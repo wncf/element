@@ -16,7 +16,7 @@
       ref="input"
       v-model="multiple ? presentText : inputValue"
       :size="realSize"
-      :placeholder="placeholder"
+      :placeholder="inputPlaceholder"
       :readonly="readonly"
       :disabled="isDisabled"
       :validate-event="false"
@@ -43,17 +43,19 @@
     </el-input>
 
     <div v-if="multiple" class="el-cascader__tags">
-      <el-tag
-        v-for="tag in presentTags"
-        :key="tag.key"
-        type="info"
-        :size="tagSize"
-        :hit="tag.hitState"
-        :closable="tag.closable"
-        disable-transitions
-        @close="deleteTag(tag)">
-        <span>{{ tag.text }}</span>
-      </el-tag>
+      <div class="el-cascader__tags-wrap">
+        <el-tag
+          v-for="tag in presentTags"
+          :key="tag.key"
+          type="info"
+          :size="tagSize"
+          :hit="tag.hitState"
+          :closable="tag.closable"
+          disable-transitions
+          @close="deleteTag(tag)">
+          <span>{{ tag.text }}</span>
+        </el-tag>
+      </div>
       <input
         v-if="filterable && !isDisabled"
         v-model.trim="inputValue"
@@ -168,9 +170,9 @@ const PopperMixin = {
 };
 
 const InputSizeMap = {
-  medium: 36,
-  small: 32,
-  mini: 28
+  medium: 30,
+  small: 28,
+  mini: 26
 };
 
 export default {
@@ -286,6 +288,12 @@ export default {
     readonly() {
       return !this.filterable || this.multiple;
     },
+    // 多选 + 可搜索时输入区由 el-cascader__search-input 承担（内层 input 是 readonly），
+    // 内层 input 若同时渲染 placeholder 会与搜索框的叠在一起变成重影
+    inputPlaceholder() {
+      const hasSearchInput = this.multiple && this.filterable && !this.isDisabled;
+      return hasSearchInput ? '' : this.placeholder;
+    },
     clearBtnVisible() {
       if (!this.clearable || this.isDisabled || this.filtering || !this.inputHover) {
         return false;
@@ -340,6 +348,9 @@ export default {
         this.$nextTick(this.updateStyle);
       }
     },
+    realSize() {
+      this.$nextTick(this.updateStyle);
+    },
     filtering(val) {
       this.$nextTick(this.updatePopper);
     }
@@ -348,7 +359,7 @@ export default {
   mounted() {
     const { input } = this.$refs;
     if (input && input.$el) {
-      this.inputInitialHeight = input.$el.offsetHeight || InputSizeMap[this.realSize] || 40;
+      this.inputInitialHeight = input.$el.offsetHeight || InputSizeMap[this.realSize] || 32;
     }
 
     if (!this.isEmptyValue(this.value)) {
@@ -624,6 +635,46 @@ export default {
       this.checkedValue = checkedValue.filter(n => !isEqual(n, current));
       this.$emit('remove-tag', val);
     },
+    syncTagsOverflow(tagsWrap) {
+      const tagEls = tagsWrap.querySelectorAll('.el-tag');
+      tagEls.forEach(tag => {
+        tag.style.display = '';
+        tag.classList.remove('is-overflow-tail');
+      });
+      if (!tagEls.length) {
+        tagsWrap.classList.remove('is-overflow');
+        return;
+      }
+
+      const maxWidth = tagsWrap.clientWidth;
+      const ellipsisWidth = 12;
+      let used = 0;
+      let lastVisible = -1;
+      for (let i = 0; i < tagEls.length; i++) {
+        const style = window.getComputedStyle(tagEls[i]);
+        const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+        const extra = i < tagEls.length - 1 ? ellipsisWidth : 0;
+        const width = tagEls[i].offsetWidth + margin;
+        if (used + width + extra <= maxWidth + 0.5) {
+          used += width;
+          lastVisible = i;
+        } else {
+          break;
+        }
+      }
+      if (lastVisible < 0) lastVisible = 0;
+
+      const overflowing = lastVisible < tagEls.length - 1;
+      tagEls.forEach((tag, index) => {
+        if (index > lastVisible) tag.style.display = 'none';
+      });
+      if (overflowing) {
+        tagsWrap.classList.add('is-overflow');
+        tagEls[lastVisible].classList.add('is-overflow-tail');
+      } else {
+        tagsWrap.classList.remove('is-overflow');
+      }
+    },
     updateStyle() {
       const { $el, inputInitialHeight } = this;
       if (this.$isServer || !$el) return;
@@ -642,9 +693,12 @@ export default {
       }
 
       if (tags) {
-        const offsetHeight = Math.round(tags.getBoundingClientRect().height);
-        const height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px';
-        inputInner.style.height = height;
+        const lockedHeight = InputSizeMap[this.realSize] || inputInitialHeight || 32;
+        inputInner.style.height = lockedHeight + 'px';
+        const tagsWrap = tags.querySelector('.el-cascader__tags-wrap');
+        if (tagsWrap && !this.collapseTags) {
+          this.syncTagsOverflow(tagsWrap);
+        }
         if (this.dropDownVisible) {
           this.updatePopper();
         }

@@ -46,6 +46,7 @@
 
   .el-range__icon {
     font-size: 14px;
+    // 与普通输入框的前缀图标对齐：内边距 10px 上再外拉 5px
     margin-left: -5px;
     color: $--color-text-placeholder;
     float: left;
@@ -56,11 +57,12 @@
     appearance: none;
     border: none;
     outline: none;
+    // input 元素不给底色会落到浏览器默认的白色，深色模式下会露出白块
+    background-color: transparent;
     display: inline-block;
     height: 100%;
     margin: 0;
     padding: 0;
-    width: 39%;
     text-align: center;
     font-size: $--font-size-base;
     color: $--color-text-regular;
@@ -71,12 +73,19 @@
   }
 
   .el-range-separator {
-    display: inline-block;
+    // 用 flex 让分隔符的行盒居中：盒子高度只有 100%（含上下 padding 后比 line-height 小），
+    // 靠 line-height 居中会让文字整体下沉
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // 行盒居中仍是按基线排布，“-”这类标点的墨迹位于基线上方、低于行盒的视觉中心，
+    // 看上去还是偏下；按字号等比上提 0.15em（14px 字号约 2px）把它拉回视觉中线
+    position: relative;
+    top: -0.15em;
     height: 100%;
     padding: 0 5px;
     margin: 0;
     text-align: center;
-    line-height: 32px;
     font-size: 14px;
     width: 5%;
     color: $--color-text-primary;
@@ -89,6 +98,8 @@
     display: inline-block;
     float: right;
     line-height: 32px;
+    // 与左侧图标的外距对称，否则两侧占位不等宽，中间的分隔符会偏左
+    margin-right: -5px;
   }
 }
 
@@ -101,6 +112,10 @@
 
   .el-range-input {
     line-height: 1;
+    // 两个输入框等分剩余空间（不再按百分比定宽）：百分比定宽在控件被拉宽、
+    // 或右侧没有清除图标时，会在右边留下空白，分隔符也跟着偏左
+    flex: 1;
+    min-width: 0;
   }
 
   @include when(active) {
@@ -117,7 +132,6 @@
     }
 
     .el-range-separator {
-      line-height: 28px;
       font-size: $--input-medium-font-size;
     }
 
@@ -127,7 +141,7 @@
 
     .el-range__icon,
     .el-range__close-icon {
-      line-height: 28px;
+      line-height: $--input-medium-height;
     }
   }
 
@@ -137,7 +151,6 @@
     }
 
     .el-range-separator {
-      line-height: 24px;
       font-size: $--input-small-font-size;
     }
 
@@ -157,7 +170,6 @@
     }
 
     .el-range-separator {
-      line-height: 20px;
       font-size: $--input-mini-font-size;
     }
 

@@ -7,6 +7,8 @@
   display: inline-block;
   width: 180px;
   line-height: #{$--input-height - 2};
+  overflow: hidden;
+  border-radius: $--input-border-radius;
 
   .el-input {
     display: block;
@@ -22,11 +24,15 @@
   @include e((increase, decrease)) {
     position: absolute;
     z-index: 1;
-    top: 1px;
+    top: 0;
+    bottom: 0;
     width: $--input-height;
     height: auto;
+    padding: 1px 0;
     text-align: center;
     background: $--background-color-base;
+    background-clip: content-box;
+    box-sizing: border-box;
     color: $--color-text-regular;
     cursor: pointer;
     font-size: 13px;
@@ -46,13 +52,15 @@
   }
 
   @include e(increase) {
-    right: 1px;
+    right: 0;
+    padding-right: 1px;
     border-radius: 0 $--border-radius-base $--border-radius-base 0;
     border-left: $--border-base;
   }
 
   @include e(decrease) {
-    left: 1px;
+    left: 0;
+    padding-left: 1px;
     border-radius: $--border-radius-base 0 0 $--border-radius-base;
     border-right: $--border-base;
   }
@@ -135,8 +143,12 @@
       padding-right: #{$--input-height + 10};
     }
 
+    // 上下箭头各占一半高度。默认的 top:0 + bottom:0 会把加号拉伸成整高，
+    // 而加号在 DOM 中位于减号之后、背景不透明，会把减号（下箭头）完全盖住
     @include e((increase, decrease)) {
-      height: auto;
+      top: auto;
+      bottom: auto;
+      height: 50%;
       line-height: #{($--input-height - 2) / 2};
 
       [class*=el-icon] {
@@ -145,15 +157,17 @@
     }
 
     @include e(increase) {
+      top: 0;
       border-radius: 0 $--border-radius-base 0 0;
       border-bottom: $--border-base;
     }
 
     @include e(decrease) {
-      right: 1px;
-      bottom: 1px;
-      top: auto;
+      top: 50%;
+      right: 0;
       left: auto;
+      padding-left: 0;
+      padding-right: 1px;
       border-right: none;
       border-left: $--border-base;
       border-radius: 0 0 $--border-radius-base 0;

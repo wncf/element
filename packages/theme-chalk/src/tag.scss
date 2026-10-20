@@ -1,104 +1,90 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@mixin genTheme($backgroundColorWeight, $borderColorWeight, $fontColorWeight, $hoverColorWeight) {
-  background-color: mix($--tag-primary-color, $--color-white, $backgroundColorWeight);
-  border-color: mix($--tag-primary-color, $--color-white, $borderColorWeight);
-  color: mix($--tag-primary-color, $--color-white, $fontColorWeight);
+/* 标签配色
+ *
+ * 原来用 4 个混合权重（mix(类型色, 白, 权重)）表达三种 effect，
+ * 现在改为取品牌色梯度的不同档位——因为权重混合在深色模式下会错：
+ * mix(类型色, 白, 10%) 在深底上会变成一块接近白的亮色。
+ *
+ * 三档后缀的含义：
+ *   light-9 = mix(白/底色, 类型色, 90%)，浅底档
+ *   light-8 / light-6 / light-2 依次加深
+ *   类型色本身 = 满饱和档
+ * tokens 会按深浅模式给出不同色值，所以这里不需要分支。
+ */
+$--tag-effects: (
+  // 名称: (底色档, 边框档, 文字档, 关闭按钮悬停底色档)
+  'default': ('light-9', 'light-8', 'type', 'type'),
+  'dark': ('type', 'type', 'white', 'light-2'),
+  'plain': ('blank', 'light-6', 'type', 'type')
+) !default;
+
+/* 把"类型 + 档位"解析成 token 引用，避免在组件层写死色值 */
+@function tag-token-color($type, $spec) {
+  @if $spec == 'type' {
+    @return var(--el-color-#{$type});
+  }
+  @if $spec == 'white' {
+    @return var(--el-color-white);
+  }
+  @if $spec == 'blank' {
+    @return var(--el-fill-color-blank);
+  }
+  @return var(--el-color-#{$type}-#{$spec});
+}
+
+/* 单个类型在某个 effect 下的完整配色 */
+@mixin tag-type-skin($type, $effect) {
+  $spec: map-get($--tag-effects, $effect);
+
+  background-color: tag-token-color($type, nth($spec, 1));
+  border-color: tag-token-color($type, nth($spec, 2));
+  color: tag-token-color($type, nth($spec, 3));
 
   @include when(hit) {
-    border-color: $--tag-primary-color;
+    border-color: var(--el-color-#{$type});
   }
 
   .el-tag__close {
-    color: mix($--tag-primary-color, $--color-white, $fontColorWeight);
+    color: tag-token-color($type, nth($spec, 3));
+
     &:hover {
-      color: $--color-white;
-      background-color: mix($--tag-primary-color, $--color-white, $hoverColorWeight);
-    }
-  }
-
-  &.el-tag--info {
-    background-color: mix($--tag-info-color, $--color-white, $backgroundColorWeight);
-    border-color: mix($--tag-info-color, $--color-white, $borderColorWeight);
-    color: mix($--tag-info-color, $--color-white, $fontColorWeight);
-
-    @include when(hit) {
-      border-color: $--tag-info-color;
-    }
-
-    .el-tag__close {
-      color: mix($--tag-info-color, $--color-white, $fontColorWeight);
-      &:hover {
-        color: $--color-white;
-        background-color: mix($--tag-info-color, $--color-white, $hoverColorWeight);
-      }
-    }
-  }
-
-  &.el-tag--success {
-    background-color: mix($--tag-success-color, $--color-white, $backgroundColorWeight);
-    border-color: mix($--tag-success-color, $--color-white, $borderColorWeight);
-    color: mix($--tag-success-color, $--color-white, $fontColorWeight);
-
-    @include when(hit) {
-      border-color: $--tag-success-color;
-    }
-
-    .el-tag__close {
-      color: mix($--tag-success-color, $--color-white, $fontColorWeight);
-      &:hover {
-        color: $--color-white;
-        background-color: mix($--tag-success-color, $--color-white, $hoverColorWeight);
-      }
-    }
-  }
-
-  &.el-tag--warning {
-    background-color: mix($--tag-warning-color, $--color-white, $backgroundColorWeight);
-    border-color: mix($--tag-warning-color, $--color-white, $borderColorWeight);
-    color: mix($--tag-warning-color, $--color-white, $fontColorWeight);
-
-    @include when(hit) {
-      border-color: $--tag-warning-color;
-    }
-
-    .el-tag__close {
-      color: mix($--tag-warning-color, $--color-white, $fontColorWeight);
-      &:hover {
-        color: $--color-white;
-        background-color: mix($--tag-warning-color, $--color-white, $hoverColorWeight);
-      }
-    }
-  }
-
-  &.el-tag--danger {
-    background-color: mix($--tag-danger-color, $--color-white, $backgroundColorWeight);
-    border-color: mix($--tag-danger-color, $--color-white, $borderColorWeight);
-    color: mix($--tag-danger-color, $--color-white, $fontColorWeight);
-
-    @include when(hit) {
-      border-color: $--tag-danger-color;
-    }
-
-    .el-tag__close {
-      color: mix($--tag-danger-color, $--color-white, $fontColorWeight);
-      &:hover {
-        color: $--color-white;
-        background-color: mix($--tag-danger-color, $--color-white, $hoverColorWeight);
-      }
+      color: var(--el-color-white);
+      background-color: tag-token-color($type, nth($spec, 4));
     }
   }
 }
 
+/* default 类型（不写 type 时的样子）落在 .el-tag 上，其余类型作为覆盖 */
+@mixin tag-effect-skin($effect) {
+  @include tag-type-skin(primary, $effect);
+
+  &.el-tag--info {
+    @include tag-type-skin(info, $effect);
+  }
+
+  &.el-tag--success {
+    @include tag-type-skin(success, $effect);
+  }
+
+  &.el-tag--warning {
+    @include tag-type-skin(warning, $effect);
+  }
+
+  &.el-tag--danger {
+    @include tag-type-skin(danger, $effect);
+  }
+}
+
 @include b(tag) {
-  @include genTheme(10%, 20%, 100%, 100%);
+  @include tag-effect-skin('default');
   display: inline-block;
-  height: 32px;
+  height: $--tag-height;
   padding: $--tag-padding;
-  line-height: 30px;
+  line-height: #{$--tag-height - 2px};
   font-size: $--tag-font-size;
-  color: $--tag-primary-color;
+  color: var(--el-color-primary);
   border-width: 1px;
   border-style: solid;
   border-radius: $--tag-border-radius;
@@ -124,26 +110,23 @@
   }
 
   @include m(dark) {
-    @include genTheme(100%, 100%, 0, 80%);
+    @include tag-effect-skin('dark');
   }
 
   @include m(plain) {
-    @include genTheme(0, 40%, 100%, 100%);
+    @include tag-effect-skin('plain');
   }
 
   @include m(medium) {
-    height: 28px;
-    line-height: 26px;
-
-    .el-icon-close {
-      transform: scale(.8);
-    }
+    // medium 与 default 同高，保留修饰符便于单独覆盖
+    height: $--tag-medium-height;
+    line-height: #{$--tag-medium-height - 2px};
   }
 
   @include m(small) {
-    height: 24px;
+    height: $--tag-small-height;
     padding: 0 8px;
-    line-height: 22px;
+    line-height: #{$--tag-small-height - 2px};
 
     .el-icon-close {
       transform: scale(.8);
@@ -151,9 +134,9 @@
   }
 
   @include m(mini) {
-    height: 20px;
-    padding: 0 5px;
-    line-height: 19px;
+    height: $--tag-mini-height;
+    padding: 0 6px;
+    line-height: #{$--tag-mini-height - 2px};
 
     .el-icon-close {
       margin-left: -3px;

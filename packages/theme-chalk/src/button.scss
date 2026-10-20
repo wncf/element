@@ -35,8 +35,8 @@
   }
 
   &:active {
-    color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-    border-color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
+    color: var(--el-color-primary-shade);
+    border-color: var(--el-color-primary-shade);
     outline: none;
   }
 
@@ -53,22 +53,22 @@
   @include when(plain) {
     &:hover,
     &:focus {
-      background: $--color-white;
+      background: var(--el-fill-color-blank);
       border-color: $--color-primary;
       color: $--color-primary;
     }
 
     &:active {
-      background: $--color-white;
-      border-color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-      color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
+      background: var(--el-fill-color-blank);
+      border-color: var(--el-color-primary-shade);
+      color: var(--el-color-primary-shade);
       outline: none;
     }
   }
 
   @include when(active) {
-    color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-    border-color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
+    color: var(--el-color-primary-shade);
+    border-color: var(--el-color-primary-shade);
   }
 
   @include when(disabled) {
@@ -90,7 +90,7 @@
       &,
       &:hover,
       &:focus {
-        background-color: $--color-white;
+        background-color: var(--el-fill-color-blank);
         border-color: $--button-disabled-border-color;
         color: $--button-disabled-font-color;
       }
@@ -110,31 +110,23 @@
       right: -1px;
       bottom: -1px;
       border-radius: inherit;
-      background-color: rgba(255,255,255,.35);
+      // 用底色压暗：浅色模式下是白色蒙层（与改造前一致），深色模式下不会糊上白雾
+      background-color: var(--el-bg-color);
+      opacity: .35;
     }
   }
   @include when(round) {
+    // 只改圆角，纵向 padding 交给各尺寸的 button-size，避免撑高按钮
     border-radius: 20px;
-    padding: 12px 23px;
   }
   @include when(circle) {
     border-radius: 50%;
     padding: $--button-padding-vertical;
   }
-  @include m(primary) {
-    @include button-variant($--button-primary-font-color, $--button-primary-background-color, $--button-primary-border-color);
-  }
-  @include m(success) {
-    @include button-variant($--button-success-font-color, $--button-success-background-color, $--button-success-border-color);
-  }
-  @include m(warning) {
-    @include button-variant($--button-warning-font-color, $--button-warning-background-color, $--button-warning-border-color);
-  }
-  @include m(danger) {
-    @include button-variant($--button-danger-font-color, $--button-danger-background-color, $--button-danger-border-color);
-  }
-  @include m(info) {
-    @include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-border-color);
+  @each $type in (primary, success, warning, danger, info) {
+    @include m($type) {
+      @include button-variant($type);
+    }
   }
   @include m(medium) {
     @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);
@@ -163,12 +155,12 @@
 
     &:hover,
     &:focus {
-      color: mix($--color-white, $--color-primary, $--button-hover-tint-percent);
+      color: var(--el-color-primary-hover);
       border-color: transparent;
       background-color: transparent;
     }
     &:active {
-      color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
+      color: var(--el-color-primary-shade);
       border-color: transparent;
       background-color: transparent;
     }

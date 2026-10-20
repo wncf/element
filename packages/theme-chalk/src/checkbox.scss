@@ -15,11 +15,13 @@
   margin-right: 30px;
 
   @include when(bordered) {
+    display: inline-flex;
+    align-items: center;
     padding: $--checkbox-bordered-padding;
-    border-radius: $--border-radius-base;
+    border-radius: $--button-border-radius;
     border: $--border-base;
     box-sizing: border-box;
-    line-height: normal;
+    line-height: 1;
     height: $--checkbox-bordered-height;
 
     &.is-checked {
@@ -29,6 +31,10 @@
     &.is-disabled {
       border-color: $--border-color-lighter;
       cursor: not-allowed;
+    }
+
+    .el-checkbox__label {
+      line-height: 1;
     }
 
     & + .el-checkbox.is-bordered {
@@ -41,7 +47,7 @@
       height: $--checkbox-bordered-medium-height;
 
       .el-checkbox__label {
-        line-height: 17px;
+        line-height: 1;
         font-size: $--button-medium-font-size;
       }
 
@@ -57,7 +63,7 @@
       height: $--checkbox-bordered-small-height;
 
       .el-checkbox__label {
-        line-height: 15px;
+        line-height: 1;
         font-size: $--button-small-font-size;
       }
 
@@ -78,7 +84,7 @@
       height: $--checkbox-bordered-mini-height;
 
       .el-checkbox__label {
-        line-height: 12px;
+        line-height: 1;
         font-size: $--button-mini-font-size;
       }
 
@@ -321,7 +327,7 @@
   &:first-child {
     .el-checkbox-button__inner {
       border-left: $--border-base;
-      border-radius: $--border-radius-base 0 0 $--border-radius-base;
+      border-radius: $--button-border-radius 0 0 $--button-border-radius;
       box-shadow: none !important;
     }
   }
@@ -334,7 +340,7 @@
 
   &:last-child {
     .el-checkbox-button__inner {
-      border-radius: 0 $--border-radius-base $--border-radius-base 0;
+      border-radius: 0 $--button-border-radius $--button-border-radius 0;
     }
   }
   @include m(medium) {

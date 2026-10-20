@@ -32,11 +32,12 @@
       top: $gap;
       bottom: $gap;
       left: 0;
-      background: mix(white, transparent, 50%);
+      background: rgba($--color-white, .5);
     }
 
     &.el-button--default::before {
-      background: mix($--button-default-border-color, transparent, 50%);
+      background: var(--el-border-color-base);
+      opacity: .5;
     }
 
     &:hover {
@@ -74,7 +75,7 @@
   z-index: 10;
   padding: 10px 0;
   margin: 5px 0;
-  background-color: $--color-white;
+  background-color: var(--el-bg-color-overlay);
   border: 1px solid $--border-color-lighter;
   border-radius: $--border-radius-base;
   box-shadow: $--dropdown-menu-box-shadow;
@@ -109,7 +110,7 @@
         height: $divided-offset;
         display: block;
         margin: 0 -20px;
-        background-color: $--color-white;
+        background-color: var(--el-bg-color-overlay);
       }
     }
 

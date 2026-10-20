@@ -93,13 +93,14 @@
         type: [String, Array, Function],
         default: ''
       },
+      // 轨道底色与文字色默认值走 token：它们是内联样式，写死浅色在深色模式下会露出一条浅轨
       defineBackColor: {
         type: [String, Array, Function],
-        default: '#ebeef5'
+        default: 'var(--el-border-color-lighter)'
       },
       textColor: {
         type: [String, Array, Function],
-        default: '#606266'
+        default: 'var(--el-text-color-regular)'
       },
       format: Function
     },
@@ -158,18 +159,20 @@
         if (this.color) {
           ret = this.getCurrentColor(this.percentage);
         } else {
+          // 圆形/仪表盘进度只认 stroke 属性，取不到 CSS 的 types 样式，
+          // 所以这里必须用 token，否则换了主色或切深色，圆环还是写死的老颜色
           switch (this.status) {
             case 'success':
-              ret = '#13ce66';
+              ret = 'var(--el-color-success)';
               break;
             case 'exception':
-              ret = '#ff4949';
+              ret = 'var(--el-color-danger)';
               break;
             case 'warning':
-              ret = '#e6a23c';
+              ret = 'var(--el-color-warning)';
               break;
             default:
-              ret = '#20a0ff';
+              ret = 'var(--el-color-primary)';
           }
         }
         return ret;

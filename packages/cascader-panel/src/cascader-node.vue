@@ -80,6 +80,11 @@
         panel.handleExpand(node);
       },
 
+      handleLeafMultiClick() {
+        this.handleExpand();
+        this.handleMultiCheckChange(!this.node.checked);
+      },
+
       handleMultiCheckChange(checked) {
         this.node.doCheck(checked);
         this.panel.calculateMultiCheckedValue();
@@ -125,7 +130,8 @@
           nativeOn: {}
         };
 
-        if (config.checkStrictly) { // when every node is selectable, click event should not trigger expand event.
+        // 多选时行点击会选中叶子，复选框点击需拦住冒泡避免连点两次
+        if (config.checkStrictly || config.multiple) {
           events.nativeOn.click = stopPropagation;
         }
 
@@ -217,8 +223,10 @@
           this.$emit('expand', e);
         };
       }
-      if (isLeaf && !isDisabled && !checkStrictly && !multiple) {
-        events.on.click = this.handleCheckChange;
+      if (isLeaf && !isDisabled && !checkStrictly) {
+        events.on.click = multiple
+          ? this.handleLeafMultiClick
+          : this.handleCheckChange;
       }
 
       return (

@@ -36,10 +36,7 @@ const install = function(Vue, opts = {}) {
   };
 
   Vue.prototype.$loading = Loading.service;
-  Vue.prototype.$msgbox = MessageBox;
-  Vue.prototype.$alert = MessageBox.alert;
-  Vue.prototype.$confirm = MessageBox.confirm;
-  Vue.prototype.$prompt = MessageBox.prompt;
+  Vue.prototype.$dialog = Dialog.dialog;
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
 
@@ -77,7 +74,7 @@ ComponentNames.forEach(name => {
     package: name
   }));
 
-  if (['Loading', 'MessageBox', 'Notification', 'Message', 'InfiniteScroll'].indexOf(componentName) === -1) {
+  if (['Loading', 'Notification', 'Message', 'InfiniteScroll'].indexOf(componentName) === -1) {
     installTemplate.push(render(INSTALL_COMPONENT_TEMPLATE, {
       name: componentName,
       component: name

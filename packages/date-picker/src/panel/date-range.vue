@@ -168,7 +168,7 @@
       </div>
       <div class="el-picker-panel__footer" v-if="showTime">
         <el-button
-          size="mini"
+          size="small"
           type="text"
           class="el-picker-panel__link-btn"
           @click="handleClear">
@@ -176,7 +176,7 @@
         </el-button>
         <el-button
           plain
-          size="mini"
+          size="small"
           class="el-picker-panel__link-btn"
           :disabled="btnDisabled"
           @click="handleConfirm(false)">

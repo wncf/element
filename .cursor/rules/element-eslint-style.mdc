@@ -1,0 +1,50 @@
+---
+description: Element UI 项目 ESLint 与代码风格（eslint-config-elemefe）
+globs: "{packages,src,test,build,examples}/**/*.{js,vue}"
+alwaysApply: false
+---
+
+# Element UI 代码风格
+
+本项目 extends `eslint-config-elemefe`（见 `.eslintrc`），`dev:play` / webpack 会对 `.vue` 的 `<script>` 跑 eslint-loader。**违反规则会直接编译失败。**
+
+## 必须遵守
+
+- 字符串用**单引号**，禁止双引号
+- **禁止尾逗号**（对象、数组、函数参数最后一项）
+- Vue 组件用 **Options API**，与周边文件保持一致
+- 缩进 **2 空格**，分号保留（与现有代码一致）
+
+## 示例
+
+```javascript
+// ❌ 错误
+import Popup from "element-ui/src/utils/popup";
+export default {
+  props: {
+    title: {
+      type: String,
+      default: "",
+    },
+  },
+};
+
+// ✅ 正确
+import Popup from 'element-ui/src/utils/popup';
+export default {
+  props: {
+    title: {
+      type: String,
+      default: ''
+    }
+  }
+};
+```
+
+## 完成前检查
+
+修改 `packages/`、`src/`、`test/`、`build/`、`examples/` 下的 `.js` / `.vue` 后：
+
+1. 先读同目录已有文件的写法，再动手
+2. 提交前运行：`npx eslint <改动的文件> --fix`
+3. 再运行：`npx eslint <改动的文件>` 确认零 error

@@ -1,0 +1,10 @@
+@import "mixins/mixins";
+
+// 视觉全部复用 el-input，这里只补金额特有的排版：
+// 等宽数字让每一位宽度一致，输入时框宽和光标不会跟着数字跳。
+// 颜色一个都不写，深色模式由 el-input 自己的 token 负责。
+@include b(amount-input) {
+  .el-input__inner {
+    font-variant-numeric: tabular-nums;
+  }
+}

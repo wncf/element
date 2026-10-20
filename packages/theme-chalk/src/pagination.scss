@@ -3,6 +3,49 @@
 @import "common/var";
 @import "select";
 
+// 分页内按钮 / 输入框的尺寸梯级：与控件一致（default/medium 32 → small 28 → mini 26）
+// 页码与上下页按钮为正方形，跳页输入框同高，保证整行基线对齐
+@mixin pagination-size($width, $height) {
+  // 上下页按钮里箭头图标之外的额外内边距（默认 32px 时是 12px）必须随宽度收敛，
+  // 否则「图标 12px + 内边距」会把按钮撑得比页码宽，small / mini 下不再是正方形
+  $arrow-offset: $width - 20px;
+
+  span:not([class*=suffix]),
+  button,
+  .el-pager li {
+    min-width: $width;
+    height: $height;
+    line-height: $height;
+  }
+
+  .btn-prev {
+    padding-right: $arrow-offset;
+  }
+
+  .btn-next {
+    padding-left: $arrow-offset;
+  }
+
+  // 省略号是落在基线附近的字形，行高略大于盒子才会视觉居中
+  .el-pager li.btn-quicknext,
+  .el-pager li.btn-quickprev {
+    line-height: $height + 4px;
+  }
+
+  .el-pager .more::before,
+  .el-pager li.more::before {
+    line-height: $height + 6px;
+  }
+
+  @include e(editor) {
+    height: $height;
+
+    &.el-input .el-input__inner {
+      height: $height;
+    }
+  }
+}
+
 @include b(pagination) {
   white-space: nowrap;
   padding: 2px 5px;
@@ -93,40 +136,11 @@
   }
 
   @include m(small) {
-    .btn-prev,
-    .btn-next,
-    .el-pager li,
-    .el-pager li.btn-quicknext,
-    .el-pager li.btn-quickprev,
-    .el-pager li:last-child {
-      border-color: transparent;
-      font-size: 12px;
-      line-height: 22px;
-      height: 22px;
-      min-width: 22px;
-    }
+    @include pagination-size($--pagination-small-button-width, $--pagination-small-button-height);
+  }
 
-    .arrow.disabled {
-      visibility: hidden;
-    }
-
-    .more::before,
-    li.more::before {
-      line-height: 24px;
-    }
-
-    span:not([class*=suffix]),
-    button {
-      height: 22px;
-      line-height: 22px;
-    }
-
-    @include e(editor) {
-      height: 22px;
-      &.el-input .el-input__inner {
-        height: 22px;
-      }
-    }
+  @include m(mini) {
+    @include pagination-size($--pagination-mini-button-width, $--pagination-mini-button-height);
   }
 
   @include e(sizes) {
@@ -134,8 +148,8 @@
     font-weight: normal;
     color: $--color-text-regular;
 
+    // 下拉与页码按钮同尺寸，字号由 input 自身的尺寸档决定
     .el-input .el-input__inner {
-      font-size: $--pagination-font-size;
       padding-left: 8px;
 
       &:hover {
@@ -196,8 +210,7 @@
       margin: 0 5px;
       background-color: $--color-info-lighter;
       color: $--color-text-regular;
-      min-width: 30px;
-      border-radius: 2px;
+      border-radius: $--pagination-border-radius;
 
       &.disabled {
         color: $--color-text-placeholder;
@@ -223,12 +236,13 @@
       }
     }
 
-    &.el-pagination--small {
+    // 小尺寸按钮之间的间距同步收紧，保持整行节奏
+    &.el-pagination--small,
+    &.el-pagination--mini {
       .btn-prev,
       .btn-next,
       .el-pager li {
         margin: 0 3px;
-        min-width: 22px;
       }
     }
   }
@@ -244,7 +258,7 @@
   margin: 0;
 
   .more::before {
-    line-height: 30px;
+    line-height: #{$--pagination-button-height + 6px};
   }
 
   li {
@@ -263,7 +277,7 @@
 
     &.btn-quicknext,
     &.btn-quickprev {
-      line-height: 28px;
+      line-height: #{$--pagination-button-height + 4px};
       color: $--pagination-button-color;
 
       &.disabled {

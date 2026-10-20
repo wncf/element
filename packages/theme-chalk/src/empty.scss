@@ -21,6 +21,8 @@
       object-fit: contain;
     }
 
+    // 内置插画的每块图形都自带 var(--el-empty-fill-color-*)，这里的 fill 只作为兜底：
+    // 用户用 image 插槽塞进来的裸 svg 没有自己的着色时，至少是主题化的灰而不是纯黑。
     svg {
       fill: $--svg-monochrome-grey;
       width: 100%;

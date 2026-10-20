@@ -129,6 +129,9 @@ export interface ElMessageBoxOptions {
 
   /** Whether to distinguish canceling and closing */
   distinguishCancelAndClose?: boolean
+
+  /** Button size, defaults to Vue.prototype.$ELEMENT.size */
+  buttonSize?: 'medium' | 'small' | 'mini' | ''
 }
 
 export interface ElMessageBoxShortcutMethod {
@@ -157,20 +160,4 @@ export interface ElMessageBox {
 
   /** Close current message box */
   close (): void
-}
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    /** Show a message box */
-    $msgbox: ElMessageBox
-
-    /** Show an alert message box */
-    $alert: ElMessageBoxShortcutMethod
-
-    /** Show a confirm message box */
-    $confirm: ElMessageBoxShortcutMethod
-
-    /** Show a prompt message box */
-    $prompt: ElMessageBoxShortcutMethod
-  }
 }

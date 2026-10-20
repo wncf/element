@@ -7,7 +7,7 @@
   position: relative;
   margin: 0 auto 50px;
   background: $--dialog-background-color;
-  border-radius: $--border-radius-small;
+  border-radius: $--dialog-border-radius;
   box-shadow: $--dialog-box-shadow;
   box-sizing: border-box;
   width: 50%;
@@ -28,39 +28,66 @@
     left: 0;
     overflow: auto;
     margin: 0;
+
+    @include m(centered) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   @include e(header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: $--dialog-padding-primary;
     padding-bottom: 10px;
-  }
 
-  @include e(headerbtn) {
-    position: absolute;
-    top: $--dialog-padding-primary;
-    right: $--dialog-padding-primary;
-    padding: 0;
-    background: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: $--message-close-size;
-
-    .el-dialog__close {
-      color: $--color-info;
-    }
-
-    &:focus, &:hover {
-      .el-dialog__close {
-        color: $--color-primary;
-      }
+    &.is-draggable {
+      cursor: move;
+      user-select: none;
     }
   }
 
   @include e(title) {
+    flex: 1;
+    min-width: 0;
+    padding-right: 12px;
     line-height: $--dialog-font-line-height;
     font-size: $--dialog-title-font-size;
     color: $--color-text-primary;
+  }
+
+  @include e(headerbtn) {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: $--dialog-close-btn-size;
+    height: $--dialog-close-btn-size;
+    padding: 0;
+    border: none;
+    border-radius: $--dialog-close-btn-border-radius;
+    background-color: $--dialog-close-btn-background;
+    outline: none;
+    cursor: pointer;
+    transition: background-color .2s, color .2s;
+
+    .el-dialog__close {
+      display: block;
+      width: 12px;
+      height: 12px;
+      color: $--dialog-close-btn-color;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $--dialog-close-btn-hover-background;
+
+      .el-dialog__close {
+        color: $--dialog-close-btn-hover-color;
+      }
+    }
   }
 
   @include e(body) {
@@ -75,6 +102,18 @@
     padding-top: 10px;
     text-align: right;
     box-sizing: border-box;
+  }
+
+  @include m(bordered) {
+    @include e(header) {
+      border-bottom: 1px solid $--border-color-lighter;
+      padding-bottom: $--dialog-padding-primary;
+    }
+
+    @include e(footer) {
+      border-top: 1px solid $--border-color-lighter;
+      padding-top: $--dialog-padding-primary;
+    }
   }
 
   // 内容居中布局

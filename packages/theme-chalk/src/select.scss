@@ -8,9 +8,14 @@
 @import "option-group";
 @import "scrollbar";
 
+// 单选的清空图标（hover 时出现的 ×）行高固定 18px，纵向位置按输入框高度计算，
+// 让它在 default 32 / small 28 / mini 26 下都居中
+$select-close-icon-height: 18px;
+
 @include b(select) {
   display: inline-block;
   position: relative;
+  vertical-align: top;
 
   .el-select__tags
     >span {
@@ -73,6 +78,29 @@
     }
   }
 
+  // 下拉箭头 / 清空图标随 size 收敛，与内部 input 字号同档
+  @include m(small) {
+    .el-input .el-select__caret {
+      font-size: $--input-small-font-size;
+    }
+
+    @include e(close) {
+      top: ($--input-small-height - $select-close-icon-height) / 2;
+      font-size: $--input-small-font-size;
+    }
+  }
+
+  @include m(mini) {
+    .el-input .el-select__caret {
+      font-size: $--input-mini-font-size;
+    }
+
+    @include e(close) {
+      top: ($--input-mini-height - $select-close-icon-height) / 2;
+      font-size: $--input-mini-font-size;
+    }
+  }
+
   > .el-input {
     display: block;
   }
@@ -85,21 +113,24 @@
     color: $--select-multiple-input-color;
     font-size: $--select-font-size;
     appearance: none;
-    height: 28px;
+    height: $--select-multiple-input-height;
     background-color: transparent;
+    @include when(small) {
+      height: $--select-multiple-input-small-height;
+    }
     @include when(mini) {
-      height: 14px;
+      height: $--select-multiple-input-mini-height;
     }
   }
 
   @include e(close) {
     cursor: pointer;
     position: absolute;
-    top: 8px;
+    top: ($--input-height - $select-close-icon-height) / 2;
     z-index: $--index-top;
     right: 25px;
     color: $--select-input-color;
-    line-height: 18px;
+    line-height: $select-close-icon-height;
     font-size: $--select-input-font-size;
 
     &:hover {
@@ -127,8 +158,10 @@
   .el-tag {
     box-sizing: border-box;
     border-color: transparent;
-    margin: 2px 0 2px 6px;
-    background-color: #f0f2f5;
+    // 多选内联 tag 比 select 自身小一档，纵向留 1px 即可对齐内容区，
+    // 留白再大（2px）会让 mini 尺寸的 tag 撑高输入框
+    margin: 1px 0 1px 6px;
+    background-color: var(--el-fill-color);
     display: flex;
     max-width: 100%;
     align-items: center;

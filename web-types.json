@@ -1959,6 +1959,99 @@
           ]
         },
         {
+          "name": "ElAmountInput",
+          "description": "Amount input that keeps the value as a string and normalizes it to a fixed precision.",
+          "props": [
+            {
+              "name": "value",
+              "description": "Binding value, an empty string means not filled in",
+              "type": "string"
+            },
+            {
+              "name": "precision",
+              "description": "Decimal places to keep, 0 means integers only",
+              "type": "number"
+            },
+            {
+              "name": "min",
+              "description": "The minimum allowed value, defaults to 0 when negative values are forbidden",
+              "type": "number"
+            },
+            {
+              "name": "max",
+              "description": "The maximum allowed value",
+              "type": "number"
+            },
+            {
+              "name": "allowNegative",
+              "description": "Whether negative values can be entered",
+              "type": "boolean"
+            },
+            {
+              "name": "placeholder",
+              "description": "Placeholder of the input",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether the input is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "readonly",
+              "description": "Same as readonly in native input",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Size of the input",
+              "type": "string"
+            },
+            {
+              "name": "clearable",
+              "description": "Whether to show the clear button",
+              "type": "boolean"
+            },
+            {
+              "name": "prefixIcon",
+              "description": "Prefix icon class",
+              "type": "string"
+            },
+            {
+              "name": "suffixIcon",
+              "description": "Suffix icon class",
+              "type": "string"
+            },
+            {
+              "name": "autocomplete",
+              "description": "Same as autocomplete in native input",
+              "type": "string"
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "Triggers when the value changes"
+            },
+            {
+              "name": "change",
+              "description": "Triggers when the input loses focus and the normalized value has changed"
+            },
+            {
+              "name": "focus",
+              "description": "Triggers when Input gains focus"
+            },
+            {
+              "name": "blur",
+              "description": "Triggers when Input loses focus"
+            },
+            {
+              "name": "clear",
+              "description": "Triggers when the clear button is clicked"
+            }
+          ]
+        },
+        {
           "name": "ElLink",
           "description": "Text hyperlink",
           "doc-url": "https://element.eleme.io/#/en-US/component/link",
@@ -1986,6 +2079,11 @@
             {
               "name": "disabled",
               "description": "Disable the link",
+              "type": "boolean"
+            },
+            {
+              "name": "loading",
+              "description": "Loading state of the link",
               "type": "boolean"
             },
             {

@@ -24,7 +24,18 @@
             v-if="showClose"
             @click="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
             @keydown.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')">
-            <i class="el-message-box__close el-icon-close"></i>
+            <svg
+              class="el-message-box__close"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                d="M2 2l8 8M10 2L2 10" />
+            </svg>
           </button>
         </div>
         <div class="el-message-box__content">
@@ -56,7 +67,7 @@
             :class="[ cancelButtonClasses ]"
             v-if="showCancelButton"
             :round="roundButton"
-            size="small"
+            :size="effectiveButtonSize"
             @click.native="handleAction('cancel')"
             @keydown.enter="handleAction('cancel')">
             {{ cancelButtonText || t('el.messagebox.cancel') }}
@@ -67,7 +78,7 @@
             :class="[ confirmButtonClasses ]"
             v-show="showConfirmButton"
             :round="roundButton"
-            size="small"
+            :size="effectiveButtonSize"
             @click.native="handleAction('confirm')"
             @keydown.enter="handleAction('confirm')">
             {{ confirmButtonText || t('el.messagebox.confirm') }}
@@ -144,6 +155,10 @@
       },
       cancelButtonClasses() {
         return `${ this.cancelButtonClass }`;
+      },
+
+      effectiveButtonSize() {
+        return this.buttonSize || (this.$ELEMENT || {}).size;
       }
     },
 
@@ -325,7 +340,8 @@
         dangerouslyUseHTMLString: false,
         focusAfterClosed: null,
         isOnComposition: false,
-        distinguishCancelAndClose: false
+        distinguishCancelAndClose: false,
+        buttonSize: ''
       };
     }
   };

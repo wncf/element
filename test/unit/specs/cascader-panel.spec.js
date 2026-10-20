@@ -312,6 +312,41 @@ describe('CascaderPanel', () => {
     expect(vm.value.length).to.equal(3);
   });
 
+  it('click leaf node should check in multiple mode', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader-panel
+          v-model="value"
+          :options="options"
+          :props="props"></el-cascader-panel>
+      `,
+      data() {
+        return {
+          value: [],
+          options,
+          props: {
+            multiple: true
+          }
+        };
+      }
+    }, true);
+
+    const el = vm.$el;
+    getOptions(el, 0)[0].click();
+    await waitImmediate();
+    getOptions(el, 1)[0].click();
+    await waitImmediate();
+    expect(vm.value.length).to.equal(0);
+
+    getOptions(el, 2)[0].click();
+    await waitImmediate();
+    expect(vm.value).to.deep.equal([['zhejiang', 'hangzhou', 'xihu']]);
+
+    getOptions(el, 2)[0].click();
+    await waitImmediate();
+    expect(vm.value.length).to.equal(0);
+  });
+
   it('multiple mode with disabled default value', async() => {
     vm = createVue({
       template: `

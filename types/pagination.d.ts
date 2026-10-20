@@ -1,9 +1,12 @@
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 
 /** Pagination Component */
 export declare class ElPagination extends ElementUIComponent {
   /** Whether to use small pagination */
   small: boolean
+
+  /** Size of the pagination buttons and the page-size Select (same size ladder as the other components) */
+  size: ElementUIComponentSize
 
   /** Item count of each page */
   pageSize: number

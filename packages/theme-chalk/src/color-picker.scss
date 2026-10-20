@@ -201,13 +201,13 @@
     float: left;
     line-height: 26px;
     font-size: 12px;
-    color: $--color-black;
+    color: var(--el-text-color-primary);
     width: 160px;
   }
 
   @include e(btn) {
-    border: 1px solid #dcdcdc;
-    color: #333;
+    border: 1px solid var(--el-border-color-base);
+    color: var(--el-text-color-regular);
     line-height: 24px;
     border-radius: 2px;
     padding: 0 20px;
@@ -217,7 +217,7 @@
     font-size: 12px;
 
     &[disabled] {
-      color: #cccccc;
+      color: var(--el-text-color-placeholder);
       cursor: not-allowed;
     }
     &:hover {
@@ -233,7 +233,7 @@
     padding: 15px;
     font-size: 12px;
     &:hover {
-      color: tint($--color-primary, $--button-hover-tint-percent);
+      color: var(--el-color-primary-hover);
     }
   }
 }
@@ -311,7 +311,8 @@
     left: 1px;
     z-index: 1;
     cursor: not-allowed;
-    background-color: rgba(255, 255, 255, .7);
+    // 禁用遮罩：浅色模式往白蒙、深色模式往黑蒙，写死白色会在深色下变成一块白方块
+    background-color: var(--el-mask-color);
   }
 
   @include e(trigger) {
@@ -320,7 +321,7 @@
     height: 40px;
     width: 40px;
     padding: 4px;
-    border: 1px solid #e6e6e6;
+    border: 1px solid var(--el-border-color-light);
     border-radius: 4px;
     font-size: 0;
     position: relative;
@@ -331,7 +332,7 @@
     position: relative;
     display: block;
     box-sizing: border-box;
-    border: 1px solid #999;
+    border: 1px solid var(--el-text-color-secondary);
     border-radius: $--border-radius-small;
     width: 100%;
     height: 100%;
@@ -352,7 +353,7 @@
 
   @include e(empty) {
     font-size: 12px;
-    color: #999;
+    color: var(--el-text-color-secondary);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -376,7 +377,7 @@
     z-index: 10;
     padding: 6px;
     box-sizing: content-box;
-    background-color: $--color-white;
+    background-color: var(--el-bg-color-overlay);
     border: 1px solid $--border-color-lighter;
     border-radius: $--border-radius-base;
     box-shadow: $--dropdown-menu-box-shadow;

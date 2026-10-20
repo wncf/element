@@ -138,7 +138,8 @@ $directions: rtl, ltr, ttb, btt;
 
   &__header {
     align-items: center;
-    color: rgb(114, 118, 123);
+    // 标题区文字跟随主题；写死 rgb(114,118,123) 在深色底上几乎读不出来
+    color: var(--el-text-color-regular);
     display: flex;
     margin-bottom: 32px;
     padding: $--dialog-padding-primary;

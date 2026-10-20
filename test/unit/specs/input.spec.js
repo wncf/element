@@ -160,14 +160,14 @@ describe('Input', () => {
 
     var limitSizeInput = vm.$refs.limitSize;
     var limitlessSizeInput = vm.$refs.limitlessSize;
-    expect(limitSizeInput.textareaStyle.height).to.be.equal('117px');
-    expect(limitlessSizeInput.textareaStyle.height).to.be.equal('201px');
+    expect(limitSizeInput.textareaStyle.height).to.be.equal('112px');
+    expect(limitlessSizeInput.textareaStyle.height).to.be.equal('188px');
 
     vm.textareaValue = '';
 
     await wait();
-    expect(limitSizeInput.textareaStyle.height).to.be.equal('75px');
-    expect(limitlessSizeInput.textareaStyle.height).to.be.equal('33px');
+    expect(limitSizeInput.textareaStyle.height).to.be.equal('72px');
+    expect(limitlessSizeInput.textareaStyle.height).to.be.equal('32px');
   });
 
   it('focus', async() => {

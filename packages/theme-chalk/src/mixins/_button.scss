@@ -1,19 +1,36 @@
 @import "../common/var";
-@mixin button-plain($color) {
-  color: $color;
-  background: mix($--color-white, $color, 90%);
-  border-color: mix($--color-white, $color, 60%);
+
+/* 按钮配色 mixin
+ *
+ * 颜色全部取自品牌色梯度 token（--el-color-{type} / -light-N / -hover / -shade），
+ * 组件层不再做任何 Sass 颜色运算——因为 Sass 无法对 var() 求值。
+ *
+ * 之所以能只靠品牌色梯度表达所有状态：
+ *   mix(白, 品牌色, 90%)                = --el-color-{type}-light-9
+ *   mix(白, 品牌色, 60%)                = --el-color-{type}-light-6
+ *   mix(品牌色, 白)  (50%/50%)          = --el-color-{type}-light-5
+ *   mix(白, 品牌色, 20%) 悬停提亮        = --el-color-{type}-hover
+ *   mix(黑, 品牌色, 10%) 按下压暗        = --el-color-{type}-shade
+ * 其中 light-N 在浅色模式向白混合、深色模式向组件底色混合，
+ * 所以同一个品牌色在深浅两套底色上都能得到正确的浅色档。
+ */
+
+/* 浅色按钮（plain）：底色/边框取浅色档，悬停转为实心 */
+@mixin button-plain($type) {
+  color: var(--el-color-#{$type});
+  background: var(--el-color-#{$type}-light-9);
+  border-color: var(--el-color-#{$type}-light-6);
 
   &:hover,
   &:focus {
-    background: $color;
-    border-color: $color;
+    background: var(--el-color-#{$type});
+    border-color: var(--el-color-#{$type});
     color: $--color-white;
   }
 
   &:active {
-    background: mix($--color-black, $color, $--button-active-shade-percent);
-    border-color: mix($--color-black, $color, $--button-active-shade-percent);
+    background: var(--el-color-#{$type}-shade);
+    border-color: var(--el-color-#{$type}-shade);
     color: $--color-white;
     outline: none;
   }
@@ -23,36 +40,37 @@
     &:hover,
     &:focus,
     &:active {
-      color: mix($--color-white, $color, 40%);
-      background-color: mix($--color-white, $color, 90%);
-      border-color: mix($--color-white, $color, 80%);
+      color: var(--el-color-#{$type}-light-4);
+      background-color: var(--el-color-#{$type}-light-9);
+      border-color: var(--el-color-#{$type}-light-8);
     }
   }
 }
 
-@mixin button-variant($color, $background-color, $border-color) {
-  color: $color;
-  background-color: $background-color;
-  border-color: $border-color;
+/* 实心按钮：底色与边框同色，悬停提亮、按下压暗，禁用时降为浅色档 */
+@mixin button-variant($type) {
+  color: $--color-white;
+  background-color: var(--el-color-#{$type});
+  border-color: var(--el-color-#{$type});
 
   &:hover,
   &:focus {
-    background: mix($--color-white, $background-color, $--button-hover-tint-percent);
-    border-color: mix($--color-white, $border-color, $--button-hover-tint-percent);
-    color: $color;
+    background: var(--el-color-#{$type}-hover);
+    border-color: var(--el-color-#{$type}-hover);
+    color: $--color-white;
   }
-  
+
   &:active {
-    background: mix($--color-black, $background-color, $--button-active-shade-percent);
-    border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
-    color: $color;
+    background: var(--el-color-#{$type}-shade);
+    border-color: var(--el-color-#{$type}-shade);
+    color: $--color-white;
     outline: none;
   }
 
   &.is-active {
-    background: mix($--color-black, $background-color, $--button-active-shade-percent);
-    border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
-    color: $color;
+    background: var(--el-color-#{$type}-shade);
+    border-color: var(--el-color-#{$type}-shade);
+    color: $--color-white;
   }
 
   &.is-disabled {
@@ -61,13 +79,13 @@
     &:focus,
     &:active {
       color: $--color-white;
-      background-color: mix($background-color, $--color-white);
-      border-color: mix($border-color, $--color-white);
+      background-color: var(--el-color-#{$type}-light-5);
+      border-color: var(--el-color-#{$type}-light-5);
     }
   }
 
   &.is-plain {
-    @include button-plain($background-color);
+    @include button-plain($type);
   }
 }
 

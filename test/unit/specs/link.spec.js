@@ -45,6 +45,19 @@ describe('Link', () => {
     expect(linkElm.classList.contains('is-disabled')).to.be.true;
   });
 
+  it('loading', () => {
+    vm = createTest(Link, {
+      loading: true,
+      icon: 'el-icon-edit',
+      href: 'https://element.eleme.io/'
+    }, true);
+    let linkElm = vm.$el;
+    expect(linkElm.classList.contains('is-loading')).to.be.true;
+    expect(linkElm.querySelector('.el-icon-loading')).to.be.ok;
+    expect(linkElm.querySelector('.el-icon-edit')).to.not.exist;
+    expect(linkElm.getAttribute('href')).to.not.exist;
+  });
+
   it('click', async() => {
     let result;
     vm = createVue({
@@ -60,6 +73,37 @@ describe('Link', () => {
     vm.$el.click();
     await wait();
     expect(result).to.exist;
+  });
+
+  it('loading works with disabled and type', () => {
+    vm = createTest(Link, {
+      loading: true,
+      disabled: true,
+      type: 'success',
+      underline: true
+    }, true);
+    let linkElm = vm.$el;
+    expect(linkElm.classList.contains('is-loading')).to.be.true;
+    expect(linkElm.classList.contains('is-disabled')).to.be.true;
+    expect(linkElm.classList.contains('el-link--success')).to.be.true;
+    expect(linkElm.classList.contains('is-underline')).to.be.false;
+  });
+
+  it('loading implies disabled', async() => {
+    let result;
+    vm = createVue({
+      template: `
+        <el-link loading @click="handleClick">loading</el-link>
+      `,
+      methods: {
+        handleClick(evt) {
+          result = evt;
+        }
+      }
+    }, true);
+    vm.$el.click();
+    await wait();
+    expect(result).to.not.exist;
   });
 
 });

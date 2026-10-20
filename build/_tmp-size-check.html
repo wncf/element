@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>size check</title>
+<link rel="stylesheet" href="./_tmp-input.css">
+<link rel="stylesheet" href="./_tmp-radio.css">
+<link rel="stylesheet" href="./_tmp-checkbox.css">
+<link rel="stylesheet" href="./_tmp-picker.css">
+<link rel="stylesheet" href="./_tmp-button-after.css">
+<style>body { margin: 0; padding: 20px; font-family: sans-serif; }</style>
+</head>
+<body>
+<div id="app">
+  <div class="el-input" id="w-default"><input class="el-input__inner" value="默认"></div>
+  <div class="el-input el-input--medium" id="w-medium"><input class="el-input__inner" value="medium"></div>
+  <div class="el-input el-input--small" id="w-small"><input class="el-input__inner" value="small"></div>
+  <div class="el-input el-input--mini" id="w-mini"><input class="el-input__inner" value="mini"></div>
+
+  <label class="el-radio is-bordered el-radio--medium" id="r-medium">
+    <span class="el-radio__input"><span class="el-radio__inner"></span></span>
+    <span class="el-radio__label">单选 medium</span>
+  </label>
+  <label class="el-checkbox is-bordered el-checkbox--medium" id="c-medium">
+    <span class="el-checkbox__input"><span class="el-checkbox__inner"></span></span>
+    <span class="el-checkbox__label">多选 medium</span>
+  </label>
+
+  <button class="el-button" id="b-default"><span>默认</span></button>
+  <button class="el-button el-button--medium" id="b-medium"><span>medium</span></button>
+  <button class="el-button el-button--small" id="b-small"><span>small</span></button>
+  <button class="el-button el-button--mini" id="b-mini"><span>mini</span></button>
+</div>
+<script>
+  window.__measure = function () {
+    var ids = ['w-default', 'w-medium', 'w-small', 'w-mini', 'r-medium', 'c-medium', 'b-default', 'b-medium', 'b-small', 'b-mini'];
+    return ids.map(function (id) {
+      var el = document.getElementById(id);
+      var target = el.querySelector('.el-input__inner') || el;
+      return { id: id, height: Math.round(target.getBoundingClientRect().height * 100) / 100 };
+    });
+  };
+</script>
+</body>
+</html>

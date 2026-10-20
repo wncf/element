@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>input-number controls-right probe</title>
+<link rel="stylesheet" href="./_tmp-input-number-after.css">
+<style>body { margin: 0; padding: 20px; font-family: sans-serif; }</style>
+</head>
+<body>
+<div class="el-input-number is-controls-right" id="num-right">
+  <span class="el-input-number__decrease" id="dec"><i class="el-icon-arrow-down">v</i></span>
+  <span class="el-input-number__increase" id="inc"><i class="el-icon-arrow-up">^</i></span>
+  <div class="el-input"><input class="el-input__inner" value="9"></div>
+</div>
+
+<div class="el-input-number" id="num-normal" style="margin-left: 20px;">
+  <span class="el-input-number__decrease" id="dec2"><i class="el-icon-minus">-</i></span>
+  <span class="el-input-number__increase" id="inc2"><i class="el-icon-plus">+</i></span>
+  <div class="el-input"><input class="el-input__inner" value="9"></div>
+</div>
+
+<script>
+  function describe(el) {
+    if (!el) return 'null';
+    return el.tagName.toLowerCase() + '.' + (typeof el.className === 'string' ? el.className : '');
+  }
+
+  function probeBox(boxId, decId, incId) {
+    var box = document.getElementById(boxId);
+    var dec = document.getElementById(decId);
+    var inc = document.getElementById(incId);
+    var boxRect = box.getBoundingClientRect();
+    var decRect = dec.getBoundingClientRect();
+    var incRect = inc.getBoundingClientRect();
+    return {
+      box: { height: Math.round(boxRect.height * 100) / 100 },
+      dec: { top: Math.round(decRect.top - boxRect.top), height: Math.round(decRect.height * 100) / 100 },
+      inc: { top: Math.round(incRect.top - boxRect.top), height: Math.round(incRect.height * 100) / 100 },
+      topmostAtDecCenter: describe(document.elementFromPoint(decRect.left + decRect.width / 2, decRect.top + decRect.height / 2)),
+      topmostAtIncCenter: describe(document.elementFromPoint(incRect.left + incRect.width / 2, incRect.top + incRect.height / 2))
+    };
+  }
+
+  window.__probe = function () {
+    return {
+      controlsRight: probeBox('num-right', 'dec', 'inc'),
+      normal: probeBox('num-normal', 'dec2', 'inc2')
+    };
+  };
+</script>
+</body>
+</html>

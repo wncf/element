@@ -39,7 +39,8 @@
 
   & .el-input__count {
     color: $--color-info;
-    background: $--color-white;
+    // 计数块压在输入框内容区上，底色必须跟着输入框的填充色，写死白色会在深色下露白块
+    background: var(--el-bg-color);
     position: absolute;
     font-size: 12px;
     bottom: 5px;
@@ -74,6 +75,7 @@
   position: relative;
   font-size: $--font-size-base;
   display: inline-block;
+  vertical-align: top;
   width: 100%;
   @include scroll-bar;
 
@@ -96,7 +98,7 @@
     font-size: 12px;
 
     .el-input__count-inner {
-      background: $--color-white;
+      background: var(--el-bg-color);
       line-height: initial;
       display: inline-block;
       padding: 0 5px;
@@ -114,7 +116,7 @@
     display: inline-block;
     font-size: inherit;
     height: $--input-height;
-    line-height: $--input-height;
+    line-height: normal;
     outline: none;
     padding: 0 15px;
     transition: $--border-transition-base;
@@ -143,13 +145,17 @@
     height: 100%;
     right: 5px;
     top: 0;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: $--input-icon-color;
     transition: all .3s;
     pointer-events: none;
   }
 
   @include e(suffix-inner) {
+    display: flex;
+    align-items: center;
     pointer-events: all;
   }
 
@@ -158,25 +164,18 @@
     height: 100%;
     left: 5px;
     top: 0;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: $--input-icon-color;
     transition: all .3s;
   }
 
   @include e(icon) {
-    height: 100%;
     width: 25px;
     text-align: center;
     transition: all .3s;
-    line-height: $--input-height;
-
-    &:after {
-      content: '';
-      height: 100%;
-      width: 0;
-      display: inline-block;
-      vertical-align: middle;
-    }
+    line-height: 1;
   }
 
   @include e(validateIcon) {
@@ -236,11 +235,7 @@
 
     @include e(inner) {
       height: $--input-medium-height;
-      line-height: $--input-medium-height;
-    }
-
-    .el-input__icon {
-      line-height: $--input-medium-height;
+      line-height: normal;
     }
   }
   @include m(small) {
@@ -248,11 +243,7 @@
 
     @include e(inner) {
       height: $--input-small-height;
-      line-height: $--input-small-height;
-    }
-
-    .el-input__icon {
-      line-height: $--input-small-height;
+      line-height: normal;
     }
   }
   @include m(mini) {
@@ -260,11 +251,7 @@
 
     @include e(inner) {
       height: $--input-mini-height;
-      line-height: $--input-mini-height;
-    }
-
-    .el-input__icon {
-      line-height: $--input-mini-height;
+      line-height: normal;
     }
   }
 }

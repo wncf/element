@@ -58,5 +58,8 @@ export declare class ElDialog extends ElementUIComponent {
   /** Whether to destroy elements in Dialog when closed */
   destroyOnClose: boolean
 
+  /** Whether the Dialog can be dragged by its header */
+  draggable: boolean
+
   $slots: DialogSlots
 }

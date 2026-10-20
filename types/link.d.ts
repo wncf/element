@@ -11,6 +11,9 @@ export declare class ElLink extends ElementUIComponent {
   /** Disable the link */
   disabled: boolean
 
+  /** Loading state */
+  loading: boolean
+
   /** Link underline */
   underline: boolean
 

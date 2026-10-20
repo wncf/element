@@ -1,12 +1,10 @@
 @import "mixins/mixins";
 @import "common/var";
 
-$typeMap: (
-  primary: $--link-primary-font-color, 
-  danger: $--link-danger-font-color, 
-  success: $--link-success-font-color, 
-  warning: $--link-warning-font-color, 
-  info: $--link-info-font-color);
+/* 链接各类型色：直接取品牌色 token 及其梯度档，
+   悬停用 --el-color-{type}-hover（两模式一致的提亮档），
+   深色模式下不会像原来那样反而变暗。 */
+$link-types: (primary, danger, success, warning, info);
 
 @include b(link) {
   display: inline-flex;
@@ -36,7 +34,12 @@ $typeMap: (
 
   @include when(disabled) {
     cursor: not-allowed;
-  } 
+  }
+
+  @include when(loading) {
+    cursor: default;
+    pointer-events: none;
+  }
 
   & [class*="el-icon-"] {
     & + span {
@@ -47,7 +50,7 @@ $typeMap: (
     
   &.el-link--default  {
     color: $--link-default-font-color;
-    &:hover {
+    &:hover:not(.is-disabled):not(.is-loading) {
       color: $--link-default-active-color
     }
     &:after {
@@ -58,21 +61,21 @@ $typeMap: (
     }
   }
 
-  @each $type, $primaryColor in $typeMap {
+  @each $type in $link-types {
     &.el-link--#{$type} {
-      color: $primaryColor;
-      &:hover {
-        color: mix($primaryColor, $--color-white, 80%)
+      color: var(--el-color-#{$type});
+      &:hover:not(.is-disabled):not(.is-loading) {
+        color: var(--el-color-#{$type}-hover)
       }
       &:after {
-        border-color: $primaryColor
+        border-color: var(--el-color-#{$type})
       }
       @include when(disabled) {
-        color: mix($primaryColor, $--color-white, 50%)
+        color: var(--el-color-#{$type}-light-5)
       }
       @include when(underline) {
         &:hover:after {
-          border-color: $primaryColor
+          border-color: var(--el-color-#{$type})
         }
       }
     }

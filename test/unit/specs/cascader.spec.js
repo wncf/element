@@ -277,6 +277,37 @@ describe('Cascader', () => {
     expect(getCloseButton(vm.$el).length).to.equal(0);
   });
 
+  it('click leaf node should check in multiple mode', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          v-model="value"
+          :options="options"
+          :props="props"></el-cascader>
+      `,
+      data() {
+        return {
+          value: [],
+          options,
+          props: {
+            multiple: true
+          }
+        };
+      }
+    }, true);
+
+    getOptions(document.body, 0)[0].click();
+    await waitImmediate();
+    getOptions(document.body, 1)[0].click();
+    await waitImmediate();
+    expect(vm.value.length).to.equal(0);
+
+    getOptions(document.body, 2)[0].click();
+    await waitImmediate();
+    expect(vm.value).to.deep.equal([['zhejiang', 'hangzhou', 'xihu']]);
+    expect(getCloseButton(vm.$el).length).to.equal(1);
+  });
+
   it('clearable in multiple mode', async() => {
     vm = createVue({
       template: `
@@ -345,6 +376,38 @@ describe('Cascader', () => {
     expect(vm.$el.querySelector('.el-tag')).to.exist;
     // disabled tag can not be closed
     expect(vm.$el.querySelector('.el-tag .el-tag__close')).to.be.null;
+  });
+
+  it('multiple tags stay in one line and mark overflow', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          v-model="value"
+          :options="options"
+          :props="props"
+          style="width: 180px;"></el-cascader>
+      `,
+      data() {
+        return {
+          value: ['xihu', 'binjiang', 'jiangbei', 'jiangdong'],
+          options,
+          props: {
+            multiple: true,
+            emitPath: false
+          }
+        };
+      }
+    }, true);
+    await waitImmediate();
+    const tags = vm.$el.querySelector('.el-cascader__tags');
+    const tagsWrap = vm.$el.querySelector('.el-cascader__tags-wrap');
+    const inputInner = vm.$el.querySelector('.el-input__inner');
+    expect(tagsWrap).to.exist;
+    expect(vm.$el.querySelectorAll('.el-tag').length).to.equal(4);
+    expect(window.getComputedStyle(tags).flexWrap).to.equal('nowrap');
+    expect(tagsWrap.classList.contains('is-overflow')).to.be.true;
+    expect(tagsWrap.querySelector('.el-tag.is-overflow-tail')).to.exist;
+    expect(parseFloat(inputInner.style.height)).to.equal(32);
   });
 
   it('filterable', async() => {

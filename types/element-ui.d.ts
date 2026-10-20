@@ -32,13 +32,14 @@ import { ElFormItem } from './form-item'
 import { ElHeader } from './header'
 import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
+import { ElAmountInput } from './amount-input'
 import { ElLoading } from './loading'
 import { ElMain } from './main'
 import { ElMenu } from './menu'
 import { ElMenuItem } from './menu-item'
 import { ElMenuItemGroup } from './menu-item-group'
 import { ElMessage } from './message'
-import { ElMessageBox } from './message-box'
+import { DialogService } from './dialog-service'
 import { ElNotification } from './notification'
 import { ElOption } from './option'
 import { ElOptionGroup } from './option-group'
@@ -122,7 +123,7 @@ export const Loading: ElLoading
 export const Message: ElMessage
 
 /** A set of modal boxes simulating system message box, mainly for message prompt, success tips, error messages and query information */
-export const MessageBox: ElMessageBox
+export const dialog: DialogService
 
 /** Displays a global notification message at the upper right corner of the page */
 export const Notification: ElNotification
@@ -221,6 +222,9 @@ export class Input extends ElInput {}
 
 /** Input Number Component */
 export class InputNumber extends ElInputNumber {}
+
+/** Amount Input Component */
+export class AmountInput extends ElAmountInput {}
 
 /** Main Component */
 export class Main extends ElMain {}

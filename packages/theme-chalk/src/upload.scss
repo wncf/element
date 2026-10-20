@@ -28,8 +28,8 @@
 
   /* 照片墙模式 */
   @include m(picture-card) {
-    background-color: #fbfdff;
-    border: 1px dashed #c0ccda;
+    background-color: var(--el-fill-color-blank);
+    border: 1px dashed var(--el-border-color-base);
     border-radius: 6px;
     box-sizing: border-box;
     width: 148px;
@@ -40,7 +40,7 @@
 
     i {
       font-size: 28px;
-      color: #8c939d;
+      color: var(--el-text-color-secondary);
     }
 
     &:hover {
@@ -59,8 +59,8 @@
 }
 
 @include b(upload-dragger) {
-  background-color: #fff;
-  border: 1px dashed #d9d9d9;
+  background-color: var(--el-fill-color-blank);
+  border: 1px dashed var(--el-border-color-base);
   border-radius: 6px;
   box-sizing: border-box;
   width: 360px;
@@ -270,8 +270,8 @@
 
     .el-upload-list__item {
       overflow: hidden;
-      background-color: #fff;
-      border: 1px solid #c0ccda;
+      background-color: var(--el-fill-color-blank);
+      border: 1px solid var(--el-border-color-base);
       border-radius: 6px;
       box-sizing: border-box;
       width: 148px;
@@ -313,7 +313,7 @@
       top: -6px;
       width: 40px;
       height: 24px;
-      background: #13ce66;
+      background: $--color-success;
       text-align: center;
       transform: rotate(45deg);
       box-shadow: 0 0 1pc 1px rgba(0,0,0,0.2);
@@ -385,8 +385,9 @@
     .el-upload-list__item {
       overflow: hidden;
       z-index: 0;
-      background-color: #fff;
-      border: 1px solid #c0ccda;
+      // 图片列表项是一张"卡片"，底色与描边都跟随主题，否则深色模式下会出现一列白卡
+      background-color: var(--el-fill-color-blank);
+      border: 1px solid var(--el-border-color-base);
       border-radius: 6px;
       box-sizing: border-box;
       margin-top: 10px;
@@ -431,7 +432,7 @@
       position: relative;
       z-index: 1;
       margin-left: -80px;
-      background-color: $--color-white
+      background-color: var(--el-fill-color-blank)
     }
 
     .el-upload-list__item-name {
@@ -453,7 +454,7 @@
       top: -7px;
       width: 46px;
       height: 26px;
-      background: #13ce66;
+      background: $--color-success;
       text-align: center;
       transform: rotate(45deg);
       box-shadow: 0 1px 1px #ccc;
@@ -495,7 +496,7 @@
     top: -6px;
     width: 40px;
     height: 24px;
-    background: #13ce66;
+    background: $--color-success;
     text-align: center;
     transform: rotate(45deg);
     box-shadow: 0 0 1pc 1px rgba(0,0,0,0.2);
@@ -580,7 +581,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: $--color-white;
+    background-color: var(--el-fill-color-blank);
     height: 36px;
     width: 100%;
     overflow: hidden;

@@ -79,13 +79,14 @@
           return ['#F7BA2A', '#F7BA2A', '#F7BA2A'];
         }
       },
+      // 空星与文字色走 token：默认色是内联样式，写死浅色在深色模式下空星会亮得比实星还显眼
       voidColor: {
         type: String,
-        default: '#C6D1DE'
+        default: 'var(--el-text-color-disabled)'
       },
       disabledVoidColor: {
         type: String,
-        default: '#EFF2F7'
+        default: 'var(--el-fill-color-light)'
       },
       iconClasses: {
         type: [Array, Object],
@@ -119,7 +120,7 @@
       },
       textColor: {
         type: String,
-        default: '#1f2d3d'
+        default: 'var(--el-text-color-regular)'
       },
       texts: {
         type: Array,

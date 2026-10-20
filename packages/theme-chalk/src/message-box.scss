@@ -9,7 +9,7 @@
   width: $--msgbox-width;
   padding-bottom: 10px;
   vertical-align: middle;
-  background-color: $--color-white;
+  background-color: var(--el-bg-color);
   border-radius: $--msgbox-border-radius;
   border: 1px solid $--border-color-lighter;
   font-size: $--messagebox-font-size;
@@ -36,13 +36,17 @@
   }
 
   @include e(header) {
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: $--msgbox-padding-primary;
     padding-bottom: 10px;
   }
 
   @include e(title) {
-    padding-left: 0;
+    flex: 1;
+    min-width: 0;
+    padding-right: 12px;
     margin-bottom: 0;
     font-size: $--messagebox-font-size;
     line-height: 1;
@@ -50,26 +54,35 @@
   }
 
   @include e(headerbtn) {
-    position: absolute;
-    top: $--msgbox-padding-primary;
-    right: $--msgbox-padding-primary;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: $--dialog-close-btn-size;
+    height: $--dialog-close-btn-size;
     padding: 0;
     border: none;
+    border-radius: $--dialog-close-btn-border-radius;
+    background-color: $--dialog-close-btn-background;
     outline: none;
-    background: transparent;
-    font-size: $--message-close-size;
     cursor: pointer;
+    transition: background-color .2s, color .2s;
 
     .el-message-box__close {
-      color: $--color-info;
+      display: block;
+      width: 12px;
+      height: 12px;
+      color: $--dialog-close-btn-color;
     }
 
-    &:focus, &:hover {
+    &:hover,
+    &:focus {
+      background-color: $--dialog-close-btn-hover-background;
+
       .el-message-box__close {
-        color: $--color-primary;
+        color: $--dialog-close-btn-hover-color;
       }
     }
-
   }
 
   @include e(content) {
@@ -164,7 +177,7 @@
     }
 
     @include e(title) {
-      position: relative;
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;

@@ -20,7 +20,7 @@
       cursor: not-allowed;
 
       &:hover {
-        background-color: $--color-white;
+        background-color: var(--el-bg-color-overlay);
       }
     }
 

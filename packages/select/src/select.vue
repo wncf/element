@@ -416,7 +416,6 @@
 
               if (this.selectedLabel) {
                 this.currentPlaceholder = this.selectedLabel;
-                this.selectedLabel = '';
               }
             }
           }
@@ -655,7 +654,7 @@
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
           const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
-          const sizeInMap = this.initialInputHeight || 40;
+          const sizeInMap = this.initialInputHeight || 32;
           input.style.height = this.selected.length === 0
             ? sizeInMap + 'px'
             : Math.max(
@@ -874,13 +873,14 @@
 
       const reference = this.$refs.reference;
       if (reference && reference.$el) {
+        // 与 var.scss 的尺寸梯级保持一致；正常情况下用实测高度，这里只在测量失败时兜底
         const sizeMap = {
-          medium: 36,
-          small: 32,
-          mini: 28
+          medium: 32,
+          small: 28,
+          mini: 26
         };
         const input = reference.$el.querySelector('input');
-        this.initialInputHeight = input.getBoundingClientRect().height || sizeMap[this.selectSize];
+        this.initialInputHeight = input.getBoundingClientRect().height || sizeMap[this.selectSize] || 32;
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();

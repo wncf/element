@@ -9,7 +9,8 @@
   display: inline-block;
   position: relative;
   font-size: $--font-size-base;
-  line-height: $--input-height;
+  line-height: normal;
+  vertical-align: top;
 
   &:not(.is-disabled):hover {
     .el-input__inner {
@@ -20,8 +21,11 @@
 
   .el-input {
     cursor: pointer;
+    display: block;
 
     .el-input__inner {
+      height: $--input-height;
+      line-height: normal;
       text-overflow: ellipsis;
 
       &:focus {
@@ -51,17 +55,26 @@
 
   @include m(medium) {
     font-size: $--input-medium-font-size;
-    line-height: $--input-medium-height;
+
+    .el-input__inner {
+      height: $--input-medium-height;
+    }
   }
 
   @include m(small) {
     font-size: $--input-small-font-size;
-    line-height: $--input-small-height;
+
+    .el-input__inner {
+      height: $--input-small-height;
+    }
   }
 
   @include m(mini) {
     font-size: $--input-mini-font-size;
-    line-height: $--input-mini-height;
+
+    .el-input__inner {
+      height: $--input-mini-height;
+    }
   }
 
   @include when(disabled) {
@@ -87,16 +100,18 @@
     top: 50%;
     transform: translateY(-50%);
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: center;
     line-height: normal;
     text-align: left;
     box-sizing: border-box;
+    overflow: hidden;
 
     .el-tag {
       display: inline-flex;
       align-items: center;
       max-width: 100%;
-      margin: 2px 0 2px 6px;
+      margin: 0 0 0 6px;
       text-overflow: ellipsis;
       background: $--cascader-tag-background;
 
@@ -110,6 +125,10 @@
         text-overflow: ellipsis;
       }
 
+      &.is-overflow-tail > span::after {
+        content: '\2026';
+      }
+
       .el-icon-close {
         flex: none;
         background-color: $--color-text-placeholder;
@@ -119,6 +138,23 @@
           background-color: $--color-text-secondary;
         }
       }
+    }
+  }
+
+  @include e(tags-wrap) {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+
+    .el-tag {
+      vertical-align: middle;
+    }
+
+    &:empty {
+      flex: 0 0 0;
+      min-width: 0;
     }
   }
 
@@ -165,18 +201,30 @@
   }
 
   @include e(search-input) {
-    flex: 1;
+    flex: 0 0 auto;
     height: 24px;
-    min-width: 60px;
-    margin: 2px 0 2px 15px;
+    width: 40px;
+    min-width: 20px;
+    margin: 0 0 0 8px;
     padding: 0;
     color: $--cascader-menu-font-color;
     border: none;
     outline: none;
     box-sizing: border-box;
+    // input 元素不给底色会落到浏览器默认的白色，深色模式下会露出白块
+    background-color: transparent;
 
     &::placeholder {
       color: $--color-text-placeholder;
     }
+  }
+
+  // 无标签时输入框收起，搜索框独占整行，并让文案对齐内层 input 的 15px 内边距，
+  // 与同排其他输入框的 placeholder 保持同一基线
+  .el-cascader__tags-wrap:empty + .el-cascader__search-input {
+    flex: 1;
+    width: auto;
+    min-width: 60px;
+    margin-left: 15px;
   }
 }

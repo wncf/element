@@ -49,18 +49,18 @@
 
   @include m(medium) {
     .el-form-item__label {
-      line-height: 36px;
+      line-height: $--form-item-line-height-medium;
     }
     .el-form-item__content {
-      line-height: 36px;
+      line-height: $--form-item-line-height-medium;
     }
   }
   @include m(small) {
     .el-form-item__label {
-      line-height: 32px;
+      line-height: $--form-item-line-height-small;
     }
     .el-form-item__content {
-      line-height: 32px;
+      line-height: $--form-item-line-height-small;
     }
     &.el-form-item {
       margin-bottom: 18px;
@@ -71,10 +71,10 @@
   }
   @include m(mini) {
     .el-form-item__label {
-      line-height: 28px;
+      line-height: $--form-item-line-height-mini;
     }
     .el-form-item__content {
-      line-height: 28px;
+      line-height: $--form-item-line-height-mini;
     }
     &.el-form-item {
       margin-bottom: 18px;
@@ -98,14 +98,14 @@
     float: left;
     font-size: $--form-label-font-size;
     color: $--color-text-regular;
-    line-height: 40px;
+    line-height: $--form-item-line-height;
     padding: 0 12px 0 0;
     box-sizing: border-box;
   }
   @include e(content) {
-    line-height: 40px;
+    line-height: $--form-item-line-height;
     position: relative;
-    font-size: 14px;
+    font-size: $--font-size-base;
     @include utils-clearfix;
 
     .el-input-group {

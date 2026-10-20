@@ -840,6 +840,8 @@ describe('Select', () => {
     await waitImmediate();
     expect(vm.$refs.select.visible).to.be.equal(true);
     expect(vm.$el.querySelector('.el-input__inner').placeholder).to.be.equal('test');
+    expect(vm.$el.querySelector('.el-input__inner').value).to.be.equal('test');
+    expect(vm.$refs.select.selectedLabel).to.be.equal('test');
     expect(vm.value).to.be.equal('test');
   });
 

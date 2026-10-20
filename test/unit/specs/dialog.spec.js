@@ -149,6 +149,126 @@ describe('Dialog', () => {
       vm = getDialogVm('custom-class="my-dialog"');
       expect(vm.$el.querySelector('.el-dialog').classList.contains('my-dialog')).to.true;
     });
+
+    it('centered by default', () => {
+      vm = getDialogVm('');
+      const wrapper = vm.$el.querySelector('.el-dialog__wrapper');
+      expect(wrapper.classList.contains('el-dialog__wrapper--centered')).to.true;
+      expect(vm.$el.querySelector('.el-dialog').style.marginTop).to.equal('');
+    });
+
+    it('not centered when top is set', () => {
+      vm = getDialogVm('top="100px"');
+      const wrapper = vm.$el.querySelector('.el-dialog__wrapper');
+      expect(wrapper.classList.contains('el-dialog__wrapper--centered')).to.false;
+    });
+
+    it('draggable by default', () => {
+      vm = getDialogVm('');
+      const header = vm.$el.querySelector('.el-dialog__header');
+      expect(header.classList.contains('is-draggable')).to.true;
+    });
+
+    it('draggable false', () => {
+      vm = getDialogVm(':draggable="false"');
+      const header = vm.$el.querySelector('.el-dialog__header');
+      expect(header.classList.contains('is-draggable')).to.false;
+    });
+
+    it('fullscreen disables draggable', () => {
+      vm = getDialogVm('fullscreen');
+      const header = vm.$el.querySelector('.el-dialog__header');
+      expect(header.classList.contains('is-draggable')).to.false;
+    });
+
+    it('close button uses svg icon', () => {
+      vm = getDialogVm('');
+      const closeIcon = vm.$el.querySelector('.el-dialog__close');
+      expect(closeIcon.tagName.toLowerCase()).to.equal('svg');
+    });
+  });
+
+  it('drag header updates dialog position', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-dialog :title="title" :visible="visible">
+            <span>这是一段信息</span>
+          </el-dialog>
+        </div>
+      `,
+      data() {
+        return {
+          title: 'dialog test',
+          visible: true
+        };
+      }
+    }, true);
+
+    const dialogEl = vm.$el.querySelector('.el-dialog');
+    const header = vm.$el.querySelector('.el-dialog__header');
+
+    dialogEl.getBoundingClientRect = () => ({
+      left: 100,
+      top: 100,
+      width: 500,
+      height: 300
+    });
+
+    header.dispatchEvent(new MouseEvent('mousedown', {
+      clientX: 150,
+      clientY: 120,
+      bubbles: true
+    }));
+    document.dispatchEvent(new MouseEvent('mousemove', {
+      clientX: 200,
+      clientY: 180,
+      bubbles: true
+    }));
+
+    expect(dialogEl.style.position).to.equal('absolute');
+    expect(dialogEl.style.left).to.equal('150px');
+    expect(dialogEl.style.top).to.equal('160px');
+
+    document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+  });
+
+  it('reset position after close animation', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-dialog :title="title" :visible.sync="visible">
+            <span>这是一段信息</span>
+          </el-dialog>
+        </div>
+      `,
+      data() {
+        return {
+          title: 'dialog test',
+          visible: true
+        };
+      }
+    }, true);
+
+    const dialogEl = vm.$el.querySelector('.el-dialog');
+    dialogEl.style.position = 'absolute';
+    dialogEl.style.left = '200px';
+    dialogEl.style.top = '150px';
+
+    vm.visible = false;
+
+    setTimeout(() => {
+      expect(dialogEl.style.position).to.equal('absolute');
+      expect(dialogEl.style.left).to.equal('200px');
+      expect(dialogEl.style.top).to.equal('150px');
+
+      setTimeout(() => {
+        expect(dialogEl.style.position).to.equal('');
+        expect(dialogEl.style.left).to.equal('');
+        expect(dialogEl.style.top).to.equal('');
+        done();
+      }, 400);
+    }, 50);
   });
 
   it('events', done => {

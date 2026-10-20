@@ -20,6 +20,9 @@ export default {
 
     pageCount: Number,
 
+    // 与其它组件保持一致：default / medium = 32px，small = 28px，mini = 26px
+    size: String,
+
     pagerCount: {
       type: Number,
       validator(value) {
@@ -72,9 +75,8 @@ export default {
     if (this.hideOnSinglePage && (!this.internalPageCount || this.internalPageCount === 1)) return null;
 
     let template = <div class={['el-pagination', {
-      'is-background': this.background,
-      'el-pagination--small': this.small
-    }] }></div>;
+      'is-background': this.background
+    }, this.paginationSize ? `el-pagination--${this.paginationSize}` : ''] }></div>;
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
@@ -174,7 +176,7 @@ export default {
             <el-select
               value={ this.$parent.internalPageSize }
               popperClass={ this.$parent.popperClass || '' }
-              size="mini"
+              size={ this.$parent.paginationSize }
               on-input={ this.handleChange }
               disabled={ this.$parent.disabled }>
               {
@@ -253,6 +255,7 @@ export default {
               max={ this.$parent.internalPageCount }
               value={ this.userInput !== null ? this.userInput : this.$parent.internalCurrentPage }
               type="number"
+              size={ this.$parent.paginationSize }
               disabled={ this.$parent.disabled }
               nativeOnKeyup={ this.handleKeyup }
               onInput={ this.handleInput }
@@ -338,6 +341,12 @@ export default {
   },
 
   computed: {
+    // 元素上的 size 优先，其次跟随全局 $ELEMENT.size；旧的 small 布尔写法等价于 size="small"
+    paginationSize() {
+      if (this.small) return 'small';
+      return this.size || (this.$ELEMENT || {}).size;
+    },
+
     internalPageCount() {
       if (typeof this.total === 'number') {
         return Math.max(1, Math.ceil(this.total / this.internalPageSize));

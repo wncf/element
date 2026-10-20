@@ -66,7 +66,7 @@ export default {
     },
     iconColor: {
       type: String,
-      default: '#f90'
+      default: 'var(--el-color-warning)'
     },
     hideIcon: {
       type: Boolean,

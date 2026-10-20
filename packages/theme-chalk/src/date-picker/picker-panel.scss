@@ -4,7 +4,7 @@
   color: $--color-text-regular;
   border: 1px solid $--datepicker-border-color;
   box-shadow: $--box-shadow-light;
-  background: $--color-white;
+  background: var(--el-bg-color-overlay);
   border-radius: $--border-radius-base;
   line-height: 30px;
   margin: 5px 0;
@@ -26,7 +26,7 @@
     border-top: 1px solid $--datepicker-inner-border-color;
     padding: 4px;
     text-align: right;
-    background-color: $--color-white;
+    background-color: var(--el-bg-color-overlay);
     position: relative;
     font-size: 0;
   }
@@ -49,14 +49,14 @@
     }
 
     &.active {
-      background-color: #e6f1fe;
+      background-color: var(--el-color-primary-light-9);
       color: $--datepicker-active-color;
     }
   }
 
   @include e(btn) {
-    border: 1px solid #dcdcdc;
-    color: #333;
+    border: 1px solid var(--el-border-color-base);
+    color: var(--el-text-color-regular);
     line-height: 24px;
     border-radius: 2px;
     padding: 0 20px;
@@ -66,7 +66,7 @@
     font-size: 12px;
 
     &[disabled] {
-      color: #cccccc;
+      color: var(--el-text-color-placeholder);
       cursor: not-allowed;
     }
   }
@@ -107,7 +107,7 @@
   border-right: 1px solid $--datepicker-inner-border-color;
   box-sizing: border-box;
   padding-top: 6px;
-  background-color: $--color-white;
+  background-color: var(--el-bg-color-overlay);
   overflow: auto;
 }
 
