@@ -46,6 +46,7 @@ import Notification from '../packages/notification/index.js';
 import Slider from '../packages/slider/index.js';
 import Loading from '../packages/loading/index.js';
 import Icon from '../packages/icon/index.js';
+import SvgIcon from '../packages/svg-icon/index.js';
 import Row from '../packages/row/index.js';
 import Col from '../packages/col/index.js';
 import Upload from '../packages/upload/index.js';
@@ -92,6 +93,7 @@ import DescriptionsItem from '../packages/descriptions-item/index.js';
 import Result from '../packages/result/index.js';
 import locale from 'hzq-ui/src/locale';
 import CollapseTransition from 'hzq-ui/src/transitions/collapse-transition';
+import { registerSvgIcons } from 'hzq-ui/packages/svg-icon';
 
 const components = [
   Pagination,
@@ -138,6 +140,7 @@ const components = [
   Alert,
   Slider,
   Icon,
+  SvgIcon,
   Row,
   Col,
   Upload,
@@ -194,7 +197,12 @@ const install = function(Vue, opts = {}) {
   Vue.use(InfiniteScroll);
   Vue.use(Loading.directive);
 
-  Vue.prototype.$ELEMENT = {
+  // opts.svgIcons: { prefix: 'crm', icons: [...] } 用户自定义 SVG 图标
+  if (opts.svgIcons) {
+    registerSvgIcons(opts.svgIcons.icons, { prefix: opts.svgIcons.prefix });
+  }
+
+  Vue.prototype.$HZQ = {
     size: opts.size || '',
     zIndex: opts.zIndex || 2000
   };
@@ -263,6 +271,7 @@ export default {
   Notification,
   Slider,
   Icon,
+  SvgIcon,
   Row,
   Col,
   Upload,
