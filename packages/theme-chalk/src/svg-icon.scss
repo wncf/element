@@ -1,0 +1,12 @@
+@import "common/var";
+@import "mixins/mixins";
+
+// 业务方自定义 SVG 图标（svg-sprite 方案）
+// 尺寸默认 1em，跟随父级字号；fill 用 currentColor，颜色继承自文字色。
+@include b(svg-icon) {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  overflow: hidden;
+  vertical-align: -0.15em;
+}
