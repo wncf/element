@@ -29,7 +29,7 @@
     .nav-item {
       a {
         font-size: 16px;
-        color: #333;
+        color: var(--hzq-text-color-primary);
         line-height: 40px;
         height: 40px;
         margin: 0;
@@ -49,7 +49,7 @@
         a {
           display: block;
           height: 40px;
-          color: #444;
+          color: var(--hzq-text-color-regular);
           line-height: 40px;
           font-size: 14px;
           overflow: hidden;
@@ -70,7 +70,7 @@
         }
         
         & > a {
-          color: #777;
+          color: var(--hzq-text-color-secondary);
           font-weight: 300;
           font-size: 14px;
         }
@@ -98,7 +98,7 @@
 
     .nav-group__title {
       font-size: 12px;
-      color: #999;
+      color: var(--hzq-text-color-secondary);
       line-height: 26px;
       margin-top: 15px;
     }

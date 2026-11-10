@@ -155,6 +155,18 @@ const generateMiscRoutes = function(lang) {
     component: load(lang, 'index')
   };
 
+  // 改造记录只维护中文版：其余语言没有对应文案，不生成路由，
+  // 避免顶部导航出现点了就 404 的入口
+  if (lang === 'zh-CN') {
+    let changesRoute = {
+      path: `/${ lang }/changes`, // 改造记录
+      meta: { lang },
+      name: 'changes' + lang,
+      component: load(lang, 'changes')
+    };
+    return [guideRoute, resourceRoute, themeRoute, changesRoute, indexRoute];
+  }
+
   return [guideRoute, resourceRoute, themeRoute, indexRoute];
 };
 

@@ -1,8 +1,8 @@
-import ElTag from './src/tag';
+import HzqTag from './src/tag';
 
 /* istanbul ignore next */
-ElTag.install = function(Vue) {
-  Vue.component(ElTag.name, ElTag);
+HzqTag.install = function(Vue) {
+  Vue.component(HzqTag.name, HzqTag);
 };
 
-export default ElTag;
+export default HzqTag;

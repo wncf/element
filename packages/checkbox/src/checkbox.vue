@@ -1,15 +1,15 @@
 <template>
   <label
-    class="el-checkbox"
+    class="hzq-checkbox"
     :class="[
-      border && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
+      border && checkboxSize ? 'hzq-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
       { 'is-bordered': border },
       { 'is-checked': isChecked }
     ]"
     :id="id"
   >
-    <span class="el-checkbox__input"
+    <span class="hzq-checkbox__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': isChecked,
@@ -20,10 +20,10 @@
       :role="indeterminate ? 'checkbox' : false"
       :aria-checked="indeterminate ? 'mixed' : false"
     >
-      <span class="el-checkbox__inner"></span>
+      <span class="hzq-checkbox__inner"></span>
       <input
         v-if="trueLabel || falseLabel"
-        class="el-checkbox__original"
+        class="hzq-checkbox__original"
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
         :name="name"
@@ -36,7 +36,7 @@
         @blur="focus = false">
       <input
         v-else
-        class="el-checkbox__original"
+        class="hzq-checkbox__original"
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
         :disabled="isDisabled"
@@ -47,17 +47,17 @@
         @focus="focus = true"
         @blur="focus = false">
     </span>
-    <span class="el-checkbox__label" v-if="$slots.default || label">
+    <span class="hzq-checkbox__label" v-if="$slots.default || label">
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>
   </label>
 </template>
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElCheckbox',
+    name: 'HzqCheckbox',
 
     mixins: [Emitter],
 
@@ -70,7 +70,7 @@
       }
     },
 
-    componentName: 'ElCheckbox',
+    componentName: 'HzqCheckbox',
 
     data() {
       return {
@@ -100,7 +100,7 @@
               (this.isLimitExceeded = true));
 
             this.isLimitExceeded === false &&
-            this.dispatch('ElCheckboxGroup', 'input', [val]);
+            this.dispatch('HzqCheckboxGroup', 'input', [val]);
           } else {
             this.$emit('input', val);
             this.selfModel = val;
@@ -121,7 +121,7 @@
       isGroup() {
         let parent = this.$parent;
         while (parent) {
-          if (parent.$options.componentName !== 'ElCheckboxGroup') {
+          if (parent.$options.componentName !== 'HzqCheckboxGroup') {
             parent = parent.$parent;
           } else {
             this._checkboxGroup = parent;
@@ -154,7 +154,7 @@
       },
 
       checkboxSize() {
-        const temCheckboxSize = this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        const temCheckboxSize = this.size || this._elFormItemSize || (this.$HZQ || {}).size;
         return this.isGroup
           ? this._checkboxGroup.checkboxGroupSize || temCheckboxSize
           : temCheckboxSize;
@@ -198,7 +198,7 @@
         this.$emit('change', value, ev);
         this.$nextTick(() => {
           if (this.isGroup) {
-            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
+            this.dispatch('HzqCheckboxGroup', 'change', [this._checkboxGroup.value]);
           }
         });
       }
@@ -215,7 +215,7 @@
 
     watch: {
       value(value) {
-        this.dispatch('ElFormItem', 'el.form.change', value);
+        this.dispatch('HzqFormItem', 'el.form.change', value);
       }
     }
   };

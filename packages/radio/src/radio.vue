@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-radio"
+    class="hzq-radio"
     :class="[
-      border && radioSize ? 'el-radio--' + radioSize : '',
+      border && radioSize ? 'hzq-radio--' + radioSize : '',
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
@@ -14,16 +14,16 @@
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
-    <span class="el-radio__input"
+    <span class="hzq-radio__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
       }"
     >
-      <span class="el-radio__inner"></span>
+      <span class="hzq-radio__inner"></span>
       <input
         ref="radio"
-        class="el-radio__original"
+        class="hzq-radio__original"
         :value="label"
         type="radio"
         aria-hidden="true"
@@ -37,17 +37,17 @@
         autocomplete="off"
       >
     </span>
-    <span class="el-radio__label" @keydown.stop>
+    <span class="hzq-radio__label" @keydown.stop>
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>
   </label>
 </template>
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElRadio',
+    name: 'HzqRadio',
 
     mixins: [Emitter],
 
@@ -61,7 +61,7 @@
       }
     },
 
-    componentName: 'ElRadio',
+    componentName: 'HzqRadio',
 
     props: {
       value: {},
@@ -81,7 +81,7 @@
       isGroup() {
         let parent = this.$parent;
         while (parent) {
-          if (parent.$options.componentName !== 'ElRadioGroup') {
+          if (parent.$options.componentName !== 'HzqRadioGroup') {
             parent = parent.$parent;
           } else {
             this._radioGroup = parent;
@@ -96,7 +96,7 @@
         },
         set(val) {
           if (this.isGroup) {
-            this.dispatch('ElRadioGroup', 'input', [val]);
+            this.dispatch('HzqRadioGroup', 'input', [val]);
           } else {
             this.$emit('input', val);
           }
@@ -107,7 +107,7 @@
         return (this.elFormItem || {}).elFormItemSize;
       },
       radioSize() {
-        const temRadioSize = this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        const temRadioSize = this.size || this._elFormItemSize || (this.$HZQ || {}).size;
         return this.isGroup
           ? this._radioGroup.radioGroupSize || temRadioSize
           : temRadioSize;
@@ -126,7 +126,7 @@
       handleChange() {
         this.$nextTick(() => {
           this.$emit('change', this.model);
-          this.isGroup && this.dispatch('ElRadioGroup', 'handleChange', this.model);
+          this.isGroup && this.dispatch('HzqRadioGroup', 'handleChange', this.model);
         });
       }
     }

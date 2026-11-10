@@ -10,19 +10,19 @@ Dialog abre una caja de diálogo, y es bastante personalizable.
 
 
 ```html
-<el-button type="text" @click="dialogVisible = true">click to open the Dialog</el-button>
+<hzq-button type="text" @click="dialogVisible = true">click to open the Dialog</hzq-button>
 
-<el-dialog
+<hzq-dialog
   title="Tips"
   :visible.sync="dialogVisible"
   width="30%"
   :before-close="handleClose">
   <span>This is a message</span>
   <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+    <hzq-button @click="dialogVisible = false">Cancel</hzq-button>
+    <hzq-button type="primary" @click="dialogVisible = false">Confirm</hzq-button>
   </span>
-</el-dialog>
+</hzq-dialog>
 
 <script>
   export default {
@@ -60,36 +60,36 @@ El contenido del Diálogo puede ser cualquier cosa, incluso una tabla o un formu
 
 ```html
 <!-- Table -->
-<el-button type="text" @click="dialogTableVisible = true">open a Table nested Dialog</el-button>
+<hzq-button type="text" @click="dialogTableVisible = true">open a Table nested Dialog</hzq-button>
 
-<el-dialog title="Shipping address" :visible.sync="dialogTableVisible">
-  <el-table :data="gridData">
-    <el-table-column property="date" label="Date" width="150"></el-table-column>
-    <el-table-column property="name" label="Name" width="200"></el-table-column>
-    <el-table-column property="address" label="Address"></el-table-column>
-  </el-table>
-</el-dialog>
+<hzq-dialog title="Shipping address" :visible.sync="dialogTableVisible">
+  <hzq-table :data="gridData">
+    <hzq-table-column property="date" label="Date" width="150"></hzq-table-column>
+    <hzq-table-column property="name" label="Name" width="200"></hzq-table-column>
+    <hzq-table-column property="address" label="Address"></hzq-table-column>
+  </hzq-table>
+</hzq-dialog>
 
 <!-- Form -->
-<el-button type="text" @click="dialogFormVisible = true">open a Form nested Dialog</el-button>
+<hzq-button type="text" @click="dialogFormVisible = true">open a Form nested Dialog</hzq-button>
 
-<el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
-  <el-form :model="form">
-    <el-form-item label="Promotion name" :label-width="formLabelWidth">
-      <el-input v-model="form.name" autocomplete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="Zones" :label-width="formLabelWidth">
-      <el-select v-model="form.region" placeholder="Please select a zone">
-        <el-option label="Zone No.1" value="shanghai"></el-option>
-        <el-option label="Zone No.2" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
-  </el-form>
+<hzq-dialog title="Shipping address" :visible.sync="dialogFormVisible">
+  <hzq-form :model="form">
+    <hzq-form-item label="Promotion name" :label-width="formLabelWidth">
+      <hzq-input v-model="form.name" autocomplete="off"></hzq-input>
+    </hzq-form-item>
+    <hzq-form-item label="Zones" :label-width="formLabelWidth">
+      <hzq-select v-model="form.region" placeholder="Please select a zone">
+        <hzq-option label="Zone No.1" value="shanghai"></hzq-option>
+        <hzq-option label="Zone No.2" value="beijing"></hzq-option>
+      </hzq-select>
+    </hzq-form-item>
+  </hzq-form>
   <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+    <hzq-button @click="dialogFormVisible = false">Cancel</hzq-button>
+    <hzq-button type="primary" @click="dialogFormVisible = false">Confirm</hzq-button>
   </span>
-</el-dialog>
+</hzq-dialog>
 
 <script>
   export default {
@@ -139,20 +139,20 @@ Si un diálogo está anidado en otro diálogo, se requiere append-to-body.
 
 ```html
 <template>
-  <el-button type="text" @click="outerVisible = true">open the outer Dialog</el-button>
+  <hzq-button type="text" @click="outerVisible = true">open the outer Dialog</hzq-button>
   
-  <el-dialog title="Outer Dialog" :visible.sync="outerVisible">
-    <el-dialog
+  <hzq-dialog title="Outer Dialog" :visible.sync="outerVisible">
+    <hzq-dialog
         width="30%"
         title="Inner Dialog"
         :visible.sync="innerVisible"
         append-to-body>
-    </el-dialog>
+    </hzq-dialog>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="outerVisible = false">Cancel</el-button>
-      <el-button type="primary" @click="innerVisible = true">open the inner Dialog</el-button>
+      <hzq-button @click="outerVisible = false">Cancel</hzq-button>
+      <hzq-button type="primary" @click="innerVisible = true">open the inner Dialog</hzq-button>
     </div>
-  </el-dialog>
+  </hzq-dialog>
 </template>
 
 <script>
@@ -174,19 +174,19 @@ El contenido de Diálogo se puede centrar.
 :::demo Ajuste `center` en `true` para centrar el encabezado y el pie de página del cuadro de diálogo horizontalmente. `center` sólo afecta al encabezado y pie de página de Dialog. El cuerpo de Dialog puede ser cualquier cosa, así que a veces no se ve bien cuando está centrado. Necesitas escribir algún CSS si deseas centrar el cuerpo también.
 
 ```html
-<el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
+<hzq-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</hzq-button>
 
-<el-dialog
+<hzq-dialog
   title="Warning"
   :visible.sync="centerDialogVisible"
   width="30%"
   center>
   <span>It should be noted that the content will not be aligned in center by default</span>
   <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="centerDialogVisible = false">Confirm</el-button>
+    <hzq-button @click="centerDialogVisible = false">Cancel</hzq-button>
+    <hzq-button type="primary" @click="centerDialogVisible = false">Confirm</hzq-button>
   </span>
-</el-dialog>
+</hzq-dialog>
 
 <script>
   export default {

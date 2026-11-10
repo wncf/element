@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import loadingVue from './loading.vue';
-import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
-import { PopupManager } from 'element-ui/src/utils/popup';
-import afterLeave from 'element-ui/src/utils/after-leave';
-import merge from 'element-ui/src/utils/merge';
+import { addClass, removeClass, getStyle } from 'hzq-ui/src/utils/dom';
+import { PopupManager } from 'hzq-ui/src/utils/popup';
+import afterLeave from 'hzq-ui/src/utils/after-leave';
+import merge from 'hzq-ui/src/utils/merge';
 
 const LoadingConstructor = Vue.extend(loadingVue);
 
@@ -28,8 +28,8 @@ LoadingConstructor.prototype.close = function() {
     const target = this.fullscreen || this.body
       ? document.body
       : this.target;
-    removeClass(target, 'el-loading-parent--relative');
-    removeClass(target, 'el-loading-parent--hidden');
+    removeClass(target, 'hzq-loading-parent--relative');
+    removeClass(target, 'hzq-loading-parent--hidden');
     if (this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     }
@@ -88,10 +88,10 @@ const Loading = (options = {}) => {
 
   addStyle(options, parent, instance);
   if (instance.originalPosition !== 'absolute' && instance.originalPosition !== 'fixed' && instance.originalPosition !== 'sticky') {
-    addClass(parent, 'el-loading-parent--relative');
+    addClass(parent, 'hzq-loading-parent--relative');
   }
   if (options.fullscreen && options.lock) {
-    addClass(parent, 'el-loading-parent--hidden');
+    addClass(parent, 'hzq-loading-parent--hidden');
   }
   parent.appendChild(instance.$el);
   Vue.nextTick(() => {

@@ -26,25 +26,25 @@
       <transition name="text-slide">
         <span v-show="hovering">{{ controlText }}</span>
       </transition>
-      <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
+      <hzq-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
         <transition name="text-slide">
-          <el-button
+          <hzq-button
             v-show="hovering || isExpanded"
             size="small"
             type="text"
             class="control-button"
             @click.stop="goCodepen">
             {{ langConfig['button-text'] }}
-          </el-button>
+          </hzq-button>
         </transition>
-      </el-tooltip>
+      </hzq-tooltip>
     </div>
   </div>
 </template>
 
 <style lang="scss">
   .demo-block {
-    border: solid 1px #ebebeb;
+    border: solid 1px var(--hzq-border-color-base);
     border-radius: 3px;
     transition: .2s;
 
@@ -65,8 +65,8 @@
     }
 
     .meta {
-      background-color: #fafafa;
-      border-top: solid 1px #eaeefb;
+      background-color: var(--hzq-fill-color-light);
+      border-top: solid 1px var(--hzq-border-color-light);
       overflow: hidden;
       height: 0;
       transition: height .2s;
@@ -75,14 +75,14 @@
     .description {
       padding: 20px;
       box-sizing: border-box;
-      border: solid 1px #ebebeb;
+      border: solid 1px var(--hzq-border-color-base);
       border-radius: 3px;
       font-size: 14px;
       line-height: 22px;
-      color: #666;
+      color: var(--hzq-text-color-regular);
       word-break: break-word;
       margin: 10px;
-      background-color: #fff;
+      background-color: var(--hzq-bg-color);
 
       p {
         margin: 0;
@@ -90,8 +90,8 @@
       }
 
       code {
-        color: #5e6d82;
-        background-color: #e6effb;
+        color: var(--hzq-text-color-regular);
+        background-color: var(--hzq-color-primary-light-9);
         margin: 0 4px;
         display: inline-block;
         padding: 1px 5px;
@@ -120,15 +120,15 @@
     }
 
     .demo-block-control {
-      border-top: solid 1px #eaeefb;
+      border-top: solid 1px var(--hzq-border-color-light);
       height: 44px;
       box-sizing: border-box;
-      background-color: #fff;
+      background-color: var(--hzq-bg-color);
       border-bottom-left-radius: 4px;
       border-bottom-right-radius: 4px;
       text-align: center;
       margin-top: -1px;
-      color: #d3dce6;
+      color: var(--hzq-text-color-placeholder);
       cursor: pointer;
       position: relative;
     
@@ -158,7 +158,7 @@
 
       &:hover {
         color: #409EFF;
-        background-color: #f9fafc;
+        background-color: var(--hzq-fill-color-light);
       }
 
       & .text-slide-enter,
@@ -175,6 +175,65 @@
         font-size: 14px;
         padding-left: 5px;
         padding-right: 25px;
+      }
+    }
+
+    /* 深色模式：代码高亮主题来自 CDN 的 color-brewer.css，是浅色的固定色板，
+       无法逐条 token 化，这里整体压暗底色并提亮文字，避免深色页里出现白块 */
+    .theme-dark & {
+      box-shadow: none;
+
+      .meta {
+        background-color: var(--hzq-fill-color-lighter);
+        border-top-color: var(--hzq-border-color-light);
+      }
+
+      .description {
+        background-color: var(--hzq-bg-color);
+        border-color: var(--hzq-border-color-light);
+        color: var(--hzq-text-color-regular);
+      }
+
+      code.hljs {
+        background-color: var(--hzq-fill-color-lighter) !important;
+        border-color: var(--hzq-border-color-light) !important;
+        color: var(--hzq-text-color-regular) !important;
+
+        .hljs-keyword,
+        .hljs-selector-tag,
+        .hljs-built_in,
+        .hljs-name,
+        .hljs-tag {
+          color: #7dd3fc !important;
+        }
+
+        .hljs-string,
+        .hljs-title,
+        .hljs-section,
+        .hljs-attribute,
+        .hljs-literal,
+        .hljs-template-tag,
+        .hljs-template-variable,
+        .hljs-type,
+        .hljs-addition {
+          color: #86efac !important;
+        }
+
+        .hljs-comment,
+        .hljs-quote,
+        .hljs-deletion,
+        .hljs-meta {
+          color: #94a3b8 !important;
+        }
+
+        .hljs-number,
+        .hljs-symbol,
+        .hljs-bullet,
+        .hljs-link,
+        .hljs-variable,
+        .hljs-attr {
+          color: #fca5a5 !important;
+        }
       }
     }
   }
@@ -264,7 +323,7 @@
       },
 
       iconClass() {
-        return this.isExpanded ? 'el-icon-caret-top' : 'el-icon-caret-bottom';
+        return this.isExpanded ? 'hzq-icon-caret-top' : 'hzq-icon-caret-bottom';
       },
 
       controlText() {
@@ -294,7 +353,7 @@
           return;
         }
         setTimeout(() => {
-          this.scrollParent = document.querySelector('.page-component__scroll > .el-scrollbar__wrap');
+          this.scrollParent = document.querySelector('.page-component__scroll > .hzq-scrollbar__wrap');
           this.scrollParent && this.scrollParent.addEventListener('scroll', this.scrollHandler);
           this.scrollHandler();
         }, 200);

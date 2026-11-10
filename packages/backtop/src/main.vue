@@ -7,9 +7,9 @@
         'right': styleRight,
         'bottom': styleBottom
       }"
-      class="el-backtop">
+      class="hzq-backtop">
       <slot>
-        <el-icon name="caret-top"></el-icon>
+        <hzq-icon name="caret-top"></hzq-icon>
       </slot>
     </div>
   </transition>
@@ -24,7 +24,7 @@ const easeInOutCubic = value => value < 0.5
   : 1 - cubic((1 - value) * 2) / 2;
 
 export default {
-  name: 'ElBacktop',
+  name: 'HzqBacktop',
 
   props: {
     visibilityHeight: {

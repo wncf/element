@@ -31,9 +31,9 @@
 <template>
   <div class="page-container page-theme-preview" ref="themePreview">
     <section class="display">
-      <el-button type="text" icon="el-icon-back" @click="navBack">
+      <hzq-button type="text" icon="hzq-icon-back" @click="navBack">
         <%= 1 >
-      </el-button>
+      </hzq-button>
       <h3>{{previewConfig.name}}</h3>
       <basic-tokens-preview>
       </basic-tokens-preview>

@@ -1,18 +1,18 @@
 <template>
-  <div class="el-transfer-panel">
-    <p class="el-transfer-panel__header">
-      <el-checkbox
+  <div class="hzq-transfer-panel">
+    <p class="hzq-transfer-panel__header">
+      <hzq-checkbox
         v-model="allChecked"
         @change="handleAllCheckedChange"
         :indeterminate="isIndeterminate">
         {{ title }}
         <span>{{ checkedSummary }}</span>
-      </el-checkbox>
+      </hzq-checkbox>
     </p>
     
-    <div :class="['el-transfer-panel__body', hasFooter ? 'is-with-footer' : '']">
-      <el-input
-        class="el-transfer-panel__filter"
+    <div :class="['hzq-transfer-panel__body', hasFooter ? 'is-with-footer' : '']">
+      <hzq-input
+        class="hzq-transfer-panel__filter"
         v-model="query"
         size="small"
         :placeholder="placeholder"
@@ -20,61 +20,61 @@
         @mouseleave.native="inputHover = false"
         v-if="filterable">
         <i slot="prefix"
-          :class="['el-input__icon', 'el-icon-' + inputIcon]"
+          :class="['hzq-input__icon', 'hzq-icon-' + inputIcon]"
           @click="clearQuery"
         ></i>
-      </el-input>
-      <el-checkbox-group
+      </hzq-input>
+      <hzq-checkbox-group
         v-model="checked"
         v-show="!hasNoMatch && data.length > 0"
         :class="{ 'is-filterable': filterable }"
-        class="el-transfer-panel__list">
-        <el-checkbox
-          class="el-transfer-panel__item"
+        class="hzq-transfer-panel__list">
+        <hzq-checkbox
+          class="hzq-transfer-panel__item"
           :label="item[keyProp]"
           :disabled="item[disabledProp]"
           :key="item[keyProp]"
           v-for="item in filteredData">
           <option-content :option="item"></option-content>
-        </el-checkbox>
-      </el-checkbox-group>
+        </hzq-checkbox>
+      </hzq-checkbox-group>
       <p
-        class="el-transfer-panel__empty"
+        class="hzq-transfer-panel__empty"
         v-show="hasNoMatch">{{ t('el.transfer.noMatch') }}</p>
       <p
-        class="el-transfer-panel__empty"
+        class="hzq-transfer-panel__empty"
         v-show="data.length === 0 && !hasNoMatch">{{ t('el.transfer.noData') }}</p>
     </div>
-    <p class="el-transfer-panel__footer" v-if="hasFooter">
+    <p class="hzq-transfer-panel__footer" v-if="hasFooter">
       <slot></slot>
     </p>
   </div>
 </template>
 
 <script>
-  import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import ElInput from 'element-ui/packages/input';
-  import Locale from 'element-ui/src/mixins/locale';
+  import HzqCheckboxGroup from 'hzq-ui/packages/checkbox-group';
+  import HzqCheckbox from 'hzq-ui/packages/checkbox';
+  import HzqInput from 'hzq-ui/packages/input';
+  import Locale from 'hzq-ui/src/mixins/locale';
 
   export default {
     mixins: [Locale],
 
-    name: 'ElTransferPanel',
+    name: 'HzqTransferPanel',
 
-    componentName: 'ElTransferPanel',
+    componentName: 'HzqTransferPanel',
 
     components: {
-      ElCheckboxGroup,
-      ElCheckbox,
-      ElInput,
+      HzqCheckboxGroup,
+      HzqCheckbox,
+      HzqInput,
       OptionContent: {
         props: {
           option: Object
         },
         render(h) {
           const getParent = vm => {
-            if (vm.$options.componentName === 'ElTransferPanel') {
+            if (vm.$options.componentName === 'HzqTransferPanel') {
               return vm;
             } else if (vm.$parent) {
               return getParent(vm.$parent);

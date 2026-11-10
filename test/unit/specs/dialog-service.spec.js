@@ -8,7 +8,7 @@ describe('$dialog', () => {
   });
 
   function getVisibleWrappers() {
-    return Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(wrapper => {
+    return Array.from(document.querySelectorAll('.hzq-dialog__wrapper')).filter(wrapper => {
       return wrapper.style.display !== 'none';
     });
   }
@@ -31,9 +31,9 @@ describe('$dialog', () => {
     setTimeout(() => {
       const wrapper = getVisibleWrappers()[0];
       expect(wrapper).to.exist;
-      expect(wrapper.querySelector('.el-dialog__title').textContent).to.equal('提示');
+      expect(wrapper.querySelector('.hzq-dialog__title').textContent).to.equal('提示');
       expect(wrapper.textContent).to.include('通知内容');
-      expect(wrapper.querySelector('.el-dialog__footer')).to.not.exist;
+      expect(wrapper.querySelector('.hzq-dialog__footer')).to.not.exist;
       done();
     }, 100);
   });
@@ -43,7 +43,7 @@ describe('$dialog', () => {
 
     setTimeout(() => {
       expect(document.body.textContent).to.include('快捷内容');
-      expect(getVisibleWrappers()[0].querySelector('.el-dialog__footer')).to.not.exist;
+      expect(getVisibleWrappers()[0].querySelector('.hzq-dialog__footer')).to.not.exist;
       done();
     }, 100);
   });
@@ -58,7 +58,7 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      const buttons = document.querySelector('.el-dialog__footer').querySelectorAll('.el-button');
+      const buttons = document.querySelector('.hzq-dialog__footer').querySelectorAll('.hzq-button');
       expect(buttons.length).to.equal(2);
       expect(buttons[0].textContent).to.include('拒绝');
       expect(buttons[1].textContent).to.include('同意');
@@ -75,7 +75,7 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      expect(document.querySelector('.el-dialog--bordered')).to.exist;
+      expect(document.querySelector('.hzq-dialog--bordered')).to.exist;
       done();
     }, 100);
   });
@@ -88,7 +88,7 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      expect(document.querySelector('.el-dialog--bordered')).to.not.exist;
+      expect(document.querySelector('.hzq-dialog--bordered')).to.not.exist;
       done();
     }, 100);
   });
@@ -102,7 +102,7 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      expect(document.querySelector('.el-dialog').style.width).to.equal('380px');
+      expect(document.querySelector('.hzq-dialog').style.width).to.equal('380px');
       done();
     }, 100);
   });
@@ -135,7 +135,7 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      document.querySelector('.el-dialog__footer .el-button--primary').click();
+      document.querySelector('.hzq-dialog__footer .hzq-button--primary').click();
     }, 100);
   });
 
@@ -152,7 +152,7 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      document.querySelector('.el-dialog__headerbtn').click();
+      document.querySelector('.hzq-dialog__headerbtn').click();
       setTimeout(() => {
         expect(cancelled).to.be.true;
         done();
@@ -173,7 +173,7 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      const buttons = document.querySelector('.el-dialog__footer').querySelectorAll('.el-button');
+      const buttons = document.querySelector('.hzq-dialog__footer').querySelectorAll('.hzq-button');
       buttons[0].click();
       setTimeout(() => {
         expect(cancelled).to.be.true;
@@ -195,7 +195,7 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      expect(document.querySelector('.el-dialog__footer')).to.not.exist;
+      expect(document.querySelector('.hzq-dialog__footer')).to.not.exist;
       expect(confirmed).to.be.false;
       done();
     }, 100);
@@ -244,7 +244,7 @@ describe('$dialog', () => {
       expect(document.body.textContent).to.include('first dialog');
       expect(document.body.textContent).to.not.include('second dialog');
 
-      document.querySelector('.el-dialog__headerbtn').click();
+      document.querySelector('.hzq-dialog__headerbtn').click();
 
       setTimeout(() => {
         expect(getVisibleWrappers().length).to.equal(1);

@@ -2,7 +2,7 @@
 @import "common/var";
 
 /* 链接各类型色：直接取品牌色 token 及其梯度档，
-   悬停用 --el-color-{type}-hover（两模式一致的提亮档），
+   悬停用 --hzq-color-{type}-hover（两模式一致的提亮档），
    深色模式下不会像原来那样反而变暗。 */
 $link-types: (primary, danger, success, warning, info);
 
@@ -41,14 +41,14 @@ $link-types: (primary, danger, success, warning, info);
     pointer-events: none;
   }
 
-  & [class*="el-icon-"] {
+  & [class*="hzq-icon-"] {
     & + span {
       margin-left: 5px;
     }
   }
     
     
-  &.el-link--default  {
+  &.hzq-link--default  {
     color: $--link-default-font-color;
     &:hover:not(.is-disabled):not(.is-loading) {
       color: $--link-default-active-color
@@ -62,20 +62,20 @@ $link-types: (primary, danger, success, warning, info);
   }
 
   @each $type in $link-types {
-    &.el-link--#{$type} {
-      color: var(--el-color-#{$type});
+    &.hzq-link--#{$type} {
+      color: var(--hzq-color-#{$type});
       &:hover:not(.is-disabled):not(.is-loading) {
-        color: var(--el-color-#{$type}-hover)
+        color: var(--hzq-color-#{$type}-hover)
       }
       &:after {
-        border-color: var(--el-color-#{$type})
+        border-color: var(--hzq-color-#{$type})
       }
       @include when(disabled) {
-        color: var(--el-color-#{$type}-light-5)
+        color: var(--hzq-color-#{$type}-light-5)
       }
       @include when(underline) {
         &:hover:after {
-          border-color: var(--el-color-#{$type})
+          border-color: var(--hzq-color-#{$type})
         }
       }
     }

@@ -1,22 +1,22 @@
 <template>
-  <div class="el-form-item" :class="[{
-      'el-form-item--feedback': elForm && elForm.statusIcon,
+  <div class="hzq-form-item" :class="[{
+      'hzq-form-item--feedback': elForm && elForm.statusIcon,
       'is-error': validateState === 'error',
       'is-validating': validateState === 'validating',
       'is-success': validateState === 'success',
       'is-required': isRequired || required,
       'is-no-asterisk': elForm && elForm.hideRequiredAsterisk
     },
-    sizeClass ? 'el-form-item--' + sizeClass : ''
+    sizeClass ? 'hzq-form-item--' + sizeClass : ''
   ]">
     <label-wrap
       :is-auto-width="labelStyle && labelStyle.width === 'auto'"
       :update-all="form.labelWidth === 'auto'">
-      <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">
+      <label :for="labelFor" class="hzq-form-item__label" :style="labelStyle" v-if="label || $slots.label">
         <slot name="label">{{label + form.labelSuffix}}</slot>
       </label>
     </label-wrap>
-    <div class="el-form-item__content" :style="contentStyle">
+    <div class="hzq-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
         <slot
@@ -24,9 +24,9 @@
           name="error"
           :error="validateMessage">
           <div
-            class="el-form-item__error"
+            class="hzq-form-item__error"
             :class="{
-              'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+              'hzq-form-item__error--inline': typeof inlineMessage === 'boolean'
                 ? inlineMessage
                 : (elForm && elForm.inlineMessage || false)
             }"
@@ -40,14 +40,14 @@
 </template>
 <script>
   import AsyncValidator from 'async-validator';
-  import emitter from 'element-ui/src/mixins/emitter';
-  import objectAssign from 'element-ui/src/utils/merge';
-  import { noop, getPropByPath } from 'element-ui/src/utils/util';
+  import emitter from 'hzq-ui/src/mixins/emitter';
+  import objectAssign from 'hzq-ui/src/utils/merge';
+  import { noop, getPropByPath } from 'hzq-ui/src/utils/util';
   import LabelWrap from './label-wrap';
   export default {
-    name: 'ElFormItem',
+    name: 'HzqFormItem',
 
-    componentName: 'ElFormItem',
+    componentName: 'HzqFormItem',
 
     mixins: [emitter],
 
@@ -135,8 +135,8 @@
       form() {
         let parent = this.$parent;
         let parentName = parent.$options.componentName;
-        while (parentName !== 'ElForm') {
-          if (parentName === 'ElFormItem') {
+        while (parentName !== 'HzqForm') {
+          if (parentName === 'HzqFormItem') {
             this.isNested = true;
           }
           parent = parent.$parent;
@@ -177,7 +177,7 @@
         return this.size || this._formSize;
       },
       sizeClass() {
-        return this.elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.elFormItemSize || (this.$HZQ || {}).size;
       }
     },
     data() {
@@ -252,7 +252,7 @@
           this.validateDisabled = false;
         });
 
-        this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
+        this.broadcast('HzqTimeSelect', 'fieldReset', this.initialValue);
       },
       getRules() {
         let formRules = this.form.rules;
@@ -304,7 +304,7 @@
     },
     mounted() {
       if (this.prop) {
-        this.dispatch('ElForm', 'el.form.addField', [this]);
+        this.dispatch('HzqForm', 'el.form.addField', [this]);
 
         let initialValue = this.fieldValue;
         if (Array.isArray(initialValue)) {
@@ -318,7 +318,7 @@
       }
     },
     beforeDestroy() {
-      this.dispatch('ElForm', 'el.form.removeField', [this]);
+      this.dispatch('HzqForm', 'el.form.removeField', [this]);
     }
   };
 </script>

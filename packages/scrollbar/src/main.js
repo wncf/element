@@ -1,13 +1,13 @@
 // reference https://github.com/noeldelgado/gemini-scrollbar/blob/master/index.js
 
-import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
-import { toObject } from 'element-ui/src/utils/util';
+import { addResizeListener, removeResizeListener } from 'hzq-ui/src/utils/resize-event';
+import scrollbarWidth from 'hzq-ui/src/utils/scrollbar-width';
+import { toObject } from 'hzq-ui/src/utils/util';
 import Bar from './bar';
 
 /* istanbul ignore next */
 export default {
-  name: 'ElScrollbar',
+  name: 'HzqScrollbar',
 
   components: { Bar },
 
@@ -57,7 +57,7 @@ export default {
       }
     }
     const view = h(this.tag, {
-      class: ['el-scrollbar__view', this.viewClass],
+      class: ['hzq-scrollbar__view', this.viewClass],
       style: this.viewStyle,
       ref: 'resize'
     }, this.$slots.default);
@@ -66,7 +66,7 @@ export default {
         ref="wrap"
         style={ style }
         onScroll={ this.handleScroll }
-        class={ [this.wrapClass, 'el-scrollbar__wrap', gutter ? '' : 'el-scrollbar__wrap--hidden-default'] }>
+        class={ [this.wrapClass, 'hzq-scrollbar__wrap', gutter ? '' : 'hzq-scrollbar__wrap--hidden-default'] }>
         { [view] }
       </div>
     );
@@ -87,13 +87,13 @@ export default {
       nodes = ([
         <div
           ref="wrap"
-          class={ [this.wrapClass, 'el-scrollbar__wrap'] }
+          class={ [this.wrapClass, 'hzq-scrollbar__wrap'] }
           style={ style }>
           { [view] }
         </div>
       ]);
     }
-    return h('div', { class: 'el-scrollbar' }, nodes);
+    return h('div', { class: 'hzq-scrollbar' }, nodes);
   },
 
   methods: {

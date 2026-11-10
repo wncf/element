@@ -10,8 +10,8 @@ describe('InputNumber', () => {
   it('create', () => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value">
-        </el-input-number>
+        <hzq-input-number v-model="value">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -27,8 +27,8 @@ describe('InputNumber', () => {
   it('decrease', done => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" ref="input">
-        </el-input-number>
+        <hzq-input-number v-model="value" ref="input">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -38,7 +38,7 @@ describe('InputNumber', () => {
     }, true);
 
     let input = vm.$el.querySelector('input');
-    let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
+    let btnDecrease = vm.$el.querySelector('.hzq-input-number__decrease');
 
     triggerEvent(btnDecrease, 'mousedown');
     triggerClick(document, 'mouseup');
@@ -52,8 +52,8 @@ describe('InputNumber', () => {
   it('increase', done => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value">
-        </el-input-number>
+        <hzq-input-number v-model="value">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -63,7 +63,7 @@ describe('InputNumber', () => {
     }, true);
 
     let input = vm.$el.querySelector('input');
-    let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
+    let btnIncrease = vm.$el.querySelector('.hzq-input-number__increase');
 
     triggerEvent(btnIncrease, 'mousedown');
     triggerClick(document, 'mouseup');
@@ -77,8 +77,8 @@ describe('InputNumber', () => {
   it('disabled', done => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" disabled>
-        </el-input-number>
+        <hzq-input-number v-model="value" disabled>
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -88,8 +88,8 @@ describe('InputNumber', () => {
     }, true);
 
     let input = vm.$el.querySelector('input');
-    let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
-    let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
+    let btnDecrease = vm.$el.querySelector('.hzq-input-number__decrease');
+    let btnIncrease = vm.$el.querySelector('.hzq-input-number__increase');
 
     triggerEvent(btnDecrease, 'mousedown');
     triggerClick(document, 'mouseup');
@@ -111,8 +111,8 @@ describe('InputNumber', () => {
   it('step', done => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" :step="3.2">
-        </el-input-number>
+        <hzq-input-number v-model="value" :step="3.2">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -122,8 +122,8 @@ describe('InputNumber', () => {
     }, true);
 
     let input = vm.$el.querySelector('input');
-    let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
-    let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
+    let btnIncrease = vm.$el.querySelector('.hzq-input-number__increase');
+    let btnDecrease = vm.$el.querySelector('.hzq-input-number__decrease');
 
     triggerEvent(btnIncrease, 'mousedown');
     triggerClick(document, 'mouseup');
@@ -145,8 +145,8 @@ describe('InputNumber', () => {
   it('step strictly', async() => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" :step="1.2" step-strictly>
-        </el-input-number>
+        <hzq-input-number v-model="value" :step="1.2" step-strictly>
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -168,8 +168,8 @@ describe('InputNumber', () => {
   it('min', done => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" :min="6">
-        </el-input-number>
+        <hzq-input-number v-model="value" :min="6">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -179,8 +179,8 @@ describe('InputNumber', () => {
     }, true);
     const vm2 = createVue({
       template: `
-        <el-input-number v-model="value" :min="6">
-        </el-input-number>
+        <hzq-input-number v-model="value" :min="6">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -193,7 +193,7 @@ describe('InputNumber', () => {
     expect(vm2.$el.querySelector('input').value).to.be.equal('6');
 
     let input = vm.$el.querySelector('input');
-    let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
+    let btnDecrease = vm.$el.querySelector('.hzq-input-number__decrease');
 
     triggerEvent(btnDecrease, 'mousedown');
     triggerClick(document, 'mouseup');
@@ -207,8 +207,8 @@ describe('InputNumber', () => {
   it('max', done => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" :max="8">
-        </el-input-number>
+        <hzq-input-number v-model="value" :max="8">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -218,8 +218,8 @@ describe('InputNumber', () => {
     }, true);
     const vm2 = createVue({
       template: `
-        <el-input-number v-model="value" :max="8">
-        </el-input-number>
+        <hzq-input-number v-model="value" :max="8">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -232,7 +232,7 @@ describe('InputNumber', () => {
     expect(vm2.$el.querySelector('input').value).to.be.equal('8');
 
     let input = vm.$el.querySelector('input');
-    let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
+    let btnIncrease = vm.$el.querySelector('.hzq-input-number__increase');
 
     triggerEvent(btnIncrease, 'mousedown');
     triggerClick(document, 'mouseup');
@@ -247,8 +247,8 @@ describe('InputNumber', () => {
     it('precision is 2', () => {
       vm = createVue({
         template: `
-          <el-input-number v-model="value" :max="8" :precision="2">
-          </el-input-number>
+          <hzq-input-number v-model="value" :max="8" :precision="2">
+          </hzq-input-number>
         `,
         data() {
           return {
@@ -263,8 +263,8 @@ describe('InputNumber', () => {
     it('precision greater than the precision of step', done => {
       vm = createVue({
         template: `
-          <el-input-number v-model="value" :max="8" :precision="0" :step="0.1">
-          </el-input-number>
+          <hzq-input-number v-model="value" :max="8" :precision="0" :step="0.1">
+          </hzq-input-number>
         `,
         data() {
           return {
@@ -273,7 +273,7 @@ describe('InputNumber', () => {
         }
       }, true);
       const input = vm.$el.querySelector('input');
-      const btnIncrease = vm.$el.querySelector('.el-input-number__increase');
+      const btnIncrease = vm.$el.querySelector('.hzq-input-number__increase');
 
       expect(vm.value === 7);
       expect(input.value).to.be.equal('7');
@@ -291,8 +291,8 @@ describe('InputNumber', () => {
   it('controls', () => {
     vm = createVue({
       template: `
-        <el-input-number :controls="false" v-model="value" :max="8">
-        </el-input-number>
+        <hzq-input-number :controls="false" v-model="value" :max="8">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -301,14 +301,14 @@ describe('InputNumber', () => {
       }
     }, true);
 
-    expect(vm.$el.querySelector('.el-input-number__decrease')).to.not.exist;
-    expect(vm.$el.querySelector('.el-input-number__increase')).to.not.exist;
+    expect(vm.$el.querySelector('.hzq-input-number__decrease')).to.not.exist;
+    expect(vm.$el.querySelector('.hzq-input-number__increase')).to.not.exist;
   });
   it('invalid value reset', done => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" :min="5" :max="10" ref="inputNumber">
-        </el-input-number>
+        <hzq-input-number v-model="value" :min="5" :max="10" ref="inputNumber">
+        </hzq-input-number>
       `,
       data() {
         return {
@@ -339,8 +339,8 @@ describe('InputNumber', () => {
     beforeEach(() => {
       vm = createVue({
         template: `
-          <el-input-number v-model="value" ref="compo" :min='2' :max='3' :step='1'>
-          </el-input-number>
+          <hzq-input-number v-model="value" ref="compo" :min='2' :max='3' :step='1'>
+          </hzq-input-number>
         `,
         data() {
           return {
@@ -362,7 +362,7 @@ describe('InputNumber', () => {
     });
 
     it('emit on button', done => {
-      const btnIncrease = vm.$el.querySelector('.el-input-number__increase');
+      const btnIncrease = vm.$el.querySelector('.hzq-input-number__increase');
       triggerEvent(btnIncrease, 'mousedown');
       triggerClick(document, 'mouseup');
       setTimeout(_ => {
@@ -383,8 +383,8 @@ describe('InputNumber', () => {
   it('event:focus & blur', done => {
     vm = createVue({
       template: `
-        <el-input-number ref="input">
-        </el-input-number>
+        <hzq-input-number ref="input">
+        </hzq-input-number>
       `
     }, true);
 
@@ -405,7 +405,7 @@ describe('InputNumber', () => {
   it('focus', done => {
     vm = createVue({
       template: `
-        <el-input-number ref="input"></el-input-number>
+        <hzq-input-number ref="input"></hzq-input-number>
       `
     }, true);
 
@@ -426,7 +426,7 @@ describe('InputNumber', () => {
 
       vm = createVue({
         template: `
-          <el-input-number
+          <hzq-input-number
             ref="inputNumComp"
             :value="${testContent}"
           />

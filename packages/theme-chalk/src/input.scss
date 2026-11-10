@@ -37,10 +37,10 @@
     }
   }
 
-  & .el-input__count {
+  & .hzq-input__count {
     color: $--color-info;
     // 计数块压在输入框内容区上，底色必须跟着输入框的填充色，写死白色会在深色下露白块
-    background: var(--el-bg-color);
+    background: var(--hzq-bg-color);
     position: absolute;
     font-size: 12px;
     bottom: 5px;
@@ -48,7 +48,7 @@
   }
 
   @include when(disabled) {
-    .el-textarea__inner {
+    .hzq-textarea__inner {
       background-color: $--input-disabled-fill;
       border-color: $--input-disabled-border;
       color: $--input-disabled-color;
@@ -61,11 +61,11 @@
   }
 
   @include when(exceed) {
-    .el-textarea__inner {
+    .hzq-textarea__inner {
       border-color: $--color-danger;
     }
 
-    .el-input__count {
+    .hzq-input__count {
       color: $--color-danger;
     }
   }
@@ -79,7 +79,7 @@
   width: 100%;
   @include scroll-bar;
 
-  & .el-input__clear {
+  & .hzq-input__clear {
     color: $--input-icon-color;
     font-size: $--input-font-size;
     cursor: pointer;
@@ -90,15 +90,15 @@
     }
   }
 
-  & .el-input__count {
+  & .hzq-input__count {
     height: 100%;
     display: inline-flex;
     align-items: center;
     color: $--color-info;
     font-size: 12px;
 
-    .el-input__count-inner {
-      background: var(--el-bg-color);
+    .hzq-input__count-inner {
+      background: var(--hzq-bg-color);
       line-height: initial;
       display: inline-block;
       padding: 0 5px;
@@ -183,14 +183,14 @@
   }
 
   @include when(active) {
-    .el-input__inner {
+    .hzq-input__inner {
       outline: none;
       border-color: $--input-focus-border;
     }
   }
 
   @include when(disabled) {
-    .el-input__inner {
+    .hzq-input__inner {
       background-color: $--input-disabled-fill;
       border-color: $--input-disabled-border;
       color: $--input-disabled-color;
@@ -201,35 +201,43 @@
       }
     }
 
-    .el-input__icon {
+    .hzq-input__icon {
       cursor: not-allowed;
     }
   }
 
   @include when(exceed) {
-    .el-input__inner {
+    .hzq-input__inner {
       border-color: $--color-danger;
     }
 
-    .el-input__suffix {
-      .el-input__count {
+    .hzq-input__suffix {
+      .hzq-input__count {
         color: $--color-danger;
       }
     }
   }
 
   @include m(suffix) {
-    .el-input__inner {
+    .hzq-input__inner {
       padding-right: 30px;
     }
   }
 
   @include m(prefix) {
-    .el-input__inner {
+    .hzq-input__inner {
       padding-left: 30px;
     }
   }
 
+  @include m(large) {
+    font-size: $--input-large-font-size;
+
+    @include e(inner) {
+      height: $--input-large-height;
+      line-height: normal;
+    }
+  }
   @include m(medium) {
     font-size: $--input-medium-font-size;
 
@@ -263,7 +271,7 @@
   border-collapse: separate;
   border-spacing:0;
 
-  > .el-input__inner {
+  > .hzq-input__inner {
     vertical-align: middle;
     display: table-cell;
   }
@@ -284,15 +292,15 @@
       outline: none;
     }
 
-    .el-select,
-    .el-button {
+    .hzq-select,
+    .hzq-button {
       display: inline-block;
       margin: -10px -20px;
     }
 
-    button.el-button,
-    div.el-select .el-input__inner,
-    div.el-select:hover .el-input__inner {
+    button.hzq-button,
+    div.hzq-select .hzq-input__inner,
+    div.hzq-select:hover .hzq-input__inner {
       border-color: transparent;
       background-color: transparent;
       color: inherit;
@@ -300,8 +308,8 @@
       border-bottom: 0;
     }
 
-    .el-button,
-    .el-input {
+    .hzq-button,
+    .hzq-input {
       font-size: inherit;
     }
   }
@@ -319,28 +327,28 @@
   }
 
   @include m(prepend) {
-    .el-input__inner {
+    .hzq-input__inner {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
-    .el-select .el-input.is-focus .el-input__inner {
+    .hzq-select .hzq-input.is-focus .hzq-input__inner {
       border-color: transparent;
     }
   }
 
   @include m(append) {
-    .el-input__inner {
+    .hzq-input__inner {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
-    .el-select .el-input.is-focus .el-input__inner {
+    .hzq-select .hzq-input.is-focus .hzq-input__inner {
       border-color: transparent;
     }
   }
 }
 
 /** disalbe default clear on IE */
-.el-input__inner::-ms-clear {
+.hzq-input__inner::-ms-clear {
   display: none;
   width: 0;
   height: 0;

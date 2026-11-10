@@ -1,36 +1,36 @@
 <template>
-  <div class="el-calendar">
-    <div class="el-calendar__header">
-      <div class="el-calendar__title">
+  <div class="hzq-calendar">
+    <div class="hzq-calendar__header">
+      <div class="hzq-calendar__title">
         {{ i18nDate }}
       </div>
       <div
-        class="el-calendar__button-group"
+        class="hzq-calendar__button-group"
         v-if="validatedRange.length === 0">
-        <el-button-group>
-          <el-button
+        <hzq-button-group>
+          <hzq-button
             type="plain"
             size="mini"
             @click="selectDate('prev-month')">
             {{ t('el.datepicker.prevMonth') }}
-          </el-button>
-          <el-button
+          </hzq-button>
+          <hzq-button
             type="plain"
             size="mini"
             @click="selectDate('today')">
             {{ t('el.datepicker.today') }}
-          </el-button>
-          <el-button
+          </hzq-button>
+          <hzq-button
             type="plain"
             size="mini"
             @click="selectDate('next-month')">
             {{ t('el.datepicker.nextMonth') }}
-          </el-button>
-        </el-button-group>
+          </hzq-button>
+        </hzq-button-group>
       </div>
     </div>
     <div
-      class="el-calendar__body"
+      class="hzq-calendar__body"
       v-if="validatedRange.length === 0"
       key="no-range">
       <date-table
@@ -41,7 +41,7 @@
     </div>
     <div
       v-else
-      class="el-calendar__body"
+      class="hzq-calendar__body"
       key="has-range">
       <date-table
         v-for="(range, index) in validatedRange"
@@ -57,26 +57,26 @@
 </template>
 
 <script>
-import Locale from 'element-ui/src/mixins/locale';
-import fecha from 'element-ui/src/utils/date';
-import ElButton from 'element-ui/packages/button';
-import ElButtonGroup from 'element-ui/packages/button-group';
+import Locale from 'hzq-ui/src/mixins/locale';
+import fecha from 'hzq-ui/src/utils/date';
+import HzqButton from 'hzq-ui/packages/button';
+import HzqButtonGroup from 'hzq-ui/packages/button-group';
 import DateTable from './date-table';
-import { validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
+import { validateRangeInOneMonth } from 'hzq-ui/src/utils/date-util';
 
 const validTypes = ['prev-month', 'today', 'next-month'];
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const oneDay = 86400000;
 
 export default {
-  name: 'ElCalendar',
+  name: 'HzqCalendar',
 
   mixins: [Locale],
 
   components: {
     DateTable,
-    ElButton,
-    ElButtonGroup
+    HzqButton,
+    HzqButtonGroup
   },
 
   props: {

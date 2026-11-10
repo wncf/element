@@ -20,7 +20,7 @@ export default {
           style.marginLeft = marginLeft + 'px';
         }
       }
-      return (<div class="el-form-item__label-wrap" style={style}>
+      return (<div class="hzq-form-item__label-wrap" style={style}>
         { slots }
       </div>);
     } else {

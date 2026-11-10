@@ -21,14 +21,14 @@
 
   @include e(body) {
     color: $--color-text-regular;
-    background-color: var(--el-bg-color);
+    background-color: var(--hzq-bg-color);
 
-    .el-descriptions__table {
+    .hzq-descriptions__table {
       border-collapse: collapse;
       width: 100%;
       table-layout: fixed;
 
-      .el-descriptions-item__cell {
+      .hzq-descriptions-item__cell {
         box-sizing: border-box;
         text-align: left;
         font-weight: normal;
@@ -51,27 +51,43 @@
 
   .is-bordered {
     table-layout: auto;
-    .el-descriptions-item__cell {
+    .hzq-descriptions-item__cell {
       border: $--descriptions-table-border;
       padding: 12px 10px;
     }
   }
 
   :not(.is-bordered) {
-    .el-descriptions-item__cell {
+    .hzq-descriptions-item__cell {
       padding-bottom: 12px;
+    }
+  }
+
+  @include m(large) {
+    font-size: $--component-font-size-large;
+
+    &.is-bordered {
+      .hzq-descriptions-item__cell {
+        padding: 14px 10px;
+      }
+    }
+
+    &:not(.is-bordered) {
+      .hzq-descriptions-item__cell {
+        padding-bottom: 14px;
+      }
     }
   }
 
   @include m(medium) {
     &.is-bordered {
-      .el-descriptions-item__cell {
+      .hzq-descriptions-item__cell {
         padding: 10px;
       }
     }
 
     &:not(.is-bordered) {
-      .el-descriptions-item__cell {
+      .hzq-descriptions-item__cell {
         padding-bottom: 10px;
       }
     }
@@ -81,13 +97,13 @@
     font-size: 12px;
 
     &.is-bordered {
-      .el-descriptions-item__cell {
+      .hzq-descriptions-item__cell {
         padding: 8px 10px;
       }
     }
 
     &:not(.is-bordered) {
-      .el-descriptions-item__cell {
+      .hzq-descriptions-item__cell {
         padding-bottom: 8px;
       }
     }
@@ -97,13 +113,13 @@
     font-size: 12px;
 
     &.is-bordered {
-      .el-descriptions-item__cell {
+      .hzq-descriptions-item__cell {
         padding: 6px 10px;
       }
     }
 
     &:not(.is-bordered) {
-      .el-descriptions-item__cell {
+      .hzq-descriptions-item__cell {
         padding-bottom: 6px;
       }
     }

@@ -1,14 +1,14 @@
 <template>
-  <footer class="el-footer" :style="{ height }">
+  <footer class="hzq-footer" :style="{ height }">
     <slot></slot>
   </footer>
 </template>
 
 <script>
   export default {
-    name: 'ElFooter',
+    name: 'HzqFooter',
 
-    componentName: 'ElFooter',
+    componentName: 'HzqFooter',
 
     props: {
       height: {

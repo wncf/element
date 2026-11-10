@@ -1,8 +1,8 @@
 import DescriptionsRow from './descriptions-row';
-import { isFunction } from 'element-ui/src/utils/types';
+import { isFunction } from 'hzq-ui/src/utils/types';
 
 export default {
-  name: 'ElDescriptions',
+  name: 'HzqDescriptions',
   components: {
     [DescriptionsRow.name]: DescriptionsRow
   },
@@ -52,7 +52,7 @@ export default {
   },
   computed: {
     descriptionsSize() {
-      return this.size || (this.$ELEMENT || {}).size;
+      return this.size || (this.$HZQ || {}).size;
     }
   },
   provide() {
@@ -113,7 +113,7 @@ export default {
     },
     getRows() {
       const children = ((this.$slots.default || []).filter(vnode => vnode.tag &&
-            vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'ElDescriptionsItem'));
+            vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'HzqDescriptionsItem'));
       const nodes = children.map(vnode => {
         return {
           props: this.getOptionProps(vnode),
@@ -153,22 +153,22 @@ export default {
     const rows = this.getRows();
 
     return (
-      <div class="el-descriptions">
+      <div class="hzq-descriptions">
         {
           (title || extra || $slots.title || $slots.extra)
-            ? <div class="el-descriptions__header">
-              <div class="el-descriptions__title">
+            ? <div class="hzq-descriptions__header">
+              <div class="hzq-descriptions__title">
                 { $slots.title ? $slots.title : title}
               </div>
-              <div class="el-descriptions__extra">
+              <div class="hzq-descriptions__extra">
                 { $slots.extra ? $slots.extra : extra }
               </div>
             </div>
             : null
         }
 
-        <div class="el-descriptions__body">
-          <table class={['el-descriptions__table', {'is-bordered': border}, descriptionsSize ? `el-descriptions--${descriptionsSize}` : '']}>
+        <div class="hzq-descriptions__body">
+          <table class={['hzq-descriptions__table', {'is-bordered': border}, descriptionsSize ? `hzq-descriptions--${descriptionsSize}` : '']}>
             {rows.map(row => (
               <DescriptionsRow row={row}></DescriptionsRow>
             ))}

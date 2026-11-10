@@ -16,7 +16,7 @@ Do not support `v-model` modifiers.
 :::demo
 
 ```html
-<el-input placeholder="Please input" v-model="input"></el-input>
+<hzq-input placeholder="Please input" v-model="input"></hzq-input>
 
 <script>
 export default {
@@ -35,11 +35,11 @@ export default {
 :::demo Disable the Input with the `disabled` attribute.
 
 ```html
-<el-input
+<hzq-input
   placeholder="Please input"
   v-model="input"
   :disabled="true">
-</el-input>
+</hzq-input>
 
 <script>
 export default {
@@ -58,11 +58,11 @@ export default {
 :::demo Make the Input clearable with the `clearable` attribute.
 
 ```html
-<el-input
+<hzq-input
   placeholder="Please input"
   v-model="input"
   clearable>
-</el-input>
+</hzq-input>
 
 <script>
 export default {
@@ -81,7 +81,7 @@ export default {
 :::demo Make a toggleable password Input with the `show-password` attribute.
 
 ```html
-<el-input placeholder="Please input password" v-model="input" show-password></el-input>
+<hzq-input placeholder="Please input password" v-model="input" show-password></hzq-input>
 
 <script>
   export default {
@@ -103,29 +103,29 @@ Add an icon to indicate input type.
 ```html
 <div class="demo-input-suffix">
   <span class="demo-input-label">Using attributes</span>
-  <el-input
+  <hzq-input
     placeholder="Pick a date"
-    suffix-icon="el-icon-date"
+    suffix-icon="hzq-icon-date"
     v-model="input1">
-  </el-input>
-  <el-input
+  </hzq-input>
+  <hzq-input
     placeholder="Type something"
-    prefix-icon="el-icon-search"
+    prefix-icon="hzq-icon-search"
     v-model="input2">
-  </el-input>
+  </hzq-input>
 </div>
 <div class="demo-input-suffix">
   <span class="demo-input-label">Using slots</span>
-  <el-input
+  <hzq-input
     placeholder="Pick a date"
     v-model="input3">
-    <i slot="suffix" class="el-input__icon el-icon-date"></i>
-  </el-input>
-  <el-input
+    <i slot="suffix" class="hzq-input__icon hzq-icon-date"></i>
+  </hzq-input>
+  <hzq-input
     placeholder="Type something"
     v-model="input4">
-    <i slot="prefix" class="el-input__icon el-icon-search"></i>
-  </el-input>
+    <i slot="prefix" class="hzq-input__icon hzq-icon-search"></i>
+  </hzq-input>
 </div>
 
 <style>
@@ -157,12 +157,12 @@ Resizable for entering multiple lines of text information. Add attribute `type="
 :::demo Control the height by setting the `rows` prop.
 
 ```html
-<el-input
+<hzq-input
   type="textarea"
   :rows="2"
   placeholder="Please input"
   v-model="textarea">
-</el-input>
+</hzq-input>
 
 <script>
 export default {
@@ -183,19 +183,19 @@ Setting the `autosize` prop for a textarea type of Input makes the height to aut
 :::demo
 
 ```html
-<el-input
+<hzq-input
   type="textarea"
   autosize
   placeholder="Please input"
   v-model="textarea1">
-</el-input>
+</hzq-input>
 <div style="margin: 20px 0;"></div>
-<el-input
+<hzq-input
   type="textarea"
   :autosize="{ minRows: 2, maxRows: 4}"
   placeholder="Please input"
   v-model="textarea2">
-</el-input>
+</hzq-input>
 
 <script>
 export default {
@@ -218,31 +218,31 @@ Prepend or append an element, generally a label or a button.
 
 ```html
 <div>
-  <el-input placeholder="Please input" v-model="input1">
+  <hzq-input placeholder="Please input" v-model="input1">
     <template slot="prepend">Http://</template>
-  </el-input>
+  </hzq-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input2">
+  <hzq-input placeholder="Please input" v-model="input2">
     <template slot="append">.com</template>
-  </el-input>
+  </hzq-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input3" class="input-with-select">
-    <el-select v-model="select" slot="prepend" placeholder="Select">
-      <el-option label="Restaurant" value="1"></el-option>
-      <el-option label="Order No." value="2"></el-option>
-      <el-option label="Tel" value="3"></el-option>
-    </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
-  </el-input>
+  <hzq-input placeholder="Please input" v-model="input3" class="input-with-select">
+    <hzq-select v-model="select" slot="prepend" placeholder="Select">
+      <hzq-option label="Restaurant" value="1"></hzq-option>
+      <hzq-option label="Order No." value="2"></hzq-option>
+      <hzq-option label="Tel" value="3"></hzq-option>
+    </hzq-select>
+    <hzq-button slot="append" icon="hzq-icon-search"></hzq-button>
+  </hzq-input>
 </div>
 
 <style>
-  .el-select .el-input {
+  .hzq-select .hzq-input {
     width: 110px;
   }
-  .input-with-select .el-input-group__prepend {
+  .input-with-select .hzq-input-group__prepend {
     background-color: #fff;
   }
 </style>
@@ -263,28 +263,33 @@ export default {
 
 ### Sizes
 
-:::demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `medium`, `small` and `mini`.
+:::demo Add `size` attribute to change the size of Input. In addition to the default size, there are four options: `large`, `medium`, `small` and `mini`. Without `size` the input is `medium`; the four heights are 36px, 32px, 28px and 24px.
 ```html
 <div class="demo-input-size">
-  <el-input
+  <hzq-input
     placeholder="Please Input"
     v-model="input1">
-  </el-input>
-  <el-input
-    size="medium"
+  </hzq-input>
+  <hzq-input
+    size="large"
     placeholder="Please Input"
     v-model="input2">
-  </el-input>
-  <el-input
-    size="small"
+  </hzq-input>
+  <hzq-input
+    size="medium"
     placeholder="Please Input"
     v-model="input3">
-  </el-input>
-  <el-input
-    size="mini"
+  </hzq-input>
+  <hzq-input
+    size="small"
     placeholder="Please Input"
     v-model="input4">
-  </el-input>
+  </hzq-input>
+  <hzq-input
+    size="mini"
+    placeholder="Please Input"
+    v-model="input5">
+  </hzq-input>
 </div>
 
 <script>
@@ -294,7 +299,8 @@ export default {
       input1: '',
       input2: '',
       input3: '',
-      input4: ''
+      input4: '',
+      input5: ''
     }
   }
 }
@@ -308,29 +314,29 @@ You can get some recommended tips based on the current input.
 
 :::demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
 ```html
-<el-row class="demo-autocomplete">
-  <el-col :span="12">
+<hzq-row class="demo-autocomplete">
+  <hzq-col :span="12">
     <div class="sub-title">list suggestions when activated</div>
-    <el-autocomplete
+    <hzq-autocomplete
       class="inline-input"
       v-model="state1"
       :fetch-suggestions="querySearch"
       placeholder="Please Input"
       @select="handleSelect"
-    ></el-autocomplete>
-  </el-col>
-  <el-col :span="12">
+    ></hzq-autocomplete>
+  </hzq-col>
+  <hzq-col :span="12">
     <div class="sub-title">list suggestions on input</div>
-    <el-autocomplete
+    <hzq-autocomplete
       class="inline-input"
       v-model="state2"
       :fetch-suggestions="querySearch"
       placeholder="Please Input"
       :trigger-on-focus="false"
       @select="handleSelect"
-    ></el-autocomplete>
-  </el-col>
-</el-row>
+    ></hzq-autocomplete>
+  </hzq-col>
+</hzq-row>
 <script>
   export default {
     data() {
@@ -381,14 +387,14 @@ Customize how suggestions are displayed.
 
 :::demo Use `scoped slot` to customize suggestion items. In the scope, you can access the suggestion object via the `item` key.
 ```html
-<el-autocomplete
+<hzq-autocomplete
   popper-class="my-autocomplete"
   v-model="state"
   :fetch-suggestions="querySearch"
   placeholder="Please input"
   @select="handleSelect">
   <i
-    class="el-icon-edit el-input__icon"
+    class="hzq-icon-edit hzq-input__icon"
     slot="suffix"
     @click="handleIconClick">
   </i>
@@ -396,7 +402,7 @@ Customize how suggestions are displayed.
     <div class="value">{{ item.value }}</div>
     <span class="link">{{ item.link }}</span>
   </template>
-</el-autocomplete>
+</hzq-autocomplete>
 
 <style>
   .my-autocomplete {
@@ -468,12 +474,12 @@ Search data from server-side.
 
 :::demo
 ```html
-<el-autocomplete
+<hzq-autocomplete
   v-model="state"
   :fetch-suggestions="querySearchAsync"
   placeholder="Please input"
   @select="handleSelect"
-></el-autocomplete>
+></hzq-autocomplete>
 <script>
   export default {
     data() {
@@ -526,23 +532,23 @@ Search data from server-side.
 :::demo `maxlength` and `minlength` are attributes of native input, they declare a limit on the number of characters a user can input. The "number of characters" is measured using JavaScript string length.Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-limit` to `true` at the same time.
 
 ```html
-<el-input
+<hzq-input
   type="text"
   placeholder="Please input"
   v-model="text"
   maxlength="10"
   show-word-limit
 >
-</el-input>
+</hzq-input>
 <div style="margin: 20px 0;"></div>
-<el-input
+<hzq-input
   type="textarea"
   placeholder="Please input"
   v-model="textarea"
   maxlength="30"
   show-word-limit
 >
-</el-input>
+</hzq-input>
 
 <script>
 export default {
@@ -570,7 +576,7 @@ export default {
 | clearable | whether to show clear button | boolean | — | false |
 | show-password | whether to show toggleable password input| boolean         | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
-|size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
+|size | size of Input, works when `type` is not 'textarea' | string | large / medium / small / mini | — |
 | prefix-icon   | prefix icon class  | string          | — | — |
 | suffix-icon   | suffix icon class  | string          | — | — |
 |rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |
@@ -634,6 +640,7 @@ Attribute | Description | Type | Options | Default
 | name | same as `name` in native input | string | — | — |
 | select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
 | label | label text | string | — | — |
+| size | size of the input, one of `large`, `medium`, `small` or `mini`; without it the size is `medium` | string | large / medium / small / mini | — |
 | prefix-icon | prefix icon class | string | — | — |
 | suffix-icon | suffix icon class | string | — | — |
 | hide-loading | whether to hide the loading icon in remote search | boolean | — | false |

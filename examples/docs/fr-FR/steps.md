@@ -9,13 +9,13 @@ Voici une barre d'étapes basique.
 :::demo Réglez l'attribut `active` avec une variable `Number`, qui indique l'index des étapes et commence à 0. L'attribut `space` permet de déterminer si l'espace entre les étapes doit être fixe à l'aide d'un `Number`. L'unité de `space` est `px`. Si cet attribut est absent, la barre sera responsive. L'attribut `finish-status` change le statut d'accomplissement des étapes.
 
 ```html
-<el-steps :active="active" finish-status="success">
-  <el-step title="Étape 1"></el-step>
-  <el-step title="Étape 2"></el-step>
-  <el-step title="Étape 3"></el-step>
-</el-steps>
+<hzq-steps :active="active" finish-status="success">
+  <hzq-step title="Étape 1"></hzq-step>
+  <hzq-step title="Étape 2"></hzq-step>
+  <hzq-step title="Étape 3"></hzq-step>
+</hzq-steps>
 
-<el-button style="margin-top: 12px;" @click="next">Prochaine étape</el-button>
+<hzq-button style="margin-top: 12px;" @click="next">Prochaine étape</hzq-button>
 
 <script>
   export default {
@@ -42,11 +42,11 @@ Vous pouvez afficher le statut de chaque étape.
 :::demo Utilisez `title` pour définir le nom de l'étape, ou écrasez cet attribut en utilisant un `slot`. La liste complète des slots se trouve en fin de page.
 
 ```html
-<el-steps :space="200" :active="1" finish-status="success">
-  <el-step title="Terminé"></el-step>
-  <el-step title="En cours"></el-step>
-  <el-step title="Étape 3"></el-step>
-</el-steps>
+<hzq-steps :space="200" :active="1" finish-status="success">
+  <hzq-step title="Terminé"></hzq-step>
+  <hzq-step title="En cours"></hzq-step>
+  <hzq-step title="Étape 3"></hzq-step>
+</hzq-steps>
 ```
 :::
 
@@ -56,11 +56,11 @@ Vous pouvez ajouter une description pour chaque étape.
 
 :::demo
 ```html
-<el-steps :active="1">
-  <el-step title="Étape 1" description="Une description"></el-step>
-  <el-step title="Étape 2" description="Une description"></el-step>
-  <el-step title="Étape 3" description="Une description"></el-step>
-</el-steps>
+<hzq-steps :active="1">
+  <hzq-step title="Étape 1" description="Une description"></hzq-step>
+  <hzq-step title="Étape 2" description="Une description"></hzq-step>
+  <hzq-step title="Étape 3" description="Une description"></hzq-step>
+</hzq-steps>
 ```
 :::
 
@@ -70,12 +70,12 @@ Le titre et la description peuvent être centrés.
 
 :::demo
 ```html
-<el-steps :active="2" align-center>
-  <el-step title="Étape 1" description="Une description"></el-step>
-  <el-step title="Étape 2" description="Une description"></el-step>
-  <el-step title="Étape 3" description="Une description"></el-step>
-  <el-step title="Étape 4" description="Une description"></el-step>
-</el-steps>
+<hzq-steps :active="2" align-center>
+  <hzq-step title="Étape 1" description="Une description"></hzq-step>
+  <hzq-step title="Étape 2" description="Une description"></hzq-step>
+  <hzq-step title="Étape 3" description="Une description"></hzq-step>
+  <hzq-step title="Étape 4" description="Une description"></hzq-step>
+</hzq-steps>
 ```
 :::
 
@@ -86,11 +86,11 @@ Une grande variété d'icônes peut être utilisée dans la barre d'étapes.
 :::demo L'icône est ajoutée en utilisant `icon`. Les types d'icônes possibles sont référencés dans la documentation du composant Icon. De plus, vous pouvez utilisé une icône personnalisée en utilisant un `slot`.
 
 ```html
-<el-steps :active="1">
-  <el-step title="Étape 1" icon="el-icon-edit"></el-step>
-  <el-step title="Étape 2" icon="el-icon-upload"></el-step>
-  <el-step title="Étape 3" icon="el-icon-picture"></el-step>
-</el-steps>
+<hzq-steps :active="1">
+  <hzq-step title="Étape 1" icon="hzq-icon-edit"></hzq-step>
+  <hzq-step title="Étape 2" icon="hzq-icon-upload"></hzq-step>
+  <hzq-step title="Étape 3" icon="hzq-icon-picture"></hzq-step>
+</hzq-steps>
 ```
 :::
 
@@ -98,15 +98,15 @@ Une grande variété d'icônes peut être utilisée dans la barre d'étapes.
 
 La barre d'étape peut être affichée de manière verticale.
 
-:::demo Mettez simplement l'attribut `direction` à ` vertical` dans l'élément `el-steps`.
+:::demo Mettez simplement l'attribut `direction` à ` vertical` dans l'élément `hzq-steps`.
 
 ```html
 <div style="height: 300px;">
-  <el-steps direction="vertical" :active="1">
-    <el-step title="Étape 1"></el-step>
-    <el-step title="Étape 2"></el-step>
-    <el-step title="Étape 3"></el-step>
-  </el-steps>
+  <hzq-steps direction="vertical" :active="1">
+    <hzq-step title="Étape 1"></hzq-step>
+    <hzq-step title="Étape 2"></hzq-step>
+    <hzq-step title="Étape 3"></hzq-step>
+  </hzq-steps>
 </div>
 ```
 :::
@@ -118,17 +118,17 @@ La barre peut être simplifiée de manière à ce que `align-center`, `descripti
 :::demo
 ```html
 
-<el-steps :space="200" :active="1" simple>
-  <el-step title="Étape 1" icon="el-icon-edit"></el-step>
-  <el-step title="Étape 2" icon="el-icon-upload"></el-step>
-  <el-step title="Étape 3" icon="el-icon-picture"></el-step>
-</el-steps>
+<hzq-steps :space="200" :active="1" simple>
+  <hzq-step title="Étape 1" icon="hzq-icon-edit"></hzq-step>
+  <hzq-step title="Étape 2" icon="hzq-icon-upload"></hzq-step>
+  <hzq-step title="Étape 3" icon="hzq-icon-picture"></hzq-step>
+</hzq-steps>
 
-<el-steps :active="1" finish-status="success" simple style="margin-top: 20px">
-  <el-step title="Étape 1" ></el-step>
-  <el-step title="Étape 2" ></el-step>
-  <el-step title="Étape 3" ></el-step>
-</el-steps>
+<hzq-steps :active="1" finish-status="success" simple style="margin-top: 20px">
+  <hzq-step title="Étape 1" ></hzq-step>
+  <hzq-step title="Étape 2" ></hzq-step>
+  <hzq-step title="Étape 3" ></hzq-step>
+</hzq-steps>
 ```
 :::
 

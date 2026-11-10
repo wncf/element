@@ -9,17 +9,17 @@ Si vous avez beaucoup de données à afficher sur une seule page, il est préfé
 ```html
 <div class="block">
   <span class="demonstration">Quand vous avez quelques pages</span>
-  <el-pagination
+  <hzq-pagination
     layout="prev, pager, next"
     :total="50">
-  </el-pagination>
+  </hzq-pagination>
 </div>
 <div class="block">
   <span class="demonstration">Quand vous avez plus que 7 pages</span>
-  <el-pagination
+  <hzq-pagination
     layout="prev, pager, next"
     :total="1000">
-  </el-pagination>
+  </hzq-pagination>
 </div>
 ```
 :::
@@ -29,12 +29,12 @@ Si vous avez beaucoup de données à afficher sur une seule page, il est préfé
 :::demo Par défaut, Pagination réduit les boutons lorsqu'il y a plus de 7 pages. Ce nombre est configurable avec l'attribut `pager-count`.
 
 ```html
-<el-pagination
+<hzq-pagination
   :page-size="20"
   :pager-count="11"
   layout="prev, pager, next"
   :total="1000">
-</el-pagination>
+</hzq-pagination>
 ```
 :::
 
@@ -43,11 +43,11 @@ Si vous avez beaucoup de données à afficher sur une seule page, il est préfé
 :::demo Réglez l'attribut `background` pour change la couleur de fond des boutons.
 
 ```html
-<el-pagination
+<hzq-pagination
   background
   layout="prev, pager, next"
   :total="1000">
-</el-pagination>
+</hzq-pagination>
 ```
 :::
 
@@ -55,14 +55,47 @@ Si vous avez beaucoup de données à afficher sur une seule page, il est préfé
 
 Utilisez une pagination de taille réduite si vous manquez d'espace.
 
-:::demo Ajoutez simplement l'attribut `small` et la pagination sera de taille réduite.
+:::demo Ajoutez simplement l'attribut `small` et la pagination sera de taille réduite. `small` est un raccourci de `size="small"` ; utilisez `size` pour un autre palier.
 
 ```html
-<el-pagination
+<hzq-pagination
   small
   layout="prev, pager, next"
   :total="50">
-</el-pagination>
+</hzq-pagination>
+```
+:::
+
+### Tailles
+
+:::demo Changez de taille avec `size` : `large`, `medium`, `small` ou `mini`. Sans lui la taille est `medium`. Les paginateurs, les boutons précédent/suivant et le champ d'accès direct suivent ensemble (36px, 32px, 28px et 24px), la ligne garde donc la même ligne de base.
+
+```html
+<template>
+  <div>
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-pagination
+      :size="size"
+      layout="prev, pager, next, jumper"
+      :total="400">
+    </hzq-pagination>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium'
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -76,18 +109,18 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
 <template>
   <div class="block">
     <span class="demonstration">Total d'entrées</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">Changement de taille de la page</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage2"
@@ -95,22 +128,22 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
       :page-size="100"
       layout="sizes, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">Aller à</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">Tous en même temps</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage4"
@@ -118,7 +151,7 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
       :total="400">
-    </el-pagination>
+    </hzq-pagination>
   </div>
 </template>
 <script>
@@ -151,13 +184,13 @@ Lorsqu'il n'y a qu'une seule page, il est possible de cacher la pagination avec 
 :::demo
 ```html
 <div>
- <el-switch v-model="value">
- </el-switch>
- <el-pagination
+ <hzq-switch v-model="value">
+ </hzq-switch>
+ <hzq-pagination
   :hide-on-single-page="value"
   :total="5"
   layout="prev, pager, next">
-</el-pagination>
+</hzq-pagination>
 </div>
 
 <script>
@@ -177,6 +210,7 @@ Lorsqu'il n'y a qu'une seule page, il est possible de cacher la pagination avec 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small | Si la pagination doit être petite. | boolean |      —       | false |
+| size | Taille de la pagination, les paginateurs et les boutons précédent/suivant suivent la taille. | string | large / medium / small / mini | — |
 | background | Si les boutons doivent avoir une couleur de fond. | boolean | — | false |
 | page-size | Nombre d'entrées sur chaque page, supporte le modificateur .sync. | number |      —       | 10 |
 | total | Nombre total d'entrées. | number | — | — |

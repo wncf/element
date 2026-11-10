@@ -21,20 +21,20 @@
 // 品牌色梯度：一个品牌色输出 13 个变量（主色、rgb 三元组、light-1..9、hover、shade）
 @mixin el-brand-tokens($brand-colors, $blend-base) {
   @each $name, $color in $brand-colors {
-    --el-color-#{$name}: #{$color};
-    // RGB 三元组：少数需要半透明推导的场景用 rgb(var(--el-color-x-rgb))
-    --el-color-#{$name}-rgb: #{red($color)}, #{green($color)}, #{blue($color)};
+    --hzq-color-#{$name}: #{$color};
+    // RGB 三元组：少数需要半透明推导的场景用 rgb(var(--hzq-color-x-rgb))
+    --hzq-color-#{$name}-rgb: #{red($color)}, #{green($color)}, #{blue($color)};
 
     // 浅色档 light-1..9：浅色模式=向白混合，深色模式=向底色混合。
     // 同一个品牌色因此能同时满足浅底和深底，这是"只设一个主色"成立的关键。
     @for $i from 1 through 9 {
-      --el-color-#{$name}-light-#{$i}: #{mix($blend-base, $color, $i * 10%)};
+      --hzq-color-#{$name}-light-#{$i}: #{mix($blend-base, $color, $i * 10%)};
     }
 
     // 提亮档（两模式一致）：文字链接、实心控件悬停时统一提亮，深色底上也读得出来
-    --el-color-#{$name}-hover: #{mix($--color-white, $color, 20%)};
+    --hzq-color-#{$name}-hover: #{mix($--color-white, $color, 20%)};
     // 加深档（两模式一致）：按下/激活态统一压暗
-    --el-color-#{$name}-shade: #{mix($--color-black, $color, 10%)};
+    --hzq-color-#{$name}-shade: #{mix($--color-black, $color, 10%)};
   }
 }
 
@@ -42,29 +42,29 @@
 // blend-base 也输出成变量，供运行期 JS 按同一目标色重算梯度（见 src/utils/theme.js）。
 @mixin el-neutral-tokens($neutrals, $blend-base) {
   @each $key, $value in $neutrals {
-    --el-#{$key}: #{$value};
+    --hzq-#{$key}: #{$value};
   }
 
-  --el-color-blend-base: #{$blend-base};
+  --hzq-color-blend-base: #{$blend-base};
 }
 
 // 成组色板：一组颜色只有一起存在才有意义（如空状态插画的 9 档灰），
 // 单看每一档都不是"中性色语义"，所以不并进 neutrals，只作为独立组随明暗轴输出。
 @mixin el-group-tokens($tokens) {
   @each $key, $value in $tokens {
-    --el-#{$key}: #{$value};
+    --hzq-#{$key}: #{$value};
   }
 }
 
-@if not global-variable-exists(--el-tokens-emitted) {
-  $--el-tokens-emitted: true !global;
+@if not global-variable-exists(--hzq-tokens-emitted) {
+  $--hzq-tokens-emitted: true !global;
 
   // 绝对色（与明暗轴无关）。组件层按 var() 引用它们，例如 tag 的深色变体文字、
   // 关闭按钮悬停色；定义在这里可以避免"引用了没定义的变量"——那种情况下整条
   // 声明会失效，颜色会退回继承值，浅色模式下就已经不对了。
   :root {
-    --el-color-white: #{$--color-white};
-    --el-color-black: #{$--color-black};
+    --hzq-color-white: #{$--color-white};
+    --hzq-color-black: #{$--color-black};
   }
 
   @each $brightness-selector, $brightness in $--brightness-modes {

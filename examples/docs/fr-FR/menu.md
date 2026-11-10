@@ -8,48 +8,48 @@ La barre du haut peut être utilisée pour différents scénarios.
 
 :::demo Par défaut le menu est vertical, mais vous pouvez le passer en horizontal en réglant l'attribut `mode` sur 'horizontal'. De plus, vous pouvez utiliser le composant submenu pour créer un second niveau niveau de menu. Le menu utilises `background-color`, `text-color` et `active-text-color` pour personnaliser les couleurs.
 ```html
-<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="1">Centre de traitement</el-menu-item>
-  <el-submenu index="2">
+<hzq-menu :default-active="activeIndex" class="hzq-menu-demo" mode="horizontal" @select="handleSelect">
+  <hzq-menu-item index="1">Centre de traitement</hzq-menu-item>
+  <hzq-submenu index="2">
     <template slot="title">Lieu de travail</template>
-    <el-menu-item index="2-1">item un</el-menu-item>
-    <el-menu-item index="2-2">item deux</el-menu-item>
-    <el-menu-item index="2-3">item trois</el-menu-item>
-    <el-submenu index="2-4">
+    <hzq-menu-item index="2-1">item un</hzq-menu-item>
+    <hzq-menu-item index="2-2">item deux</hzq-menu-item>
+    <hzq-menu-item index="2-3">item trois</hzq-menu-item>
+    <hzq-submenu index="2-4">
       <template slot="title">item quatre</template>
-      <el-menu-item index="2-4-1">item un</el-menu-item>
-      <el-menu-item index="2-4-2">item deux</el-menu-item>
-      <el-menu-item index="2-4-3">item trois</el-menu-item>
-    </el-submenu>
-  </el-submenu>
-  <el-menu-item index="3" disabled>Infos</el-menu-item>
-  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Commandes</a></el-menu-item>
-</el-menu>
+      <hzq-menu-item index="2-4-1">item un</hzq-menu-item>
+      <hzq-menu-item index="2-4-2">item deux</hzq-menu-item>
+      <hzq-menu-item index="2-4-3">item trois</hzq-menu-item>
+    </hzq-submenu>
+  </hzq-submenu>
+  <hzq-menu-item index="3" disabled>Infos</hzq-menu-item>
+  <hzq-menu-item index="4"><a href="https://www.ele.me" target="_blank">Commandes</a></hzq-menu-item>
+</hzq-menu>
 <div class="line"></div>
-<el-menu
+<hzq-menu
   :default-active="activeIndex2"
-  class="el-menu-demo"
+  class="hzq-menu-demo"
   mode="horizontal"
   @select="handleSelect"
   background-color="#545c64"
   text-color="#fff"
   active-text-color="#ffd04b">
-  <el-menu-item index="1">Centre de traitement</el-menu-item>
-  <el-submenu index="2">
+  <hzq-menu-item index="1">Centre de traitement</hzq-menu-item>
+  <hzq-submenu index="2">
     <template slot="title">Lieu de travail</template>
-    <el-menu-item index="2-1">item un</el-menu-item>
-    <el-menu-item index="2-2">item deux</el-menu-item>
-    <el-menu-item index="2-3">item trois</el-menu-item>
-    <el-submenu index="2-4">
+    <hzq-menu-item index="2-1">item un</hzq-menu-item>
+    <hzq-menu-item index="2-2">item deux</hzq-menu-item>
+    <hzq-menu-item index="2-3">item trois</hzq-menu-item>
+    <hzq-submenu index="2-4">
       <template slot="title">item quatre</template>
-      <el-menu-item index="2-4-1">item un</el-menu-item>
-      <el-menu-item index="2-4-2">item deux</el-menu-item>
-      <el-menu-item index="2-4-3">item trois</el-menu-item>
-    </el-submenu>
-  </el-submenu>
-  <el-menu-item index="3" disabled>Info</el-menu-item>
-  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Commandes</a></el-menu-item>
-</el-menu>
+      <hzq-menu-item index="2-4-1">item un</hzq-menu-item>
+      <hzq-menu-item index="2-4-2">item deux</hzq-menu-item>
+      <hzq-menu-item index="2-4-3">item trois</hzq-menu-item>
+    </hzq-submenu>
+  </hzq-submenu>
+  <hzq-menu-item index="3" disabled>Info</hzq-menu-item>
+  <hzq-menu-item index="4"><a href="https://www.ele.me" target="_blank">Commandes</a></hzq-menu-item>
+</hzq-menu>
 
 <script>
   export default {
@@ -73,89 +73,89 @@ La barre du haut peut être utilisée pour différents scénarios.
 
 Menu vertical avec sous-menus.
 
-:::demo Vous pouvez utiliser le composant el-menu-item-group pour créer un groupe dans le menu dont le nom sera déterminé par celui de la propriété title ou d'un slot.
+:::demo Vous pouvez utiliser le composant hzq-menu-item-group pour créer un groupe dans le menu dont le nom sera déterminé par celui de la propriété title ou d'un slot.
 ```html
-<el-row class="tac">
-  <el-col :span="12">
+<hzq-row class="tac">
+  <hzq-col :span="12">
     <h5>Couleurs par défaut</h5>
-    <el-menu
+    <hzq-menu
       default-active="2"
-      class="el-menu-vertical-demo"
+      class="hzq-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose">
-      <el-submenu index="1">
+      <hzq-submenu index="1">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="hzq-icon-location"></i>
           <span>Navigateur Un</span>
         </template>
-        <el-menu-item-group title="Group Un">
-          <el-menu-item index="1-1">item un</el-menu-item>
-          <el-menu-item index="1-2">item un</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group Deux">
-          <el-menu-item index="1-3">item trois</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
+        <hzq-menu-item-group title="Group Un">
+          <hzq-menu-item index="1-1">item un</hzq-menu-item>
+          <hzq-menu-item index="1-2">item un</hzq-menu-item>
+        </hzq-menu-item-group>
+        <hzq-menu-item-group title="Group Deux">
+          <hzq-menu-item index="1-3">item trois</hzq-menu-item>
+        </hzq-menu-item-group>
+        <hzq-submenu index="1-4">
           <template slot="title">item quatre</template>
-          <el-menu-item index="1-4-1">item un</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
+          <hzq-menu-item index="1-4-1">item un</hzq-menu-item>
+        </hzq-submenu>
+      </hzq-submenu>
+      <hzq-menu-item index="2">
+        <i class="hzq-icon-menu"></i>
         <span>Navigateur Deux</span>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
+      </hzq-menu-item>
+      <hzq-menu-item index="3" disabled>
+        <i class="hzq-icon-document"></i>
         <span>Navigateur Trois</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
+      </hzq-menu-item>
+      <hzq-menu-item index="4">
+        <i class="hzq-icon-setting"></i>
         <span>Navigateur Quatre</span>
-      </el-menu-item>
-    </el-menu>
-  </el-col>
-  <el-col :span="12">
+      </hzq-menu-item>
+    </hzq-menu>
+  </hzq-col>
+  <hzq-col :span="12">
     <h5>Couleurs personnalisées</h5>
-    <el-menu
+    <hzq-menu
       default-active="2"
-      class="el-menu-vertical-demo"
+      class="hzq-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-submenu index="1">
+      <hzq-submenu index="1">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="hzq-icon-location"></i>
           <span>Navigateur Un</span>
         </template>
-        <el-menu-item-group title="Group Un">
-          <el-menu-item index="1-1">item un</el-menu-item>
-          <el-menu-item index="1-2">item un</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group Deux">
-          <el-menu-item index="1-3">item trois</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
+        <hzq-menu-item-group title="Group Un">
+          <hzq-menu-item index="1-1">item un</hzq-menu-item>
+          <hzq-menu-item index="1-2">item un</hzq-menu-item>
+        </hzq-menu-item-group>
+        <hzq-menu-item-group title="Group Deux">
+          <hzq-menu-item index="1-3">item trois</hzq-menu-item>
+        </hzq-menu-item-group>
+        <hzq-submenu index="1-4">
           <template slot="title">item quatre</template>
-          <el-menu-item index="1-4-1">item un</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
+          <hzq-menu-item index="1-4-1">item un</hzq-menu-item>
+        </hzq-submenu>
+      </hzq-submenu>
+      <hzq-menu-item index="2">
+        <i class="hzq-icon-menu"></i>
         <span>Navigateur Deux</span>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
+      </hzq-menu-item>
+      <hzq-menu-item index="3" disabled>
+        <i class="hzq-icon-document"></i>
         <span>Navigateur Trois</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
+      </hzq-menu-item>
+      <hzq-menu-item index="4">
+        <i class="hzq-icon-setting"></i>
         <span>Navigateur Quatre</span>
-      </el-menu-item>
-    </el-menu>
-  </el-col>
-</el-row>
+      </hzq-menu-item>
+    </hzq-menu>
+  </hzq-col>
+</hzq-row>
 
 <script>
   export default {
@@ -178,45 +178,45 @@ Le menu vertical peut être réduit.
 
 :::demo
 ```html
-<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-  <el-radio-button :label="false">Agrandir</el-radio-button>
-  <el-radio-button :label="true">Réduire</el-radio-button>
-</el-radio-group>
-<el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-  <el-submenu index="1">
+<hzq-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+  <hzq-radio-button :label="false">Agrandir</hzq-radio-button>
+  <hzq-radio-button :label="true">Réduire</hzq-radio-button>
+</hzq-radio-group>
+<hzq-menu default-active="2" class="hzq-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+  <hzq-submenu index="1">
     <template slot="title">
-      <i class="el-icon-location"></i>
+      <i class="hzq-icon-location"></i>
       <span slot="title">Navigateur Un</span>
     </template>
-    <el-menu-item-group>
+    <hzq-menu-item-group>
       <span slot="title">Group Un</span>
-      <el-menu-item index="1-1">item un</el-menu-item>
-      <el-menu-item index="1-2">item deux</el-menu-item>
-    </el-menu-item-group>
-    <el-menu-item-group title="Group Deux">
-      <el-menu-item index="1-3">item trois</el-menu-item>
-    </el-menu-item-group>
-    <el-submenu index="1-4">
+      <hzq-menu-item index="1-1">item un</hzq-menu-item>
+      <hzq-menu-item index="1-2">item deux</hzq-menu-item>
+    </hzq-menu-item-group>
+    <hzq-menu-item-group title="Group Deux">
+      <hzq-menu-item index="1-3">item trois</hzq-menu-item>
+    </hzq-menu-item-group>
+    <hzq-submenu index="1-4">
       <span slot="title">item quatre</span>
-      <el-menu-item index="1-4-1">item un</el-menu-item>
-    </el-submenu>
-  </el-submenu>
-  <el-menu-item index="2">
-    <i class="el-icon-menu"></i>
+      <hzq-menu-item index="1-4-1">item un</hzq-menu-item>
+    </hzq-submenu>
+  </hzq-submenu>
+  <hzq-menu-item index="2">
+    <i class="hzq-icon-menu"></i>
     <span slot="title">Navigateur Deux</span>
-  </el-menu-item>
-  <el-menu-item index="3" disabled>
-    <i class="el-icon-document"></i>
+  </hzq-menu-item>
+  <hzq-menu-item index="3" disabled>
+    <i class="hzq-icon-document"></i>
     <span slot="title">Navigateur Trois</span>
-  </el-menu-item>
-  <el-menu-item index="4">
-    <i class="el-icon-setting"></i>
+  </hzq-menu-item>
+  <hzq-menu-item index="4">
+    <i class="hzq-icon-setting"></i>
     <span slot="title">Navigateur Quatre</span>
-  </el-menu-item>
-</el-menu>
+  </hzq-menu-item>
+</hzq-menu>
 
 <style>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
+  .hzq-menu-vertical-demo:not(.hzq-menu--collapse) {
     width: 200px;
     min-height: 400px;
   }

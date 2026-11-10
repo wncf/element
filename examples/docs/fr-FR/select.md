@@ -4,18 +4,18 @@ Utile lorsqu'il faut sélectionner des options parmi un large choix, affiché gr
 
 ### Usage
 
-:::demo `v-model` est la valeur du `el-option` sélectionné.
+:::demo `v-model` est la valeur du `hzq-option` sélectionné.
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -48,19 +48,19 @@ Utile lorsqu'il faut sélectionner des options parmi un large choix, affiché gr
 
 ### Option désactivée
 
-:::demo Mettez l'attribut `disabled` dans `el-option` à `true` pour désactiver cette option.
+:::demo Mettez l'attribut `disabled` dans `hzq-option` à `true` pour désactiver cette option.
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value"
       :disabled="item.disabled">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -96,17 +96,17 @@ Utile lorsqu'il faut sélectionner des options parmi un large choix, affiché gr
 
 Vous pouvez désactiver le composant lui-même.
 
-:::demo Ajoutez `disabled` à `el-select` pour le désactiver.
+:::demo Ajoutez `disabled` à `hzq-select` pour le désactiver.
 ```html
 <template>
-  <el-select v-model="value" disabled placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" disabled placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -141,17 +141,17 @@ Vous pouvez désactiver le composant lui-même.
 
 Vous pouvez ajouter un bouton pour effacer la sélection.
 
-:::demo Ajoutez l'attribut `clearable` à `el-select` et l'icône de fermeture s'affichera après une sélection. Notez que `clearable` ne marche qu'avec les sélecteurs à choix unique.
+:::demo Ajoutez l'attribut `clearable` à `hzq-select` et l'icône de fermeture s'affichera après une sélection. Notez que `clearable` ne marche qu'avec les sélecteurs à choix unique.
 ```html
 <template>
-  <el-select v-model="value" clearable placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" clearable placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -186,31 +186,31 @@ Vous pouvez ajouter un bouton pour effacer la sélection.
 
 Les sélecteurs multiples utilisent des tags pour afficher les différentes options choisies.
 
-:::demo Ajoutez `multiple` à `el-select` pour le changer en sélecteur multiple. La valeur de `v-model` devient un tableau contenant toutes les options. Par défaut les différents choix sont affichés sous forme de tags. Vous pouvez réduire leur nombre en utilisant l'attribut `collapse-tags`.
+:::demo Ajoutez `multiple` à `hzq-select` pour le changer en sélecteur multiple. La valeur de `v-model` devient un tableau contenant toutes les options. Par défaut les différents choix sont affichés sous forme de tags. Vous pouvez réduire leur nombre en utilisant l'attribut `collapse-tags`.
 ```html
 <template>
-  <el-select v-model="value1" multiple placeholder="Select">
-    <el-option
+  <hzq-select v-model="value1" multiple placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 
-  <el-select
+  <hzq-select
     v-model="value2"
     multiple
     collapse-tags
     style="margin-left: 20px;"
     placeholder="Select">
-    <el-option
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -246,20 +246,20 @@ Les sélecteurs multiples utilisent des tags pour afficher les différentes opti
 
 Vous pouvez définir un template HTML pour l'affichage des options.
 
-:::demo Insérez votre template dans le slot de `el-option`.
+:::demo Insérez votre template dans le slot de `hzq-option`.
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" placeholder="Select">
+    <hzq-option
       v-for="item in cities"
       :key="item.value"
       :label="item.label"
       :value="item.value">
       <span style="float: left">{{ item.label }}</span>
       <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -297,23 +297,23 @@ Vous pouvez définir un template HTML pour l'affichage des options.
 
 Vous pouvez définir des groupes pour les options du menu.
 
-:::demo Utilisez `el-option-group` pour grouper les options. L'attribut `label` définit le nom du groupe.
+:::demo Utilisez `hzq-option-group` pour grouper les options. L'attribut `label` définit le nom du groupe.
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option-group
+  <hzq-select v-model="value" placeholder="Select">
+    <hzq-option-group
       v-for="group in options"
       :key="group.label"
       :label="group.label">
-      <el-option
+      <hzq-option
         v-for="item in group.options"
         :key="item.value"
         :label="item.label"
         :value="item.value">
-      </el-option>
-    </el-option-group>
-  </el-select>
+      </hzq-option>
+    </hzq-option-group>
+  </hzq-select>
 </template>
 
 <script>
@@ -357,17 +357,17 @@ Vous pouvez définir des groupes pour les options du menu.
 
 Vous pouvez ajouter un mode de filtrage pour trouver les options désirées plus rapidement.
 
-:::demo Ajoutez `filterable` à `el-select` pour activer le filtrage. Par défaut, Select cherchera les options dont le `label` contient la valeur du filtre. Si vous préférez une autre stratégie de filtrage, utilisez `filter-method`. C'est une `Function` qui est appelée quand la valeur change, avec pour paramètre la valeur courante.
+:::demo Ajoutez `filterable` à `hzq-select` pour activer le filtrage. Par défaut, Select cherchera les options dont le `label` contient la valeur du filtre. Si vous préférez une autre stratégie de filtrage, utilisez `filter-method`. C'est une `Function` qui est appelée quand la valeur change, avec pour paramètre la valeur courante.
 ```html
 <template>
-  <el-select v-model="value" filterable placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" filterable placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -402,11 +402,11 @@ Vous pouvez ajouter un mode de filtrage pour trouver les options désirées plus
 
 Vous pouvez aller chercher les options sur le serveur de manière dynamique.
 
-:::demo Ajoutez `filterable` et `remote` pour activer la recherche distante, ainsi que `remote-method`. Cette dernière est une `Function` qui est appelée lorsque la valeur change, avec pour paramètre la valeur courante. Notes que si `el-option` est rendu dans une directive `v-for`, vous devriez ajouter l'attribut `key` aux `el-option`. Cette valeur doit unique, comme `item.value` dans l'exemple suivant.
+:::demo Ajoutez `filterable` et `remote` pour activer la recherche distante, ainsi que `remote-method`. Cette dernière est une `Function` qui est appelée lorsque la valeur change, avec pour paramètre la valeur courante. Notes que si `hzq-option` est rendu dans une directive `v-for`, vous devriez ajouter l'attribut `key` aux `hzq-option`. Cette valeur doit unique, comme `item.value` dans l'exemple suivant.
 
 ```html
 <template>
-  <el-select
+  <hzq-select
     v-model="value"
     multiple
     filterable
@@ -415,13 +415,13 @@ Vous pouvez aller chercher les options sur le serveur de manière dynamique.
     placeholder="Entrez un mot-clé"
     :remote-method="remoteMethod"
     :loading="loading">
-    <el-option
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -484,20 +484,20 @@ Vous pouvez entrer des choix dans le champ de sélection qui ne sont pas incluse
 :::demo En utilisant `allow-create`, peuvent créer de nouveaux choix en les entrant dans le champ d'input. Cette option ne marche que si `filterable` est activé. Cette exemple montre aussi `default-first-option`, qui permet de sélectionner la première option en pressant Entrée sans avoir à utiliser la souris ou le clavier.
 ```html
 <template>
-  <el-select
+  <hzq-select
     v-model="value"
     multiple
     filterable
     allow-create
     default-first-option
     placeholder="Choisissez les tags de vos articles">
-    <el-option
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -526,6 +526,62 @@ Vous pouvez entrer des choix dans le champ de sélection qui ne sont pas incluse
 Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme identifiant unique.
 :::
 
+### Tailles
+
+:::demo Changez de taille avec `size` : `large`, `medium`, `small` ou `mini`. Sans lui la taille est `medium` ; les hauteurs sont 36px, 32px, 28px et 24px. En mode multiple les étiquettes suivent la taille.
+
+```html
+<template>
+  <div style="margin-bottom: 16px">
+    <hzq-radio-group v-model="size" size="mini">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+  </div>
+  <hzq-select v-model="value" :size="size" placeholder="Sélectionnez">
+    <hzq-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </hzq-option>
+  </hzq-select>
+  <hzq-select v-model="values" :size="size" multiple placeholder="Sélectionnez">
+    <hzq-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </hzq-option>
+  </hzq-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: '',
+        values: ['Option1', 'Option2'],
+        options: [{
+          value: 'Option1',
+          label: 'Option 1'
+        }, {
+          value: 'Option2',
+          label: 'Option 2'
+        }, {
+          value: 'Option3',
+          label: 'Option 3'
+        }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributs de Select
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
@@ -534,7 +590,7 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | multiple | Si la sélection multiple est activée. | boolean | — | false |
 | disabled | Si le sélecteur est désactivé. | boolean | — | false |
 | value-key | Identifiant unique pour la valeur, requis quand la valeur est un objet. | string | — | value |
-| size | Taille de l'Input. | string | large/small/mini | — |
+| size | Taille de l'Input. | string | large / medium / small / mini | — |
 | clearable | Si la sélection est effaçable. | boolean | — | false |
 | collapse-tags | Si les tags peuvent être réduits, dans le cas d'une sélection multiple. | boolean | — | false |
 | multiple-limit | Nombre maximum d'options multiples sélectionnable. Pas de limites quand est à 0. | number | — | 0 |

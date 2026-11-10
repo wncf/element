@@ -6,11 +6,11 @@ Progreso es usado para mostrar el estado de la operación actual e informar al u
 :::demo Usa el atributo `percentage` para asignar el porcentaje. Este es **requerido** y tiene que ser un valor entre `0-100`. Puede personalizar el formato de texto estableciendo `format`.
 
 ```html
-<el-progress :percentage="50"></el-progress>
-<el-progress :percentage="100" :format="format"></el-progress>
-<el-progress :percentage="100" status="success"></el-progress>
-<el-progress :percentage="100" status="warning"></el-progress>
-<el-progress :percentage="50" status="exception"></el-progress>
+<hzq-progress :percentage="50"></hzq-progress>
+<hzq-progress :percentage="100" :format="format"></hzq-progress>
+<hzq-progress :percentage="100" status="success"></hzq-progress>
+<hzq-progress :percentage="100" status="warning"></hzq-progress>
+<hzq-progress :percentage="50" status="exception"></hzq-progress>
 
 <script>
   export default {
@@ -29,10 +29,10 @@ En este caso el porcentaje no toma espacio adicional.
 
 :::demo El atributo `stroke-width` decide el ancho de la barra de progreso, y usa el atributo `text-inside` para poner la descripción dentro de la misma.
 ```html
-<el-progress :text-inside="true" :stroke-width="26" :percentage="70"></el-progress>
-<el-progress :text-inside="true" :stroke-width="24" :percentage="100" status="success"></el-progress>
-<el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"></el-progress>
-<el-progress :text-inside="true" :stroke-width="20" :percentage="50" status="exception"></el-progress>
+<hzq-progress :text-inside="true" :stroke-width="26" :percentage="70"></hzq-progress>
+<hzq-progress :text-inside="true" :stroke-width="24" :percentage="100" status="success"></hzq-progress>
+<hzq-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"></hzq-progress>
+<hzq-progress :text-inside="true" :stroke-width="20" :percentage="50" status="exception"></hzq-progress>
 ```
 :::
 
@@ -43,16 +43,16 @@ Puede utilizar el atributo `color` para establecer el color de la barra de progr
 :::demo
 
 ```html
-<el-progress :percentage="percentage" :color="customColor"></el-progress>
+<hzq-progress :percentage="percentage" :color="customColor"></hzq-progress>
 
-<el-progress :percentage="percentage" :color="customColorMethod"></el-progress>
+<hzq-progress :percentage="percentage" :color="customColorMethod"></hzq-progress>
 
-<el-progress :percentage="percentage" :color="customColors"></el-progress>
+<hzq-progress :percentage="percentage" :color="customColors"></hzq-progress>
 <div>
-  <el-button-group>
-    <el-button icon="el-icon-minus" @click="decrease"></el-button>
-    <el-button icon="el-icon-plus" @click="increase"></el-button>
-  </el-button-group>
+  <hzq-button-group>
+    <hzq-button icon="hzq-icon-minus" @click="decrease"></hzq-button>
+    <hzq-button icon="hzq-icon-plus" @click="increase"></hzq-button>
+  </hzq-button-group>
 </div>
 
 <script>
@@ -102,11 +102,11 @@ Puede utilizar el atributo `color` para establecer el color de la barra de progr
 
 :::demo Puede asignar el atributo `type` como `circle` para usar la barra circular de progreso, y usar el atributo `width` para cambiar el tamaño del círculo.
 ```html
-<el-progress type="circle" :percentage="0"></el-progress>
-<el-progress type="circle" :percentage="25"></el-progress>
-<el-progress type="circle" :percentage="100" status="success"></el-progress>
-<el-progress type="circle" :percentage="70" status="warning"></el-progress>
-<el-progress type="circle" :percentage="50" status="exception"></el-progress>
+<hzq-progress type="circle" :percentage="0"></hzq-progress>
+<hzq-progress type="circle" :percentage="25"></hzq-progress>
+<hzq-progress type="circle" :percentage="100" status="success"></hzq-progress>
+<hzq-progress type="circle" :percentage="70" status="warning"></hzq-progress>
+<hzq-progress type="circle" :percentage="50" status="exception"></hzq-progress>
 ```
 :::
 
@@ -115,13 +115,13 @@ Puede utilizar el atributo `color` para establecer el color de la barra de progr
 :::demo También puede especificar el atributo `type` a `dashboard` para usar la barra de progreso del panel de control.
 
 ```html
-<el-progress type="dashboard" :percentage="percentage" :color="colors"></el-progress>
+<hzq-progress type="dashboard" :percentage="percentage" :color="colors"></hzq-progress>
 
 <div>
-  <el-button-group>
-    <el-button icon="el-icon-minus" @click="decrease"></el-button>
-    <el-button icon="el-icon-plus" @click="increase"></el-button>
-  </el-button-group>
+  <hzq-button-group>
+    <hzq-button icon="hzq-icon-minus" @click="decrease"></hzq-button>
+    <hzq-button icon="hzq-icon-plus" @click="increase"></hzq-button>
+  </hzq-button-group>
 </div>
 
 <script>

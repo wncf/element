@@ -4,7 +4,7 @@
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave">
     <div
-      class="el-carousel__container"
+      class="hzq-carousel__container"
       :style="{ height: height }">
       <transition
         v-if="arrowDisplay"
@@ -15,8 +15,8 @@
           @mouseenter="handleButtonEnter('left')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
-          class="el-carousel__arrow el-carousel__arrow--left">
-          <i class="el-icon-arrow-left"></i>
+          class="hzq-carousel__arrow hzq-carousel__arrow--left">
+          <i class="hzq-icon-arrow-left"></i>
         </button>
       </transition>
       <transition
@@ -28,8 +28,8 @@
           @mouseenter="handleButtonEnter('right')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
-          class="el-carousel__arrow el-carousel__arrow--right">
-          <i class="el-icon-arrow-right"></i>
+          class="hzq-carousel__arrow hzq-carousel__arrow--right">
+          <i class="hzq-icon-arrow-right"></i>
         </button>
       </transition>
       <slot></slot>
@@ -41,12 +41,12 @@
         v-for="(item, index) in items"
         :key="index"
         :class="[
-          'el-carousel__indicator',
-          'el-carousel__indicator--' + direction,
+          'hzq-carousel__indicator',
+          'hzq-carousel__indicator--' + direction,
           { 'is-active': index === activeIndex }]"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)">
-        <button class="el-carousel__button">
+        <button class="hzq-carousel__button">
           <span v-if="hasLabel">{{ item.label }}</span>
         </button>
       </li>
@@ -56,10 +56,10 @@
 
 <script>
 import throttle from 'throttle-debounce/throttle';
-import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+import { addResizeListener, removeResizeListener } from 'hzq-ui/src/utils/resize-event';
 
 export default {
-  name: 'ElCarousel',
+  name: 'HzqCarousel',
 
   props: {
     initialIndex: {
@@ -122,20 +122,20 @@ export default {
     },
 
     carouselClasses() {
-      const classes = ['el-carousel', 'el-carousel--' + this.direction];
+      const classes = ['hzq-carousel', 'hzq-carousel--' + this.direction];
       if (this.type === 'card') {
-        classes.push('el-carousel--card');
+        classes.push('hzq-carousel--card');
       }
       return classes;
     },
 
     indicatorsClasses() {
-      const classes = ['el-carousel__indicators', 'el-carousel__indicators--' + this.direction];
+      const classes = ['hzq-carousel__indicators', 'hzq-carousel__indicators--' + this.direction];
       if (this.hasLabel) {
-        classes.push('el-carousel__indicators--labels');
+        classes.push('hzq-carousel__indicators--labels');
       }
       if (this.indicatorPosition === 'outside' || this.type === 'card') {
-        classes.push('el-carousel__indicators--outside');
+        classes.push('hzq-carousel__indicators--outside');
       }
       return classes;
     }
@@ -207,7 +207,7 @@ export default {
     },
 
     updateItems() {
-      this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
+      this.items = this.$children.filter(child => child.$options.name === 'HzqCarouselItem');
     },
 
     resetItemPosition(oldIndex) {

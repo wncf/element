@@ -12,14 +12,14 @@ describe('Link', () => {
       type: 'primary'
     }, true);
     let linkElm = vm.$el;
-    expect(linkElm.classList.contains('el-link--primary')).to.be.true;
+    expect(linkElm.classList.contains('hzq-link--primary')).to.be.true;
   });
   it('icon', () => {
     vm = createTest(Link, {
-      icon: 'el-icon-search'
+      icon: 'hzq-icon-search'
     }, true);
     let linkElm = vm.$el;
-    expect(linkElm.querySelector('.el-icon-search')).to.be.ok;
+    expect(linkElm.querySelector('.hzq-icon-search')).to.be.ok;
   });
   it('href', () => {
     vm = createTest(Link, {
@@ -30,9 +30,9 @@ describe('Link', () => {
   });
   it('target', () => {
     vm = createVue(`
-    <el-link href="https://element.eleme.io" target="_blank">
+    <hzq-link href="https://element.eleme.io" target="_blank">
       default
-    </el-link>
+    </hzq-link>
     `);
     let linkElm = vm.$el;
     expect(linkElm.getAttribute('target')).to.be.equal('_blank');
@@ -48,13 +48,13 @@ describe('Link', () => {
   it('loading', () => {
     vm = createTest(Link, {
       loading: true,
-      icon: 'el-icon-edit',
+      icon: 'hzq-icon-edit',
       href: 'https://element.eleme.io/'
     }, true);
     let linkElm = vm.$el;
     expect(linkElm.classList.contains('is-loading')).to.be.true;
-    expect(linkElm.querySelector('.el-icon-loading')).to.be.ok;
-    expect(linkElm.querySelector('.el-icon-edit')).to.not.exist;
+    expect(linkElm.querySelector('.hzq-icon-loading')).to.be.ok;
+    expect(linkElm.querySelector('.hzq-icon-edit')).to.not.exist;
     expect(linkElm.getAttribute('href')).to.not.exist;
   });
 
@@ -62,7 +62,7 @@ describe('Link', () => {
     let result;
     vm = createVue({
       template: `
-        <el-link @click="handleClick"></el-link>
+        <hzq-link @click="handleClick"></hzq-link>
       `,
       methods: {
         handleClick(evt) {
@@ -85,7 +85,7 @@ describe('Link', () => {
     let linkElm = vm.$el;
     expect(linkElm.classList.contains('is-loading')).to.be.true;
     expect(linkElm.classList.contains('is-disabled')).to.be.true;
-    expect(linkElm.classList.contains('el-link--success')).to.be.true;
+    expect(linkElm.classList.contains('hzq-link--success')).to.be.true;
     expect(linkElm.classList.contains('is-underline')).to.be.false;
   });
 
@@ -93,7 +93,7 @@ describe('Link', () => {
     let result;
     vm = createVue({
       template: `
-        <el-link loading @click="handleClick">loading</el-link>
+        <hzq-link loading @click="handleClick">loading</hzq-link>
       `,
       methods: {
         handleClick(evt) {

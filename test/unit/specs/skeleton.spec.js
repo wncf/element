@@ -13,8 +13,8 @@ describe('Skeleton.vue', () => {
   it('render test', () => {
     vm = createTest(Skeleton, true);
     const el = vm.$el;
-    expect(el.querySelectorAll('.el-skeleton__p').length).to.equal(4);
-    expect(Array.from(el.children[0].classList)).to.contain('el-skeleton');
+    expect(el.querySelectorAll('.hzq-skeleton__p').length).to.equal(4);
+    expect(Array.from(el.children[0].classList)).to.contain('hzq-skeleton');
 
   });
 
@@ -32,7 +32,7 @@ describe('Skeleton.vue', () => {
     vm = createVue(
       {
         template: `
-        <el-skeleton :count="count"></el-skeleton>
+        <hzq-skeleton :count="count"></hzq-skeleton>
       `,
         data() {
           return {
@@ -44,12 +44,12 @@ describe('Skeleton.vue', () => {
     );
 
     const wrapper = vm.$el;
-    expect(wrapper.querySelectorAll('.el-skeleton__p').length).to.equal(4);
+    expect(wrapper.querySelectorAll('.hzq-skeleton__p').length).to.equal(4);
 
     vm.count = 2;
 
     await waitImmediate();
-    expect(wrapper.querySelectorAll('.el-skeleton__p').length).to.equal(8);
+    expect(wrapper.querySelectorAll('.hzq-skeleton__p').length).to.equal(8);
   });
 
   it('should render x rows', () => {
@@ -57,14 +57,14 @@ describe('Skeleton.vue', () => {
       rows: 5
     }, true);
 
-    expect(vm.$el.querySelectorAll('.el-skeleton__p').length).to.equal(5);
+    expect(vm.$el.querySelectorAll('.hzq-skeleton__p').length).to.equal(5);
   });
 
   it('should render default slots', () => {
     vm = createVue(
       {
         template: `
-        <el-skeleton :loading="loading">{{content}}</el-skeleton>
+        <hzq-skeleton :loading="loading">{{content}}</hzq-skeleton>
       `,
         data() {
           return {
@@ -80,7 +80,7 @@ describe('Skeleton.vue', () => {
     vm = createVue(
       {
         template: `
-        <el-skeleton :loading="loading"><template slot="template">{{content}}</template></el-skeleton>
+        <hzq-skeleton :loading="loading"><template slot="template">{{content}}</template></hzq-skeleton>
       `,
         data() {
           return {
@@ -89,7 +89,7 @@ describe('Skeleton.vue', () => {
           };
         }
       }, true);
-    expect(vm.$el.querySelector('.el-skeleton').textContent).to.be.equal(content);
+    expect(vm.$el.querySelector('.hzq-skeleton').textContent).to.be.equal(content);
   });
 
   it('should throttle rendering', async() => {

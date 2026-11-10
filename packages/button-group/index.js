@@ -1,8 +1,8 @@
-import ElButtonGroup from '../button/src/button-group';
+import HzqButtonGroup from '../button/src/button-group';
 
 /* istanbul ignore next */
-ElButtonGroup.install = function(Vue) {
-  Vue.component(ElButtonGroup.name, ElButtonGroup);
+HzqButtonGroup.install = function(Vue) {
+  Vue.component(HzqButtonGroup.name, HzqButtonGroup);
 };
 
-export default ElButtonGroup;
+export default HzqButtonGroup;

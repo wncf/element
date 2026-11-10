@@ -9,7 +9,7 @@ describe('Divider', () => {
   it('content', () => {
     vm = createVue({
       template: `
-          <el-divider>我是一条完美分割线！</el-divider>
+          <hzq-divider>我是一条完美分割线！</hzq-divider>
       `
     });
 
@@ -19,17 +19,17 @@ describe('Divider', () => {
   it('direction', () => {
     vm = createVue({
       template: `
-          <el-divider direction="vertical">我是一条完美分割线！</el-divider>
+          <hzq-divider direction="vertical">我是一条完美分割线！</hzq-divider>
       `
     });
 
-    expect(vm.$el.className).to.include('el-divider--vertical');
+    expect(vm.$el.className).to.include('hzq-divider--vertical');
   });
 
   it('apply class to divider', () => {
     vm = createVue({
       template: `
-        <el-divider direction="vertical" class="my-divider">我是一条完美分割线！</el-divider>
+        <hzq-divider direction="vertical" class="my-divider">我是一条完美分割线！</hzq-divider>
       `
     });
     expect(vm.$el.className).to.include('my-divider');

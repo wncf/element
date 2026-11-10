@@ -1,7 +1,7 @@
 <template>
   <component
     :is="_elTag"
-    class="el-radio-group"
+    class="hzq-radio-group"
     role="radiogroup"
     @keydown="handleKeydown"
   >
@@ -9,7 +9,7 @@
   </component>
 </template>
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
 
   const keyCode = Object.freeze({
     LEFT: 37,
@@ -18,9 +18,9 @@
     DOWN: 40
   });
   export default {
-    name: 'ElRadioGroup',
+    name: 'HzqRadioGroup',
 
-    componentName: 'ElRadioGroup',
+    componentName: 'HzqRadioGroup',
 
     inject: {
       elFormItem: {
@@ -48,7 +48,7 @@
         return tag;
       },
       radioGroupSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size || this._elFormItemSize || (this.$HZQ || {}).size;
       }
     },
 
@@ -105,7 +105,7 @@
     },
     watch: {
       value(value) {
-        this.dispatch('ElFormItem', 'el.form.change', [this.value]);
+        this.dispatch('HzqFormItem', 'el.form.change', [this.value]);
       }
     }
   };

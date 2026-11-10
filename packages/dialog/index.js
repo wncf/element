@@ -1,11 +1,11 @@
-import ElDialog from './src/component';
+import HzqDialog from './src/component';
 import dialog from './src/dialog-service';
 
-ElDialog.install = function(Vue) {
-  Vue.component(ElDialog.name, ElDialog);
+HzqDialog.install = function(Vue) {
+  Vue.component(HzqDialog.name, HzqDialog);
 };
 
-ElDialog.dialog = dialog;
+HzqDialog.dialog = dialog;
 
-export default ElDialog;
+export default HzqDialog;
 export { dialog };

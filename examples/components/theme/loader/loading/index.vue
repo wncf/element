@@ -1,7 +1,7 @@
 <style>
   .loadingClass {
     z-index: 0!important;
-    .el-loading-spinner {
+    .hzq-loading-spinner {
       top: 0%;
       margin-top: 30%;
     }

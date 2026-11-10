@@ -39,6 +39,32 @@ Vue.use(Element)
 Il est obligatoire de remplacer le chemin du fichier de police.
 :::
 
+#### Ajuster l'échelle des tailles en un seul endroit
+
+Les quatre tailles (`large` / `medium` / `small` / `mini`) de Button, Input, Select, Tag, Table, Pagination et des autres contrôles dérivent du bloc « Size ladder » de `common/var.scss`. En modifiant ce bloc, tous les composants suivent ensemble, sans surcharge composant par composant :
+
+```scss
+/* hauteur totale, bordures de 1px comprises */
+$--component-height-large: 36px;
+$--component-height-medium: 32px;
+$--component-height-small: 28px;
+$--component-height-mini: 24px;
+
+/* hauteur intérieure = hauteur totale - 2px, à modifier avec les valeurs ci-dessus */
+$--component-inner-height-large: 34px;
+$--component-inner-height-medium: 30px;
+$--component-inner-height-small: 26px;
+$--component-inner-height-mini: 22px;
+
+/* tailles de police */
+$--component-font-size-large: 14px;
+$--component-font-size-medium: 13px;
+$--component-font-size-small: 12px;
+$--component-font-size-mini: 12px;
+```
+
+Sans `size` le contrôle est `medium`. Quelques composants ont des valeurs dérivées qui suivent les mêmes ancrages, comme `$--input-*-height`, `$--tag-*-height`, `$--pagination-*-button-*` et `$--form-item-line-height-*` ; ne les surchargez que si un composant doit s'écarter de l'échelle. Les entrées du menu Dropdown utilisent leur propre échelle (15 / 14 / 13 / 12) et ne suivent pas les variables de police ci-dessus.
+
 ### Outil de thème CLI
 Si votre projet n'utilise pas SCSS, vous pouvez personnaliser le thème en utilisant notre outil en ligne de commande:
 

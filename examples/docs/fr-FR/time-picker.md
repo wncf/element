@@ -6,9 +6,9 @@ Utiliser TimePicker pour sélectionner un horaire.
 
 Vous pouvez fournir une liste d'horaires fixés pour que l'utilisateur en choisisse un.
 
-:::demo Utilisez `el-time-select` puis assignez un horaire de début, de fin et un pas grâce aux propriétés `start`, `end` et `step` de l'attribut `picker-options`.
+:::demo Utilisez `hzq-time-select` puis assignez un horaire de début, de fin et un pas grâce aux propriétés `start`, `end` et `step` de l'attribut `picker-options`.
 ```html
-<el-time-select
+<hzq-time-select
   v-model="value"
   :picker-options="{
     start: '08:30',
@@ -16,7 +16,7 @@ Vous pouvez fournir une liste d'horaires fixés pour que l'utilisateur en choisi
     end: '18:30'
   }"
   placeholder="Choisissez un horaire">
-</el-time-select>
+</hzq-time-select>
 
 <script>
   export default {
@@ -34,25 +34,25 @@ Vous pouvez fournir une liste d'horaires fixés pour que l'utilisateur en choisi
 
 Vous pouvez aussi laisser l'utilisateur choisir librement un horaire.
 
-:::demo Utilisez `el-time-picker` puis l'attribut `picker-options` et sa propriété `selectableRange` pour déterminer la tranche horaire disponible. Par défaut, vous pouvez utiliser la molette de votre souris, ou les flèches directionnelles si l'attribut `arrow-control` est présent.
+:::demo Utilisez `hzq-time-picker` puis l'attribut `picker-options` et sa propriété `selectableRange` pour déterminer la tranche horaire disponible. Par défaut, vous pouvez utiliser la molette de votre souris, ou les flèches directionnelles si l'attribut `arrow-control` est présent.
 
 ```html
 <template>
-  <el-time-picker
+  <hzq-time-picker
     v-model="value1"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
     placeholder="Horaire libre">
-  </el-time-picker>
-  <el-time-picker
+  </hzq-time-picker>
+  <hzq-time-picker
     arrow-control
     v-model="value2"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
     placeholder="Horaire libre">
-  </el-time-picker>
+  </hzq-time-picker>
 </template>
 
 <script>
@@ -75,7 +75,7 @@ Vous pouvez définir un intervalle de temps. Si l'horaire de début est sélecti
 :::demo
 ```html
 <template>
-  <el-time-select
+  <hzq-time-select
     placeholder="Horaire de début"
     v-model="startTime"
     :picker-options="{
@@ -83,8 +83,8 @@ Vous pouvez définir un intervalle de temps. Si l'horaire de début est sélecti
       step: '00:15',
       end: '18:30'
     }">
-  </el-time-select>
-  <el-time-select
+  </hzq-time-select>
+  <hzq-time-select
     placeholder="Horaire de fin"
     v-model="endTime"
     :picker-options="{
@@ -93,7 +93,7 @@ Vous pouvez définir un intervalle de temps. Si l'horaire de début est sélecti
       end: '18:30',
       minTime: startTime
     }">
-  </el-time-select>
+  </hzq-time-select>
 </template>
 
 <script>
@@ -116,21 +116,21 @@ Vous pouvez également définir un intervalle libre.
 :::demo Ajoutez l'attribut `is-range`. L'attribut `arrow-control` est aussi supporté dans ce mode.
 ```html
 <template>
-  <el-time-picker
+  <hzq-time-picker
     is-range
     v-model="value1"
     range-separator="To"
     start-placeholder="Horaire de début"
     end-placeholder="Horaire de fin">
-  </el-time-picker>
-  <el-time-picker
+  </hzq-time-picker>
+  <hzq-time-picker
     is-range
     arrow-control
     v-model="value2"
     range-separator="To"
     start-placeholder="Horaire de début"
     end-placeholder="Horaire de fin">
-  </el-time-picker>
+  </hzq-time-picker>
 </template>
 
 <script>
@@ -139,6 +139,51 @@ Vous pouvez également définir un intervalle libre.
       return {
         value1: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
         value2: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+      };
+    }
+  }
+</script>
+```
+:::
+
+### Tailles
+
+:::demo Changez de taille avec `size` : `large`, `medium`, `small` ou `mini`. Sans lui la taille est `medium` ; les hauteurs sont 36px, 32px, 28px et 24px.
+
+```html
+<template>
+  <div class="block">
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-time-picker
+      v-model="value"
+      :size="size"
+      placeholder="Choisir une heure">
+    </hzq-time-picker>
+  </div>
+  <div class="block">
+    <hzq-time-picker
+      is-range
+      v-model="range"
+      :size="size"
+      range-separator="à"
+      start-placeholder="Heure de début"
+      end-placeholder="Heure de fin">
+    </hzq-time-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: new Date(2016, 9, 10, 8, 40),
+        range: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
       };
     }
   }
@@ -155,12 +200,12 @@ Vous pouvez également définir un intervalle libre.
 | disabled | Si TimePicker est désactivé. | boolean | — | false |
 | editable | Si le champ d'input est éditable. | boolean | — | true |
 | clearable | Si un bouton d'effacement doit être affiché. | boolean | — | true |
-| size | Taille du champ. | string | medium / small / mini | — |
+| size | Taille du champ. | string | large / medium / small / mini | — |
 | placeholder | Placeholder en mode non-intervalle. | string | — | — |
 | start-placeholder | Placeholder de l'horaire de début en mode intervalle. | string | — | — |
 | end-placeholder | Placeholder de l'horaire de fin en mode intervalle. | string | — | — |
-| is-range | Si le mode intervalle est activé, marche avec `<el-time-picker>`. | boolean | — | false |
-| arrow-control | Si les flèches directionnelles peuvent être utilisées, marche avec `<el-time-picker>`. | boolean | — | false |
+| is-range | Si le mode intervalle est activé, marche avec `<hzq-time-picker>`. | boolean | — | false |
+| arrow-control | Si les flèches directionnelles peuvent être utilisées, marche avec `<hzq-time-picker>`. | boolean | — | false |
 | align | Alignement. | left / center / right | left |
 | popper-class | Classe du menu du TimePicker. | string | — | — |
 | picker-options | Options additionnelles, voir la table ci-dessous. | object | — | {} |
@@ -168,8 +213,8 @@ Vous pouvez également définir un intervalle libre.
 | default-value | Optionnel, date d'aujourd'hui par défaut. | `Date` pour le TimePicker, `string` pour le TimeSelect | Toute valeur acceptée par `new Date()` pour le TimePicker, une valeur sélectionnable pour TimeSelect. | — |
 | value-format | Optionnel, uniquement pour TimePicker, format de la valeur. Si non spécifié, la valeur sera un objet `Date`. | string | Voir [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | Attribut `name` natif de l'input. | string | — | — |
-| prefix-icon | Classe de l'icône de préfixe. | string | — | el-icon-time |
-| clear-icon | Classe de l'icône d'effacement. | string | — | el-icon-circle-close |
+| prefix-icon | Classe de l'icône de préfixe. | string | — | hzq-icon-time |
+| clear-icon | Classe de l'icône d'effacement. | string | — | hzq-icon-circle-close |
 
 ### Options de TimeSelect
 

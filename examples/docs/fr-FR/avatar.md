@@ -10,26 +10,26 @@ utilisez les prop `shape` et` size` pour définir la forme et la taille de l'ava
 :::demo
 ```html
 <template>
-  <el-row class="demo-avatar demo-basic">
-    <el-col :span="12">
+  <hzq-row class="demo-avatar demo-basic">
+    <hzq-col :span="12">
       <div class="sub-title">cercle</div>
       <div class="demo-basic--circle">
-        <div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
+        <div class="block"><hzq-avatar :size="50" :src="circleUrl"></hzq-avatar></div>
         <div class="block" v-for="size in sizeList" :key="size">
-          <el-avatar :size="size" :src="circleUrl"></el-avatar>
+          <hzq-avatar :size="size" :src="circleUrl"></hzq-avatar>
         </div>
       </div>
-    </el-col>  
-    <el-col :span="12">
+    </hzq-col>  
+    <hzq-col :span="12">
       <div class="sub-title">carré</div>
       <div class="demo-basic--circle">
-        <div class="block"><el-avatar shape="square" :size="50" :src="squareUrl"></el-avatar></div>
+        <div class="block"><hzq-avatar shape="square" :size="50" :src="squareUrl"></hzq-avatar></div>
         <div class="block" v-for="size in sizeList" :key="size">
-          <el-avatar shape="square" :size="size" :src="squareUrl"></el-avatar>
+          <hzq-avatar shape="square" :size="size" :src="squareUrl"></hzq-avatar>
         </div>
       </div>
-    </el-col>
-  </el-row>
+    </hzq-col>
+  </hzq-row>
 </template>
 <script>
   export default {
@@ -55,13 +55,13 @@ Les images, icônes et les caractères sont supportés.
 <template>
   <div class="demo-type">
     <div>
-      <el-avatar icon="el-icon-user-solid"></el-avatar>
+      <hzq-avatar icon="hzq-icon-user-solid"></hzq-avatar>
     </div>
     <div>
-      <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+      <hzq-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></hzq-avatar>
     </div>
     <div>
-      <el-avatar> user </el-avatar>
+      <hzq-avatar> user </hzq-avatar>
     </div>
   </div>
 </template>
@@ -76,9 +76,9 @@ fallback en cas d'erreur de chargement d'image
 ```html
 <template>
   <div class="demo-type">
-    <el-avatar :size="60" src="https://empty" @error="errorHandler">
+    <hzq-avatar :size="60" src="https://empty" @error="errorHandler">
       <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
-      </el-avatar>
+      </hzq-avatar>
   </div>
 </template>
 <script>
@@ -104,7 +104,7 @@ Défini comment l'image s'adapte à son conteneur, pareil que [object-fit](https
   <div class="demo-fit">
     <div class="block" v-for="fit in fits" :key="fit">
         <span class="title">{{ fit }}</span>
-        <el-avatar shape="square" :size="100" :fit="fit" :src="url"></el-avatar>
+        <hzq-avatar shape="square" :size="100" :fit="fit" :src="url"></hzq-avatar>
     </div>
   </div>
 </template>

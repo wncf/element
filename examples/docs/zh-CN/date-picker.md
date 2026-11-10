@@ -12,21 +12,21 @@
 <template>
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="date"
       placeholder="选择日期">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">带快捷选项</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       align="right"
       type="date"
       placeholder="选择日期"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -77,56 +77,56 @@
 <div class="container">
   <div class="block">
     <span class="demonstration">周</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="week"
       format="yyyy 第 WW 周"
       placeholder="选择周">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">月</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="month"
       placeholder="选择月">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </div>
 <div class="container">
   <div class="block">
     <span class="demonstration">年</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value3"
       type="year"
       placeholder="选择年">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">多个日期</span>
-    <el-date-picker
+    <hzq-date-picker
       type="dates"
       v-model="value4"
       placeholder="选择一个或多个日期">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </div>
 <div class="container">
   <div class="block">
     <span class="demonstration">多个月</span>
-    <el-date-picker
+    <hzq-date-picker
       type="months"
       v-model="value5"
       placeholder="选择一个或多个月">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">多个年</span>
-    <el-date-picker
+    <hzq-date-picker
       type="years"
       v-model="value6"
       placeholder="选择一个或多个年">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </div>
 
@@ -156,17 +156,17 @@
 <template>
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="daterange"
       range-separator="至"
       start-placeholder="开始日期"
       end-placeholder="结束日期">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">带快捷选项</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="daterange"
       align="right"
@@ -175,7 +175,7 @@
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -229,17 +229,17 @@
 <template>
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="monthrange"
       range-separator="至"
       start-placeholder="开始月份"
       end-placeholder="结束月份">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">带快捷选项</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="monthrange"
       align="right"
@@ -248,7 +248,7 @@
       start-placeholder="开始月份"
       end-placeholder="结束月份"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -327,34 +327,34 @@
   <div class="block">
     <span class="demonstration">默认为 Date 对象</span>
     <div class="demonstration">值：{{ value1 }}</div>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="date"
       placeholder="选择日期"
       format="yyyy 年 MM 月 dd 日">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">使用 value-format</span>
     <div class="demonstration">值：{{ value2 }}</div>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="date"
       placeholder="选择日期"
       format="yyyy 年 MM 月 dd 日"
       value-format="yyyy-MM-dd">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">时间戳</span>
     <div class="demonstration">值：{{ value3 }}</div>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value3"
       type="date"
       placeholder="选择日期"
       format="yyyy 年 MM 月 dd 日"
       value-format="timestamp">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -381,13 +381,13 @@
 <template>
   <div class="block">
     <p>组件值：{{ value }}</p>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value"
       type="daterange"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       :default-time="['00:00:00', '23:59:59']">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -403,6 +403,51 @@
 ```
 :::
 
+### 尺寸
+
+:::demo 通过 `size` 切换四档尺寸：`large`、`medium`、`small`、`mini`。不传时等同 `medium`，四档高度依次为 36px、32px、28px、24px。
+
+```html
+<template>
+  <div class="block">
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">大型</hzq-radio-button>
+      <hzq-radio-button label="medium">中等</hzq-radio-button>
+      <hzq-radio-button label="small">小型</hzq-radio-button>
+      <hzq-radio-button label="mini">超小</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-date-picker
+      v-model="value"
+      type="date"
+      :size="size"
+      placeholder="选择日期">
+    </hzq-date-picker>
+  </div>
+  <div class="block">
+    <hzq-date-picker
+      v-model="range"
+      type="daterange"
+      :size="size"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期">
+    </hzq-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: '',
+        range: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -411,7 +456,7 @@
 | disabled | 禁用 | boolean | — | false |
 | editable | 文本框可输入 | boolean | — | true |
 | clearable | 是否显示清除按钮 | boolean | — | true |
-| size          | 输入框尺寸     | string          | large, small, mini  | — |
+| size          | 输入框尺寸     | string          | large / medium / small / mini | — |
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
@@ -426,8 +471,8 @@
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
-| prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
-| clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
+| prefix-icon | 自定义头部图标的类名 | string | — | hzq-icon-date |
+| clear-icon | 自定义清空图标的类名 | string | — | hzq-icon-circle-close |
 | validate-event | 输入时是否触发表单的校验 | boolean | - | true |
 | append-to-body | DetePicker 自身是否插入至 body 元素上。   | boolean   | — | true |
 

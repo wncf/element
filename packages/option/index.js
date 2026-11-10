@@ -1,8 +1,8 @@
-import ElOption from '../select/src/option';
+import HzqOption from '../select/src/option';
 
 /* istanbul ignore next */
-ElOption.install = function(Vue) {
-  Vue.component(ElOption.name, ElOption);
+HzqOption.install = function(Vue) {
+  Vue.component(HzqOption.name, HzqOption);
 };
 
-export default ElOption;
+export default HzqOption;

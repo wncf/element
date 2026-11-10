@@ -1,14 +1,14 @@
 <template>
-  <header class="el-header" :style="{ height }">
+  <header class="hzq-header" :style="{ height }">
     <slot></slot>
   </header>
 </template>
 
 <script>
   export default {
-    name: 'ElHeader',
+    name: 'HzqHeader',
 
-    componentName: 'ElHeader',
+    componentName: 'HzqHeader',
 
     props: {
       height: {

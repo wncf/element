@@ -1,8 +1,8 @@
-import ElCollapseItem from '../collapse/src/collapse-item.vue';
+import HzqCollapseItem from '../collapse/src/collapse-item.vue';
 
 /* istanbul ignore next */
-ElCollapseItem.install = function(Vue) {
-  Vue.component(ElCollapseItem.name, ElCollapseItem);
+HzqCollapseItem.install = function(Vue) {
+  Vue.component(HzqCollapseItem.name, HzqCollapseItem);
 };
 
-export default ElCollapseItem;
+export default HzqCollapseItem;

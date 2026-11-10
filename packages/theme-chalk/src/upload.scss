@@ -28,8 +28,8 @@
 
   /* 照片墙模式 */
   @include m(picture-card) {
-    background-color: var(--el-fill-color-blank);
-    border: 1px dashed var(--el-border-color-base);
+    background-color: var(--hzq-fill-color-blank);
+    border: 1px dashed var(--hzq-border-color-base);
     border-radius: 6px;
     box-sizing: border-box;
     width: 148px;
@@ -40,7 +40,7 @@
 
     i {
       font-size: 28px;
-      color: var(--el-text-color-secondary);
+      color: var(--hzq-text-color-secondary);
     }
 
     &:hover {
@@ -52,15 +52,15 @@
     border-color: $--color-primary;
     color: $--color-primary;
 
-    .el-upload-dragger {
+    .hzq-upload-dragger {
       border-color: $--color-primary;
     }
   }
 }
 
 @include b(upload-dragger) {
-  background-color: var(--el-fill-color-blank);
-  border: 1px dashed var(--el-border-color-base);
+  background-color: var(--hzq-fill-color-blank);
+  border: 1px dashed var(--hzq-border-color-base);
   border-radius: 6px;
   box-sizing: border-box;
   width: 360px;
@@ -70,24 +70,24 @@
   position: relative;
   overflow: hidden;
 
-  .el-icon-upload {
+  .hzq-icon-upload {
     font-size: 67px;
     color: $--color-text-placeholder;
     margin: 40px 0 16px;
     line-height: 50px;
   }
 
-  + .el-upload__tip {
+  + .hzq-upload__tip {
     text-align: center;
   }
 
-  ~ .el-upload__files {
+  ~ .hzq-upload__files {
     border-top: $--border-base;
     margin-top: 7px;
     padding-top: 5px;
   }
 
-  .el-upload__text {
+  .hzq-upload__text {
     color: $--color-text-regular;
     font-size: 14px;
     text-align: center;
@@ -124,19 +124,19 @@
     border-radius: 4px;
     width: 100%;
 
-    .el-progress {
+    .hzq-progress {
       position: absolute;
       top: 20px;
       width: 100%;
     }
 
-    .el-progress__text {
+    .hzq-progress__text {
       position: absolute;
       right: 0;
       top: -13px;
     }
 
-    .el-progress-bar {
+    .hzq-progress-bar {
       margin-right: 0;
       padding-right: 0;
     }
@@ -145,11 +145,11 @@
       margin-top: 10px;
     }
 
-    & .el-icon-upload-success {
+    & .hzq-icon-upload-success {
       color: $--color-success;
     }
 
-    .el-icon-close {
+    .hzq-icon-close {
       display: none;
       position: absolute;
       top: 5px;
@@ -164,7 +164,7 @@
       }
     }
 
-    & .el-icon-close-tip {
+    & .hzq-icon-close-tip {
       display: none;
       position: absolute;
       top: 5px;
@@ -178,40 +178,40 @@
     &:hover {
       background-color: $--background-color-base;
 
-      .el-icon-close {
+      .hzq-icon-close {
         display: inline-block;
       }
 
-      .el-progress__text {
+      .hzq-progress__text {
         display: none;
       }
     }
 
     @include when(success) {
-      .el-upload-list__item-status-label {
+      .hzq-upload-list__item-status-label {
         display: block;
       }
 
-      .el-upload-list__item-name:hover, .el-upload-list__item-name:focus {
+      .hzq-upload-list__item-name:hover, .hzq-upload-list__item-name:focus {
         color: $--link-hover-color;
         cursor: pointer;
       }
 
       &:focus:not(:hover) {  /* 键盘focus */
-        .el-icon-close-tip {
+        .hzq-icon-close-tip {
           display: inline-block;
         }
       }
 
       &:not(.focusing):focus, &:active { /* click时 */
         outline-width: 0;
-        .el-icon-close-tip {
+        .hzq-icon-close-tip {
           display: none;
         }
       }
 
       &:hover, &:focus {
-        .el-upload-list__item-status-label {
+        .hzq-upload-list__item-status-label {
           display: none;
         }
       }
@@ -219,7 +219,7 @@
   }
 
   @include when(disabled) {
-    .el-upload-list__item:hover .el-upload-list__item-status-label {
+    .hzq-upload-list__item:hover .hzq-upload-list__item-status-label {
       display: block;
     }
   }
@@ -234,7 +234,7 @@
     transition: color .3s;
     white-space: nowrap;
 
-    [class^="el-icon"] {
+    [class^="hzq-icon"] {
       height: 100%;
       margin-right: 7px;
       color: $--color-text-secondary;
@@ -268,10 +268,10 @@
     display: inline;
     vertical-align: top;
 
-    .el-upload-list__item {
+    .hzq-upload-list__item {
       overflow: hidden;
-      background-color: var(--el-fill-color-blank);
-      border: 1px solid var(--el-border-color-base);
+      background-color: var(--hzq-fill-color-blank);
+      border: 1px solid var(--hzq-border-color-base);
       border-radius: 6px;
       box-sizing: border-box;
       width: 148px;
@@ -279,35 +279,35 @@
       margin: 0 8px 8px 0;
       display: inline-block;
 
-      .el-icon-check,
-      .el-icon-circle-check {
+      .hzq-icon-check,
+      .hzq-icon-circle-check {
         color: $--color-white;
       }
 
-      .el-icon-close {
+      .hzq-icon-close {
         display: none;
       }
       &:hover {
-        .el-upload-list__item-status-label {
+        .hzq-upload-list__item-status-label {
           display: none;
         }
 
-        .el-progress__text {
+        .hzq-progress__text {
           display: block;
         }
       }
     }
 
-    .el-upload-list__item-name {
+    .hzq-upload-list__item-name {
       display: none;
     }
 
-    .el-upload-list__item-thumbnail {
+    .hzq-upload-list__item-thumbnail {
       width: 100%;
       height: 100%;
     }
 
-    .el-upload-list__item-status-label {
+    .hzq-upload-list__item-status-label {
       position: absolute;
       right: -15px;
       top: -6px;
@@ -325,7 +325,7 @@
       }
     }
 
-    .el-upload-list__item-actions {
+    .hzq-upload-list__item-actions {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -354,7 +354,7 @@
         margin-left: 15px;
       }
 
-      .el-upload-list__item-delete {
+      .hzq-upload-list__item-delete {
         position: static;
         font-size: inherit;
         color: inherit;
@@ -368,52 +368,52 @@
       }
     }
 
-    .el-progress {
+    .hzq-progress {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       bottom: auto;
       width: 126px;
 
-      .el-progress__text {
+      .hzq-progress__text {
         top: 50%;
       }
     }
   }
 
   @include m(picture) {
-    .el-upload-list__item {
+    .hzq-upload-list__item {
       overflow: hidden;
       z-index: 0;
       // 图片列表项是一张"卡片"，底色与描边都跟随主题，否则深色模式下会出现一列白卡
-      background-color: var(--el-fill-color-blank);
-      border: 1px solid var(--el-border-color-base);
+      background-color: var(--hzq-fill-color-blank);
+      border: 1px solid var(--hzq-border-color-base);
       border-radius: 6px;
       box-sizing: border-box;
       margin-top: 10px;
       padding: 10px 10px 10px 90px;
       height: 92px;
 
-      .el-icon-check,
-      .el-icon-circle-check {
+      .hzq-icon-check,
+      .hzq-icon-circle-check {
         color: $--color-white;
       }
 
       &:hover {
-        .el-upload-list__item-status-label {
+        .hzq-upload-list__item-status-label {
           background: transparent;
           box-shadow: none;
           top: -2px;
           right: -12px;
         }
 
-        .el-progress__text {
+        .hzq-progress__text {
           display: block;
         }
       }
 
       &.is-success {
-        .el-upload-list__item-name {
+        .hzq-upload-list__item-name {
           line-height: 70px;
           margin-top: 0;
           i {
@@ -423,7 +423,7 @@
       }
     }
 
-    .el-upload-list__item-thumbnail {
+    .hzq-upload-list__item-thumbnail {
       vertical-align: middle;
       display: inline-block;
       width: 70px;
@@ -432,10 +432,10 @@
       position: relative;
       z-index: 1;
       margin-left: -80px;
-      background-color: var(--el-fill-color-blank)
+      background-color: var(--hzq-fill-color-blank)
     }
 
-    .el-upload-list__item-name {
+    .hzq-upload-list__item-name {
       display: block;
       margin-top: 20px;
 
@@ -448,7 +448,7 @@
       }
     }
 
-    .el-upload-list__item-status-label {
+    .hzq-upload-list__item-status-label {
       position: absolute;
       right: -17px;
       top: -7px;
@@ -466,7 +466,7 @@
       }
     }
 
-    .el-progress {
+    .hzq-progress {
       position: relative;
       top: -7px;
     }
@@ -515,7 +515,7 @@
     position: static;
     width: 243px;
 
-    + .el-upload__inner {
+    + .hzq-upload__inner {
       opacity: 0;
     }
   }
@@ -581,7 +581,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: var(--el-fill-color-blank);
+    background-color: var(--hzq-fill-color-blank);
     height: 36px;
     width: 100%;
     overflow: hidden;
@@ -596,7 +596,7 @@
     color: $--color-text-primary;
   }
 
-  + .el-upload__inner {
+  + .hzq-upload__inner {
     opacity: 0;
     position: relative;
     z-index: 1;

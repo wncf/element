@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-select-dropdown el-popper"
+    class="hzq-select-dropdown hzq-popper"
     :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
     :style="{ minWidth: minWidth }">
     <slot></slot>
@@ -8,12 +8,12 @@
 </template>
 
 <script type="text/babel">
-  import Popper from 'element-ui/src/utils/vue-popper';
+  import Popper from 'hzq-ui/src/utils/vue-popper';
 
   export default {
-    name: 'ElSelectDropdown',
+    name: 'HzqSelectDropdown',
 
-    componentName: 'ElSelectDropdown',
+    componentName: 'HzqSelectDropdown',
 
     mixins: [Popper],
 

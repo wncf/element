@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 
 /** Radio Component */
 export declare class ElRadio extends ElementUIComponent {
@@ -13,6 +13,9 @@ export declare class ElRadio extends ElementUIComponent {
 
   /** Whether to add a border around Radio */
   border: boolean
+
+  /** Size of the Radio, only works when border is true */
+  size: ElementUIComponentSize
 
   /** Native 'name' attribute */
   name: string

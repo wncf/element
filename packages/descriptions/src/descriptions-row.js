@@ -1,5 +1,5 @@
 export default {
-  name: 'ElDescriptionsRow',
+  name: 'HzqDescriptionsRow',
   props: {
     row: {
       type: Array
@@ -21,14 +21,14 @@ export default {
     if (elDescriptions.direction === 'vertical') {
       return (
         <tbody>
-          <tr class="el-descriptions-row">
+          <tr class="hzq-descriptions-row">
             {
               row.map(item => {
                 return (
                   <th
                     class={{
-                      'el-descriptions-item__cell': true,
-                      'el-descriptions-item__label': true,
+                      'hzq-descriptions-item__cell': true,
+                      'hzq-descriptions-item__label': true,
                       'has-colon': elDescriptions.border ? false : elDescriptions.colon,
                       'is-bordered-label': elDescriptions.border,
                       [item.labelClassName]: true
@@ -40,12 +40,12 @@ export default {
               })
             }
           </tr>
-          <tr class="el-descriptions-row">
+          <tr class="hzq-descriptions-row">
             {
               row.map(item =>{
                 return (
                   <td
-                    class={['el-descriptions-item__cell', 'el-descriptions-item__content', item.contentClassName]}
+                    class={['hzq-descriptions-item__cell', 'hzq-descriptions-item__content', item.contentClassName]}
                     style={item.contentStyle}
                     colSpan={item.props.span}
                   >{item.slots.default}</td>
@@ -59,14 +59,14 @@ export default {
     if (elDescriptions.border) {
       return (
         <tbody>
-          <tr class="el-descriptions-row">
+          <tr class="hzq-descriptions-row">
             {
               row.map(item=> {
                 return ([
                   <th
                     class={{
-                      'el-descriptions-item__cell': true,
-                      'el-descriptions-item__label': true,
+                      'hzq-descriptions-item__cell': true,
+                      'hzq-descriptions-item__label': true,
                       'is-bordered-label': elDescriptions.border,
                       [item.labelClassName]: true
                     }}
@@ -74,7 +74,7 @@ export default {
                     colSpan="1"
                   >{item.label}</th>,
                   <td
-                    class={['el-descriptions-item__cell', 'el-descriptions-item__content', item.contentClassName]}
+                    class={['hzq-descriptions-item__cell', 'hzq-descriptions-item__content', item.contentClassName]}
                     style={item.contentStyle}
                     colSpan={item.props.span * 2 - 1}
                   >{item.slots.default}</td>
@@ -87,22 +87,22 @@ export default {
     }
     return (
       <tbody>
-        <tr class="el-descriptions-row">
+        <tr class="hzq-descriptions-row">
           {
             row.map(item=> {
               return (
-                <td class="el-descriptions-item el-descriptions-item__cell" colSpan={item.props.span}>
-                  <div class="el-descriptions-item__container">
+                <td class="hzq-descriptions-item hzq-descriptions-item__cell" colSpan={item.props.span}>
+                  <div class="hzq-descriptions-item__container">
                     <span
                       class={{
-                        'el-descriptions-item__label': true,
+                        'hzq-descriptions-item__label': true,
                         'has-colon': elDescriptions.colon,
                         [item.labelClassName]: true
                       }}
                       style={item.labelStyle}
                     >{item.label}</span>
                     <span
-                      class={['el-descriptions-item__content', item.contentClassName]}
+                      class={['hzq-descriptions-item__content', item.contentClassName]}
                       style={item.contentStyle}
                     >{item.slots.default}</span>
                   </div>

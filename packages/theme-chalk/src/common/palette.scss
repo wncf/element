@@ -10,8 +10,8 @@
 /* 原始色板
 -------------------------- */
 // 原始品牌色只用 $--palette-* 命名，不要写成 $--color-primary：
-// $--color-* 是语义层（定义在 var.scss，值是 var(--el-color-*)），组件样式引用的是语义层，
-// 运行时只需覆盖一个 --el-color-primary 就能全量生效。
+// $--color-* 是语义层（定义在 var.scss，值是 var(--hzq-color-*)），组件样式引用的是语义层，
+// 运行时只需覆盖一个 --hzq-color-primary 就能全量生效。
 // 若这里也叫 $--color-primary，语义层会因为 !default 拿不到 var()，梯度就退化成编译期字面量。
 /// color|1|Brand Color|0
 $--palette-primary: #2563eb !default;
@@ -47,7 +47,7 @@ $--brand-green: map-merge($--brand-default, ('primary': #16a34a)) !default;
 // 新增预设只在这里加一行，例如 '.theme-purple': $--brand-purple。
 $--brand-modes: (
   '': $--brand-default,
-  '.theme-green': $--brand-green
+  '.hzq-theme-green': $--brand-green
 ) !default;
 
 /* 明暗轴：中性色
@@ -81,38 +81,41 @@ $--neutrals-light: (
   'mask-color': rgba(255, 255, 255, .7)
 ) !default;
 
+// 深色模式用带蓝调的 slate 色系，而不是纯中性灰。
+// 纯灰（#0a0a0a / #141414）在 sRGB 下面板之间几乎分不出层次，且和品牌蓝完全不呼应；
+// slate 的每一档都保留了固定比例的蓝通道，从最暗的页面底到最亮的悬停态是一套连续的明度阶梯。
 $--neutrals-dark: (
-  'bg-color-page': #0a0a0a,
-  'bg-color': #141414,
-  'bg-color-overlay': #1d1e1f,
-  'fill-color': #2d2d2f,
-  'fill-color-dark': #393a3c,
-  'fill-color-darker': #424243,
-  'fill-color-light': #262727,
-  'fill-color-lighter': #1d1d1d,
-  'fill-color-blank': #141414,
-  'text-color-primary': #e5eaf3,
-  'text-color-regular': #cfd3dc,
-  'text-color-secondary': #a3a6ad,
-  'text-color-placeholder': #8d9095,
-  'text-color-disabled': #6c6e72,
-  'border-color-hover': #58585b,
-  'border-color-base': #4c4d4f,
-  'border-color-light': #414243,
-  'border-color-lighter': #363637,
-  'border-color-extra-light': #2b2b2c,
-  'tooltip-bg-color': #363637,
-  'scrollbar-thumb-color': #56575a,
-  'scrollbar-track-color': #141414,
-  'loading-mask-color': rgba(20, 20, 20, .9),
-  'mask-color': rgba(20, 20, 20, .7)
+  'bg-color-page': #0f172a,
+  'bg-color': #1e293b,
+  'bg-color-overlay': #243347,
+  'fill-color': #243347,
+  'fill-color-dark': #2d3f52,
+  'fill-color-darker': #374b61,
+  'fill-color-light': #1a2740,
+  'fill-color-lighter': #182338,
+  'fill-color-blank': #1e293b,
+  'text-color-primary': #e2e8f0,
+  'text-color-regular': #cbd5e1,
+  'text-color-secondary': #94a3b8,
+  'text-color-placeholder': #64748b,
+  'text-color-disabled': #475569,
+  'border-color-hover': #475569,
+  'border-color-base': #2d3f52,
+  'border-color-light': #26374a,
+  'border-color-lighter': #1f2d40,
+  'border-color-extra-light': #1a2740,
+  'tooltip-bg-color': #0f172a,
+  'scrollbar-thumb-color': #475569,
+  'scrollbar-track-color': #0f172a,
+  'loading-mask-color': rgba(15, 23, 42, .9),
+  'mask-color': rgba(15, 23, 42, .7)
 ) !default;
 
 /* 明暗轴：空状态插画的灰阶序列
 -------------------------- */
 // 插画靠 9 档灰叠出立体感，单个中性色表达不了，所以整组定义、整组翻转。
-// 两套都是纯中性灰，只是明暗相反；深色档贴着组件底色（#141414），所以才不会在白底里"炸"出来。
-// 键名与 Element Plus 的 --el-empty-fill-color-* 对齐，覆盖写法可以直接沿用。
+// 深色档贴着组件底色（#1e293b / #243347），所以才不会在白底里"炸"出来。
+// 键名与 Element Plus 的 --hzq-empty-fill-color-* 对齐，覆盖写法可以直接沿用。
 $--empty-fills-light: (
   'empty-fill-color-1': #fcfcfd,
   'empty-fill-color-2': #f8f9fb,
@@ -125,16 +128,17 @@ $--empty-fills-light: (
   'empty-fill-color-9': #d5d7de
 ) !default;
 
+// 插画灰阶跟随上面的 slate 深色底，否则纯灰插画贴到蓝调卡片上会显出一块"脏"色
 $--empty-fills-dark: (
-  'empty-fill-color-1': #4b4b52,
-  'empty-fill-color-2': #36383d,
-  'empty-fill-color-3': #1e1e20,
-  'empty-fill-color-4': #262629,
-  'empty-fill-color-5': #202124,
-  'empty-fill-color-6': #212224,
-  'empty-fill-color-7': #1b1c1f,
-  'empty-fill-color-8': #1c1d1f,
-  'empty-fill-color-9': #18181a
+  'empty-fill-color-1': #64748b,
+  'empty-fill-color-2': #475569,
+  'empty-fill-color-3': #243347,
+  'empty-fill-color-4': #2d3f52,
+  'empty-fill-color-5': #243347,
+  'empty-fill-color-6': #26374a,
+  'empty-fill-color-7': #1f2d40,
+  'empty-fill-color-8': #1e293b,
+  'empty-fill-color-9': #1a2740
 ) !default;
 
 // 明暗轴配置：key 为选择器（模式类挂在根元素上），value 为该模式的中性色板、梯度混合目标色，
@@ -147,9 +151,9 @@ $--brightness-modes: (
     'blend-base': #ffffff,
     'empty-fills': $--empty-fills-light
   ),
-  ':root.theme-dark': (
+  ':root.hzq-theme-dark': (
     'neutrals': $--neutrals-dark,
-    'blend-base': #141414,
+    'blend-base': #1e293b,
     'empty-fills': $--empty-fills-dark
   )
 ) !default;

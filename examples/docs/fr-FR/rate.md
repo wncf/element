@@ -9,14 +9,14 @@ Utilisé pour donner une note sur cinq étoiles.
 ```html
 <div class="block">
   <span class="demonstration">Défaut</span>
-  <el-rate v-model="value1"></el-rate>
+  <hzq-rate v-model="value1"></hzq-rate>
 </div>
 <div class="block">
   <span class="demonstration">Couleurs pour chaque niveau</span>
-  <el-rate
+  <hzq-rate
     v-model="value2"
     :colors="colors">
-  </el-rate>
+  </hzq-rate>
 </div>
 
 <script>
@@ -40,11 +40,11 @@ Vous pouvez ajouter du texte à chaque score.
 :::demo Ajoutez l'attribut `show-text` pour afficher du texte à droite des étoiles. Vous pouvez choisir les textes avec l'attribut `texts`. C'est un tableau dont la taille doit être égale au score max `max`.
 
 ```html
-<el-rate
+<hzq-rate
   v-model="value"
   :texts="['oops', 'disappointed', 'normal', 'good', 'great']"
   show-text>
-</el-rate>
+</hzq-rate>
 
 <script>
   export default {
@@ -65,12 +65,12 @@ Vous pouvez utiliser différentes icônes pour chaque
 :::demo Vous pouvez personnaliser les icônes en passant à `icon-classes` un tableau avec trois éléments ou un objet dont la clé est le seuil entre deux niveaux et la valeur la classe d'icônes correspondante. Dans cet exemple, nous utilisons aussi `void-icon-class` qui permet de choisir d'autres valeurs non sélectionnées.
 
 ```html
-<el-rate
+<hzq-rate
   v-model="value"
   :icon-classes="iconClasses"
   void-icon-class="icon-rate-face-off"
   :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
-</el-rate>
+</hzq-rate>
 
 <script>
   export default {
@@ -92,13 +92,13 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
 :::demo Utilisez `disabled` pour mettre le composant en lecture seule. Ajoutez `show-score` pour afficher le score à droite des étoiles. De plus, vous pouvez utiliser `score-template` pour déterminer un template. Il doit contenir `{value}` qui sera remplacé par la valeur du score.
 
 ```html
-<el-rate
+<hzq-rate
   v-model="value"
   disabled
   show-score
   text-color="#ff9900"
   score-template="{value} points">
-</el-rate>
+</hzq-rate>
 
 <script>
   export default {
@@ -125,9 +125,9 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
 | colors | colors for icons. Si c'est un array, il doit avoir 3 élements, chacun correspondant à un niveau. Si c'est un objet, la clé est le seuil entre deux niveaux et la valeur est la couleur correspondante. | array/object | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
 | void-color | Couleur des icônes non sélectionnées. | string | — | #C6D1DE |
 | disabled-void-color | Couleur des icônes non sélectionnées en lecture seule. | string | — | #EFF2F7 |
-| icon-classes | Noms de classe des icônes. Si c'est un array, il doit avoir 3 élements, chacun correspondant à un niveau. Si c'est un objet, la clé est le seuil entre deux niveaux et la valeur est le nom de classe de l'icône. | array/object | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
-| void-icon-class | Classe des icônes non sélectionnées. | string | — | el-icon-star-off |
-| disabled-void-icon-class | Classe des icônes non sélectionnées en lecture seule. | string | — | el-icon-star-on |
+| icon-classes | Noms de classe des icônes. Si c'est un array, il doit avoir 3 élements, chacun correspondant à un niveau. Si c'est un objet, la clé est le seuil entre deux niveaux et la valeur est le nom de classe de l'icône. | array/object | — | ['hzq-icon-star-on', 'hzq-icon-star-on','hzq-icon-star-on'] |
+| void-icon-class | Classe des icônes non sélectionnées. | string | — | hzq-icon-star-off |
+| disabled-void-icon-class | Classe des icônes non sélectionnées en lecture seule. | string | — | hzq-icon-star-on |
 | show-text | Si du texte doit apparaître à droite des étoiles. | boolean | — | false |
 | show-score | Si le score doit apparaître. Incompatible avec show-text. | boolean | — | false |
 | text-color | Couleur du texte. | string | — | #1F2D3D |

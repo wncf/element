@@ -8,10 +8,10 @@
 <div class="demo-image">
   <div class="block" v-for="fit in fits" :key="fit">
     <span class="demonstration">{{ fit }}</span>
-    <el-image
+    <hzq-image
       style="width: 100px; height: 100px"
       :src="url"
-      :fit="fit"></el-image>
+      :fit="fit"></hzq-image>
   </div>
 </div>
 
@@ -35,15 +35,15 @@
 <div class="demo-image__placeholder">
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-image :src="src"></el-image>
+    <hzq-image :src="src"></hzq-image>
   </div>
   <div class="block">
     <span class="demonstration">自定义</span>
-    <el-image :src="src">
+    <hzq-image :src="src">
       <div slot="placeholder" class="image-slot">
         加载中<span class="dot">...</span>
       </div>
-    </el-image>
+    </hzq-image>
   </div>
 </div>
 
@@ -66,15 +66,15 @@
 <div class="demo-image__error">
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-image></el-image>
+    <hzq-image></hzq-image>
   </div>
   <div class="block">
     <span class="demonstration">自定义</span>
-    <el-image>
+    <hzq-image>
       <div slot="error" class="image-slot">
-        <i class="el-icon-picture-outline"></i>
+        <i class="hzq-icon-picture-outline"></i>
       </div>
-    </el-image>
+    </hzq-image>
   </div>
 </div>
 ```
@@ -85,7 +85,7 @@
 :::demo 可通过`lazy`开启懒加载功能，当图片滚动到可视范围内才会加载。可通过`scroll-container`来设置滚动容器，若未定义，则为最近一个`overflow`值为`auto`或`scroll`的父元素。
 ```html
 <div class="demo-image__lazy">
-  <el-image v-for="url in urls" :key="url" :src="url" lazy></el-image>
+  <hzq-image v-for="url in urls" :key="url" :src="url" lazy></hzq-image>
 </div>
 
 <script>
@@ -113,11 +113,11 @@
 :::demo 可通过 `previewSrcList` 开启预览大图的功能。
 ```html
 <div class="demo-image__preview">
-  <el-image 
+  <hzq-image 
     style="width: 100px; height: 100px"
     :src="url" 
     :preview-src-list="srcList">
-  </el-image>
+  </hzq-image>
 </div>
 
 <script>

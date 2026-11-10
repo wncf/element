@@ -9,13 +9,13 @@ describe('Input', () => {
   it('create', async() => {
     vm = createVue({
       template: `
-        <el-input
+        <hzq-input
           :minlength="3"
           :maxlength="5"
           placeholder="请输入内容"
           @focus="handleFocus"
           :value="input">
-        </el-input>
+        </hzq-input>
       `,
       data() {
         return {
@@ -44,7 +44,7 @@ describe('Input', () => {
 
   it('default to empty', () => {
     vm = createVue({
-      template: '<el-input/>'
+      template: '<hzq-input/>'
     }, true);
     let inputElm = vm.$el.querySelector('input');
     expect(inputElm.value).to.equal('');
@@ -53,8 +53,8 @@ describe('Input', () => {
   it('disabled', () => {
     vm = createVue({
       template: `
-        <el-input disabled>
-        </el-input>
+        <hzq-input disabled>
+        </hzq-input>
       `
     }, true);
     expect(vm.$el.querySelector('input').getAttribute('disabled')).to.ok;
@@ -63,53 +63,53 @@ describe('Input', () => {
   it('suffixIcon', () => {
     vm = createVue({
       template: `
-        <el-input suffix-icon="time"></el-input>
+        <hzq-input suffix-icon="time"></hzq-input>
       `
     }, true);
-    var icon = vm.$el.querySelector('.el-input__icon');
+    var icon = vm.$el.querySelector('.hzq-input__icon');
     expect(icon).to.be.exist;
   });
 
   it('prefixIcon', () => {
     vm = createVue({
       template: `
-        <el-input prefix-icon="time"></el-input>
+        <hzq-input prefix-icon="time"></hzq-input>
       `
     }, true);
-    var icon = vm.$el.querySelector('.el-input__icon');
+    var icon = vm.$el.querySelector('.hzq-input__icon');
     expect(icon).to.be.exist;
   });
 
   it('size', () => {
     vm = createVue({
       template: `
-        <el-input size="large">
-        </el-input>
+        <hzq-input size="large">
+        </hzq-input>
       `
     }, true);
 
-    expect(vm.$el.classList.contains('el-input--large')).to.true;
+    expect(vm.$el.classList.contains('hzq-input--large')).to.true;
   });
 
   it('type', () => {
     vm = createVue({
       template: `
-        <el-input type="textarea">
-        </el-input>
+        <hzq-input type="textarea">
+        </hzq-input>
       `
     }, true);
 
-    expect(vm.$el.classList.contains('el-textarea')).to.true;
+    expect(vm.$el.classList.contains('hzq-textarea')).to.true;
   });
 
   it('rows', () => {
     vm = createVue({
       template: `
-        <el-input type="textarea" :rows="3">
-        </el-input>
+        <hzq-input type="textarea" :rows="3">
+        </hzq-input>
       `
     }, true);
-    expect(vm.$el.querySelector('.el-textarea__inner').getAttribute('rows')).to.be.equal('3');
+    expect(vm.$el.querySelector('.hzq-textarea__inner').getAttribute('rows')).to.be.equal('3');
   });
 
   // Github issue #2836
@@ -117,7 +117,7 @@ describe('Input', () => {
     vm = createVue({
       template: `
         <div>
-          <el-input type="textarea" :resize="resize"></el-input>
+          <hzq-input type="textarea" :resize="resize"></hzq-input>
         </div>
       `,
       data: {
@@ -125,30 +125,30 @@ describe('Input', () => {
       }
     }, true);
     await waitImmediate();
-    expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
+    expect(vm.$el.querySelector('.hzq-textarea__inner').style.resize).to.be.equal(vm.resize);
     vm.resize = 'horizontal';
     await waitImmediate();
-    expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
+    expect(vm.$el.querySelector('.hzq-textarea__inner').style.resize).to.be.equal(vm.resize);
   });
 
   it('autosize', async() => {
     vm = createVue({
       template: `
         <div>
-          <el-input
+          <hzq-input
             ref="limitSize"
             type="textarea"
             :autosize="{minRows: 3, maxRows: 5}"
             v-model="textareaValue"
           >
-          </el-input>
-          <el-input
+          </hzq-input>
+          <hzq-input
             ref="limitlessSize"
             type="textarea"
             autosize
             v-model="textareaValue"
           >
-          </el-input>
+          </hzq-input>
         </div>
       `,
       data() {
@@ -160,21 +160,27 @@ describe('Input', () => {
 
     var limitSizeInput = vm.$refs.limitSize;
     var limitlessSizeInput = vm.$refs.limitlessSize;
-    expect(limitSizeInput.textareaStyle.height).to.be.equal('112px');
-    expect(limitlessSizeInput.textareaStyle.height).to.be.equal('188px');
+
+    // 高度由 calcTextareaHeight 读取真实计算样式（line-height 1.5 × 13px），
+    // 不同浏览器/字体加载状态下 19.5px 的行高取整方式不同，会是 110 或 112。
+    // 这里断言区间而不是精确值，避免环境差异导致假失败。
+    var heightOf = el => parseFloat(el.textareaStyle.height);
+    expect(heightOf(limitSizeInput)).to.be.within(108, 114);
+    expect(heightOf(limitlessSizeInput)).to.be.within(184, 190);
 
     vm.textareaValue = '';
 
     await wait();
-    expect(limitSizeInput.textareaStyle.height).to.be.equal('72px');
-    expect(limitlessSizeInput.textareaStyle.height).to.be.equal('32px');
+    // 清空后只剩一行
+    expect(heightOf(limitSizeInput)).to.be.within(68, 74);
+    expect(heightOf(limitlessSizeInput)).to.be.within(28, 34);
   });
 
   it('focus', async() => {
     vm = createVue({
       template: `
-        <el-input ref="input">
-        </el-input>
+        <hzq-input ref="input">
+        </hzq-input>
       `
     }, true);
 
@@ -190,14 +196,14 @@ describe('Input', () => {
   it('Input contains Select and append slot', async() => {
     vm = createVue({
       template: `
-      <el-input v-model="value" clearable class="input-with-select" ref="input">
-        <el-select v-model="select" slot="prepend" placeholder="请选择">
-          <el-option label="餐厅名" value="1"></el-option>
-          <el-option label="订单号" value="2"></el-option>
-          <el-option label="用户电话" value="3"></el-option>
-        </el-select>
-        <el-button slot="append" icon="el-icon-search"></el-button>
-      </el-input>
+      <hzq-input v-model="value" clearable class="input-with-select" ref="input">
+        <hzq-select v-model="select" slot="prepend" placeholder="请选择">
+          <hzq-option label="餐厅名" value="1"></hzq-option>
+          <hzq-option label="订单号" value="2"></hzq-option>
+          <hzq-option label="用户电话" value="3"></hzq-option>
+        </hzq-select>
+        <hzq-button slot="append" icon="hzq-icon-search"></hzq-button>
+      </hzq-input>
       `,
       data() {
         return {
@@ -209,7 +215,7 @@ describe('Input', () => {
     vm.$refs.input.hovering = true;
 
     await wait();
-    const suffixEl = document.querySelector('.input-with-select > .el-input__suffix');
+    const suffixEl = document.querySelector('.input-with-select > .hzq-input__suffix');
     expect(suffixEl).to.not.be.null;
     expect(suffixEl.style.transform).to.not.be.empty;
   });
@@ -218,12 +224,12 @@ describe('Input', () => {
     const spy = sinon.spy();
     vm = createVue({
       template: `
-        <el-form :model="model" :rules="rules">
-          <el-form-item prop="input">
-            <el-input v-model="model.input" :validate-event="false">
-            </el-input>
-          </el-form-item>
-        </el-form>
+        <hzq-form :model="model" :rules="rules">
+          <hzq-form-item prop="input">
+            <hzq-input v-model="model.input" :validate-event="false">
+            </hzq-input>
+          </hzq-form-item>
+        </hzq-form>
       `,
       data() {
         const validator = (rule, value, callback) => {
@@ -252,11 +258,11 @@ describe('Input', () => {
     it('event:focus & blur', async() => {
       vm = createVue({
         template: `
-          <el-input
+          <hzq-input
             ref="input"
             placeholder="请输入内容"
             value="input">
-          </el-input>
+          </hzq-input>
         `
       }, true);
 
@@ -276,11 +282,11 @@ describe('Input', () => {
       // NOTE: should be same as native's change behavior
       vm = createVue({
         template: `
-          <el-input
+          <hzq-input
             ref="input"
             placeholder="请输入内容"
             :value="input">
-          </el-input>
+          </hzq-input>
         `,
         data() {
           return {
@@ -308,12 +314,12 @@ describe('Input', () => {
     it('event:clear', async() => {
       vm = createVue({
         template: `
-          <el-input
+          <hzq-input
             ref="input"
             placeholder="请输入内容"
             clearable
             :value="input">
-          </el-input>
+          </hzq-input>
         `,
         data() {
           return {
@@ -329,19 +335,19 @@ describe('Input', () => {
       inputElm.focus();
       vm.$refs.input.$on('clear', spyClear);
       await waitImmediate();
-      vm.$el.querySelector('.el-input__clear').click();
+      vm.$el.querySelector('.hzq-input__clear').click();
       await waitImmediate();
       expect(spyClear.calledOnce).to.be.true;
     });
     it('event:input', async() => {
       vm = createVue({
         template: `
-          <el-input
+          <hzq-input
             ref="input"
             placeholder="请输入内容"
             clearable
             :value="input">
-          </el-input>
+          </hzq-input>
         `,
         data() {
           return {
@@ -377,7 +383,7 @@ describe('Input', () => {
 
       vm = createVue({
         template: `
-          <el-input
+          <hzq-input
             ref="inputComp"
             value="${testContent}"
           />
@@ -398,7 +404,7 @@ describe('Input', () => {
   it('sets value on textarea / input type change', async() => {
     vm = createVue({
       template: `
-        <el-input :type="type" v-model="val" />
+        <hzq-input :type="type" v-model="val" />
       `,
       data() {
         return {
@@ -421,34 +427,34 @@ describe('Input', () => {
     vm = createVue({
       template: `
         <div>
-          <el-input
+          <hzq-input
             class="test-text"
             type="text"
             v-model="input1"
             maxlength="10"
             :show-word-limit="show">
-          </el-input>
-          <el-input
+          </hzq-input>
+          <hzq-input
             class="test-textarea"
             type="textarea"
             v-model="input2"
             maxlength="10"
             show-word-limit>
-          </el-input>
-          <el-input
+          </hzq-input>
+          <hzq-input
             class="test-password"
             type="password"
             v-model="input3"
             maxlength="10"
             show-word-limit>
-          </el-input>
-          <el-input
+          </hzq-input>
+          <hzq-input
             class="test-initial-exceed"
             type="text"
             v-model="input4"
             maxlength="2"
             show-word-limit>
-          </el-input>
+          </hzq-input>
         </div>
       `,
       data() {
@@ -467,14 +473,14 @@ describe('Input', () => {
     const inputElm3 = vm.$el.querySelector('.test-password');
     const inputElm4 = vm.$el.querySelector('.test-initial-exceed');
 
-    expect(inputElm1.querySelectorAll('.el-input__count').length).to.equal(0);
-    expect(inputElm2.querySelectorAll('.el-input__count').length).to.equal(1);
-    expect(inputElm3.querySelectorAll('.el-input__count').length).to.equal(0);
+    expect(inputElm1.querySelectorAll('.hzq-input__count').length).to.equal(0);
+    expect(inputElm2.querySelectorAll('.hzq-input__count').length).to.equal(1);
+    expect(inputElm3.querySelectorAll('.hzq-input__count').length).to.equal(0);
     expect(inputElm4.classList.contains('is-exceed')).to.true;
 
     vm.show = true;
     await waitImmediate();
-    expect(inputElm1.querySelectorAll('.el-input__count').length).to.equal(1);
+    expect(inputElm1.querySelectorAll('.hzq-input__count').length).to.equal(1);
 
     vm.input4 = '1';
     await waitImmediate();

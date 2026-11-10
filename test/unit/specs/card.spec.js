@@ -9,12 +9,12 @@ describe('Card', () => {
 
   it('slot:header', () => {
     vm = createVue(`
-      <el-card>
+      <hzq-card>
         <header slot="header">二师兄叫我埋梗 啦啦啦</header>
-      </el-card>
+      </hzq-card>
     `);
 
-    expect(vm.$el.querySelector('.el-card__header')).to.property('textContent').to.include('二师兄叫我埋梗 啦啦啦');
+    expect(vm.$el.querySelector('.hzq-card__header')).to.property('textContent').to.include('二师兄叫我埋梗 啦啦啦');
   });
 
   it('header', () => {
@@ -22,7 +22,7 @@ describe('Card', () => {
       header: '好烦'
     });
 
-    expect(vm.$el.querySelector('.el-card__header')).to.property('textContent').to.include('好烦');
+    expect(vm.$el.querySelector('.hzq-card__header')).to.property('textContent').to.include('好烦');
   });
 
   it('bodyStyle', () => {
@@ -30,7 +30,7 @@ describe('Card', () => {
       bodyStyle: { padding: '10px' }
     });
 
-    expect(vm.$el.querySelector('.el-card__body').style.padding).to.equal('10px');
+    expect(vm.$el.querySelector('.hzq-card__body').style.padding).to.equal('10px');
   });
 
   it('default shadow is always', () => {

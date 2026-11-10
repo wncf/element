@@ -5,14 +5,14 @@
     @mouseleave="hovering = false"
   >
     <!--
-      不套 el-input：金额要在每次按键后就地过滤。包一层的话，el-input 会先按原文
+      不套 hzq-input：金额要在每次按键后就地过滤。包一层的话，el-input 会先按原文
       吐一次 input、自己把 DOM 值写回去，外层再纠正就成了"两次改 DOM、两次 emit"，
-      光标位置、组字和重复事件都会乱。这里参照 el-input 的实现，直接持有原生 input，
+      光标位置、组字和重复事件都会乱。这里参照 hzq-input 的实现，直接持有原生 input，
       由组件自己决定框里显示什么、什么时候抛值。
     -->
     <input
       ref="input"
-      class="el-input__inner"
+      class="hzq-input__inner"
       type="text"
       inputmode="decimal"
       :disabled="inputDisabled"
@@ -28,26 +28,26 @@
       @focus="handleFocus"
       @blur="handleBlur"
     >
-    <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
+    <span class="hzq-input__prefix" v-if="$slots.prefix || prefixIcon">
       <slot name="prefix"></slot>
-      <i class="el-input__icon" v-if="prefixIcon" :class="prefixIcon"></i>
+      <i class="hzq-input__icon" v-if="prefixIcon" :class="prefixIcon"></i>
     </span>
-    <span class="el-input__suffix" v-if="suffixVisible">
-      <span class="el-input__suffix-inner">
+    <span class="hzq-input__suffix" v-if="suffixVisible">
+      <span class="hzq-input__suffix-inner">
         <template v-if="!showClear">
           <slot name="suffix"></slot>
-          <i class="el-input__icon" v-if="suffixIcon" :class="suffixIcon"></i>
+          <i class="hzq-input__icon" v-if="suffixIcon" :class="suffixIcon"></i>
         </template>
         <i
           v-if="showClear"
-          class="el-input__icon el-icon-circle-close el-input__clear"
+          class="hzq-input__icon hzq-icon-circle-close hzq-input__clear"
           @mousedown.prevent
           @click="clear"
         ></i>
       </span>
       <i
         v-if="validateState && needStatusIcon"
-        class="el-input__icon el-input__validateIcon"
+        class="hzq-input__icon hzq-input__validateIcon"
         :class="validateIcon"
       ></i>
     </span>
@@ -55,16 +55,16 @@
 </template>
 
 <script>
-import emitter from 'element-ui/src/mixins/emitter';
+import emitter from 'hzq-ui/src/mixins/emitter';
 import {
   DEFAULT_PRECISION,
   sanitizeAmount,
   clampAmount,
   normalizeAmount
-} from 'element-ui/src/utils/amount';
+} from 'hzq-ui/src/utils/amount';
 
 export default {
-  name: 'ElAmountInput',
+  name: 'HzqAmountInput',
 
   mixins: [emitter],
 
@@ -172,13 +172,13 @@ export default {
 
     inputClass() {
       return [
-        'el-input',
-        'el-amount-input',
-        this.inputSize ? `el-input--${this.inputSize}` : '',
+        'hzq-input',
+        'hzq-amount-input',
+        this.inputSize ? `hzq-input--${this.inputSize}` : '',
         {
           'is-disabled': this.inputDisabled,
-          'el-input--prefix': this.$slots.prefix || this.prefixIcon,
-          'el-input--suffix': this.suffixVisible
+          'hzq-input--prefix': this.$slots.prefix || this.prefixIcon,
+          'hzq-input--suffix': this.suffixVisible
         }
       ];
     },
@@ -188,7 +188,7 @@ export default {
     },
 
     inputSize() {
-      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      return this.size || this._elFormItemSize || (this.$HZQ || {}).size;
     },
 
     inputDisabled() {
@@ -205,9 +205,9 @@ export default {
 
     validateIcon() {
       return {
-        validating: 'el-icon-loading',
-        success: 'el-icon-circle-check',
-        error: 'el-icon-circle-close'
+        validating: 'hzq-icon-loading',
+        success: 'hzq-icon-circle-check',
+        error: 'hzq-icon-circle-close'
       }[this.validateState];
     },
 
@@ -241,7 +241,7 @@ export default {
         if (this.synced) this.notifyFormChange();
       }
     },
-    // 和 el-input 一样自己写回原生值。直接给 input 绑 :value 的话，
+    // 和 hzq-input 一样自己写回原生值。直接给 input 绑 :value 的话，
     // 组字过程中一旦触发重渲染，Vue 会把输入法里的拼音整段抹掉
     displayValue() {
       this.$nextTick(() => this.setNativeInputValue());
@@ -275,7 +275,7 @@ export default {
 
     notifyFormChange(value = this.displayValue) {
       if (this.validateEvent) {
-        this.dispatch('ElFormItem', 'el.form.change', [value]);
+        this.dispatch('HzqFormItem', 'el.form.change', [value]);
       }
     },
 
@@ -312,7 +312,7 @@ export default {
 
       if (normalized !== this.valueOnFocus) this.$emit('change', normalized);
 
-      if (this.validateEvent) this.dispatch('ElFormItem', 'el.form.blur', [normalized]);
+      if (this.validateEvent) this.dispatch('HzqFormItem', 'el.form.blur', [normalized]);
 
       this.$emit('blur', event);
     },

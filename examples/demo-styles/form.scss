@@ -1,8 +1,8 @@
 .demo-form {
-  .el-select .el-input {
+  .hzq-select .hzq-input {
     width: 380px;
   }
-  .el-form {
+  .hzq-form {
     width: 460px;
   }
 
@@ -10,7 +10,7 @@
     text-align: center;
   }
 
-  .el-checkbox-group {
+  .hzq-checkbox-group {
     width: 320px;
     margin: 0;
     padding: 0;
@@ -28,14 +28,14 @@
       height: 0;
     }
 
-    .el-checkbox {
+    .hzq-checkbox {
       float: left;
       width: 160px;
       padding-right: 20px;
       margin: 0;
       padding: 0;
 
-      + .el-checkbox {
+      + .hzq-checkbox {
         margin-left: 0;
       }
     }
@@ -46,7 +46,7 @@
   .demo-form-inline {
     width: auto;
 
-    .el-input {
+    .hzq-input {
       width: 150px;
     }
     > * {
@@ -56,12 +56,12 @@
   .demo-ruleForm {
     width: 460px;
 
-    .el-select .el-input {
+    .hzq-select .hzq-input {
       width: 360px;
     }
   }
   .demo-dynamic {
-    .el-input {
+    .hzq-input {
       margin-right: 10px;
       width: 270px;
       vertical-align: top;

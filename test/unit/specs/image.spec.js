@@ -16,15 +16,15 @@ describe('Image', () => {
       src,
       fit: 'fill'
     }, true);
-    const placeholder = vm.$el.querySelector('.el-image__placeholder');
-    const error = vm.$el.querySelector('.el-image__error');
-    let img = vm.$el.querySelector('.el-image__inner');
+    const placeholder = vm.$el.querySelector('.hzq-image__placeholder');
+    const error = vm.$el.querySelector('.hzq-image__error');
+    let img = vm.$el.querySelector('.hzq-image__inner');
     expect(placeholder).to.exist;
     expect(error).to.be.null;
     expect(img).to.be.null;
 
     await wait();
-    img = vm.$el.querySelector('.el-image__inner');
+    img = vm.$el.querySelector('.hzq-image__inner');
     expect(img.style.objectFit).to.equal('fill');
   });
 
@@ -33,7 +33,7 @@ describe('Image', () => {
       src: IMAGE_FAIL
     }, true);
     await wait();
-    const error = vm.$el.querySelector('.el-image__error');
+    const error = vm.$el.querySelector('.hzq-image__error');
     expect(error).to.be.exist;
   });
 
@@ -41,13 +41,13 @@ describe('Image', () => {
     vm = createVue({
       template: `
         <div ref="wrapper" style="height: 200px; overflow: auto;">
-          <el-image
+          <hzq-image
             v-for="item in 2"
             :key="item"
             :src="src"
             ref="image"
             style="display: block; height: 200px;"
-            lazy></el-image>
+            lazy></hzq-image>
         </div>
       `,
       data() {
@@ -71,10 +71,10 @@ describe('Image', () => {
   it('$attrs', async() => {
     vm = createVue({
       template: `
-        <el-image
+        <hzq-image
           alt="$attrs test"
           referrerpolicy="origin"
-          :src="src"></el-image>
+          :src="src"></hzq-image>
       `,
       data() {
         return {
@@ -84,7 +84,7 @@ describe('Image', () => {
     }, true);
 
     await wait();
-    const $img = vm.$el.querySelector('.el-image__inner');
+    const $img = vm.$el.querySelector('.hzq-image__inner');
     expect($img.getAttribute('alt')).to.be.equal('$attrs test');
     expect($img.getAttribute('referrerpolicy')).to.be.equal('origin');
   });
@@ -93,7 +93,7 @@ describe('Image', () => {
     let result;
     vm = createVue({
       template: `
-        <el-image @click="handleClick" :src="src"></el-image>
+        <hzq-image @click="handleClick" :src="src"></hzq-image>
       `,
       data() {
         return {
@@ -107,7 +107,7 @@ describe('Image', () => {
       }
     }, true);
     await wait();
-    vm.$el.querySelector('.el-image__inner').click();
+    vm.$el.querySelector('.hzq-image__inner').click();
     await wait();
     expect(result).to.exist;
   });
@@ -115,7 +115,7 @@ describe('Image', () => {
   it('big image preview', async() => {
     vm = createVue({
       template: `
-        <el-image :src="src" :preview-src-list="srcList"></el-image>
+        <hzq-image :src="src" :preview-src-list="srcList"></hzq-image>
       `,
       data() {
         return {
@@ -125,13 +125,13 @@ describe('Image', () => {
       }
     }, true);
     await wait();
-    vm.$el.querySelector('.el-image__inner').click();
+    vm.$el.querySelector('.hzq-image__inner').click();
     await wait();
 
-    expect(document.querySelector('.el-image-viewer__wrapper')).to.exist;
-    document.querySelector('.el-image-viewer__close').click();
+    expect(document.querySelector('.hzq-image-viewer__wrapper')).to.exist;
+    document.querySelector('.hzq-image-viewer__close').click();
     await wait(1000);
-    expect(document.querySelector('.el-image-viewer__wrapper')).to.not.exist;
+    expect(document.querySelector('.hzq-image-viewer__wrapper')).to.not.exist;
   });
 });
 

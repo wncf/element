@@ -1,13 +1,13 @@
 <template>
   <button
-    class="el-button"
+    class="hzq-button"
     @click="handleClick"
     :disabled="buttonDisabled || loading"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
-      type ? 'el-button--' + type : '',
-      buttonSize ? 'el-button--' + buttonSize : '',
+      type ? 'hzq-button--' + type : '',
+      buttonSize ? 'hzq-button--' + buttonSize : '',
       {
         'is-disabled': buttonDisabled,
         'is-loading': loading,
@@ -17,14 +17,14 @@
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading"></i>
+    <i class="hzq-icon-loading" v-if="loading"></i>
     <i :class="icon" v-if="icon && !loading"></i>
     <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
 <script>
   export default {
-    name: 'ElButton',
+    name: 'HzqButton',
 
     inject: {
       elForm: {
@@ -62,7 +62,7 @@
         return (this.elFormItem || {}).elFormItemSize;
       },
       buttonSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size || this._elFormItemSize || (this.$HZQ || {}).size;
       },
       buttonDisabled() {
         return this.$options.propsData.hasOwnProperty('disabled') ? this.disabled : (this.elForm || {}).disabled;

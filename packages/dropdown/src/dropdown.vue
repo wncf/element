@@ -1,23 +1,23 @@
 <script>
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Migrating from 'element-ui/src/mixins/migrating';
-  import ElButton from 'element-ui/packages/button';
-  import ElButtonGroup from 'element-ui/packages/button-group';
-  import { generateId } from 'element-ui/src/utils/util';
+  import Clickoutside from 'hzq-ui/src/utils/clickoutside';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
+  import Migrating from 'hzq-ui/src/mixins/migrating';
+  import HzqButton from 'hzq-ui/packages/button';
+  import HzqButtonGroup from 'hzq-ui/packages/button-group';
+  import { generateId } from 'hzq-ui/src/utils/util';
 
   export default {
-    name: 'ElDropdown',
+    name: 'HzqDropdown',
 
-    componentName: 'ElDropdown',
+    componentName: 'HzqDropdown',
 
     mixins: [Emitter, Migrating],
 
     directives: { Clickoutside },
 
     components: {
-      ElButton,
-      ElButtonGroup
+      HzqButton,
+      HzqButtonGroup
     },
 
     provide() {
@@ -81,7 +81,7 @@
 
     computed: {
       dropdownSize() {
-        return this.size || (this.$ELEMENT || {}).size;
+        return this.size || (this.$HZQ || {}).size;
       }
     },
 
@@ -91,11 +91,11 @@
 
     watch: {
       visible(val) {
-        this.broadcast('ElDropdownMenu', 'visible', val);
+        this.broadcast('HzqDropdownMenu', 'visible', val);
         this.$emit('visible-change', val);
       },
       focusing(val) {
-        const selfDefine = this.$el.querySelector('.el-dropdown-selfdefine');
+        const selfDefine = this.$el.querySelector('.hzq-dropdown-selfdefine');
         if (selfDefine) { // 自定义
           if (val) {
             selfDefine.className += ' focusing';
@@ -200,7 +200,7 @@
         if (!this.splitButton) { // 自定义
           this.triggerElm.setAttribute('role', 'button');
           this.triggerElm.setAttribute('tabindex', this.tabindex);
-          this.triggerElm.setAttribute('class', (this.triggerElm.getAttribute('class') || '') + ' el-dropdown-selfdefine'); // 控制
+          this.triggerElm.setAttribute('class', (this.triggerElm.getAttribute('class') || '') + ' hzq-dropdown-selfdefine'); // 控制
         }
       },
       initEvent() {
@@ -263,14 +263,14 @@
 
       let triggerElm = null;
       if (splitButton) {
-        triggerElm = <el-button-group>
-          <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick} disabled={disabled}>
+        triggerElm = <hzq-button-group>
+          <hzq-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick} disabled={disabled}>
             {this.$slots.default}
-          </el-button>
-          <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button" disabled={disabled}>
-            <i class="el-dropdown__icon el-icon-arrow-down"></i>
-          </el-button>
-        </el-button-group>;
+          </hzq-button>
+          <hzq-button ref="trigger" type={type} size={dropdownSize} class="hzq-dropdown__caret-button" disabled={disabled}>
+            <i class="hzq-dropdown__icon hzq-icon-arrow-down"></i>
+          </hzq-button>
+        </hzq-button-group>;
       } else {
         triggerElm = this.$slots.default;
         const vnodeData = triggerElm[0].data || {};
@@ -283,7 +283,7 @@
       const menuElm = disabled ? null : this.$slots.dropdown;
 
       return (
-        <div class="el-dropdown" v-clickoutside={hide} aria-disabled={disabled}>
+        <div class="hzq-dropdown" v-clickoutside={hide} aria-disabled={disabled}>
           {triggerElm}
           {menuElm}
         </div>

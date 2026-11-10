@@ -1,8 +1,8 @@
-import ElFormItem from '../form/src/form-item';
+import HzqFormItem from '../form/src/form-item';
 
 /* istanbul ignore next */
-ElFormItem.install = function(Vue) {
-  Vue.component(ElFormItem.name, ElFormItem);
+HzqFormItem.install = function(Vue) {
+  Vue.component(HzqFormItem.name, HzqFormItem);
 };
 
-export default ElFormItem;
+export default HzqFormItem;

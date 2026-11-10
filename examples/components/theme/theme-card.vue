@@ -173,7 +173,7 @@
         </div>
       </div>
       <input
-        class="el-upload__input"
+        class="hzq-upload__input"
         type="file"
         ref="input"
         @change="uploadAction"
@@ -219,19 +219,19 @@
             <span>{{config.name}}</span>
             <span class="right" v-if="isOfficial">by {{config.author}}</span>
             <span class="right more" v-else>
-              <el-dropdown @command="actionClick">
-                <i class="el-icon-more"></i>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item command="rename">{{getActionDisplayName('rename-theme')}}</el-dropdown-item>
-                  <el-dropdown-item command="copy">{{getActionDisplayName('copy-theme')}}</el-dropdown-item>
-                  <el-dropdown-item
+              <hzq-dropdown @command="actionClick">
+                <i class="hzq-icon-more"></i>
+                <hzq-dropdown-menu slot="dropdown">
+                  <hzq-dropdown-item command="rename">{{getActionDisplayName('rename-theme')}}</hzq-dropdown-item>
+                  <hzq-dropdown-item command="copy">{{getActionDisplayName('copy-theme')}}</hzq-dropdown-item>
+                  <hzq-dropdown-item
                       command="delete"
                       style="color: #F56C6C;"
                     >
                       {{getActionDisplayName('delete-theme')}}
-                    </el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
+                    </hzq-dropdown-item>
+                </hzq-dropdown-menu>
+              </hzq-dropdown>
             </span>
           </div>
           <div class="description" v-if="isOfficial">{{getActionDisplayName(getDescriptionKey(config.name))}} </div>
@@ -250,7 +250,7 @@ import {
 } from './constant.js';
 import { savePreviewToLocal } from './localstorage';
 import { tintColor } from '../../color.js';
-import dateUtil from 'element-ui/src/utils/date';
+import dateUtil from 'hzq-ui/src/utils/date';
 import { getActionDisplayName } from '../theme-configurator/utils/utils';
 
 export default {

@@ -1,42 +1,42 @@
-.el-header,
-.el-footer {
+.hzq-header,
+.hzq-footer {
   background-color: #b3c0d1;
   color: #333;
   line-height: 60px;
 }
 
-.el-aside {
+.hzq-aside {
   color: #333;
 }
 
 #chang-jian-ye-mian-bu-ju + .demo-container {
-  .el-header,
-  .el-footer {
+  .hzq-header,
+  .hzq-footer {
     text-align: center;
   }
 
-  .el-aside {
+  .hzq-aside {
     background-color: #d3dce6;
     text-align: center;
     line-height: 200px;
   }
 
-  .el-main {
+  .hzq-main {
     background-color: #e9eef3;
     color: #333;
     text-align: center;
     line-height: 160px;
   }
 
-  & > .source > .el-container {
+  & > .source > .hzq-container {
     margin-bottom: 40px;
 
-    &:nth-child(5) .el-aside,
-    &:nth-child(6) .el-aside {
+    &:nth-child(5) .hzq-aside,
+    &:nth-child(6) .hzq-aside {
       line-height: 260px;
     }
 
-    &:nth-child(7) .el-aside {
+    &:nth-child(7) .hzq-aside {
       line-height: 320px;
     }
   }

@@ -1,12 +1,12 @@
 import Pager from './pager.vue';
-import ElSelect from 'element-ui/packages/select';
-import ElOption from 'element-ui/packages/option';
-import ElInput from 'element-ui/packages/input';
-import Locale from 'element-ui/src/mixins/locale';
-import { valueEquals } from 'element-ui/src/utils/util';
+import HzqSelect from 'hzq-ui/packages/select';
+import HzqOption from 'hzq-ui/packages/option';
+import HzqInput from 'hzq-ui/packages/input';
+import Locale from 'hzq-ui/src/mixins/locale';
+import { valueEquals } from 'hzq-ui/src/utils/util';
 
 export default {
-  name: 'ElPagination',
+  name: 'HzqPagination',
 
   props: {
     pageSize: {
@@ -20,7 +20,8 @@ export default {
 
     pageCount: Number,
 
-    // 与其它组件保持一致：default / medium = 32px，small = 28px，mini = 26px
+    // 与其它组件保持一致：large = 36px，default / medium = 32px，
+    // small = 28px，mini = 24px
     size: String,
 
     pagerCount: {
@@ -74,9 +75,9 @@ export default {
     if (!layout) return null;
     if (this.hideOnSinglePage && (!this.internalPageCount || this.internalPageCount === 1)) return null;
 
-    let template = <div class={['el-pagination', {
+    let template = <div class={['hzq-pagination', {
       'is-background': this.background
-    }, this.paginationSize ? `el-pagination--${this.paginationSize}` : ''] }></div>;
+    }, this.paginationSize ? `hzq-pagination--${this.paginationSize}` : ''] }></div>;
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
@@ -87,7 +88,7 @@ export default {
       total: <total></total>
     };
     const components = layout.split(',').map((item) => item.trim());
-    const rightWrapper = <div class="el-pagination__rightwrapper"></div>;
+    const rightWrapper = <div class="hzq-pagination__rightwrapper"></div>;
     let haveRightWrapper = false;
 
     template.children = template.children || [];
@@ -124,7 +125,7 @@ export default {
             {
               this.$parent.prevText
                 ? <span>{ this.$parent.prevText }</span>
-                : <i class="el-icon el-icon-arrow-left"></i>
+                : <i class="hzq-icon hzq-icon-arrow-left"></i>
             }
           </button>
         );
@@ -142,7 +143,7 @@ export default {
             {
               this.$parent.nextText
                 ? <span>{ this.$parent.nextText }</span>
-                : <i class="el-icon el-icon-arrow-right"></i>
+                : <i class="hzq-icon hzq-icon-arrow-right"></i>
             }
           </button>
         );
@@ -172,8 +173,8 @@ export default {
 
       render(h) {
         return (
-          <span class="el-pagination__sizes">
-            <el-select
+          <span class="hzq-pagination__sizes">
+            <hzq-select
               value={ this.$parent.internalPageSize }
               popperClass={ this.$parent.popperClass || '' }
               size={ this.$parent.paginationSize }
@@ -181,20 +182,20 @@ export default {
               disabled={ this.$parent.disabled }>
               {
                 this.pageSizes.map(item =>
-                  <el-option
+                  <hzq-option
                     value={ item }
                     label={ item + this.t('el.pagination.pagesize') }>
-                  </el-option>
+                  </hzq-option>
                 )
               }
-            </el-select>
+            </hzq-select>
           </span>
         );
       },
 
       components: {
-        ElSelect,
-        ElOption
+        HzqSelect,
+        HzqOption
       },
 
       methods: {
@@ -212,7 +213,7 @@ export default {
     Jumper: {
       mixins: [Locale],
 
-      components: { ElInput },
+      components: { HzqInput },
 
       data() {
         return {
@@ -247,10 +248,10 @@ export default {
 
       render(h) {
         return (
-          <span class="el-pagination__jump">
+          <span class="hzq-pagination__jump">
             { this.t('el.pagination.goto') }
-            <el-input
-              class="el-pagination__editor is-in-pagination"
+            <hzq-input
+              class="hzq-pagination__editor is-in-pagination"
               min={ 1 }
               max={ this.$parent.internalPageCount }
               value={ this.userInput !== null ? this.userInput : this.$parent.internalCurrentPage }
@@ -272,7 +273,7 @@ export default {
       render(h) {
         return (
           typeof this.$parent.total === 'number'
-            ? <span class="el-pagination__total">{ this.t('el.pagination.total', { total: this.$parent.total }) }</span>
+            ? <span class="hzq-pagination__total">{ this.t('el.pagination.total', { total: this.$parent.total }) }</span>
             : ''
         );
       }
@@ -341,10 +342,10 @@ export default {
   },
 
   computed: {
-    // 元素上的 size 优先，其次跟随全局 $ELEMENT.size；旧的 small 布尔写法等价于 size="small"
+    // 元素上的 size 优先，其次跟随全局 $HZQ.size；旧的 small 布尔写法等价于 size="small"
     paginationSize() {
       if (this.small) return 'small';
-      return this.size || (this.$ELEMENT || {}).size;
+      return this.size || (this.$HZQ || {}).size;
     },
 
     internalPageCount() {

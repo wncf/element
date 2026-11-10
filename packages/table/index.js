@@ -1,8 +1,8 @@
-import ElTable from './src/table';
+import HzqTable from './src/table';
 
 /* istanbul ignore next */
-ElTable.install = function(Vue) {
-  Vue.component(ElTable.name, ElTable);
+HzqTable.install = function(Vue) {
+  Vue.component(HzqTable.name, HzqTable);
 };
 
-export default ElTable;
+export default HzqTable;

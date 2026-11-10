@@ -1,7 +1,7 @@
 <template>
-  <div class="el-color-predefine">
-    <div class="el-color-predefine__colors">
-      <div class="el-color-predefine__color-selector"
+  <div class="hzq-color-predefine">
+    <div class="hzq-color-predefine__colors">
+      <div class="hzq-color-predefine__color-selector"
            :class="{selected: item.selected, 'is-alpha': item._alpha < 100}"
            v-for="(item, index) in rgbaColors"
            :key="colors[index]"

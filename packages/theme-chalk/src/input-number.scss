@@ -10,7 +10,7 @@
   overflow: hidden;
   border-radius: $--input-border-radius;
 
-  .el-input {
+  .hzq-input {
     display: block;
 
     &__inner {
@@ -40,7 +40,7 @@
     &:hover {
       color: $--color-primary;
 
-      &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
+      &:not(.is-disabled) ~ .hzq-input .hzq-input__inner:not(.is-disabled) {
         border-color: $--input-focus-border;
       }
     }
@@ -77,6 +77,21 @@
     }
   }
 
+  @include m(large) {
+    width: 220px;
+    line-height: #{$--input-large-height - 2};
+
+    @include e((increase, decrease)) {
+      width: $--input-large-height;
+      font-size: $--input-large-font-size;
+    }
+
+    .hzq-input__inner {
+      padding-left: #{$--input-large-height + 7};
+      padding-right: #{$--input-large-height + 7};
+    }
+  }
+
   @include m(medium) {
     width: 200px;
     line-height: #{$--input-medium-height - 2};
@@ -86,7 +101,7 @@
       font-size: $--input-medium-font-size;
     }
 
-    .el-input__inner {
+    .hzq-input__inner {
       padding-left: #{$--input-medium-height + 7};
       padding-right: #{$--input-medium-height + 7};
     }
@@ -100,12 +115,12 @@
       width: $--input-small-height;
       font-size: $--input-small-font-size;
 
-      [class*=el-icon] {
+      [class*=hzq-icon] {
         transform: scale(.9);
       }
     }
 
-    .el-input__inner {
+    .hzq-input__inner {
       padding-left: #{$--input-small-height + 7};
       padding-right: #{$--input-small-height + 7};
     }
@@ -119,26 +134,26 @@
       width: $--input-mini-height;
       font-size: $--input-mini-font-size;
 
-      [class*=el-icon] {
+      [class*=hzq-icon] {
         transform: scale(.8);
       }
     }
 
-    .el-input__inner {
+    .hzq-input__inner {
       padding-left: #{$--input-mini-height + 7};
       padding-right: #{$--input-mini-height + 7};
     }
   }
 
   @include when(without-controls) {
-    .el-input__inner {
+    .hzq-input__inner {
       padding-left: 15px;
       padding-right: 15px;
     }
   }
 
   @include when(controls-right) {
-    .el-input__inner {
+    .hzq-input__inner {
       padding-left: 15px;
       padding-right: #{$--input-height + 10};
     }
@@ -151,7 +166,7 @@
       height: 50%;
       line-height: #{($--input-height - 2) / 2};
 
-      [class*=el-icon] {
+      [class*=hzq-icon] {
         transform: scale(.8);
       }
     }
@@ -171,6 +186,12 @@
       border-right: none;
       border-left: $--border-base;
       border-radius: 0 0 $--border-radius-base 0;
+    }
+
+    &[class*=large] {
+      [class*=increase], [class*=decrease] {
+        line-height: #{($--input-large-height - 2) / 2};
+      }
     }
 
     &[class*=medium] {

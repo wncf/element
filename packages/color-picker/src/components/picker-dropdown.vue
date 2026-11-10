@@ -1,38 +1,38 @@
 <template>
   <transition name="el-zoom-in-top" @after-leave="doDestroy">
     <div
-      class="el-color-dropdown"
+      class="hzq-color-dropdown"
       v-show="showPopper">
-      <div class="el-color-dropdown__main-wrapper">
+      <div class="hzq-color-dropdown__main-wrapper">
         <hue-slider ref="hue" :color="color" vertical style="float: right;"></hue-slider>
         <sv-panel ref="sl" :color="color"></sv-panel>
       </div>
       <alpha-slider v-if="showAlpha" ref="alpha" :color="color"></alpha-slider>
       <predefine v-if="predefine" :color="color" :colors="predefine"></predefine>
-      <div class="el-color-dropdown__btns">
-        <span class="el-color-dropdown__value">
-          <el-input
+      <div class="hzq-color-dropdown__btns">
+        <span class="hzq-color-dropdown__value">
+          <hzq-input
             v-model="customInput"
             @keyup.native.enter="handleConfirm"
             @blur="handleConfirm"
             :validate-event="false"
             size="mini">
-          </el-input>
+          </hzq-input>
         </span>
-        <el-button
+        <hzq-button
           size="mini"
           type="text"
-          class="el-color-dropdown__link-btn"
+          class="hzq-color-dropdown__link-btn"
           @click="$emit('clear')">
           {{ t('el.colorpicker.clear') }}
-        </el-button>
-        <el-button
+        </hzq-button>
+        <hzq-button
           plain
           size="mini"
-          class="el-color-dropdown__btn"
+          class="hzq-color-dropdown__btn"
           @click="confirmValue">
           {{ t('el.colorpicker.confirm') }}
-        </el-button>
+        </hzq-button>
       </div>
     </div>
   </transition>
@@ -43,13 +43,13 @@
   import HueSlider from './hue-slider';
   import AlphaSlider from './alpha-slider';
   import Predefine from './predefine';
-  import Popper from 'element-ui/src/utils/vue-popper';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
+  import Popper from 'hzq-ui/src/utils/vue-popper';
+  import Locale from 'hzq-ui/src/mixins/locale';
+  import HzqInput from 'hzq-ui/packages/input';
+  import HzqButton from 'hzq-ui/packages/button';
 
   export default {
-    name: 'el-color-picker-dropdown',
+    name: 'hzq-color-picker-dropdown',
 
     mixins: [Popper, Locale],
 
@@ -57,8 +57,8 @@
       SvPanel,
       HueSlider,
       AlphaSlider,
-      ElInput,
-      ElButton,
+      HzqInput,
+      HzqButton,
       Predefine
     },
 

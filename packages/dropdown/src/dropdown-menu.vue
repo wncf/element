@@ -1,17 +1,17 @@
 <template>
   <transition name="el-zoom-in-top" @after-leave="doDestroy">
-    <ul class="el-dropdown-menu el-popper" :class="[size && `el-dropdown-menu--${size}`]" v-show="showPopper">
+    <ul class="hzq-dropdown-menu hzq-popper" :class="[size && `hzq-dropdown-menu--${size}`]" v-show="showPopper">
       <slot></slot>
     </ul>
   </transition>
 </template>
 <script>
-  import Popper from 'element-ui/src/utils/vue-popper';
+  import Popper from 'hzq-ui/src/utils/vue-popper';
 
   export default {
-    name: 'ElDropdownMenu',
+    name: 'HzqDropdownMenu',
 
-    componentName: 'ElDropdownMenu',
+    componentName: 'HzqDropdownMenu',
 
     mixins: [Popper],
 

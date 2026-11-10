@@ -7,36 +7,36 @@
 :::demo
 
 ```html
-<el-row>
-  <el-col :sm="12" :lg="6">
-    <el-result icon="success" title="成功提示" subTitle="请根据提示进行操作">
+<hzq-row>
+  <hzq-col :sm="12" :lg="6">
+    <hzq-result icon="success" title="成功提示" subTitle="请根据提示进行操作">
       <template slot="extra">
-        <el-button type="primary" size="medium">返回</el-button>
+        <hzq-button type="primary" size="medium">返回</hzq-button>
       </template>
-    </el-result>
-  </el-col>
-  <el-col :sm="12" :lg="6">
-    <el-result icon="warning" title="警告提示" subTitle="请根据提示进行操作">
+    </hzq-result>
+  </hzq-col>
+  <hzq-col :sm="12" :lg="6">
+    <hzq-result icon="warning" title="警告提示" subTitle="请根据提示进行操作">
       <template slot="extra">
-        <el-button type="primary" size="medium">返回</el-button>
+        <hzq-button type="primary" size="medium">返回</hzq-button>
       </template>
-    </el-result>
-  </el-col>
-  <el-col :sm="12" :lg="6">
-    <el-result icon="error" title="错误提示" subTitle="请根据提示进行操作">
+    </hzq-result>
+  </hzq-col>
+  <hzq-col :sm="12" :lg="6">
+    <hzq-result icon="error" title="错误提示" subTitle="请根据提示进行操作">
       <template slot="extra">
-        <el-button type="primary" size="medium">返回</el-button>
+        <hzq-button type="primary" size="medium">返回</hzq-button>
       </template>
-    </el-result>
-  </el-col>
-  <el-col :sm="12" :lg="6">
-    <el-result icon="info" title="信息提示" subTitle="请根据提示进行操作">
+    </hzq-result>
+  </hzq-col>
+  <hzq-col :sm="12" :lg="6">
+    <hzq-result icon="info" title="信息提示" subTitle="请根据提示进行操作">
       <template slot="extra">
-        <el-button type="primary" size="medium">返回</el-button>
+        <hzq-button type="primary" size="medium">返回</hzq-button>
       </template>
-    </el-result>
-  </el-col>
-</el-row>
+    </hzq-result>
+  </hzq-col>
+</hzq-row>
 ```
 
 :::
@@ -46,14 +46,14 @@
 :::demo
 
 ```html
-<el-result title="404" subTitle="抱歉，请求错误">
+<hzq-result title="404" subTitle="抱歉，请求错误">
   <template slot="icon">
-    <el-image src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"></el-image>
+    <hzq-image src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"></hzq-image>
   </template>
   <template slot="extra">
-    <el-button type="primary" size="medium">返回</el-button>
+    <hzq-button type="primary" size="medium">返回</hzq-button>
   </template>
-</el-result>
+</hzq-result>
 ```
 
 :::

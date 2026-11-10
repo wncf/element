@@ -2,7 +2,7 @@
   import TabNav from './tab-nav';
 
   export default {
-    name: 'ElTabs',
+    name: 'HzqTabs',
 
     components: {
       TabNav
@@ -58,7 +58,7 @@
       calcPaneInstances(isForceUpdate = false) {
         if (this.$slots.default) {
           const paneSlots = this.$slots.default.filter(vnode => vnode.tag &&
-            vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'ElTabPane');
+            vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'HzqTabPane');
           // update indeed
           const panes = paneSlots.map(({ componentInstance }) => componentInstance);
           const panesChanged = !(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]));
@@ -126,12 +126,12 @@
       const newButton = editable || addable
         ? (
           <span
-            class="el-tabs__new-tab"
+            class="hzq-tabs__new-tab"
             on-click={ handleTabAdd }
             tabindex="0"
             on-keydown={ (ev) => { if (ev.keyCode === 13) { handleTabAdd(); }} }
           >
-            <i class="el-icon-plus"></i>
+            <i class="hzq-icon-plus"></i>
           </span>
         )
         : null;
@@ -149,23 +149,23 @@
         ref: 'nav'
       };
       const header = (
-        <div class={['el-tabs__header', `is-${tabPosition}`]}>
+        <div class={['hzq-tabs__header', `is-${tabPosition}`]}>
           {newButton}
           <tab-nav { ...navData }></tab-nav>
         </div>
       );
       const panels = (
-        <div class="el-tabs__content">
+        <div class="hzq-tabs__content">
           {this.$slots.default}
         </div>
       );
 
       return (
         <div class={{
-          'el-tabs': true,
-          'el-tabs--card': type === 'card',
-          [`el-tabs--${tabPosition}`]: true,
-          'el-tabs--border-card': type === 'border-card'
+          'hzq-tabs': true,
+          'hzq-tabs--card': type === 'card',
+          [`hzq-tabs--${tabPosition}`]: true,
+          'hzq-tabs--border-card': type === 'border-card'
         }}>
           { tabPosition !== 'bottom' ? [header, panels] : [panels, header] }
         </div>

@@ -1,8 +1,8 @@
-import ElButton from './src/button';
+import HzqButton from './src/button';
 
 /* istanbul ignore next */
-ElButton.install = function(Vue) {
-  Vue.component(ElButton.name, ElButton);
+HzqButton.install = function(Vue) {
+  Vue.component(HzqButton.name, HzqButton);
 };
 
-export default ElButton;
+export default HzqButton;

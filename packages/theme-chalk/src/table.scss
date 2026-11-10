@@ -12,7 +12,7 @@
   width: 100%;
   max-width: 100%;
   /* 表格底色跟着主题走：深色模式下必须是深底，写死白色会让文字与底色撞成低对比 */
-  background-color: var(--el-bg-color);
+  background-color: var(--hzq-bg-color);
   font-size: 14px;
   color: $--table-font-color;
 
@@ -45,7 +45,7 @@
   @include e(expand-icon) {
     position: relative;
     cursor: pointer;
-    color: var(--el-text-color-secondary);
+    color: var(--hzq-text-color-secondary);
     font-size: 12px;
     transition: transform 0.2s ease-in-out;
     height: 20px;
@@ -54,7 +54,7 @@
       transform: rotate(90deg);
     }
 
-    > .el-icon {
+    > .hzq-icon {
       position: absolute;
       left: 50%;
       top: 50%;
@@ -64,7 +64,7 @@
   }
 
   @include e(expanded-cell) {
-    background-color: var(--el-bg-color);
+    background-color: var(--hzq-bg-color);
 
     // 纯属为了增加权重
     &[class*=cell] {
@@ -90,19 +90,19 @@
     border-right: 0;
     border-bottom: 0;
 
-    .el-table__cell.gutter {
+    .hzq-table__cell.gutter {
       border-right-width: 1px;
     }
   }
 
   @include m(scrollable-x) {
-    .el-table__body-wrapper {
+    .hzq-table__body-wrapper {
       overflow-x: auto;
     }
   }
 
   @include m(scrollable-y) {
-    .el-table__body-wrapper {
+    .hzq-table__body-wrapper {
       overflow-y: auto;
     }
   }
@@ -112,13 +112,13 @@
     font-weight: 500;
 
     &.is-group {
-      th.el-table__cell {
+      th.hzq-table__cell {
         background: $--background-color-base;
       }
     }
   }
 
-  .el-table__cell {
+  .hzq-table__cell {
     padding: 12px 0;
     min-width: 0;
     box-sizing: border-box;
@@ -149,44 +149,50 @@
     }
   }
 
+  @include m(large) {
+    .hzq-table__cell {
+      padding: 14px 0;
+    }
+  }
+
   @include m(medium) {
-    .el-table__cell {
+    .hzq-table__cell {
       padding: 10px 0;
     }
   }
 
   @include m(small) {
     font-size: 12px;
-    .el-table__cell {
+    .hzq-table__cell {
       padding: 8px 0;
     }
   }
 
   @include m(mini) {
     font-size: 12px;
-    .el-table__cell {
+    .hzq-table__cell {
       padding: 6px 0;
     }
   }
 
   tr {
-    background-color: var(--el-bg-color);
+    background-color: var(--hzq-bg-color);
 
     input[type="checkbox"] {
       margin: 0;
     }
   }
 
-  th.el-table__cell.is-leaf,
-  td.el-table__cell {
+  th.hzq-table__cell.is-leaf,
+  td.hzq-table__cell {
     border-bottom: $--table-border;
   }
 
-  th.el-table__cell.is-sortable {
+  th.hzq-table__cell.is-sortable {
     cursor: pointer;
   }
 
-  th.el-table__cell {
+  th.hzq-table__cell {
     overflow: hidden;
     user-select: none;
     background-color: $--table-header-background-color;
@@ -217,7 +223,7 @@
     }
   }
 
-  td.el-table__cell {
+  td.hzq-table__cell {
     div {
       box-sizing: border-box;
     }
@@ -237,7 +243,7 @@
     padding-left: 10px;
     padding-right: 10px;
 
-    &.el-tooltip {
+    &.hzq-tooltip {
       white-space: nowrap;
       min-width: 50px;
     }
@@ -278,11 +284,11 @@
     border-right: none;
     border-bottom: none;
 
-    &.el-loading-parent--relative {
+    &.hzq-loading-parent--relative {
       border-color: transparent;
     }
 
-    .el-table__cell {
+    .hzq-table__cell {
       border-right: $--table-border;
 
       &:first-child .cell {
@@ -290,12 +296,12 @@
       }
     }
 
-    th.el-table__cell.gutter:last-of-type {
+    th.hzq-table__cell.gutter:last-of-type {
       border-bottom: $--table-border;
       border-bottom-width: 1px;
     }
 
-    & th.el-table__cell {
+    & th.hzq-table__cell {
       border-bottom: $--table-border;
     }
   }
@@ -328,7 +334,7 @@
     position: absolute;
     top: -1px;
     right: 0;
-    background-color: var(--el-bg-color);
+    background-color: var(--hzq-bg-color);
     border-bottom: $--table-border;
   }
 
@@ -337,9 +343,9 @@
     left: auto;
     right: 0;
 
-    .el-table__fixed-header-wrapper,
-    .el-table__fixed-body-wrapper,
-    .el-table__fixed-footer-wrapper {
+    .hzq-table__fixed-header-wrapper,
+    .hzq-table__fixed-body-wrapper,
+    .hzq-table__fixed-footer-wrapper {
       left: auto;
       right: 0;
     }
@@ -358,7 +364,7 @@
     bottom: 0;
     z-index: 3;
 
-    & tbody td.el-table__cell {
+    & tbody td.hzq-table__cell {
       border-top: $--table-border;
       background-color: $--table-row-hover-background-color;
       color: $--table-font-color;
@@ -379,7 +385,7 @@
 
   @include e(footer-wrapper) {
     margin-top: -1px;
-    td.el-table__cell {
+    td.hzq-table__cell {
       border-top: $--table-border;
     }
   }
@@ -392,7 +398,7 @@
   @include e((header-wrapper, footer-wrapper)) {
     overflow: hidden;
 
-    & tbody td.el-table__cell {
+    & tbody td.hzq-table__cell {
       background-color: $--table-row-hover-background-color;
       color: $--table-font-color;
     }
@@ -403,33 +409,33 @@
     position: relative;
 
     @include when(scrolling-none) {
-      ~ .el-table__fixed,
-      ~ .el-table__fixed-right {
+      ~ .hzq-table__fixed,
+      ~ .hzq-table__fixed-right {
         box-shadow: none;
       }
     }
 
     @include when(scrolling-left) {
-      ~ .el-table__fixed {
+      ~ .hzq-table__fixed {
         box-shadow: none;
       }
     }
 
     @include when(scrolling-right) {
-      ~ .el-table__fixed-right {
+      ~ .hzq-table__fixed-right {
         box-shadow: none;
       }
     }
 
-    .el-table--border {
+    .hzq-table--border {
       @include when(scrolling-right) {
-        ~ .el-table__fixed-right {
+        ~ .hzq-table__fixed-right {
           border-left: $--table-border;
         }
       }
 
       @include when(scrolling-left) {
-        ~ .el-table__fixed {
+        ~ .hzq-table__fixed {
           border-right: $--table-border;
         }
       }
@@ -481,13 +487,13 @@
   }
 
   @include m(striped) {
-    & .el-table__body {
-      & tr.el-table__row--striped {
-        td.el-table__cell {
-          background: var(--el-fill-color-lighter);
+    & .hzq-table__body {
+      & tr.hzq-table__row--striped {
+        td.hzq-table__cell {
+          background: var(--hzq-fill-color-lighter);
         }
 
-        &.current-row td.el-table__cell, &.selection-row td.el-table__cell {
+        &.current-row td.hzq-table__cell, &.selection-row td.hzq-table__cell {
           background-color: $--table-current-row-background-color;
         }
       }
@@ -496,16 +502,16 @@
 
   @include e(body) {
     tr.hover-row {
-      &, &.el-table__row--striped {
+      &, &.hzq-table__row--striped {
         &, &.current-row, &.selection-row {
-          > td.el-table__cell {
+          > td.hzq-table__cell {
             background-color: $--table-row-hover-background-color;
           }
         }
       }
     }
 
-    tr.current-row > td.el-table__cell, tr.selection-row > td.el-table__cell {
+    tr.current-row > td.hzq-table__cell, tr.selection-row > td.hzq-table__cell {
       background-color: $--table-current-row-background-color;
     }
   }
@@ -533,27 +539,27 @@
   }
 
   @include m(enable-row-transition) {
-    .el-table__body td.el-table__cell {
+    .hzq-table__body td.hzq-table__cell {
       transition: background-color .25s ease;
     }
   }
 
   @include m(enable-row-hover) {
-    .el-table__body tr:hover > td.el-table__cell {
+    .hzq-table__body tr:hover > td.hzq-table__cell {
       background-color: $--table-row-hover-background-color;
     }
   }
 
   @include m(fluid-height) {
-    .el-table__fixed,
-    .el-table__fixed-right {
+    .hzq-table__fixed,
+    .hzq-table__fixed-right {
       bottom: 0;
       overflow: hidden;
     }
   }
 
-  [class*=el-table__row--level] {
-    .el-table__expand-icon {
+  [class*=hzq-table__row--level] {
+    .hzq-table__expand-icon {
       display: inline-block;
       width: 20px;
       line-height: 20px;

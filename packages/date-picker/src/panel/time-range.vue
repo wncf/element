@@ -4,14 +4,14 @@
     @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      class="el-time-range-picker el-picker-panel el-popper"
+      class="hzq-time-range-picker hzq-picker-panel hzq-popper"
       :class="popperClass">
-      <div class="el-time-range-picker__content">
-        <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">{{ t('el.datepicker.startTime') }}</div>
+      <div class="hzq-time-range-picker__content">
+        <div class="hzq-time-range-picker__cell">
+          <div class="hzq-time-range-picker__header">{{ t('el.datepicker.startTime') }}</div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
-            class="el-time-range-picker__body el-time-panel__content">
+            class="hzq-time-range-picker__body hzq-time-panel__content">
             <time-spinner
               ref="minSpinner"
               :show-seconds="showSeconds"
@@ -23,11 +23,11 @@
             </time-spinner>
           </div>
         </div>
-        <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">{{ t('el.datepicker.endTime') }}</div>
+        <div class="hzq-time-range-picker__cell">
+          <div class="hzq-time-range-picker__header">{{ t('el.datepicker.endTime') }}</div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
-            class="el-time-range-picker__body el-time-panel__content">
+            class="hzq-time-range-picker__body hzq-time-panel__content">
             <time-spinner
               ref="maxSpinner"
               :show-seconds="showSeconds"
@@ -40,14 +40,14 @@
           </div>
         </div>
       </div>
-      <div class="el-time-panel__footer">
+      <div class="hzq-time-panel__footer">
         <button
           type="button"
-          class="el-time-panel__btn cancel"
+          class="hzq-time-panel__btn cancel"
           @click="handleCancel()">{{ t('el.datepicker.cancel') }}</button>
         <button
           type="button"
-          class="el-time-panel__btn confirm"
+          class="hzq-time-panel__btn confirm"
           @click="handleConfirm()"
           :disabled="btnDisabled">{{ t('el.datepicker.confirm') }}</button>
       </div>
@@ -62,8 +62,8 @@
     modifyDate,
     clearMilliseconds,
     timeWithinRange
-  } from 'element-ui/src/utils/date-util';
-  import Locale from 'element-ui/src/mixins/locale';
+  } from 'hzq-ui/src/utils/date-util';
+  import Locale from 'hzq-ui/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
 
   const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');

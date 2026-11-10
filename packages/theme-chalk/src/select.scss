@@ -9,7 +9,7 @@
 @import "scrollbar";
 
 // 单选的清空图标（hover 时出现的 ×）行高固定 18px，纵向位置按输入框高度计算，
-// 让它在 default 32 / small 28 / mini 26 下都居中
+// 让它在 large 36 / default 32 / small 28 / mini 24 下都居中
 $select-close-icon-height: 18px;
 
 @include b(select) {
@@ -17,18 +17,18 @@ $select-close-icon-height: 18px;
   position: relative;
   vertical-align: top;
 
-  .el-select__tags
+  .hzq-select__tags
     >span {
       display: contents;
     }
 
   &:hover {
-    .el-input__inner {
+    .hzq-input__inner {
       border-color: $--select-border-color-hover;
     }
   }
 
-  .el-input__inner {
+  .hzq-input__inner {
     cursor: pointer;
     padding-right: 35px;
 
@@ -37,8 +37,8 @@ $select-close-icon-height: 18px;
     }
   }
 
-  .el-input {
-    & .el-select__caret {
+  .hzq-input {
+    & .hzq-select__caret {
       color: $--select-input-color;
       font-size: $--select-input-font-size;
       transition: transform .3s;
@@ -64,7 +64,7 @@ $select-close-icon-height: 18px;
     }
 
     &.is-disabled {
-      & .el-input__inner {
+      & .hzq-input__inner {
         cursor: not-allowed;
 
         &:hover {
@@ -73,14 +73,36 @@ $select-close-icon-height: 18px;
       }
     }
 
-    &.is-focus .el-input__inner {
+    &.is-focus .hzq-input__inner {
       border-color: $--select-input-focus-border-color;
     }
   }
 
   // 下拉箭头 / 清空图标随 size 收敛，与内部 input 字号同档
+  @include m(large) {
+    .hzq-input .hzq-select__caret {
+      font-size: $--input-large-font-size;
+    }
+
+    @include e(close) {
+      top: ($--input-large-height - $select-close-icon-height) / 2;
+      font-size: $--input-large-font-size;
+    }
+  }
+
+  @include m(medium) {
+    .hzq-input .hzq-select__caret {
+      font-size: $--input-medium-font-size;
+    }
+
+    @include e(close) {
+      top: ($--input-medium-height - $select-close-icon-height) / 2;
+      font-size: $--input-medium-font-size;
+    }
+  }
+
   @include m(small) {
-    .el-input .el-select__caret {
+    .hzq-input .hzq-select__caret {
       font-size: $--input-small-font-size;
     }
 
@@ -91,7 +113,7 @@ $select-close-icon-height: 18px;
   }
 
   @include m(mini) {
-    .el-input .el-select__caret {
+    .hzq-input .hzq-select__caret {
       font-size: $--input-mini-font-size;
     }
 
@@ -101,7 +123,7 @@ $select-close-icon-height: 18px;
     }
   }
 
-  > .el-input {
+  > .hzq-input {
     display: block;
   }
 
@@ -115,6 +137,9 @@ $select-close-icon-height: 18px;
     appearance: none;
     height: $--select-multiple-input-height;
     background-color: transparent;
+    @include when(large) {
+      height: $--select-multiple-input-large-height;
+    }
     @include when(small) {
       height: $--select-multiple-input-small-height;
     }
@@ -155,18 +180,18 @@ $select-close-icon-height: 18px;
     text-overflow: ellipsis;
   }
 
-  .el-tag {
+  .hzq-tag {
     box-sizing: border-box;
     border-color: transparent;
     // 多选内联 tag 比 select 自身小一档，纵向留 1px 即可对齐内容区，
     // 留白再大（2px）会让 mini 尺寸的 tag 撑高输入框
     margin: 1px 0 1px 6px;
-    background-color: var(--el-fill-color);
+    background-color: var(--hzq-fill-color);
     display: flex;
     max-width: 100%;
     align-items: center;
 
-    &__close.el-icon-close {
+    &__close.hzq-icon-close {
       background-color: $--color-text-placeholder;
       top: 0;
       color: $--color-white;

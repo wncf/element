@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-rate"
+    class="hzq-rate"
     @keydown="handleKey"
     role="slider"
     :aria-valuenow="currentValue"
@@ -10,7 +10,7 @@
     tabindex="0">
     <span
       v-for="(item, key) in max"
-      class="el-rate__item"
+      class="hzq-rate__item"
       @mousemove="setCurrentValue(item, $event)"
       @mouseleave="resetCurrentValue"
       @click="selectValue(item)"
@@ -18,27 +18,27 @@
       :key="key">
       <i
         :class="[classes[item - 1], { 'hover': hoverIndex === item }]"
-        class="el-rate__icon"
+        class="hzq-rate__icon"
         :style="getIconStyle(item)">
         <i
           v-if="showDecimalIcon(item)"
           :class="decimalIconClass"
           :style="decimalStyle"
-          class="el-rate__decimal">
+          class="hzq-rate__decimal">
         </i>
       </i>
     </span>
-    <span v-if="showText || showScore" class="el-rate__text" :style="{ color: textColor }">{{ text }}</span>
+    <span v-if="showText || showScore" class="hzq-rate__text" :style="{ color: textColor }">{{ text }}</span>
   </div>
 </template>
 
 <script>
-  import { hasClass } from 'element-ui/src/utils/dom';
-  import { isObject } from 'element-ui/src/utils/types';
-  import Migrating from 'element-ui/src/mixins/migrating';
+  import { hasClass } from 'hzq-ui/src/utils/dom';
+  import { isObject } from 'hzq-ui/src/utils/types';
+  import Migrating from 'hzq-ui/src/mixins/migrating';
 
   export default {
-    name: 'ElRate',
+    name: 'HzqRate',
 
     mixins: [Migrating],
 
@@ -82,25 +82,25 @@
       // 空星与文字色走 token：默认色是内联样式，写死浅色在深色模式下空星会亮得比实星还显眼
       voidColor: {
         type: String,
-        default: 'var(--el-text-color-disabled)'
+        default: 'var(--hzq-text-color-disabled)'
       },
       disabledVoidColor: {
         type: String,
-        default: 'var(--el-fill-color-light)'
+        default: 'var(--hzq-fill-color-light)'
       },
       iconClasses: {
         type: [Array, Object],
         default() {
-          return ['el-icon-star-on', 'el-icon-star-on', 'el-icon-star-on'];
+          return ['hzq-icon-star-on', 'hzq-icon-star-on', 'hzq-icon-star-on'];
         }
       },
       voidIconClass: {
         type: String,
-        default: 'el-icon-star-off'
+        default: 'hzq-icon-star-off'
       },
       disabledVoidIconClass: {
         type: String,
-        default: 'el-icon-star-on'
+        default: 'hzq-icon-star-on'
       },
       disabled: {
         type: Boolean,
@@ -120,7 +120,7 @@
       },
       textColor: {
         type: String,
-        default: 'var(--el-text-color-regular)'
+        default: 'var(--hzq-text-color-regular)'
       },
       texts: {
         type: Array,
@@ -314,10 +314,10 @@
         /* istanbul ignore if */
         if (this.allowHalf) {
           let target = event.target;
-          if (hasClass(target, 'el-rate__item')) {
-            target = target.querySelector('.el-rate__icon');
+          if (hasClass(target, 'hzq-rate__item')) {
+            target = target.querySelector('.hzq-rate__icon');
           }
-          if (hasClass(target, 'el-rate__decimal')) {
+          if (hasClass(target, 'hzq-rate__decimal')) {
             target = target.parentNode;
           }
           this.pointerAtLeftHalf = event.offsetX * 2 <= target.clientWidth;

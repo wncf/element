@@ -1,5 +1,5 @@
 <template>
-  <div :class="['el-skeleton__item', `el-skeleton__${variant}`]">
+  <div :class="['hzq-skeleton__item', `hzq-skeleton__${variant}`]">
     <img-placeholder v-if="variant === 'image'" />
   </div>
 </template>
@@ -8,7 +8,7 @@
   import ImgPlaceholder from './img-placeholder';
 
   export default {
-    name: 'ElSkeletonItem',
+    name: 'HzqSkeletonItem',
     props: {
       variant: {
         type: String,

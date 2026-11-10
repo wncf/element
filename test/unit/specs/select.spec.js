@@ -33,7 +33,7 @@ describe('Select', () => {
     const vm = createVue({
       template: `
         <div>
-          <el-select
+          <hzq-select
             ref="select"
             v-model="value"
             :multiple="multiple"
@@ -48,14 +48,14 @@ describe('Select', () => {
             :loading="loading"
             :remoteMethod="remoteMethod"
             :automatic-dropdown="automaticDropdown">
-            <el-option
+            <hzq-option
               v-for="item in options"
               :label="item.label"
               :key="item.value"
               :disabled="item.disabled"
               :value="item.value">
-            </el-option>
-          </el-select>
+            </hzq-option>
+          </hzq-select>
         </div>
       `,
 
@@ -88,15 +88,15 @@ describe('Select', () => {
 
   it('create', () => {
     vm = createTest(Select, true);
-    expect(vm.$el.className).to.equal('el-select');
-    expect(vm.$el.querySelector('.el-input__inner').placeholder).to.equal('请选择');
+    expect(vm.$el.className).to.equal('hzq-select');
+    expect(vm.$el.querySelector('.hzq-input__inner').placeholder).to.equal('请选择');
     vm.toggleMenu();
     expect(vm.visible).to.true;
   });
 
   it('options rendered correctly', () => {
     vm = getSelectVm();
-    const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+    const options = vm.$el.querySelectorAll('.hzq-select-dropdown__item');
     const result = [].every.call(options, (option, index) => {
       let text = option.querySelector('span').textContent;
       return text === vm.options[index].label;
@@ -106,7 +106,7 @@ describe('Select', () => {
 
   it('custom dropdown class', () => {
     vm = getSelectVm({ popperClass: 'custom-dropdown' });
-    const dropdown = vm.$el.querySelector('.el-select-dropdown');
+    const dropdown = vm.$el.querySelector('.hzq-select-dropdown');
     expect(dropdown.classList.contains('custom-dropdown')).to.true;
   });
 
@@ -114,14 +114,14 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value">
-            <el-option
+          <hzq-select v-model="value">
+            <hzq-option
               v-for="item in options"
               :label="item.label"
               :key="item.value"
               :value="item.value">
-            </el-option>
-          </el-select>
+            </hzq-option>
+          </hzq-select>
         </div>
       `,
 
@@ -139,7 +139,7 @@ describe('Select', () => {
       }
     }, true);
     setTimeout(() => {
-      expect(vm.$el.querySelector('.el-input__inner').value).to.equal('双皮奶');
+      expect(vm.$el.querySelector('.hzq-input__inner').value).to.equal('双皮奶');
       done();
     }, 100);
   });
@@ -148,15 +148,15 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value" @change="handleChange">
-            <el-option
+          <hzq-select v-model="value" @change="handleChange">
+            <hzq-option
               v-for="item in options"
               :label="item.label"
               :key="item.value"
               :value="item.value">
               <p>{{item.label}} {{item.value}}</p>
-            </el-option>
-          </el-select>
+            </hzq-option>
+          </hzq-select>
         </div>
       `,
 
@@ -189,7 +189,7 @@ describe('Select', () => {
         }
       }
     }, true);
-    const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+    const options = vm.$el.querySelectorAll('.hzq-select-dropdown__item');
     expect(vm.value).to.equal('');
     triggerEvent(options[2], 'mouseenter');
     options[2].click();
@@ -210,7 +210,7 @@ describe('Select', () => {
     vm = getSelectVm();
     vm.options[1].disabled = true;
     setTimeout(() => {
-      const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+      const options = vm.$el.querySelectorAll('.hzq-select-dropdown__item');
       expect(options[1].classList.contains('is-disabled')).to.true;
       options[1].click();
       setTimeout(() => {
@@ -222,21 +222,21 @@ describe('Select', () => {
 
   it('disabled select', () => {
     vm = createTest(Select, { disabled: true }, true);
-    expect(vm.$el.querySelector('.el-input').classList.contains('is-disabled')).to.true;
+    expect(vm.$el.querySelector('.hzq-input').classList.contains('is-disabled')).to.true;
   });
 
   it('visible event', done => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value" @visible-change="handleVisibleChange">
-            <el-option
+          <hzq-select v-model="value" @visible-change="handleVisibleChange">
+            <hzq-option
               v-for="item in options"
               :label="item.label"
               :key="item.value"
               :value="item.value">
-            </el-option>
-          </el-select>
+            </hzq-option>
+          </hzq-select>
         </div>
       `,
 
@@ -285,7 +285,7 @@ describe('Select', () => {
     vm.value = '选项1';
     select.inputHovering = true;
     setTimeout(() => {
-      const iconClear = vm.$el.querySelector('.el-input__icon.el-icon-circle-close');
+      const iconClear = vm.$el.querySelector('.hzq-input__icon.hzq-icon-circle-close');
       expect(iconClear).to.exist;
       iconClear.click();
       expect(vm.value).to.equal('');
@@ -297,14 +297,14 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value" value-key="id">
-            <el-option
+          <hzq-select v-model="value" value-key="id">
+            <hzq-option
               v-for="item in options"
               :label="item.label"
               :key="item.id"
               :value="item">
-            </el-option>
-          </el-select>
+            </hzq-option>
+          </hzq-select>
         </div>
       `,
 
@@ -325,8 +325,8 @@ describe('Select', () => {
       }
     }, true);
     setTimeout(() => {
-      expect(vm.$el.querySelector('.el-input__inner').value).to.equal('label1');
-      expect(vm.$el.querySelector('.el-select-dropdown__item').classList.contains('selected'));
+      expect(vm.$el.querySelector('.hzq-input__inner').value).to.equal('label1');
+      expect(vm.$el.querySelector('.hzq-select-dropdown__item').classList.contains('selected'));
       done();
     }, 100);
   });
@@ -335,15 +335,15 @@ describe('Select', () => {
     vm = createTest({
       template: `
         <div>
-          <el-select v-model="value">
-            <el-option
+          <hzq-select v-model="value">
+            <hzq-option
               v-for="item in options"
               :label="item.label"
               :key="item.value"
               :value="item.value">
-            </el-option>
-            <i slot="prefix" class="el-input__icon el-icon-search"></i>
-          </el-select>
+            </hzq-option>
+            <i slot="prefix" class="hzq-input__icon hzq-icon-search"></i>
+          </hzq-select>
         </div>
       `,
 
@@ -354,22 +354,22 @@ describe('Select', () => {
         };
       }
     });
-    expect(vm.$el.querySelector('.el-input__icon').classList.contains('el-icon-search')).to.be.true;
+    expect(vm.$el.querySelector('.hzq-input__icon').classList.contains('hzq-icon-search')).to.be.true;
   });
 
-  it('custom el-option template', () => {
+  it('custom hzq-option template', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value">
-            <el-option
+          <hzq-select v-model="value">
+            <hzq-option
               v-for="item in options"
               :label="item.label"
               :key="item.value"
               :value="item.value">
               <p>{{item.label}} {{item.value}}</p>
-            </el-option>
-          </el-select>
+            </hzq-option>
+          </hzq-select>
         </div>
       `,
 
@@ -383,27 +383,27 @@ describe('Select', () => {
         };
       }
     }, true);
-    expect(vm.$el.querySelector('.el-select-dropdown__item p').textContent).to.equal('label value');
+    expect(vm.$el.querySelector('.hzq-select-dropdown__item p').textContent).to.equal('label value');
   });
 
   it('option group', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value">
-            <el-option-group
+          <hzq-select v-model="value">
+            <hzq-option-group
               v-for="group in options"
               :key="group.label"
               :disabled="group.disabled"
               :label="group.label">
-              <el-option
+              <hzq-option
                 v-for="item in group.options"
                 :label="item.label"
                 :key="item.value"
                 :value="item.value">
-              </el-option>
-            </el-option-group>
-          </el-select>
+              </hzq-option>
+            </hzq-option-group>
+          </hzq-select>
         </div>
       `,
 
@@ -439,8 +439,8 @@ describe('Select', () => {
         };
       }
     }, true);
-    const groups = vm.$el.querySelectorAll('.el-select-group__wrap');
-    const options = groups[1].querySelectorAll('.el-select-dropdown__item');
+    const groups = vm.$el.querySelectorAll('.hzq-select-group__wrap');
+    const options = groups[1].querySelectorAll('.hzq-select-dropdown__item');
     expect(groups.length).to.equal(2);
     expect(options.length).to.equal(4);
     expect(options[0].querySelector('span').textContent).to.equal('成都');
@@ -483,18 +483,18 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select
+          <hzq-select
             v-model="value"
             default-first-option
             filterable
           >
-            <el-option
+            <hzq-option
               v-for="item in options"
               :label="item"
               :key="item"
               :value="item"
             />
-          </el-select>
+          </hzq-select>
         </div>
       `,
       data() {
@@ -526,7 +526,7 @@ describe('Select', () => {
       select.selectedLabel = 'new';
       select.onInputChange();
       setTimeout(() => {
-        const options = document.querySelectorAll('.el-select-dropdown__item span');
+        const options = document.querySelectorAll('.hzq-select-dropdown__item span');
         const target = [].filter.call(options, option => option.innerText === 'new');
         target[0].click();
         setTimeout(() => {
@@ -539,7 +539,7 @@ describe('Select', () => {
 
   it('multiple select', done => {
     vm = getSelectVm({ multiple: true });
-    const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+    const options = vm.$el.querySelectorAll('.hzq-select-dropdown__item');
     vm.value = ['选项1'];
     setTimeout(() => {
       options[1].click();
@@ -547,7 +547,7 @@ describe('Select', () => {
         options[3].click();
         setTimeout(() => {
           expect(vm.value.indexOf('选项2') > -1 && vm.value.indexOf('选项4') > -1).to.true;
-          const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
+          const tagCloseIcons = vm.$el.querySelectorAll('.hzq-tag__close');
           tagCloseIcons[0].click();
           setTimeout(() => {
             expect(vm.value.indexOf('选项1')).to.equal(-1);
@@ -563,15 +563,15 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value" multiple @remove-tag="handleRemoveTag">
-            <el-option
+          <hzq-select v-model="value" multiple @remove-tag="handleRemoveTag">
+            <hzq-option
               v-for="item in options"
               :label="item.label"
               :key="item.value"
               :value="item.value">
               <p>{{item.label}} {{item.value}}</p>
-            </el-option>
-          </el-select>
+            </hzq-option>
+          </hzq-select>
         </div>
       `,
 
@@ -605,7 +605,7 @@ describe('Select', () => {
     }, true);
     expect(vm.value.length).to.equal(2);
     setTimeout(() => {
-      const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
+      const tagCloseIcons = vm.$el.querySelectorAll('.hzq-tag__close');
       tagCloseIcons[1].click();
       setTimeout(() => {
         expect(vm.value.length).to.equal(1);
@@ -623,7 +623,7 @@ describe('Select', () => {
 
   it('multiple limit', done => {
     vm = getSelectVm({ multiple: true, multipleLimit: 1 });
-    const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+    const options = vm.$el.querySelectorAll('.hzq-select-dropdown__item');
     options[1].click();
     setTimeout(() => {
       expect(vm.value.indexOf('选项2') > -1).to.true;
@@ -677,7 +677,7 @@ describe('Select', () => {
   it('event:focus & blur', done => {
     vm = createVue({
       template: `
-        <el-select ref="select"></el-select>
+        <hzq-select ref="select"></hzq-select>
       `
     }, true);
 
@@ -700,9 +700,9 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value" ref="select">
-            <el-option label="1" :value="1" />
-          </el-select>
+          <hzq-select v-model="value" ref="select">
+            <hzq-option label="1" :value="1" />
+          </hzq-select>
         </div>
       `,
       data() {
@@ -718,7 +718,7 @@ describe('Select', () => {
     vm.$refs.select.$on('focus', spySelectFocus);
     vm.$refs.select.$refs.reference.$on('focus', spyInputFocus);
 
-    const option = vm.$el.querySelectorAll('.el-select-dropdown__item')[0];
+    const option = vm.$el.querySelectorAll('.hzq-select-dropdown__item')[0];
     triggerEvent(option, 'mouseenter');
     option.click();
 
@@ -754,7 +754,7 @@ describe('Select', () => {
   it('focus', done => {
     vm = createVue({
       template: `
-        <el-select ref="select"></el-select>
+        <hzq-select ref="select"></hzq-select>
       `
     }, true);
     const spy = sinon.spy();
@@ -773,11 +773,11 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value" @change="change" ref="select">
-            <el-option label="1" :value="1" />
-            <el-option label="2" :value="2" />
-            <el-option label="3" :value="3" />
-          </el-select>
+          <hzq-select v-model="value" @change="change" ref="select">
+            <hzq-option label="1" :value="1" />
+            <hzq-option label="2" :value="2" />
+            <hzq-option label="3" :value="3" />
+          </hzq-select>
         </div>
       `,
       data() {
@@ -791,7 +791,7 @@ describe('Select', () => {
     vm.value = 2;
     setTimeout(() => {
       expect(callCount).to.equal(0);
-      const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+      const options = vm.$el.querySelectorAll('.hzq-select-dropdown__item');
       triggerEvent(options[2], 'mouseenter');
       options[2].click();
       setTimeout(() => {
@@ -805,9 +805,9 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value">
+          <hzq-select v-model="value">
             <div class="empty-slot" slot="empty">EmptySlot</div>
-          </el-select>
+          </hzq-select>
         </div>
       `,
       data() {
@@ -825,9 +825,9 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select ref="select" v-model="value" filterable>
-            <el-option label="test" value="test" />
-          </el-select>
+          <hzq-select ref="select" v-model="value" filterable>
+            <hzq-option label="test" value="test" />
+          </hzq-select>
         </div>
       `,
       data() {
@@ -839,8 +839,8 @@ describe('Select', () => {
     vm.$refs.select.$el.click();
     await waitImmediate();
     expect(vm.$refs.select.visible).to.be.equal(true);
-    expect(vm.$el.querySelector('.el-input__inner').placeholder).to.be.equal('test');
-    expect(vm.$el.querySelector('.el-input__inner').value).to.be.equal('test');
+    expect(vm.$el.querySelector('.hzq-input__inner').placeholder).to.be.equal('test');
+    expect(vm.$el.querySelector('.hzq-input__inner').value).to.be.equal('test');
     expect(vm.$refs.select.selectedLabel).to.be.equal('test');
     expect(vm.value).to.be.equal('test');
   });
@@ -849,14 +849,14 @@ describe('Select', () => {
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value">
-            <el-option
+          <hzq-select v-model="value">
+            <hzq-option
               v-for="item in options"
               :label="item.label"
               :key="item.value"
               :value="item.value">
-            </el-option>
-          </el-select>
+            </hzq-option>
+          </hzq-select>
         </div>
       `,
 
@@ -876,10 +876,10 @@ describe('Select', () => {
 
     vm.value = null;
     await waitImmediate();
-    expect(vm.$el.querySelector('.el-input__inner').value).to.equal('');
+    expect(vm.$el.querySelector('.hzq-input__inner').value).to.equal('');
     vm.value = '选项1';
     await waitImmediate();
-    expect(vm.$el.querySelector('.el-input__inner').value).to.equal('黄金糕');
+    expect(vm.$el.querySelector('.hzq-input__inner').value).to.equal('黄金糕');
   });
 
   describe('resetInputHeight', () => {

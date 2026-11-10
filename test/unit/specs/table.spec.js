@@ -26,13 +26,13 @@ describe('Table', () => {
   describe('rendering data is correct', () => {
     const vm = createVue({
       template: `
-        <el-table :data="testData">
-          <el-table-column prop="id" />
-          <el-table-column prop="name" label="片名" />
-          <el-table-column prop="release" label="发行日期" />
-          <el-table-column prop="director" label="导演" />
-          <el-table-column prop="runtime" label="时长（分）" />
-        </el-table>
+        <hzq-table :data="testData">
+          <hzq-table-column prop="id" />
+          <hzq-table-column prop="name" label="片名" />
+          <hzq-table-column prop="release" label="发行日期" />
+          <hzq-table-column prop="director" label="导演" />
+          <hzq-table-column prop="runtime" label="时长（分）" />
+        </hzq-table>
       `,
 
       created() {
@@ -51,7 +51,7 @@ describe('Table', () => {
     });
 
     it('row length', () => {
-      expect(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr')).to.length(getTestData().length);
+      expect(vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr')).to.length(getTestData().length);
     });
 
     it('row data', () => {
@@ -67,12 +67,12 @@ describe('Table', () => {
     const createTable = function(props, opts) {
       return createVue(Object.assign({
         template: `
-          <el-table :data="testData" ${props}>
-            <el-table-column prop="name" label="片名" />
-            <el-table-column prop="release" label="发行日期" />
-            <el-table-column prop="director" label="导演" />
-            <el-table-column prop="runtime" label="时长（分）" />
-          </el-table>
+          <hzq-table :data="testData" ${props}>
+            <hzq-table-column prop="name" label="片名" />
+            <hzq-table-column prop="release" label="发行日期" />
+            <hzq-table-column prop="director" label="导演" />
+            <hzq-table-column prop="runtime" label="时长（分）" />
+          </hzq-table>
         `,
 
         created() {
@@ -111,7 +111,7 @@ describe('Table', () => {
     it('stripe', done => {
       const vm = createTable('stripe');
       setTimeout(_ => {
-        expect(vm.$el.classList.contains('el-table--striped')).to.true;
+        expect(vm.$el.classList.contains('hzq-table--striped')).to.true;
         destroyVM(vm);
         done();
       }, DELAY);
@@ -120,7 +120,7 @@ describe('Table', () => {
     it('border', done => {
       const vm = createTable('border');
       setTimeout(_ => {
-        expect(vm.$el.classList.contains('el-table--border')).to.true;
+        expect(vm.$el.classList.contains('hzq-table--border')).to.true;
         destroyVM(vm);
         done();
       }, DELAY);
@@ -129,7 +129,7 @@ describe('Table', () => {
     it('fit', done => {
       const vm = createTable(':fit="false"');
       setTimeout(_ => {
-        expect(vm.$el.classList.contains('el-table--fit')).to.false;
+        expect(vm.$el.classList.contains('hzq-table--fit')).to.false;
         destroyVM(vm);
         done();
       }, DELAY);
@@ -138,7 +138,7 @@ describe('Table', () => {
     it('show-header', done => {
       const vm = createTable(':show-header="false"');
       setTimeout(_ => {
-        expect(vm.$el.querySelectorAll('.el-table__header-wrapper').length).to.equal(0);
+        expect(vm.$el.querySelectorAll('.hzq-table__header-wrapper').length).to.equal(0);
         destroyVM(vm);
         done();
       }, DELAY);
@@ -171,7 +171,7 @@ describe('Table', () => {
       const vm = createTable(':row-style="{ height: \'60px\' }"', {});
 
       setTimeout(_ => {
-        expect(vm.$el.querySelector('.el-table__body tr').style.height).to.equal('60px');
+        expect(vm.$el.querySelector('.hzq-table__body tr').style.height).to.equal('60px');
         destroyVM(vm);
         done();
       }, DELAY);
@@ -191,8 +191,8 @@ describe('Table', () => {
       });
 
       setTimeout(_ => {
-        let child1 = vm.$el.querySelector('.el-table__body tr:nth-child(1)');
-        let child2 = vm.$el.querySelector('.el-table__body tr:nth-child(2)');
+        let child1 = vm.$el.querySelector('.hzq-table__body tr:nth-child(1)');
+        let child2 = vm.$el.querySelector('.hzq-table__body tr:nth-child(2)');
         expect(child1.style.height).to.equal('');
         expect(child1.style.display).to.equal('');
         expect(child2.style.height).to.equal('60px');
@@ -205,12 +205,12 @@ describe('Table', () => {
     it('current-row-key', done => {
       const vm = createVue({
         template: `
-        <el-table :data="testData" row-key="id" highlight-current-row :current-row-key="currentRowKey">
-          <el-table-column prop="name" label="片名" />
-          <el-table-column prop="release" label="发行日期" />
-          <el-table-column prop="director" label="导演" />
-          <el-table-column prop="runtime" label="时长（分）" />
-        </el-table>
+        <hzq-table :data="testData" row-key="id" highlight-current-row :current-row-key="currentRowKey">
+          <hzq-table-column prop="name" label="片名" />
+          <hzq-table-column prop="release" label="发行日期" />
+          <hzq-table-column prop="director" label="导演" />
+          <hzq-table-column prop="runtime" label="时长（分）" />
+        </hzq-table>
       `,
 
         created() {
@@ -223,12 +223,12 @@ describe('Table', () => {
       }, true);
       setTimeout(_ => {
         vm.currentRowKey = 1;
-        const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
+        const tr = vm.$el.querySelector('.hzq-table__body-wrapper tbody tr');
         setTimeout(_ => {
           expect(tr.classList.contains('current-row')).to.be.true;
           vm.currentRowKey = 2;
 
-          const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+          const rows = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr');
           setTimeout(_ => {
             expect(tr.classList.contains('current-row')).to.be.false;
             expect(rows[1].classList.contains('current-row')).to.be.true;
@@ -242,13 +242,13 @@ describe('Table', () => {
     it('select-on-indeterminate', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData" @selection-change="change" :select-on-indeterminate="false" ref="table">
-            <el-table-column type="selection" />
-            <el-table-column prop="name" label="name" />
-            <el-table-column prop="release" label="release" />
-            <el-table-column prop="director" label="director" />
-            <el-table-column prop="runtime" label="runtime" />
-          </el-table>
+          <hzq-table :data="testData" @selection-change="change" :select-on-indeterminate="false" ref="table">
+            <hzq-table-column type="selection" />
+            <hzq-table-column prop="name" label="name" />
+            <hzq-table-column prop="release" label="release" />
+            <hzq-table-column prop="director" label="director" />
+            <hzq-table-column prop="runtime" label="runtime" />
+          </hzq-table>
         `,
 
         created() {
@@ -271,7 +271,7 @@ describe('Table', () => {
       }, true);
 
       setTimeout(_ => {
-        vm.$el.querySelector('.el-checkbox').click();
+        vm.$el.querySelector('.hzq-checkbox').click();
         setTimeout(_ => {
           expect(vm.selected).to.length(0);
           destroyVM(vm);
@@ -287,10 +287,10 @@ describe('Table', () => {
     beforeEach(done => {
       vm = createVue({
         template: `
-          <el-table ref="table" :data="testData" @filter-change="handleFilterChange">
-            <el-table-column prop="name" label="片名" />
-            <el-table-column prop="release" label="发行日期" />
-            <el-table-column
+          <hzq-table ref="table" :data="testData" @filter-change="handleFilterChange">
+            <hzq-table-column prop="name" label="片名" />
+            <hzq-table-column prop="release" label="发行日期" />
+            <hzq-table-column
               prop="director"
               column-key="director"
               :filters="[
@@ -300,8 +300,8 @@ describe('Table', () => {
               ]"
               :filter-method="filterMethod"
               label="导演" />
-            <el-table-column prop="runtime" label="时长（分）" />
-          </el-table>
+            <hzq-table-column prop="runtime" label="时长（分）" />
+          </hzq-table>
         `,
 
         created() {
@@ -324,14 +324,14 @@ describe('Table', () => {
     afterEach(() => destroyVM(vm));
 
     it('render', () => {
-      expect(vm.$el.querySelector('.el-table__column-filter-trigger')).to.exist;
+      expect(vm.$el.querySelector('.hzq-table__column-filter-trigger')).to.exist;
     });
 
     it('click dropdown', done => {
-      const btn = vm.$el.querySelector('.el-table__column-filter-trigger');
+      const btn = vm.$el.querySelector('.hzq-table__column-filter-trigger');
       triggerEvent(btn, 'click', true, false);
       setTimeout(_ => {
-        const filter = document.body.querySelector('.el-table-filter');
+        const filter = document.body.querySelector('.hzq-table-filter');
         expect(filter).to.exist;
         document.body.removeChild(filter);
         done();
@@ -339,20 +339,20 @@ describe('Table', () => {
     });
 
     it('click filter', done => {
-      const btn = vm.$el.querySelector('.el-table__column-filter-trigger');
+      const btn = vm.$el.querySelector('.hzq-table__column-filter-trigger');
 
       triggerEvent(btn, 'click', true, false);
       setTimeout(_ => {
-        const filter = document.body.querySelector('.el-table-filter');
+        const filter = document.body.querySelector('.hzq-table-filter');
 
         // John Lasseter
-        triggerEvent(filter.querySelector('.el-checkbox'), 'click', true, false);
+        triggerEvent(filter.querySelector('.hzq-checkbox'), 'click', true, false);
         // confrim button
         setTimeout(_ => {
-          triggerEvent(filter.querySelector('.el-table-filter__bottom button'), 'click', true, false);
+          triggerEvent(filter.querySelector('.hzq-table-filter__bottom button'), 'click', true, false);
           setTimeout(_ => {
             expect(vm.filters['director']).to.be.eql(['John Lasseter']);
-            expect(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr')).to.length(3);
+            expect(vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr')).to.length(3);
             document.body.removeChild(filter);
             done();
           }, DELAY);
@@ -361,20 +361,20 @@ describe('Table', () => {
     });
 
     it('click reset', done => {
-      const btn = vm.$el.querySelector('.el-table__column-filter-trigger');
+      const btn = vm.$el.querySelector('.hzq-table__column-filter-trigger');
 
       triggerEvent(btn, 'click', true, false);
       setTimeout(_ => {
-        const filter = document.body.querySelector('.el-table-filter');
+        const filter = document.body.querySelector('.hzq-table-filter');
 
         // John Lasseter
-        triggerEvent(filter.querySelector('.el-checkbox'), 'click', true, false);
+        triggerEvent(filter.querySelector('.hzq-checkbox'), 'click', true, false);
         setTimeout(_ => {
           // reset button
-          triggerEvent(filter.querySelectorAll('.el-table-filter__bottom button')[1], 'click', true, false);
+          triggerEvent(filter.querySelectorAll('.hzq-table-filter__bottom button')[1], 'click', true, false);
           setTimeout(_ => {
             expect(vm.filters['director']).to.be.eql([]);
-            expect(filter.querySelector('.el-table-filter__bottom button').classList.contains('is-disabled')).to.true;
+            expect(filter.querySelector('.hzq-table-filter__bottom button').classList.contains('is-disabled')).to.true;
             document.body.removeChild(filter);
             destroyVM(vm);
             done();
@@ -388,13 +388,13 @@ describe('Table', () => {
     const createTable = function(prop = '', opts) {
       return createVue({
         template: `
-          <el-table :data="testData" @${prop}="handleEvent">
-            <el-table-column type="selection" />
-            <el-table-column prop="name" />
-            <el-table-column prop="release" />
-            <el-table-column prop="director" />
-            <el-table-column prop="runtime"/>
-          </el-table>
+          <hzq-table :data="testData" @${prop}="handleEvent">
+            <hzq-table-column type="selection" />
+            <hzq-table-column prop="name" />
+            <hzq-table-column prop="release" />
+            <hzq-table-column prop="director" />
+            <hzq-table-column prop="runtime"/>
+          </hzq-table>
         `,
 
         methods: {
@@ -417,7 +417,7 @@ describe('Table', () => {
       const vm = createTable('select');
 
       setTimeout(_ => {
-        vm.$el.querySelectorAll('.el-checkbox')[1].click();
+        vm.$el.querySelectorAll('.hzq-checkbox')[1].click();
         expect(vm.result).to.length(2);
         expect(vm.result[1]).to.have.property('name').to.equal(getTestData()[0].name);
         destroyVM(vm);
@@ -429,7 +429,7 @@ describe('Table', () => {
       const vm = createTable('select-all');
 
       setTimeout(_ => {
-        vm.$el.querySelector('.el-checkbox').click();
+        vm.$el.querySelector('.hzq-checkbox').click();
         setTimeout(_ => {
           expect(vm.result).to.length(1);
           expect(vm.result[0]).to.length(getTestData().length);
@@ -442,7 +442,7 @@ describe('Table', () => {
     it('selection-change', done => {
       const vm = createTable('selection-change');
       setTimeout(_ => {
-        vm.$el.querySelectorAll('.el-checkbox')[1].click();
+        vm.$el.querySelectorAll('.hzq-checkbox')[1].click();
         expect(vm.result).to.length(1);
         destroyVM(vm);
         done();
@@ -453,7 +453,7 @@ describe('Table', () => {
       const vm = createTable('cell-mouse-enter');
 
       setTimeout(_ => {
-        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+        const cell = vm.$el.querySelectorAll('.hzq-table__body .cell')[2]; // first row
         triggerEvent(cell.parentNode, 'mouseenter');
         expect(vm.result).to.length(4); // row, column, cell, event
         expect(vm.result[0]).to.have.property('name').to.equal(getTestData()[0].name);
@@ -466,8 +466,8 @@ describe('Table', () => {
       const vm = createTable('cell-mouse-leave');
 
       setTimeout(_ => {
-        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[7]; // second row
-        const cell2 = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+        const cell = vm.$el.querySelectorAll('.hzq-table__body .cell')[7]; // second row
+        const cell2 = vm.$el.querySelectorAll('.hzq-table__body .cell')[2]; // first row
 
         triggerEvent(cell2.parentNode, 'mouseenter');
         triggerEvent(cell.parentNode, 'mouseleave');
@@ -482,7 +482,7 @@ describe('Table', () => {
       const vm = createTable('cell-click');
 
       setTimeout(_ => {
-        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+        const cell = vm.$el.querySelectorAll('.hzq-table__body .cell')[2]; // first row
 
         cell.parentNode.click();
         expect(vm.result).to.length(4); // row, column, cell, event
@@ -496,7 +496,7 @@ describe('Table', () => {
       const vm = createTable('row-click');
 
       setTimeout(_ => {
-        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+        const cell = vm.$el.querySelectorAll('.hzq-table__body .cell')[2]; // first row
 
         triggerEvent(cell.parentNode.parentNode, 'click');
         expect(vm.result).to.length(3); // row, event, column
@@ -510,7 +510,7 @@ describe('Table', () => {
       const vm = createTable('row-dblclick');
 
       setTimeout(_ => {
-        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+        const cell = vm.$el.querySelectorAll('.hzq-table__body .cell')[2]; // first row
 
         triggerEvent(cell.parentNode.parentNode, 'dblclick');
         expect(vm.result).to.length(3); // row, event, column
@@ -524,7 +524,7 @@ describe('Table', () => {
       const vm = createTable('current-change');
 
       setTimeout(_ => {
-        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+        const cell = vm.$el.querySelectorAll('.hzq-table__body .cell')[2]; // first row
 
         triggerEvent(cell.parentNode.parentNode, 'click');
         expect(vm.result).to.length(2); // currentRow, oldCurrentRow
@@ -550,7 +550,7 @@ describe('Table', () => {
       const vm = createTable('header-click');
 
       setTimeout(_ => {
-        const cell = vm.$el.querySelectorAll('.el-table__header th')[1]; // header[prop='name']
+        const cell = vm.$el.querySelectorAll('.hzq-table__header th')[1]; // header[prop='name']
 
         triggerEvent(cell, 'click');
         expect(vm.result).to.length(2); // column, event
@@ -563,12 +563,12 @@ describe('Table', () => {
     it('sort-change', async() => {
       const vm = createVue({
         template: `
-          <el-table ref="table" :data="testData" :default-sort = "{prop: 'runtime', order: 'ascending'}">
-            <el-table-column prop="name" />
-            <el-table-column prop="release" />
-            <el-table-column prop="director" />
-            <el-table-column prop="runtime" sortable/>
-          </el-table>
+          <hzq-table ref="table" :data="testData" :default-sort = "{prop: 'runtime', order: 'ascending'}">
+            <hzq-table-column prop="name" />
+            <hzq-table-column prop="release" />
+            <hzq-table-column prop="director" />
+            <hzq-table-column prop="runtime" sortable/>
+          </hzq-table>
         `,
 
         data() {
@@ -593,12 +593,12 @@ describe('Table', () => {
     const createTable = function(props1, props2, props3, props4, opts, tableProps) {
       return createVue(Object.assign({
         template: `
-          <el-table :data="testData" ${tableProps || ''}>
-            <el-table-column prop="name" ${props1 || ''} />
-            <el-table-column prop="release" ${props2 || ''} />
-            <el-table-column prop="director" ${props3 || ''} />
-            <el-table-column prop="runtime" ${props4 || ''} />
-          </el-table>
+          <hzq-table :data="testData" ${tableProps || ''}>
+            <hzq-table-column prop="name" ${props1 || ''} />
+            <hzq-table-column prop="release" ${props2 || ''} />
+            <hzq-table-column prop="director" ${props3 || ''} />
+            <hzq-table-column prop="runtime" ${props4 || ''} />
+          </hzq-table>
         `,
 
         created() {
@@ -622,7 +622,7 @@ describe('Table', () => {
     it('width', done => {
       const vm = createTable('width="123px"', ':width="102"', 'width="39"');
       setTimeout(_ => {
-        const ths = toArray(vm.$el.querySelectorAll('.el-table__header-wrapper col'))
+        const ths = toArray(vm.$el.querySelectorAll('.hzq-table__header-wrapper col'))
           .map(node => node.width).filter(o => o);
 
         expect(ths).to.include('123').include('102').include('39');
@@ -637,14 +637,14 @@ describe('Table', () => {
         'fixed="right" label="test2"',
         'fixed="left" label="test3"');
       setTimeout(_ => {
-        expect(toArray(vm.$el.querySelectorAll('.el-table__fixed th:not(.is-hidden)'))
+        expect(toArray(vm.$el.querySelectorAll('.hzq-table__fixed th:not(.is-hidden)'))
           .map(node => node.textContent))
           .to.eql(['test1', 'test3']);
 
-        expect(toArray(vm.$el.querySelectorAll('.el-table__fixed-right th:not(.is-hidden)'))
+        expect(toArray(vm.$el.querySelectorAll('.hzq-table__fixed-right th:not(.is-hidden)'))
           .map(node => node.textContent))
           .to.eql(['test2']);
-        expect(vm.$el.querySelector('.el-table__body-wrapper').style.height).to.equal('');
+        expect(vm.$el.querySelector('.hzq-table__body-wrapper').style.height).to.equal('');
         destroyVM(vm);
         done();
       }, DELAY);
@@ -679,7 +679,7 @@ describe('Table', () => {
         });
 
       setTimeout(_ => {
-        const cells = toArray(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:first-child'));
+        const cells = toArray(vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr td:first-child'));
         expect(cells.map(n => n.textContent)).to.eql(getTestData().map(o => `[${o.name}]`));
         destroyVM(vm);
         done();
@@ -689,7 +689,7 @@ describe('Table', () => {
     it('show-overflow-tooltip', done => {
       const vm = createTable('show-overflow-tooltip');
       setTimeout(_ => {
-        expect(vm.$el.querySelectorAll('.el-tooltip')).to.length(5);
+        expect(vm.$el.querySelectorAll('.hzq-tooltip')).to.length(5);
         destroyVM(vm);
         done();
       }, DELAY);
@@ -698,7 +698,7 @@ describe('Table', () => {
     it('show-tooltip-when-overflow', done => { // old version prop name
       const vm = createTable('show-tooltip-when-overflow');
       setTimeout(_ => {
-        expect(vm.$el.querySelectorAll('.el-tooltip')).to.length(5);
+        expect(vm.$el.querySelectorAll('.hzq-tooltip')).to.length(5);
         destroyVM(vm);
         done();
       }, DELAY);
@@ -707,16 +707,16 @@ describe('Table', () => {
     it('render-header', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData">
-            <el-table-column prop="name" label="name">
+          <hzq-table :data="testData">
+            <hzq-table-column prop="name" label="name">
               <template slot="header" slot-scope="{ column, $index }">
               {{ $index }}:{{column.label}}
               </template>
-            </el-table-column>
-            <el-table-column prop="release"/>
-            <el-table-column prop="director"/>
-            <el-table-column prop="runtime"/>
-          </el-table>
+            </hzq-table-column>
+            <hzq-table-column prop="release"/>
+            <hzq-table-column prop="director"/>
+            <hzq-table-column prop="runtime"/>
+          </hzq-table>
         `,
 
         created() {
@@ -725,7 +725,7 @@ describe('Table', () => {
       });
 
       setTimeout(_ => {
-        const headerCell = vm.$el.querySelector('.el-table__header-wrapper thead tr th:first-child .cell');
+        const headerCell = vm.$el.querySelector('.hzq-table__header-wrapper thead tr th:first-child .cell');
         expect(headerCell.textContent.trim()).to.equal('0:name');
         destroyVM(vm);
         done();
@@ -759,13 +759,13 @@ describe('Table', () => {
     it('selectable', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData" @selection-change="change">
-            <el-table-column type="selection" :selectable="filterSelect" />
-            <el-table-column prop="name" label="name" />
-            <el-table-column prop="release" label="release" />
-            <el-table-column prop="director" label="director" />
-            <el-table-column prop="runtime" label="runtime" />
-          </el-table>
+          <hzq-table :data="testData" @selection-change="change">
+            <hzq-table-column type="selection" :selectable="filterSelect" />
+            <hzq-table-column prop="name" label="name" />
+            <hzq-table-column prop="release" label="release" />
+            <hzq-table-column prop="director" label="director" />
+            <hzq-table-column prop="runtime" label="runtime" />
+          </hzq-table>
         `,
 
         created() {
@@ -788,7 +788,7 @@ describe('Table', () => {
       }, true);
 
       setTimeout(_ => {
-        vm.$el.querySelector('.el-checkbox').click();
+        vm.$el.querySelector('.hzq-checkbox').click();
         setTimeout(_ => {
           expect(vm.selected).to.length(2);
           destroyVM(vm);
@@ -800,13 +800,13 @@ describe('Table', () => {
     it('selectable === false & check selectAll status', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData" @selection-change="change">
-            <el-table-column type="selection" :selectable="filterSelect" />
-            <el-table-column prop="name" label="name" />
-            <el-table-column prop="release" label="release" />
-            <el-table-column prop="director" label="director" />
-            <el-table-column prop="runtime" label="runtime" />
-          </el-table>
+          <hzq-table :data="testData" @selection-change="change">
+            <hzq-table-column type="selection" :selectable="filterSelect" />
+            <hzq-table-column prop="name" label="name" />
+            <hzq-table-column prop="release" label="release" />
+            <hzq-table-column prop="director" label="director" />
+            <hzq-table-column prop="runtime" label="runtime" />
+          </hzq-table>
         `,
 
         created() {
@@ -830,7 +830,7 @@ describe('Table', () => {
       vm.testData = getTestData();
 
       setTimeout(_ => {
-        expect(vm.$el.querySelector('.el-checkbox').__vue__.checked).to.be.false;
+        expect(vm.$el.querySelector('.hzq-checkbox').__vue__.checked).to.be.false;
         setTimeout(_ => {
           expect(vm.selected).to.length(0);
           destroyVM(vm);
@@ -842,13 +842,13 @@ describe('Table', () => {
     it('emit selection-change after row has been removed', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData" @selection-change="change">
-            <el-table-column type="selection" />
-            <el-table-column prop="name" label="name" />
-            <el-table-column prop="release" label="release" />
-            <el-table-column prop="director" label="director" />
-            <el-table-column prop="runtime" label="runtime" />
-          </el-table>
+          <hzq-table :data="testData" @selection-change="change">
+            <hzq-table-column type="selection" />
+            <hzq-table-column prop="name" label="name" />
+            <hzq-table-column prop="release" label="release" />
+            <hzq-table-column prop="director" label="director" />
+            <hzq-table-column prop="runtime" label="runtime" />
+          </hzq-table>
         `,
 
         created() {
@@ -871,7 +871,7 @@ describe('Table', () => {
       }, true);
 
       setTimeout(_ => {
-        vm.$el.querySelector('.el-checkbox').click();
+        vm.$el.querySelector('.hzq-checkbox').click();
         setTimeout(_ => {
           expect(vm.selected).to.length(5);
           vm.testData.splice(0, 1);
@@ -888,13 +888,13 @@ describe('Table', () => {
       const createTable = function(type) {
         return createVue({
           template: `
-            <el-table :data="testData" @selection-change="change">
-              <el-table-column type="${type}" />
-              <el-table-column prop="name" label="name" />
-              <el-table-column prop="release" label="release" />
-              <el-table-column prop="director" label="director" />
-              <el-table-column prop="runtime" label="runtime" />
-            </el-table>
+            <hzq-table :data="testData" @selection-change="change">
+              <hzq-table-column type="${type}" />
+              <hzq-table-column prop="name" label="name" />
+              <hzq-table-column prop="release" label="release" />
+              <hzq-table-column prop="director" label="director" />
+              <hzq-table-column prop="runtime" label="runtime" />
+            </hzq-table>
           `,
 
           created() {
@@ -918,13 +918,13 @@ describe('Table', () => {
 
         it('render', done => {
           setTimeout(_ => {
-            expect(vm.$el.querySelectorAll('.el-checkbox')).to.length(getTestData().length + 1);
+            expect(vm.$el.querySelectorAll('.hzq-checkbox')).to.length(getTestData().length + 1);
             done();
           }, DELAY);
         });
 
         it('select all', done => {
-          vm.$el.querySelector('.el-checkbox').click();
+          vm.$el.querySelector('.hzq-checkbox').click();
 
           setTimeout(_ => {
             expect(vm.selected).to.length(getTestData().length);
@@ -933,7 +933,7 @@ describe('Table', () => {
         });
 
         it('cancel all', done => {
-          vm.$el.querySelector('.el-checkbox').click();
+          vm.$el.querySelector('.hzq-checkbox').click();
 
           setTimeout(_ => {
             expect(vm.selected).to.length(0);
@@ -946,7 +946,7 @@ describe('Table', () => {
           const vm2 = createTable('selection');
 
           setTimeout(_ => {
-            vm2.$el.querySelectorAll('.el-checkbox')[1].click();
+            vm2.$el.querySelectorAll('.hzq-checkbox')[1].click();
 
             setTimeout(_ => {
               expect(vm2.selected).to.length(1);
@@ -963,7 +963,7 @@ describe('Table', () => {
 
         it('render', done => {
           setTimeout(_ => {
-            expect(toArray(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:first-child'))
+            expect(toArray(vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr td:first-child'))
               .map(node => node.textContent)).to.eql(['1', '2', '3', '4', '5']);
             destroyVM(vm);
             done();
@@ -976,16 +976,16 @@ describe('Table', () => {
           extra = extra || '';
           return createVue({
             template: `
-            <el-table row-key="id" :data="testData" @expand-change="handleExpand" ${extra}>
-              <el-table-column type="expand">
+            <hzq-table row-key="id" :data="testData" @expand-change="handleExpand" ${extra}>
+              <hzq-table-column type="expand">
                 <template slot-scope="props">
                   <div>{{props.row.name}}</div>
                 </template>
-              </el-table-column>
-              <el-table-column prop="release" label="release" />
-              <el-table-column prop="director" label="director" />
-              <el-table-column prop="runtime" label="runtime" />
-            </el-table>
+              </hzq-table-column>
+              <hzq-table-column prop="release" label="release" />
+              <hzq-table-column prop="director" label="director" />
+              <hzq-table-column prop="runtime" label="runtime" />
+            </hzq-table>
           `,
 
             data() {
@@ -1006,7 +1006,7 @@ describe('Table', () => {
         it('works', done => {
           const vm = createInstance();
           setTimeout(_ => {
-            expect(vm.$el.querySelectorAll('td.el-table__expand-column').length).to.equal(5);
+            expect(vm.$el.querySelectorAll('td.hzq-table__expand-column').length).to.equal(5);
             destroyVM(vm);
             done();
           }, DELAY);
@@ -1015,13 +1015,13 @@ describe('Table', () => {
         it('should expand when click icon', done => {
           const vm = createInstance();
           setTimeout(_ => {
-            vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+            vm.$el.querySelector('td.hzq-table__expand-column .hzq-table__expand-icon').click();
             setTimeout(_ => {
-              expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+              expect(vm.$el.querySelectorAll('.hzq-table__expanded-cell').length).to.equal(1);
               expect(vm.expandCount).to.equal(1);
-              vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+              vm.$el.querySelector('td.hzq-table__expand-column .hzq-table__expand-icon').click();
               setTimeout(_ => {
-                expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(0);
+                expect(vm.$el.querySelectorAll('.hzq-table__expanded-cell').length).to.equal(0);
                 expect(vm.expandCount).to.equal(2);
                 destroyVM(vm);
                 done();
@@ -1035,10 +1035,10 @@ describe('Table', () => {
           setTimeout(_ => {
             vm.expandRowKeys = [1, 3];
             setTimeout(_ => {
-              expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(2);
+              expect(vm.$el.querySelectorAll('.hzq-table__expanded-cell').length).to.equal(2);
               vm.expandRowKeys = [2];
               setTimeout(_ => {
-                expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+                expect(vm.$el.querySelectorAll('.hzq-table__expanded-cell').length).to.equal(1);
                 destroyVM(vm);
                 done();
               }, DELAY);
@@ -1049,7 +1049,7 @@ describe('Table', () => {
         it('should default-expand-all when default-expand-all is true', done => {
           const vm = createInstance('default-expand-all');
           setTimeout(_ => {
-            expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(5);
+            expect(vm.$el.querySelectorAll('.hzq-table__expanded-cell').length).to.equal(5);
             destroyVM(vm);
             done();
           }, DELAY);
@@ -1058,17 +1058,17 @@ describe('Table', () => {
         it('should unexpand after refresh data and click', function(done) {
           const vm = createInstance();
           setTimeout(_ => {
-            vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+            vm.$el.querySelector('td.hzq-table__expand-column .hzq-table__expand-icon').click();
             setTimeout(_ => {
-              expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+              expect(vm.$el.querySelectorAll('.hzq-table__expanded-cell').length).to.equal(1);
               expect(vm.expandCount).to.equal(1);
               vm.refreshData();
               setTimeout(_ => { // wait until refreshed
-                expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
-                vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+                expect(vm.$el.querySelectorAll('.hzq-table__expanded-cell').length).to.equal(1);
+                vm.$el.querySelector('td.hzq-table__expand-column .hzq-table__expand-icon').click();
                 setTimeout(_ => {
                   // should unexpand
-                  expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(0);
+                  expect(vm.$el.querySelectorAll('.hzq-table__expanded-cell').length).to.equal(0);
                   expect(vm.expandCount).to.equal(2);
                   destroyVM(vm);
                   done();
@@ -1099,7 +1099,7 @@ describe('Table', () => {
           elm.click();
 
           setTimeout(_ => {
-            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            const lastCells = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
             destroyVM(vm);
             done();
@@ -1129,7 +1129,7 @@ describe('Table', () => {
           elm.click();
 
           setTimeout(_ => {
-            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            const lastCells = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
             destroyVM(vm);
             done();
@@ -1152,7 +1152,7 @@ describe('Table', () => {
           elm.click();
 
           setTimeout(_ => {
-            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            const lastCells = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
             destroyVM(vm);
             done();
@@ -1169,7 +1169,7 @@ describe('Table', () => {
           elm.click();
 
           setTimeout(_ => {
-            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            const lastCells = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['80', '92', '92', '95', '100']);
             destroyVM(vm);
             done();
@@ -1186,7 +1186,7 @@ describe('Table', () => {
 
         elm.click();
         setTimeout(_ => {
-          const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+          const lastCells = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr td:last-child');
           expect(toArray(lastCells).map(node => node.textContent))
             .to.eql(['80', '92', '92', '95', '100']);
           done();
@@ -1198,7 +1198,7 @@ describe('Table', () => {
 
         elm.click();
         setTimeout(_ => {
-          const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+          const lastCells = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr td:last-child');
           expect(toArray(lastCells).map(node => node.textContent))
             .to.eql(['100', '95', '92', '92', '80']);
           destroyVM(vm);
@@ -1212,12 +1212,12 @@ describe('Table', () => {
     it('should render', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData" show-summary>
-            <el-table-column prop="name" />
-            <el-table-column prop="release"/>
-            <el-table-column prop="director"/>
-            <el-table-column prop="runtime"/>
-          </el-table>
+          <hzq-table :data="testData" show-summary>
+            <hzq-table-column prop="name" />
+            <hzq-table-column prop="release"/>
+            <hzq-table-column prop="director"/>
+            <hzq-table-column prop="runtime"/>
+          </hzq-table>
         `,
 
         created() {
@@ -1226,7 +1226,7 @@ describe('Table', () => {
       }, true);
 
       setTimeout(_ => {
-        const footer = vm.$el.querySelector('.el-table__footer');
+        const footer = vm.$el.querySelector('.hzq-table__footer');
         expect(footer).to.exist;
         const cells = toArray(footer.querySelectorAll('.cell'));
         expect(cells[cells.length - 1].innerText).to.equal('459');
@@ -1238,12 +1238,12 @@ describe('Table', () => {
     it('custom sum text', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData" show-summary sum-text="Time">
-            <el-table-column prop="name" />
-            <el-table-column prop="release"/>
-            <el-table-column prop="director"/>
-            <el-table-column prop="runtime"/>
-          </el-table>
+          <hzq-table :data="testData" show-summary sum-text="Time">
+            <hzq-table-column prop="name" />
+            <hzq-table-column prop="release"/>
+            <hzq-table-column prop="director"/>
+            <hzq-table-column prop="runtime"/>
+          </hzq-table>
         `,
 
         created() {
@@ -1252,7 +1252,7 @@ describe('Table', () => {
       }, true);
 
       setTimeout(_ => {
-        const cells = toArray(vm.$el.querySelectorAll('.el-table__footer .cell'));
+        const cells = toArray(vm.$el.querySelectorAll('.hzq-table__footer .cell'));
         expect(cells[0].innerText).to.equal('Time');
         destroyVM(vm);
         done();
@@ -1262,12 +1262,12 @@ describe('Table', () => {
     it('custom summary method', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData" show-summary :summary-method="getSummary">
-            <el-table-column prop="name" />
-            <el-table-column prop="release"/>
-            <el-table-column prop="director"/>
-            <el-table-column prop="runtime"/>
-          </el-table>
+          <hzq-table :data="testData" show-summary :summary-method="getSummary">
+            <hzq-table-column prop="name" />
+            <hzq-table-column prop="release"/>
+            <hzq-table-column prop="director"/>
+            <hzq-table-column prop="runtime"/>
+          </hzq-table>
         `,
 
         created() {
@@ -1296,7 +1296,7 @@ describe('Table', () => {
       }, true);
 
       setTimeout(_ => {
-        const cells = toArray(vm.$el.querySelectorAll('.el-table__footer .cell'));
+        const cells = toArray(vm.$el.querySelectorAll('.hzq-table__footer .cell'));
         expect(cells[1].innerText).to.equal('9996');
         destroyVM(vm);
         done();
@@ -1308,14 +1308,14 @@ describe('Table', () => {
     it('should works', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData">
-            <el-table-column prop="name" />
-            <el-table-column label="group">
-              <el-table-column prop="release"/>
-              <el-table-column prop="director"/>
-            </el-table-column>
-            <el-table-column prop="runtime"/>
-          </el-table>
+          <hzq-table :data="testData">
+            <hzq-table-column prop="name" />
+            <hzq-table-column label="group">
+              <hzq-table-column prop="release"/>
+              <hzq-table-column prop="director"/>
+            </hzq-table-column>
+            <hzq-table-column prop="runtime"/>
+          </hzq-table>
         `,
 
         created() {
@@ -1324,7 +1324,7 @@ describe('Table', () => {
       }, true);
 
       setTimeout(_ => {
-        const trs = vm.$el.querySelectorAll('.el-table__header tr');
+        const trs = vm.$el.querySelectorAll('.hzq-table__header tr');
         expect(trs.length).equal(2);
         const firstRowHeader = trs[0].querySelectorAll('th .cell').length;
         const secondRowHeader = trs[1].querySelectorAll('th .cell').length;
@@ -1341,17 +1341,17 @@ describe('Table', () => {
     it('should works', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData">
-            <el-table-column prop="name" />
-            <el-table-column label="group">
-              <el-table-column label="group's group">
-                <el-table-column prop="release" />
-                <el-table-column prop="runtime"/>
-              </el-table-column>
-              <el-table-column prop="director" />
-            </el-table-column>
-            <el-table-column prop="runtime"/>
-          </el-table>
+          <hzq-table :data="testData">
+            <hzq-table-column prop="name" />
+            <hzq-table-column label="group">
+              <hzq-table-column label="group's group">
+                <hzq-table-column prop="release" />
+                <hzq-table-column prop="runtime"/>
+              </hzq-table-column>
+              <hzq-table-column prop="director" />
+            </hzq-table-column>
+            <hzq-table-column prop="runtime"/>
+          </hzq-table>
         `,
 
         created() {
@@ -1360,7 +1360,7 @@ describe('Table', () => {
       }, true);
 
       setTimeout(_ => {
-        const trs = vm.$el.querySelectorAll('.el-table__header tr');
+        const trs = vm.$el.querySelectorAll('.hzq-table__header tr');
         expect(trs.length).equal(3);
         const firstRowHeader = trs[0].querySelectorAll('th .cell').length;
         const secondRowHeader = trs[1].querySelectorAll('th .cell').length;
@@ -1382,11 +1382,11 @@ describe('Table', () => {
     it('should work in one column', done => {
       const vm = createVue({
         template: `
-          <el-table :data="testData">
-            <el-table-column label="group">
-              <el-table-column prop="release"/>
-            </el-table-column>
-          </el-table>
+          <hzq-table :data="testData">
+            <hzq-table-column label="group">
+              <hzq-table-column prop="release"/>
+            </hzq-table-column>
+          </hzq-table>
         `,
 
         created() {
@@ -1395,7 +1395,7 @@ describe('Table', () => {
       }, true);
 
       setTimeout(_ => {
-        const trs = vm.$el.querySelectorAll('.el-table__header tr');
+        const trs = vm.$el.querySelectorAll('.hzq-table__header tr');
         expect(trs.length).equal(2);
         const firstRowLength = trs[0].querySelectorAll('th .cell').length;
         const secondRowLength = trs[1].querySelectorAll('th .cell').length;
@@ -1416,12 +1416,12 @@ describe('Table', () => {
     it('label', (done) => {
       const vm = createVue({
         template: `
-          <el-table :data="testData">
-            <el-table-column prop="name" :label="label"/>
-            <el-table-column prop="release" />
-            <el-table-column prop="director" />
-            <el-table-column prop="runtime" />
-          </el-table>
+          <hzq-table :data="testData">
+            <hzq-table-column prop="name" :label="label"/>
+            <hzq-table-column prop="release" />
+            <hzq-table-column prop="director" />
+            <hzq-table-column prop="runtime" />
+          </hzq-table>
         `,
 
         data() {
@@ -1436,10 +1436,10 @@ describe('Table', () => {
       }, true);
 
       setTimeout(() => {
-        expect(vm.$el.querySelector('.el-table__header th .cell').textContent).to.equal('name');
+        expect(vm.$el.querySelector('.hzq-table__header th .cell').textContent).to.equal('name');
         vm.label = 'NAME';
         vm.$nextTick(() => {
-          expect(vm.$el.querySelector('.el-table__header th .cell').textContent).to.equal('NAME');
+          expect(vm.$el.querySelector('.hzq-table__header th .cell').textContent).to.equal('NAME');
           destroyVM(vm);
           done();
         });
@@ -1449,9 +1449,9 @@ describe('Table', () => {
     it('align', (done) => {
       const vm = createVue({
         template: `
-          <el-table :data="testData">
-            <el-table-column prop="name" :align="align"/>
-          </el-table>
+          <hzq-table :data="testData">
+            <hzq-table-column prop="name" :align="align"/>
+          </hzq-table>
         `,
 
         data() {
@@ -1466,10 +1466,10 @@ describe('Table', () => {
       }, true);
 
       setTimeout(() => {
-        expect(vm.$el.querySelectorAll('.el-table__body td.is-right').length === 0).to.be.true;
+        expect(vm.$el.querySelectorAll('.hzq-table__body td.is-right').length === 0).to.be.true;
         vm.align = 'right';
         vm.$nextTick(() => {
-          expect(vm.$el.querySelectorAll('.el-table__body td.is-right').length > 0).to.be.true;
+          expect(vm.$el.querySelectorAll('.hzq-table__body td.is-right').length > 0).to.be.true;
           destroyVM(vm);
           done();
         });
@@ -1479,9 +1479,9 @@ describe('Table', () => {
     it('header-align', (done) => {
       const vm = createVue({
         template: `
-           <el-table :data="testData">
-            <el-table-column prop="name" :align="align" :header-align="headerAlign"/>
-          </el-table>
+           <hzq-table :data="testData">
+            <hzq-table-column prop="name" :align="align" :header-align="headerAlign"/>
+          </hzq-table>
         `,
 
         data() {
@@ -1497,24 +1497,24 @@ describe('Table', () => {
       }, true);
 
       vm.$nextTick(() => {
-        expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.above(0);
-        expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
-        expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.equal(0);
+        expect(vm.$el.querySelectorAll('.hzq-table__header th.is-left').length).to.above(0);
+        expect(vm.$el.querySelectorAll('.hzq-table__header th.is-center').length).to.equal(0);
+        expect(vm.$el.querySelectorAll('.hzq-table__header th.is-right').length).to.equal(0);
         vm.align = 'right';
         vm.$nextTick(() => {
-          expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
-          expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
-          expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.above(0);
+          expect(vm.$el.querySelectorAll('.hzq-table__header th.is-left').length).to.equal(0);
+          expect(vm.$el.querySelectorAll('.hzq-table__header th.is-center').length).to.equal(0);
+          expect(vm.$el.querySelectorAll('.hzq-table__header th.is-right').length).to.above(0);
           vm.headerAlign = 'center';
           vm.$nextTick(() => {
-            expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
-            expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.above(0);
-            expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.equal(0);
+            expect(vm.$el.querySelectorAll('.hzq-table__header th.is-left').length).to.equal(0);
+            expect(vm.$el.querySelectorAll('.hzq-table__header th.is-center').length).to.above(0);
+            expect(vm.$el.querySelectorAll('.hzq-table__header th.is-right').length).to.equal(0);
             vm.headerAlign = null;
             vm.$nextTick(() => {
-              expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
-              expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
-              expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.above(0);
+              expect(vm.$el.querySelectorAll('.hzq-table__header th.is-left').length).to.equal(0);
+              expect(vm.$el.querySelectorAll('.hzq-table__header th.is-center').length).to.equal(0);
+              expect(vm.$el.querySelectorAll('.hzq-table__header th.is-right').length).to.above(0);
               destroyVM(vm);
               done();
             });
@@ -1526,9 +1526,9 @@ describe('Table', () => {
     it('width', (done) => {
       const vm = createVue({
         template: `
-          <el-table :data="testData" :fit="false">
-            <el-table-column prop="name" :width="width"/>
-          </el-table>
+          <hzq-table :data="testData" :fit="false">
+            <hzq-table-column prop="name" :width="width"/>
+          </hzq-table>
         `,
 
         data() {
@@ -1543,10 +1543,10 @@ describe('Table', () => {
       }, true);
 
       setTimeout(() => {
-        expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('100');
+        expect(vm.$el.querySelector('.hzq-table__body col').getAttribute('width')).to.equal('100');
         vm.width = 200;
         setTimeout(() => {
-          expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('200');
+          expect(vm.$el.querySelector('.hzq-table__body col').getAttribute('width')).to.equal('200');
           destroyVM(vm);
           done();
         }, 100);
@@ -1556,9 +1556,9 @@ describe('Table', () => {
     it('min-width', (done) => {
       const vm = createVue({
         template: `
-          <el-table :data="testData" :fit="false">
-            <el-table-column prop="name" :min-width="width"/>
-          </el-table>
+          <hzq-table :data="testData" :fit="false">
+            <hzq-table-column prop="name" :min-width="width"/>
+          </hzq-table>
         `,
 
         data() {
@@ -1573,10 +1573,10 @@ describe('Table', () => {
       }, true);
 
       setTimeout(() => {
-        expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('100');
+        expect(vm.$el.querySelector('.hzq-table__body col').getAttribute('width')).to.equal('100');
         vm.width = 200;
         setTimeout(() => {
-          expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('200');
+          expect(vm.$el.querySelector('.hzq-table__body col').getAttribute('width')).to.equal('200');
           destroyVM(vm);
           done();
         }, 100);
@@ -1586,12 +1586,12 @@ describe('Table', () => {
     it('fixed', (done) => {
       const vm = createVue({
         template: `
-          <el-table :data="testData">
-            <el-table-column :fixed="fixed" />
-            <el-table-column prop="release" />
-            <el-table-column prop="director" />
-            <el-table-column prop="runtime" />
-          </el-table>
+          <hzq-table :data="testData">
+            <hzq-table-column :fixed="fixed" />
+            <hzq-table-column prop="release" />
+            <hzq-table-column prop="director" />
+            <hzq-table-column prop="runtime" />
+          </hzq-table>
         `,
 
         data() {
@@ -1606,10 +1606,10 @@ describe('Table', () => {
       }, true);
 
       setTimeout(() => {
-        expect(!vm.$el.querySelector('.el-table__fixed')).to.be.true;
+        expect(!vm.$el.querySelector('.hzq-table__fixed')).to.be.true;
         vm.fixed = true;
         setTimeout(() => {
-          expect(!!vm.$el.querySelector('.el-table__fixed')).to.be.true;
+          expect(!!vm.$el.querySelector('.hzq-table__fixed')).to.be.true;
           destroyVM(vm);
           done();
         }, 100);
@@ -1619,12 +1619,12 @@ describe('Table', () => {
     it('prop', (done) => {
       const vm = createVue({
         template: `
-          <el-table :data="testData">
-            <el-table-column :prop="prop" />
-            <el-table-column prop="release" />
-            <el-table-column prop="director" />
-            <el-table-column prop="runtime" />
-          </el-table>
+          <hzq-table :data="testData">
+            <hzq-table-column :prop="prop" />
+            <hzq-table-column prop="release" />
+            <hzq-table-column prop="director" />
+            <hzq-table-column prop="runtime" />
+          </hzq-table>
         `,
 
         data() {
@@ -1639,13 +1639,13 @@ describe('Table', () => {
       }, true);
 
       setTimeout(() => {
-        let firstColumnContent = vm.$el.querySelector('.el-table__body td .cell').textContent;
-        let secondColumnContent = vm.$el.querySelector('.el-table__body td:nth-child(2) .cell').textContent;
+        let firstColumnContent = vm.$el.querySelector('.hzq-table__body td .cell').textContent;
+        let secondColumnContent = vm.$el.querySelector('.hzq-table__body td:nth-child(2) .cell').textContent;
         expect(firstColumnContent !== secondColumnContent).to.be.true;
         vm.prop = 'release';
         setTimeout(() => {
-          firstColumnContent = vm.$el.querySelector('.el-table__body td .cell').textContent;
-          secondColumnContent = vm.$el.querySelector('.el-table__body td:nth-child(2) .cell').textContent;
+          firstColumnContent = vm.$el.querySelector('.hzq-table__body td .cell').textContent;
+          secondColumnContent = vm.$el.querySelector('.hzq-table__body td:nth-child(2) .cell').textContent;
           expect(firstColumnContent === secondColumnContent).to.be.true;
           destroyVM(vm);
           done();
@@ -1658,13 +1658,13 @@ describe('Table', () => {
     const createTable = function(prop = '', opts) {
       return createVue({
         template: `
-          <el-table ref="table" :data="testData" @${prop}="handleEvent">
-            <el-table-column type="selection" />
-            <el-table-column prop="name" />
-            <el-table-column prop="release" />
-            <el-table-column prop="director" />
-            <el-table-column prop="runtime"/>
-          </el-table>
+          <hzq-table ref="table" :data="testData" @${prop}="handleEvent">
+            <hzq-table-column type="selection" />
+            <hzq-table-column prop="name" />
+            <hzq-table-column prop="release" />
+            <hzq-table-column prop="director" />
+            <hzq-table-column prop="runtime"/>
+          </hzq-table>
         `,
 
         methods: {
@@ -1721,14 +1721,14 @@ describe('Table', () => {
       const vm = createVue({
         template: `
         <div>
-          <el-table ref="table" :data="testData" @selection-change="change">
-            <el-table-column type="selection" />
-            <el-table-column prop="name" />
-          </el-table>
-          <el-table ref="table1" :data="testData1" @selection-change="change">
-            <el-table-column type="selection" />
-            <el-table-column prop="name" />
-          </el-table>
+          <hzq-table ref="table" :data="testData" @selection-change="change">
+            <hzq-table-column type="selection" />
+            <hzq-table-column prop="name" />
+          </hzq-table>
+          <hzq-table ref="table1" :data="testData1" @selection-change="change">
+            <hzq-table-column type="selection" />
+            <hzq-table-column prop="name" />
+          </hzq-table>
         </div>
         `,
 
@@ -1778,12 +1778,12 @@ describe('Table', () => {
     it('sort', done => {
       const vm = createVue({
         template: `
-          <el-table ref="table" :data="testData" :default-sort = "{prop: 'runtime', order: 'ascending'}">
-            <el-table-column prop="name" />
-            <el-table-column prop="release" />
-            <el-table-column prop="director" />
-            <el-table-column prop="runtime"/>
-          </el-table>
+          <hzq-table ref="table" :data="testData" :default-sort = "{prop: 'runtime', order: 'ascending'}">
+            <hzq-table-column prop="name" />
+            <hzq-table-column prop="release" />
+            <hzq-table-column prop="director" />
+            <hzq-table-column prop="runtime"/>
+          </hzq-table>
         `,
 
         created() {
@@ -1796,7 +1796,7 @@ describe('Table', () => {
       });
 
       setTimeout(() => {
-        const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+        const lastCells = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr td:last-child');
         expect(toArray(lastCells).map(node => node.textContent))
           .to.eql(['80', '92', '92', '95', '100']);
 
@@ -1821,12 +1821,12 @@ describe('Table', () => {
 
       const vm = createVue({
         template: `
-          <el-table ref="table" :data="testData" >
-            <el-table-column prop="name" sortable />
-            <el-table-column prop="release" sortable />
-            <el-table-column prop="director" sortable />
-            <el-table-column prop="runtime" sortable />
-          </el-table>
+          <hzq-table ref="table" :data="testData" >
+            <hzq-table-column prop="name" sortable />
+            <hzq-table-column prop="release" sortable />
+            <hzq-table-column prop="director" sortable />
+            <hzq-table-column prop="runtime" sortable />
+          </hzq-table>
         `,
         data() {
           return { testData: getTestData() };
@@ -1852,12 +1852,12 @@ describe('Table', () => {
       const vm = createVue({
         template: `
         <div>
-          <el-table ref="table" :data="testData" highlight-current-row>
-            <el-table-column prop="name" sortable />
-            <el-table-column prop="release" sortable />
-            <el-table-column prop="director" sortable />
-            <el-table-column prop="runtime" sortable />
-          </el-table>
+          <hzq-table ref="table" :data="testData" highlight-current-row>
+            <hzq-table-column prop="name" sortable />
+            <hzq-table-column prop="release" sortable />
+            <hzq-table-column prop="director" sortable />
+            <hzq-table-column prop="runtime" sortable />
+          </hzq-table>
           <button class="clear" @click="clear">clear</button>
         </div>
         `,
@@ -1873,7 +1873,7 @@ describe('Table', () => {
 
       vm.$refs.table.setCurrentRow(vm.testData[1]);
       await waitImmediate();
-      const secondRow = vm.$el.querySelectorAll('.el-table__row')[1];
+      const secondRow = vm.$el.querySelectorAll('.hzq-table__row')[1];
       expect(secondRow.classList.contains('current-row')).to.true;
 
       vm.$el.querySelector('.clear').click();
@@ -1887,12 +1887,12 @@ describe('Table', () => {
   it('hover', async() => {
     const vm = createVue({
       template: `
-        <el-table :data="testData">
-          <el-table-column prop="name" label="片名" fixed />
-          <el-table-column prop="release" label="发行日期" />
-          <el-table-column prop="director" label="导演" />
-          <el-table-column prop="runtime" label="时长（分）" />
-        </el-table>
+        <hzq-table :data="testData">
+          <hzq-table-column prop="name" label="片名" fixed />
+          <hzq-table-column prop="release" label="发行日期" />
+          <hzq-table-column prop="director" label="导演" />
+          <hzq-table-column prop="runtime" label="时长（分）" />
+        </hzq-table>
       `,
       data() {
         return {
@@ -1901,7 +1901,7 @@ describe('Table', () => {
       }
     }, true);
     await waitImmediate();
-    const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
+    const tr = vm.$el.querySelector('.hzq-table__body-wrapper tbody tr');
     triggerEvent(tr, 'mouseenter', true, false);
 
     await wait(50);
@@ -1916,12 +1916,12 @@ describe('Table', () => {
   it('highlight-current-row', done => {
     const vm = createVue({
       template: `
-        <el-table :data="testData" highlight-current-row>
-          <el-table-column prop="name" label="片名" />
-          <el-table-column prop="release" label="发行日期" />
-          <el-table-column prop="director" label="导演" />
-          <el-table-column prop="runtime" label="时长（分）" sortable />
-        </el-table>
+        <hzq-table :data="testData" highlight-current-row>
+          <hzq-table-column prop="name" label="片名" />
+          <hzq-table-column prop="release" label="发行日期" />
+          <hzq-table-column prop="director" label="导演" />
+          <hzq-table-column prop="runtime" label="时长（分）" sortable />
+        </hzq-table>
       `,
 
       created() {
@@ -1929,22 +1929,22 @@ describe('Table', () => {
       }
     }, true);
     setTimeout(_ => {
-      const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
+      const tr = vm.$el.querySelector('.hzq-table__body-wrapper tbody tr');
       triggerEvent(tr, 'click', true, false);
       setTimeout(_ => {
         expect(tr.classList.contains('current-row')).to.be.true;
-        const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+        const rows = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr');
 
         triggerEvent(rows[1], 'click', true, false);
         setTimeout(_ => {
           expect(tr.classList.contains('current-row')).to.be.false;
           expect(rows[1].classList.contains('current-row')).to.be.true;
 
-          const ths = vm.$el.querySelectorAll('.el-table__header-wrapper thead th');
+          const ths = vm.$el.querySelectorAll('.hzq-table__header-wrapper thead th');
           triggerEvent(ths[3], 'click', true, false);
 
           setTimeout(_ => {
-            const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+            const rows = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr');
 
             expect(rows[1].classList.contains('current-row')).to.be.false;
             expect(rows[3].classList.contains('current-row')).to.be.true;
@@ -1959,12 +1959,12 @@ describe('Table', () => {
   it('keep highlight row when data change', done => {
     const vm = createVue({
       template: `
-        <el-table :data="testData" highlight-current-row row-key="release">
-          <el-table-column prop="name" label="片名" />
-          <el-table-column prop="release" label="发行日期" />
-          <el-table-column prop="director" label="导演" />
-          <el-table-column prop="runtime" label="时长（分）" sortable />
-        </el-table>
+        <hzq-table :data="testData" highlight-current-row row-key="release">
+          <hzq-table-column prop="name" label="片名" />
+          <hzq-table-column prop="release" label="发行日期" />
+          <hzq-table-column prop="director" label="导演" />
+          <hzq-table-column prop="runtime" label="时长（分）" sortable />
+        </hzq-table>
       `,
       data() {
         return {
@@ -1973,7 +1973,7 @@ describe('Table', () => {
       }
     }, true);
     setTimeout(() => {
-      let rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+      let rows = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr');
       triggerEvent(rows[2], 'click', true, false);
       setTimeout(() => {
         expect(rows[2].classList.contains('current-row')).to.be.true;
@@ -1989,7 +1989,7 @@ describe('Table', () => {
         vm.testData = data;
 
         setTimeout(() => {
-          rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+          rows = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr');
           expect(rows[3].classList.contains('current-row')).to.be.true;
           destroyVM(vm);
           done();
@@ -2001,12 +2001,12 @@ describe('Table', () => {
   it('keep highlight row after sort', done => {
     const vm = createVue({
       template: `
-        <el-table :data="testData" row-key="release" highlight-current-row >
-          <el-table-column prop="name" label="片名" />
-          <el-table-column prop="release" label="发行日期" />
-          <el-table-column prop="director" label="导演" />
-          <el-table-column prop="runtime" label="时长（分）" sortable />
-        </el-table>
+        <hzq-table :data="testData" row-key="release" highlight-current-row >
+          <hzq-table-column prop="name" label="片名" />
+          <hzq-table-column prop="release" label="发行日期" />
+          <hzq-table-column prop="director" label="导演" />
+          <hzq-table-column prop="runtime" label="时长（分）" sortable />
+        </hzq-table>
       `,
       data() {
         return {
@@ -2015,15 +2015,15 @@ describe('Table', () => {
       }
     }, true);
     setTimeout(() => {
-      let rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+      let rows = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr');
       triggerEvent(rows[1], 'click', true, false);
       setTimeout(() => {
         expect(rows[1].classList.contains('current-row')).to.be.true;
-        const cells = vm.$el.querySelectorAll('.el-table__header-wrapper thead th > .cell');
+        const cells = vm.$el.querySelectorAll('.hzq-table__header-wrapper thead th > .cell');
         triggerEvent(cells[3], 'click', true, false);
 
         setTimeout(() => {
-          rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+          rows = vm.$el.querySelectorAll('.hzq-table__body-wrapper tbody tr');
           expect(rows[3].classList.contains('current-row')).to.be.true;
           destroyVM(vm);
           done();
@@ -2035,21 +2035,21 @@ describe('Table', () => {
   it('table append is visible in viewport if height is 100%', async() => {
     const vm = createVue({
       template: `
-      <el-table :data="[]" height="100%">
-        <el-table-column prop="name" label="片名" />
-        <el-table-column prop="release" label="发行日期" />
-        <el-table-column prop="director" label="导演" />
-        <el-table-column prop="runtime" label="时长（分）" />
+      <hzq-table :data="[]" height="100%">
+        <hzq-table-column prop="name" label="片名" />
+        <hzq-table-column prop="release" label="发行日期" />
+        <hzq-table-column prop="director" label="导演" />
+        <hzq-table-column prop="runtime" label="时长（分）" />
         <template slot="append">
           <div class="append-content" style="height: 48px;">
             append 区域始终出现在视图内
           </div>
         </template>
-      </el-table>
+      </hzq-table>
       `
     }, true);
     await waitImmediate();
-    const emptyBlockEl = vm.$el.querySelector('.el-table__empty-block');
+    const emptyBlockEl = vm.$el.querySelector('.hzq-table__empty-block');
     expect(emptyBlockEl.style.height).to.be.equal('calc(100% - 48px)');
     destroyVM(vm);
   });
@@ -2060,12 +2060,12 @@ describe('Table', () => {
     it('render tree structual data', async() => {
       vm = createVue({
         template: `
-          <el-table :data="testData" row-key="release">
-            <el-table-column prop="name" label="片名" />
-            <el-table-column prop="release" label="发行日期" />
-            <el-table-column prop="director" label="导演" />
-            <el-table-column prop="runtime" label="时长（分）" />
-          </el-table>
+          <hzq-table :data="testData" row-key="release">
+            <hzq-table-column prop="name" label="片名" />
+            <hzq-table-column prop="release" label="发行日期" />
+            <hzq-table-column prop="director" label="导演" />
+            <hzq-table-column prop="runtime" label="时长（分）" />
+          </hzq-table>
         `,
         data() {
           const testData = getTestData();
@@ -2084,14 +2084,14 @@ describe('Table', () => {
       }, true);
       await waitImmediate();
 
-      const rows = vm.$el.querySelectorAll('.el-table__row');
+      const rows = vm.$el.querySelectorAll('.hzq-table__row');
       expect(rows.length).to.equal(7);
-      const childRows = vm.$el.querySelectorAll('.el-table__row--level-1');
+      const childRows = vm.$el.querySelectorAll('.hzq-table__row--level-1');
       expect(childRows.length).to.equal(2);
       childRows.forEach(item => {
         expect(item.style.display).to.equal('none');
       });
-      vm.$el.querySelector('.el-table__expand-icon').click();
+      vm.$el.querySelector('.hzq-table__expand-icon').click();
 
       await waitImmediate();
       childRows.forEach(item => {
@@ -2102,12 +2102,12 @@ describe('Table', () => {
     it('load substree row data', async() => {
       vm = createVue({
         template: `
-          <el-table :data="testData" row-key="release" lazy :load="load">
-            <el-table-column prop="name" label="片名" />
-            <el-table-column prop="release" label="发行日期" />
-            <el-table-column prop="director" label="导演" />
-            <el-table-column prop="runtime" label="时长（分）" />
-          </el-table>
+          <hzq-table :data="testData" row-key="release" lazy :load="load">
+            <hzq-table-column prop="name" label="片名" />
+            <hzq-table-column prop="release" label="发行日期" />
+            <hzq-table-column prop="director" label="导演" />
+            <hzq-table-column prop="runtime" label="时长（分）" />
+          </hzq-table>
         `,
         data() {
           const testData = getTestData();
@@ -2136,27 +2136,27 @@ describe('Table', () => {
       }, true);
       await waitImmediate();
 
-      const expandIcon = vm.$el.querySelector('.el-table__expand-icon');
+      const expandIcon = vm.$el.querySelector('.hzq-table__expand-icon');
       expandIcon.click();
 
       await waitImmediate();
 
-      expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.true;
-      expect(vm.$el.querySelectorAll('.el-table__row').length).to.equal(8);
+      expect(expandIcon.classList.contains('hzq-table__expand-icon--expanded')).to.be.true;
+      expect(vm.$el.querySelectorAll('.hzq-table__row').length).to.equal(8);
     });
 
     it('tree-props & default-expand-all & expand-change', async() => {
       const spy = sinon.spy();
       vm = createVue({
         template: `
-          <el-table
+          <hzq-table
             :data="testData" lazy default-expand-all row-key="release" :tree-props="{children: 'childrenTest', hasChildren: 'hasChildrenTest'}"
             :load="load" @expand-change="change">
-            <el-table-column prop="name" label="片名" />
-            <el-table-column prop="release" label="发行日期" />
-            <el-table-column prop="director" label="导演" />
-            <el-table-column prop="runtime" label="时长（分）" />
-          </el-table>
+            <hzq-table-column prop="name" label="片名" />
+            <hzq-table-column prop="release" label="发行日期" />
+            <hzq-table-column prop="director" label="导演" />
+            <hzq-table-column prop="runtime" label="时长（分）" />
+          </hzq-table>
         `,
         data() {
           const testData = getTestData();
@@ -2185,17 +2185,17 @@ describe('Table', () => {
         }
       }, true);
       await waitImmediate();
-      const childRows = vm.$el.querySelectorAll('.el-table__row--level-1');
+      const childRows = vm.$el.querySelectorAll('.hzq-table__row--level-1');
       childRows.forEach(item => {
         expect(item.style.display).to.equal('');
       });
-      const expandIcon = vm.$el.querySelector('.el-table__expand-icon');
+      const expandIcon = vm.$el.querySelector('.hzq-table__expand-icon');
       expandIcon.click();
 
       await waitImmediate();
 
-      expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.true;
-      expect(vm.$el.querySelectorAll('.el-table__row').length).to.equal(8);
+      expect(expandIcon.classList.contains('hzq-table__expand-icon--expanded')).to.be.true;
+      expect(vm.$el.querySelectorAll('.hzq-table__row').length).to.equal(8);
       expect(spy.args[0][0]).to.be.an('object');
       expect(spy.args[0][1]).to.be.true;
     });
@@ -2203,12 +2203,12 @@ describe('Table', () => {
     it('expand-row-keys & toggleRowExpansion', async() => {
       vm = createVue({
         template: `
-          <el-table :data="testData" row-key="release" lazy :load="load" :expand-row-keys="['2003-5-30']" ref="table">
-            <el-table-column prop="name" label="片名" />
-            <el-table-column prop="release" label="发行日期" />
-            <el-table-column prop="director" label="导演" />
-            <el-table-column prop="runtime" label="时长（分）" />
-          </el-table>
+          <hzq-table :data="testData" row-key="release" lazy :load="load" :expand-row-keys="['2003-5-30']" ref="table">
+            <hzq-table-column prop="name" label="片名" />
+            <hzq-table-column prop="release" label="发行日期" />
+            <hzq-table-column prop="director" label="导演" />
+            <hzq-table-column prop="runtime" label="时长（分）" />
+          </hzq-table>
         `,
         data() {
           const testData = getTestData();
@@ -2238,20 +2238,20 @@ describe('Table', () => {
         }
       }, true);
       await waitImmediate();
-      const childRows = vm.$el.querySelectorAll('.el-table__row--level-1');
+      const childRows = vm.$el.querySelectorAll('.hzq-table__row--level-1');
       childRows.forEach(item => {
         expect(item.style.display).to.equal('');
       });
-      const expandIcon = childRows[0].querySelector('.el-table__expand-icon');
+      const expandIcon = childRows[0].querySelector('.hzq-table__expand-icon');
       expandIcon.click();
 
       await waitImmediate();
 
-      expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.true;
+      expect(expandIcon.classList.contains('hzq-table__expand-icon--expanded')).to.be.true;
       vm.closeExpandRow();
 
       await waitImmediate();
-      expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.false;
+      expect(expandIcon.classList.contains('hzq-table__expand-icon--expanded')).to.be.false;
     });
   });
 });

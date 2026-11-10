@@ -25,11 +25,11 @@ describe('Form', () => {
   it('label width', done => {
     vm = createVue({
       template: `
-        <el-form ref="form" :model="form" label-width="80px">
-          <el-form-item label="活动名称">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-        </el-form>
+        <hzq-form ref="form" :model="form" label-width="80px">
+          <hzq-form-item label="活动名称">
+            <hzq-input v-model="form.name"></hzq-input>
+          </hzq-form-item>
+        </hzq-form>
       `,
       data() {
         return {
@@ -39,21 +39,21 @@ describe('Form', () => {
         };
       }
     }, true);
-    expect(vm.$el.querySelector('.el-form-item__label').style.width).to.equal('80px');
-    expect(vm.$el.querySelector('.el-form-item__content').style.marginLeft).to.equal('80px');
+    expect(vm.$el.querySelector('.hzq-form-item__label').style.width).to.equal('80px');
+    expect(vm.$el.querySelector('.hzq-form-item__content').style.marginLeft).to.equal('80px');
     done();
   });
   it('auto label width', async() => {
     vm = createVue({
       template: `
-        <el-form ref="form" :model="form" label-width="auto">
-          <el-form-item label="活动名称">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-          <el-form-item label="活动备注信息" v-if="display">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-        </el-form>
+        <hzq-form ref="form" :model="form" label-width="auto">
+          <hzq-form-item label="活动名称">
+            <hzq-input v-model="form.name"></hzq-input>
+          </hzq-form-item>
+          <hzq-form-item label="活动备注信息" v-if="display">
+            <hzq-input v-model="form.name"></hzq-input>
+          </hzq-form-item>
+        </hzq-form>
       `,
       data() {
         return {
@@ -68,7 +68,7 @@ describe('Form', () => {
 
     await waitImmediate();
 
-    const formItems = vm.$el.querySelectorAll('.el-form-item__content');
+    const formItems = vm.$el.querySelectorAll('.hzq-form-item__content');
     const marginLeft = parseInt(formItems[0].style.marginLeft, 10);
     const marginLeft1 = parseInt(formItems[1].style.marginLeft, 10);
     expect(marginLeft === marginLeft1).to.be.true;
@@ -76,21 +76,21 @@ describe('Form', () => {
     vm.display = false;
     await waitImmediate();
 
-    const formItem = vm.$el.querySelector('.el-form-item__content');
+    const formItem = vm.$el.querySelector('.hzq-form-item__content');
     const newMarginLeft = parseInt(formItem.style.marginLeft, 10);
     expect(newMarginLeft < marginLeft).to.be.true;
   });
   it('inline form', done => {
     vm = createVue({
       template: `
-        <el-form ref="form" :model="form" inline>
-          <el-form-item>
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="form.address"></el-input>
-          </el-form-item>
-        </el-form>
+        <hzq-form ref="form" :model="form" inline>
+          <hzq-form-item>
+            <hzq-input v-model="form.name"></hzq-input>
+          </hzq-form-item>
+          <hzq-form-item>
+            <hzq-input v-model="form.address"></hzq-input>
+          </hzq-form-item>
+        </hzq-form>
       `,
       data() {
         return {
@@ -101,29 +101,29 @@ describe('Form', () => {
         };
       }
     }, true);
-    expect(vm.$el.classList.contains('el-form--inline')).to.be.true;
+    expect(vm.$el.classList.contains('hzq-form--inline')).to.be.true;
     done();
   });
   it('label position', done => {
     vm = createVue({
       template: `
         <div>
-          <el-form :model="form" label-position="top" ref="labelTop">
-            <el-form-item>
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-input v-model="form.address"></el-input>
-            </el-form-item>
-          </el-form>
-          <el-form :model="form" label-position="left" ref="labelLeft">
-            <el-form-item>
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-input v-model="form.address"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" label-position="top" ref="labelTop">
+            <hzq-form-item>
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+            <hzq-form-item>
+              <hzq-input v-model="form.address"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
+          <hzq-form :model="form" label-position="left" ref="labelLeft">
+            <hzq-form-item>
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+            <hzq-form-item>
+              <hzq-input v-model="form.address"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         </div>
       `,
       data() {
@@ -135,19 +135,19 @@ describe('Form', () => {
         };
       }
     }, true);
-    expect(vm.$refs.labelTop.$el.classList.contains('el-form--label-top')).to.be.true;
-    expect(vm.$refs.labelLeft.$el.classList.contains('el-form--label-left')).to.be.true;
+    expect(vm.$refs.labelTop.$el.classList.contains('hzq-form--label-top')).to.be.true;
+    expect(vm.$refs.labelLeft.$el.classList.contains('hzq-form--label-left')).to.be.true;
     done();
   });
   it('label size', () => {
     vm = createVue({
       template: `
         <div>
-          <el-form :model="form" size="mini" ref="labelMini">
-            <el-form-item>
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" size="mini" ref="labelMini">
+            <hzq-form-item>
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         </div>
       `,
       data() {
@@ -158,13 +158,13 @@ describe('Form', () => {
         };
       }
     }, true);
-    expect(vm.$refs.labelMini.$el.children[0].classList.contains('el-form-item--mini')).to.be.true;
+    expect(vm.$refs.labelMini.$el.children[0].classList.contains('hzq-form-item--mini')).to.be.true;
   });
   it('show message', done => {
     vm = createVue({
       template: `
-        <el-form :model="form" ref="form">
-          <el-form-item label="活动名称" prop="name" :show-message="false"
+        <hzq-form :model="form" ref="form">
+          <hzq-form-item label="活动名称" prop="name" :show-message="false"
             :rules="{
               required: true,
               message: '请输入活动名称',
@@ -173,9 +173,9 @@ describe('Form', () => {
               max: 6
             }"
           >
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-        </el-form>
+            <hzq-input v-model="form.name"></hzq-input>
+          </hzq-form-item>
+        </hzq-form>
       `,
       data() {
         return {
@@ -188,7 +188,7 @@ describe('Form', () => {
     vm.$refs.form.validate(valid => {
       expect(valid).to.not.true;
       vm.$refs.form.$nextTick(_ => {
-        expect(vm.$el.querySelector('.el-form-item__error')).to.not.exist;
+        expect(vm.$el.querySelector('.hzq-form-item__error')).to.not.exist;
         done();
       });
     });
@@ -196,22 +196,22 @@ describe('Form', () => {
   it('reset field', done => {
     vm = createVue({
       template: `
-        <el-form ref="form" :model="form" :rules="rules">
-          <el-form-item label="活动名称" prop="name">
-            <el-input v-model="form.name" ref="fieldName"></el-input>
-          </el-form-item>
-          <el-form-item label="活动地址" prop="address">
-            <el-input v-model="form.address" ref="fieldAddr"></el-input>
-          </el-form-item>
-          <el-form-item label="活动性质" prop="type">
-            <el-checkbox-group v-model="form.type">
-              <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-              <el-checkbox label="地推活动" name="type"></el-checkbox>
-              <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-              <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-        </el-form>
+        <hzq-form ref="form" :model="form" :rules="rules">
+          <hzq-form-item label="活动名称" prop="name">
+            <hzq-input v-model="form.name" ref="fieldName"></hzq-input>
+          </hzq-form-item>
+          <hzq-form-item label="活动地址" prop="address">
+            <hzq-input v-model="form.address" ref="fieldAddr"></hzq-input>
+          </hzq-form-item>
+          <hzq-form-item label="活动性质" prop="type">
+            <hzq-checkbox-group v-model="form.type">
+              <hzq-checkbox label="美食/餐厅线上活动" name="type"></hzq-checkbox>
+              <hzq-checkbox label="地推活动" name="type"></hzq-checkbox>
+              <hzq-checkbox label="线下主题活动" name="type"></hzq-checkbox>
+              <hzq-checkbox label="单纯品牌曝光" name="type"></hzq-checkbox>
+            </hzq-checkbox-group>
+          </hzq-form-item>
+        </hzq-form>
       `,
       data() {
         return {
@@ -253,22 +253,22 @@ describe('Form', () => {
   it('clear validate', done => {
     vm = createVue({
       template: `
-        <el-form ref="form" :model="form" :rules="rules">
-          <el-form-item label="活动名称" prop="name">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-          <el-form-item label="活动地址" prop="address">
-            <el-input v-model="form.address"></el-input>
-          </el-form-item>
-          <el-form-item label="活动性质" prop="type">
-            <el-checkbox-group v-model="form.type">
-              <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-              <el-checkbox label="地推活动" name="type"></el-checkbox>
-              <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-              <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-        </el-form>
+        <hzq-form ref="form" :model="form" :rules="rules">
+          <hzq-form-item label="活动名称" prop="name">
+            <hzq-input v-model="form.name"></hzq-input>
+          </hzq-form-item>
+          <hzq-form-item label="活动地址" prop="address">
+            <hzq-input v-model="form.address"></hzq-input>
+          </hzq-form-item>
+          <hzq-form-item label="活动性质" prop="type">
+            <hzq-checkbox-group v-model="form.type">
+              <hzq-checkbox label="美食/餐厅线上活动" name="type"></hzq-checkbox>
+              <hzq-checkbox label="地推活动" name="type"></hzq-checkbox>
+              <hzq-checkbox label="线下主题活动" name="type"></hzq-checkbox>
+              <hzq-checkbox label="单纯品牌曝光" name="type"></hzq-checkbox>
+            </hzq-checkbox-group>
+          </hzq-form-item>
+        </hzq-form>
       `,
       data() {
         return {
@@ -311,21 +311,21 @@ describe('Form', () => {
   it('form item nest', done => {
     vm = createVue({
       template: `
-        <el-form ref="form" :model="form" :rules="rules">
-          <el-form-item label="活动时间" required>
-            <el-col :span="11">
-              <el-form-item prop="date1">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-              </el-form-item>
-            </el-col>
-            <el-col class="line" :span="2">-</el-col>
-            <el-col :span="11">
-              <el-form-item prop="date2">
-                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-              </el-form-item>
-            </el-col>
-          </el-form-item>
-        </el-form>
+        <hzq-form ref="form" :model="form" :rules="rules">
+          <hzq-form-item label="活动时间" required>
+            <hzq-col :span="11">
+              <hzq-form-item prop="date1">
+                <hzq-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></hzq-date-picker>
+              </hzq-form-item>
+            </hzq-col>
+            <hzq-col class="line" :span="2">-</hzq-col>
+            <hzq-col :span="11">
+              <hzq-form-item prop="date2">
+                <hzq-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></hzq-time-picker>
+              </hzq-form-item>
+            </hzq-col>
+          </hzq-form-item>
+        </hzq-form>
       `,
       data() {
         return {
@@ -356,11 +356,11 @@ describe('Form', () => {
     it('input', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name" ref="field">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="活动名称" prop="name" ref="field">
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -402,11 +402,11 @@ describe('Form', () => {
     it('textarea', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name" ref="field">
-              <el-input type="textarea" v-model="form.name"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="活动名称" prop="name" ref="field">
+              <hzq-input type="textarea" v-model="form.name"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -448,14 +448,14 @@ describe('Form', () => {
     it('selector', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="记住密码" prop="region" ref="field">
-              <el-select v-model="form.region" placeholder="请选择活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" ref="opt" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="记住密码" prop="region" ref="field">
+              <hzq-select v-model="form.region" placeholder="请选择活动区域">
+                <hzq-option label="区域一" value="shanghai"></hzq-option>
+                <hzq-option label="区域二" ref="opt" value="beijing"></hzq-option>
+              </hzq-select>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -496,11 +496,11 @@ describe('Form', () => {
     it('datepicker', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="记住密码" prop="date" ref="field">
-              <el-date-picker type="date" ref="picker" placeholder="选择日期" v-model="form.date" style="width: 100%;"></el-date-picker>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="记住密码" prop="date" ref="field">
+              <hzq-date-picker type="date" ref="picker" placeholder="选择日期" v-model="form.date" style="width: 100%;"></hzq-date-picker>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -552,11 +552,11 @@ describe('Form', () => {
     it('timepicker', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="记住密码" prop="date" ref="field">
-              <el-time-picker ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="记住密码" prop="date" ref="field">
+              <hzq-time-picker ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></hzq-time-picker>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -599,13 +599,13 @@ describe('Form', () => {
     it('checkbox', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="是否接受协议" prop="accept" ref="field">
-              <el-checkbox v-model="form.accept">
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="是否接受协议" prop="accept" ref="field">
+              <hzq-checkbox v-model="form.accept">
                 <span>接受协议</span>
-              </el-checkbox>
-            </el-form-item>
-          </el-form>
+              </hzq-checkbox>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -651,16 +651,16 @@ describe('Form', () => {
     it('checkbox group', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="type" ref="field">
-              <el-checkbox-group v-model="form.type">
-                <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-                <el-checkbox label="地推活动" name="type"></el-checkbox>
-                <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-                <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-              </el-checkbox-group>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="活动名称" prop="type" ref="field">
+              <hzq-checkbox-group v-model="form.type">
+                <hzq-checkbox label="美食/餐厅线上活动" name="type"></hzq-checkbox>
+                <hzq-checkbox label="地推活动" name="type"></hzq-checkbox>
+                <hzq-checkbox label="线下主题活动" name="type"></hzq-checkbox>
+                <hzq-checkbox label="单纯品牌曝光" name="type"></hzq-checkbox>
+              </hzq-checkbox-group>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -697,14 +697,14 @@ describe('Form', () => {
     it('radio group', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="type" ref="field">
-              <el-radio-group v-model="form.type">
-                <el-radio label="线上品牌商赞助"></el-radio>
-                <el-radio label="线下场地免费"></el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="活动名称" prop="type" ref="field">
+              <hzq-radio-group v-model="form.type">
+                <hzq-radio label="线上品牌商赞助"></hzq-radio>
+                <hzq-radio label="线下场地免费"></hzq-radio>
+              </hzq-radio-group>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -741,11 +741,11 @@ describe('Form', () => {
     it('validate field', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name" ref="field">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="活动名称" prop="name" ref="field">
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -780,11 +780,11 @@ describe('Form', () => {
       };
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name" ref="field">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="活动名称" prop="name" ref="field">
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -821,11 +821,11 @@ describe('Form', () => {
     it('error', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name" :error="error" ref="field">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="活动名称" prop="name" :error="error" ref="field">
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -868,11 +868,11 @@ describe('Form', () => {
       };
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name" ref="field">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="活动名称" prop="name" ref="field">
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -902,11 +902,11 @@ describe('Form', () => {
       };
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name" ref="field">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form">
+            <hzq-form-item label="活动名称" prop="name" ref="field">
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -930,14 +930,14 @@ describe('Form', () => {
   it('validate event', done => {
     vm = createVue({
       template: `
-          <el-form :model="form" :rules="rules" ref="form" @validate="onValidate">
-            <el-form-item label="活动名称" prop="name" ref="name">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-            <el-form-item label="活动地点" prop="addr" ref="addr">
-              <el-input v-model="form.addr"></el-input>
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules" ref="form" @validate="onValidate">
+            <hzq-form-item label="活动名称" prop="name" ref="name">
+              <hzq-input v-model="form.name"></hzq-input>
+            </hzq-form-item>
+            <hzq-form-item label="活动地点" prop="addr" ref="addr">
+              <hzq-input v-model="form.addr"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
         `,
       data() {
         return {

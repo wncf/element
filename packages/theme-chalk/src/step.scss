@@ -62,7 +62,7 @@
     height: 24px;
     font-size: 14px;
     box-sizing: border-box;
-    background: var(--el-bg-color);
+    background: var(--hzq-bg-color);
     transition: .15s ease-out;
 
     @include when(text) {
@@ -84,7 +84,7 @@
     line-height: 1;
     color: inherit;
 
-    &[class*=el-icon]:not(.is-status) {
+    &[class*=hzq-icon]:not(.is-status) {
       font-size: 25px;
       font-weight: normal;
     }
@@ -253,7 +253,7 @@
     }
 
     @include e(icon-inner) {
-      &[class*=el-icon]:not(.is-status) {
+      &[class*=hzq-icon]:not(.is-status) {
         font-size: 18px;
       }
 

@@ -9,8 +9,8 @@ Radio should not have too many options. Otherwise, use the Select component inst
 :::demo Creating a radio component is easy, you just need to bind a variable to Radio's `v-model`. It equals to the value of `label` of the chosen radio. The type of `label` is `String`, `Number` or `Boolean`.
 ```html
 <template>
-  <el-radio v-model="radio" label="1">Option A</el-radio>
-  <el-radio v-model="radio" label="2">Option B</el-radio>
+  <hzq-radio v-model="radio" label="1">Option A</hzq-radio>
+  <hzq-radio v-model="radio" label="2">Option B</hzq-radio>
 </template>
 
 <script>
@@ -32,8 +32,8 @@ Radio should not have too many options. Otherwise, use the Select component inst
 :::demo You just need to add the `disabled` attribute.
 ```html
 <template>
-  <el-radio disabled v-model="radio" label="disabled">Option A</el-radio>
-  <el-radio disabled v-model="radio" label="selected and disabled">Option B</el-radio>
+  <hzq-radio disabled v-model="radio" label="disabled">Option A</hzq-radio>
+  <hzq-radio disabled v-model="radio" label="selected and disabled">Option B</hzq-radio>
 </template>
 
 <script>
@@ -52,14 +52,14 @@ Radio should not have too many options. Otherwise, use the Select component inst
 
 Suitable for choosing from some mutually exclusive options.
 
-:::demo Combine `el-radio-group` with `el-radio` to display a radio group. Bind a variable with `v-model` of `el-radio-group` element and set label value in `el-radio`. It also provides `change` event with the current value as its parameter.
+:::demo Combine `hzq-radio-group` with `hzq-radio` to display a radio group. Bind a variable with `v-model` of `hzq-radio-group` element and set label value in `hzq-radio`. It also provides `change` event with the current value as its parameter.
 
 ```html
-<el-radio-group v-model="radio">
-  <el-radio :label="3">Option A</el-radio>
-  <el-radio :label="6">Option B</el-radio>
-  <el-radio :label="9">Option C</el-radio>
-</el-radio-group>
+<hzq-radio-group v-model="radio">
+  <hzq-radio :label="3">Option A</hzq-radio>
+  <hzq-radio :label="6">Option B</hzq-radio>
+  <hzq-radio :label="9">Option C</hzq-radio>
+</hzq-radio-group>
 
 <script>
   export default {
@@ -77,40 +77,40 @@ Suitable for choosing from some mutually exclusive options.
 
 Radio with button styles.
 
-:::demo You just need to change `el-radio` element into `el-radio-button` element. We also provide `size` attribute.
+:::demo You just need to change `hzq-radio` element into `hzq-radio-button` element. We also provide `size` attribute.
 ```html
 <template>
   <div>
-    <el-radio-group v-model="radio1">
-      <el-radio-button label="New York"></el-radio-button>
-      <el-radio-button label="Washington"></el-radio-button>
-      <el-radio-button label="Los Angeles"></el-radio-button>
-      <el-radio-button label="Chicago"></el-radio-button>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio1">
+      <hzq-radio-button label="New York"></hzq-radio-button>
+      <hzq-radio-button label="Washington"></hzq-radio-button>
+      <hzq-radio-button label="Los Angeles"></hzq-radio-button>
+      <hzq-radio-button label="Chicago"></hzq-radio-button>
+    </hzq-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio2" size="medium">
-      <el-radio-button label="New York" ></el-radio-button>
-      <el-radio-button label="Washington"></el-radio-button>
-      <el-radio-button label="Los Angeles"></el-radio-button>
-      <el-radio-button label="Chicago"></el-radio-button>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio2" size="large">
+      <hzq-radio-button label="New York" ></hzq-radio-button>
+      <hzq-radio-button label="Washington"></hzq-radio-button>
+      <hzq-radio-button label="Los Angeles"></hzq-radio-button>
+      <hzq-radio-button label="Chicago"></hzq-radio-button>
+    </hzq-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio3" size="small">
-      <el-radio-button label="New York"></el-radio-button>
-      <el-radio-button label="Washington" disabled ></el-radio-button>
-      <el-radio-button label="Los Angeles"></el-radio-button>
-      <el-radio-button label="Chicago"></el-radio-button>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio3" size="small">
+      <hzq-radio-button label="New York"></hzq-radio-button>
+      <hzq-radio-button label="Washington" disabled ></hzq-radio-button>
+      <hzq-radio-button label="Los Angeles"></hzq-radio-button>
+      <hzq-radio-button label="Chicago"></hzq-radio-button>
+    </hzq-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio4" disabled size="mini">
-      <el-radio-button label="New York"></el-radio-button>
-      <el-radio-button label="Washington"></el-radio-button>
-      <el-radio-button label="Los Angeles"></el-radio-button>
-      <el-radio-button label="Chicago"></el-radio-button>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio4" disabled size="mini">
+      <hzq-radio-button label="New York"></hzq-radio-button>
+      <hzq-radio-button label="Washington"></hzq-radio-button>
+      <hzq-radio-button label="Los Angeles"></hzq-radio-button>
+      <hzq-radio-button label="Chicago"></hzq-radio-button>
+    </hzq-radio-group>
   </div>
 </template>
 
@@ -135,24 +135,24 @@ Radio with button styles.
 ```html
 <template>
   <div>
-    <el-radio v-model="radio1" label="1" border>Option A</el-radio>
-    <el-radio v-model="radio1" label="2" border>Option B</el-radio>
+    <hzq-radio v-model="radio1" label="1" border>Option A</hzq-radio>
+    <hzq-radio v-model="radio1" label="2" border>Option B</hzq-radio>
   </div>
   <div style="margin-top: 20px">
-    <el-radio v-model="radio2" label="1" border size="medium">Option A</el-radio>
-    <el-radio v-model="radio2" label="2" border size="medium">Option B</el-radio>
+    <hzq-radio v-model="radio2" label="1" border size="large">Option A</hzq-radio>
+    <hzq-radio v-model="radio2" label="2" border size="medium">Option B</hzq-radio>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio3" size="small">
-      <el-radio label="1" border>Option A</el-radio>
-      <el-radio label="2" border disabled>Option B</el-radio>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio3" size="small">
+      <hzq-radio label="1" border>Option A</hzq-radio>
+      <hzq-radio label="2" border disabled>Option B</hzq-radio>
+    </hzq-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio4" size="mini" disabled>
-      <el-radio label="1" border>Option A</el-radio>
-      <el-radio label="2" border>Option B</el-radio>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio4" size="mini" disabled>
+      <hzq-radio label="1" border>Option A</hzq-radio>
+      <hzq-radio label="2" border>Option B</hzq-radio>
+    </hzq-radio-group>
   </div>
 </template>
 
@@ -179,7 +179,7 @@ value / v-model | binding value | string / number / boolean | — | —
 label | the value of Radio | string / number / boolean | — | —
 disabled | whether Radio is disabled | boolean | — | false
 border  | whether to add a border around Radio  | boolean   | — | false
-size  | size of the Radio, only works when `border` is true  | string  | medium / small / mini | —
+| size  | size of the Radio, only works when `border` is true  | string  | large / medium / small / mini | —
 name | native 'name' attribute | string    |      —         |     —
 
 ### Radio Events
@@ -193,7 +193,7 @@ name | native 'name' attribute | string    |      —         |     —
  Attribute      | Description          | Type      | Accepted Values       | Default
 ---- | ---- | ---- | ---- | ----
 value / v-model | binding value | string / number / boolean | — | —
-size | the size of radio buttons or bordered radios | string | medium / small / mini | —
+| size | the size of radio buttons or bordered radios | string | large / medium / small / mini | —
 disabled  | whether the nesting radios are disabled | boolean   | — | false
 text-color | font color when button is active | string   | — | #ffffff   |
 fill  | border and background color when button is active | string   | — | #409EFF   |

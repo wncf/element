@@ -9,8 +9,8 @@ describe('Checkbox', () => {
   it('create', done => {
     vm = createVue({
       template: `
-        <el-checkbox v-model="checked">
-        </el-checkbox>
+        <hzq-checkbox v-model="checked">
+        </hzq-checkbox>
       `,
       data() {
         return {
@@ -19,7 +19,7 @@ describe('Checkbox', () => {
       }
     }, true);
     let checkboxElm = vm.$el;
-    expect(checkboxElm.classList.contains('el-checkbox')).to.be.true;
+    expect(checkboxElm.classList.contains('hzq-checkbox')).to.be.true;
     checkboxElm.click();
     vm.$nextTick(_ => {
       expect(checkboxElm.querySelector('.is-checked')).to.be.ok;
@@ -29,11 +29,11 @@ describe('Checkbox', () => {
   it('disabled', () => {
     vm = createVue({
       template: `
-        <el-checkbox
+        <hzq-checkbox
           v-model="checked"
           disabled
         >
-        </el-checkbox>
+        </hzq-checkbox>
       `,
       data() {
         return {
@@ -47,8 +47,8 @@ describe('Checkbox', () => {
   it('change event', done => {
     vm = createVue({
       template: `
-        <el-checkbox v-model="checked" @change="onChange">
-        </el-checkbox>
+        <hzq-checkbox v-model="checked" @change="onChange">
+        </hzq-checkbox>
       `,
       methods: {
         onChange(val) {
@@ -76,12 +76,12 @@ describe('Checkbox', () => {
   it('checkbox group', done => {
     vm = createVue({
       template: `
-        <el-checkbox-group v-model="checkList">
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
-          <el-checkbox label="c" ref="c"></el-checkbox>
-          <el-checkbox label="d" ref="d"></el-checkbox>
-        </el-checkbox-group>
+        <hzq-checkbox-group v-model="checkList">
+          <hzq-checkbox label="a" ref="a"></hzq-checkbox>
+          <hzq-checkbox label="b" ref="b"></hzq-checkbox>
+          <hzq-checkbox label="c" ref="c"></hzq-checkbox>
+          <hzq-checkbox label="d" ref="d"></hzq-checkbox>
+        </hzq-checkbox-group>
       `,
       data() {
         return {
@@ -100,10 +100,10 @@ describe('Checkbox', () => {
   it('checkbox group change event', done => {
     vm = createVue({
       template: `
-        <el-checkbox-group v-model="checkList" @change="onChange">
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
-        </el-checkbox-group>
+        <hzq-checkbox-group v-model="checkList" @change="onChange">
+          <hzq-checkbox label="a" ref="a"></hzq-checkbox>
+          <hzq-checkbox label="b" ref="b"></hzq-checkbox>
+        </hzq-checkbox-group>
       `,
       methods: {
         onChange(val) {
@@ -128,16 +128,16 @@ describe('Checkbox', () => {
   it('checkbox group minimum and maximum', done => {
     vm = createVue({
       template: `
-        <el-checkbox-group 
+        <hzq-checkbox-group 
           v-model="checkList" 
           :min="1" 
           :max="2"
         >
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
-          <el-checkbox label="c" ref="c"></el-checkbox>
-          <el-checkbox label="d" ref="d"></el-checkbox>
-        </el-checkbox-group>
+          <hzq-checkbox label="a" ref="a"></hzq-checkbox>
+          <hzq-checkbox label="b" ref="b"></hzq-checkbox>
+          <hzq-checkbox label="c" ref="c"></hzq-checkbox>
+          <hzq-checkbox label="d" ref="d"></hzq-checkbox>
+        </hzq-checkbox-group>
       `,
       data() {
         return {
@@ -170,14 +170,14 @@ describe('Checkbox', () => {
   it('nested group', done => {
     vm = createVue({
       template: `
-        <el-checkbox-group v-model="checkList">
-          <el-row>
-            <el-checkbox label="a" ref="a"></el-checkbox>
-            <el-checkbox label="b" ref="b"></el-checkbox>
-            <el-checkbox label="c" ref="c"></el-checkbox>
-            <el-checkbox label="d" ref="d"></el-checkbox>
-          </el-row>
-        </el-checkbox-group>
+        <hzq-checkbox-group v-model="checkList">
+          <hzq-row>
+            <hzq-checkbox label="a" ref="a"></hzq-checkbox>
+            <hzq-checkbox label="b" ref="b"></hzq-checkbox>
+            <hzq-checkbox label="c" ref="c"></hzq-checkbox>
+            <hzq-checkbox label="d" ref="d"></hzq-checkbox>
+          </hzq-row>
+        </hzq-checkbox-group>
       `,
       data() {
         return {
@@ -196,7 +196,7 @@ describe('Checkbox', () => {
   it('true false label', done => {
     vm = createVue({
       template: `
-        <el-checkbox true-label="a" :false-label="3" v-model="checked"></el-checkbox>
+        <hzq-checkbox true-label="a" :false-label="3" v-model="checked"></hzq-checkbox>
       `,
       data() {
         return {
@@ -214,10 +214,10 @@ describe('Checkbox', () => {
     vm = createVue({
       template: `
         <div>
-          <el-checkbox v-model="checked" checked></el-checkbox>
-          <el-checkbox-group v-model="checklist">
-            <el-checkbox checked label="a"></el-checkbox>
-          </el-checkbox-group>
+          <hzq-checkbox v-model="checked" checked></hzq-checkbox>
+          <hzq-checkbox-group v-model="checklist">
+            <hzq-checkbox checked label="a"></hzq-checkbox>
+          </hzq-checkbox-group>
         </div>
       `,
       data() {
@@ -240,8 +240,8 @@ describe('Checkbox', () => {
     it('create', done => {
       vm = createVue({
         template: `
-          <el-checkbox-button v-model="checked">
-          </el-checkbox-button>
+          <hzq-checkbox-button v-model="checked">
+          </hzq-checkbox-button>
         `,
         data() {
           return {
@@ -250,7 +250,7 @@ describe('Checkbox', () => {
         }
       }, true);
       let checkboxElm = vm.$el;
-      expect(checkboxElm.classList.contains('el-checkbox-button')).to.be.true;
+      expect(checkboxElm.classList.contains('hzq-checkbox-button')).to.be.true;
       checkboxElm.click();
       vm.$nextTick(_ => {
         expect(checkboxElm.classList.contains('is-checked')).to.be.ok;
@@ -260,11 +260,11 @@ describe('Checkbox', () => {
     it('disabled', () => {
       vm = createVue({
         template: `
-          <el-checkbox-button
+          <hzq-checkbox-button
             v-model="checked"
             disabled
           >
-          </el-checkbox-button>
+          </hzq-checkbox-button>
         `,
         data() {
           return {
@@ -279,8 +279,8 @@ describe('Checkbox', () => {
     it('change event', done => {
       vm = createVue({
         template: `
-        <el-checkbox-button v-model="checked" @change="onChange">
-        </el-checkbox-button>
+        <hzq-checkbox-button v-model="checked" @change="onChange">
+        </hzq-checkbox-button>
       `,
         methods: {
           onChange(val) {
@@ -309,12 +309,12 @@ describe('Checkbox', () => {
     it('checkbox group', done => {
       vm = createVue({
         template: `
-          <el-checkbox-group v-model="checkList">
-            <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-            <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-            <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-            <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-          </el-checkbox-group>
+          <hzq-checkbox-group v-model="checkList">
+            <hzq-checkbox-button label="a" ref="a"></hzq-checkbox-button>
+            <hzq-checkbox-button label="b" ref="b"></hzq-checkbox-button>
+            <hzq-checkbox-button label="c" ref="c"></hzq-checkbox-button>
+            <hzq-checkbox-button label="d" ref="d"></hzq-checkbox-button>
+          </hzq-checkbox-group>
         `,
         data() {
           return {
@@ -338,12 +338,12 @@ describe('Checkbox', () => {
     it('checkbox-button group change event', done => {
       vm = createVue({
         template: `
-        <el-checkbox-group v-model="checkList" @change="onChange">
-          <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-          <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-          <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-          <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-        </el-checkbox-group>
+        <hzq-checkbox-group v-model="checkList" @change="onChange">
+          <hzq-checkbox-button label="a" ref="a"></hzq-checkbox-button>
+          <hzq-checkbox-button label="b" ref="b"></hzq-checkbox-button>
+          <hzq-checkbox-button label="c" ref="c"></hzq-checkbox-button>
+          <hzq-checkbox-button label="d" ref="d"></hzq-checkbox-button>
+        </hzq-checkbox-group>
       `,
         methods: {
           onChange(val) {
@@ -371,12 +371,12 @@ describe('Checkbox', () => {
     it('checkbox group props', () => {
       vm = createVue({
         template: `
-          <el-checkbox-group v-model="checkList" size="large" fill="#FF0000" text-color="#000">
-            <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-            <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-            <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-            <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-          </el-checkbox-group>
+          <hzq-checkbox-group v-model="checkList" size="large" fill="#FF0000" text-color="#000">
+            <hzq-checkbox-button label="a" ref="a"></hzq-checkbox-button>
+            <hzq-checkbox-button label="b" ref="b"></hzq-checkbox-button>
+            <hzq-checkbox-button label="c" ref="c"></hzq-checkbox-button>
+            <hzq-checkbox-button label="d" ref="d"></hzq-checkbox-button>
+          </hzq-checkbox-group>
         `,
         data() {
           return {
@@ -386,11 +386,11 @@ describe('Checkbox', () => {
       }, true);
       expect(vm.checkList.length === 2).to.be.true;
       expect(vm.$refs.a.$el.classList.contains('is-checked')).to.be.true;
-      expect(vm.$refs.a.$el.classList.contains('el-checkbox-button--large')).to.be.true;
-      expect(vm.$refs.a.$el.querySelector('.el-checkbox-button__inner').style.backgroundColor).to.be.eql('rgb(255, 0, 0)');
-      expect(vm.$refs.a.$el.querySelector('.el-checkbox-button__inner').style.boxShadow).to.be.eql('rgb(255, 0, 0) -1px 0px 0px 0px');
-      expect(vm.$refs.a.$el.querySelector('.el-checkbox-button__inner').style.borderColor).to.be.eql('rgb(255, 0, 0)');
-      expect(vm.$refs.a.$el.querySelector('.el-checkbox-button__inner').style.color).to.be.eql('rgb(0, 0, 0)');
+      expect(vm.$refs.a.$el.classList.contains('hzq-checkbox-button--large')).to.be.true;
+      expect(vm.$refs.a.$el.querySelector('.hzq-checkbox-button__inner').style.backgroundColor).to.be.eql('rgb(255, 0, 0)');
+      expect(vm.$refs.a.$el.querySelector('.hzq-checkbox-button__inner').style.boxShadow).to.be.eql('rgb(255, 0, 0) -1px 0px 0px 0px');
+      expect(vm.$refs.a.$el.querySelector('.hzq-checkbox-button__inner').style.borderColor).to.be.eql('rgb(255, 0, 0)');
+      expect(vm.$refs.a.$el.querySelector('.hzq-checkbox-button__inner').style.color).to.be.eql('rgb(0, 0, 0)');
       expect(vm.$refs.b.$el.classList.contains('is-checked')).to.be.false;
       expect(vm.$refs.c.$el.classList.contains('is-checked')).to.be.false;
       expect(vm.$refs.d.$el.classList.contains('is-checked')).to.be.true;
@@ -399,16 +399,16 @@ describe('Checkbox', () => {
     it('checkbox group minimum and maximum', done => {
       vm = createVue({
         template: `
-          <el-checkbox-group 
+          <hzq-checkbox-group 
             v-model="checkList" 
             :min="1" 
             :max="2"
           >
-            <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-            <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-            <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-            <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-          </el-checkbox-group>
+            <hzq-checkbox-button label="a" ref="a"></hzq-checkbox-button>
+            <hzq-checkbox-button label="b" ref="b"></hzq-checkbox-button>
+            <hzq-checkbox-button label="c" ref="c"></hzq-checkbox-button>
+            <hzq-checkbox-button label="d" ref="d"></hzq-checkbox-button>
+          </hzq-checkbox-group>
         `,
         data() {
           return {
@@ -438,14 +438,14 @@ describe('Checkbox', () => {
     it('nested group', done => {
       vm = createVue({
         template: `
-          <el-checkbox-group v-model="checkList">
-            <el-row>
-              <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-              <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-              <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-              <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-            </el-row>
-          </el-checkbox-group>
+          <hzq-checkbox-group v-model="checkList">
+            <hzq-row>
+              <hzq-checkbox-button label="a" ref="a"></hzq-checkbox-button>
+              <hzq-checkbox-button label="b" ref="b"></hzq-checkbox-button>
+              <hzq-checkbox-button label="c" ref="c"></hzq-checkbox-button>
+              <hzq-checkbox-button label="d" ref="d"></hzq-checkbox-button>
+            </hzq-row>
+          </hzq-checkbox-group>
         `,
         data() {
           return {
@@ -464,11 +464,11 @@ describe('Checkbox', () => {
     it('true false label', done => {
       vm = createVue({
         template: `
-          <el-checkbox-button 
+          <hzq-checkbox-button 
             true-label="a" 
             :false-label="3" 
             v-model="checked"
-          ></el-checkbox-button>
+          ></hzq-checkbox-button>
         `,
         data() {
           return {
@@ -486,10 +486,10 @@ describe('Checkbox', () => {
       vm = createVue({
         template: `
           <div>
-            <el-checkbox-button v-model="checked" checked></el-checkbox-button>
-            <el-checkbox-group v-model="checklist">
-              <el-checkbox-button checked label="a"></el-checkbox-button>
-            </el-checkbox-group>
+            <hzq-checkbox-button v-model="checked" checked></hzq-checkbox-button>
+            <hzq-checkbox-group v-model="checklist">
+              <hzq-checkbox-button checked label="a"></hzq-checkbox-button>
+            </hzq-checkbox-group>
           </div>
         `,
         data() {

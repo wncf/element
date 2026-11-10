@@ -39,6 +39,32 @@ Vue.use(Element)
 Note that it is required to override icon font path to the relative path of Element's font files.
 :::
 
+#### Adjust the control size ladder in one place
+
+The four sizes (`large` / `medium` / `small` / `mini`) of Button, Input, Select, Tag, Table, Pagination and the other controls all derive from the "Size ladder" block in `common/var.scss`. Change that block and every component scales together, instead of overriding component by component:
+
+```scss
+/* total height, including the 1px border on each side (see box-sizing: border-box on input) */
+$--component-height-large: 36px;
+$--component-height-medium: 32px;
+$--component-height-small: 28px;
+$--component-height-mini: 24px;
+
+/* inner height = total height - 2px, must be changed together with the values above */
+$--component-inner-height-large: 34px;
+$--component-inner-height-medium: 30px;
+$--component-inner-height-small: 26px;
+$--component-inner-height-mini: 22px;
+
+/* font sizes */
+$--component-font-size-large: 14px;
+$--component-font-size-medium: 13px;
+$--component-font-size-small: 12px;
+$--component-font-size-mini: 12px;
+```
+
+Without `size` the control is `medium`. A few components have derived values that follow the same anchors, such as `$--input-*-height`, `$--tag-*-height`, `$--pagination-*-button-*` and `$--form-item-line-height-*`; override those only when a single component has to step away from the ladder. Dropdown menu items use their own type scale (15 / 14 / 13 / 12) and do not follow the font size variables above.
+
 ### CLI theme tool
 If you project doesn't use SCSS, you can customize themes with our CLI theme tool:
 

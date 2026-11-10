@@ -7,25 +7,25 @@ Passez sur le menu avec la souris pour dérouler son contenu.
 :::demo L'élément déclencheur est généré par le `slot` par défaut, et le menu déroulant est généré par le `slot` appelé `dropdown`. Par défaut le menu apparaît simplement en passant la souris sur l'élément déclencheur, sans avoir à cliquer.
 
 ```html
-<el-dropdown>
-  <span class="el-dropdown-link">
-    Menu déroulant<i class="el-icon-arrow-down el-icon--right"></i>
+<hzq-dropdown>
+  <span class="hzq-dropdown-link">
+    Menu déroulant<i class="hzq-icon-arrow-down hzq-icon--right"></i>
   </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>Action 1</el-dropdown-item>
-    <el-dropdown-item>Action 2</el-dropdown-item>
-    <el-dropdown-item>Action 3</el-dropdown-item>
-    <el-dropdown-item disabled>Action 4</el-dropdown-item>
-    <el-dropdown-item divided>Action 5</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item>Action 1</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 2</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 3</hzq-dropdown-item>
+    <hzq-dropdown-item disabled>Action 4</hzq-dropdown-item>
+    <hzq-dropdown-item divided>Action 5</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
 
 <style>
-  .el-dropdown-link {
+  .hzq-dropdown-link {
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-arrow-down {
+  .hzq-icon-arrow-down {
     font-size: 12px;
   }
 </style>
@@ -40,37 +40,37 @@ Utilisez le bouton pour ouvrir le menu déroulant.
 
 :::demo Utilisez `split-button` pour séparer le déclencheur du reste du bouton, ce dernier devenant la partie gauche et le déclencheur la partie droite.
 ```html
-<el-dropdown>
-  <el-button type="primary">
-    Liste déroulante<i class="el-icon-arrow-down el-icon--right"></i>
-  </el-button>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>Action 1</el-dropdown-item>
-    <el-dropdown-item>Action 2</el-dropdown-item>
-    <el-dropdown-item>Action 3</el-dropdown-item>
-    <el-dropdown-item>Action 4</el-dropdown-item>
-    <el-dropdown-item>Action 5</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
-<el-dropdown split-button type="primary" @click="handleClick">
+<hzq-dropdown>
+  <hzq-button type="primary">
+    Liste déroulante<i class="hzq-icon-arrow-down hzq-icon--right"></i>
+  </hzq-button>
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item>Action 1</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 2</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 3</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 4</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 5</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
+<hzq-dropdown split-button type="primary" @click="handleClick">
   Liste déroulante
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>Action 1</el-dropdown-item>
-    <el-dropdown-item>Action 2</el-dropdown-item>
-    <el-dropdown-item>Action 3</el-dropdown-item>
-    <el-dropdown-item>Action 4</el-dropdown-item>
-    <el-dropdown-item>Action 5</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item>Action 1</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 2</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 3</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 4</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 5</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
 
 <style>
-  .el-dropdown {
+  .hzq-dropdown {
     vertical-align: top;
   }
-  .el-dropdown + .el-dropdown {
+  .hzq-dropdown + .hzq-dropdown {
     margin-left: 15px;
   }
-  .el-icon-arrow-down {
+  .hzq-icon-arrow-down {
     font-size: 12px;
   }
 </style>
@@ -94,45 +94,45 @@ Vous pouvez choisir de déclencher le menu au moment du clic, ou en passant la s
 :::demo Utilisez l'attribut `trigger`. Par défaut, il est à `hover`.
 
 ```html
-<el-row class="block-col-2">
-  <el-col :span="12">
+<hzq-row class="block-col-2">
+  <hzq-col :span="12">
     <span class="demonstration">En passant la souris</span>
-    <el-dropdown>
-      <span class="el-dropdown-link">
-        Liste déroulante<i class="el-icon-arrow-down el-icon--right"></i>
+    <hzq-dropdown>
+      <span class="hzq-dropdown-link">
+        Liste déroulante<i class="hzq-icon-arrow-down hzq-icon--right"></i>
       </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item icon="el-icon-plus">Action 1</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-plus">Action 2</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-plus-outline">Action 3</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-check">Action 4</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-check">Action 5</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-  </el-col>
-  <el-col :span="12">
+      <hzq-dropdown-menu slot="dropdown">
+        <hzq-dropdown-item icon="hzq-icon-plus">Action 1</hzq-dropdown-item>
+        <hzq-dropdown-item icon="hzq-icon-circle-plus">Action 2</hzq-dropdown-item>
+        <hzq-dropdown-item icon="hzq-icon-circle-plus-outline">Action 3</hzq-dropdown-item>
+        <hzq-dropdown-item icon="hzq-icon-check">Action 4</hzq-dropdown-item>
+        <hzq-dropdown-item icon="hzq-icon-circle-check">Action 5</hzq-dropdown-item>
+      </hzq-dropdown-menu>
+    </hzq-dropdown>
+  </hzq-col>
+  <hzq-col :span="12">
     <span class="demonstration">En cliquant</span>
-    <el-dropdown trigger="click">
-      <span class="el-dropdown-link">
-        Liste déroulante<i class="el-icon-arrow-down el-icon--right"></i>
+    <hzq-dropdown trigger="click">
+      <span class="hzq-dropdown-link">
+        Liste déroulante<i class="hzq-icon-arrow-down hzq-icon--right"></i>
       </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item icon="el-icon-plus">Action 1</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-plus">Action 2</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-plus-outline">Action 3</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-check">Action 4</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-check">Action 5</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-  </el-col>
-</el-row>
+      <hzq-dropdown-menu slot="dropdown">
+        <hzq-dropdown-item icon="hzq-icon-plus">Action 1</hzq-dropdown-item>
+        <hzq-dropdown-item icon="hzq-icon-circle-plus">Action 2</hzq-dropdown-item>
+        <hzq-dropdown-item icon="hzq-icon-circle-plus-outline">Action 3</hzq-dropdown-item>
+        <hzq-dropdown-item icon="hzq-icon-check">Action 4</hzq-dropdown-item>
+        <hzq-dropdown-item icon="hzq-icon-circle-check">Action 5</hzq-dropdown-item>
+      </hzq-dropdown-menu>
+    </hzq-dropdown>
+  </hzq-col>
+</hzq-row>
 
 <style>
-  .el-dropdown-link {
+  .hzq-dropdown-link {
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-arrow-down {
+  .hzq-icon-arrow-down {
     font-size: 12px;
   }
   .demonstration {
@@ -151,25 +151,25 @@ Utilisez l'attribut `hide-on-click` pour déterminer si le menu se ferme après 
 
 :::demo Par défaut le menu se ferme après avoir cliqué dans la liste. Vous pouvez changer cette option en mettant `hide-on-click` à `false`.
 ```html
-<el-dropdown :hide-on-click="false">
-  <span class="el-dropdown-link">
-    Liste déroulante<i class="el-icon-arrow-down el-icon--right"></i>
+<hzq-dropdown :hide-on-click="false">
+  <span class="hzq-dropdown-link">
+    Liste déroulante<i class="hzq-icon-arrow-down hzq-icon--right"></i>
   </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>Action 1</el-dropdown-item>
-    <el-dropdown-item>Action 2</el-dropdown-item>
-    <el-dropdown-item>Action 3</el-dropdown-item>
-    <el-dropdown-item disabled>Action 4</el-dropdown-item>
-    <el-dropdown-item divided>Action 5</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item>Action 1</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 2</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 3</hzq-dropdown-item>
+    <hzq-dropdown-item disabled>Action 4</hzq-dropdown-item>
+    <hzq-dropdown-item divided>Action 5</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
 
 <style>
-  .el-dropdown-link {
+  .hzq-dropdown-link {
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-arrow-down {
+  .hzq-icon-arrow-down {
     font-size: 12px;
   }
 </style>
@@ -183,25 +183,25 @@ Le paramètre de cet évènement peut être assigné à chaque élément de la l
 
 :::demo
 ```html
-<el-dropdown @command="handleCommand">
-  <span class="el-dropdown-link">
-    Liste déroulante<i class="el-icon-arrow-down el-icon--right"></i>
+<hzq-dropdown @command="handleCommand">
+  <span class="hzq-dropdown-link">
+    Liste déroulante<i class="hzq-icon-arrow-down hzq-icon--right"></i>
   </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item command="a">Action 1</el-dropdown-item>
-    <el-dropdown-item command="b">Action 2</el-dropdown-item>
-    <el-dropdown-item command="c">Action 3</el-dropdown-item>
-    <el-dropdown-item command="d" disabled>Action 4</el-dropdown-item>
-    <el-dropdown-item command="e" divided>Action 5</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item command="a">Action 1</hzq-dropdown-item>
+    <hzq-dropdown-item command="b">Action 2</hzq-dropdown-item>
+    <hzq-dropdown-item command="c">Action 3</hzq-dropdown-item>
+    <hzq-dropdown-item command="d" disabled>Action 4</hzq-dropdown-item>
+    <hzq-dropdown-item command="e" divided>Action 5</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
 
 <style>
-  .el-dropdown-link {
+  .hzq-dropdown-link {
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-arrow-down {
+  .hzq-icon-arrow-down {
     font-size: 12px;
   }
 </style>
@@ -220,50 +220,60 @@ Le paramètre de cet évènement peut être assigné à chaque élément de la l
 
 ### Tailles
 
-En plus de la taille par défaut, le composant Dropdown propose trois autres tailles différentes.
+Le composant Dropdown propose quatre tailles différentes.
 
-:::demo Utilisez `size` pour déterminer une autre taille parmi `medium`, `small` ou `mini`.
+:::demo Utilisez `size` pour déterminer une autre taille parmi `large`, `medium`, `small` ou `mini`. Sans `size` le menu est `medium`.
 
 ```html
-<el-dropdown split-button type="primary">
+<hzq-dropdown split-button type="primary">
   Défaut
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>Action 1</el-dropdown-item>
-    <el-dropdown-item>Action 2</el-dropdown-item>
-    <el-dropdown-item>Action 3</el-dropdown-item>
-    <el-dropdown-item>Action 4</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item>Action 1</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 2</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 3</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 4</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
 
-<el-dropdown size="medium" split-button type="primary">
+<hzq-dropdown size="large" split-button type="primary">
+  Large
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item>Action 1</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 2</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 3</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 4</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
+
+<hzq-dropdown size="medium" split-button type="primary">
   Medium
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>Action 1</el-dropdown-item>
-    <el-dropdown-item>Action 2</el-dropdown-item>
-    <el-dropdown-item>Action 3</el-dropdown-item>
-    <el-dropdown-item>Action 4</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item>Action 1</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 2</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 3</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 4</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
 
-<el-dropdown size="small" split-button type="primary">
+<hzq-dropdown size="small" split-button type="primary">
   Small
-  <el-dropdown-menu slot="dropdown">
-   <el-dropdown-item>Action 1</el-dropdown-item>
-   <el-dropdown-item>Action 2</el-dropdown-item>
-   <el-dropdown-item>Action 3</el-dropdown-item>
-   <el-dropdown-item>Action 4</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+  <hzq-dropdown-menu slot="dropdown">
+   <hzq-dropdown-item>Action 1</hzq-dropdown-item>
+   <hzq-dropdown-item>Action 2</hzq-dropdown-item>
+   <hzq-dropdown-item>Action 3</hzq-dropdown-item>
+   <hzq-dropdown-item>Action 4</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
 
-<el-dropdown size="mini" split-button type="primary">
+<hzq-dropdown size="mini" split-button type="primary">
   Mini
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>Action 1</el-dropdown-item>
-    <el-dropdown-item>Action 2</el-dropdown-item>
-    <el-dropdown-item>Action 3</el-dropdown-item>
-    <el-dropdown-item>Action 4</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item>Action 1</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 2</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 3</hzq-dropdown-item>
+    <hzq-dropdown-item>Action 4</hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
 ```
 :::
 
@@ -273,7 +283,7 @@ En plus de la taille par défaut, le composant Dropdown propose trois autres tai
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type          | Type du bouton, se référer au composant `Button`. Ne marche que si `split-button` est `true`.  | string  |  —   |    —     |
-| size          | Taille du menu, marche aussi avec `split button`.  | string  | medium / small / mini  |    —     |
+| size          | Taille du menu, marche aussi avec `split button`.  | string  | large / medium / small / mini  |    —     |
 | split-button | Si le bouton est séparé en deux. | boolean         |     —       | false   |
 | placement    | Emplacement du menu déroulant | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | Comment déclencher l'ouverture du menu.     | string  |    hover/click  |  hover |
@@ -287,8 +297,8 @@ En plus de la taille par défaut, le composant Dropdown propose trois autres tai
 
 | Nom | Description |
 |------|--------|
-| — | Contenu du Dropdown. Note: doit être un élément du DOM valide (ex. `<span>, <button> etc.`) ou `el-component`, pour y attacher un évènement.  |
-| dropdown | Contenu du menu du Dropdown, en général un élément `<el-dropdown-menu>`. |
+| — | Contenu du Dropdown. Note: doit être un élément du DOM valide (ex. `<span>, <button> etc.`) ou `hzq-component`, pour y attacher un évènement.  |
+| dropdown | Contenu du menu du Dropdown, en général un élément `<hzq-dropdown-menu>`. |
 
 ### Évènements du Dropdown
 

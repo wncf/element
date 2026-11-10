@@ -2,31 +2,31 @@
   <div
     @dragstart.prevent
     :class="[
-      'el-input-number',
-      inputNumberSize ? 'el-input-number--' + inputNumberSize : '',
+      'hzq-input-number',
+      inputNumberSize ? 'hzq-input-number--' + inputNumberSize : '',
       { 'is-disabled': inputNumberDisabled },
       { 'is-without-controls': !controls },
       { 'is-controls-right': controlsAtRight }
     ]">
     <span
-      class="el-input-number__decrease"
+      class="hzq-input-number__decrease"
       role="button"
       v-if="controls"
       v-repeat-click="decrease"
       :class="{'is-disabled': minDisabled}"
       @keydown.enter="decrease">
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
+      <i :class="`hzq-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
     </span>
     <span
-      class="el-input-number__increase"
+      class="hzq-input-number__increase"
       role="button"
       v-if="controls"
       v-repeat-click="increase"
       :class="{'is-disabled': maxDisabled}"
       @keydown.enter="increase">
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
+      <i :class="`hzq-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
     </span>
-    <el-input
+    <hzq-input
       ref="input"
       :value="displayValue"
       :placeholder="placeholder"
@@ -42,16 +42,16 @@
       @focus="handleFocus"
       @input="handleInput"
       @change="handleInputChange">
-    </el-input>
+    </hzq-input>
   </div>
 </template>
 <script>
-  import ElInput from 'element-ui/packages/input';
-  import Focus from 'element-ui/src/mixins/focus';
-  import RepeatClick from 'element-ui/src/directives/repeat-click';
+  import HzqInput from 'hzq-ui/packages/input';
+  import Focus from 'hzq-ui/src/mixins/focus';
+  import RepeatClick from 'hzq-ui/src/directives/repeat-click';
 
   export default {
-    name: 'ElInputNumber',
+    name: 'HzqInputNumber',
     mixins: [Focus('input')],
     inject: {
       elForm: {
@@ -65,7 +65,7 @@
       repeatClick: RepeatClick
     },
     components: {
-      ElInput
+      HzqInput
     },
     props: {
       step: {
@@ -165,7 +165,7 @@
         return (this.elFormItem || {}).elFormItemSize;
       },
       inputNumberSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size || this._elFormItemSize || (this.$HZQ || {}).size;
       },
       inputNumberDisabled() {
         return this.disabled || !!(this.elForm || {}).disabled;

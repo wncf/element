@@ -9,34 +9,34 @@ Muestra la cantidad de mensajes nuevos.
 :::demo La cantidad está definida por `value` que acepta `Number` o `String`.
 
 ```html
-<el-badge :value="12" class="item">
-  <el-button size="small">comments</el-button>
-</el-badge>
-<el-badge :value="3" class="item">
-  <el-button size="small">replies</el-button>
-</el-badge>
-<el-badge :value="1" class="item" type="primary">
-  <el-button size="small">comments</el-button>
-</el-badge>
-<el-badge :value="2" class="item" type="warning">
-  <el-button size="small">replies</el-button>
-</el-badge>
+<hzq-badge :value="12" class="item">
+  <hzq-button size="small">comments</hzq-button>
+</hzq-badge>
+<hzq-badge :value="3" class="item">
+  <hzq-button size="small">replies</hzq-button>
+</hzq-badge>
+<hzq-badge :value="1" class="item" type="primary">
+  <hzq-button size="small">comments</hzq-button>
+</hzq-badge>
+<hzq-badge :value="2" class="item" type="warning">
+  <hzq-button size="small">replies</hzq-button>
+</hzq-badge>
 
-<el-dropdown trigger="click">
-  <span class="el-dropdown-link">
-    Click Me<i class="el-icon-caret-bottom el-icon--right"></i>
+<hzq-dropdown trigger="click">
+  <span class="hzq-dropdown-link">
+    Click Me<i class="hzq-icon-caret-bottom hzq-icon--right"></i>
   </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item class="clearfix">
+  <hzq-dropdown-menu slot="dropdown">
+    <hzq-dropdown-item class="clearfix">
       comments
-      <el-badge class="mark" :value="12" />
-    </el-dropdown-item>
-    <el-dropdown-item class="clearfix">
+      <hzq-badge class="mark" :value="12" />
+    </hzq-dropdown-item>
+    <hzq-dropdown-item class="clearfix">
       replies
-      <el-badge class="mark" :value="3" />
-    </el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+      <hzq-badge class="mark" :value="3" />
+    </hzq-dropdown-item>
+  </hzq-dropdown-menu>
+</hzq-dropdown>
 
 <style>
 .item {
@@ -54,12 +54,12 @@ Se puede personalizar el valor máximo.
 :::demo El valor máximo se define como `max` el cual es un `Number`. Nota: solo funciona si `value` es también un `Number`.
 
 ```html
-<el-badge :value="200" :max="99" class="item">
-  <el-button size="small">comments</el-button>
-</el-badge>
-<el-badge :value="100" :max="10" class="item">
-  <el-button size="small">replies</el-button>
-</el-badge>
+<hzq-badge :value="200" :max="99" class="item">
+  <hzq-button size="small">comments</hzq-button>
+</hzq-badge>
+<hzq-badge :value="100" :max="10" class="item">
+  <hzq-button size="small">replies</hzq-button>
+</hzq-badge>
 
 <style>
 .item {
@@ -77,12 +77,12 @@ Mostrar texto en vez de números.
 :::demo Cuando `value` es un `String`, puede mostrar texto personalizado.
 
 ```html
-<el-badge value="new" class="item">
-  <el-button size="small">comments</el-button>
-</el-badge>
-<el-badge value="hot" class="item">
-  <el-button size="small">replies</el-button>
-</el-badge>
+<hzq-badge value="new" class="item">
+  <hzq-button size="small">comments</hzq-button>
+</hzq-badge>
+<hzq-badge value="hot" class="item">
+  <hzq-button size="small">replies</hzq-button>
+</hzq-badge>
 
 <style>
 .item {
@@ -100,10 +100,10 @@ Puede utilizar un punto rojo para marcar contenido que debe ser notado.
 :::demo Use el atributo `is-dot`. Es un `Boolean`.
 
 ```html
-<el-badge is-dot class="item">query</el-badge>
-<el-badge is-dot class="item">
-  <el-button class="share-button" icon="el-icon-share" type="primary"></el-button>
-</el-badge>
+<hzq-badge is-dot class="item">query</hzq-badge>
+<hzq-badge is-dot class="item">
+  <hzq-button class="share-button" icon="hzq-icon-share" type="primary"></hzq-button>
+</hzq-badge>
 
 <style>
 .item {

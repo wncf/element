@@ -1,8 +1,8 @@
-import ElTabs from './src/tabs';
+import HzqTabs from './src/tabs';
 
 /* istanbul ignore next */
-ElTabs.install = function(Vue) {
-  Vue.component(ElTabs.name, ElTabs);
+HzqTabs.install = function(Vue) {
+  Vue.component(HzqTabs.name, HzqTabs);
 };
 
-export default ElTabs;
+export default HzqTabs;

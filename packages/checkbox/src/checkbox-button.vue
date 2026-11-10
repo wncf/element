@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-checkbox-button"
+    class="hzq-checkbox-button"
       :class="[
-        size ? 'el-checkbox-button--' + size : '',
+        size ? 'hzq-checkbox-button--' + size : '',
         { 'is-disabled': isDisabled },
         { 'is-checked': isChecked },
         { 'is-focus': focus },
@@ -13,7 +13,7 @@
     >
     <input
       v-if="trueLabel || falseLabel"
-      class="el-checkbox-button__original"
+      class="hzq-checkbox-button__original"
       type="checkbox"
       :name="name"
       :disabled="isDisabled"
@@ -25,7 +25,7 @@
       @blur="focus = false">
     <input
       v-else
-      class="el-checkbox-button__original"
+      class="hzq-checkbox-button__original"
       type="checkbox"
       :name="name"
       :disabled="isDisabled"
@@ -35,7 +35,7 @@
       @focus="focus = true"
       @blur="focus = false">
 
-    <span class="el-checkbox-button__inner"
+    <span class="hzq-checkbox-button__inner"
       v-if="$slots.default || label"
       :style="isChecked ? activeStyle : null">
       <slot>{{label}}</slot>
@@ -44,10 +44,10 @@
   </label>
 </template>
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElCheckboxButton',
+    name: 'HzqCheckboxButton',
 
     mixins: [Emitter],
 
@@ -97,7 +97,7 @@
               (this.isLimitExceeded = true));
 
             this.isLimitExceeded === false &&
-            this.dispatch('ElCheckboxGroup', 'input', [val]);
+            this.dispatch('HzqCheckboxGroup', 'input', [val]);
           } else if (this.value !== undefined) {
             this.$emit('input', val);
           } else {
@@ -119,7 +119,7 @@
       _checkboxGroup() {
         let parent = this.$parent;
         while (parent) {
-          if (parent.$options.componentName !== 'ElCheckboxGroup') {
+          if (parent.$options.componentName !== 'HzqCheckboxGroup') {
             parent = parent.$parent;
           } else {
             return parent;
@@ -147,7 +147,7 @@
       },
 
       size() {
-        return this._checkboxGroup.checkboxGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this._checkboxGroup.checkboxGroupSize || this._elFormItemSize || (this.$HZQ || {}).size;
       },
 
       /* used to make the isDisabled judgment under max/min props */
@@ -186,7 +186,7 @@
         this.$emit('change', value, ev);
         this.$nextTick(() => {
           if (this._checkboxGroup) {
-            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
+            this.dispatch('HzqCheckboxGroup', 'change', [this._checkboxGroup.value]);
           }
         });
       }

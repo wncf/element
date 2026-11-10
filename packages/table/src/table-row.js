@@ -1,6 +1,6 @@
-import ElCheckbox from 'element-ui/packages/checkbox';
+import HzqCheckbox from 'hzq-ui/packages/checkbox';
 export default {
-  name: 'ElTableRow',
+  name: 'HzqTableRow',
   props: [
     'columns',
     'row',
@@ -22,7 +22,7 @@ export default {
     'fixed'
   ],
   components: {
-    ElCheckbox
+    HzqCheckbox
   },
   render() {
     const {

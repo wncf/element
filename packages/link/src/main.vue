@@ -1,8 +1,8 @@
 <template>
   <a
     :class="[
-      'el-link',
-      type ? `el-link--${type}` : '',
+      'hzq-link',
+      type ? `hzq-link--${type}` : '',
       disabled && 'is-disabled',
       loading && 'is-loading',
       underline && !disabled && !loading && 'is-underline'
@@ -12,10 +12,10 @@
     @click="handleClick"
   >
 
-    <i class="el-icon-loading" v-if="loading"></i>
+    <i class="hzq-icon-loading" v-if="loading"></i>
     <i :class="icon" v-if="icon && !loading"></i>
 
-    <span v-if="$slots.default" class="el-link--inner">
+    <span v-if="$slots.default" class="hzq-link--inner">
       <slot></slot>
     </span>
 
@@ -26,7 +26,7 @@
 <script>
 
 export default {
-  name: 'ElLink',
+  name: 'HzqLink',
 
   props: {
     type: {

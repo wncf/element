@@ -1,5 +1,5 @@
 <template>
-  <div class="el-statistic">
+  <div class="hzq-statistic">
     <div class="head" v-if="title||$slots.title">
       <slot name="title">
         <span class="title">
@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import { isNumber, chain, multiply, padStart, reduce} from 'element-ui/src/utils/lodash';
+import { isNumber, chain, multiply, padStart, reduce} from 'hzq-ui/src/utils/lodash';
 export default {
-  name: 'ElStatistic',
+  name: 'HzqStatistic',
   data() {
     return {
       disposeValue: '',

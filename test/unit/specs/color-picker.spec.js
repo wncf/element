@@ -7,7 +7,7 @@ describe('ColorPicker', () => {
   afterEach(() => {
     vm.$destroy(true);
     destroyVM(vm);
-    const dropdown = document.querySelector('.el-color-dropdown');
+    const dropdown = document.querySelector('.hzq-color-dropdown');
     if (dropdown && dropdown.parentNode) dropdown.parentNode.removeChild(dropdown);
   });
 
@@ -19,7 +19,7 @@ describe('ColorPicker', () => {
   it('should show alpha slider when show-alpha=true', (done) => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color" show-alpha></el-color-picker>
+        <hzq-color-picker v-model="color" show-alpha></hzq-color-picker>
       `,
 
       data() {
@@ -29,11 +29,11 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const alphaSlider = document.querySelector('.el-color-alpha-slider');
+      const alphaSlider = document.querySelector('.hzq-color-alpha-slider');
       expect(alphaSlider).to.exist;
       done();
     }, ANIMATION_TIME);
@@ -42,11 +42,11 @@ describe('ColorPicker', () => {
   it('should show color picker when click trigger', (done) => {
     vm = createTest(ColorPicker, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     vm.$nextTick(() => {
-      const dropdown = document.querySelector('.el-color-dropdown');
+      const dropdown = document.querySelector('.hzq-color-dropdown');
       expect(dropdown).to.exist;
       done();
     });
@@ -57,7 +57,7 @@ describe('ColorPicker', () => {
   it('should pick a color when confirm button click', (done) => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color"></el-color-picker>
+        <hzq-color-picker v-model="color"></hzq-color-picker>
       `,
 
       data() {
@@ -67,11 +67,11 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const dropdown = document.querySelector('.el-color-dropdown__btn');
+      const dropdown = document.querySelector('.hzq-color-dropdown__btn');
       dropdown.click();
       vm.$nextTick(() => {
         expect(vm.color).to.equal('#FF0000');
@@ -83,7 +83,7 @@ describe('ColorPicker', () => {
   it('should show correct rgb value', (done) => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color"></el-color-picker>
+        <hzq-color-picker v-model="color"></hzq-color-picker>
       `,
 
       data() {
@@ -93,11 +93,11 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const input = document.querySelector('.el-color-dropdown__value input');
+      const input = document.querySelector('.hzq-color-dropdown__value input');
       expect(input.value.trim().toUpperCase()).to.equal('#20A0FF');
       done();
     }, ANIMATION_TIME);
@@ -106,7 +106,7 @@ describe('ColorPicker', () => {
   it('should init the right color when open', (done) => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color"></el-color-picker>
+        <hzq-color-picker v-model="color"></hzq-color-picker>
       `,
 
       data() {
@@ -116,14 +116,14 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const dropdown = document.querySelector('.el-color-dropdown__btn');
+      const dropdown = document.querySelector('.hzq-color-dropdown__btn');
       dropdown.click();
       vm.$nextTick(() => {
-        const hueBar = document.querySelector('.el-color-hue-slider__thumb');
+        const hueBar = document.querySelector('.hzq-color-hue-slider__thumb');
         const top = parseInt(hueBar.style.top, 10);
         expect(top > 10).to.be.true;
         done();
@@ -134,7 +134,7 @@ describe('ColorPicker', () => {
   it('should clear a color when clear button click', (done) => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color"></el-color-picker>
+        <hzq-color-picker v-model="color"></hzq-color-picker>
       `,
 
       data() {
@@ -144,11 +144,11 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const clearBtn = document.querySelector('.el-color-dropdown__link-btn');
+      const clearBtn = document.querySelector('.hzq-color-dropdown__link-btn');
       clearBtn.click();
       setTimeout(() => {
         expect(vm.color).to.equal(null);
@@ -160,7 +160,7 @@ describe('ColorPicker', () => {
   it('should change hue when clicking the hue bar', (done) => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color"></el-color-picker>
+        <hzq-color-picker v-model="color"></hzq-color-picker>
       `,
 
       data() {
@@ -170,11 +170,11 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const hueBar = document.querySelector('.el-color-hue-slider');
+      const hueBar = document.querySelector('.hzq-color-hue-slider');
       hueBar.__vue__.handleClick({ target: null, clientX: 0, clientY: 1000 });
       vm.$nextTick(() => {
         const picker = vm.$children[0];
@@ -187,7 +187,7 @@ describe('ColorPicker', () => {
   it('should change hue when saturation is zero', (done) => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color"></el-color-picker>
+        <hzq-color-picker v-model="color"></hzq-color-picker>
       `,
 
       data() {
@@ -197,14 +197,14 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const hueBar = document.querySelector('.el-color-hue-slider');
+      const hueBar = document.querySelector('.hzq-color-hue-slider');
       hueBar.__vue__.handleClick({ target: null, clientX: 0, clientY: 1000 });
       vm.$nextTick(() => {
-        const thumb = document.querySelector('.el-color-hue-slider__thumb');
+        const thumb = document.querySelector('.hzq-color-hue-slider__thumb');
         expect(parseInt(thumb.style.top, 10) > 0).to.true;
         done();
       });
@@ -214,7 +214,7 @@ describe('ColorPicker', () => {
   it('should change alpha when clicking the alpha bar', (done) => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color" show-alpha></el-color-picker>
+        <hzq-color-picker v-model="color" show-alpha></hzq-color-picker>
       `,
 
       data() {
@@ -224,11 +224,11 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const alphaBar = document.querySelector('.el-color-alpha-slider');
+      const alphaBar = document.querySelector('.hzq-color-alpha-slider');
       alphaBar.__vue__.handleClick({ target: null, clientX: 50, clientY: 0 });
       vm.$nextTick(() => {
         const picker = vm.$children[0];
@@ -241,7 +241,7 @@ describe('ColorPicker', () => {
   it('should change saturation and value when clicking the sv-panel', (done) => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color" color-format="hsv"></el-color-picker>
+        <hzq-color-picker v-model="color" color-format="hsv"></hzq-color-picker>
       `,
 
       data() {
@@ -251,11 +251,11 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const svPanel = document.querySelector('.el-color-svpanel');
+      const svPanel = document.querySelector('.hzq-color-svpanel');
       svPanel.__vue__.handleDrag({ clientX: 0, clientY: 0 });
       vm.$nextTick(() => {
         const picker = vm.$children[0];
@@ -269,7 +269,7 @@ describe('ColorPicker', () => {
   it('should change color to the selected color', done => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color" show-alpha :predefine="colors"></el-color-picker>
+        <hzq-color-picker v-model="color" show-alpha :predefine="colors"></hzq-color-picker>
       `,
       data() {
         return {
@@ -289,12 +289,12 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      expect(document.querySelectorAll('.el-color-predefine__color-selector').length === 9).to.be.true;
-      const selector = document.querySelector('.el-color-predefine__color-selector:nth-child(4)');
+      expect(document.querySelectorAll('.hzq-color-predefine__color-selector').length === 9).to.be.true;
+      const selector = document.querySelector('.hzq-color-predefine__color-selector:nth-child(4)');
       selector.click();
       vm.$nextTick(() => {
         const picker = vm.$children[0];
@@ -303,7 +303,7 @@ describe('ColorPicker', () => {
         expect(picker.color._value === 20).to.be.true;
         expect(picker.color._alpha === 50).to.be.true;
 
-        const selector2 = document.querySelector('.el-color-predefine__color-selector:nth-child(3)');
+        const selector2 = document.querySelector('.hzq-color-predefine__color-selector:nth-child(3)');
         selector2.click();
 
         vm.$nextTick(() => {
@@ -320,7 +320,7 @@ describe('ColorPicker', () => {
   it('should change selected state of predefined color', done => {
     const vm = createVue({
       template: `
-        <el-color-picker v-model="color" show-alpha :predefine="colors"></el-color-picker>
+        <hzq-color-picker v-model="color" show-alpha :predefine="colors"></hzq-color-picker>
       `,
       data() {
         return {
@@ -340,16 +340,16 @@ describe('ColorPicker', () => {
       }
     }, true);
 
-    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    const trigger = vm.$el.querySelector('.hzq-color-picker__trigger');
     trigger.click();
 
     setTimeout(() => {
-      const selector = document.querySelector('.el-color-predefine__color-selector:nth-child(4)');
+      const selector = document.querySelector('.hzq-color-predefine__color-selector:nth-child(4)');
       selector.click();
       vm.$nextTick(() => {
         expect(selector.classList.contains('selected')).to.be.true;
 
-        const hueBar = document.querySelector('.el-color-hue-slider');
+        const hueBar = document.querySelector('.hzq-color-hue-slider');
         hueBar.__vue__.handleClick({ target: null, clientX: 0, clientY: 1000 });
 
         vm.$nextTick(() => {

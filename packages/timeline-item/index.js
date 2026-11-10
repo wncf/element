@@ -1,8 +1,8 @@
-import ElTimelineItem from '../timeline/src/item';
+import HzqTimelineItem from '../timeline/src/item';
 
 /* istanbul ignore next */
-ElTimelineItem.install = function(Vue) {
-  Vue.component(ElTimelineItem.name, ElTimelineItem);
+HzqTimelineItem.install = function(Vue) {
+  Vue.component(HzqTimelineItem.name, HzqTimelineItem);
 };
 
-export default ElTimelineItem;
+export default HzqTimelineItem;

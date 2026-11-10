@@ -6,7 +6,7 @@ Permet d'uploader des fichiers en cliquant ou en les déplaçant sur le composan
 
 :::demo Personnalisez le bouton d'envoi avec `slot`. Utilisez `limit` et `on-exceed` pour limiter le nombre maximal de fichiers et déterminer le comportement quand ce nombre est dépassé. De plus, vous pouvez annuler la suppression d'un fichier avec `before-remove`.
 ```html
-<el-upload
+<hzq-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
@@ -16,9 +16,9 @@ Permet d'uploader des fichiers en cliquant ou en les déplaçant sur le composan
   :limit="3"
   :on-exceed="handleExceed"
   :file-list="fileList">
-  <el-button size="small" type="primary">Cliquer pour envoyer</el-button>
-  <div slot="tip" class="el-upload__tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
-</el-upload>
+  <hzq-button size="small" type="primary">Cliquer pour envoyer</hzq-button>
+  <div slot="tip" class="hzq-upload__tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
+</hzq-upload>
 <script>
   export default {
     data() {
@@ -51,25 +51,25 @@ Utilisez `before-upload` pour restreindre le format et la taille du fichier à e
 
 :::demo
 ```html
-<el-upload
+<hzq-upload
   class="avatar-uploader"
   action="https://jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
   :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-</el-upload>
+  <i v-else class="hzq-icon-plus avatar-uploader-icon"></i>
+</hzq-upload>
 
 <style>
-  .avatar-uploader .el-upload {
+  .avatar-uploader .hzq-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
   }
-  .avatar-uploader .el-upload:hover {
+  .avatar-uploader .hzq-upload:hover {
     border-color: #409EFF;
   }
   .avatar-uploader-icon {
@@ -122,16 +122,16 @@ Utilisez `list-type` pour changer le style de la liste de fichiers.
 
 :::demo
 ```html
-<el-upload
+<hzq-upload
   action="https://jsonplaceholder.typicode.com/posts/"
   list-type="picture-card"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
-  <i class="el-icon-plus"></i>
-</el-upload>
-<el-dialog :visible.sync="dialogVisible">
+  <i class="hzq-icon-plus"></i>
+</hzq-upload>
+<hzq-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
-</el-dialog>
+</hzq-dialog>
 <script>
   export default {
     data() {
@@ -160,43 +160,43 @@ Use `scoped-slot` to change default thumbnail template.
 
 :::demo
 ```html
-<el-upload
+<hzq-upload
   action="#"
   list-type="picture-card"
   :auto-upload="false">
-    <i slot="default" class="el-icon-plus"></i>
+    <i slot="default" class="hzq-icon-plus"></i>
     <div slot="file" slot-scope="{file}">
       <img
-        class="el-upload-list__item-thumbnail"
+        class="hzq-upload-list__item-thumbnail"
         :src="file.url" alt=""
       >
-      <span class="el-upload-list__item-actions">
+      <span class="hzq-upload-list__item-actions">
         <span
-          class="el-upload-list__item-preview"
+          class="hzq-upload-list__item-preview"
           @click="handlePictureCardPreview(file)"
         >
-          <i class="el-icon-zoom-in"></i>
+          <i class="hzq-icon-zoom-in"></i>
         </span>
         <span
           v-if="!disabled"
-          class="el-upload-list__item-delete"
+          class="hzq-upload-list__item-delete"
           @click="handleDownload(file)"
         >
-          <i class="el-icon-download"></i>
+          <i class="hzq-icon-download"></i>
         </span>
         <span
           v-if="!disabled"
-          class="el-upload-list__item-delete"
+          class="hzq-upload-list__item-delete"
           @click="handleRemove(file)"
         >
-          <i class="el-icon-delete"></i>
+          <i class="hzq-icon-delete"></i>
         </span>
       </span>
     </div>
-</el-upload>
-<el-dialog :visible.sync="dialogVisible">
+</hzq-upload>
+<hzq-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
-</el-dialog>
+</hzq-dialog>
 <script>
   export default {
     data() {
@@ -227,16 +227,16 @@ Use `scoped-slot` to change default thumbnail template.
 
 :::demo
 ```html
-<el-upload
+<hzq-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
   list-type="picture">
-  <el-button size="small" type="primary">Cliquer pour envoyer</el-button>
-  <div slot="tip" class="el-upload__tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
-</el-upload>
+  <hzq-button size="small" type="primary">Cliquer pour envoyer</hzq-button>
+  <div slot="tip" class="hzq-upload__tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
+</hzq-upload>
 <script>
   export default {
     data() {
@@ -263,14 +263,14 @@ Utilisez `on-change` pour contrôler le comportement de la liste de fichiers.
 
 :::demo
 ```html
-<el-upload
+<hzq-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
   :file-list="fileList">
-  <el-button size="small" type="primary">Cliquer pour envoyer</el-button>
-  <div slot="tip" class="el-upload__tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
-</el-upload>
+  <hzq-button size="small" type="primary">Cliquer pour envoyer</hzq-button>
+  <div slot="tip" class="hzq-upload__tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
+</hzq-upload>
 <script>
   export default {
     data() {
@@ -300,7 +300,7 @@ Vous pouvez déposer les fichiers par drag'n drop sur l'espace dédié.
 
 :::demo
 ```html
-<el-upload
+<hzq-upload
   class="upload-demo"
   drag
   action="https://jsonplaceholder.typicode.com/posts/"
@@ -308,10 +308,10 @@ Vous pouvez déposer les fichiers par drag'n drop sur l'espace dédié.
   :on-remove="handleRemove"
   :file-list="fileList"
   multiple>
-  <i class="el-icon-upload"></i>
-  <div class="el-upload__text">Déposer les fichiers ici ou<em>cliquez pour envoyer</em></div>
-  <div class="el-upload__tip" slot="tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
-</el-upload>
+  <i class="hzq-icon-upload"></i>
+  <div class="hzq-upload__text">Déposer les fichiers ici ou<em>cliquez pour envoyer</em></div>
+  <div class="hzq-upload__tip" slot="tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
+</hzq-upload>
 ```
 :::
 
@@ -319,15 +319,15 @@ Vous pouvez déposer les fichiers par drag'n drop sur l'espace dédié.
 
 :::demo
 ```html
-<el-upload
+<hzq-upload
   class="upload-demo"
   ref="upload"
   action="https://jsonplaceholder.typicode.com/posts/"
   :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">Choisir un fichier</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">Envoyer au serveur</el-button>
-  <div class="el-upload__tip" slot="tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
-</el-upload>
+  <hzq-button slot="trigger" size="small" type="primary">Choisir un fichier</hzq-button>
+  <hzq-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">Envoyer au serveur</hzq-button>
+  <div class="hzq-upload__tip" slot="tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
+</hzq-upload>
 <script>
   export default {
     methods: {

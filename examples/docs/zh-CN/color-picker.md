@@ -8,11 +8,11 @@
 ```html
 <div class="block">
   <span class="demonstration">有默认值</span>
-  <el-color-picker v-model="color1"></el-color-picker>
+  <hzq-color-picker v-model="color1"></hzq-color-picker>
 </div>
 <div class="block">
   <span class="demonstration">无默认值</span>
-  <el-color-picker v-model="color2"></el-color-picker>
+  <hzq-color-picker v-model="color2"></hzq-color-picker>
 </div>
 
 <script>
@@ -32,7 +32,7 @@
 
 :::demo ColorPicker 支持普通颜色，也支持带 Alpha 通道的颜色，通过`show-alpha`属性即可控制是否支持透明度的选择。
 ```html
-<el-color-picker v-model="color" show-alpha></el-color-picker>
+<hzq-color-picker v-model="color" show-alpha></hzq-color-picker>
 
 <script>
   export default {
@@ -50,11 +50,11 @@
 
 :::demo ColorPicker 支持预定义颜色
 ```html
-<el-color-picker
+<hzq-color-picker
   v-model="color"
   show-alpha
   :predefine="predefineColors">
-</el-color-picker>
+</hzq-color-picker>
 
 <script>
   export default {
@@ -88,10 +88,11 @@
 
 :::demo
 ```html
-<el-color-picker v-model="color"></el-color-picker>
-<el-color-picker v-model="color" size="medium"></el-color-picker>
-<el-color-picker v-model="color" size="small"></el-color-picker>
-<el-color-picker v-model="color" size="mini"></el-color-picker>
+<hzq-color-picker v-model="color"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="large"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="medium"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="small"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="mini"></hzq-color-picker>
 
 <script>
   export default {
@@ -110,7 +111,7 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | 绑定值 | string | — | — |
 | disabled | 是否禁用 | boolean | — | false |
-| size | 尺寸 | string | medium / small / mini | — |
+| size | 尺寸 | string | large / medium / small / mini | — |
 | show-alpha | 是否支持透明度选择 | boolean | — | false |
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |
 | popper-class | ColorPicker 下拉框的类名 | string | — | — |

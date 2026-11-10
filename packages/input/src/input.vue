@@ -1,15 +1,15 @@
 <template>
   <div :class="[
-    type === 'textarea' ? 'el-textarea' : 'el-input',
-    inputSize ? 'el-input--' + inputSize : '',
+    type === 'textarea' ? 'hzq-textarea' : 'hzq-input',
+    inputSize ? 'hzq-input--' + inputSize : '',
     {
       'is-disabled': inputDisabled,
       'is-exceed': inputExceed,
-      'el-input-group': $slots.prepend || $slots.append,
-      'el-input-group--append': $slots.append,
-      'el-input-group--prepend': $slots.prepend,
-      'el-input--prefix': $slots.prefix || prefixIcon,
-      'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
+      'hzq-input-group': $slots.prepend || $slots.append,
+      'hzq-input-group--append': $slots.append,
+      'hzq-input-group--prepend': $slots.prepend,
+      'hzq-input--prefix': $slots.prefix || prefixIcon,
+      'hzq-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
     }
     ]"
     @mouseenter="hovering = true"
@@ -17,13 +17,13 @@
   >
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
-      <div class="el-input-group__prepend" v-if="$slots.prepend">
+      <div class="hzq-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </div>
       <input
         :tabindex="tabindex"
         v-if="type !== 'textarea'"
-        class="el-input__inner"
+        class="hzq-input__inner"
         v-bind="$attrs"
         :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
         :disabled="inputDisabled"
@@ -40,54 +40,54 @@
         :aria-label="label"
       >
       <!-- 前置内容 -->
-      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
+      <span class="hzq-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
-        <i class="el-input__icon"
+        <i class="hzq-input__icon"
            v-if="prefixIcon"
            :class="prefixIcon">
         </i>
       </span>
       <!-- 后置内容 -->
       <span
-        class="el-input__suffix"
+        class="hzq-input__suffix"
         v-if="getSuffixVisible()">
-        <span class="el-input__suffix-inner">
+        <span class="hzq-input__suffix-inner">
           <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix"></slot>
-            <i class="el-input__icon"
+            <i class="hzq-input__icon"
               v-if="suffixIcon"
               :class="suffixIcon">
             </i>
           </template>
           <i v-if="showClear"
-            class="el-input__icon el-icon-circle-close el-input__clear"
+            class="hzq-input__icon hzq-icon-circle-close hzq-input__clear"
             @mousedown.prevent
             @click="clear"
           ></i>
           <i v-if="showPwdVisible"
-            class="el-input__icon el-icon-view el-input__clear"
+            class="hzq-input__icon hzq-icon-view hzq-input__clear"
             @click="handlePasswordVisible"
           ></i>
-          <span v-if="isWordLimitVisible" class="el-input__count">
-            <span class="el-input__count-inner">
+          <span v-if="isWordLimitVisible" class="hzq-input__count">
+            <span class="hzq-input__count-inner">
               {{ textLength }}/{{ upperLimit }}
             </span>
           </span>
         </span>
-        <i class="el-input__icon"
+        <i class="hzq-input__icon"
           v-if="validateState"
-          :class="['el-input__validateIcon', validateIcon]">
+          :class="['hzq-input__validateIcon', validateIcon]">
         </i>
       </span>
       <!-- 后置元素 -->
-      <div class="el-input-group__append" v-if="$slots.append">
+      <div class="hzq-input-group__append" v-if="$slots.append">
         <slot name="append"></slot>
       </div>
     </template>
     <textarea
       v-else
       :tabindex="tabindex"
-      class="el-textarea__inner"
+      class="hzq-textarea__inner"
       @compositionstart="handleCompositionStart"
       @compositionupdate="handleCompositionUpdate"
       @compositionend="handleCompositionEnd"
@@ -104,20 +104,20 @@
       :aria-label="label"
     >
     </textarea>
-    <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
+    <span v-if="isWordLimitVisible && type === 'textarea'" class="hzq-input__count">{{ textLength }}/{{ upperLimit }}</span>
   </div>
 </template>
 <script>
-  import emitter from 'element-ui/src/mixins/emitter';
-  import Migrating from 'element-ui/src/mixins/migrating';
+  import emitter from 'hzq-ui/src/mixins/emitter';
+  import Migrating from 'hzq-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
-  import merge from 'element-ui/src/utils/merge';
-  import {isKorean} from 'element-ui/src/utils/shared';
+  import merge from 'hzq-ui/src/utils/merge';
+  import {isKorean} from 'hzq-ui/src/utils/shared';
 
   export default {
-    name: 'ElInput',
+    name: 'HzqInput',
 
-    componentName: 'ElInput',
+    componentName: 'HzqInput',
 
     mixins: [emitter, Migrating],
 
@@ -204,16 +204,16 @@
       },
       validateIcon() {
         return {
-          validating: 'el-icon-loading',
-          success: 'el-icon-circle-check',
-          error: 'el-icon-circle-close'
+          validating: 'hzq-icon-loading',
+          success: 'hzq-icon-circle-check',
+          error: 'hzq-icon-circle-close'
         }[this.validateState];
       },
       textareaStyle() {
         return merge({}, this.textareaCalcStyle, { resize: this.resize });
       },
       inputSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size || this._elFormItemSize || (this.$HZQ || {}).size;
       },
       inputDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
@@ -263,7 +263,7 @@
       value(val) {
         this.$nextTick(this.resizeTextarea);
         if (this.validateEvent) {
-          this.dispatch('ElFormItem', 'el.form.change', [val]);
+          this.dispatch('HzqFormItem', 'el.form.change', [val]);
         }
       },
       // native input value is set explicitly
@@ -306,7 +306,7 @@
         this.focused = false;
         this.$emit('blur', event);
         if (this.validateEvent) {
-          this.dispatch('ElFormItem', 'el.form.blur', [this.value]);
+          this.dispatch('HzqFormItem', 'el.form.blur', [this.value]);
         }
       },
       select() {
@@ -373,7 +373,7 @@
         this.$emit('change', event.target.value);
       },
       calcIconOffset(place) {
-        let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
+        let elList = [].slice.call(this.$el.querySelectorAll(`.hzq-input__${place}`) || []);
         if (!elList.length) return;
         let el = null;
         for (let i = 0; i < elList.length; i++) {
@@ -390,7 +390,7 @@
 
         const pendant = pendantMap[place];
         if (this.$slots[pendant]) {
-          el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth}px)`;
+          el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${this.$el.querySelector(`.hzq-input-group__${pendant}`).offsetWidth}px)`;
         } else {
           el.removeAttribute('style');
         }

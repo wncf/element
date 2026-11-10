@@ -10,18 +10,18 @@ There are two ways to expand child option items.
 ```html
 <div class="block">
   <span class="demonstration">Child options expand when clicked (default)</span>
-  <el-cascader
+  <hzq-cascader
     v-model="value"
     :options="options"
-    @change="handleChange"></el-cascader>
+    @change="handleChange"></hzq-cascader>
 </div>
 <div class="block">
   <span class="demonstration">Child options expand when hovered</span>
-  <el-cascader
+  <hzq-cascader
     v-model="value"
     :options="options"
     :props="{ expandTrigger: 'hover' }"
-    @change="handleChange"></el-cascader>
+    @change="handleChange"></hzq-cascader>
 </div>
 
 <script>
@@ -242,7 +242,7 @@ Disable an option by setting a `disabled` field in the option object.
 
 :::demo In this example, the first item in `options` array has a `disabled: true` field, so it is disabled. By default, Cascader checks the `disabled` field in each option object; if you are using another field name to indicate whether an option is disabled, you can assign it in the `props.disabled` attribute (see the API table below for details). And of course, field name `value`, `label` and `children` can also be customized in the same way.
 ```html
-<el-cascader :options="options"></el-cascader>
+<hzq-cascader :options="options"></hzq-cascader>
 
 <script>
   export default {
@@ -453,11 +453,11 @@ Disable an option by setting a `disabled` field in the option object.
 
 ### Clearable
 
-Set `clearable` attribute for `el-cascader` and a clear icon will appear when selected and hovered
+Set `clearable` attribute for `hzq-cascader` and a clear icon will appear when selected and hovered
 
 :::demo
 ```html
-<el-cascader :options="options" clearable></el-cascader>
+<hzq-cascader :options="options" clearable></hzq-cascader>
 
 <script>
   export default {
@@ -671,7 +671,7 @@ The input can display only the last level instead of all levels.
 
 :::demo The `show-all-levels` attribute defines if all levels are displayed. If it is `false`, only the last level is displayed.
 ```html
-<el-cascader :options="options" :show-all-levels="false"></el-cascader>
+<hzq-cascader :options="options" :show-all-levels="false"></hzq-cascader>
 <script>
   export default {
     data() {
@@ -886,18 +886,18 @@ Set `props.multiple = true` to use multiple selection.
 ```html
 <div class="block">
   <span class="demonstration">Display all tags (default)</span>
-  <el-cascader
+  <hzq-cascader
     :options="options"
     :props="props"
-    clearable></el-cascader>
+    clearable></hzq-cascader>
 </div>
 <div class="block">
   <span class="demonstration">Collapse tags</span>
-  <el-cascader
+  <hzq-cascader
     :options="options"
     :props="props"
     collapse-tags
-    clearable></el-cascader>
+    clearable></hzq-cascader>
 </div>
 
 <script>
@@ -990,17 +990,17 @@ In single selection, only the leaf nodes can be checked, and in multiple selecti
 ```html
 <div class="block">
   <span class="demonstration">Select any level of options (Single selection)</span>
-  <el-cascader
+  <hzq-cascader
     :options="options"
     :props="{ checkStrictly: true }"
-    clearable></el-cascader>
+    clearable></hzq-cascader>
 </div>
 <div class="block">
   <span class="demonstration">Select any level of options (Multiple selection)</span>
-  <el-cascader
+  <hzq-cascader
     :options="options"
     :props="{ multiple: true, checkStrictly: true }"
-    clearable></el-cascader>
+    clearable></hzq-cascader>
 </div>
 
 <script>
@@ -1215,7 +1215,7 @@ Dynamic load its child nodes when checked a node.
 
 :::demo Set `lazy = true` to use dynamic loading, and you have to specify how to load the data source by `lazyload`. There are two parameters of `lazyload`,the first parameter `node` is the node currently clicked, and the `resolve` is a callback that indicate loading is finished which must invoke. To display the status of node more accurately, you can add a `leaf` field (can be modified by `props.leaf`) to indicate whether it is a leaf node. Otherwise, it will be inferred by if has any child nodes.
 ```html
-<el-cascader :props="props"></el-cascader>
+<hzq-cascader :props="props"></hzq-cascader>
 
 <script>
   let id = 0;
@@ -1250,22 +1250,22 @@ Dynamic load its child nodes when checked a node.
 
 Search and select options with a keyword.
 
-:::demo Adding `filterable` to `el-cascader` enables filtering. Cascader will match nodes whose label or parent's label (according to `show-all-levels`) includes input keyword. Of course, you can customize search logic by `filter-method` which accepts a function, the first parameter is `node`, the second is `keyword`, and need return a boolean value indicating whether it hits.
+:::demo Adding `filterable` to `hzq-cascader` enables filtering. Cascader will match nodes whose label or parent's label (according to `show-all-levels`) includes input keyword. Of course, you can customize search logic by `filter-method` which accepts a function, the first parameter is `node`, the second is `keyword`, and need return a boolean value indicating whether it hits.
 ```html
 <div class="block">
   <span class="demonstration">Filterable (Single selection)</span>
-  <el-cascader
+  <hzq-cascader
     placeholder="Try searchingL Guide"
     :options="options"
-    filterable></el-cascader>
+    filterable></hzq-cascader>
 </div>
 <div class="block">
   <span class="demonstration">Filterable (Multiple selection)</span>
-  <el-cascader
+  <hzq-cascader
     placeholder="Try searchingL Guide"
     :options="options"
     :props="{ multiple: true }"
-    filterable></el-cascader>
+    filterable></hzq-cascader>
 </div>
 
 <script>
@@ -1480,12 +1480,12 @@ You can customize the content of cascader node.
 
 :::demo You can customize the content of cascader node by `scoped slot`. You'll have access to `node` and `data` in the scope,  standing for the Node object and node data of the current node respectively。
 ```html
-<el-cascader :options="options">
+<hzq-cascader :options="options">
   <template slot-scope="{ node, data }">
     <span>{{ data.label }}</span>
     <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
   </template>
-</el-cascader>
+</hzq-cascader>
 
 <script>
   export default {
@@ -1693,13 +1693,67 @@ You can customize the content of cascader node.
 ```
 :::
 
+### Sizes
+
+:::demo Switch between the four sizes with `size`: `large`, `medium`, `small` and `mini`. Without it the size is `medium`; the heights are 36px, 32px, 28px and 24px.
+
+```html
+<template>
+  <div class="block">
+    <hzq-radio-group v-model="size" size="mini">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+  </div>
+  <hzq-cascader
+    v-model="value"
+    :options="options"
+    :size="size"></hzq-cascader>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: [],
+        options: [{
+          value: 'guide',
+          label: 'Guide',
+          children: [{
+            value: 'consistency',
+            label: 'Consistency'
+          }, {
+            value: 'feedback',
+            label: 'Feedback'
+          }]
+        }, {
+          value: 'resource',
+          label: 'Resource',
+          children: [{
+            value: 'axure',
+            label: 'Axure Components'
+          }, {
+            value: 'sketch',
+            label: 'Sketch Templates'
+          }]
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Cascader panel
 
 `CascaderPanel` is the core component of `Cascader` which has various of features such as single selection, multiple selection, dynamic loading and so on.
 
-:::demo Just like `el-cascader`, you can set alternative options by `options`, and enable other features by `props`, see the API form below for details.
+:::demo Just like `hzq-cascader`, you can set alternative options by `options`, and enable other features by `props`, see the API form below for details.
 ```html
-<el-cascader-panel :options="options"></el-cascader-panel>
+<hzq-cascader-panel :options="options"></hzq-cascader-panel>
 
 <script>
   export default {
@@ -1913,7 +1967,7 @@ You can customize the content of cascader node.
 | value / v-model | binding value | - | — | — |
 | options | data of the options，the key of `value` and `label` can be customize by `Props`.| array | — | — |
 | props | configuration options, see the following table. | object | — | — |
-| size | size of input | string | medium / small / mini | — |
+| size | size of input | string | large / medium / small / mini | — |
 | placeholder | placeholder of input | string | — | Select |
 | disabled | whether Cascader is disabled | boolean | — | false |
 | clearable | whether selected value can be cleared | boolean | — | false |

@@ -1,11 +1,11 @@
 <template>
-  <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
+  <div class="hzq-breadcrumb" aria-label="Breadcrumb" role="navigation">
     <slot></slot>
   </div>
 </template>
 <script>
   export default {
-    name: 'ElBreadcrumb',
+    name: 'HzqBreadcrumb',
 
     props: {
       separator: {
@@ -25,7 +25,7 @@
     },
 
     mounted() {
-      const items = this.$el.querySelectorAll('.el-breadcrumb__item');
+      const items = this.$el.querySelectorAll('.hzq-breadcrumb__item');
       if (items.length) {
         items[items.length - 1].setAttribute('aria-current', 'page');
       }

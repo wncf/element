@@ -14,29 +14,29 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 <template>
   <div class="block">
     <span class="demonstration">Défaut</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="datetime"
       placeholder="Selectionnez date et horaire">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Avec raccourcis</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="datetime"
       placeholder="Selectionnez date et horaire"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Avec horaire par défaut</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value3"
       type="datetime"
       placeholder="Selectionnez date et horaire"
       default-time="12:00:00">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -84,17 +84,17 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 <template>
   <div class="block">
     <span class="demonstration">Défaut</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="datetimerange"
       range-separator="à"
       start-placeholder="Date de début"
       end-placeholder="Date de fin">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Avec raccourcis</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="datetimerange"
       :picker-options="pickerOptions"
@@ -102,7 +102,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
       start-placeholder="Date de début"
       end-placeholder="Date de fin"
       align="right">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -153,24 +153,24 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 <template>
   <div class="block">
     <span class="demonstration">Heure de la date de début 12:00:00</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="datetimerange"
       start-placeholder="Date de début"
       end-placeholder="Date de fin"
       :default-time="['12:00:00']">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Heure de la date de début 12:00:00, heure de la date de fin 08:00:00</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="datetimerange"
       align="right"
       start-placeholder="Date de début"
       end-placeholder="Date de fin"
       :default-time="['12:00:00', '08:00:00']">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -187,6 +187,51 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 ```
 :::
 
+### Tailles
+
+:::demo Changez de taille avec `size` : `large`, `medium`, `small` ou `mini`. Sans lui la taille est `medium` ; les hauteurs sont 36px, 32px, 28px et 24px.
+
+```html
+<template>
+  <div class="block">
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-date-picker
+      v-model="value"
+      type="datetime"
+      :size="size"
+      placeholder="Choisir la date et l'heure">
+    </hzq-date-picker>
+  </div>
+  <div class="block">
+    <hzq-date-picker
+      v-model="range"
+      type="datetimerange"
+      :size="size"
+      start-placeholder="Date et heure de début"
+      end-placeholder="Date et heure de fin">
+    </hzq-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: '',
+        range: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Attributs
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -195,7 +240,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 | disabled | Si le DatePicker est désactivé. | boolean | — | false |
 | editable | Si le champ est éditable. | boolean | — | true |
 | clearable | Si la croix de reset doit apparaître. | boolean | — | true |
-|size | Taille du champ. | string | large/small/mini | — |
+|size | Taille du champ. | string | large / medium / small / mini | — |
 | placeholder | Le placeholder en mode normal. | string | — | — |
 | start-placeholder | Le placeholder de la date de début en mode plage de dates. | string | — | — |
 | end-placeholder | Le placeholder de la date de fin en mode plage de dates. | string | — | — |
@@ -211,8 +256,8 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 | value-format | Format de la variable stockée, optionnel. Si non spécifié, La valeur sera un objet Date. | string | Voir [formats de date](#/fr-FR/component/date-picker#formats-de-date) | — |
 | name | Identique au `name` de l'input natif | string | — | — |
 | unlink-panels | Rend indépendants les deux panneaux de plage de dates | boolean | — | false |
-| prefix-icon | Icône de préfixe. | string | — | el-icon-date |
-| clear-icon | Icône de reset | string | — | el-icon-circle-close |
+| prefix-icon | Icône de préfixe. | string | — | hzq-icon-date |
+| clear-icon | Icône de reset | string | — | hzq-icon-circle-close |
 
 ### Options du Picker
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |

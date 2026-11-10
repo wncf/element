@@ -11,7 +11,7 @@ Divide el texto de los diferentes párrafos.
 <template>
   <div>
     <span>I sit at my window this morning where the world like a passer-by stops for a moment, nods to me and goes.</span>
-    <el-divider></el-divider>
+    <hzq-divider></hzq-divider>
     <span>There little thoughts are the rustle of leaves; they have their whisper of joy in my mind.</span>
   </div>
 </template>
@@ -28,11 +28,11 @@ Puede personalizar el contenido en la línea divisoria.
 <template>
   <div>
     <span>What you are you do not see, what you see is your shadow. </span>
-    <el-divider content-position="left">Rabindranath Tagore</el-divider>
+    <hzq-divider content-position="left">Rabindranath Tagore</hzq-divider>
     <span>I cannot choose the best. The best chooses me.</span>
-    <el-divider><i class="el-icon-star-on"></i></el-divider>
+    <hzq-divider><i class="hzq-icon-star-on"></i></hzq-divider>
     <span>My wishes are fools, they shout across thy song, my Master. Let me but listen.</span>
-    <el-divider content-position="right">Rabindranath Tagore</el-divider>
+    <hzq-divider content-position="right">Rabindranath Tagore</hzq-divider>
   </div>
 </template>
 ```
@@ -45,9 +45,9 @@ Puede personalizar el contenido en la línea divisoria.
 <template>
   <div>
     <span>Rain</span>
-    <el-divider direction="vertical"></el-divider>
+    <hzq-divider direction="vertical"></hzq-divider>
     <span>Home</span>
-    <el-divider direction="vertical"></el-divider>
+    <hzq-divider direction="vertical"></hzq-divider>
     <span>Grass</span>
   </div>
 </template>

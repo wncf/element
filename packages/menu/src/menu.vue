@@ -1,11 +1,11 @@
 <script type="text/jsx">
-  import emitter from 'element-ui/src/mixins/emitter';
-  import Migrating from 'element-ui/src/mixins/migrating';
-  import Menubar from 'element-ui/src/utils/menu/aria-menubar';
-  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
+  import emitter from 'hzq-ui/src/mixins/emitter';
+  import Migrating from 'hzq-ui/src/mixins/migrating';
+  import Menubar from 'hzq-ui/src/utils/menu/aria-menubar';
+  import { addClass, removeClass, hasClass } from 'hzq-ui/src/utils/dom';
 
   export default {
-    name: 'ElMenu',
+    name: 'HzqMenu',
 
     render (h) {
       const component = (
@@ -14,9 +14,9 @@
           key={ +this.collapse }
           style={{ backgroundColor: this.backgroundColor || '' }}
           class={{
-            'el-menu--horizontal': this.mode === 'horizontal',
-            'el-menu--collapse': this.collapse,
-            "el-menu": true
+            'hzq-menu--horizontal': this.mode === 'horizontal',
+            'hzq-menu--collapse': this.collapse,
+            "hzq-menu": true
           }}
         >
           { this.$slots.default }
@@ -25,16 +25,16 @@
 
       if (this.collapseTransition) {
         return (
-          <el-menu-collapse-transition>
+          <hzq-menu-collapse-transition>
             { component }
-          </el-menu-collapse-transition>
+          </hzq-menu-collapse-transition>
         );
       } else {
         return component;
       }
     },
 
-    componentName: 'ElMenu',
+    componentName: 'HzqMenu',
 
     mixins: [emitter, Migrating],
 
@@ -45,7 +45,7 @@
     },
 
     components: {
-      'el-menu-collapse-transition': {
+      'hzq-menu-collapse-transition': {
         functional: true,
         render(createElement, context) {
           const data = {
@@ -70,16 +70,16 @@
               beforeLeave(el) {
                 if (!el.dataset) el.dataset = {};
 
-                if (hasClass(el, 'el-menu--collapse')) {
-                  removeClass(el, 'el-menu--collapse');
+                if (hasClass(el, 'hzq-menu--collapse')) {
+                  removeClass(el, 'hzq-menu--collapse');
                   el.dataset.oldOverflow = el.style.overflow;
                   el.dataset.scrollWidth = el.clientWidth;
-                  addClass(el, 'el-menu--collapse');
+                  addClass(el, 'hzq-menu--collapse');
                 } else {
-                  addClass(el, 'el-menu--collapse');
+                  addClass(el, 'hzq-menu--collapse');
                   el.dataset.oldOverflow = el.style.overflow;
                   el.dataset.scrollWidth = el.clientWidth;
-                  removeClass(el, 'el-menu--collapse');
+                  removeClass(el, 'hzq-menu--collapse');
                 }
 
                 el.style.width = el.scrollWidth + 'px';
@@ -154,7 +154,7 @@
 
       collapse(value) {
         if (value) this.openedMenus = [];
-        this.broadcast('ElSubmenu', 'toggle-collapse', value);
+        this.broadcast('HzqSubmenu', 'toggle-collapse', value);
       }
     },
     methods: {

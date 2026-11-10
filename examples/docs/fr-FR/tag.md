@@ -7,11 +7,11 @@ Les tags sont utiles sont marquer certaines données afin d'ajouter des informat
 :::demo Utilisez l'attribut `type` pour définir le type de tag. De plus, l'attribut `color` détermine la couleur de fond.
 
 ```html
-<el-tag>Tag 1</el-tag>
-<el-tag type="success">Tag 2</el-tag>
-<el-tag type="info">Tag 3</el-tag>
-<el-tag type="warning">Tag 4</el-tag>
-<el-tag type="danger">Tag 5</el-tag>
+<hzq-tag>Tag 1</hzq-tag>
+<hzq-tag type="success">Tag 2</hzq-tag>
+<hzq-tag type="info">Tag 3</hzq-tag>
+<hzq-tag type="warning">Tag 4</hzq-tag>
+<hzq-tag type="danger">Tag 5</hzq-tag>
 ```
 :::
 
@@ -20,13 +20,13 @@ Les tags sont utiles sont marquer certaines données afin d'ajouter des informat
 :::demo L'attribut `closable` détermine si un tag est supprimable grâce à un `Boolean`. Par défaut la suppression bénéficie d'un animation de fading. Utilisez `disable-transitions` si vous ne souhaitez pas d'animations en utilisant un `Boolean` à `true`. L'évènement `close` se déclenche quand un tag est supprimé.
 
 ```html
-<el-tag
+<hzq-tag
   v-for="tag in tags"
   :key="tag.name"
   closable
   :type="tag.type">
   {{tag.name}}
-</el-tag>
+</hzq-tag>
 
 <script>
   export default {
@@ -52,15 +52,15 @@ Vous pouvez utiliser l'évènement `close` pour ajouter et supprimer des tags dy
 
 :::demo
 ```html
-<el-tag
+<hzq-tag
   :key="tag"
   v-for="tag in dynamicTags"
   closable
   :disable-transitions="false"
   @close="handleClose(tag)">
   {{tag}}
-</el-tag>
-<el-input
+</hzq-tag>
+<hzq-input
   class="input-new-tag"
   v-if="inputVisible"
   v-model="inputValue"
@@ -69,11 +69,11 @@ Vous pouvez utiliser l'évènement `close` pour ajouter et supprimer des tags dy
   @keyup.enter.native="handleInputConfirm"
   @blur="handleInputConfirm"
 >
-</el-input>
-<el-button v-else class="button-new-tag" size="small" @click="showInput">+ Nouveau Tag</el-button>
+</hzq-input>
+<hzq-button v-else class="button-new-tag" size="small" @click="showInput">+ Nouveau Tag</hzq-button>
 
 <style>
-  .el-tag + .el-tag {
+  .hzq-tag + .hzq-tag {
     margin-left: 10px;
   }
   .button-new-tag {
@@ -127,15 +127,16 @@ Vous pouvez utiliser l'évènement `close` pour ajouter et supprimer des tags dy
 
 ### Tailles
 
-En plus de la taille par défaut, Tag fournit d'autres tailles pour vos composants.
+Tag fournit quatre tailles pour vos composants.
 
-:::demo Utilisez `size` pour choisir une autre taille parmi `medium`, `small` ou `mini`.
+:::demo Utilisez `size` pour choisir une autre taille parmi `large`, `medium`, `small` ou `mini`. Sans `size` le tag est `medium` ; les quatre hauteurs sont 36px, 32px, 28px et 24px.
 
 ```html
-<el-tag>Défaut</el-tag>
-<el-tag size="medium">Medium</el-tag>
-<el-tag size="small">Small</el-tag>
-<el-tag size="mini">Mini</el-tag>
+<hzq-tag>Défaut</hzq-tag>
+<hzq-tag size="large">Large</hzq-tag>
+<hzq-tag size="medium">Medium</hzq-tag>
+<hzq-tag size="small">Small</hzq-tag>
+<hzq-tag size="mini">Mini</hzq-tag>
 ```
 :::
 
@@ -147,23 +148,23 @@ Les balises utilisent trois thèmes différents: `dark`, `light` et `plain`
 ```html
 <div class="tag-group">
   <span class="tag-group__title">Dark</span>
-  <el-tag
+  <hzq-tag
     v-for="item in items"
     :key="item.label"
     :type="item.type"
     effect="dark">
     {{ item.label }}
-  </el-tag>
+  </hzq-tag>
 </div>
 <div class="tag-group">
   <span class="tag-group__title">Plain</span>
-  <el-tag
+  <hzq-tag
     v-for="item in items"
     :key="item.label"
     :type="item.type"
     effect="plain">
     {{ item.label }}
-  </el-tag>
+  </hzq-tag>
 </div>
 
 <script>
@@ -193,7 +194,7 @@ Les balises utilisent trois thèmes différents: `dark`, `light` et `plain`
 | disable-transitions | Si les animations sont désactivées. | boolean | — | false |
 | hit | Si le tag à une bordure mise en valeur. | boolean | — | false |
 | color | Couleur de fond du tag. | string | — | — |
-| size | Taille du tag. | string | medium / small / mini | — |
+| size | Taille du tag. | string | large / medium / small / mini | — |
 | effect | component theme | string | dark / light / plain | light |
 
 ### Évènements

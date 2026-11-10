@@ -105,10 +105,10 @@ const options3 = [
   }
 ];
 
-const getMenus = el => el.querySelectorAll('.el-cascader-menu');
-const getOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.el-cascader-node');
-const getValidOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.el-cascader-node[tabindex="-1"]');
-const getLabel = el => el.querySelector('.el-cascader-node__label').textContent;
+const getMenus = el => el.querySelectorAll('.hzq-cascader-menu');
+const getOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.hzq-cascader-node');
+const getValidOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.hzq-cascader-node[tabindex="-1"]');
+const getLabel = el => el.querySelector('.hzq-cascader-node__label').textContent;
 
 describe('CascaderPanel', () => {
   let vm;
@@ -124,10 +124,10 @@ describe('CascaderPanel', () => {
   it('expand and check', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           ref="panel"
           v-model="value"
-          :options="options"></el-cascader-panel>
+          :options="options"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -166,10 +166,10 @@ describe('CascaderPanel', () => {
   it('with default value', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           ref="panel"
           v-model="value"
-          :options="options"></el-cascader-panel>
+          :options="options"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -185,16 +185,16 @@ describe('CascaderPanel', () => {
     expect(getMenus(el).length).to.equal(3);
     expect(getOptions(el, 0)[0].className).to.includes('in-active-path');
     expect(getOptions(el, 2)[0].className).to.includes('is-active');
-    expect(getOptions(el, 2)[0].querySelector('.el-icon-check')).to.exist;
+    expect(getOptions(el, 2)[0].querySelector('.hzq-icon-check')).to.exist;
   });
 
   it('disabled options', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           ref="panel"
           :value="value"
-          :options="options"></el-cascader-panel>
+          :options="options"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -223,9 +223,9 @@ describe('CascaderPanel', () => {
   it('expand by hover', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           :options="options"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -252,11 +252,11 @@ describe('CascaderPanel', () => {
   it('emit value only', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           ref="panel"
           v-model="value"
           :options="options"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -273,7 +273,7 @@ describe('CascaderPanel', () => {
 
     await waitImmediate();
     expect(getMenus(el).length).to.equal(3);
-    expect(getOptions(el, 2)[0].querySelector('.el-icon-check')).to.exist;
+    expect(getOptions(el, 2)[0].querySelector('.hzq-icon-check')).to.exist;
 
     getOptions(el, 1)[1].click();
     await waitImmediate();
@@ -285,10 +285,10 @@ describe('CascaderPanel', () => {
   it('multiple mode', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           v-model="value"
           :options="options"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -302,23 +302,23 @@ describe('CascaderPanel', () => {
     }, true);
 
     const el = vm.$el;
-    const checkbox = getOptions(el, 0)[0].querySelector('.el-checkbox');
+    const checkbox = getOptions(el, 0)[0].querySelector('.hzq-checkbox');
     expect(checkbox).to.exist;
-    expect(checkbox.querySelector('.el-checkbox__input').className).to.not.includes('is-checked');
+    expect(checkbox.querySelector('.hzq-checkbox__input').className).to.not.includes('is-checked');
     checkbox.querySelector('input').click();
 
     await waitImmediate();
-    expect(checkbox.querySelector('.el-checkbox__input').className).to.includes('is-checked');
+    expect(checkbox.querySelector('.hzq-checkbox__input').className).to.includes('is-checked');
     expect(vm.value.length).to.equal(3);
   });
 
   it('click leaf node should check in multiple mode', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           v-model="value"
           :options="options"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -350,10 +350,10 @@ describe('CascaderPanel', () => {
   it('multiple mode with disabled default value', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           v-model="value"
           :options="options"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -367,15 +367,15 @@ describe('CascaderPanel', () => {
     }, true);
 
     const el = vm.$el;
-    const checkbox = getOptions(el, 0)[0].querySelector('.el-checkbox');
+    const checkbox = getOptions(el, 0)[0].querySelector('.hzq-checkbox');
 
     await waitImmediate();
     expect(checkbox).to.exist;
-    expect(checkbox.querySelector('.el-checkbox__input').className).to.includes('is-indeterminate');
+    expect(checkbox.querySelector('.hzq-checkbox__input').className).to.includes('is-indeterminate');
     checkbox.querySelector('input').click();
 
     await waitImmediate();
-    expect(checkbox.querySelector('.el-checkbox__input').className).to.includes('is-checked');
+    expect(checkbox.querySelector('.hzq-checkbox__input').className).to.includes('is-checked');
     expect(vm.value.length).to.equal(4);
 
     getOptions(el, 1)[1].click();
@@ -388,10 +388,10 @@ describe('CascaderPanel', () => {
   it('check strictly in single mode', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           v-model="value"
           :options="options"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -405,7 +405,7 @@ describe('CascaderPanel', () => {
     }, true);
 
     const el = vm.$el;
-    const radio = getOptions(el, 0)[0].querySelector('.el-radio');
+    const radio = getOptions(el, 0)[0].querySelector('.hzq-radio');
 
     await waitImmediate();
     expect(radio).to.exist;
@@ -416,16 +416,16 @@ describe('CascaderPanel', () => {
     getOptions(el, 1)[0].querySelector('input').click();
     await waitImmediate();
     expect(vm.value).to.deep.equal(['zhejiang', 'hangzhou']);
-    expect(getOptions(el, 0)[1].querySelector('.el-radio').className).to.includes('is-disabled');
+    expect(getOptions(el, 0)[1].querySelector('.hzq-radio').className).to.includes('is-disabled');
   });
 
   it('check strictly in multiple mode', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           v-model="value"
           :options="options"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -441,7 +441,7 @@ describe('CascaderPanel', () => {
     }, true);
 
     const el = vm.$el;
-    const checkbox = getOptions(el, 0)[0].querySelector('.el-checkbox');
+    const checkbox = getOptions(el, 0)[0].querySelector('.hzq-checkbox');
 
     await waitImmediate();
     expect(checkbox).to.exist;
@@ -449,20 +449,20 @@ describe('CascaderPanel', () => {
 
     getOptions(el, 0)[0].click();
     await waitImmediate();
-    expect(getOptions(el, 1)[0].querySelector('.el-checkbox').className).to.not.includes('is-checked');
+    expect(getOptions(el, 1)[0].querySelector('.hzq-checkbox').className).to.not.includes('is-checked');
     getOptions(el, 1)[0].querySelector('input').click();
     await waitImmediate();
     expect(vm.value).to.deep.equal(['zhejiang', 'hangzhou']);
-    expect(getOptions(el, 0)[1].querySelector('.el-checkbox').className).to.includes('is-disabled');
+    expect(getOptions(el, 0)[1].querySelector('.hzq-checkbox').className).to.includes('is-disabled');
   });
 
   it('custom props', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           v-model="value"
           :options="options"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -502,10 +502,10 @@ describe('CascaderPanel', () => {
   it('value key is same as label key', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           v-model="value"
           :options="options"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         return {
@@ -542,9 +542,9 @@ describe('CascaderPanel', () => {
   it('dynamic loading', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           v-model="value"
-          :props="props"></el-cascader-panel>
+          :props="props"></hzq-cascader-panel>
       `,
       data() {
         let id = 0;
@@ -574,9 +574,9 @@ describe('CascaderPanel', () => {
     const firstOption = getOptions(el, 0)[0];
     firstOption.click();
     await waitImmediate();
-    expect(firstOption.querySelector('i').className).to.includes('el-icon-loading');
+    expect(firstOption.querySelector('i').className).to.includes('hzq-icon-loading');
     await wait(1000);
-    expect(firstOption.querySelector('i').className).to.includes('el-icon-arrow-right');
+    expect(firstOption.querySelector('i').className).to.includes('hzq-icon-arrow-right');
     expect(getMenus(el).length).to.equal(2);
     getOptions(el, 1)[0].click();
     await wait(1000);
@@ -588,10 +588,10 @@ describe('CascaderPanel', () => {
   it('click leaf hidden children', async() => {
     vm = createVue({
       template: `
-        <el-cascader-panel
+        <hzq-cascader-panel
           ref="panel"
           v-model="value"
-          :options="options"></el-cascader-panel>
+          :options="options"></hzq-cascader-panel>
       `,
       data() {
         return {

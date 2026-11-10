@@ -9,50 +9,50 @@ Incluye todo tipo de entradas, tales como `input`, `select`, `radio` y `checkbox
 :::demo En cada componente `form`, necesita un campo `form-item` para que sea el contenedor del ítem.
 
 ```html
-<el-form ref="form" :model="form" label-width="120px">
-  <el-form-item label="Activity name">
-    <el-input v-model="form.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity zone">
-    <el-select v-model="form.region" placeholder="please select your zone">
-      <el-option label="Zone one" value="shanghai"></el-option>
-      <el-option label="Zone two" value="beijing"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="Activity time">
-    <el-col :span="11">
-      <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
-    </el-col>
-    <el-col class="line" :span="2">-</el-col>
-    <el-col :span="11">
-      <el-time-picker placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
-    </el-col>
-  </el-form-item>
-  <el-form-item label="Instant delivery">
-    <el-switch v-model="form.delivery"></el-switch>
-  </el-form-item>
-  <el-form-item label="Activity type">
-    <el-checkbox-group v-model="form.type">
-      <el-checkbox label="Online activities" name="type"></el-checkbox>
-      <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-      <el-checkbox label="Offline activities" name="type"></el-checkbox>
-      <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-    </el-checkbox-group>
-  </el-form-item>
-  <el-form-item label="Resources">
-    <el-radio-group v-model="form.resource">
-      <el-radio label="Sponsor"></el-radio>
-      <el-radio label="Venue"></el-radio>
-    </el-radio-group>
-  </el-form-item>
-  <el-form-item label="Activity form">
-    <el-input type="textarea" v-model="form.desc"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit">Create</el-button>
-    <el-button>Cancel</el-button>
-  </el-form-item>
-</el-form>
+<hzq-form ref="form" :model="form" label-width="120px">
+  <hzq-form-item label="Activity name">
+    <hzq-input v-model="form.name"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item label="Activity zone">
+    <hzq-select v-model="form.region" placeholder="please select your zone">
+      <hzq-option label="Zone one" value="shanghai"></hzq-option>
+      <hzq-option label="Zone two" value="beijing"></hzq-option>
+    </hzq-select>
+  </hzq-form-item>
+  <hzq-form-item label="Activity time">
+    <hzq-col :span="11">
+      <hzq-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></hzq-date-picker>
+    </hzq-col>
+    <hzq-col class="line" :span="2">-</hzq-col>
+    <hzq-col :span="11">
+      <hzq-time-picker placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></hzq-time-picker>
+    </hzq-col>
+  </hzq-form-item>
+  <hzq-form-item label="Instant delivery">
+    <hzq-switch v-model="form.delivery"></hzq-switch>
+  </hzq-form-item>
+  <hzq-form-item label="Activity type">
+    <hzq-checkbox-group v-model="form.type">
+      <hzq-checkbox label="Online activities" name="type"></hzq-checkbox>
+      <hzq-checkbox label="Promotion activities" name="type"></hzq-checkbox>
+      <hzq-checkbox label="Offline activities" name="type"></hzq-checkbox>
+      <hzq-checkbox label="Simple brand exposure" name="type"></hzq-checkbox>
+    </hzq-checkbox-group>
+  </hzq-form-item>
+  <hzq-form-item label="Resources">
+    <hzq-radio-group v-model="form.resource">
+      <hzq-radio label="Sponsor"></hzq-radio>
+      <hzq-radio label="Venue"></hzq-radio>
+    </hzq-radio-group>
+  </hzq-form-item>
+  <hzq-form-item label="Activity form">
+    <hzq-input type="textarea" v-model="form.desc"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item>
+    <hzq-button type="primary" @click="onSubmit">Create</hzq-button>
+    <hzq-button>Cancel</hzq-button>
+  </hzq-form-item>
+</hzq-form>
 <script>
   export default {
     data() {
@@ -85,7 +85,7 @@ Incluye todo tipo de entradas, tales como `input`, `select`, `radio` y `checkbox
 
 > <i>Cuando sólo hay un campo de entrada de texto de una sola línea en un formulario, el agente usuario debe aceptar <b>Enter</b> en ese campo como una solicitud para enviar el formulario.</i>
 
-Para prevenir este comportamiento, puede agregar `@submit.native.prevent` on `<el-form>`.
+Para prevenir este comportamiento, puede agregar `@submit.native.prevent` on `<hzq-form>`.
 :::
 
 ### Formulario inline
@@ -95,20 +95,20 @@ Cuando el espacio vertical es limitado y la forma es relativamente simple, puede
 :::demo Establezca el atributo `inline` como `true` y el formulario sera inline.
 
 ```html
-<el-form :inline="true" :model="formInline" class="demo-form-inline">
-  <el-form-item label="Approved by">
-    <el-input v-model="formInline.user" placeholder="Approved by"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity zone">
-    <el-select v-model="formInline.region" placeholder="Activity zone">
-      <el-option label="Zone one" value="shanghai"></el-option>
-      <el-option label="Zone two" value="beijing"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit">Query</el-button>
-  </el-form-item>
-</el-form>
+<hzq-form :inline="true" :model="formInline" class="demo-form-inline">
+  <hzq-form-item label="Approved by">
+    <hzq-input v-model="formInline.user" placeholder="Approved by"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item label="Activity zone">
+    <hzq-select v-model="formInline.region" placeholder="Activity zone">
+      <hzq-option label="Zone one" value="shanghai"></hzq-option>
+      <hzq-option label="Zone two" value="beijing"></hzq-option>
+    </hzq-select>
+  </hzq-form-item>
+  <hzq-form-item>
+    <hzq-button type="primary" @click="onSubmit">Query</hzq-button>
+  </hzq-form-item>
+</hzq-form>
 <script>
   export default {
     data() {
@@ -137,23 +137,23 @@ Dependiendo de su diseño, hay varias maneras diferentes de alinear el elemento 
 :::demo El atributo `label-position` decide cómo se alinean las etiquetas, puede estar `top` o `left`. Cuando se establece en `top`, las etiquetas se colocarán en la parte superior del campo de formulario.
 
 ```html
-<el-radio-group v-model="labelPosition" size="small">
-  <el-radio-button label="left">Left</el-radio-button>
-  <el-radio-button label="right">Right</el-radio-button>
-  <el-radio-button label="top">Top</el-radio-button>
-</el-radio-group>
+<hzq-radio-group v-model="labelPosition" size="small">
+  <hzq-radio-button label="left">Left</hzq-radio-button>
+  <hzq-radio-button label="right">Right</hzq-radio-button>
+  <hzq-radio-button label="top">Top</hzq-radio-button>
+</hzq-radio-group>
 <div style="margin: 20px;"></div>
-<el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign">
-  <el-form-item label="Name">
-    <el-input v-model="formLabelAlign.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity zone">
-    <el-input v-model="formLabelAlign.region"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity form">
-    <el-input v-model="formLabelAlign.type"></el-input>
-  </el-form-item>
-</el-form>
+<hzq-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign">
+  <hzq-form-item label="Name">
+    <hzq-input v-model="formLabelAlign.name"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item label="Activity zone">
+    <hzq-input v-model="formLabelAlign.region"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item label="Activity form">
+    <hzq-input v-model="formLabelAlign.type"></hzq-input>
+  </hzq-form-item>
+</hzq-form>
 <script>
   export default {
     data() {
@@ -179,54 +179,54 @@ El componente `form` le permite verificar sus datos, ayudándole a encontrar y c
 :::demo Sólo tiene que añadir el atributo `rules` en el componente `Form`, pasar las reglas de validación y establecer el atributo `prop` para `Form-Item` como una clave específica que necesita ser validada. Ver más información en [async-validator](https://github.com/yiminghe/async-validator).
 
 ```html
-<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-  <el-form-item label="Activity name" prop="name">
-    <el-input v-model="ruleForm.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity zone" prop="region">
-    <el-select v-model="ruleForm.region" placeholder="Activity zone">
-      <el-option label="Zone one" value="shanghai"></el-option>
-      <el-option label="Zone two" value="beijing"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="Activity time" required>
-    <el-col :span="11">
-      <el-form-item prop="date1">
-        <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-      </el-form-item>
-    </el-col>
-    <el-col class="line" :span="2">-</el-col>
-    <el-col :span="11">
-      <el-form-item prop="date2">
-        <el-time-picker placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-      </el-form-item>
-    </el-col>
-  </el-form-item>
-  <el-form-item label="Instant delivery" prop="delivery">
-    <el-switch v-model="ruleForm.delivery"></el-switch>
-  </el-form-item>
-  <el-form-item label="Activity type" prop="type">
-    <el-checkbox-group v-model="ruleForm.type">
-      <el-checkbox label="Online activities" name="type"></el-checkbox>
-      <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-      <el-checkbox label="Offline activities" name="type"></el-checkbox>
-      <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-    </el-checkbox-group>
-  </el-form-item>
-  <el-form-item label="Resources" prop="resource">
-    <el-radio-group v-model="ruleForm.resource">
-      <el-radio label="Sponsorship"></el-radio>
-      <el-radio label="Venue"></el-radio>
-    </el-radio-group>
-  </el-form-item>
-  <el-form-item label="Activity form" prop="desc">
-    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
-    <el-button @click="resetForm('ruleForm')">Reset</el-button>
-  </el-form-item>
-</el-form>
+<hzq-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+  <hzq-form-item label="Activity name" prop="name">
+    <hzq-input v-model="ruleForm.name"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item label="Activity zone" prop="region">
+    <hzq-select v-model="ruleForm.region" placeholder="Activity zone">
+      <hzq-option label="Zone one" value="shanghai"></hzq-option>
+      <hzq-option label="Zone two" value="beijing"></hzq-option>
+    </hzq-select>
+  </hzq-form-item>
+  <hzq-form-item label="Activity time" required>
+    <hzq-col :span="11">
+      <hzq-form-item prop="date1">
+        <hzq-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></hzq-date-picker>
+      </hzq-form-item>
+    </hzq-col>
+    <hzq-col class="line" :span="2">-</hzq-col>
+    <hzq-col :span="11">
+      <hzq-form-item prop="date2">
+        <hzq-time-picker placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></hzq-time-picker>
+      </hzq-form-item>
+    </hzq-col>
+  </hzq-form-item>
+  <hzq-form-item label="Instant delivery" prop="delivery">
+    <hzq-switch v-model="ruleForm.delivery"></hzq-switch>
+  </hzq-form-item>
+  <hzq-form-item label="Activity type" prop="type">
+    <hzq-checkbox-group v-model="ruleForm.type">
+      <hzq-checkbox label="Online activities" name="type"></hzq-checkbox>
+      <hzq-checkbox label="Promotion activities" name="type"></hzq-checkbox>
+      <hzq-checkbox label="Offline activities" name="type"></hzq-checkbox>
+      <hzq-checkbox label="Simple brand exposure" name="type"></hzq-checkbox>
+    </hzq-checkbox-group>
+  </hzq-form-item>
+  <hzq-form-item label="Resources" prop="resource">
+    <hzq-radio-group v-model="ruleForm.resource">
+      <hzq-radio label="Sponsorship"></hzq-radio>
+      <hzq-radio label="Venue"></hzq-radio>
+    </hzq-radio-group>
+  </hzq-form-item>
+  <hzq-form-item label="Activity form" prop="desc">
+    <hzq-input type="textarea" v-model="ruleForm.desc"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item>
+    <hzq-button type="primary" @click="submitForm('ruleForm')">Create</hzq-button>
+    <hzq-button @click="resetForm('ruleForm')">Reset</hzq-button>
+  </hzq-form-item>
+</hzq-form>
 <script>
   export default {
     data() {
@@ -295,21 +295,21 @@ Este ejemplo muestra cómo personalizar sus propias reglas de validación para f
 :::demo Aquí utilizamos el `status-icon` para reflejar el resultado de la validación como un icono.
 
 ```html
-<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-  <el-form-item label="Password" prop="pass">
-    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-  </el-form-item>
-  <el-form-item label="Confirm" prop="checkPass">
-    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-  </el-form-item>
-  <el-form-item label="Age" prop="age">
-    <el-input v-model.number="ruleForm.age"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
-    <el-button @click="resetForm('ruleForm')">Reset</el-button>
-  </el-form-item>
-</el-form>
+<hzq-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+  <hzq-form-item label="Password" prop="pass">
+    <hzq-input type="password" v-model="ruleForm.pass" autocomplete="off"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item label="Confirm" prop="checkPass">
+    <hzq-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item label="Age" prop="age">
+    <hzq-input v-model.number="ruleForm.age"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item>
+    <hzq-button type="primary" @click="submitForm('ruleForm')">Submit</hzq-button>
+    <hzq-button @click="resetForm('ruleForm')">Reset</hzq-button>
+  </hzq-form-item>
+</hzq-form>
 <script>
   export default {
     data() {
@@ -397,8 +397,8 @@ Se debe llamar a la función de validación de llamada de retorno personalizada.
 :::demo Además de pasar todas las reglas de validación al mismo tiempo en el componente `form`, también puede pasar las reglas de validación o borrar reglas en un único campo de formulario de forma dinámica.
 
 ```html
-<el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="120px" class="demo-dynamic">
-  <el-form-item
+<hzq-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="120px" class="demo-dynamic">
+  <hzq-form-item
     prop="email"
     label="Email"
     :rules="[
@@ -406,9 +406,9 @@ Se debe llamar a la función de validación de llamada de retorno personalizada.
       { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
     ]"
   >
-    <el-input v-model="dynamicValidateForm.email"></el-input>
-  </el-form-item>
-  <el-form-item
+    <hzq-input v-model="dynamicValidateForm.email"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item
     v-for="(domain, index) in dynamicValidateForm.domains"
     :label="'Domain' + index"
     :key="domain.key"
@@ -417,14 +417,14 @@ Se debe llamar a la función de validación de llamada de retorno personalizada.
       required: true, message: 'domain can not be null', trigger: 'blur'
     }"
   >
-    <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">Delete</el-button>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('dynamicValidateForm')">Submit</el-button>
-    <el-button @click="addDomain">New domain</el-button>
-    <el-button @click="resetForm('dynamicValidateForm')">Reset</el-button>
-  </el-form-item>
-</el-form>
+    <hzq-input v-model="domain.value"></hzq-input><hzq-button @click.prevent="removeDomain(domain)">Delete</hzq-button>
+  </hzq-form-item>
+  <hzq-form-item>
+    <hzq-button type="primary" @click="submitForm('dynamicValidateForm')">Submit</hzq-button>
+    <hzq-button @click="addDomain">New domain</hzq-button>
+    <hzq-button @click="resetForm('dynamicValidateForm')">Reset</hzq-button>
+  </hzq-form-item>
+</hzq-form>
 <script>
   export default {
     data() {
@@ -476,8 +476,8 @@ Se debe llamar a la función de validación de llamada de retorno personalizada.
 :::demo La validación numérica necesita un modificador `.number` añadido en el enlace `v-model` de entrada, sirve para transformar el valor de la cadena al número proporcionado por Vuejs.
 
 ```html
-<el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
-  <el-form-item
+<hzq-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
+  <hzq-form-item
     label="age"
     prop="age"
     :rules="[
@@ -485,13 +485,13 @@ Se debe llamar a la función de validación de llamada de retorno personalizada.
       { type: 'number', message: 'age must be a number'}
     ]"
   >
-    <el-input v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>
-    <el-button @click="resetForm('numberValidateForm')">Reset</el-button>
-  </el-form-item>
-</el-form>
+    <hzq-input v-model.number="numberValidateForm.age" autocomplete="off"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item>
+    <hzq-button type="primary" @click="submitForm('numberValidateForm')">Submit</hzq-button>
+    <hzq-button @click="resetForm('numberValidateForm')">Reset</hzq-button>
+  </hzq-form-item>
+</hzq-form>
 <script>
   export default {
     data() {
@@ -524,53 +524,53 @@ Se debe llamar a la función de validación de llamada de retorno personalizada.
 
 :::tip
 
-Cuando un `el-form-item` está anidado en otro `el-form-item`, su ancho de etiqueta será 0. Si es necesario, puede establecer el ancho de etiqueta en ese `el-form-item`.
+Cuando un `hzq-form-item` está anidado en otro `hzq-form-item`, su ancho de etiqueta será 0. Si es necesario, puede establecer el ancho de etiqueta en ese `hzq-form-item`.
 
 :::
 
 ### Tamaño del control
 
-Todos los componentes de un formulario heredan su atributo `size`. De manera similar, FormItem también tiene un atributo `size`.
+Todos los componentes de un formulario heredan su atributo `size`. De manera similar, FormItem también tiene un atributo `size`. Los cuatro tamaños son `large`, `medium`, `small` y `mini`; sin `size` es `medium`.
 
-:::demo Aún así, puede ajustar el `size` de cada componente si no desea que herede su tamaño de From o FormItem.
+:::demo Aún así, puede ajustar el `size` de cada componente si no desea que herede su tamaño de From o FormItem. En el ejemplo el formulario es `mini`, el radio group es `medium` y el form item de los botones es `large`.
 
 ```html
-<el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
-  <el-form-item label="Activity name">
-    <el-input v-model="sizeForm.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity zone">
-    <el-select v-model="sizeForm.region" placeholder="please select your zone">
-      <el-option label="Zone one" value="shanghai"></el-option>
-      <el-option label="Zone two" value="beijing"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="Activity time">
-    <el-col :span="11">
-      <el-date-picker type="date" placeholder="Pick a date" v-model="sizeForm.date1" style="width: 100%;"></el-date-picker>
-    </el-col>
-    <el-col class="line" :span="2">-</el-col>
-    <el-col :span="11">
-      <el-time-picker placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
-    </el-col>
-  </el-form-item>
-  <el-form-item label="Activity type">
-    <el-checkbox-group v-model="sizeForm.type">
-      <el-checkbox-button label="Online activities" name="type"></el-checkbox-button>
-      <el-checkbox-button label="Promotion activities" name="type"></el-checkbox-button>
-    </el-checkbox-group>
-  </el-form-item>
-  <el-form-item label="Resources">
-    <el-radio-group v-model="sizeForm.resource" size="medium">
-      <el-radio border label="Sponsor"></el-radio>
-      <el-radio border label="Venue"></el-radio>
-    </el-radio-group>
-  </el-form-item>
-  <el-form-item size="large">
-    <el-button type="primary" @click="onSubmit">Create</el-button>
-    <el-button>Cancel</el-button>
-  </el-form-item>
-</el-form>
+<hzq-form ref="form" :model="sizeForm" label-width="120px" size="mini">
+  <hzq-form-item label="Activity name">
+    <hzq-input v-model="sizeForm.name"></hzq-input>
+  </hzq-form-item>
+  <hzq-form-item label="Activity zone">
+    <hzq-select v-model="sizeForm.region" placeholder="please select your zone">
+      <hzq-option label="Zone one" value="shanghai"></hzq-option>
+      <hzq-option label="Zone two" value="beijing"></hzq-option>
+    </hzq-select>
+  </hzq-form-item>
+  <hzq-form-item label="Activity time">
+    <hzq-col :span="11">
+      <hzq-date-picker type="date" placeholder="Pick a date" v-model="sizeForm.date1" style="width: 100%;"></hzq-date-picker>
+    </hzq-col>
+    <hzq-col class="line" :span="2">-</hzq-col>
+    <hzq-col :span="11">
+      <hzq-time-picker placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></hzq-time-picker>
+    </hzq-col>
+  </hzq-form-item>
+  <hzq-form-item label="Activity type">
+    <hzq-checkbox-group v-model="sizeForm.type">
+      <hzq-checkbox-button label="Online activities" name="type"></hzq-checkbox-button>
+      <hzq-checkbox-button label="Promotion activities" name="type"></hzq-checkbox-button>
+    </hzq-checkbox-group>
+  </hzq-form-item>
+  <hzq-form-item label="Resources">
+    <hzq-radio-group v-model="sizeForm.resource" size="medium">
+      <hzq-radio border label="Sponsor"></hzq-radio>
+      <hzq-radio border label="Venue"></hzq-radio>
+    </hzq-radio-group>
+  </hzq-form-item>
+  <hzq-form-item size="large">
+    <hzq-button type="primary" @click="onSubmit">Create</hzq-button>
+    <hzq-button>Cancel</hzq-button>
+  </hzq-form-item>
+</hzq-form>
 
 <script>
   export default {
@@ -614,7 +614,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | inline-message          | si desea visualizar el mensaje de error inline con la posición del form item | boolean | —                     | false       |
 | status-icon             | si desea visualizar un icono que indique el resultado de la validación | boolean | —                     | false       |
 | validate-on-rule-change | si se dispara la validación cuando el prop `rules` cambia | boolean | —                     | true        |
-| size                    | el tamaño de los componentes en este form | string  | medium / small / mini | —           |
+| size                    | el tamaño de los componentes en este form | string  | large / medium / small / mini | —           |
 | disabled                | si se desactivan todos los componentes del formulario. Si esta en `true` no puede ser cambiado por el prop `disabled` individual de los componentes. | boolean | —                     | false       |
 
 ### Form Métodos
@@ -645,7 +645,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | error          | mensaje de error de campo, establezca su valor y el campo validará el error y mostrará este mensaje inmediatamente. | string  | —                                           | —           |
 | show-message   | si mostrar o no el mensaje de error                          | boolean | —                                           | true        |
 | inline-message | mensaje de validación estilo inline                          | boolean | —                                           | false       |
-| size           | Tamaño de los componentes en este form item                  | string  | medium / small / mini                       | -           |
+| size           | Tamaño de los componentes en este form item                  | string  | large / medium / small / mini | -           |
 
 ### Form-Item Slot
 

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import merge from 'element-ui/src/utils/merge';
+import merge from 'hzq-ui/src/utils/merge';
 import DialogInstance from './dialog-instance.vue';
 
 const DialogConstructor = Vue.extend(DialogInstance);

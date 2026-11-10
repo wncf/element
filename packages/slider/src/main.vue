@@ -1,17 +1,17 @@
 <template>
   <div
-    class="el-slider"
-    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
+    class="hzq-slider"
+    :class="{ 'is-vertical': vertical, 'hzq-slider--with-input': showInput }"
     role="slider"
     :aria-valuemin="min"
     :aria-valuemax="max"
     :aria-orientation="vertical ? 'vertical': 'horizontal'"
     :aria-disabled="sliderDisabled"
   >
-    <el-input-number
+    <hzq-input-number
       v-model="firstValue"
       v-if="showInput && !range"
-      class="el-slider__input"
+      class="hzq-slider__input"
       ref="input"
       @change="emitChange"
       :step="step"
@@ -21,15 +21,15 @@
       :max="max"
       :debounce="debounce"
       :size="inputSize">
-    </el-input-number>
+    </hzq-input-number>
     <div
-      class="el-slider__runway"
+      class="hzq-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"
       ref="slider">
       <div
-        class="el-slider__bar"
+        class="hzq-slider__bar"
         :style="barStyle">
       </div>
       <slider-button
@@ -46,7 +46,7 @@
         v-if="range">
       </slider-button>
       <div
-        class="el-slider__stop"
+        class="hzq-slider__stop"
         v-for="(item, key) in stops"
         :key="key"
         :style="getStopStyle(item)"
@@ -57,11 +57,11 @@
           <div
             v-for="(item, key) in markList"
             :style="getStopStyle(item.position)"
-            class="el-slider__stop el-slider__marks-stop"
+            class="hzq-slider__stop hzq-slider__marks-stop"
             :key="key">
           </div>
         </div>
-        <div class="el-slider__marks">
+        <div class="hzq-slider__marks">
           <slider-marker
             :mark="item.mark" v-for="(item, key) in markList"
             :key="key"
@@ -74,13 +74,13 @@
 </template>
 
 <script type="text/babel">
-  import ElInputNumber from 'element-ui/packages/input-number';
+  import HzqInputNumber from 'hzq-ui/packages/input-number';
   import SliderButton from './button.vue';
   import SliderMarker from './marker';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElSlider',
+    name: 'HzqSlider',
 
     mixins: [Emitter],
 
@@ -155,7 +155,7 @@
     },
 
     components: {
-      ElInputNumber,
+      HzqInputNumber,
       SliderButton,
       SliderMarker
     },
@@ -238,7 +238,7 @@
             this.firstValue = val[0];
             this.secondValue = val[1];
             if (this.valueChanged()) {
-              this.dispatch('ElFormItem', 'el.form.change', [this.minValue, this.maxValue]);
+              this.dispatch('HzqFormItem', 'el.form.change', [this.minValue, this.maxValue]);
               this.oldValue = val.slice();
             }
           }
@@ -250,7 +250,7 @@
           } else {
             this.firstValue = val;
             if (this.valueChanged()) {
-              this.dispatch('ElFormItem', 'el.form.change', val);
+              this.dispatch('HzqFormItem', 'el.form.change', val);
               this.oldValue = val;
             }
           }

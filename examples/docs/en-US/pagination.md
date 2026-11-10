@@ -8,17 +8,17 @@ If you have too much data to display in one page, use pagination.
 ```html
 <div class="block">
   <span class="demonstration">When you have few pages</span>
-  <el-pagination
+  <hzq-pagination
     layout="prev, pager, next"
     :total="50">
-  </el-pagination>
+  </hzq-pagination>
 </div>
 <div class="block">
   <span class="demonstration">When you have more than 7 pages</span>
-  <el-pagination
+  <hzq-pagination
     layout="prev, pager, next"
     :total="1000">
-  </el-pagination>
+  </hzq-pagination>
 </div>
 ```
 :::
@@ -27,12 +27,12 @@ If you have too much data to display in one page, use pagination.
 
 :::demo By default, Pagination collapses extra pager buttons when it has more than 7 pages. This can be configured with the `pager-count` attribute.
 ```html
-<el-pagination
+<hzq-pagination
   :page-size="20"
   :pager-count="11"
   layout="prev, pager, next"
   :total="1000">
-</el-pagination>
+</hzq-pagination>
 ```
 :::
 
@@ -40,11 +40,11 @@ If you have too much data to display in one page, use pagination.
 
 :::demo Set the `background` attribute and the buttons will have a background color.
 ```html
-<el-pagination
+<hzq-pagination
   background
   layout="prev, pager, next"
   :total="1000">
-</el-pagination>
+</hzq-pagination>
 ```
 :::
 
@@ -52,13 +52,46 @@ If you have too much data to display in one page, use pagination.
 
 Use small pagination in the case of limited space.
 
-:::demo Just set the `small` attribute to `true` and the Pagination becomes smaller.
+:::demo Just set the `small` attribute to `true` and the Pagination becomes smaller. `small` is shorthand for `size="small"`; use `size` when you need another step.
 ```html
-<el-pagination
+<hzq-pagination
   small
   layout="prev, pager, next"
   :total="50">
-</el-pagination>
+</hzq-pagination>
+```
+:::
+
+### Sizes
+
+:::demo Switch between the four sizes with `size`: `large`, `medium`, `small` and `mini`. Without it the size is `medium`. The pager, the prev/next buttons and the jumper input scale together (36px, 32px, 28px and 24px), so the row keeps a shared baseline.
+
+```html
+<template>
+  <div>
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-pagination
+      :size="size"
+      layout="prev, pager, next, jumper"
+      :total="400">
+    </hzq-pagination>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium'
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -72,18 +105,18 @@ Add more modules based on your scenario.
 <template>
   <div class="block">
     <span class="demonstration">Total item count</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">Change page size</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage2"
@@ -91,22 +124,22 @@ Add more modules based on your scenario.
       :page-size="100"
       layout="sizes, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">Jump to</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">All combined</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage4"
@@ -114,7 +147,7 @@ Add more modules based on your scenario.
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
       :total="400">
-    </el-pagination>
+    </hzq-pagination>
   </div>
 </template>
 <script>
@@ -147,13 +180,13 @@ When there is only one page, hide the pagination by setting the `hide-on-single-
 :::demo
 ```html
 <div>
- <el-switch v-model="value">
- </el-switch>
- <el-pagination
+ <hzq-switch v-model="value">
+ </hzq-switch>
+ <hzq-pagination
   :hide-on-single-page="value"
   :total="5"
   layout="prev, pager, next">
-</el-pagination>
+</hzq-pagination>
 </div>
 
 <script>
@@ -172,6 +205,7 @@ When there is only one page, hide the pagination by setting the `hide-on-single-
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small              |   whether to use small pagination    | boolean |      —       | false |
+| size | size of the pagination, the pager and prev/next buttons scale with it | string | large / medium / small / mini | — |
 | background | whether the buttons have a background color | boolean | — | false |
 | page-size              | item count of each page, supports the .sync modifier  | number |      —       | 10 |
 | total | total item count | number | — | — |

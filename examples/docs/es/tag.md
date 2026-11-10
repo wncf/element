@@ -7,11 +7,11 @@ Se utiliza para marcar y seleccionar.
 :::demo Utilice el atributo `type` para definir el tipo de etiqueta. Además, el atributo `color` se puede utilizar para establecer el color de fondo de la etiqueta.
 
 ```html
-<el-tag>Tag 1</el-tag>
-<el-tag type="success">Tag 2</el-tag>
-<el-tag type="info">Tag 3</el-tag>
-<el-tag type="warning">Tag 4</el-tag>
-<el-tag type="danger">Tag 5</el-tag>
+<hzq-tag>Tag 1</hzq-tag>
+<hzq-tag type="success">Tag 2</hzq-tag>
+<hzq-tag type="info">Tag 3</hzq-tag>
+<hzq-tag type="warning">Tag 4</hzq-tag>
+<hzq-tag type="danger">Tag 5</hzq-tag>
 ```
 :::
 
@@ -20,13 +20,13 @@ Se utiliza para marcar y seleccionar.
 :::demo el atributo `closable` puede usarse para definir una etiqueta removible. Acepta un `Boolean`. De forma predeterminada, la eliminación de la etiqueta tiene una animación que se desvanece. Si no quiere usarlo, puede configurar el atributo `disable-transitions` , que acepta `Boolean`, como `true`. Se dispara el evento `close` cuando la etiqueta es removida. 
 
 ```html
-<el-tag
+<hzq-tag
   v-for="tag in tags"
   :key="tag.name"
   closable
   :type="tag.type">
   {{tag.name}}
-</el-tag>
+</hzq-tag>
 
 <script>
   export default {
@@ -52,15 +52,15 @@ Puede utilizar el evento `close` para añadir y eliminar etiquetas dinámicament
 
 :::demo
 ```html
-<el-tag
+<hzq-tag
   :key="tag"
   v-for="tag in dynamicTags"
   closable
   :disable-transitions="false"
   @close="handleClose(tag)">
   {{tag}}
-</el-tag>
-<el-input
+</hzq-tag>
+<hzq-input
   class="input-new-tag"
   v-if="inputVisible"
   v-model="inputValue"
@@ -69,11 +69,11 @@ Puede utilizar el evento `close` para añadir y eliminar etiquetas dinámicament
   @keyup.enter.native="handleInputConfirm"
   @blur="handleInputConfirm"
 >
-</el-input>
-<el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+</hzq-input>
+<hzq-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</hzq-button>
 
 <style>
-  .el-tag + .el-tag {
+  .hzq-tag + .hzq-tag {
     margin-left: 10px;
   }
   .button-new-tag {
@@ -127,15 +127,16 @@ Puede utilizar el evento `close` para añadir y eliminar etiquetas dinámicament
 
 ### Tamaños
 
-Además del tamaño predeterminado, el componente Tag proporciona tres tamaños adicionales para que pueda elegir entre diferentes escenarios.
+El componente Tag proporciona cuatro tamaños para que pueda elegir entre diferentes escenarios.
 
-:::demo Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `small` o `mini`.
+:::demo Utilice el atributo `size` para establecer tamaños adicionales con `large`, `medium`, `small` o `mini`. Sin `size` el tag es `medium`; las cuatro alturas son 36px, 32px, 28px y 24px.
 
 ```html
-<el-tag>Default</el-tag>
-<el-tag size="medium">Medium</el-tag>
-<el-tag size="small">Small</el-tag>
-<el-tag size="mini">Mini</el-tag>
+<hzq-tag>Default</hzq-tag>
+<hzq-tag size="large">Large</hzq-tag>
+<hzq-tag size="medium">Medium</hzq-tag>
+<hzq-tag size="small">Small</hzq-tag>
+<hzq-tag size="mini">Mini</hzq-tag>
 ```
 :::
 
@@ -147,23 +148,23 @@ Tag tiene tres diferentes temas: `dark`、`light` y `plain`
 ```html
 <div class="tag-group">
   <span class="tag-group__title">Dark</span>
-  <el-tag
+  <hzq-tag
     v-for="item in items"
     :key="item.label"
     :type="item.type"
     effect="dark">
     {{ item.label }}
-  </el-tag>
+  </hzq-tag>
 </div>
 <div class="tag-group">
   <span class="tag-group__title">Plain</span>
-  <el-tag
+  <hzq-tag
     v-for="item in items"
     :key="item.label"
     :type="item.type"
     effect="plain">
     {{ item.label }}
-  </el-tag>
+  </hzq-tag>
 </div>
 
 <script>
@@ -192,7 +193,7 @@ Tag tiene tres diferentes temas: `dark`、`light` y `plain`
 | disable-transitions | si se deshabilitan las animaciones  | boolean | —                           | false       |
 | hit                 | si el  Tag tiene un borde resaltado | boolean | —                           | false       |
 | color               | color de fondo del Tag              | string  | —                           | —           |
-| size                | tamaño del Tag                      | string  | medium / small / mini       | —           |
+| size                | tamaño del Tag                      | string  | large / medium / small / mini | —           |
 | effect | Tema del Tag | string | dark / light / plain | light |
 
 

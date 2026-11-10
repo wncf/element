@@ -11,20 +11,20 @@ La timeline peut être divisée en plusieurs activités en ordre ascendant ou de
 <div class="block">
   <div class="radio">
     Order:
-    <el-radio-group v-model="reverse">
-      <el-radio :label="true">Descendant</el-radio>
-      <el-radio :label="false">Ascendant</el-radio>
-    </el-radio-group>
+    <hzq-radio-group v-model="reverse">
+      <hzq-radio :label="true">Descendant</hzq-radio>
+      <hzq-radio :label="false">Ascendant</hzq-radio>
+    </hzq-radio-group>
   </div>
 
-  <el-timeline :reverse="reverse">
-    <el-timeline-item
+  <hzq-timeline :reverse="reverse">
+    <hzq-timeline-item
       v-for="(activity, index) in activities"
       :key="index"
       :timestamp="activity.timestamp">
       {{activity.content}}
-    </el-timeline-item>
-  </el-timeline>
+    </hzq-timeline-item>
+  </hzq-timeline>
 </div>
 
 <script>
@@ -56,8 +56,8 @@ Vous pouvez personnaliser la taille, la couleur et les icônes de chaque Noeud.
 :::demo
 ```html
 <div class="block">
-  <el-timeline>
-    <el-timeline-item
+  <hzq-timeline>
+    <hzq-timeline-item
       v-for="(activity, index) in activities"
       :key="index"
       :icon="activity.icon"
@@ -66,8 +66,8 @@ Vous pouvez personnaliser la taille, la couleur et les icônes de chaque Noeud.
       :size="activity.size"
       :timestamp="activity.timestamp">
       {{activity.content}}
-    </el-timeline-item>
-  </el-timeline>
+    </hzq-timeline-item>
+  </hzq-timeline>
 </div>
 
 <script>
@@ -79,7 +79,7 @@ Vous pouvez personnaliser la taille, la couleur et les icônes de chaque Noeud.
           timestamp: '2018-04-12 20:46',
           size: 'large',
           type: 'primary',
-          icon: 'el-icon-more'
+          icon: 'hzq-icon-more'
         }, {
           content: 'Couleur',
           timestamp: '2018-04-03 20:46',
@@ -106,26 +106,26 @@ Le timestamp peut être placé au-dessus du contenu lorsque celui-ci est trop ha
 :::demo
 ```html
 <div class="block">
-  <el-timeline>
-    <el-timeline-item timestamp="2018/4/12" placement="top">
-      <el-card>
+  <hzq-timeline>
+    <hzq-timeline-item timestamp="2018/4/12" placement="top">
+      <hzq-card>
         <h4>Mise à jour du template GitHub</h4>
         <p>Commit de Tom le 2018/4/12 20:46</p>
-      </el-card>
-    </el-timeline-item>
-    <el-timeline-item timestamp="2018/4/3" placement="top">
-      <el-card>
+      </hzq-card>
+    </hzq-timeline-item>
+    <hzq-timeline-item timestamp="2018/4/3" placement="top">
+      <hzq-card>
         <h4>Mise à jour du template GitHub</h4>
         <p>Commit de Tom le 2018/4/3 20:46</p>
-      </el-card>
-    </el-timeline-item>
-    <el-timeline-item timestamp="2018/4/2" placement="top">
-      <el-card>
+      </hzq-card>
+    </hzq-timeline-item>
+    <hzq-timeline-item timestamp="2018/4/2" placement="top">
+      <hzq-card>
         <h4>Mise à jour du template GitHub</h4>
         <p>Commit de Tom le 2018/4/2 20:46</p>
-      </el-card>
-    </el-timeline-item>
-  </el-timeline>
+      </hzq-card>
+    </hzq-timeline-item>
+  </hzq-timeline>
 </div>
 ```
 :::

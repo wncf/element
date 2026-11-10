@@ -1,6 +1,6 @@
 <script>
   import TabBar from './tab-bar';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+  import { addResizeListener, removeResizeListener } from 'hzq-ui/src/utils/resize-event';
 
   function noop() {}
   const firstUpperCase = str => {
@@ -211,8 +211,8 @@
       } = this;
       const scrollBtn = scrollable
         ? [
-          <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
-          <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
+          <span class={['hzq-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="hzq-icon-arrow-left"></i></span>,
+          <span class={['hzq-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="hzq-icon-arrow-right"></i></span>
         ] : null;
 
       const tabs = this._l(panes, (pane, index) => {
@@ -222,7 +222,7 @@
         pane.index = `${index}`;
 
         const btnClose = closable
-          ? <span class="el-icon-close" on-click={(ev) => { onTabRemove(pane, ev); }}></span>
+          ? <span class="hzq-icon-close" on-click={(ev) => { onTabRemove(pane, ev); }}></span>
           : null;
 
         const tabLabelContent = pane.$slots.label || pane.label;
@@ -230,7 +230,7 @@
         return (
           <div
             class={{
-              'el-tabs__item': true,
+              'hzq-tabs__item': true,
               [`is-${ this.rootTabs.tabPosition }`]: true,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
@@ -256,11 +256,11 @@
         );
       });
       return (
-        <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
+        <div class={['hzq-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
           {scrollBtn}
-          <div class={['el-tabs__nav-scroll']} ref="navScroll">
+          <div class={['hzq-tabs__nav-scroll']} ref="navScroll">
             <div
-              class={['el-tabs__nav', `is-${ this.rootTabs.tabPosition }`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
+              class={['hzq-tabs__nav', `is-${ this.rootTabs.tabPosition }`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
               ref="nav"
               style={navStyle}
               role="tablist"

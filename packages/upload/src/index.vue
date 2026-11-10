@@ -1,18 +1,18 @@
 <script>
 import UploadList from './upload-list';
 import Upload from './upload';
-import ElProgress from 'element-ui/packages/progress';
-import Migrating from 'element-ui/src/mixins/migrating';
+import HzqProgress from 'hzq-ui/packages/progress';
+import Migrating from 'hzq-ui/src/mixins/migrating';
 
 function noop() {}
 
 export default {
-  name: 'ElUpload',
+  name: 'HzqUpload',
 
   mixins: [Migrating],
 
   components: {
-    ElProgress,
+    HzqProgress,
     UploadList,
     Upload
   },

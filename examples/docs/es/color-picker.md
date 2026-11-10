@@ -8,11 +8,11 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 ```html
 <div class="block">
   <span class="demonstration">Especifica valor por defecto</span>
-  <el-color-picker v-model="color1"></el-color-picker>
+  <hzq-color-picker v-model="color1"></hzq-color-picker>
 </div>
 <div class="block">
   <span class="demonstration">No especifica valor por defecto</span>
-  <el-color-picker v-model="color2"></el-color-picker>
+  <hzq-color-picker v-model="color2"></hzq-color-picker>
 </div>
 
 <script>
@@ -32,7 +32,7 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 
 :::demo ColorPicker soporta selección de canales alpha. Para activarlo sólo agregue el atributo `show-alpha`.
 ```html
-<el-color-picker v-model="color" show-alpha></el-color-picker>
+<hzq-color-picker v-model="color" show-alpha></hzq-color-picker>
 
 <script>
   export default {
@@ -50,11 +50,11 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 
 :::demo ColorPicker soporta opciones de color predefinidas
 ```html
-<el-color-picker
+<hzq-color-picker
   v-model="color"
   show-alpha
   :predefine="predefineColors">
-</el-color-picker>
+</hzq-color-picker>
 
 <script>
   export default {
@@ -88,10 +88,11 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 
 :::demo
 ```html
-<el-color-picker v-model="color"></el-color-picker>
-<el-color-picker v-model="color" size="medium"></el-color-picker>
-<el-color-picker v-model="color" size="small"></el-color-picker>
-<el-color-picker v-model="color" size="mini"></el-color-picker>
+<hzq-color-picker v-model="color"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="large"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="medium"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="small"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="mini"></hzq-color-picker>
 
 <script>
   export default {
@@ -110,7 +111,7 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 | -------------- | ---------------------------------------- | ------- | --------------------- | ---------------------------------------- |
 | value / v-model | valor enlazado                           | string  | —                     | —                                        |
 | disabled       | especifica si se deshabilita el ColorPicker | boolean | —                     | false                                    |
-| size           | tamaño del ColorPicker                   | string  | —                     | medium / small / mini                    |
+| size           | tamaño del ColorPicker                   | string  | large / medium / small / mini | —                     |
 | show-alpha     | especifica si se muestra el control deslizante para el valor alpha | boolean | —                     | false                                    |
 | color-format   | formato de color del `v-model`           | string  | hsl / hsv / hex / rgb | hex (si show-alpha es false)/ rgb (si show-alpha es true) |
 | popper-class   | nombre de clase para el dropdown del ColorPicker | string  | —                     | —                                        |

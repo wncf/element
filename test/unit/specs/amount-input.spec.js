@@ -3,7 +3,7 @@ import {
   sanitizeAmount,
   clampAmount,
   normalizeAmount
-} from 'element-ui/src/utils/amount';
+} from 'hzq-ui/src/utils/amount';
 
 const OPTIONS = {
   precision: 2,
@@ -83,7 +83,7 @@ describe('AmountInput', () => {
 
     it('初值按精度补齐并回写', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" />',
+        '<hzq-amount-input v-model="amount" />',
         () => ({ amount: '12' })
       );
       await waitImmediate();
@@ -94,7 +94,7 @@ describe('AmountInput', () => {
 
     it('过滤非法字符', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" />',
+        '<hzq-amount-input v-model="amount" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -108,7 +108,7 @@ describe('AmountInput', () => {
 
     it('超过精度的小数位输不进去', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" />',
+        '<hzq-amount-input v-model="amount" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -121,7 +121,7 @@ describe('AmountInput', () => {
 
     it('默认不接受负数', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" />',
+        '<hzq-amount-input v-model="amount" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -134,7 +134,7 @@ describe('AmountInput', () => {
 
     it('allow-negative 时可以输入负数', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" allow-negative />',
+        '<hzq-amount-input v-model="amount" allow-negative />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -147,7 +147,7 @@ describe('AmountInput', () => {
 
     it('min 在整数前缀时不提前收敛', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" :min="100" />',
+        '<hzq-amount-input v-model="amount" :min="100" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -167,7 +167,7 @@ describe('AmountInput', () => {
 
     it('超过 max 立即截断', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" :max="1000" />',
+        '<hzq-amount-input v-model="amount" :max="1000" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -183,7 +183,7 @@ describe('AmountInput', () => {
       const changes = [];
 
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" @change="handleChange" />',
+        '<hzq-amount-input v-model="amount" @change="handleChange" />',
         () => ({ amount: '' }),
         { handleChange(value) { changes.push(value); } }
       );
@@ -200,7 +200,7 @@ describe('AmountInput', () => {
 
     it('空值失焦后保持空', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" />',
+        '<hzq-amount-input v-model="amount" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -213,7 +213,7 @@ describe('AmountInput', () => {
 
     it('整数模式下小数点及其后面被舍去', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" :precision="0" />',
+        '<hzq-amount-input v-model="amount" :precision="0" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -227,7 +227,7 @@ describe('AmountInput', () => {
 
     it('只输入负号时不会被吞掉', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" allow-negative />',
+        '<hzq-amount-input v-model="amount" allow-negative />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -241,7 +241,7 @@ describe('AmountInput', () => {
 
     it('过滤掉中间字符后光标不跳到末尾', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" />',
+        '<hzq-amount-input v-model="amount" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -257,7 +257,7 @@ describe('AmountInput', () => {
 
     it('外部改值时退出编辑态并规范化', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" />',
+        '<hzq-amount-input v-model="amount" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -276,7 +276,7 @@ describe('AmountInput', () => {
       const events = [];
 
       vm = createAmountInput(
-        '<el-amount-input ref="amount" v-model="amount" clearable @change="onChange" @clear="onClear" />',
+        '<hzq-amount-input ref="amount" v-model="amount" clearable @change="onChange" @clear="onClear" />',
         () => ({ amount: '12.00' }),
         {
           onChange(value) { events.push(['change', value]); },
@@ -295,7 +295,7 @@ describe('AmountInput', () => {
 
     it('组字期间不改写输入框内容', async() => {
       vm = createAmountInput(
-        '<el-amount-input v-model="amount" />',
+        '<hzq-amount-input v-model="amount" />',
         () => ({ amount: '' })
       );
       const input = vm.$el.querySelector('input');
@@ -315,12 +315,12 @@ describe('AmountInput', () => {
 
     it('沿用 el-input 的类名并透传原生属性', () => {
       vm = createAmountInput(
-        '<el-amount-input placeholder="请输入金额" size="small" />',
+        '<hzq-amount-input placeholder="请输入金额" size="small" />',
         () => ({})
       );
 
-      expect(vm.$el.classList.contains('el-input--small')).to.be.true;
-      expect(vm.$el.classList.contains('el-amount-input')).to.be.true;
+      expect(vm.$el.classList.contains('hzq-input--small')).to.be.true;
+      expect(vm.$el.classList.contains('hzq-amount-input')).to.be.true;
       expect(vm.$el.querySelector('input').getAttribute('placeholder')).to.equal('请输入金额');
       expect(vm.$el.querySelector('input').getAttribute('inputmode')).to.equal('decimal');
     });
@@ -328,11 +328,11 @@ describe('AmountInput', () => {
     it('挂载时的规范化不触发校验', async() => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules">
-            <el-form-item prop="amount" ref="item">
-              <el-amount-input v-model="form.amount" />
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules">
+            <hzq-form-item prop="amount" ref="item">
+              <hzq-amount-input v-model="form.amount" />
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {
@@ -350,11 +350,11 @@ describe('AmountInput', () => {
     it('输入和失焦都会通知表单校验', async() => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules">
-            <el-form-item prop="amount" ref="item">
-              <el-amount-input v-model="form.amount" />
-            </el-form-item>
-          </el-form>
+          <hzq-form :model="form" :rules="rules">
+            <hzq-form-item prop="amount" ref="item">
+              <hzq-amount-input v-model="form.amount" />
+            </hzq-form-item>
+          </hzq-form>
         `,
         data() {
           return {

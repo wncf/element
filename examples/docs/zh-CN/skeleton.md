@@ -10,7 +10,7 @@
 
 ```html
 <template>
-  <el-skeleton />
+  <hzq-skeleton />
 </template>
 ```
 
@@ -23,7 +23,7 @@
 :::demo
 
 ```html
-<el-skeleton :rows="6" />
+<hzq-skeleton :rows="6" />
 ```
 
 :::
@@ -35,7 +35,7 @@
 :::demo
 
 ```html
-<el-skeleton :rows="6" animated />
+<hzq-skeleton :rows="6" animated />
 ```
 
 :::
@@ -49,20 +49,20 @@ Element 提供的排版模式有时候并不满足要求，当您想要用自己
 
 ```html
 <template>
-  <el-skeleton style="width: 240px">
+  <hzq-skeleton style="width: 240px">
     <template slot="template">
-      <el-skeleton-item variant="image" style="width: 240px; height: 240px;" />
+      <hzq-skeleton-item variant="image" style="width: 240px; height: 240px;" />
       <div style="padding: 14px;">
-        <el-skeleton-item variant="p" style="width: 50%" />
+        <hzq-skeleton-item variant="p" style="width: 50%" />
         <div
           style="display: flex; align-items: center; justify-items: space-between;"
         >
-          <el-skeleton-item variant="text" style="margin-right: 16px;" />
-          <el-skeleton-item variant="text" style="width: 30%;" />
+          <hzq-skeleton-item variant="text" style="margin-right: 16px;" />
+          <hzq-skeleton-item variant="text" style="width: 30%;" />
         </div>
       </div>
     </template>
-  </el-skeleton>
+  </hzq-skeleton>
 </template>
 ```
 
@@ -80,26 +80,26 @@ Element 提供的排版模式有时候并不满足要求，当您想要用自己
   <div style="width: 240px">
     <p>
       <label style="margin-right: 16px;">切换 Loading</label>
-      <el-switch v-model="loading" />
+      <hzq-switch v-model="loading" />
     </p>
-    <el-skeleton style="width: 240px" :loading="loading" animated>
+    <hzq-skeleton style="width: 240px" :loading="loading" animated>
       <template slot="template">
-        <el-skeleton-item
+        <hzq-skeleton-item
           variant="image"
           style="width: 240px; height: 240px;"
         />
         <div style="padding: 14px;">
-          <el-skeleton-item variant="h3" style="width: 50%;" />
+          <hzq-skeleton-item variant="h3" style="width: 50%;" />
           <div
             style="display: flex; align-items: center; justify-items: space-between; margin-top: 16px; height: 16px;"
           >
-            <el-skeleton-item variant="text" style="margin-right: 16px;" />
-            <el-skeleton-item variant="text" style="width: 30%;" />
+            <hzq-skeleton-item variant="text" style="margin-right: 16px;" />
+            <hzq-skeleton-item variant="text" style="width: 30%;" />
           </div>
         </div>
       </template>
       <template>
-        <el-card :body-style="{ padding: '0px', marginBottom: '1px' }">
+        <hzq-card :body-style="{ padding: '0px', marginBottom: '1px' }">
           <img
             src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
             class="image"
@@ -108,12 +108,12 @@ Element 提供的排版模式有时候并不满足要求，当您想要用自己
             <span>好吃的汉堡</span>
             <div class="bottom card-header">
               <span class="time">{{ currentDate }}</span>
-              <el-button type="text" class="button">操作按钮</el-button>
+              <hzq-button type="text" class="button">操作按钮</hzq-button>
             </div>
           </div>
-        </el-card>
+        </hzq-card>
       </template>
-    </el-skeleton>
+    </hzq-skeleton>
   </div>
 </template>
 
@@ -146,26 +146,26 @@ Element 提供的排版模式有时候并不满足要求，当您想要用自己
 <template>
   <div style="width: 400px">
     <p>
-      <el-button @click="setLoading">点我重新加载</el-button>
+      <hzq-button @click="setLoading">点我重新加载</hzq-button>
     </p>
-    <el-skeleton style="width:400px" :loading="loading" animated :count="3">
+    <hzq-skeleton style="width:400px" :loading="loading" animated :count="3">
       <template slot="template">
-        <el-skeleton-item
+        <hzq-skeleton-item
           variant="image"
           style="width: 400px; height: 267px;"
         />
         <div style="padding: 14px;">
-          <el-skeleton-item variant="h3" style="width: 50%;" />
+          <hzq-skeleton-item variant="h3" style="width: 50%;" />
           <div
             style="display: flex; align-items: center; justify-items: space-between; margin-top: 16px; height: 16px;"
           >
-            <el-skeleton-item variant="text" style="margin-right: 16px;" />
-            <el-skeleton-item variant="text" style="width: 30%;" />
+            <hzq-skeleton-item variant="text" style="margin-right: 16px;" />
+            <hzq-skeleton-item variant="text" style="width: 30%;" />
           </div>
         </div>
       </template>
       <template>
-        <el-card
+        <hzq-card
           :body-style="{ padding: '0px', marginBottom: '1px' }"
           v-for="item in lists"
           :key="item.name"
@@ -175,12 +175,12 @@ Element 提供的排版模式有时候并不满足要求，当您想要用自己
             <span>{{ item.name }}</span>
             <div class="bottom card-header">
               <span class="time">{{ currentDate }}</span>
-              <el-button type="text" class="button">操作按钮</el-button>
+              <hzq-button type="text" class="button">操作按钮</hzq-button>
             </div>
           </div>
-        </el-card>
+        </hzq-card>
       </template>
-    </el-skeleton>
+    </hzq-skeleton>
   </div>
 </template>
 
@@ -236,31 +236,31 @@ Element 提供的排版模式有时候并不满足要求，当您想要用自己
   <div style="width: 240px">
     <p>
       <label style="margin-right: 16px;">切换 Loading</label>
-      <el-switch v-model="loading" />
+      <hzq-switch v-model="loading" />
     </p>
-    <el-skeleton
+    <hzq-skeleton
       style="width: 240px"
       :loading="loading"
       animated
       :throttle="500"
     >
       <template slot="template">
-        <el-skeleton-item
+        <hzq-skeleton-item
           variant="image"
           style="width: 240px; height: 240px;"
         />
         <div style="padding: 14px;">
-          <el-skeleton-item variant="h3" style="width: 50%;" />
+          <hzq-skeleton-item variant="h3" style="width: 50%;" />
           <div
             style="display: flex; align-items: center; justify-items: space-between; margin-top: 16px; height: 16px;"
           >
-            <el-skeleton-item variant="text" style="margin-right: 16px;" />
-            <el-skeleton-item variant="text" style="width: 30%;" />
+            <hzq-skeleton-item variant="text" style="margin-right: 16px;" />
+            <hzq-skeleton-item variant="text" style="width: 30%;" />
           </div>
         </div>
       </template>
       <template>
-        <el-card :body-style="{ padding: '0px', marginBottom: '1px'}">
+        <hzq-card :body-style="{ padding: '0px', marginBottom: '1px'}">
           <img
             src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
             class="image"
@@ -269,12 +269,12 @@ Element 提供的排版模式有时候并不满足要求，当您想要用自己
             <span>好吃的汉堡</span>
             <div class="bottom card-header">
               <span class="time">{{ currentDate }}</span>
-              <el-button type="text" class="button">操作按钮</el-button>
+              <hzq-button type="text" class="button">操作按钮</hzq-button>
             </div>
           </div>
-        </el-card>
+        </hzq-card>
       </template>
-    </el-skeleton>
+    </hzq-skeleton>
   </div>
 </template>
 

@@ -1,11 +1,11 @@
 import { cellStarts, cellForced, defaultRenderCell, treeCellPrefix } from './config';
 import { mergeOptions, parseWidth, parseMinWidth, compose } from './util';
-import ElCheckbox from 'element-ui/packages/checkbox';
+import HzqCheckbox from 'hzq-ui/packages/checkbox';
 
 let columnIdSeed = 1;
 
 export default {
-  name: 'ElTableColumn',
+  name: 'HzqTableColumn',
 
   props: {
     type: {
@@ -182,7 +182,7 @@ export default {
             style: {}
           };
           if (column.showOverflowTooltip) {
-            props.class += ' el-tooltip';
+            props.class += ' hzq-tooltip';
             props.style = {width: (data.column.realWidth || data.column.width) - 1 + 'px'};
           }
           return (<div { ...props }>
@@ -241,7 +241,7 @@ export default {
   },
 
   components: {
-    ElCheckbox
+    HzqCheckbox
   },
 
   beforeCreate() {

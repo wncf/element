@@ -14,7 +14,7 @@ describe('PageHeader', () => {
     expect(vm.$el).to.exist;
     const spy = sinon.spy();
     vm.$on('back', spy);
-    vm.$el.querySelector('.el-page-header__left').click();
+    vm.$el.querySelector('.hzq-page-header__left').click();
 
     await waitImmediate();
 

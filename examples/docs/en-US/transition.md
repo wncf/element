@@ -8,7 +8,7 @@ You can use Element's built-in transitions directly. Before that, please read th
 ```html
 <template>
   <div>
-    <el-button @click="show = !show">Click Me</el-button>
+    <hzq-button @click="show = !show">Click Me</hzq-button>
 
     <div style="display: flex; margin-top: 20px; height: 100px;">
       <transition name="el-fade-in-linear">
@@ -52,7 +52,7 @@ You can use Element's built-in transitions directly. Before that, please read th
 ```html
 <template>
   <div>
-    <el-button @click="show2 = !show2">Click Me</el-button>
+    <hzq-button @click="show2 = !show2">Click Me</hzq-button>
 
     <div style="display: flex; margin-top: 20px; height: 100px;">
       <transition name="el-zoom-in-center">
@@ -98,21 +98,21 @@ You can use Element's built-in transitions directly. Before that, please read th
 
 ### collapse
 
-For collapse effect, use the `el-collapse-transition` component.
+For collapse effect, use the `hzq-collapse-transition` component.
 
 :::demo
 ```html
 <template>
   <div>
-    <el-button @click="show3 = !show3">Click Me</el-button>
+    <hzq-button @click="show3 = !show3">Click Me</hzq-button>
 
     <div style="margin-top: 20px; height: 200px;">
-      <el-collapse-transition>
+      <hzq-collapse-transition>
         <div v-show="show3">
-          <div class="transition-box">el-collapse-transition</div>
-          <div class="transition-box">el-collapse-transition</div>
+          <div class="transition-box">hzq-collapse-transition</div>
+          <div class="transition-box">hzq-collapse-transition</div>
         </div>
-      </el-collapse-transition>
+      </hzq-collapse-transition>
     </div>
   </div>
 </template>

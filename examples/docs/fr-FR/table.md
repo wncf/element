@@ -6,28 +6,28 @@ Permet d'afficher de nombreuses données possédant un format similaire. Vous po
 
 Un tableau de base pour afficher seulement.
 
-:::demo Après avoir configuré l'attribut `data` de `el-table` avec un tableau d'objets, vous pouvez utiliser `prop` (correspondant à une clé dans chaque objet du tableau `data`) dans `el-table-column` pour insérer des données dans les colonnes, ainsi que l'attribut `label` pour définir le nom de la colonne. L'attribut `width` définit si besoin la largeur de la colonne.
+:::demo Après avoir configuré l'attribut `data` de `hzq-table` avec un tableau d'objets, vous pouvez utiliser `prop` (correspondant à une clé dans chaque objet du tableau `data`) dans `hzq-table-column` pour insérer des données dans les colonnes, ainsi que l'attribut `label` pour définir le nom de la colonne. L'attribut `width` définit si besoin la largeur de la colonne.
 
 ```html
   <template>
-    <el-table
+    <hzq-table
       :data="tableData"
       style="width: 100%">
-      <el-table-column
+      <hzq-table-column
         prop="date"
         label="Date"
         width="180">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="name"
         label="Nom"
         width="180">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="address"
         label="Adresse">
-      </el-table-column>
-    </el-table>
+      </hzq-table-column>
+    </hzq-table>
   </template>
 
   <script>
@@ -65,25 +65,25 @@ Ajouter des couleurs différentes pour les lignes paires et impaires permet de l
 :::demo L'attribut `stripe` accepte un `Boolean`. Si `true`, le tableau sera rayé.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     stripe
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       prop="date"
       label="Date"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -120,25 +120,25 @@ Ajouter des couleurs différentes pour les lignes paires et impaires permet de l
 
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     border
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       prop="date"
       label="Date"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -173,36 +173,36 @@ Ajouter des couleurs différentes pour les lignes paires et impaires permet de l
 
 Vous pouvez mettre en valeur certaines lignes du tableau suivant leur état, comme "success", "information", "warning", "danger" et d'autres.
 
-:::demo Utilisez `row-class-name` dans `el-table` pour utiliser une fonction qui permettra ajouter des classes à certaines lignes. Vous pouvez ensuite définir les classes en question dans votre CSS.
+:::demo Utilisez `row-class-name` dans `hzq-table` pour utiliser une fonction qui permettra ajouter des classes à certaines lignes. Vous pouvez ensuite définir les classes en question dans votre CSS.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     style="width: 100%"
     :row-class-name="tableRowClassName">
-    <el-table-column
+    <hzq-table-column
       prop="date"
       label="Date"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <style>
-  .el-table .warning-row {
+  .hzq-table .warning-row {
     background: oldlace;
   }
 
-  .el-table .success-row {
+  .hzq-table .success-row {
     background: #f0f9eb;
   }
 </style>
@@ -249,28 +249,28 @@ Vous pouvez mettre en valeur certaines lignes du tableau suivant leur état, com
 
 Lorsqu'il y a beaucoup de lignes, il peut être utile d'avoir un header fixe afin de ne pas perdre le nom de colonnes à mesure que l'utilisateur défile vers le bas.
 
-:::demo En réglant l'attribut `height` de `el-table`, vous pouvez fixer le header sans avoir besoin de plus de code.
+:::demo En réglant l'attribut `height` de `hzq-table`, vous pouvez fixer le header sans avoir besoin de plus de code.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     height="250"
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       prop="date"
       label="Date"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -317,53 +317,53 @@ Lorsqu'il y a beaucoup de lignes, il peut être utile d'avoir un header fixe afi
 
 Lorsque qu'il y a beaucoup de colonnes, il peut être utile d'en fixer certaines afin de ne pas perdre de vue leurs informations à mesure que l'utilisateur défile sur les cotés.
 
-:::demo Utilisez l'attribut `fixed` de `el-table-column` qui accepte un `Boolean`. Si `true`, la colonne sera fixée à gauche. Il accepte aussi les valeurs 'left' et 'right', indiquant de quel coté la colonne doit être fixée.
+:::demo Utilisez l'attribut `fixed` de `hzq-table-column` qui accepte un `Boolean`. Si `true`, la colonne sera fixée à gauche. Il accepte aussi les valeurs 'left' et 'right', indiquant de quel coté la colonne doit être fixée.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       fixed
       prop="date"
       label="Date"
       width="150">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="state"
       label="État"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="city"
       label="Ville"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse"
       width="300">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="zip"
       label="Zip"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       fixed="right"
       label="Opérations"
       width="120">
       <template slot-scope="scope">
-        <el-button @click="handleClick" type="text" size="small">Detail</el-button>
-        <el-button type="text" size="small">Editer</el-button>
+        <hzq-button @click="handleClick" type="text" size="small">Detail</hzq-button>
+        <hzq-button type="text" size="small">Editer</hzq-button>
       </template>
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -422,42 +422,42 @@ Si vous avez un gros volume de données à afficher, vous pouvez fixer le header
 :::demo Header et colonnes fixes combinant les deux exemples précédents.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     style="width: 100%"
     height="250">
-    <el-table-column
+    <hzq-table-column
       fixed
       prop="date"
       label="Date"
       width="150">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="state"
       label="État"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="city"
       label="Ville"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse"
       width="300">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="zip"
       label="Zip"
       width="120">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -525,58 +525,58 @@ Si vous avez un gros volume de données à afficher, vous pouvez fixer le header
 
 Quand les données changent dynamiquement, vous pouvez avoir besoin d'une hauteur maximale et d'afficher une barre de défilement si besoin.
 
-:::demo En utilisant l'attribut `max-height` de `el-table`, vous fixez le header. Le tableau ne défilera que si la hauteur des lignes dépasse cette hauteur maximale.
+:::demo En utilisant l'attribut `max-height` de `hzq-table`, vous fixez le header. Le tableau ne défilera que si la hauteur des lignes dépasse cette hauteur maximale.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     style="width: 100%"
     max-height="250">
-    <el-table-column
+    <hzq-table-column
       fixed
       prop="date"
       label="Date"
       width="150">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="state"
       label="État"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="city"
       label="Ville"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse"
       width="300">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="zip"
       label="Zip"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       fixed="right"
       label="Opérations"
       width="120">
       <template slot-scope="scope">
-        <el-button
+        <hzq-button
           @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
           size="small">
           Supprimer
-        </el-button>
+        </hzq-button>
       </template>
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -649,47 +649,47 @@ Quand les données changent dynamiquement, vous pouvez avoir besoin d'une hauteu
 
 Quand la structure du tableau est complexe, vous pouvez grouper les headers afin de montrer une hiérarchie.
 
-:::demo Placez simplement `el-table-column` dans une autre `el-table-column`, et vous grouperez ainsi les headers.
+:::demo Placez simplement `hzq-table-column` dans une autre `hzq-table-column`, et vous grouperez ainsi les headers.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       prop="date"
       label="Date"
       width="150">
-    </el-table-column>
-    <el-table-column label="Informations de livraison">
-      <el-table-column
+    </hzq-table-column>
+    <hzq-table-column label="Informations de livraison">
+      <hzq-table-column
         prop="name"
         label="Nom"
         width="120">
-      </el-table-column>
-      <el-table-column label="Informations d'adresse">
-        <el-table-column
+      </hzq-table-column>
+      <hzq-table-column label="Informations d'adresse">
+        <hzq-table-column
           prop="state"
           label="État"
           width="120">
-        </el-table-column>
-        <el-table-column
+        </hzq-table-column>
+        <hzq-table-column
           prop="city"
           label="Ville"
           width="120">
-        </el-table-column>
-        <el-table-column
+        </hzq-table-column>
+        <hzq-table-column
           prop="address"
           label="Adresse"
           width="300">
-        </el-table-column>
-        <el-table-column
+        </hzq-table-column>
+        <hzq-table-column
           prop="zip"
           label="Zip"
           width="120">
-        </el-table-column>
-      </el-table-column>
-    </el-table-column>
-  </el-table>
+        </hzq-table-column>
+      </hzq-table-column>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -757,37 +757,37 @@ Quand la structure du tableau est complexe, vous pouvez grouper les headers afin
 
 Vous pouvez activer la sélection d'une ligne.
 
-:::demo Activez la sélection en ajoutant l'attribut `highlight-current-row`. L'évènement `current-change` se déclenchera à chaque changement de sélection, ses paramètres étant les deux lignes avant et après le changement: `currentRow` et `oldCurrentRow`. Si vous avez besoin d'afficher l'index des lignes, ajoutez une `el-table-column` avec pour `type` la valeur `index`, qui commencera à 1.
+:::demo Activez la sélection en ajoutant l'attribut `highlight-current-row`. L'évènement `current-change` se déclenchera à chaque changement de sélection, ses paramètres étant les deux lignes avant et après le changement: `currentRow` et `oldCurrentRow`. Si vous avez besoin d'afficher l'index des lignes, ajoutez une `hzq-table-column` avec pour `type` la valeur `index`, qui commencera à 1.
 ```html
 <template>
-  <el-table
+  <hzq-table
     ref="singleTable"
     :data="tableData"
     highlight-current-row
     @current-change="handleCurrentChange"
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       type="index"
       width="50">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       property="date"
       label="Date"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       property="name"
       label="Nom"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       property="address"
       label="Adresse">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
   <div style="margin-top: 20px">
-    <el-button @click="setCurrent(tableData[1])">Sélectionner la deuxième ligne</el-button>
-    <el-button @click="setCurrent()">Effacer la sélection</el-button>
+    <hzq-button @click="setCurrent(tableData[1])">Sélectionner la deuxième ligne</hzq-button>
+    <hzq-button @click="setCurrent()">Effacer la sélection</hzq-button>
   </div>
 </template>
 
@@ -833,37 +833,37 @@ Vous pouvez activer la sélection d'une ligne.
 
 Vous pouvez aussi sélectionner plusieurs lignes.
 
-:::demo Ajoutez une `el-table-column` avec son `type` à `selection`. Cet exemple utilise aussi `show-overflow-tooltip`: par défaut, si le contenu est trop long, il se séparera en plusieurs lignes. Si vous souhaitez conserver une seule ligne, utilisez `show-overflow-tooltip`, qui accepte un `Boolean`. Si `true`, le contenu non affiché s'affichera dans le tooltip lorsque la souris passera sur la case.
+:::demo Ajoutez une `hzq-table-column` avec son `type` à `selection`. Cet exemple utilise aussi `show-overflow-tooltip`: par défaut, si le contenu est trop long, il se séparera en plusieurs lignes. Si vous souhaitez conserver une seule ligne, utilisez `show-overflow-tooltip`, qui accepte un `Boolean`. Si `true`, le contenu non affiché s'affichera dans le tooltip lorsque la souris passera sur la case.
 ```html
 <template>
-  <el-table
+  <hzq-table
     ref="multipleTable"
     :data="tableData"
     style="width: 100%"
     @selection-change="handleSelectionChange">
-    <el-table-column
+    <hzq-table-column
       type="selection"
       width="55">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       label="Date"
       width="120">
       <template slot-scope="scope">{{ scope.row.date }}</template>
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       property="name"
       label="Nom"
       width="120">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       property="address"
       label="Adresse"
       show-overflow-tooltip>
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData[1], tableData[2]])">Sélectionner les deuxième et troisième lignes</el-button>
-    <el-button @click="toggleSelection()">Effacer la sélection</el-button>
+    <hzq-button @click="toggleSelection([tableData[1], tableData[2]])">Sélectionner les deuxième et troisième lignes</hzq-button>
+    <hzq-button @click="toggleSelection()">Effacer la sélection</hzq-button>
   </div>
 </template>
 
@@ -930,27 +930,27 @@ Il est possible de trier les données afin de trouver plus facilement ce qu'on c
 :::demo Ajoutez l'attribut `sortable` a une colonne pour pouvoir trier cette colonne. Il accepte un `Boolean` et à `false` par défaut. Ajoutez `default-sort` pour déterminer les propriétés par défaut du tri. Pour appliquer vos propres règles, utilisez `sort-method` ou `sort-by`. Si vous avez besoin d'un tri dynamique depuis le serveur, mettez `sortable` à `custom`, et écoutez l'évènement `sort-change` de `Table`. Depuis cet évènement, vous aurez accès à la colonne et l'ordre de tri. cet exemple utilise aussi `formatter` pour formater les valeurs de colonnes. Il prend une fonction avec deux paramètres: `row` et `column`. Vous pouvez ainsi transformer les valeurs.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     :default-sort = "{prop: 'date', order: 'descending'}"
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       prop="date"
       label="Date"
       sortable
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse"
       :formatter="formatter">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -990,16 +990,16 @@ Il est possible de trier les données afin de trouver plus facilement ce qu'on c
 
 Vous pouvez filtrer la table pour obtenir rapidement les lignes désirées.
 
-:::demo Réglez `filters` et `filter-method` dans `el-table-column` pour rendre la colonne filtrable. `filters` prends un tableau, et `filter-method` est une fonction déterminant comment les lignes s'affichent. Elle prend trois paramètres: `value`, `row` et `column`.
+:::demo Réglez `filters` et `filter-method` dans `hzq-table-column` pour rendre la colonne filtrable. `filters` prends un tableau, et `filter-method` est une fonction déterminant comment les lignes s'affichent. Elle prend trois paramètres: `value`, `row` et `column`.
 ```html
 <template>
-  <el-button @click="resetDateFilter">Effacer le filtre date</el-button>
-  <el-button @click="clearFilter">Effacer tout les filtres</el-button>
-  <el-table
+  <hzq-button @click="resetDateFilter">Effacer le filtre date</hzq-button>
+  <hzq-button @click="clearFilter">Effacer tout les filtres</hzq-button>
+  <hzq-table
     ref="filterTable"
     :data="tableData"
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       prop="date"
       label="Date"
       sortable
@@ -1008,18 +1008,18 @@ Vous pouvez filtrer la table pour obtenir rapidement les lignes désirées.
       :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
       :filter-method="filterHandler"
     >
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse"
       :formatter="formatter">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="tag"
       label="Tag"
       width="100"
@@ -1027,12 +1027,12 @@ Vous pouvez filtrer la table pour obtenir rapidement les lignes désirées.
       :filter-method="filterTag"
       filter-placement="bottom-end">
       <template slot-scope="scope">
-        <el-tag
+        <hzq-tag
           :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
-          disable-transitions>{{scope.row.tag}}</el-tag>
+          disable-transitions>{{scope.row.tag}}</hzq-tag>
       </template>
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -1092,43 +1092,43 @@ Vous pouvez customiser le contenu des colonnes afin de pouvoir utiliser d'autres
 :::demo Vous avez acccès aux données suivantes: `row`, `column`, `$index` et `store` (gestionnaire d'état de Table) grâce aux [Scoped slot](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots).
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       label="Date"
       width="180">
       <template slot-scope="scope">
-        <i class="el-icon-time"></i>
+        <i class="hzq-icon-time"></i>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
       </template>
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       label="Nom"
       width="180">
       <template slot-scope="scope">
-        <el-popover trigger="hover" placement="top">
+        <hzq-popover trigger="hover" placement="top">
           <p>Nom: {{ scope.row.name }}</p>
           <p>Addr: {{ scope.row.address }}</p>
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.name }}</el-tag>
+            <hzq-tag size="medium">{{ scope.row.name }}</hzq-tag>
           </div>
-        </el-popover>
+        </hzq-popover>
       </template>
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       label="Opérations">
       <template slot-scope="scope">
-        <el-button
+        <hzq-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">Editer</el-button>
-        <el-button
+          @click="handleEdit(scope.$index, scope.row)">Editer</hzq-button>
+        <hzq-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)">Supprimer</el-button>
+          @click="handleDelete(scope.$index, scope.row)">Supprimer</hzq-button>
       </template>
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -1174,36 +1174,36 @@ Vous pouvez également personnaliser le header de la table.
 :::demo Vous pouvez personnaliser le header grâce aux [slots avec portée](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots).
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       label="Date"
       prop="date">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       label="Name"
       prop="name">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       align="right">
       <template slot="header" slot-scope="scope">
-        <el-input
+        <hzq-input
           v-model="search"
           size="mini"
           placeholder="Type to search"/>
       </template>
       <template slot-scope="scope">
-        <el-button
+        <hzq-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">Editer</el-button>
-        <el-button
+          @click="handleEdit(scope.$index, scope.row)">Editer</hzq-button>
+        <hzq-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)">Supprimer</el-button>
+          @click="handleDelete(scope.$index, scope.row)">Supprimer</hzq-button>
       </template>
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -1247,29 +1247,29 @@ Vous pouvez également personnaliser le header de la table.
 
 Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas afficher de scrollbar, vous pouvez utiliser une ligne extensible.
 
-:::demo Activer la ligne extensible en mettant `type` à `expand` et en utilisant un slot. Le contenu de `el-table-column` sera généré quand l'extension aura lieu, et vous avez aux même attributs que pour le slot des templates de colonnes.
+:::demo Activer la ligne extensible en mettant `type` à `expand` et en utilisant un slot. Le contenu de `hzq-table-column` sera généré quand l'extension aura lieu, et vous avez aux même attributs que pour le slot des templates de colonnes.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     style="width: 100%">
-    <el-table-column type="expand">
+    <hzq-table-column type="expand">
       <template slot-scope="props">
         <p>État: {{ props.row.state }}</p>
         <p>Ville: {{ props.row.city }}</p>
         <p>Adresse: {{ props.row.address }}</p>
         <p>Zip: {{ props.row.zip }}</p>
       </template>
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       label="Date"
       prop="date">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       label="Nom"
       prop="name">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -1340,27 +1340,27 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
 ```html
 <template>
 <div>
-  <el-table
+  <hzq-table
     :data="tableData"
     style="width: 100%;margin-bottom: 20px;"
     row-key="id"
     border
     default-expand-all>
-    <el-table-column
+    <hzq-table-column
       prop="date"
       label="date"
       sortable
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       sortable
       width="180">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 
-  <el-table
+  <hzq-table
     :data="tableData1"
     style="width: 100%"
     row-key="id"
@@ -1368,17 +1368,17 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
     lazy
     :load="load"
     :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
-    <el-table-column
+    <hzq-table-column
       prop="date"
       label="Date"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="180">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </div>
 </template>
 <script>
@@ -1457,69 +1457,69 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
 
 Pour les tableaux de nombres, vous pouvez ajouter une ligne en plus pour afficher la somme de chaque colonne.
 
-:::demo Mettez l'attribut `show-summary` à `true` dans `el-table`. Par défaut, la première colonne n'affiche que 'Sum' (vous pouvez configurer ce label avec `sum-text`), alors que les autres affichent la somme de chaque colonne. Vous pouvez choisir comment effectuer l'opération grâce à `summary-method`, qui doit retourner un tableau, cahque élément correspondant à la somme de chaque colonne. La deuxième table de cet exemple montre tout cela en pratique.
+:::demo Mettez l'attribut `show-summary` à `true` dans `hzq-table`. Par défaut, la première colonne n'affiche que 'Sum' (vous pouvez configurer ce label avec `sum-text`), alors que les autres affichent la somme de chaque colonne. Vous pouvez choisir comment effectuer l'opération grâce à `summary-method`, qui doit retourner un tableau, cahque élément correspondant à la somme de chaque colonne. La deuxième table de cet exemple montre tout cela en pratique.
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     border
     show-summary
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       prop="id"
       label="ID"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="amount1"
       sortable
       label="Quantité 1">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="amount2"
       sortable
       label="Quantité 2">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="amount3"
       sortable
       label="Quantité 3">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 
-  <el-table
+  <hzq-table
     :data="tableData"
     border
     height="200"
     :summary-method="getSummaries"
     show-summary
     style="width: 100%; margin-top: 20px">
-    <el-table-column
+    <hzq-table-column
       prop="id"
       label="ID"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="amount1"
       label="Coût 1 ($)">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="amount2"
       label="Coût 2 ($)">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="amount3"
       label="Coût 3 ($)">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -1600,64 +1600,64 @@ Vous pouvez configurer l'étendue des lignes et colonnes afin de fusionner des c
 ```html
 <template>
   <div>
-    <el-table
+    <hzq-table
       :data="tableData"
       :span-method="arraySpanMethod"
       border
       style="width: 100%">
-      <el-table-column
+      <hzq-table-column
         prop="id"
         label="ID"
         width="180">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="name"
         label="Nom">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="amount1"
         sortable
         label="Quantité 1">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="amount2"
         sortable
         label="Quantité 2">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="amount3"
         sortable
         label="Quantité 3">
-      </el-table-column>
-    </el-table>
+      </hzq-table-column>
+    </hzq-table>
 
-    <el-table
+    <hzq-table
       :data="tableData"
       :span-method="objectSpanMethod"
       border
       style="width: 100%; margin-top: 20px">
-      <el-table-column
+      <hzq-table-column
         prop="id"
         label="ID"
         width="180">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="name"
         label="Nom">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="amount1"
         label="Quantité 1">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="amount2"
         label="Quantité 2">
-      </el-table-column>
-      <el-table-column
+      </hzq-table-column>
+      <hzq-table-column
         prop="amount3"
         label="Quantité 3">
-      </el-table-column>
-    </el-table>
+      </hzq-table-column>
+    </hzq-table>
   </div>
 </template>
 
@@ -1734,32 +1734,32 @@ Vous pouvez configurer l'étendue des lignes et colonnes afin de fusionner des c
 
 Vous pouvez personnaliser les indices des colonnes de type `index`.
 
-:::demo Utilisez l'attribut `index` sur une `el-table-column` avec `type=index`. Si un nombre est assigné, tout les indices auront un décalage égal à ce nombre. Il peut aussi prendre une fonction avec chaque indice (commençant à `0`) comme paramètre, et la valeur de retour sera affichée en tant qu'indice.
+:::demo Utilisez l'attribut `index` sur une `hzq-table-column` avec `type=index`. Si un nombre est assigné, tout les indices auront un décalage égal à ce nombre. Il peut aussi prendre une fonction avec chaque indice (commençant à `0`) comme paramètre, et la valeur de retour sera affichée en tant qu'indice.
 
 ```html
 <template>
-  <el-table
+  <hzq-table
     :data="tableData"
     style="width: 100%">
-    <el-table-column
+    <hzq-table-column
       type="index"
       :index="indexMethod">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="date"
       label="Date"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="name"
       label="Nom"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </hzq-table-column>
+    <hzq-table-column
       prop="address"
       label="Adresse">
-    </el-table-column>
-  </el-table>
+    </hzq-table-column>
+  </hzq-table>
 </template>
 
 <script>
@@ -1811,6 +1811,52 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 ```
 :::
 
+### Tailles
+
+:::demo Changez de hauteur de ligne avec `size` : `large`, `medium`, `small` ou `mini`. Sans lui la taille est `medium`. Les boutons et tags dans la table gardent leur propre taille.
+
+```html
+<template>
+  <div>
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-table :data="tableData" :size="size" border style="width: 100%">
+      <hzq-table-column prop="date" label="Date" width="180"></hzq-table-column>
+      <hzq-table-column prop="name" label="Nom" width="180"></hzq-table-column>
+      <hzq-table-column prop="address" label="Adresse"></hzq-table-column>
+    </hzq-table>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        tableData: [{
+          date: '2016-05-02',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-04',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-01',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles'
+        }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributs de Table
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
@@ -1820,7 +1866,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | max-height | Table's max-height. The legal value is a number or the height in px. | string/number | — | — |
 | stripe | Si la table est rayée. | boolean | — | false |
 | border | Si la table à une bordure verticale. | boolean | — | false |
-| size | Taille de la table. | string | medium / small / mini | — |
+| size | Taille de la table. | string | large / medium / small / mini | — |
 | fit | Si la largeur des colonnes s'adapte au conteneur. | boolean | — | true |
 | show-header | Si le header de la table est visible. | boolean | — | true |
 | highlight-current-row | Si la ligne courante est mise en valeur. | boolean | — | false |
@@ -1909,7 +1955,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | sort-method | Méthode de tri, marche quand `sortable` est `true`. Doit retourner un nombre, tout comme Array.sort. | Function(a, b) | — | — |
 | sort-by | Détermine par quelle propriété effectuer le tri, marche quand `sortable` est `true` et `sort-method` est `undefined`. Si c'est un Array, sera triée par la propriété suivante si la précédente est équivalente. | Function(row, index)/String/Array | — | — |
 | sort-orders | Liste des stratégies de tri, marche quand `sortable` est `true`. Accepte un tableau. Lorsque l'utilisateur clique plusieurs fois sur le header, la colonne est triée dans l'ordre des stratégies indiquée. | array | Les élements du tableau doivent être parmi: `ascending`, `descending` et `null` (restaure l'état originel du tableau). | ['ascending', 'descending', null] |
-| resizable | Si la largeur de la colonne peut être modifiée, marche quand `border` de `el-table` est `true`. | boolean | — | false |
+| resizable | Si la largeur de la colonne peut être modifiée, marche quand `border` de `hzq-table` est `true`. | boolean | — | false |
 | formatter | Fonction pour formater le contenu des cellules. | Function(row, column, cellValue, index) | — | — |
 | show-overflow-tooltip | Si du contenu trop long doit être caché et affiché dans une tooltip quand la souris passe sur la cellule. | boolean | — | false |
 | align | Alignement. | string | left/center/right | left |

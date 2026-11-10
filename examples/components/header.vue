@@ -4,7 +4,7 @@
   }
 
   #v3-banner {
-    background-color: #409EFF;
+    background-color: var(--hzq-color-primary);
     min-height: 30px;
     padding: 5px 60px;
     z-index: 19;
@@ -20,8 +20,9 @@
 
   .header {
     height: 80px;
-    background-color: #fff;
-    color: #fff;
+    // 顶栏跟随明暗模式，写死白底会在深色下露出一条亮带
+    background-color: var(--hzq-bg-color);
+    color: var(--hzq-text-color-primary);
     top: 0;
     left: 0;
     width: 100%;
@@ -32,11 +33,11 @@
     .container {
       height: 100%;
       box-sizing: border-box;
-      border-bottom: 1px solid #DCDFE6;
+      border-bottom: 1px solid var(--hzq-border-color-base);
     }
 
     .nav-lang-spe {
-      color: #888;
+      color: var(--hzq-text-color-secondary);
     }
 
     h1 {
@@ -46,7 +47,7 @@
       font-weight: normal;
 
       a {
-        color: #333;
+        color: var(--hzq-text-color-primary);
         text-decoration: none;
         display: block;
       }
@@ -130,7 +131,7 @@
           cursor: pointer;
           display: inline-block;
           height: 100%;
-          color: #888;
+          color: var(--hzq-text-color-secondary);
 
           &:hover {
             color: #409EFF;
@@ -142,16 +143,28 @@
         }
       }
 
+      // 主题切换：紧跟语言选择器右侧，样式由 theme-switcher 组件自己维护。
+      // 其余 nav-item 靠 line-height: 80px 垂直居中，这里放的是固定尺寸按钮，
+      // 不吃行高，必须显式补齐同样是 80px 的行盒并垂直居中
+      &.nav-theme-switch {
+        display: flex;
+        align-items: center;
+        height: 80px;
+        margin-left: 20px;
+      }
+
       a {
         text-decoration: none;
-        color: #1989FA;
-        opacity: 0.5;
+        // 未选中态用文字色 + 降透明度，深色底上比主色更清楚
+        color: var(--hzq-text-color-primary);
+        opacity: 0.6;
         display: block;
         padding: 0 22px;
 
         &.active,
         &:hover {
           opacity: 1;
+          color: var(--hzq-color-primary);
         }
 
         &.active::after {
@@ -162,7 +175,7 @@
           left: calc(50% - 15px);
           width: 30px;
           height: 2px;
-          background: #409EFF;
+          background: var(--hzq-color-primary);
         }
       }
     }
@@ -177,7 +190,7 @@
       display: block;
       width: 100%;
       font-size: 16px;
-      color: #888;
+      color: var(--hzq-text-color-secondary);
       line-height: 40px;
       transition: .2s;
       padding-bottom: 6px;
@@ -191,7 +204,7 @@
     i {
       transition: .2s;
       font-size: 12px;
-      color: #979797;
+      color: var(--hzq-text-color-secondary);
       transform: translateY(-2px);
     }
 
@@ -343,6 +356,12 @@
               exact>{{ langConfig.resource }}
             </router-link>
           </li>
+          <li class="nav-item" v-if="lang === 'zh-CN'">
+            <router-link
+              active-class="active"
+              :to="`/${ lang }/changes`">{{ langConfig.changes }}
+            </router-link>
+          </li>
 
           <!-- gap -->
           <li class="nav-item" v-show="isComponentPage">
@@ -351,50 +370,55 @@
 
           <!-- 版本选择器 -->
           <li class="nav-item nav-versions" v-show="isComponentPage">
-            <el-dropdown
+            <hzq-dropdown
               trigger="click"
               class="nav-dropdown"
               :class="{ 'is-active': verDropdownVisible }">
               <span>
                 {{ version }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
+                <i class="hzq-icon-arrow-down hzq-icon--right"></i>
               </span>
-              <el-dropdown-menu
+              <hzq-dropdown-menu
                 slot="dropdown"
                 class="nav-dropdown-list"
                 @input="handleVerDropdownToggle">
-                <el-dropdown-item
+                <hzq-dropdown-item
                   v-for="item in Object.keys(versions)"
                   :key="item"
                   @click.native="switchVersion(item)">
                   {{ item }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+                </hzq-dropdown-item>
+              </hzq-dropdown-menu>
+            </hzq-dropdown>
           </li>
 
           <!-- 语言选择器 -->
           <li class="nav-item lang-item">
-            <el-dropdown
+            <hzq-dropdown
               trigger="click"
               class="nav-dropdown nav-lang"
               :class="{ 'is-active': langDropdownVisible }">
               <span>
                 {{ displayedLang }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
+                <i class="hzq-icon-arrow-down hzq-icon--right"></i>
               </span>
-              <el-dropdown-menu
+              <hzq-dropdown-menu
                 slot="dropdown"
                 class="nav-dropdown-list"
                 @input="handleLangDropdownToggle">
-                <el-dropdown-item
+                <hzq-dropdown-item
                   v-for="(value, key) in langs"
                   :key="key"
                   @click.native="switchLang(key)">
                   {{ value }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+                </hzq-dropdown-item>
+              </hzq-dropdown-menu>
+            </hzq-dropdown>
+          </li>
+
+          <!-- 主题切换：模式 / 预设 / 主色 -->
+          <li class="nav-item nav-theme-switch">
+            <theme-switcher />
           </li>
         </ul>
       </div>
@@ -409,6 +433,7 @@
   import themeLoader from './theme/loader';
   import bus from '../bus';
   import { ACTION_USER_CONFIG_UPDATE } from './theme/constant.js';
+  import ThemeSwitcher from './theme-switcher.vue';
 
   const { version } = Element;
 
@@ -433,7 +458,8 @@
 
     components: {
       ThemePicker,
-      AlgoliaSearch
+      AlgoliaSearch,
+      ThemeSwitcher
     },
 
     computed: {

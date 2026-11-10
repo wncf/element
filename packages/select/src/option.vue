@@ -2,7 +2,7 @@
   <li
     @mouseenter="hoverItem"
     @click.stop="selectOptionClick"
-    class="el-select-dropdown__item"
+    class="hzq-select-dropdown__item"
     v-show="visible"
     :class="{
       'selected': itemSelected,
@@ -16,15 +16,15 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import { getValueByPath, escapeRegexpString } from 'element-ui/src/utils/util';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
+  import { getValueByPath, escapeRegexpString } from 'hzq-ui/src/utils/util';
 
   export default {
     mixins: [Emitter],
 
-    name: 'ElOption',
+    name: 'HzqOption',
 
-    componentName: 'ElOption',
+    componentName: 'HzqOption',
 
     inject: ['select'],
 
@@ -84,7 +84,7 @@
 
     watch: {
       currentLabel() {
-        if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
+        if (!this.created && !this.select.remote) this.dispatch('HzqSelect', 'setSelected');
       },
       value(val, oldVal) {
         const { remote, valueKey } = this.select;
@@ -92,7 +92,7 @@
           if (valueKey && typeof val === 'object' && typeof oldVal === 'object' && val[valueKey] === oldVal[valueKey]) {
             return;
           }
-          this.dispatch('ElSelect', 'setSelected');
+          this.dispatch('HzqSelect', 'setSelected');
         }
       }
     },
@@ -130,7 +130,7 @@
 
       selectOptionClick() {
         if (this.disabled !== true && this.groupDisabled !== true) {
-          this.dispatch('ElSelect', 'handleOptionClick', [this, true]);
+          this.dispatch('HzqSelect', 'handleOptionClick', [this, true]);
         }
       },
 

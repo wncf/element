@@ -5,8 +5,8 @@
       @after-enter="handleAfterEnter"
       @after-leave="handleAfterLeave">
       <div
-        class="el-popover el-popper"
-        :class="[popperClass, content && 'el-popover--plain']"
+        class="hzq-popover hzq-popper"
+        :class="[popperClass, content && 'hzq-popover--plain']"
         ref="popper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }"
@@ -14,23 +14,23 @@
         :id="tooltipId"
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
       >
-        <div class="el-popover__title" v-if="title" v-text="title"></div>
+        <div class="hzq-popover__title" v-if="title" v-text="title"></div>
         <slot>{{ content }}</slot>
       </div>
     </transition>
-    <span class="el-popover__reference-wrapper" ref="wrapper" >
+    <span class="hzq-popover__reference-wrapper" ref="wrapper" >
       <slot name="reference"></slot>
     </span>
   </span>
 </template>
 <script>
-import Popper from 'element-ui/src/utils/vue-popper';
-import { on, off } from 'element-ui/src/utils/dom';
-import { addClass, removeClass } from 'element-ui/src/utils/dom';
-import { generateId } from 'element-ui/src/utils/util';
+import Popper from 'hzq-ui/src/utils/vue-popper';
+import { on, off } from 'hzq-ui/src/utils/dom';
+import { addClass, removeClass } from 'hzq-ui/src/utils/dom';
+import { generateId } from 'hzq-ui/src/utils/util';
 
 export default {
-  name: 'ElPopover',
+  name: 'HzqPopover',
 
   mixins: [Popper],
 
@@ -73,7 +73,7 @@ export default {
 
   computed: {
     tooltipId() {
-      return `el-popover-${generateId()}`;
+      return `hzq-popover-${generateId()}`;
     }
   },
   watch: {
@@ -94,7 +94,7 @@ export default {
     }
     // 可访问性
     if (reference) {
-      addClass(reference, 'el-popover__reference');
+      addClass(reference, 'hzq-popover__reference');
       reference.setAttribute('aria-describedby', this.tooltipId);
       reference.setAttribute('tabindex', this.tabindex); // tab序列
       popper.setAttribute('tabindex', 0);

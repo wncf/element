@@ -12,20 +12,20 @@ L'unité de base du DatePicker est le jour.
 <template>
   <div class="block">
     <span class="demonstration">Défaut</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="date"
       placeholder="Choississez un jour">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Picker avec raccourcis</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="date"
       placeholder="Choississez un jour"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -77,38 +77,38 @@ Vous pouvez sélectionner une semaine, un mois, une année ou plusieurs dates en
 <div class="container">
   <div class="block">
     <span class="demonstration">Semaine</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="week"
       format="Week WW"
       placeholder="Sélectionnez une semaine">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Mois</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="month"
       placeholder="Sélectionnez un mois">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </div>
 <div class="container">
   <div class="block">
     <span class="demonstration">Année</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value3"
       type="year"
       placeholder="Sélectionnez une année">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Dates</span>
-    <el-date-picker
+    <hzq-date-picker
       type="dates"
       v-model="value4"
       placeholder="Sélectionnez une ou plusieurs dates">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </div>
 
@@ -138,17 +138,17 @@ Vous pouvez sélectionner une plage de dates.
 <template>
   <div class="block">
     <span class="demonstration">Défaut</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="daterange"
       range-separator="à"
       start-placeholder="Date de début"
       end-placeholder="Date de fin">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Avec des options</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="daterange"
       align="right"
@@ -157,7 +157,7 @@ Vous pouvez sélectionner une plage de dates.
       start-placeholder="Date de début"
       end-placeholder="Date de fin"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -211,17 +211,17 @@ Vous pouvez sélectionner une plage de mois.
 <template>
   <div class="block">
     <span class="demonstration">Défaut</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="monthrange"
       range-separator="à"
       start-placeholder="Mois de début"
       end-placeholder="Mois de fin">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Avec options</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="monthrange"
       align="right"
@@ -230,7 +230,7 @@ Vous pouvez sélectionner une plage de mois.
       start-placeholder="Mois de début"
       end-placeholder="Mois de fin"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -281,23 +281,23 @@ Si le type est `daterange`, `default-value` configure la panneau de gauche.
 <template>
   <div class="block">
     <span class="demonstration">Date</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="date"
       placeholder="Sélectionnez une date"
       default-value="2010-10-01">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Plage de dates</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="daterange"
       align="right"
       start-placeholder="Date de début"
       end-placeholder="Date de fin"
       default-value="2010-10-01">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -354,34 +354,34 @@ Attention à la capitalisation !
   <div class="block">
     <span class="demonstration">Émet un objet Date</span>
     <div class="demonstration">Value: {{ value1 }}</div>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="date"
       placeholder="Sélectionnez une date"
       format="yyyy/MM/dd">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Utilise value-format</span>
     <div class="demonstration">Value: {{ value2 }}</div>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="date"
       placeholder="Sélectionnez une date"
       format="yyyy/MM/dd"
       value-format="yyyy-MM-dd">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Timestamp</span>
     <div class="demonstration">Value：{{ value3 }}</div>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value3"
       type="date"
       placeholder="Sélectionnez une date"
       format="yyyy/MM/dd"
       value-format="timestamp">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -408,13 +408,13 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 <template>
   <div class="block">
     <p>Valeur: {{ value }}</p>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value"
       type="daterange"
       start-placeholder="Date de début"
       end-placeholder="Date de fin"
       :default-time="['00:00:00', '23:59:59']">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -430,13 +430,58 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 ```
 :::
 
+### Tailles
+
+:::demo Changez de taille avec `size` : `large`, `medium`, `small` ou `mini`. Sans lui la taille est `medium` ; les hauteurs sont 36px, 32px, 28px et 24px.
+
+```html
+<template>
+  <div class="block">
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-date-picker
+      v-model="value"
+      type="date"
+      :size="size"
+      placeholder="Choisir un jour">
+    </hzq-date-picker>
+  </div>
+  <div class="block">
+    <hzq-date-picker
+      v-model="range"
+      type="daterange"
+      :size="size"
+      start-placeholder="Date de début"
+      end-placeholder="Date de fin">
+    </hzq-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: '',
+        range: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Attributs
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | value / v-model | La valeur liée. | date(DatePicker) / array(DateRangePicker) | — | — |
 | readonly | Si le DatePicker est en lecture seule. | boolean | — | false |
 | disabled | Si le DatePicker est désactivé. | boolean | — | false |
-| size | Taille du champs. | string | large/small/mini | — |
+| size | Taille du champs. | string | large / medium / small / mini | — |
 | editable | Si le champ est éditable. | boolean | — | true |
 | clearable | Si la croix de reset doit apparaître. | boolean | — | true |
 | placeholder | Le placeholder en mode normal. | string | — | — |
@@ -453,8 +498,8 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 | value-format | Format de la variable stockée, optionnel. Si non spécifié, la valeur sera un objet Date. | string | Voir [formats de date](#/en-US/component/date-picker#formats-de-date) | — |
 | name | Identique au `name` de l'input natif | string | — | — |
 | unlink-panels | Rend indépendants les deux panneaux de plage de dates. | boolean | — | false |
-| prefix-icon | Icône de préfixe. | string | — | el-icon-date |
-| clear-icon | Icône de reset. | string | — | el-icon-circle-close |
+| prefix-icon | Icône de préfixe. | string | — | hzq-icon-date |
+| clear-icon | Icône de reset. | string | — | hzq-icon-circle-close |
 | validate-event | Si la validation doit être déclenchée. | boolean | - | true |
 | append-to-body     | S'il faut ajouter le DatePicker au body | boolean   | — | true |
 

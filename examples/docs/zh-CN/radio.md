@@ -10,8 +10,8 @@
 
 ```html
 <template>
-  <el-radio v-model="radio" label="1">备选项</el-radio>
-  <el-radio v-model="radio" label="2">备选项</el-radio>
+  <hzq-radio v-model="radio" label="1">备选项</hzq-radio>
+  <hzq-radio v-model="radio" label="2">备选项</hzq-radio>
 </template>
 
 <script>
@@ -30,11 +30,11 @@
 
 单选框不可用的状态。
 
-:::demo 只要在`el-radio`元素中设置`disabled`属性即可，它接受一个`Boolean`，`true`为禁用。
+:::demo 只要在`hzq-radio`元素中设置`disabled`属性即可，它接受一个`Boolean`，`true`为禁用。
 ```html
 <template>
-  <el-radio disabled v-model="radio" label="禁用">备选项</el-radio>
-  <el-radio disabled v-model="radio" label="选中且禁用">备选项</el-radio>
+  <hzq-radio disabled v-model="radio" label="禁用">备选项</hzq-radio>
+  <hzq-radio disabled v-model="radio" label="选中且禁用">备选项</hzq-radio>
 </template>
 
 <script>
@@ -53,15 +53,15 @@
 
 适用于在多个互斥的选项中选择的场景
 
-:::demo 结合`el-radio-group`元素和子元素`el-radio`可以实现单选组，在`el-radio-group`中绑定`v-model`，在`el-radio`中设置好`label`即可，无需再给每一个`el-radio`绑定变量，另外，还提供了`change`事件来响应变化，它会传入一个参数`value`。
+:::demo 结合`hzq-radio-group`元素和子元素`hzq-radio`可以实现单选组，在`hzq-radio-group`中绑定`v-model`，在`hzq-radio`中设置好`label`即可，无需再给每一个`hzq-radio`绑定变量，另外，还提供了`change`事件来响应变化，它会传入一个参数`value`。
 
 ```html
 <template>
-  <el-radio-group v-model="radio">
-    <el-radio :label="3">备选项</el-radio>
-    <el-radio :label="6">备选项</el-radio>
-    <el-radio :label="9">备选项</el-radio>
-  </el-radio-group>
+  <hzq-radio-group v-model="radio">
+    <hzq-radio :label="3">备选项</hzq-radio>
+    <hzq-radio :label="6">备选项</hzq-radio>
+    <hzq-radio :label="9">备选项</hzq-radio>
+  </hzq-radio-group>
 </template>
 
 <script>
@@ -80,40 +80,40 @@
 
 按钮样式的单选组合。
 
-:::demo 只需要把`el-radio`元素换成`el-radio-button`元素即可，此外，Element 还提供了`size`属性。
+:::demo 只需要把`hzq-radio`元素换成`hzq-radio-button`元素即可，此外，Element 还提供了`size`属性。
 ```html
 <template>
   <div>
-    <el-radio-group v-model="radio1">
-      <el-radio-button label="上海"></el-radio-button>
-      <el-radio-button label="北京"></el-radio-button>
-      <el-radio-button label="广州"></el-radio-button>
-      <el-radio-button label="深圳"></el-radio-button>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio1">
+      <hzq-radio-button label="上海"></hzq-radio-button>
+      <hzq-radio-button label="北京"></hzq-radio-button>
+      <hzq-radio-button label="广州"></hzq-radio-button>
+      <hzq-radio-button label="深圳"></hzq-radio-button>
+    </hzq-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio2" size="medium">
-      <el-radio-button label="上海" ></el-radio-button>
-      <el-radio-button label="北京"></el-radio-button>
-      <el-radio-button label="广州"></el-radio-button>
-      <el-radio-button label="深圳"></el-radio-button>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio2" size="large">
+      <hzq-radio-button label="上海" ></hzq-radio-button>
+      <hzq-radio-button label="北京"></hzq-radio-button>
+      <hzq-radio-button label="广州"></hzq-radio-button>
+      <hzq-radio-button label="深圳"></hzq-radio-button>
+    </hzq-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio3" size="small">
-      <el-radio-button label="上海"></el-radio-button>
-      <el-radio-button label="北京" disabled ></el-radio-button>
-      <el-radio-button label="广州"></el-radio-button>
-      <el-radio-button label="深圳"></el-radio-button>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio3" size="small">
+      <hzq-radio-button label="上海"></hzq-radio-button>
+      <hzq-radio-button label="北京" disabled ></hzq-radio-button>
+      <hzq-radio-button label="广州"></hzq-radio-button>
+      <hzq-radio-button label="深圳"></hzq-radio-button>
+    </hzq-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio4" disabled size="mini">
-      <el-radio-button label="上海"></el-radio-button>
-      <el-radio-button label="北京"></el-radio-button>
-      <el-radio-button label="广州"></el-radio-button>
-      <el-radio-button label="深圳"></el-radio-button>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio4" disabled size="mini">
+      <hzq-radio-button label="上海"></hzq-radio-button>
+      <hzq-radio-button label="北京"></hzq-radio-button>
+      <hzq-radio-button label="广州"></hzq-radio-button>
+      <hzq-radio-button label="深圳"></hzq-radio-button>
+    </hzq-radio-group>
   </div>
 </template>
 
@@ -138,24 +138,24 @@
 ```html
 <template>
   <div>
-    <el-radio v-model="radio1" label="1" border>备选项1</el-radio>
-    <el-radio v-model="radio1" label="2" border>备选项2</el-radio>
+    <hzq-radio v-model="radio1" label="1" border>备选项1</hzq-radio>
+    <hzq-radio v-model="radio1" label="2" border>备选项2</hzq-radio>
   </div>
   <div style="margin-top: 20px">
-    <el-radio v-model="radio2" label="1" border size="medium">备选项1</el-radio>
-    <el-radio v-model="radio2" label="2" border size="medium">备选项2</el-radio>
+    <hzq-radio v-model="radio2" label="1" border size="large">备选项1</hzq-radio>
+    <hzq-radio v-model="radio2" label="2" border size="medium">备选项2</hzq-radio>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio3" size="small">
-      <el-radio label="1" border>备选项1</el-radio>
-      <el-radio label="2" border disabled>备选项2</el-radio>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio3" size="small">
+      <hzq-radio label="1" border>备选项1</hzq-radio>
+      <hzq-radio label="2" border disabled>备选项2</hzq-radio>
+    </hzq-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio4" size="mini" disabled>
-      <el-radio label="1" border>备选项1</el-radio>
-      <el-radio label="2" border>备选项2</el-radio>
-    </el-radio-group>
+    <hzq-radio-group v-model="radio4" size="mini" disabled>
+      <hzq-radio label="1" border>备选项1</hzq-radio>
+      <hzq-radio label="2" border>备选项2</hzq-radio>
+    </hzq-radio-group>
   </div>
 </template>
 
@@ -181,7 +181,7 @@
 | label     | Radio 的 value   | string / number / boolean    |       —        |      —   |
 | disabled  | 是否禁用    | boolean   | — | false   |
 | border  | 是否显示边框  | boolean   | — | false   |
-| size  | Radio 的尺寸，仅在 border 为真时有效  | string  | medium / small / mini | — |
+| size  | Radio 的尺寸，仅在 border 为真时有效  | string  | large / medium / small / mini | — |
 | name | 原生 name 属性 | string    |      —         |     —    |
 
 ### Radio Events
@@ -193,7 +193,7 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | 绑定值 | string / number / boolean | — | — |
-| size     | 单选框组尺寸，仅对按钮形式的 Radio 或带有边框的 Radio 有效   | string  | medium / small / mini |    —     |
+| size     | 单选框组尺寸，仅对按钮形式的 Radio 或带有边框的 Radio 有效   | string  | large / medium / small / mini |    —     |
 | disabled  | 是否禁用    | boolean   | — | false   |
 | text-color  | 按钮形式的 Radio 激活时的文本颜色    | string   | — | #ffffff   |
 | fill  | 按钮形式的 Radio 激活时的填充色和边框色    | string   | — | #409EFF   |

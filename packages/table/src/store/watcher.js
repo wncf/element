@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import merge from 'element-ui/src/utils/merge';
+import merge from 'hzq-ui/src/utils/merge';
 import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
 import expand from './expand';
 import current from './current';
@@ -78,7 +78,7 @@ export default Vue.extend({
     // 检查 rowKey 是否存在
     assertRowKey() {
       const rowKey = this.states.rowKey;
-      if (!rowKey) throw new Error('[ElTable] prop row-key is required');
+      if (!rowKey) throw new Error('[HzqTable] prop row-key is required');
     },
 
     // 更新列

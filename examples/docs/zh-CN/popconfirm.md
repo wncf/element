@@ -8,11 +8,11 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 :::demo 在 Popconfirm 中，只有 `title` 属性可用，`content` 属性不会被展示。
 ```html
 <template>
-<el-popconfirm
+<hzq-popconfirm
   title="这是一段内容确定删除吗？"
 >
-  <el-button slot="reference">删除</el-button>
-</el-popconfirm>
+  <hzq-button slot="reference">删除</hzq-button>
+</hzq-popconfirm>
 </template>
 ````
 :::
@@ -23,15 +23,15 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 :::demo
 ```html
 <template>
-<el-popconfirm
+<hzq-popconfirm
   confirm-button-text='好的'
   cancel-button-text='不用了'
-  icon="el-icon-info"
+  icon="hzq-icon-info"
   icon-color="red"
   title="这是一段内容确定删除吗？"
 >
-  <el-button slot="reference">删除</el-button>
-</el-popconfirm>
+  <hzq-button slot="reference">删除</hzq-button>
+</hzq-popconfirm>
 </template>
 ```
 :::
@@ -44,8 +44,8 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 |  cancel-button-text              | 取消按钮文字 | String | — | — |
 |  confirm-button-type              | 确认按钮类型 | String | — | Primary |
 |  cancel-button-type              | 取消按钮类型 | String | — | Text |
-|  icon              | Icon | String | — | el-icon-question |
-|  icon-color              | Icon 颜色 | String | — | #f90 |
+|  icon              | Icon | String | — | hzq-icon-question |
+|  icon-color              | Icon 颜色 | String | — | var(--hzq-color-warning) |
 |  hide-icon              | 是否隐藏 Icon | Boolean | — | false |
 
 ### Slot

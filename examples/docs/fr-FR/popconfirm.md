@@ -9,11 +9,11 @@ Popconfirm is similar to Popover. So for some duplicated attributes, please refe
 :::demo Only `title` attribute is avaliable in Popconfirm, `content` will be ignored.
 ```html
 <template>
-<el-popconfirm
+<hzq-popconfirm
   title="Are you sure to delete this?"
 >
-  <el-button slot="reference">Delete</el-button>
-</el-popconfirm>
+  <hzq-button slot="reference">Delete</hzq-button>
+</hzq-popconfirm>
 </template>
 ````
 :::
@@ -23,15 +23,15 @@ You can customise Popconfirm like:
 :::demo
 ```html
 <template>
-<el-popconfirm
+<hzq-popconfirm
   confirm-button-text='OK'
   cancel-button-text='No, Thanks'
-  icon="el-icon-info"
+  icon="hzq-icon-info"
   icon-color="red"
   title="Are you sure to delete this?"
 >
-  <el-button slot="reference">Delete</el-button>
-</el-popconfirm>
+  <hzq-button slot="reference">Delete</hzq-button>
+</hzq-popconfirm>
 </template>
 ```
 :::
@@ -44,7 +44,7 @@ You can customise Popconfirm like:
 |  cancel-button-text              | Cancel button text | String | — | — |
 |  confirm-button-type              | Confirm button type | String | — | Primary |
 |  cancel-button-type              | Cancel button type | String | — | Text |
-|  icon              | Icon | String | — | el-icon-question |
+|  icon              | Icon | String | — | hzq-icon-question |
 |  icon-color              | Icon color | String | — | #f90 |
 |  hide-icon              | is hide Icon | Boolean | — | false |
 

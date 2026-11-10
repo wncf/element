@@ -388,7 +388,7 @@
             {
               "name": "size",
               "description": "Button size",
-              "type": "'medium' | 'small' | 'mini'"
+              "type": "ElementUIComponentSize"
             },
             {
               "name": "icon",
@@ -1103,7 +1103,7 @@
             {
               "name": "size",
               "description": "size of list",
-              "type": "\"medium\"|\"small\"|\"mini\""
+              "type": "ElementUIComponentSize"
             },
             {
               "name": "labelClassName",
@@ -1663,6 +1663,122 @@
           ]
         },
         {
+          "name": "ElFormBuilder",
+          "description": "Config driven form: render a whole form from a field config array, including components, props, events, validation and layout.",
+          "props": [
+            {
+              "name": "value",
+              "description": "Form data, updated in place (same reference as the el-form model)",
+              "type": "object"
+            },
+            {
+              "name": "fields",
+              "description": "Field configs, each entry renders one form item",
+              "type": "FormBuilderField[]"
+            },
+            {
+              "name": "rules",
+              "description": "Validation rules of the form, merged with each field's own rules",
+              "type": "object"
+            },
+            {
+              "name": "labelWidth",
+              "description": "Width of label, inherited by all fields",
+              "type": "string"
+            },
+            {
+              "name": "labelPosition",
+              "description": "Position of label",
+              "type": "string"
+            },
+            {
+              "name": "labelSuffix",
+              "description": "Suffix of the label",
+              "type": "string"
+            },
+            {
+              "name": "inline",
+              "description": "Whether the form is inline",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Controls the size of components in this form",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether the whole form is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "showMessage",
+              "description": "Whether to show the error message",
+              "type": "boolean"
+            },
+            {
+              "name": "columns",
+              "description": "Number of columns in a row, takes precedence over field.span when set",
+              "type": "number"
+            },
+            {
+              "name": "gutter",
+              "description": "Horizontal gap between columns, in pixels",
+              "type": "number"
+            },
+            {
+              "name": "showActions",
+              "description": "Whether to render the submit / reset buttons",
+              "type": "boolean"
+            },
+            {
+              "name": "submitText",
+              "description": "Text of the submit button",
+              "type": "string"
+            },
+            {
+              "name": "resetText",
+              "description": "Text of the reset button",
+              "type": "string"
+            },
+            {
+              "name": "loading",
+              "description": "Loading state of the submit button",
+              "type": "boolean"
+            }
+          ],
+          "events": [
+            {
+              "name": "submit",
+              "description": "Triggers when the submit button is clicked and the form is valid"
+            },
+            {
+              "name": "invalid",
+              "description": "Triggers when the submit button is clicked but the form is invalid"
+            },
+            {
+              "name": "reset",
+              "description": "Triggers when the reset button is clicked"
+            },
+            {
+              "name": "field-change",
+              "description": "Triggers when a field value changes, arguments are (prop, value, model)"
+            }
+          ],
+          "slots": [
+            {
+              "name": "title",
+              "description": "Content of a `title` entry",
+              "type": "{field: FormBuilderField}"
+            },
+            {
+              "name": "*",
+              "description": "Any slot referenced by `field.slot`, `field.labelSlot` or `field.slots`",
+              "type": "{field: FormBuilderField, model: object, value: any, setValue: Function}"
+            }
+          ]
+        },
+        {
           "name": "ElHeader",
           "description": "Container for headers.",
           "doc-url": "https://element.eleme.io/#/en-US/component/container",
@@ -1919,7 +2035,7 @@
             {
               "name": "size",
               "description": "Size of the component",
-              "type": "InputNumberSize"
+              "type": "ElementUIComponentSize"
             },
             {
               "name": "name",
@@ -2261,6 +2377,11 @@
               "name": "small",
               "description": "Whether to use small pagination",
               "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Size of the pagination, the pager and prev/next buttons scale with it",
+              "type": "ElementUIComponentSize"
             },
             {
               "name": "pageSize",
@@ -2607,6 +2728,11 @@
               "type": "boolean"
             },
             {
+              "name": "size",
+              "description": "Size of the Radio, only works when border is true",
+              "type": "ElementUIComponentSize"
+            },
+            {
               "name": "name",
               "description": "Native 'name' attribute",
               "type": "string"
@@ -2671,7 +2797,7 @@
             {
               "name": "size",
               "description": "The size of radio buttons",
-              "type": "RadioGroupSize"
+              "type": "ElementUIComponentSize"
             },
             {
               "name": "disabled",
@@ -3372,6 +3498,11 @@
               "name": "showSummary",
               "description": "Whether to display a summary row",
               "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Size of the table, controls the row height",
+              "type": "ElementUIComponentSize"
             },
             {
               "name": "data",

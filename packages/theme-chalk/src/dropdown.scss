@@ -9,14 +9,14 @@
   color: $--color-text-regular;
   font-size: $--font-size-base;
 
-  .el-button-group {
+  .hzq-button-group {
     display: block;
-    .el-button {
+    .hzq-button {
       float: none;
     }
   }
 
-  & .el-dropdown__caret-button {
+  & .hzq-dropdown__caret-button {
     padding-left: 5px;
     padding-right: 5px;
     position: relative;
@@ -35,8 +35,8 @@
       background: rgba($--color-white, .5);
     }
 
-    &.el-button--default::before {
-      background: var(--el-border-color-base);
+    &.hzq-button--default::before {
+      background: var(--hzq-border-color-base);
       opacity: .5;
     }
 
@@ -47,7 +47,7 @@
       }
     }
 
-    & .el-dropdown__icon {
+    & .hzq-dropdown__icon {
       padding-left: 0;
     }
   }
@@ -56,7 +56,7 @@
     margin: 0 3px;
   }
 
-  .el-dropdown-selfdefine { // 自定义
+  .hzq-dropdown-selfdefine { // 自定义
     &:focus:active, &:focus:not(.focusing) {
       outline-width: 0;
     }
@@ -75,7 +75,7 @@
   z-index: 10;
   padding: 10px 0;
   margin: 5px 0;
-  background-color: var(--el-bg-color-overlay);
+  background-color: var(--hzq-bg-color-overlay);
   border: 1px solid $--border-color-lighter;
   border-radius: $--border-radius-base;
   box-shadow: $--dropdown-menu-box-shadow;
@@ -110,7 +110,7 @@
         height: $divided-offset;
         display: block;
         margin: 0 -20px;
-        background-color: var(--el-bg-color-overlay);
+        background-color: var(--hzq-bg-color-overlay);
       }
     }
 
@@ -118,6 +118,28 @@
       cursor: default;
       color: $--font-color-disabled-base;
       pointer-events: none;
+    }
+  }
+
+  @include m(large) {
+    padding: 10px 0;
+
+    @include e(item) {
+      line-height: 40px;
+      padding: 0 20px;
+      // 菜单项的梯级自成一套（15/14/13/12），比控件档略大，
+      // 与下方 medium 保持 1px 递进，不跟随控件字号变量
+      font-size: 15px;
+
+      &.hzq-dropdown-menu__item--divided {
+        $divided-offset: 10px;
+        margin-top: $divided-offset;
+
+        &:before {
+          height: $divided-offset;
+          margin: 0 -20px;
+        }
+      }
     }
   }
 
@@ -129,7 +151,7 @@
       padding: 0 17px;
       font-size: 14px;
 
-      &.el-dropdown-menu__item--divided {
+      &.hzq-dropdown-menu__item--divided {
         $divided-offset: 6px;
         margin-top: $divided-offset;
 
@@ -149,7 +171,7 @@
       padding: 0 15px;
       font-size: 13px;
 
-      &.el-dropdown-menu__item--divided {
+      &.hzq-dropdown-menu__item--divided {
         $divided-offset: 4px;
         margin-top: $divided-offset;
 
@@ -169,7 +191,7 @@
       padding: 0 10px;
       font-size: 12px;
 
-      &.el-dropdown-menu__item--divided {
+      &.hzq-dropdown-menu__item--divided {
         $divided-offset: 3px;
         margin-top: $divided-offset;
 

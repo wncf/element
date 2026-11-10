@@ -5,15 +5,15 @@ Displays the location of the current page, making it easier to browser back.
 ### Basic usage
 
 
-:::demo In `el-breadcrumb`, each `el-breadcrumb-item` is a tag that stands for every level starting from homepage. This component has a `String` attribute `separator`, and it determines the separator. Its default value is '/'.
+:::demo In `hzq-breadcrumb`, each `hzq-breadcrumb-item` is a tag that stands for every level starting from homepage. This component has a `String` attribute `separator`, and it determines the separator. Its default value is '/'.
 
 ```html
-<el-breadcrumb separator="/">
-  <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-  <el-breadcrumb-item><a href="/">promotion management</a></el-breadcrumb-item>
-  <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-  <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
-</el-breadcrumb>
+<hzq-breadcrumb separator="/">
+  <hzq-breadcrumb-item :to="{ path: '/' }">homepage</hzq-breadcrumb-item>
+  <hzq-breadcrumb-item><a href="/">promotion management</a></hzq-breadcrumb-item>
+  <hzq-breadcrumb-item>promotion list</hzq-breadcrumb-item>
+  <hzq-breadcrumb-item>promotion detail</hzq-breadcrumb-item>
+</hzq-breadcrumb>
 ```
 :::
 
@@ -22,12 +22,12 @@ Displays the location of the current page, making it easier to browser back.
 :::demo Set `separator-class` to use `iconfont` as the separator，it will cover `separator`
 
 ```html
-<el-breadcrumb separator-class="el-icon-arrow-right">
-  <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-  <el-breadcrumb-item>promotion management</el-breadcrumb-item>
-  <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-  <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
-</el-breadcrumb>
+<hzq-breadcrumb separator-class="hzq-icon-arrow-right">
+  <hzq-breadcrumb-item :to="{ path: '/' }">homepage</hzq-breadcrumb-item>
+  <hzq-breadcrumb-item>promotion management</hzq-breadcrumb-item>
+  <hzq-breadcrumb-item>promotion list</hzq-breadcrumb-item>
+  <hzq-breadcrumb-item>promotion detail</hzq-breadcrumb-item>
+</hzq-breadcrumb>
 ```
 :::
 

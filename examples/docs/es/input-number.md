@@ -4,11 +4,11 @@ Input de  valores numéricos con un rango personalizable.
 
 ### Uso básico
 
-:::demo Vincule una variable con `v-model` en el elemento `<el-input-number>` y estará listo.
+:::demo Vincule una variable con `v-model` en el elemento `<hzq-input-number>` y estará listo.
 
 ```html
 <template>
-  <el-input-number v-model="num" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <hzq-input-number v-model="num" @change="handleChange" :min="1" :max="10"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -33,7 +33,7 @@ Input de  valores numéricos con un rango personalizable.
 
 ```html
 <template>
-  <el-input-number v-model="num" :disabled="true"></el-input-number>
+  <hzq-input-number v-model="num" :disabled="true"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -55,7 +55,7 @@ Le permite definir el nivel de incremento de los saltos.
 
 ```html
 <template>
-  <el-input-number v-model="num" :step="2"></el-input-number>
+  <hzq-input-number v-model="num" :step="2"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -75,7 +75,7 @@ Le permite definir el nivel de incremento de los saltos.
 
 ```html
 <template>
-  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+  <hzq-input-number v-model="num" :step="2" step-strictly></hzq-input-number>
 </template>
 <script>
   export default {
@@ -95,7 +95,7 @@ Le permite definir el nivel de incremento de los saltos.
 
 ```html
 <template>
-  <el-input-number v-model="num" :precision="2" :step="0.1" :max="10"></el-input-number>
+  <hzq-input-number v-model="num" :precision="2" :step="0.1" :max="10"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -117,16 +117,17 @@ El valor de `precision` debe ser un numero entero positivo que no debe ser infer
 
 ### Tamaño
 
-Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `small` o `mini`.
+Utilice el atributo `size` para establecer tamaños adicionales con `large`, `medium`, `small` o `mini`. Sin `size` el componente es `medium`.
 
 :::demo
 
 ```html
 <template>
-  <el-input-number v-model="num1"></el-input-number>
-    <el-input-number size="medium" v-model="num2"></el-input-number>
-    <el-input-number size="small" v-model="num3"></el-input-number>
-    <el-input-number size="mini" v-model="num4"></el-input-number>
+  <hzq-input-number v-model="num1"></hzq-input-number>
+  <hzq-input-number size="large" v-model="num2"></hzq-input-number>
+  <hzq-input-number size="medium" v-model="num3"></hzq-input-number>
+  <hzq-input-number size="small" v-model="num4"></hzq-input-number>
+  <hzq-input-number size="mini" v-model="num5"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -135,7 +136,8 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
         num1: 1,
         num2: 1,
         num3: 1,
-        num4: 1
+        num4: 1,
+        num5: 1
       }
     }
   };
@@ -149,7 +151,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 
 ```html
 <template>
-  <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <hzq-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -178,7 +180,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | step              | incremento (salto)                       | number  | —                 | 1           |
 | step-strictly  | si el valor del input puede ser solo un múltiplo de step | boolean  | —                 | false       |
 | precision         | precisión del valor del input | number  | —                 | —           |
-| size              | tamaño del componente                    | string  | large/small       | —           |
+| size              | tamaño del componente                    | string  | large / medium / small / mini | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |
 | controls          | si se activan los botones de control     | boolean | —                 | true        |
 | controls-position | posición de los botones de control       | string  | right             | -           |

@@ -2,9 +2,9 @@
   <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      class="el-time-panel el-popper"
+      class="hzq-time-panel hzq-popper"
       :class="popperClass">
-      <div class="el-time-panel__content" :class="{ 'has-seconds': showSeconds }">
+      <div class="hzq-time-panel__content" :class="{ 'has-seconds': showSeconds }">
         <time-spinner
           ref="spinner"
           @change="handleChange"
@@ -15,14 +15,14 @@
           :date="date">
         </time-spinner>
       </div>
-      <div class="el-time-panel__footer">
+      <div class="hzq-time-panel__footer">
         <button
           type="button"
-          class="el-time-panel__btn cancel"
+          class="hzq-time-panel__btn cancel"
           @click="handleCancel">{{ t('el.datepicker.cancel') }}</button>
         <button
           type="button"
-          class="el-time-panel__btn"
+          class="hzq-time-panel__btn"
           :class="{confirm: !disabled}"
           @click="handleConfirm()">{{ t('el.datepicker.confirm') }}</button>
       </div>
@@ -31,8 +31,8 @@
 </template>
 
 <script type="text/babel">
-  import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from 'element-ui/src/utils/date-util';
-  import Locale from 'element-ui/src/mixins/locale';
+  import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from 'hzq-ui/src/utils/date-util';
+  import Locale from 'hzq-ui/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
 
   export default {

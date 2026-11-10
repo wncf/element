@@ -1,5 +1,5 @@
 <template>
-  <el-input 
+  <hzq-input 
     @keyup.enter.native="onUpdate"
     v-model="value"
     @blur="onUpdate"
@@ -8,7 +8,7 @@
     <template slot="suffix">
       <slot name="suffix"></slot>
     </template>
-  </el-input>
+  </hzq-input>
 </template>
 
 <script>

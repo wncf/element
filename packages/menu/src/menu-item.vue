@@ -1,5 +1,5 @@
 <template>
-  <li class="el-menu-item"
+  <li class="hzq-menu-item"
     role="menuitem"
     tabindex="-1"
     :style="[paddingStyle, itemStyle, { backgroundColor }]"
@@ -13,15 +13,15 @@
     @blur="onMouseLeave"
     @mouseleave="onMouseLeave"
   >
-    <el-tooltip
-      v-if="parentMenu.$options.componentName === 'ElMenu' && rootMenu.collapse && $slots.title"
+    <hzq-tooltip
+      v-if="parentMenu.$options.componentName === 'HzqMenu' && rootMenu.collapse && $slots.title"
       effect="dark"
       placement="right">
       <div slot="content"><slot name="title"></slot></div>
       <div style="position: absolute;left: 0;top: 0;height: 100%;width: 100%;display: inline-block;box-sizing: border-box;padding: 0 20px;">
         <slot></slot>
       </div>
-    </el-tooltip>
+    </hzq-tooltip>
     <template v-else>
       <slot></slot>
       <slot name="title"></slot>
@@ -30,17 +30,17 @@
 </template>
 <script>
   import Menu from './menu-mixin';
-  import ElTooltip from 'element-ui/packages/tooltip';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import HzqTooltip from 'hzq-ui/packages/tooltip';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElMenuItem',
+    name: 'HzqMenuItem',
 
-    componentName: 'ElMenuItem',
+    componentName: 'HzqMenuItem',
 
     mixins: [Menu, Emitter],
 
-    components: { ElTooltip },
+    components: { HzqTooltip },
 
     props: {
       index: {
@@ -95,7 +95,7 @@
       },
       handleClick() {
         if (!this.disabled) {
-          this.dispatch('ElMenu', 'item-click', this);
+          this.dispatch('HzqMenu', 'item-click', this);
           this.$emit('click', this);
         }
       }

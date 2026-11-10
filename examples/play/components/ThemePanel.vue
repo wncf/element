@@ -2,28 +2,28 @@
   <div class="theme-panel">
     <div class="theme-panel__header">
       <span class="theme-panel__title">主题</span>
-      <el-button type="text" size="mini" @click="handleReset">重置</el-button>
+      <hzq-button type="text" size="mini" @click="handleReset">重置</hzq-button>
     </div>
 
     <div class="theme-panel__row">
       <span class="theme-panel__label">模式</span>
-      <el-radio-group v-model="mode" size="mini" @change="handleModeChange">
-        <el-radio-button label="light">浅色</el-radio-button>
-        <el-radio-button label="dark">深色</el-radio-button>
-      </el-radio-group>
+      <hzq-radio-group v-model="mode" size="mini" @change="handleModeChange">
+        <hzq-radio-button label="light">浅色</hzq-radio-button>
+        <hzq-radio-button label="dark">深色</hzq-radio-button>
+      </hzq-radio-group>
     </div>
 
     <div class="theme-panel__row">
       <span class="theme-panel__label">预设</span>
-      <el-radio-group v-model="preset" size="mini" @change="handlePresetChange">
-        <el-radio-button label="default">默认</el-radio-button>
-        <el-radio-button label="green">绿色</el-radio-button>
-      </el-radio-group>
+      <hzq-radio-group v-model="preset" size="mini" @change="handlePresetChange">
+        <hzq-radio-button label="default">默认</hzq-radio-button>
+        <hzq-radio-button label="green">绿色</hzq-radio-button>
+      </hzq-radio-group>
     </div>
 
     <div class="theme-panel__row">
       <span class="theme-panel__label">主色</span>
-      <el-color-picker
+      <hzq-color-picker
         v-model="primary"
         size="mini"
         :predefine="PREDEFINE_COLORS"
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { applyTheme, setThemeMode, getThemeMode, resetTheme } from 'element-ui/src/utils/theme';
+import { applyTheme, setThemeMode, getThemeMode, resetTheme } from 'hzq-ui/src/utils/theme';
 
 // 绿色预设由编译期 CSS 提供（palette.scss 的 $--brand-modes），运行期只切类即可
 const GREEN_PRESET_CLASS = 'theme-green';
@@ -82,7 +82,7 @@ export default {
       this.mode = getThemeMode(root);
       this.preset = root.classList.contains(GREEN_PRESET_CLASS) ? 'green' : 'default';
 
-      this.primary = root.style.getPropertyValue('--el-color-primary').trim();
+      this.primary = root.style.getPropertyValue('--hzq-color-primary').trim();
     },
 
     handleModeChange(mode) {
@@ -134,7 +134,7 @@ export default {
 <style scoped>
 .theme-panel {
   padding: 12px 16px 16px;
-  border-top: 1px solid var(--el-border-color-lighter);
+  border-top: 1px solid var(--hzq-border-color-lighter);
 }
 
 .theme-panel__header {
@@ -146,7 +146,7 @@ export default {
 .theme-panel__title {
   font-size: 13px;
   font-weight: 600;
-  color: var(--el-text-color-primary);
+  color: var(--hzq-text-color-primary);
 }
 
 .theme-panel__row {
@@ -159,19 +159,19 @@ export default {
   width: 32px;
   flex-shrink: 0;
   font-size: 12px;
-  color: var(--el-text-color-secondary);
+  color: var(--hzq-text-color-secondary);
 }
 
-.theme-panel__row >>> .el-radio-group {
+.theme-panel__row >>> .hzq-radio-group {
   flex: 1;
   display: flex;
 }
 
-.theme-panel__row >>> .el-radio-button {
+.theme-panel__row >>> .hzq-radio-button {
   flex: 1;
 }
 
-.theme-panel__row >>> .el-radio-button__inner {
+.theme-panel__row >>> .hzq-radio-button__inner {
   width: 100%;
   padding-left: 0;
   padding-right: 0;
@@ -180,13 +180,13 @@ export default {
 .theme-panel__token {
   margin-left: 8px;
   font-size: 12px;
-  color: var(--el-text-color-placeholder);
+  color: var(--hzq-text-color-placeholder);
 }
 
 .theme-panel__hint {
   margin: 10px 0 0;
   font-size: 12px;
   line-height: 1.6;
-  color: var(--el-text-color-secondary);
+  color: var(--hzq-text-color-secondary);
 }
 </style>

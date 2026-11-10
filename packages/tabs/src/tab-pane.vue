@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-tab-pane"
+    class="hzq-tab-pane"
     v-if="(!lazy || loaded) || active"
     v-show="active"
     role="tabpanel"
@@ -13,9 +13,9 @@
 </template>
 <script>
   export default {
-    name: 'ElTabPane',
+    name: 'HzqTabPane',
 
-    componentName: 'ElTabPane',
+    componentName: 'HzqTabPane',
 
     props: {
       label: String,

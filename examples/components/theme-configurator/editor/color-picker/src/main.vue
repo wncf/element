@@ -1,25 +1,25 @@
 <template>
   <div
     :class="[
-      'el-color-picker',
+      'hzq-color-picker',
       colorDisabled ? 'is-disabled' : '',
-      colorSize ? `el-color-picker--${ colorSize }` : ''
+      colorSize ? `hzq-color-picker--${ colorSize }` : ''
     ]"
     v-clickoutside="hide">
-    <div class="el-color-picker__mask" v-if="colorDisabled"></div>
-    <div class="el-color-picker__trigger" @click="handleTrigger">
-      <span class="el-color-picker__color" :class="{ 'is-alpha': showAlpha }">
-        <span class="el-color-picker__color-inner"
+    <div class="hzq-color-picker__mask" v-if="colorDisabled"></div>
+    <div class="hzq-color-picker__trigger" @click="handleTrigger">
+      <span class="hzq-color-picker__color" :class="{ 'is-alpha': showAlpha }">
+        <span class="hzq-color-picker__color-inner"
           :style="{
             backgroundColor: displayedColor
           }"></span>
-        <span class="el-color-picker__empty el-icon-close" v-if="!value && !showPanelColor"></span>
+        <span class="hzq-color-picker__empty hzq-icon-close" v-if="!value && !showPanelColor"></span>
       </span>
-      <span class="el-color-picker__icon el-icon-arrow-down" v-show="value || showPanelColor"></span>
+      <span class="hzq-color-picker__icon hzq-icon-arrow-down" v-show="value || showPanelColor"></span>
     </div>
     <picker-dropdown
        ref="dropdown"
-       :class="['el-color-picker__panel', popperClass || '']"
+       :class="['hzq-color-picker__panel', popperClass || '']"
        v-model="showPicker"
        @pick="confirmValue"
        @clear="clearValue"
@@ -34,11 +34,11 @@
 <script>
   import Color from './color';
   import PickerDropdown from './components/picker-dropdown.vue';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Clickoutside from 'hzq-ui/src/utils/clickoutside';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElColorPicker',
+    name: 'HzqColorPicker',
 
     mixins: [Emitter],
 
@@ -124,14 +124,14 @@
         const value = selection || this.color.value;
         this.$emit('input', value);
         this.$emit('change', value);
-        this.dispatch('ElFormItem', 'el.form.change', value);
+        this.dispatch('HzqFormItem', 'el.form.change', value);
         this.showPicker = false;
       },
       clearValue() {
         this.$emit('input', null);
         this.$emit('change', null);
         if (this.value !== null) {
-          this.dispatch('ElFormItem', 'el.form.change', null);
+          this.dispatch('HzqFormItem', 'el.form.change', null);
         }
         this.showPanelColor = false;
         this.showPicker = false;

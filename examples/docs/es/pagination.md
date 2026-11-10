@@ -7,17 +7,17 @@ Si tiene que mostrar muchos datos en una página, utilice la paginación.
 ```html
 <div class="block">
   <span class="demonstration">When you have few pages</span>
-  <el-pagination
+  <hzq-pagination
     layout="prev, pager, next"
     :total="50">
-  </el-pagination>
+  </hzq-pagination>
 </div>
 <div class="block">
   <span class="demonstration">When you have more than 7 pages</span>
-  <el-pagination
+  <hzq-pagination
     layout="prev, pager, next"
     :total="1000">
-  </el-pagination>
+  </hzq-pagination>
 </div>
 ```
 :::
@@ -26,12 +26,12 @@ Si tiene que mostrar muchos datos en una página, utilice la paginación.
 
 :::demo De forma predeterminada, Pagination colapsa los botones del paginador adicionales cuando tiene más de 7 páginas. Esto se puede configurar con el atributo `pager-count`.
 ```html
-<el-pagination
+<hzq-pagination
   :page-size="20"
   :pager-count="11"
   layout="prev, pager, next"
   :total="1000">
-</el-pagination>
+</hzq-pagination>
 ```
 :::
 
@@ -39,13 +39,46 @@ Si tiene que mostrar muchos datos en una página, utilice la paginación.
 
 Usa una paginación pequeña en caso de espacio limitado.
 
-:::demo Solo ponga el atributo `small` como `true` y la Paginación se volverá pequeña.
+:::demo Solo ponga el atributo `small` como `true` y la Paginación se volverá pequeña. `small` es un atajo de `size="small"`; use `size` si necesita otro escalón.
 ```html
-<el-pagination
+<hzq-pagination
   small
   layout="prev, pager, next"
   :total="50">
-</el-pagination>
+</hzq-pagination>
+```
+:::
+
+### Tamaños
+
+:::demo Cambie entre las cuatro tallas con `size`: `large`, `medium`, `small` y `mini`. Sin él la talla es `medium`. Los paginadores, los botones anterior/siguiente y el campo de salto escalan juntos (36px, 32px, 28px y 24px), así la fila mantiene la misma línea base.
+
+```html
+<template>
+  <div>
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-pagination
+      :size="size"
+      layout="prev, pager, next, jumper"
+      :total="400">
+    </hzq-pagination>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium'
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -59,18 +92,18 @@ Agrega más módulos basados en su escenario.
 <template>
   <div class="block">
     <span class="demonstration">Total item count</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">Change page size</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage2"
@@ -78,22 +111,22 @@ Agrega más módulos basados en su escenario.
       :page-size="100"
       layout="sizes, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">Jump to</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">All combined</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage4"
@@ -101,7 +134,7 @@ Agrega más módulos basados en su escenario.
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
       :total="400">
-    </el-pagination>
+    </hzq-pagination>
   </div>
 </template>
 <script>
@@ -134,13 +167,13 @@ Cuando sólo hay una página, oculte la paginación configurando el atributo `hi
 :::demo
 ```html
 <div>
- <el-switch v-model="value">
- </el-switch>
- <el-pagination
+ <hzq-switch v-model="value">
+ </hzq-switch>
+ <hzq-pagination
   :hide-on-single-page="value"
   :total="5"
   layout="prev, pager, next">
-</el-pagination>
+</hzq-pagination>
 </div>
 
 <script>
@@ -159,6 +192,7 @@ Cuando sólo hay una página, oculte la paginación configurando el atributo `hi
 | Atributo     | Descripción                              | Tipo     | Valores aceptados                        | Por defecto                            |
 | ------------ | ---------------------------------------- | -------- | ---------------------------------------- | -------------------------------------- |
 | small        | usar paginación pequeña                  | boolean  | —                                        | false                                  |
+| size         | tamaño de la paginación, los paginadores y botones prev/next escalan con él | string   | large / medium / small / mini            | —                                      |
 | page-size    | cantidad de elementos por página, soporta el modificador .sync         | number   | —                                        | 10                                     |
 | total        | total de elementos                       | number   | —                                        | —                                      |
 | page-count   | total de páginas. Asigna `total` o `page-count` y las páginas serán mostradas; si necesitas `page-sizes`, `total` es **requerido** | number   | —                                        | —                                      |

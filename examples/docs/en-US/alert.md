@@ -10,22 +10,22 @@ Alert components are non-overlay elements in the page that does not disappear au
 
 ```html
 <template>
-  <el-alert
+  <hzq-alert
     title="success alert"
     type="success">
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="info alert"
     type="info">
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="warning alert"
     type="warning">
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="error alert"
     type="error">
-  </el-alert>
+  </hzq-alert>
 </template>
 ```
 :::
@@ -37,26 +37,26 @@ Alert provide two different themes, `light` and `dark`.
 :::demo Set `effect` to change theme, default is `light`.
 ```html
 <template>
-  <el-alert
+  <hzq-alert
     title="success alert"
     type="success"
     effect="dark">
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="info alert"
     type="info"
     effect="dark">
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="warning alert"
     type="warning"
     effect="dark">
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="error alert"
     type="error"
     effect="dark">
-  </el-alert>
+  </hzq-alert>
 </template>
 ```
 :::
@@ -69,21 +69,21 @@ Customize the close button as texts or other symbols.
 
 ```html
 <template>
-  <el-alert
+  <hzq-alert
     title="unclosable alert"
     type="success"
     :closable="false">
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="customized close-text"
     type="info"
     close-text="Gotcha">
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="alert with callback"
     type="warning"
     @close="hello">
-  </el-alert>
+  </hzq-alert>
 </template>
 
 <script>
@@ -106,26 +106,26 @@ Displaying an icon improves readability.
 
 ```html
 <template>
-  <el-alert
+  <hzq-alert
     title="success alert"
     type="success"
     show-icon>
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="info alert"
     type="info"
     show-icon>
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="warning alert"
     type="warning"
     show-icon>
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="error alert"
     type="error"
     show-icon>
-  </el-alert>
+  </hzq-alert>
 </template>
 ```
 :::
@@ -138,30 +138,30 @@ Use the `center` attribute to center the text.
 
 ```html
 <template>
-  <el-alert
+  <hzq-alert
     title="success alert"
     type="success"
     center
     show-icon>
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="info alert"
     type="info"
     center
     show-icon>
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="warning alert"
     type="warning"
     center
     show-icon>
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="error alert"
     type="error"
     center
     show-icon>
-  </el-alert>
+  </hzq-alert>
 </template>
 ```
 :::
@@ -174,11 +174,11 @@ Description includes a message with more detailed information.
 
 ```html
 <template>
-  <el-alert
+  <hzq-alert
     title="with description"
     type="success"
     description="This is a description.">
-  </el-alert>
+  </hzq-alert>
 </template>
 ```
 :::
@@ -189,30 +189,30 @@ Description includes a message with more detailed information.
 
 ```html
 <template>
-  <el-alert
+  <hzq-alert
     title="success alert"
     type="success"
     description="more text description"
     show-icon>
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="info alert"
     type="info"
     description="more text description"
     show-icon>
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="warning alert"
     type="warning"
     description="more text description"
     show-icon>
-  </el-alert>
-  <el-alert
+  </hzq-alert>
+  <hzq-alert
     title="error alert"
     type="error"
     description="more text description"
     show-icon>
-  </el-alert>
+  </hzq-alert>
 </template>
 ```
 :::

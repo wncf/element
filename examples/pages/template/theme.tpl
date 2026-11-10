@@ -66,17 +66,17 @@
         </li>
       </ul>
     </section>
-    <el-dialog :visible.sync="copyDialogVisible">
-      <el-form :model="copyForm" ref="copyForm" :rules="copyFormRule">
-        <el-form-item label="<%= 3 >" prop="name">
-          <el-input v-model="copyForm.name"></el-input>
-        </el-form-item>
-      </el-form>
+    <hzq-dialog :visible.sync="copyDialogVisible">
+      <hzq-form :model="copyForm" ref="copyForm" :rules="copyFormRule">
+        <hzq-form-item label="<%= 3 >" prop="name">
+          <hzq-input v-model="copyForm.name"></hzq-input>
+        </hzq-form-item>
+      </hzq-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="closeCopyForm">{{getActionDisplayName('cancel')}}</el-button>
-        <el-button type="primary" @click="copyToUser">{{getActionDisplayName('confirm')}}</el-button>
+        <hzq-button @click="closeCopyForm">{{getActionDisplayName('cancel')}}</hzq-button>
+        <hzq-button type="primary" @click="copyToUser">{{getActionDisplayName('confirm')}}</hzq-button>
       </div>
-    </el-dialog>
+    </hzq-dialog>
   </div>
 </template>
 <script>

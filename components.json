@@ -34,6 +34,7 @@
   "breadcrumb": "./packages/breadcrumb/index.js",
   "breadcrumb-item": "./packages/breadcrumb-item/index.js",
   "form": "./packages/form/index.js",
+  "form-builder": "./packages/form-builder/index.js",
   "form-item": "./packages/form-item/index.js",
   "tabs": "./packages/tabs/index.js",
   "tab-pane": "./packages/tab-pane/index.js",

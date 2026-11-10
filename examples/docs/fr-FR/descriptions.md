@@ -7,91 +7,91 @@ Display multiple fields in list form.
 :::demo
 
 ```html
-<el-descriptions title="User Info">
-    <el-descriptions-item label="Username">kooriookami</el-descriptions-item>
-    <el-descriptions-item label="Telephone">18100000000</el-descriptions-item>
-    <el-descriptions-item label="Place">Suzhou</el-descriptions-item>
-    <el-descriptions-item label="Remarks">
-      <el-tag size="small">School</el-tag>
-    </el-descriptions-item>
-    <el-descriptions-item label="Address">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</el-descriptions-item>
-</el-descriptions>
+<hzq-descriptions title="User Info">
+    <hzq-descriptions-item label="Username">kooriookami</hzq-descriptions-item>
+    <hzq-descriptions-item label="Telephone">18100000000</hzq-descriptions-item>
+    <hzq-descriptions-item label="Place">Suzhou</hzq-descriptions-item>
+    <hzq-descriptions-item label="Remarks">
+      <hzq-tag size="small">School</hzq-tag>
+    </hzq-descriptions-item>
+    <hzq-descriptions-item label="Address">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</hzq-descriptions-item>
+</hzq-descriptions>
 ```
 :::
 
 ### Sizes
 
-:::demo
+:::demo Changez de taille avec `size` ; sans lui la liste est `medium`.
 
 ```html
 <template>
-  <el-radio-group v-model="size">
-    <el-radio label="">Default</el-radio>
-    <el-radio label="medium">Medium</el-radio>
-    <el-radio label="small">Small</el-radio>
-    <el-radio label="mini">Mini</el-radio>
-  </el-radio-group>
+  <hzq-radio-group v-model="size">
+    <hzq-radio label="large">Large</hzq-radio>
+    <hzq-radio label="medium">Medium</hzq-radio>
+    <hzq-radio label="small">Small</hzq-radio>
+    <hzq-radio label="mini">Mini</hzq-radio>
+  </hzq-radio-group>
 
-  <el-descriptions class="margin-top" title="With border" :column="3" :size="size" border>
+  <hzq-descriptions class="margin-top" title="With border" :column="3" :size="size" border>
     <template slot="extra">
-      <el-button type="primary" size="small">Operation</el-button>
+      <hzq-button type="primary" size="small">Operation</hzq-button>
     </template>
-    <el-descriptions-item>
+    <hzq-descriptions-item>
       <template slot="label">
-        <i class="el-icon-user"></i>
+        <i class="hzq-icon-user"></i>
         Username
       </template>
       kooriookami
-    </el-descriptions-item>
-    <el-descriptions-item>
+    </hzq-descriptions-item>
+    <hzq-descriptions-item>
       <template slot="label">
-        <i class="el-icon-mobile-phone"></i>
+        <i class="hzq-icon-mobile-phone"></i>
         Telephone
       </template>
       18100000000
-    </el-descriptions-item>
-    <el-descriptions-item>
+    </hzq-descriptions-item>
+    <hzq-descriptions-item>
       <template slot="label">
-        <i class="el-icon-location-outline"></i>
+        <i class="hzq-icon-location-outline"></i>
         Place
       </template>
       Suzhou
-    </el-descriptions-item>
-    <el-descriptions-item>
+    </hzq-descriptions-item>
+    <hzq-descriptions-item>
       <template slot="label">
-        <i class="el-icon-tickets"></i>
+        <i class="hzq-icon-tickets"></i>
         Remarks
       </template>
-      <el-tag size="small">School</el-tag>
-    </el-descriptions-item>
-    <el-descriptions-item>
+      <hzq-tag size="small">School</hzq-tag>
+    </hzq-descriptions-item>
+    <hzq-descriptions-item>
       <template slot="label">
-        <i class="el-icon-office-building"></i>
+        <i class="hzq-icon-office-building"></i>
         Address
       </template>
       No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
-    </el-descriptions-item>
-  </el-descriptions>
+    </hzq-descriptions-item>
+  </hzq-descriptions>
 
-  <el-descriptions class="margin-top" title="Without border" :column="3" :size="size">
+  <hzq-descriptions class="margin-top" title="Without border" :column="3" :size="size">
     <template slot="extra">
-      <el-button type="primary" size="small">Operation</el-button>
+      <hzq-button type="primary" size="small">Operation</hzq-button>
     </template>
-    <el-descriptions-item label="Username">kooriookami</el-descriptions-item>
-    <el-descriptions-item label="Telephone">18100000000</el-descriptions-item>
-    <el-descriptions-item label="Place">Suzhou</el-descriptions-item>
-    <el-descriptions-item label="Remarks">
-      <el-tag size="small">School</el-tag>
-    </el-descriptions-item>
-    <el-descriptions-item label="Address">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</el-descriptions-item>
-  </el-descriptions>
+    <hzq-descriptions-item label="Username">kooriookami</hzq-descriptions-item>
+    <hzq-descriptions-item label="Telephone">18100000000</hzq-descriptions-item>
+    <hzq-descriptions-item label="Place">Suzhou</hzq-descriptions-item>
+    <hzq-descriptions-item label="Remarks">
+      <hzq-tag size="small">School</hzq-tag>
+    </hzq-descriptions-item>
+    <hzq-descriptions-item label="Address">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</hzq-descriptions-item>
+  </hzq-descriptions>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        size: ''
+        size: 'medium'
       };
     }
   }
@@ -104,25 +104,25 @@ Display multiple fields in list form.
 :::demo
 
 ```html
-<el-descriptions title="Vertical list with border" direction="vertical" :column="4" border>
-  <el-descriptions-item label="Username">kooriookami</el-descriptions-item>
-  <el-descriptions-item label="Telephone">18100000000</el-descriptions-item>
-  <el-descriptions-item label="Place" :span="2">Suzhou</el-descriptions-item>
-  <el-descriptions-item label="Remarks">
-    <el-tag size="small">School</el-tag>
-  </el-descriptions-item>
-  <el-descriptions-item label="Address">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</el-descriptions-item>
-</el-descriptions>
+<hzq-descriptions title="Vertical list with border" direction="vertical" :column="4" border>
+  <hzq-descriptions-item label="Username">kooriookami</hzq-descriptions-item>
+  <hzq-descriptions-item label="Telephone">18100000000</hzq-descriptions-item>
+  <hzq-descriptions-item label="Place" :span="2">Suzhou</hzq-descriptions-item>
+  <hzq-descriptions-item label="Remarks">
+    <hzq-tag size="small">School</hzq-tag>
+  </hzq-descriptions-item>
+  <hzq-descriptions-item label="Address">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</hzq-descriptions-item>
+</hzq-descriptions>
 
-<el-descriptions class="margin-top" title="Vertical list without border" :column="4" direction="vertical">
-  <el-descriptions-item label="Username">kooriookami</el-descriptions-item>
-  <el-descriptions-item label="Telephone">18100000000</el-descriptions-item>
-  <el-descriptions-item label="Place" :span="2">Suzhou</el-descriptions-item>
-  <el-descriptions-item label="Remarks">
-    <el-tag size="small">School</el-tag>
-  </el-descriptions-item>
-  <el-descriptions-item label="Address">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</el-descriptions-item>
-</el-descriptions>
+<hzq-descriptions class="margin-top" title="Vertical list without border" :column="4" direction="vertical">
+  <hzq-descriptions-item label="Username">kooriookami</hzq-descriptions-item>
+  <hzq-descriptions-item label="Telephone">18100000000</hzq-descriptions-item>
+  <hzq-descriptions-item label="Place" :span="2">Suzhou</hzq-descriptions-item>
+  <hzq-descriptions-item label="Remarks">
+    <hzq-tag size="small">School</hzq-tag>
+  </hzq-descriptions-item>
+  <hzq-descriptions-item label="Address">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</hzq-descriptions-item>
+</hzq-descriptions>
 ```
 :::
 
@@ -131,15 +131,15 @@ Display multiple fields in list form.
 :::demo
 
 ```html
-<el-descriptions title="Customized style list" :column="3" border>
-  <el-descriptions-item label="Username" label-class-name="my-label" content-class-name="my-content">kooriookami</el-descriptions-item>
-  <el-descriptions-item label="Telephone">18100000000</el-descriptions-item>
-  <el-descriptions-item label="Place">Suzhou</el-descriptions-item>
-  <el-descriptions-item label="Remarks">
-    <el-tag size="small">School</el-tag>
-  </el-descriptions-item>
-  <el-descriptions-item label="Address" :content-style="{'text-align': 'right'}">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</el-descriptions-item>
-</el-descriptions>
+<hzq-descriptions title="Customized style list" :column="3" border>
+  <hzq-descriptions-item label="Username" label-class-name="my-label" content-class-name="my-content">kooriookami</hzq-descriptions-item>
+  <hzq-descriptions-item label="Telephone">18100000000</hzq-descriptions-item>
+  <hzq-descriptions-item label="Place">Suzhou</hzq-descriptions-item>
+  <hzq-descriptions-item label="Remarks">
+    <hzq-tag size="small">School</hzq-tag>
+  </hzq-descriptions-item>
+  <hzq-descriptions-item label="Address" :content-style="{'text-align': 'right'}">No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</hzq-descriptions-item>
+</hzq-descriptions>
 <style>
   .my-label {
     background: #E1F3D8;
@@ -158,7 +158,7 @@ Display multiple fields in list form.
 | border        | with or without border      | boolean  |          —             |    false     |
 | column        | numbers of `Descriptions Item` in one line  | number | — |    3  |
 | direction     | direction of list  | string | vertical / horizontal |    horizontal  |
-| size          | size of list    | string  |    medium / small / mini  |  — |
+| size          | size of list    | string  | large / medium / small / mini |  — |
 | title         | title text, display on the top left    | string  |    —  |  — |
 | extra         | extra text, display on the top right    | string  |    —  |  — |
 | colon | change default props colon value of Descriptions Item   | boolean |    —  |  true |

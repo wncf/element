@@ -10,7 +10,7 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible="visible"></el-dialog>
+          <hzq-dialog :title="title" :visible="visible"></hzq-dialog>
         </div>
       `,
 
@@ -24,7 +24,7 @@ describe('Dialog', () => {
     const dialog = vm.$children[0];
     setTimeout(() => {
       expect(document.querySelector('.v-modal')).to.exist;
-      expect(vm.$el.querySelector('.el-dialog__title').textContent).to.equal('dialog test');
+      expect(vm.$el.querySelector('.hzq-dialog__title').textContent).to.equal('dialog test');
       expect(dialog.$el.style.display).to.not.equal('none');
       done();
     }, 10);
@@ -34,13 +34,13 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible="visible">
+          <hzq-dialog :title="title" :visible="visible">
             <span>这是一段信息</span>
             <span slot="footer" class="dialog-footer">
-              <el-button @click.native="dialogVisible = false">取消</el-button>
-              <el-button type="primary" @click.native="dialogVisible = false">确定</el-button>
+              <hzq-button @click.native="dialogVisible = false">取消</hzq-button>
+              <hzq-button type="primary" @click.native="dialogVisible = false">确定</hzq-button>
             </span>
-          </el-dialog>
+          </hzq-dialog>
         </div>
       `,
 
@@ -52,8 +52,8 @@ describe('Dialog', () => {
       }
     }, true);
     setTimeout(() => {
-      const footerBtns = vm.$el.querySelectorAll('.el-dialog__footer .el-button');
-      expect(vm.$el.querySelector('.el-dialog__body span').textContent).to.equal('这是一段信息');
+      const footerBtns = vm.$el.querySelectorAll('.hzq-dialog__footer .hzq-button');
+      expect(vm.$el.querySelector('.hzq-dialog__body span').textContent).to.equal('这是一段信息');
       expect(footerBtns.length).to.equal(2);
       expect(footerBtns[0].querySelector('span').textContent).to.equal('取消');
       expect(footerBtns[1].querySelector('span').textContent).to.equal('确定');
@@ -65,7 +65,7 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" append-to-body :visible="visible"></el-dialog>
+          <hzq-dialog :title="title" append-to-body :visible="visible"></hzq-dialog>
         </div>
       `,
 
@@ -87,9 +87,9 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible.sync="visible">
+          <hzq-dialog :title="title" :visible.sync="visible">
             <span>这是一段信息</span>
-          </el-dialog>
+          </hzq-dialog>
         </div>
       `,
 
@@ -118,9 +118,9 @@ describe('Dialog', () => {
       return createVue(Object.assign({
         template: `
           <div>
-            <el-dialog ${ props } :title="title" :visible="visible">
+            <hzq-dialog ${ props } :title="title" :visible="visible">
               <span>这是一段信息</span>
-            </el-dialog>
+            </hzq-dialog>
           </div>
         `,
 
@@ -135,55 +135,55 @@ describe('Dialog', () => {
 
     it('fullscreen', () => {
       vm = getDialogVm('fullscreen width="40%"');
-      const dialogEl = vm.$el.querySelector('.el-dialog');
+      const dialogEl = vm.$el.querySelector('.hzq-dialog');
       expect(dialogEl.classList.contains('is-fullscreen')).to.true;
       expect(dialogEl.style.width).to.be.empty;
     });
 
     it('top', () => {
       vm = getDialogVm('top="100px"');
-      expect(vm.$el.querySelector('.el-dialog').style.marginTop).to.equal('100px');
+      expect(vm.$el.querySelector('.hzq-dialog').style.marginTop).to.equal('100px');
     });
 
     it('custom-class', () => {
       vm = getDialogVm('custom-class="my-dialog"');
-      expect(vm.$el.querySelector('.el-dialog').classList.contains('my-dialog')).to.true;
+      expect(vm.$el.querySelector('.hzq-dialog').classList.contains('my-dialog')).to.true;
     });
 
     it('centered by default', () => {
       vm = getDialogVm('');
-      const wrapper = vm.$el.querySelector('.el-dialog__wrapper');
-      expect(wrapper.classList.contains('el-dialog__wrapper--centered')).to.true;
-      expect(vm.$el.querySelector('.el-dialog').style.marginTop).to.equal('');
+      const wrapper = vm.$el.querySelector('.hzq-dialog__wrapper');
+      expect(wrapper.classList.contains('hzq-dialog__wrapper--centered')).to.true;
+      expect(vm.$el.querySelector('.hzq-dialog').style.marginTop).to.equal('');
     });
 
     it('not centered when top is set', () => {
       vm = getDialogVm('top="100px"');
-      const wrapper = vm.$el.querySelector('.el-dialog__wrapper');
-      expect(wrapper.classList.contains('el-dialog__wrapper--centered')).to.false;
+      const wrapper = vm.$el.querySelector('.hzq-dialog__wrapper');
+      expect(wrapper.classList.contains('hzq-dialog__wrapper--centered')).to.false;
     });
 
     it('draggable by default', () => {
       vm = getDialogVm('');
-      const header = vm.$el.querySelector('.el-dialog__header');
+      const header = vm.$el.querySelector('.hzq-dialog__header');
       expect(header.classList.contains('is-draggable')).to.true;
     });
 
     it('draggable false', () => {
       vm = getDialogVm(':draggable="false"');
-      const header = vm.$el.querySelector('.el-dialog__header');
+      const header = vm.$el.querySelector('.hzq-dialog__header');
       expect(header.classList.contains('is-draggable')).to.false;
     });
 
     it('fullscreen disables draggable', () => {
       vm = getDialogVm('fullscreen');
-      const header = vm.$el.querySelector('.el-dialog__header');
+      const header = vm.$el.querySelector('.hzq-dialog__header');
       expect(header.classList.contains('is-draggable')).to.false;
     });
 
     it('close button uses svg icon', () => {
       vm = getDialogVm('');
-      const closeIcon = vm.$el.querySelector('.el-dialog__close');
+      const closeIcon = vm.$el.querySelector('.hzq-dialog__close');
       expect(closeIcon.tagName.toLowerCase()).to.equal('svg');
     });
   });
@@ -192,9 +192,9 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible="visible">
+          <hzq-dialog :title="title" :visible="visible">
             <span>这是一段信息</span>
-          </el-dialog>
+          </hzq-dialog>
         </div>
       `,
       data() {
@@ -205,8 +205,8 @@ describe('Dialog', () => {
       }
     }, true);
 
-    const dialogEl = vm.$el.querySelector('.el-dialog');
-    const header = vm.$el.querySelector('.el-dialog__header');
+    const dialogEl = vm.$el.querySelector('.hzq-dialog');
+    const header = vm.$el.querySelector('.hzq-dialog__header');
 
     dialogEl.getBoundingClientRect = () => ({
       left: 100,
@@ -237,9 +237,9 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible.sync="visible">
+          <hzq-dialog :title="title" :visible.sync="visible">
             <span>这是一段信息</span>
-          </el-dialog>
+          </hzq-dialog>
         </div>
       `,
       data() {
@@ -250,7 +250,7 @@ describe('Dialog', () => {
       }
     }, true);
 
-    const dialogEl = vm.$el.querySelector('.el-dialog');
+    const dialogEl = vm.$el.querySelector('.hzq-dialog');
     dialogEl.style.position = 'absolute';
     dialogEl.style.left = '200px';
     dialogEl.style.top = '150px';
@@ -275,7 +275,7 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog
+          <hzq-dialog
             @open="handleOpen"
             @opened="handleOpened"
             @close="handleClose"
@@ -283,7 +283,7 @@ describe('Dialog', () => {
             :title="title"
             :visible.sync="visible">
             <span>这是一段信息</span>
-          </el-dialog>
+          </hzq-dialog>
         </div>
       `,
 
@@ -330,9 +330,9 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible.sync="visible">
+          <hzq-dialog :title="title" :visible.sync="visible">
             <span>这是一段信息</span>
-          </el-dialog>
+          </hzq-dialog>
         </div>
       `,
 
@@ -356,9 +356,9 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible.sync="visible">
+          <hzq-dialog :title="title" :visible.sync="visible">
             <span>这是一段信息</span>
-          </el-dialog>
+          </hzq-dialog>
         </div>
       `,
 
@@ -371,7 +371,7 @@ describe('Dialog', () => {
     }, true);
     const dialog = vm.$children[0];
     setTimeout(() => {
-      dialog.$el.querySelector('.el-dialog__headerbtn').click();
+      dialog.$el.querySelector('.hzq-dialog__headerbtn').click();
       setTimeout(() => {
         expect(vm.visible).to.be.false;
         done();
@@ -383,7 +383,7 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible="visible" :before-close="beforeClose"></el-dialog>
+          <hzq-dialog :title="title" :visible="visible" :before-close="beforeClose"></hzq-dialog>
         </div>
       `,
 
@@ -414,9 +414,9 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible.sync="visible" destroy-on-close>
+          <hzq-dialog :title="title" :visible.sync="visible" destroy-on-close>
             <input />
-          </el-dialog>
+          </hzq-dialog>
         </div>
       `,
 

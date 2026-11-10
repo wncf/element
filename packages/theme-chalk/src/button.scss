@@ -35,8 +35,8 @@
   }
 
   &:active {
-    color: var(--el-color-primary-shade);
-    border-color: var(--el-color-primary-shade);
+    color: var(--hzq-color-primary-shade);
+    border-color: var(--hzq-color-primary-shade);
     outline: none;
   }
 
@@ -44,7 +44,7 @@
     border: 0;
   }
 
-  & [class*="el-icon-"] {
+  & [class*="hzq-icon-"] {
     & + span {
       margin-left: 5px;
     }
@@ -53,22 +53,22 @@
   @include when(plain) {
     &:hover,
     &:focus {
-      background: var(--el-fill-color-blank);
+      background: var(--hzq-fill-color-blank);
       border-color: $--color-primary;
       color: $--color-primary;
     }
 
     &:active {
-      background: var(--el-fill-color-blank);
-      border-color: var(--el-color-primary-shade);
-      color: var(--el-color-primary-shade);
+      background: var(--hzq-fill-color-blank);
+      border-color: var(--hzq-color-primary-shade);
+      color: var(--hzq-color-primary-shade);
       outline: none;
     }
   }
 
   @include when(active) {
-    color: var(--el-color-primary-shade);
-    border-color: var(--el-color-primary-shade);
+    color: var(--hzq-color-primary-shade);
+    border-color: var(--hzq-color-primary-shade);
   }
 
   @include when(disabled) {
@@ -82,7 +82,7 @@
       border-color: $--button-disabled-border-color;
     }
 
-    &.el-button--text {
+    &.hzq-button--text {
       background-color: transparent;
     }
 
@@ -90,7 +90,7 @@
       &,
       &:hover,
       &:focus {
-        background-color: var(--el-fill-color-blank);
+        background-color: var(--hzq-fill-color-blank);
         border-color: $--button-disabled-border-color;
         color: $--button-disabled-font-color;
       }
@@ -111,7 +111,7 @@
       bottom: -1px;
       border-radius: inherit;
       // 用底色压暗：浅色模式下是白色蒙层（与改造前一致），深色模式下不会糊上白雾
-      background-color: var(--el-bg-color);
+      background-color: var(--hzq-bg-color);
       opacity: .35;
     }
   }
@@ -126,6 +126,12 @@
   @each $type in (primary, success, warning, danger, info) {
     @include m($type) {
       @include button-variant($type);
+    }
+  }
+  @include m(large) {
+    @include button-size($--button-large-padding-vertical, $--button-large-padding-horizontal, $--button-large-font-size, $--button-large-border-radius);
+    @include when(circle) {
+      padding: $--button-large-padding-vertical;
     }
   }
   @include m(medium) {
@@ -155,12 +161,12 @@
 
     &:hover,
     &:focus {
-      color: var(--el-color-primary-hover);
+      color: var(--hzq-color-primary-hover);
       border-color: transparent;
       background-color: transparent;
     }
     &:active {
-      color: var(--el-color-primary-shade);
+      color: var(--hzq-color-primary-shade);
       border-color: transparent;
       background-color: transparent;
     }
@@ -178,10 +184,10 @@
   display: inline-block;
   vertical-align: middle;
 
-  & > .el-button {
+  & > .hzq-button {
     float: left;
     position: relative;
-    & + .el-button {
+    & + .hzq-button {
       margin-left: 0;
     }
     &.is-disabled {
@@ -229,8 +235,8 @@
     }
   }
   
-  & > .el-dropdown {
-    & > .el-button {
+  & > .hzq-dropdown {
+    & > .hzq-button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       border-left-color: rgba($--color-white, 0.5);
@@ -238,7 +244,7 @@
   }
 
   @each $type in (primary, success, warning, danger, info) {
-    .el-button--#{$type} {
+    .hzq-button--#{$type} {
       &:first-child {
         border-right-color: rgba($--color-white, 0.5);
       }

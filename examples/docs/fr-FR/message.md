@@ -10,8 +10,8 @@ S'affiche en haut de la page et disparaît après trois secondes.
 
 ```html
 <template>
-  <el-button :plain="true" @click="open">Afficher le message</el-button>
-  <el-button :plain="true" @click="openVn">VNode</el-button>
+  <hzq-button :plain="true" @click="open">Afficher le message</hzq-button>
+  <hzq-button :plain="true" @click="openVn">VNode</hzq-button>
 </template>
 
 <script>
@@ -43,10 +43,10 @@ Utilisé pour montrer un retour d'activités Success, Warning, Message ou Error.
 :::demo Lorsque vous avez besoin de plus de personnalisation, Message peut aussi accepter un objet en paramètre. Par exemple, le paramètre `type` définit différents types, son défaut étant `info`. Dans ce cas le body est passé comme valeur de `message`. De plus, il existe des méthodes pour chaque type, afin que vous puissiez vous passer de la propriété `type` comme dans `open4`.
 ```html
 <template>
-  <el-button :plain="true" @click="open2">success</el-button>
-  <el-button :plain="true" @click="open3">warning</el-button>
-  <el-button :plain="true" @click="open1">message</el-button>
-  <el-button :plain="true" @click="open4">error</el-button>
+  <hzq-button :plain="true" @click="open2">success</hzq-button>
+  <hzq-button :plain="true" @click="open3">warning</hzq-button>
+  <hzq-button :plain="true" @click="open1">message</hzq-button>
+  <hzq-button :plain="true" @click="open4">error</hzq-button>
 </template>
 
 <script>
@@ -85,10 +85,10 @@ Un bouton de fermeture peut être ajouté.
 :::demo Un Message ne peut être fermé par défaut. Utiliséez `showClose` si vous avez besoin de pouvoir le fermer. De plus, tout comme Notification, Message possède une `duration` réglable. La durée par défaut est de 3000 ms, et infinie si à `0`.
 ```html
 <template>
-  <el-button :plain="true" @click="open1">message</el-button>
-  <el-button :plain="true" @click="open2">success</el-button>
-  <el-button :plain="true" @click="open3">warning</el-button>
-  <el-button :plain="true" @click="open4">error</el-button>
+  <hzq-button :plain="true" @click="open1">message</hzq-button>
+  <hzq-button :plain="true" @click="open2">success</hzq-button>
+  <hzq-button :plain="true" @click="open3">warning</hzq-button>
+  <hzq-button :plain="true" @click="open4">error</hzq-button>
 </template>
 
 <script>
@@ -138,7 +138,7 @@ Utilisez l'attribut `center` pour centrer le texte.
 
 ```html
 <template>
-  <el-button :plain="true" @click="openCenter">Texte centré</el-button>
+  <hzq-button :plain="true" @click="openCenter">Texte centré</hzq-button>
 </template>
 
 <script>
@@ -164,7 +164,7 @@ Utilisez l'attribut `center` pour centrer le texte.
 
 ```html
 <template>
-  <el-button :plain="true" @click="openHTML">Utiliser du HTML</el-button>
+  <hzq-button :plain="true" @click="openHTML">Utiliser du HTML</hzq-button>
 </template>
 
 <script>

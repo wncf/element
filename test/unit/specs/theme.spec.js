@@ -6,7 +6,7 @@ import {
   setThemeMode,
   getThemeMode,
   resetTheme
-} from 'element-ui/src/utils/theme';
+} from 'hzq-ui/src/utils/theme';
 
 // 期望值全部取自编译产物（packages/theme-chalk/lib/index.css），
 // 用来锁住"JS 推导 == Sass mix()"，两边算法漂移会立刻失败。
@@ -58,31 +58,31 @@ describe('Utils:theme', () => {
       const tokens = createBrandTokens('primary', PRIMARY_RGB, WHITE);
 
       expect(Object.keys(tokens).length).to.equal(13);
-      expect(tokens['--el-color-primary']).to.equal('#2563eb');
-      expect(tokens['--el-color-primary-rgb']).to.equal('37, 99, 235');
-      expect(tokens['--el-color-primary-light-1']).to.equal('#3b73ed');
-      expect(tokens['--el-color-primary-light-7']).to.equal('#bed0f9');
-      expect(tokens['--el-color-primary-light-9']).to.equal('#e9effd');
-      expect(tokens['--el-color-primary-hover']).to.equal('#5182ef');
-      expect(tokens['--el-color-primary-shade']).to.equal('#2159d4');
+      expect(tokens['--hzq-color-primary']).to.equal('#2563eb');
+      expect(tokens['--hzq-color-primary-rgb']).to.equal('37, 99, 235');
+      expect(tokens['--hzq-color-primary-light-1']).to.equal('#3b73ed');
+      expect(tokens['--hzq-color-primary-light-7']).to.equal('#bed0f9');
+      expect(tokens['--hzq-color-primary-light-9']).to.equal('#e9effd');
+      expect(tokens['--hzq-color-primary-hover']).to.equal('#5182ef');
+      expect(tokens['--hzq-color-primary-shade']).to.equal('#2159d4');
     });
   });
 
   describe('applyTheme', () => {
     it('only rewrites the colors it is given', () => {
-      const successBefore = readToken('--el-color-success-light-1');
+      const successBefore = readToken('--hzq-color-success-light-1');
 
       applyTheme({ primary: '#16a34a' }, root);
 
-      expect(readToken('--el-color-primary')).to.equal('#16a34a');
-      expect(readToken('--el-color-primary-light-1')).to.equal('#2dac5c');
-      expect(readToken('--el-color-success-light-1')).to.equal(successBefore);
+      expect(readToken('--hzq-color-primary')).to.equal('#16a34a');
+      expect(readToken('--hzq-color-primary-light-1')).to.equal('#2dac5c');
+      expect(readToken('--hzq-color-success-light-1')).to.equal(successBefore);
     });
 
     it('ignores invalid colors', () => {
       applyTheme({ primary: 'not-a-color' }, root);
 
-      expect(root.style.getPropertyValue('--el-color-primary')).to.equal('');
+      expect(root.style.getPropertyValue('--hzq-color-primary')).to.equal('');
     });
 
     it('re-derives the owned color when the mode changes', () => {
@@ -90,7 +90,8 @@ describe('Utils:theme', () => {
       setThemeMode('dark', root);
 
       expect(getThemeMode(root)).to.equal('dark');
-      expect(readToken('--el-color-primary-light-1')).to.equal('#169545');
+      // 深色模式的 blend-base 是 #1e293b，JS 推导须与 Sass mix() 的编译产物一致
+      expect(readToken('--hzq-color-primary-light-1')).to.equal('#179749');
     });
   });
 
@@ -99,8 +100,8 @@ describe('Utils:theme', () => {
       applyTheme({ primary: '#16a34a' }, root);
       resetTheme(root);
 
-      expect(root.style.getPropertyValue('--el-color-primary')).to.equal('');
-      expect(readToken('--el-color-primary')).to.equal('#2563eb');
+      expect(root.style.getPropertyValue('--hzq-color-primary')).to.equal('');
+      expect(readToken('--hzq-color-primary')).to.equal('#2563eb');
     });
   });
 });

@@ -7,11 +7,11 @@
 :::demo Progress 组件设置`percentage`属性即可，表示进度条对应的百分比，**必填**，必须在 0-100。通过 `format` 属性来指定进度条文字内容。
 
 ```html
-<el-progress :percentage="50"></el-progress>
-<el-progress :percentage="100" :format="format"></el-progress>
-<el-progress :percentage="100" status="success"></el-progress>
-<el-progress :percentage="100" status="warning"></el-progress>
-<el-progress :percentage="50" status="exception"></el-progress>
+<hzq-progress :percentage="50"></hzq-progress>
+<hzq-progress :percentage="100" :format="format"></hzq-progress>
+<hzq-progress :percentage="100" status="success"></hzq-progress>
+<hzq-progress :percentage="100" status="warning"></hzq-progress>
+<hzq-progress :percentage="50" status="exception"></hzq-progress>
 
 <script>
   export default {
@@ -32,10 +32,10 @@
 :::demo Progress 组件可通过 `stroke-width` 属性更改进度条的高度，并可通过 `text-inside` 属性来将进度条描述置于进度条内部。
 
 ```html
-<el-progress :text-inside="true" :stroke-width="26" :percentage="70"></el-progress>
-<el-progress :text-inside="true" :stroke-width="24" :percentage="100" status="success"></el-progress>
-<el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"></el-progress>
-<el-progress :text-inside="true" :stroke-width="20" :percentage="50" status="exception"></el-progress>
+<hzq-progress :text-inside="true" :stroke-width="26" :percentage="70"></hzq-progress>
+<hzq-progress :text-inside="true" :stroke-width="24" :percentage="100" status="success"></hzq-progress>
+<hzq-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"></hzq-progress>
+<hzq-progress :text-inside="true" :stroke-width="20" :percentage="50" status="exception"></hzq-progress>
 ```
 :::
 
@@ -46,16 +46,16 @@
 :::demo
 
 ```html
-<el-progress :percentage="percentage" :color="customColor"></el-progress>
+<hzq-progress :percentage="percentage" :color="customColor"></hzq-progress>
 
-<el-progress :percentage="percentage" :color="customColorMethod"></el-progress>
+<hzq-progress :percentage="percentage" :color="customColorMethod"></hzq-progress>
 
-<el-progress :percentage="percentage" :color="customColors"></el-progress>
+<hzq-progress :percentage="percentage" :color="customColors"></hzq-progress>
 <div>
-  <el-button-group>
-    <el-button icon="el-icon-minus" @click="decrease"></el-button>
-    <el-button icon="el-icon-plus" @click="increase"></el-button>
-  </el-button-group>
+  <hzq-button-group>
+    <hzq-button icon="hzq-icon-minus" @click="decrease"></hzq-button>
+    <hzq-button icon="hzq-icon-plus" @click="increase"></hzq-button>
+  </hzq-button-group>
 </div>
 
 <script>
@@ -108,11 +108,11 @@ Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形
 :::demo
 
 ```html
-<el-progress type="circle" :percentage="0"></el-progress>
-<el-progress type="circle" :percentage="25"></el-progress>
-<el-progress type="circle" :percentage="100" status="success"></el-progress>
-<el-progress type="circle" :percentage="70" status="warning"></el-progress>
-<el-progress type="circle" :percentage="50" status="exception"></el-progress>
+<hzq-progress type="circle" :percentage="0"></hzq-progress>
+<hzq-progress type="circle" :percentage="25"></hzq-progress>
+<hzq-progress type="circle" :percentage="100" status="success"></hzq-progress>
+<hzq-progress type="circle" :percentage="70" status="warning"></hzq-progress>
+<hzq-progress type="circle" :percentage="50" status="exception"></hzq-progress>
 ```
 :::
 
@@ -122,12 +122,12 @@ Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形
 
 ```html
 
-<el-progress type="dashboard" :percentage="percentage" :color="colors"></el-progress>
+<hzq-progress type="dashboard" :percentage="percentage" :color="colors"></hzq-progress>
 <div>
-  <el-button-group>
-    <el-button icon="el-icon-minus" @click="decrease"></el-button>
-    <el-button icon="el-icon-plus" @click="increase"></el-button>
-  </el-button-group>
+  <hzq-button-group>
+    <hzq-button icon="hzq-icon-minus" @click="decrease"></hzq-button>
+    <hzq-button icon="hzq-icon-plus" @click="increase"></hzq-button>
+  </hzq-button-group>
 </div>
 
 <script>
@@ -176,5 +176,5 @@ Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形
 | show-text  | 是否显示进度条文字内容 | boolean | — | true |
 | stroke-linecap  | circle/dashboard 类型路径两端的形状 | string | butt/round/square | round |
 | format  | 指定进度条文字内容 | function(percentage) | — | — |
-| define-back-color  | 指定进度条底色（支持 hex 格式） | string | — | — |
-| text-color  | 指定进度条字体颜色（支持 hex 格式） | string | — | — |
+| define-back-color  | 指定进度条底色 | string | — | var(--hzq-border-color-lighter) |
+| text-color  | 指定进度条字体颜色 | string | — | var(--hzq-text-color-regular) |

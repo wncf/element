@@ -26,8 +26,8 @@
       &.is-in-stage {
         cursor: pointer;
         z-index: $--index-normal;
-        &:hover .el-carousel__mask,
-        &.is-hover .el-carousel__mask {
+        &:hover .hzq-carousel__mask,
+        &.is-hover .hzq-carousel__mask {
           opacity: 0.12;
         }
       }
@@ -44,7 +44,7 @@
     top: 0;
     left: 0;
     // 卡片式轮播的非激活项遮罩：跟随底色，写死白色会在深色模式下把整块卡片蒙成灰白
-    background-color: var(--el-bg-color);
+    background-color: var(--hzq-bg-color);
     opacity: 0.24;
     transition: .2s;
   }

@@ -1,6 +1,6 @@
 <script>
-import fecha from 'element-ui/src/utils/date';
-import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
+import fecha from 'hzq-ui/src/utils/date';
+import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'hzq-ui/src/utils/date-util';
 
 export default {
   props: {
@@ -164,7 +164,7 @@ export default {
     return (
       <table
         class={{
-          'el-calendar-table': true,
+          'hzq-calendar-table': true,
           'is-range': this.isInRange
         }}
         cellspacing="0"
@@ -176,15 +176,15 @@ export default {
           {
             this.rows.map((row, index) => <tr
               class={{
-                'el-calendar-table__row': true,
-                'el-calendar-table__row--hide-border': index === 0 && this.hideHeader
+                'hzq-calendar-table__row': true,
+                'hzq-calendar-table__row--hide-border': index === 0 && this.hideHeader
               }}
               key={index}>
               {
                 row.map((cell, key) => <td key={key}
                   class={ this.getCellClass(cell) }
                   onClick={this.pickDay.bind(this, cell)}>
-                  <div class="el-calendar-day">
+                  <div class="hzq-calendar-day">
                     {
                       this.cellRenderProxy(cell)
                     }

@@ -1,13 +1,13 @@
 <template>
   <div
-    class="el-autocomplete"
+    class="hzq-autocomplete"
     v-clickoutside="close"
     aria-haspopup="listbox"
     role="combobox"
     :aria-expanded="suggestionVisible"
     :aria-owns="id"
   >
-    <el-input
+    <hzq-input
       ref="input"
       v-bind="[$props, $attrs]"
       @input="handleInput"
@@ -32,8 +32,8 @@
       <template slot="suffix" v-if="$slots.suffix">
         <slot name="suffix"></slot>
       </template>
-    </el-input>
-    <el-autocomplete-suggestions
+    </hzq-input>
+    <hzq-autocomplete-suggestions
       visible-arrow
       :class="[popperClass ? popperClass : '']"
       :popper-options="popperOptions"
@@ -54,31 +54,31 @@
           {{ item[valueKey] }}
         </slot>
       </li>
-    </el-autocomplete-suggestions>
+    </hzq-autocomplete-suggestions>
   </div>
 </template>
 <script>
   import debounce from 'throttle-debounce/debounce';
-  import ElInput from 'element-ui/packages/input';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Migrating from 'element-ui/src/mixins/migrating';
-  import { generateId } from 'element-ui/src/utils/util';
-  import Focus from 'element-ui/src/mixins/focus';
+  import HzqInput from 'hzq-ui/packages/input';
+  import Clickoutside from 'hzq-ui/src/utils/clickoutside';
+  import HzqAutocompleteSuggestions from './autocomplete-suggestions.vue';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
+  import Migrating from 'hzq-ui/src/mixins/migrating';
+  import { generateId } from 'hzq-ui/src/utils/util';
+  import Focus from 'hzq-ui/src/mixins/focus';
 
   export default {
-    name: 'ElAutocomplete',
+    name: 'HzqAutocomplete',
 
     mixins: [Emitter, Focus('input'), Migrating],
 
     inheritAttrs: false,
 
-    componentName: 'ElAutocomplete',
+    componentName: 'HzqAutocomplete',
 
     components: {
-      ElInput,
-      ElAutocompleteSuggestions
+      HzqInput,
+      HzqAutocompleteSuggestions
     },
 
     directives: { Clickoutside },
@@ -149,14 +149,14 @@
         return (isValidData || this.loading) && this.activated;
       },
       id() {
-        return `el-autocomplete-${generateId()}`;
+        return `hzq-autocomplete-${generateId()}`;
       }
     },
     watch: {
       suggestionVisible(val) {
         let $input = this.getInput();
         if ($input) {
-          this.broadcast('ElAutocompleteSuggestions', 'visible', [val, $input.offsetWidth]);
+          this.broadcast('HzqAutocompleteSuggestions', 'visible', [val, $input.offsetWidth]);
         }
       }
     },
@@ -246,8 +246,8 @@
         if (index >= this.suggestions.length) {
           index = this.suggestions.length - 1;
         }
-        const suggestion = this.$refs.suggestions.$el.querySelector('.el-autocomplete-suggestion__wrap');
-        const suggestionList = suggestion.querySelectorAll('.el-autocomplete-suggestion__list li');
+        const suggestion = this.$refs.suggestions.$el.querySelector('.hzq-autocomplete-suggestion__wrap');
+        const suggestionList = suggestion.querySelectorAll('.hzq-autocomplete-suggestion__list li');
 
         let highlightItem = suggestionList[index];
         let scrollTop = suggestion.scrollTop;

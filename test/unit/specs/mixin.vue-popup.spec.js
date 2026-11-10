@@ -1,4 +1,4 @@
-import VuePopup from 'element-ui/src/utils/popup';
+import VuePopup from 'hzq-ui/src/utils/popup';
 import { createTest, destroyVM } from '../util';
 
 const Popup = Object.assign({}, VuePopup, {
@@ -49,13 +49,13 @@ describe('Mixin:vue-popup', () => {
   it('lock scroll', done => {
     vm = createTest(Popup, { modal: true });
     vm.open();
-    expect(document.body.classList.contains('el-popup-parent--hidden')).to.be.true;
+    expect(document.body.classList.contains('hzq-popup-parent--hidden')).to.be.true;
     vm.close();
     destroyVM(vm);
     setTimeout(() => {
       vm = createTest(Popup, { modal: true, lockScroll: false });
       vm.open();
-      expect(document.body.classList.contains('el-popup-parent--hidden')).to.be.false;
+      expect(document.body.classList.contains('hzq-popup-parent--hidden')).to.be.false;
       done();
     }, 200);
   });

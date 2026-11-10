@@ -1,10 +1,10 @@
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElCheckboxGroup',
+    name: 'HzqCheckboxGroup',
 
-    componentName: 'ElCheckboxGroup',
+    componentName: 'HzqCheckboxGroup',
 
     mixins: [Emitter],
 
@@ -29,20 +29,20 @@
         return (this.elFormItem || {}).elFormItemSize;
       },
       checkboxGroupSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size || this._elFormItemSize || (this.$HZQ || {}).size;
       }
     },
 
     watch: {
       value(value) {
-        this.dispatch('ElFormItem', 'el.form.change', [value]);
+        this.dispatch('HzqFormItem', 'el.form.change', [value]);
       }
     }
   };
 </script>
 
 <template>
-  <div class="el-checkbox-group" role="group" aria-label="checkbox-group">
+  <div class="hzq-checkbox-group" role="group" aria-label="checkbox-group">
     <slot></slot>
   </div>
 </template>

@@ -2,8 +2,8 @@
   <div
     ref="reference"
     :class="[
-      'el-cascader',
-      realSize && `el-cascader--${realSize}`,
+      'hzq-cascader',
+      realSize && `hzq-cascader--${realSize}`,
       { 'is-disabled': isDisabled }
     ]"
     v-clickoutside="() => toggleDropDownVisible(false)"
@@ -12,7 +12,7 @@
     @click="() => toggleDropDownVisible(readonly ? undefined : true)"
     @keydown="handleKeyDown">
 
-    <el-input
+    <hzq-input
       ref="input"
       v-model="multiple ? presentText : inputValue"
       :size="realSize"
@@ -28,23 +28,23 @@
         <i
           v-if="clearBtnVisible"
           key="clear"
-          class="el-input__icon el-icon-circle-close"
+          class="hzq-input__icon hzq-icon-circle-close"
           @click.stop="handleClear"></i>
         <i
           v-else
           key="arrow-down"
           :class="[
-            'el-input__icon',
-            'el-icon-arrow-down',
+            'hzq-input__icon',
+            'hzq-icon-arrow-down',
             dropDownVisible && 'is-reverse'
           ]"
           @click.stop="toggleDropDownVisible()"></i>
       </template>
-    </el-input>
+    </hzq-input>
 
-    <div v-if="multiple" class="el-cascader__tags">
-      <div class="el-cascader__tags-wrap">
-        <el-tag
+    <div v-if="multiple" class="hzq-cascader__tags">
+      <div class="hzq-cascader__tags-wrap">
+        <hzq-tag
           v-for="tag in presentTags"
           :key="tag.key"
           type="info"
@@ -54,13 +54,13 @@
           disable-transitions
           @close="deleteTag(tag)">
           <span>{{ tag.text }}</span>
-        </el-tag>
+        </hzq-tag>
       </div>
       <input
         v-if="filterable && !isDisabled"
         v-model.trim="inputValue"
         type="text"
-        class="el-cascader__search-input"
+        class="hzq-cascader__search-input"
         :placeholder="presentTags.length ? '' : placeholder"
         @input="e => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
@@ -71,8 +71,8 @@
       <div
         v-show="dropDownVisible"
         ref="popper"
-        :class="['el-popper', 'el-cascader__dropdown', popperClass]">
-        <el-cascader-panel
+        :class="['hzq-popper', 'hzq-cascader__dropdown', popperClass]">
+        <hzq-cascader-panel
           ref="panel"
           v-show="!filtering"
           v-model="checkedValue"
@@ -81,54 +81,54 @@
           :border="false"
           :render-label="$scopedSlots.default"
           @expand-change="handleExpandChange"
-          @close="toggleDropDownVisible(false)"></el-cascader-panel>
-        <el-scrollbar
+          @close="toggleDropDownVisible(false)"></hzq-cascader-panel>
+        <hzq-scrollbar
           ref="suggestionPanel"
           v-if="filterable"
           v-show="filtering"
           tag="ul"
-          class="el-cascader__suggestion-panel"
-          view-class="el-cascader__suggestion-list"
+          class="hzq-cascader__suggestion-panel"
+          view-class="hzq-cascader__suggestion-list"
           @keydown.native="handleSuggestionKeyDown">
           <template v-if="suggestions.length">
             <li
               v-for="(item, index) in suggestions"
               :key="item.uid"
               :class="[
-                'el-cascader__suggestion-item',
+                'hzq-cascader__suggestion-item',
                 item.checked && 'is-checked'
               ]"
               :tabindex="-1"
               @click="handleSuggestionClick(index)">
               <span>{{ item.text }}</span>
-              <i v-if="item.checked" class="el-icon-check"></i>
+              <i v-if="item.checked" class="hzq-icon-check"></i>
             </li>
           </template>
           <slot v-else name="empty">
-            <li class="el-cascader__empty-text">{{ t('el.cascader.noMatch') }}</li>
+            <li class="hzq-cascader__empty-text">{{ t('el.cascader.noMatch') }}</li>
           </slot>
-        </el-scrollbar>
+        </hzq-scrollbar>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
-import Popper from 'element-ui/src/utils/vue-popper';
-import Clickoutside from 'element-ui/src/utils/clickoutside';
-import Emitter from 'element-ui/src/mixins/emitter';
-import Locale from 'element-ui/src/mixins/locale';
-import Migrating from 'element-ui/src/mixins/migrating';
-import ElInput from 'element-ui/packages/input';
-import ElTag from 'element-ui/packages/tag';
-import ElScrollbar from 'element-ui/packages/scrollbar';
-import ElCascaderPanel from 'element-ui/packages/cascader-panel';
-import AriaUtils from 'element-ui/src/utils/aria-utils';
-import { t } from 'element-ui/src/locale';
-import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
-import { isUndefined, isFunction } from 'element-ui/src/utils/types';
-import { isDef } from 'element-ui/src/utils/shared';
-import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+import Popper from 'hzq-ui/src/utils/vue-popper';
+import Clickoutside from 'hzq-ui/src/utils/clickoutside';
+import Emitter from 'hzq-ui/src/mixins/emitter';
+import Locale from 'hzq-ui/src/mixins/locale';
+import Migrating from 'hzq-ui/src/mixins/migrating';
+import HzqInput from 'hzq-ui/packages/input';
+import HzqTag from 'hzq-ui/packages/tag';
+import HzqScrollbar from 'hzq-ui/packages/scrollbar';
+import HzqCascaderPanel from 'hzq-ui/packages/cascader-panel';
+import AriaUtils from 'hzq-ui/src/utils/aria-utils';
+import { t } from 'hzq-ui/src/locale';
+import { isEqual, isEmpty, kebabCase } from 'hzq-ui/src/utils/util';
+import { isUndefined, isFunction } from 'hzq-ui/src/utils/types';
+import { isDef } from 'hzq-ui/src/utils/shared';
+import { addResizeListener, removeResizeListener } from 'hzq-ui/src/utils/resize-event';
 import debounce from 'throttle-debounce/debounce';
 
 const { keys: KeyCode } = AriaUtils;
@@ -169,14 +169,17 @@ const PopperMixin = {
   beforeDestroy: Popper.beforeDestroy
 };
 
+// 与 var.scss 的尺寸梯级保持一致：large 36 / medium 32 / small 28 / mini 24。
+// 多选锁高时用它兜底，正常情况下取实测高度
 const InputSizeMap = {
-  medium: 30,
+  large: 36,
+  medium: 32,
   small: 28,
-  mini: 26
+  mini: 24
 };
 
 export default {
-  name: 'ElCascader',
+  name: 'HzqCascader',
 
   directives: { Clickoutside },
 
@@ -192,10 +195,10 @@ export default {
   },
 
   components: {
-    ElInput,
-    ElTag,
-    ElScrollbar,
-    ElCascaderPanel
+    HzqInput,
+    HzqTag,
+    HzqScrollbar,
+    HzqCascaderPanel
   },
 
   props: {
@@ -250,7 +253,7 @@ export default {
   computed: {
     realSize() {
       const _elFormItemSize = (this.elFormItem || {}).elFormItemSize;
-      return this.size || _elFormItemSize || (this.$ELEMENT || {}).size;
+      return this.size || _elFormItemSize || (this.$HZQ || {}).size;
     },
     tagSize() {
       return ['small', 'mini'].indexOf(this.realSize) > -1
@@ -288,7 +291,7 @@ export default {
     readonly() {
       return !this.filterable || this.multiple;
     },
-    // 多选 + 可搜索时输入区由 el-cascader__search-input 承担（内层 input 是 readonly），
+    // 多选 + 可搜索时输入区由 hzq-cascader__search-input 承担（内层 input 是 readonly），
     // 内层 input 若同时渲染 placeholder 会与搜索框的叠在一起变成重影
     inputPlaceholder() {
       const hasSearchInput = this.multiple && this.filterable && !this.isDisabled;
@@ -331,7 +334,7 @@ export default {
 
         this.$emit('input', val);
         this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', [val]);
+        this.dispatch('HzqFormItem', 'el.form.change', [val]);
       }
     },
     options: {
@@ -475,10 +478,10 @@ export default {
         let firstNode = null;
 
         if (filtering && suggestionPanel) {
-          firstNode = suggestionPanel.$el.querySelector('.el-cascader__suggestion-item');
+          firstNode = suggestionPanel.$el.querySelector('.hzq-cascader__suggestion-item');
         } else {
-          const firstMenu = popper.querySelector('.el-cascader-menu');
-          firstNode = firstMenu.querySelector('.el-cascader-node[tabindex="-1"]');
+          const firstMenu = popper.querySelector('.hzq-cascader-menu');
+          firstNode = firstMenu.querySelector('.hzq-cascader-node[tabindex="-1"]');
         }
 
         if (firstNode) {
@@ -636,7 +639,7 @@ export default {
       this.$emit('remove-tag', val);
     },
     syncTagsOverflow(tagsWrap) {
-      const tagEls = tagsWrap.querySelectorAll('.el-tag');
+      const tagEls = tagsWrap.querySelectorAll('.hzq-tag');
       tagEls.forEach(tag => {
         tag.style.display = '';
         tag.classList.remove('is-overflow-tail');
@@ -680,22 +683,22 @@ export default {
       if (this.$isServer || !$el) return;
 
       const { suggestionPanel } = this.$refs;
-      const inputInner = $el.querySelector('.el-input__inner');
+      const inputInner = $el.querySelector('.hzq-input__inner');
 
       if (!inputInner) return;
 
-      const tags = $el.querySelector('.el-cascader__tags');
+      const tags = $el.querySelector('.hzq-cascader__tags');
       let suggestionPanelEl = null;
 
       if (suggestionPanel && (suggestionPanelEl = suggestionPanel.$el)) {
-        const suggestionList = suggestionPanelEl.querySelector('.el-cascader__suggestion-list');
+        const suggestionList = suggestionPanelEl.querySelector('.hzq-cascader__suggestion-list');
         suggestionList.style.minWidth = inputInner.offsetWidth + 'px';
       }
 
       if (tags) {
         const lockedHeight = InputSizeMap[this.realSize] || inputInitialHeight || 32;
         inputInner.style.height = lockedHeight + 'px';
-        const tagsWrap = tags.querySelector('.el-cascader__tags-wrap');
+        const tagsWrap = tags.querySelector('.hzq-cascader__tags-wrap');
         if (tagsWrap && !this.collapseTags) {
           this.syncTagsOverflow(tagsWrap);
         }

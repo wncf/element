@@ -1,8 +1,8 @@
-import ElAutocomplete from './src/autocomplete';
+import HzqAutocomplete from './src/autocomplete';
 
 /* istanbul ignore next */
-ElAutocomplete.install = function(Vue) {
-  Vue.component(ElAutocomplete.name, ElAutocomplete);
+HzqAutocomplete.install = function(Vue) {
+  Vue.component(HzqAutocomplete.name, HzqAutocomplete);
 };
 
-export default ElAutocomplete;
+export default HzqAutocomplete;

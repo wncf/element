@@ -97,6 +97,10 @@
               "title": "InputNumber 计数器"
             },
             {
+              "path": "/amount-input",
+              "title": "AmountInput 金额输入"
+            },
+            {
               "path": "/select",
               "title": "Select 选择器"
             },
@@ -143,6 +147,10 @@
             {
               "path": "/form",
               "title": "Form 表单"
+            },
+            {
+              "path": "/form-builder",
+              "title": "FormBuilder 配置化表单"
             }
           ]
         },
@@ -213,10 +221,6 @@
             {
               "path": "/message",
               "title": "Message 消息提示"
-            },
-            {
-              "path": "/message-box",
-              "title": "MessageBox 弹框"
             },
             {
               "path": "/notification",
@@ -461,6 +465,10 @@
             {
               "path": "/form",
               "title": "Form"
+            },
+            {
+              "path": "/form-builder",
+              "title": "FormBuilder"
             }
           ]
         },
@@ -527,10 +535,6 @@
             {
               "path": "/message",
               "title": "Message"
-            },
-            {
-              "path": "/message-box",
-              "title": "MessageBox"
             },
             {
               "path": "/notification",
@@ -779,6 +783,10 @@
             {
               "path": "/form",
               "title": "Form"
+            },
+            {
+              "path": "/form-builder",
+              "title": "FormBuilder"
             }
           ]
         },
@@ -845,10 +853,6 @@
             {
               "path": "/message",
               "title": "Message"
-            },
-            {
-              "path": "/message-box",
-              "title": "MessageBox"
             },
             {
               "path": "/notification",
@@ -1097,6 +1101,10 @@
             {
               "path": "/form",
               "title": "Form"
+            },
+            {
+              "path": "/form-builder",
+              "title": "FormBuilder"
             }
           ]
         },
@@ -1163,10 +1171,6 @@
             {
               "path": "/message",
               "title": "Message"
-            },
-            {
-              "path": "/message-box",
-              "title": "MessageBox"
             },
             {
               "path": "/notification",

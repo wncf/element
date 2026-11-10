@@ -13,30 +13,30 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 <template>
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="datetime"
       placeholder="选择日期时间">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">带快捷选项</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="datetime"
       placeholder="选择日期时间"
       align="right"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">设置默认时间</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value3"
       type="datetime"
       placeholder="选择日期时间"
       default-time="12:00:00">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -83,17 +83,17 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 <template>
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="datetimerange"
       range-separator="至"
       start-placeholder="开始日期"
       end-placeholder="结束日期">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">带快捷选项</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="datetimerange"
       :picker-options="pickerOptions"
@@ -101,7 +101,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       align="right">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -152,24 +152,24 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 <template>
   <div class="block">
     <span class="demonstration">起始日期时刻为 12:00:00</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="datetimerange"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       :default-time="['12:00:00']">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">起始日期时刻为 12:00:00，结束日期时刻为 08:00:00</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="datetimerange"
       align="right"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       :default-time="['12:00:00', '08:00:00']">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -186,6 +186,51 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 ```
 :::
 
+### 尺寸
+
+:::demo 通过 `size` 切换四档尺寸：`large`、`medium`、`small`、`mini`。不传时等同 `medium`，四档高度依次为 36px、32px、28px、24px。
+
+```html
+<template>
+  <div class="block">
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">大型</hzq-radio-button>
+      <hzq-radio-button label="medium">中等</hzq-radio-button>
+      <hzq-radio-button label="small">小型</hzq-radio-button>
+      <hzq-radio-button label="mini">超小</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-date-picker
+      v-model="value"
+      type="datetime"
+      :size="size"
+      placeholder="选择日期时间">
+    </hzq-date-picker>
+  </div>
+  <div class="block">
+    <hzq-date-picker
+      v-model="range"
+      type="datetimerange"
+      :size="size"
+      start-placeholder="开始日期时间"
+      end-placeholder="结束日期时间">
+    </hzq-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: '',
+        range: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -194,7 +239,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | disabled | 禁用 | boolean | — | false |
 | editable | 文本框可输入 | boolean | — | true |
 | clearable | 是否显示清除按钮 | boolean | — | true |
-| size          | 输入框尺寸     | string          | large, small, mini  | — |
+| size          | 输入框尺寸     | string          | large / medium / small / mini | — |
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
@@ -210,8 +255,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
-| prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
-| clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
+| prefix-icon | 自定义头部图标的类名 | string | — | hzq-icon-date |
+| clear-icon | 自定义清空图标的类名 | string | — | hzq-icon-circle-close |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

@@ -1,8 +1,8 @@
-import ElTableColumn from '../table/src/table-column';
+import HzqTableColumn from '../table/src/table-column';
 
 /* istanbul ignore next */
-ElTableColumn.install = function(Vue) {
-  Vue.component(ElTableColumn.name, ElTableColumn);
+HzqTableColumn.install = function(Vue) {
+  Vue.component(HzqTableColumn.name, HzqTableColumn);
 };
 
-export default ElTableColumn;
+export default HzqTableColumn;

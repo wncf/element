@@ -1,7 +1,7 @@
 {
-  "name": "element-ui",
-  "version": "2.15.14",
-  "description": "A Component Library for Vue.js.",
+  "name": "hzq-ui",
+  "version": "1.0.0",
+  "description": "A Component Library for Vue.js, based on Element UI.",
   "main": "lib/element-ui.common.js",
   "files": [
     "lib",

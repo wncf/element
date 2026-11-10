@@ -1,6 +1,6 @@
 <script>
   export default {
-    name: 'ElTag',
+    name: 'HzqTag',
     props: {
       text: String,
       closable: Boolean,
@@ -28,16 +28,16 @@
     },
     computed: {
       tagSize() {
-        return this.size || (this.$ELEMENT || {}).size;
+        return this.size || (this.$HZQ || {}).size;
       }
     },
     render(h) {
       const { type, tagSize, hit, effect } = this;
       const classes = [
-        'el-tag',
-        type ? `el-tag--${type}` : '',
-        tagSize ? `el-tag--${tagSize}` : '',
-        effect ? `el-tag--${effect}` : '',
+        'hzq-tag',
+        type ? `hzq-tag--${type}` : '',
+        tagSize ? `hzq-tag--${tagSize}` : '',
+        effect ? `hzq-tag--${effect}` : '',
         hit && 'is-hit'
       ];
       const tagEl = (
@@ -47,7 +47,7 @@
           on-click={ this.handleClick }>
           { this.$slots.default }
           {
-            this.closable && <i class="el-tag__close el-icon-close" on-click={ this.handleClose }></i>
+            this.closable && <i class="hzq-tag__close hzq-icon-close" on-click={ this.handleClose }></i>
           }
         </span>
       );

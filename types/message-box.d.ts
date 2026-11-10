@@ -1,5 +1,6 @@
 import Vue, { VNode } from 'vue'
 import { MessageType } from './message'
+import { ElementUIComponentSize } from './component'
 
 export type MessageBoxCloseAction = 'confirm' | 'cancel' | 'close'
 export type MessageBoxData = MessageBoxInputData | MessageBoxCloseAction
@@ -131,7 +132,7 @@ export interface ElMessageBoxOptions {
   distinguishCancelAndClose?: boolean
 
   /** Button size, defaults to Vue.prototype.$ELEMENT.size */
-  buttonSize?: 'medium' | 'small' | 'mini' | ''
+  buttonSize?: ElementUIComponentSize | ''
 }
 
 export interface ElMessageBoxShortcutMethod {

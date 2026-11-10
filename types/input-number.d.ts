@@ -1,6 +1,6 @@
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 
-export type InputNumberSize = 'large' | 'small'
+export type InputNumberSize = ElementUIComponentSize
 
 /** InputNumber Component */
 export declare class ElInputNumber extends ElementUIComponent {

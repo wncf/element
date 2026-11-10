@@ -1,12 +1,12 @@
 <template>
-  <main class="el-main">
+  <main class="hzq-main">
     <slot></slot>
   </main>
 </template>
 
 <script>
   export default {
-    name: 'ElMain',
-    componentName: 'ElMain'
+    name: 'HzqMain',
+    componentName: 'HzqMain'
   };
 </script>

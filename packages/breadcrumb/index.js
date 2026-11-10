@@ -1,8 +1,8 @@
-import ElBreadcrumb from './src/breadcrumb';
+import HzqBreadcrumb from './src/breadcrumb';
 
 /* istanbul ignore next */
-ElBreadcrumb.install = function(Vue) {
-  Vue.component(ElBreadcrumb.name, ElBreadcrumb);
+HzqBreadcrumb.install = function(Vue) {
+  Vue.component(HzqBreadcrumb.name, HzqBreadcrumb);
 };
 
-export default ElBreadcrumb;
+export default HzqBreadcrumb;

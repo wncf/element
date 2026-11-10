@@ -1,8 +1,8 @@
-import ElDropdownMenu from '../dropdown/src/dropdown-menu';
+import HzqDropdownMenu from '../dropdown/src/dropdown-menu';
 
 /* istanbul ignore next */
-ElDropdownMenu.install = function(Vue) {
-  Vue.component(ElDropdownMenu.name, ElDropdownMenu);
+HzqDropdownMenu.install = function(Vue) {
+  Vue.component(HzqDropdownMenu.name, HzqDropdownMenu);
 };
 
-export default ElDropdownMenu;
+export default HzqDropdownMenu;

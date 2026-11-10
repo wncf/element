@@ -21,62 +21,62 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 /* 语义颜色统一指向 token（定义见 common/tokens.scss），
    深浅模式切换对组件代码透明；原始色板在 common/palette.scss。 */
 /// color|1|Brand Color|0
-$--color-primary: var(--el-color-primary) !default;
+$--color-primary: var(--hzq-color-primary) !default;
 /// color|1|Background Color|4
 $--color-white: #FFFFFF !default;
 /// color|1|Background Color|4
 $--color-black: #000000 !default;
 /* 品牌色浅色档：浅色模式向白混合、深色模式向组件底色混合，由 tokens.scss 按模式生成 */
-$--color-primary-light-1: var(--el-color-primary-light-1) !default;
-$--color-primary-light-2: var(--el-color-primary-light-2) !default;
-$--color-primary-light-3: var(--el-color-primary-light-3) !default;
-$--color-primary-light-4: var(--el-color-primary-light-4) !default;
-$--color-primary-light-5: var(--el-color-primary-light-5) !default;
-$--color-primary-light-6: var(--el-color-primary-light-6) !default;
-$--color-primary-light-7: var(--el-color-primary-light-7) !default;
-$--color-primary-light-8: var(--el-color-primary-light-8) !default;
-$--color-primary-light-9: var(--el-color-primary-light-9) !default;
+$--color-primary-light-1: var(--hzq-color-primary-light-1) !default;
+$--color-primary-light-2: var(--hzq-color-primary-light-2) !default;
+$--color-primary-light-3: var(--hzq-color-primary-light-3) !default;
+$--color-primary-light-4: var(--hzq-color-primary-light-4) !default;
+$--color-primary-light-5: var(--hzq-color-primary-light-5) !default;
+$--color-primary-light-6: var(--hzq-color-primary-light-6) !default;
+$--color-primary-light-7: var(--hzq-color-primary-light-7) !default;
+$--color-primary-light-8: var(--hzq-color-primary-light-8) !default;
+$--color-primary-light-9: var(--hzq-color-primary-light-9) !default;
 /* 品牌色提亮档（悬停）与加深档（按下）：两种模式取值一致，深色底上也读得出来 */
-$--color-primary-hover: var(--el-color-primary-hover) !default;
-$--color-primary-shade: var(--el-color-primary-shade) !default;
+$--color-primary-hover: var(--hzq-color-primary-hover) !default;
+$--color-primary-shade: var(--hzq-color-primary-shade) !default;
 /// color|1|Functional Color|1
-$--color-success: var(--el-color-success) !default;
+$--color-success: var(--hzq-color-success) !default;
 /// color|1|Functional Color|1
-$--color-warning: var(--el-color-warning) !default;
+$--color-warning: var(--hzq-color-warning) !default;
 /// color|1|Functional Color|1
-$--color-danger: var(--el-color-danger) !default;
+$--color-danger: var(--hzq-color-danger) !default;
 /// color|1|Functional Color|1
-$--color-info: var(--el-color-info) !default;
+$--color-info: var(--hzq-color-info) !default;
 
-$--color-success-light: var(--el-color-success-light-8) !default;
-$--color-warning-light: var(--el-color-warning-light-8) !default;
-$--color-danger-light: var(--el-color-danger-light-8) !default;
-$--color-info-light: var(--el-color-info-light-8) !default;
+$--color-success-light: var(--hzq-color-success-light-8) !default;
+$--color-warning-light: var(--hzq-color-warning-light-8) !default;
+$--color-danger-light: var(--hzq-color-danger-light-8) !default;
+$--color-info-light: var(--hzq-color-info-light-8) !default;
 
-$--color-success-lighter: var(--el-color-success-light-9) !default;
-$--color-warning-lighter: var(--el-color-warning-light-9) !default;
-$--color-danger-lighter: var(--el-color-danger-light-9) !default;
-$--color-info-lighter: var(--el-color-info-light-9) !default;
+$--color-success-lighter: var(--hzq-color-success-light-9) !default;
+$--color-warning-lighter: var(--hzq-color-warning-light-9) !default;
+$--color-danger-lighter: var(--hzq-color-danger-light-9) !default;
+$--color-info-lighter: var(--hzq-color-info-light-9) !default;
 /// color|1|Font Color|2
-$--color-text-primary: var(--el-text-color-primary) !default;
+$--color-text-primary: var(--hzq-text-color-primary) !default;
 /// color|1|Font Color|2
-$--color-text-regular: var(--el-text-color-regular) !default;
+$--color-text-regular: var(--hzq-text-color-regular) !default;
 /// color|1|Font Color|2
-$--color-text-secondary: var(--el-text-color-secondary) !default;
+$--color-text-secondary: var(--hzq-text-color-secondary) !default;
 /// color|1|Font Color|2
-$--color-text-placeholder: var(--el-text-color-placeholder) !default;
+$--color-text-placeholder: var(--hzq-text-color-placeholder) !default;
 /// color|1|Border Color|3
-$--border-color-base: var(--el-border-color-base) !default;
+$--border-color-base: var(--hzq-border-color-base) !default;
 /// color|1|Border Color|3
-$--border-color-light: var(--el-border-color-light) !default;
+$--border-color-light: var(--hzq-border-color-light) !default;
 /// color|1|Border Color|3
-$--border-color-lighter: var(--el-border-color-lighter) !default;
+$--border-color-lighter: var(--hzq-border-color-lighter) !default;
 /// color|1|Border Color|3
-$--border-color-extra-light: var(--el-border-color-extra-light) !default;
+$--border-color-extra-light: var(--hzq-border-color-extra-light) !default;
 
 // Background
 /// color|1|Background Color|4
-$--background-color-base: var(--el-fill-color-light) !default;
+$--background-color-base: var(--hzq-fill-color-light) !default;
 
 /* Link
 -------------------------- */
@@ -87,7 +87,7 @@ $--link-hover-color: $--color-primary !default;
 -------------------------- */
 $--border-width-base: 1px !default;
 $--border-style-base: solid !default;
-$--border-color-hover: var(--el-border-color-hover) !default;
+$--border-color-hover: var(--hzq-border-color-hover) !default;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base !default;
 /// borderRadius|1|Radius|0
 $--border-radius-base: 3px !default;
@@ -108,7 +108,7 @@ $--box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
 
 /* Fill
 -------------------------- */
-$--fill-base: var(--el-fill-color-blank) !default;
+$--fill-base: var(--hzq-fill-color-blank) !default;
 
 /* Typography
 -------------------------- */
@@ -134,10 +134,43 @@ $--font-weight-secondary: 100 !default;
 $--font-line-height-primary: 20px !default;
 /// fontLineHeight|1|Line Height|2
 $--font-line-height-secondary: 14px !default;
-$--font-color-disabled-base: var(--el-text-color-disabled) !default;
+$--font-color-disabled-base: var(--hzq-text-color-disabled) !default;
 /* Size
 -------------------------- */
 $--size-base: 13px !default;
+
+/* Size ladder（控件尺寸梯级）
+-------------------------- */
+// 四档控件的总高与字号统一在这里定义，其余组件按档位引用它们。
+// 总高含上下各 1px 边框（见 input 的 box-sizing: border-box），
+// 内容区 = 总高 - 2px，两者成对出现，改高度只需改这一处。
+// 顺序固定为 large → medium → small → mini，默认（不传 size）等同 medium。
+/// height||Other|4
+$--component-height-large: 36px !default;
+/// height||Other|4
+$--component-height-medium: 32px !default;
+/// height||Other|4
+$--component-height-small: 28px !default;
+/// height||Other|4
+$--component-height-mini: 24px !default;
+
+/// fontSize||Font|1
+$--component-font-size-large: 14px !default;
+/// fontSize||Font|1
+$--component-font-size-medium: 13px !default;
+/// fontSize||Font|1
+$--component-font-size-small: 12px !default;
+/// fontSize||Font|1
+$--component-font-size-mini: 12px !default;
+
+/// height||Other|4
+$--component-inner-height-large: 34px !default;
+/// height||Other|4
+$--component-inner-height-medium: 30px !default;
+/// height||Other|4
+$--component-inner-height-small: 26px !default;
+/// height||Other|4
+$--component-inner-height-mini: 22px !default;
 
 /* z-index
 -------------------------- */
@@ -153,7 +186,7 @@ $--disabled-border-base: $--border-color-light !default;
 
 /* Icon
 -------------------------- */
-$--icon-color: var(--el-text-color-regular) !default;
+$--icon-color: var(--hzq-text-color-regular) !default;
 $--icon-color-base: $--color-info !default;
 
 /* Checkbox
@@ -169,12 +202,12 @@ $--checkbox-input-width: 14px !default;
 /// borderRadius||Border|2
 $--checkbox-border-radius: $--border-radius-small !default;
 /// color||Color|0
-$--checkbox-background-color: var(--el-bg-color) !default;
+$--checkbox-background-color: var(--hzq-bg-color) !default;
 $--checkbox-input-border: $--border-base !default;
 
 /// color||Color|0
 $--checkbox-disabled-border-color: $--border-color-base !default;
-$--checkbox-disabled-input-fill: var(--el-fill-color-dark) !default;
+$--checkbox-disabled-input-fill: var(--hzq-fill-color-dark) !default;
 $--checkbox-disabled-icon-color: $--color-text-placeholder !default;
 
 $--checkbox-disabled-checked-input-fill: $--border-color-extra-light !default;
@@ -189,10 +222,13 @@ $--checkbox-checked-background-color: $--color-primary !default;
 $--checkbox-checked-icon-color: $--color-white !default;
 
 $--checkbox-input-border-color-hover: $--color-primary !default;
+/* 尺寸梯级：与控件同档（large 36 → default/medium 32 → small 28 → mini 24） */
 /// height||Other|4
-$--checkbox-bordered-height: 32px !default;
+$--checkbox-bordered-height: $--component-height-medium !default;
 /// padding||Spacing|3
 $--checkbox-bordered-padding: 6px 14px 6px 8px !default;
+/// padding||Spacing|3
+$--checkbox-bordered-large-padding: 8px 16px 8px 10px !default;
 /// padding||Spacing|3
 // medium 与 default 同高（32px），padding 一并对齐
 $--checkbox-bordered-medium-padding: 6px 14px 6px 8px !default;
@@ -200,18 +236,22 @@ $--checkbox-bordered-medium-padding: 6px 14px 6px 8px !default;
 $--checkbox-bordered-small-padding: 4px 12px 4px 8px !default;
 /// padding||Spacing|3
 $--checkbox-bordered-mini-padding: 2px 10px 2px 8px !default;
+$--checkbox-bordered-large-input-height: 16px !default;
+$--checkbox-bordered-large-input-width: 16px !default;
+/// height||Other|4
+$--checkbox-bordered-large-height: $--component-height-large !default;
 $--checkbox-bordered-medium-input-height: 14px !default;
 $--checkbox-bordered-medium-input-width: 14px !default;
 /// height||Other|4
-$--checkbox-bordered-medium-height: 32px !default;
+$--checkbox-bordered-medium-height: $--component-height-medium !default;
 $--checkbox-bordered-small-input-height: 12px !default;
 $--checkbox-bordered-small-input-width: 12px !default;
 /// height||Other|4
-$--checkbox-bordered-small-height: 28px !default;
+$--checkbox-bordered-small-height: $--component-height-small !default;
 $--checkbox-bordered-mini-input-height: 12px !default;
 $--checkbox-bordered-mini-input-width: 12px !default;
 /// height||Other|4
-$--checkbox-bordered-mini-height: 26px !default;
+$--checkbox-bordered-mini-height: $--component-height-mini !default;
 
 /// color||Color|0
 $--checkbox-button-checked-background-color: $--color-primary !default;
@@ -235,7 +275,7 @@ $--radio-input-width: 14px !default;
 /// borderRadius||Border|2
 $--radio-input-border-radius: $--border-radius-circle !default;
 /// color||Color|0
-$--radio-input-background-color: var(--el-bg-color) !default;
+$--radio-input-background-color: var(--hzq-bg-color) !default;
 $--radio-input-border: $--border-base !default;
 /// color||Color|0
 $--radio-input-border-color: $--border-color-base !default;
@@ -255,30 +295,34 @@ $--radio-checked-font-color: $--color-primary !default;
 /// color||Color|0
 $--radio-checked-input-border-color: $--color-primary !default;
 /// color||Color|0
-$--radio-checked-input-background-color: var(--el-bg-color) !default;
+$--radio-checked-input-background-color: var(--hzq-bg-color) !default;
 /// color||Color|0
 $--radio-checked-icon-color: $--color-primary !default;
 
 $--radio-input-border-color-hover: $--color-primary !default;
 
-$--radio-bordered-height: 32px !default;
+$--radio-bordered-height: $--component-height-medium !default;
 $--radio-bordered-padding: 6px 14px 6px 8px !default;
+$--radio-bordered-large-padding: 8px 16px 8px 10px !default;
 // medium 与 default 同高（32px），padding 一并对齐
 $--radio-bordered-medium-padding: 6px 14px 6px 8px !default;
 $--radio-bordered-small-padding: 4px 12px 4px 8px !default;
 $--radio-bordered-mini-padding: 2px 10px 2px 8px !default;
+$--radio-bordered-large-input-height: 16px !default;
+$--radio-bordered-large-input-width: 16px !default;
+$--radio-bordered-large-height: $--component-height-large !default;
 $--radio-bordered-medium-input-height: 14px !default;
 $--radio-bordered-medium-input-width: 14px !default;
-$--radio-bordered-medium-height: 32px !default;
+$--radio-bordered-medium-height: $--component-height-medium !default;
 $--radio-bordered-small-input-height: 12px !default;
 $--radio-bordered-small-input-width: 12px !default;
-$--radio-bordered-small-height: 28px !default;
+$--radio-bordered-small-height: $--component-height-small !default;
 $--radio-bordered-mini-input-height: 12px !default;
 $--radio-bordered-mini-input-width: 12px !default;
-$--radio-bordered-mini-height: 26px !default;
+$--radio-bordered-mini-height: $--component-height-mini !default;
 
 /// fontSize||Font|1
-$--radio-button-font-size: $--font-size-base !default;
+$--radio-button-font-size: $--component-font-size-medium !default;
 /// color||Color|0
 $--radio-button-checked-background-color: $--color-primary !default;
 /// color||Color|0
@@ -296,7 +340,7 @@ $--select-font-size: $--font-size-base !default;
 $--select-close-hover-color: $--color-text-secondary !default;
 
 $--select-input-color: $--color-text-placeholder !default;
-$--select-multiple-input-color: var(--el-text-color-regular) !default;
+$--select-multiple-input-color: var(--hzq-text-color-regular) !default;
 /// color||Color|0
 $--select-input-focus-border-color: $--color-primary !default;
 /// fontSize||Font|1
@@ -304,7 +348,7 @@ $--select-input-font-size: $--font-size-base !default;
 
 $--select-option-color: $--color-text-regular !default;
 $--select-option-disabled-color: $--color-text-placeholder !default;
-$--select-option-disabled-background: var(--el-bg-color-overlay) !default;
+$--select-option-disabled-background: var(--hzq-bg-color-overlay) !default;
 /// height||Other|4
 $--select-option-height: 30px !default;
 $--select-option-hover-background: $--background-color-base !default;
@@ -316,9 +360,9 @@ $--select-group-color: $--color-info !default;
 $--select-group-height: 26px !default;
 $--select-group-font-size: 12px !default;
 
-$--select-dropdown-background: var(--el-bg-color-overlay) !default;
+$--select-dropdown-background: var(--hzq-bg-color-overlay) !default;
 $--select-dropdown-shadow: $--box-shadow-light !default;
-$--select-dropdown-empty-color: var(--el-text-color-secondary) !default;
+$--select-dropdown-empty-color: var(--hzq-text-color-secondary) !default;
 /// height||Other|4
 $--select-dropdown-max-height: 274px !default;
 $--select-dropdown-padding: 4px 0 !default;
@@ -349,35 +393,12 @@ $--alert-icon-size: 16px !default;
 /// height||Other|4
 $--alert-icon-large-size: 28px !default;
 
-/* MessageBox
--------------------------- */
-/// color||Color|0
-$--messagebox-title-color: $--color-text-primary !default;
-$--msgbox-width: 420px !default;
-$--msgbox-border-radius: 12px !default;
-/// fontSize||Font|1
-$--messagebox-font-size: $--font-size-large !default;
-/// fontSize||Font|1
-$--messagebox-content-font-size: $--font-size-base !default;
-/// color||Color|0
-$--messagebox-content-color: $--color-text-regular !default;
-/// fontSize||Font|1
-$--messagebox-error-font-size: 12px !default;
-$--msgbox-padding-primary: 12px !default;
-/// color||Color|0
-$--messagebox-success-color: $--color-success !default;
-/// color||Color|0
-$--messagebox-info-color: $--color-info !default;
-/// color||Color|0
-$--messagebox-warning-color: $--color-warning !default;
-/// color||Color|0
-$--messagebox-danger-color: $--color-danger !default;
 
 /* Message
 -------------------------- */
 $--message-shadow: $--box-shadow-base !default;
 $--message-min-width: 380px !default;
-$--message-background-color: var(--el-fill-color-dark) !default;
+$--message-background-color: var(--hzq-fill-color-dark) !default;
 $--message-padding: 12px 12px 12px 16px !default;
 /// color||Color|0
 $--message-close-icon-color: $--color-text-placeholder !default;
@@ -433,21 +454,22 @@ $--notification-danger-icon-color: $--color-danger !default;
 
 /* Input
 -------------------------- */
-/* 尺寸梯级（总高 = 内容区 + 上下边框各 1px，原版 40→36→32→28，紧凑版 default/medium 32 → small 28 → mini 26） */
-$--input-font-size: $--font-size-base !default;
+/* 尺寸梯级：总高 36/32/28/24（含上下边框各 1px），内容区 34/30/26/22。
+   large/medium/small/mini 四档均可在 var.scss 的 Size ladder 段统一调整 */
+$--input-font-size: $--component-font-size-medium !default;
 /// color||Color|0
 $--input-font-color: $--color-text-regular !default;
 /// height||Other|4
-$--input-inner-height: 30px !default;
+$--input-inner-height: $--component-inner-height-medium !default;
 /// height||Other|4
-$--input-height: 32px !default;
+$--input-height: $--component-height-medium !default;
 $--input-border: $--border-base !default;
 $--input-border-color: $--border-color-base !default;
 /// borderRadius||Border|2
 $--input-border-radius: $--border-radius-base !default;
 $--input-border-color-hover: $--border-color-hover !default;
 /// color||Color|0
-$--input-background-color: var(--el-bg-color) !default;
+$--input-background-color: var(--hzq-bg-color) !default;
 $--input-fill-disabled: $--disabled-fill-base !default;
 $--input-color-disabled: $--font-color-disabled-base !default;
 /// color||Color|0
@@ -460,7 +482,7 @@ $--input-hover-border: $--border-color-hover !default;
 $--input-clear-hover-color: $--color-text-secondary !default;
 
 $--input-focus-border: $--color-primary !default;
-$--input-focus-fill: var(--el-bg-color) !default;
+$--input-focus-fill: var(--hzq-bg-color) !default;
 
 $--input-disabled-fill: $--disabled-fill-base !default;
 $--input-disabled-border: $--disabled-border-base !default;
@@ -468,28 +490,36 @@ $--input-disabled-color: $--disabled-color-base !default;
 $--input-disabled-placeholder-color: $--color-text-placeholder !default;
 
 /// fontSize||Font|1
-$--input-medium-font-size: $--font-size-base !default;
+$--input-large-font-size: $--component-font-size-large !default;
 /// height||Other|4
-$--input-medium-inner-height: 30px !default;
+$--input-large-inner-height: $--component-inner-height-large !default;
+/// height||Other|4
+$--input-large-height: $--component-height-large !default;
+/// fontSize||Font|1
+$--input-medium-font-size: $--component-font-size-medium !default;
+/// height||Other|4
+$--input-medium-inner-height: $--component-inner-height-medium !default;
 /// height||Other|4
 // medium 与 default 同高（32px），不再单独降一级
-$--input-medium-height: 32px !default;
+$--input-medium-height: $--component-height-medium !default;
 /// fontSize||Font|1
-$--input-small-font-size: $--font-size-small !default;
+$--input-small-font-size: $--component-font-size-small !default;
 /// height||Other|4
-$--input-small-inner-height: 26px !default;
+$--input-small-inner-height: $--component-inner-height-small !default;
 /// height||Other|4
-$--input-small-height: 28px !default;
+$--input-small-height: $--component-height-small !default;
 /// fontSize||Font|1
-$--input-mini-font-size: $--font-size-extra-small !default;
+$--input-mini-font-size: $--component-font-size-mini !default;
 /// height||Other|4
-$--input-mini-inner-height: 24px !default;
+$--input-mini-inner-height: $--component-inner-height-mini !default;
 /// height||Other|4
-$--input-mini-height: 26px !default;
+$--input-mini-height: $--component-height-mini !default;
 
 /* Select multiple inner input (depends on input inner height) */
 /// height||Other|4
 $--select-multiple-input-height: $--input-inner-height !default;
+/// height||Other|4
+$--select-multiple-input-large-height: $--input-large-inner-height !default;
 /// height||Other|4
 $--select-multiple-input-small-height: $--input-small-inner-height !default;
 /// height||Other|4
@@ -501,7 +531,7 @@ $--select-multiple-input-mini-height: $--input-mini-inner-height !default;
 $--cascader-menu-font-color: $--color-text-regular !default;
 /// color||Color|0
 $--cascader-menu-selected-font-color: $--color-primary !default;
-$--cascader-menu-fill: var(--el-bg-color-overlay) !default;
+$--cascader-menu-fill: var(--hzq-bg-color-overlay) !default;
 $--cascader-menu-font-size: $--font-size-base !default;
 $--cascader-menu-radius: $--border-radius-base !default;
 $--cascader-menu-border: solid 1px $--border-color-light !default;
@@ -509,13 +539,13 @@ $--cascader-menu-shadow: $--box-shadow-light !default;
 $--cascader-node-background-hover: $--background-color-base !default;
 $--cascader-node-color-disabled:$--color-text-placeholder !default;
 $--cascader-color-empty:$--color-text-placeholder !default;
-$--cascader-tag-background: var(--el-fill-color);
+$--cascader-tag-background: var(--hzq-fill-color);
 
 /* Group
 -------------------------- */
 $--group-option-flex: 0 0 (1/5) * 100% !default;
 $--group-option-offset-bottom: 8px !default;
-$--group-option-fill-hover: var(--el-fill-color-light) !default;
+$--group-option-fill-hover: var(--hzq-fill-color-light) !default;
 $--group-title-color: $--color-black !default;
 $--group-title-font-size: $--font-size-base !default;
 $--group-title-width: 66px !default;
@@ -523,12 +553,12 @@ $--group-title-width: 66px !default;
 /* Tab
 -------------------------- */
 $--tab-font-size: $--font-size-base !default;
-$--tab-border-line: 1px solid var(--el-border-color-light) !default;
+$--tab-border-line: 1px solid var(--hzq-border-color-light) !default;
 $--tab-header-color-active: $--color-text-secondary !default;
 $--tab-header-color-hover: $--color-text-regular !default;
 $--tab-header-color: $--color-text-regular !default;
-$--tab-header-fill-active: var(--el-fill-color-light) !default;
-$--tab-header-fill-hover: var(--el-fill-color-light) !default;
+$--tab-header-fill-active: var(--hzq-fill-color-light) !default;
+$--tab-header-fill-hover: var(--hzq-fill-color-light) !default;
 $--tab-vertical-header-width: 90px !default;
 $--tab-vertical-header-count-color: $--color-white !default;
 $--tab-vertical-header-count-fill: $--color-text-secondary !default;
@@ -536,10 +566,11 @@ $--tab-vertical-header-count-fill: $--color-text-secondary !default;
 /* Button
 -------------------------- */
 // 按钮高度由 padding 撑开：高度 = 上下 padding × 2 + font-size + 上下 border(1px × 2)
-// 目标高度：default/medium 32px、small 28px、mini 22px，padding 按目标高度反推
-// default: 8.5 × 2 + 13 + 2 = 32 / small: 7 × 2 + 12 + 2 = 28 / mini: 4 × 2 + 12 + 2 = 22
+// 目标高度：large 36、default/medium 32、small 28、mini 24，padding 按目标高度反推
+// large: 10 × 2 + 14 + 2 = 36 / medium: 8.5 × 2 + 13 + 2 = 32
+// small: 7 × 2 + 12 + 2 = 28 / mini: 5 × 2 + 12 + 2 = 24
 /// fontSize||Font|1
-$--button-font-size: $--font-size-base !default;
+$--button-font-size: $--component-font-size-medium !default;
 /// fontWeight||Font|1
 $--button-font-weight: $--font-weight-primary !default;
 /// borderRadius||Border|2
@@ -550,7 +581,16 @@ $--button-padding-vertical: 8.5px !default;
 $--button-padding-horizontal: 14px !default;
 
 /// fontSize||Font|1
-$--button-medium-font-size: $--font-size-base !default;
+$--button-large-font-size: $--component-font-size-large !default;
+/// borderRadius||Border|2
+$--button-large-border-radius: 6px !default;
+/// padding||Spacing|3
+$--button-large-padding-vertical: 10px !default;
+/// padding||Spacing|3
+$--button-large-padding-horizontal: 16px !default;
+
+/// fontSize||Font|1
+$--button-medium-font-size: $--component-font-size-medium !default;
 /// borderRadius||Border|2
 $--button-medium-border-radius: 6px !default;
 // medium 与 default 同尺寸，高度保持一致
@@ -560,31 +600,31 @@ $--button-medium-padding-vertical: 8.5px !default;
 $--button-medium-padding-horizontal: 14px !default;
 
 /// fontSize||Font|1
-$--button-small-font-size: 12px !default;
+$--button-small-font-size: $--component-font-size-small !default;
 $--button-small-border-radius: 6px !default;
 /// padding||Spacing|3
 $--button-small-padding-vertical: 7px !default;
 /// padding||Spacing|3
 $--button-small-padding-horizontal: 12px !default;
 /// fontSize||Font|1
-$--button-mini-font-size: 12px !default;
+$--button-mini-font-size: $--component-font-size-mini !default;
 $--button-mini-border-radius: 6px !default;
 /// padding||Spacing|3
-$--button-mini-padding-vertical: 4px !default;
+$--button-mini-padding-vertical: 5px !default;
 /// padding||Spacing|3
 $--button-mini-padding-horizontal: 10px !default;
 
 /// color||Color|0
 $--button-default-font-color: $--color-text-regular !default;
 /// color||Color|0
-$--button-default-background-color: var(--el-fill-color-blank) !default;
+$--button-default-background-color: var(--hzq-fill-color-blank) !default;
 /// color||Color|0
 $--button-default-border-color: $--border-color-base !default;
 
 /// color||Color|0
 $--button-disabled-font-color: $--color-text-placeholder !default;
 /// color||Color|0
-$--button-disabled-background-color: var(--el-fill-color-blank) !default;
+$--button-disabled-background-color: var(--hzq-fill-color-blank) !default;
 /// color||Color|0
 $--button-disabled-border-color: $--border-color-lighter !default;
 
@@ -645,7 +685,7 @@ $--switch-button-size: 16px !default;
 
 /* Dialog
 -------------------------- */
-$--dialog-background-color: var(--el-bg-color) !default;
+$--dialog-background-color: var(--hzq-bg-color) !default;
 $--dialog-border-radius: 12px !default;
 $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
 /// fontSize||Font|1
@@ -661,13 +701,13 @@ $--dialog-close-btn-size: 24px !default;
 /// borderRadius||Border|2
 $--dialog-close-btn-border-radius: 6px !default;
 /// color||Color|0
-$--dialog-close-btn-background: var(--el-fill-color) !default;
+$--dialog-close-btn-background: var(--hzq-fill-color) !default;
 /// color||Color|0
-$--dialog-close-btn-color: var(--el-text-color-secondary) !default;
+$--dialog-close-btn-color: var(--hzq-text-color-secondary) !default;
 /// color||Color|0
-$--dialog-close-btn-hover-background: var(--el-fill-color-dark) !default;
+$--dialog-close-btn-hover-background: var(--hzq-fill-color-dark) !default;
 /// color||Color|0
-$--dialog-close-btn-hover-color: var(--el-text-color-regular) !default;
+$--dialog-close-btn-hover-color: var(--hzq-text-color-regular) !default;
 
 /* Table
 -------------------------- */
@@ -682,7 +722,7 @@ $--table-header-font-color: $--color-text-secondary !default;
 $--table-row-hover-background-color: $--background-color-base !default;
 $--table-current-row-background-color: $--color-primary-light-9 !default;
 /// color||Color|0
-$--table-header-background-color: var(--el-bg-color) !default;
+$--table-header-background-color: var(--hzq-bg-color) !default;
 $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
 
 /* Pagination
@@ -690,29 +730,33 @@ $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
 /// fontSize||Font|1
 $--pagination-font-size: 12px !default;
 /// color||Color|0
-$--pagination-background-color: var(--el-bg-color) !default;
+$--pagination-background-color: var(--hzq-bg-color) !default;
 /// color||Color|0
 $--pagination-font-color: $--color-text-primary !default;
 $--pagination-border-radius: $--button-border-radius !default;
 /// color||Color|0
 $--pagination-button-color: $--color-text-primary !default;
-/* 尺寸梯级：与控件一致（default/medium 32 → small 28 → mini 26），页码与上下页按钮为正方形 */
+/* 尺寸梯级：与控件一致（large 36 → default/medium 32 → small 28 → mini 24），页码与上下页按钮为正方形 */
 /// height||Other|4
-$--pagination-button-width: 32px !default;
+$--pagination-button-width: $--component-height-medium !default;
 /// height||Other|4
-$--pagination-button-height: 32px !default;
+$--pagination-button-height: $--component-height-medium !default;
 /// height||Other|4
-$--pagination-small-button-width: 28px !default;
+$--pagination-large-button-width: $--component-height-large !default;
 /// height||Other|4
-$--pagination-small-button-height: 28px !default;
+$--pagination-large-button-height: $--component-height-large !default;
 /// height||Other|4
-$--pagination-mini-button-width: 26px !default;
+$--pagination-small-button-width: $--component-height-small !default;
 /// height||Other|4
-$--pagination-mini-button-height: 26px !default;
+$--pagination-small-button-height: $--component-height-small !default;
+/// height||Other|4
+$--pagination-mini-button-width: $--component-height-mini !default;
+/// height||Other|4
+$--pagination-mini-button-height: $--component-height-mini !default;
 /// color||Color|0
 $--pagination-button-disabled-color: $--color-text-placeholder !default;
 /// color||Color|0
-$--pagination-button-disabled-background-color: var(--el-fill-color-blank) !default;
+$--pagination-button-disabled-background-color: var(--hzq-fill-color-blank) !default;
 /// color||Color|0
 $--pagination-hover-color: $--color-primary !default;
 
@@ -726,7 +770,7 @@ $--popup-modal-opacity: 0.5 !default;
 /* Popover
 -------------------------- */
 /// color||Color|0
-$--popover-background-color: var(--el-bg-color-overlay) !default;
+$--popover-background-color: var(--hzq-bg-color-overlay) !default;
 /// fontSize||Font|1
 $--popover-font-size: $--font-size-base !default;
 /// color||Color|0
@@ -743,13 +787,13 @@ $--popover-title-font-color: $--color-text-primary !default;
 /* Tooltip
 -------------------------- */
 /// color|1|Color|0
-$--tooltip-fill: var(--el-tooltip-bg-color) !default;
+$--tooltip-fill: var(--hzq-tooltip-bg-color) !default;
 /// color|1|Color|0
 $--tooltip-color: $--color-white !default;
 /// fontSize||Font|1
 $--tooltip-font-size: 12px !default;
 /// color||Color|0
-$--tooltip-border-color: var(--el-tooltip-bg-color) !default;
+$--tooltip-border-color: var(--hzq-tooltip-bg-color) !default;
 $--tooltip-arrow-size: 6px !default;
 /// padding||Spacing|3
 $--tooltip-padding: 8px !default;
@@ -767,18 +811,22 @@ $--tag-warning-color: $--color-warning !default;
 /// color||Color|0
 $--tag-danger-color: $--color-danger !default;
 /// fontSize||Font|1
+// 标签是展示型元素，字号不跟随控件档位的中位值（12px 起步），
+// 只有 large 档放大到 14px，其余档保持原字号
 $--tag-font-size: 12px !default;
 $--tag-border-radius: $--border-radius-base !default;
 $--tag-padding: 0 8px !default;
-/* 尺寸梯级：tag 比同尺寸控件小一档（控件 32/32/28/26 → tag 32/32/28/24） */
+/* 尺寸梯级：与控件同档（large 36 → default/medium 32 → small 28 → mini 24） */
 /// height||Other|4
-$--tag-height: 32px !default;
+$--tag-height: $--component-height-medium !default;
+/// height||Other|4
+$--tag-large-height: $--component-height-large !default;
 /// height||Other|4
 $--tag-medium-height: $--tag-height !default;
 /// height||Other|4
-$--tag-small-height: 28px !default;
+$--tag-small-height: $--component-height-small !default;
 /// height||Other|4
-$--tag-mini-height: 24px !default;
+$--tag-mini-height: $--component-height-mini !default;
 
 /* Tree
 -------------------------- */
@@ -822,7 +870,7 @@ $--card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !default;
 $--slider-main-background-color: $--color-primary !default;
 /// color||Color|0
 $--slider-runway-background-color: $--border-color-light !default;
-$--slider-button-hover-color: var(--el-color-primary-shade) !default;
+$--slider-button-hover-color: var(--hzq-color-primary-shade) !default;
 $--slider-stop-background-color: $--color-white !default;
 $--slider-disable-color: $--color-text-placeholder !default;
 $--slider-margin: 12px 0 !default;
@@ -847,7 +895,7 @@ $--menu-item-font-size: $--font-size-base !default;
 /// color||Color|0
 $--menu-item-font-color: $--color-text-primary !default;
 /// color||Color|0
-$--menu-background-color: var(--el-bg-color) !default;
+$--menu-background-color: var(--hzq-bg-color) !default;
 $--menu-item-hover-fill: $--color-primary-light-9 !default;
 
 /* Rate
@@ -870,7 +918,7 @@ $--datepicker-off-font-color: $--color-text-placeholder !default;
 $--datepicker-header-font-color: $--color-text-regular !default;
 $--datepicker-icon-color: $--color-text-primary !default;
 $--datepicker-border-color: $--disabled-border-base !default;
-$--datepicker-inner-border-color: var(--el-border-color-light) !default;
+$--datepicker-inner-border-color: var(--hzq-border-color-light) !default;
 /// color||Color|0
 $--datepicker-inrange-background-color: $--border-color-extra-light !default;
 /// color||Color|0
@@ -890,8 +938,8 @@ $--loading-fullscreen-spinner-size: 50px !default;
 
 /* Scrollbar
 --------------------------*/
-$--scrollbar-background-color: var(--el-scrollbar-thumb-color) !default;
-$--scrollbar-hover-background-color: var(--el-scrollbar-thumb-color) !default;
+$--scrollbar-background-color: var(--hzq-scrollbar-thumb-color) !default;
+$--scrollbar-hover-background-color: var(--hzq-scrollbar-thumb-color) !default;
 
 /* Carousel
 --------------------------*/
@@ -915,13 +963,13 @@ $--collapse-border-color: $--border-color-lighter !default;
 /// height||Other|4
 $--collapse-header-height: 40px !default;
 /// color||Color|0
-$--collapse-header-background-color: var(--el-bg-color) !default;
+$--collapse-header-background-color: var(--hzq-bg-color) !default;
 /// color||Color|0
 $--collapse-header-font-color: $--color-text-primary !default;
 /// fontSize||Font|1
 $--collapse-header-font-size: 13px !default;
 /// color||Color|0
-$--collapse-content-background-color: var(--el-bg-color) !default;
+$--collapse-content-background-color: var(--hzq-bg-color) !default;
 /// fontSize||Font|1
 $--collapse-content-font-size: 13px !default;
 /// color||Color|0
@@ -967,7 +1015,7 @@ $--timeline-node-color: $--border-color-light !default;
 /* Backtop
 --------------------------*/
 /// color||Color|0
-$--backtop-background-color: var(--el-bg-color) !default;
+$--backtop-background-color: var(--hzq-bg-color) !default;
 /// color||Color|0
 $--backtop-font-color: $--color-primary !default;
 /// color||Color|0
@@ -1000,28 +1048,30 @@ $--link-info-font-color: $--color-info !default;
 /// border||Other|4
 $--calendar-border: $--table-border !default;
 /// color||Other|4
-$--calendar-selected-background-color: var(--el-color-primary-light-9) !default;
+$--calendar-selected-background-color: var(--hzq-color-primary-light-9) !default;
 $--calendar-cell-width: 85px !default;
 
 /* Form
 -------------------------- */
 /// fontSize||Font|1
-$--form-label-font-size: $--font-size-base !default;
+$--form-label-font-size: $--component-font-size-medium !default;
 /// height||Other|4
-$--form-item-line-height: $--input-height !default;
+$--form-item-line-height: $--component-height-medium !default;
 /// height||Other|4
-$--form-item-line-height-medium: $--input-medium-height !default;
+$--form-item-line-height-large: $--component-height-large !default;
 /// height||Other|4
-$--form-item-line-height-small: $--input-small-height !default;
+$--form-item-line-height-medium: $--component-height-medium !default;
 /// height||Other|4
-$--form-item-line-height-mini: $--input-mini-height !default;
+$--form-item-line-height-small: $--component-height-small !default;
+/// height||Other|4
+$--form-item-line-height-mini: $--component-height-mini !default;
 
 /* Avatar
 --------------------------*/
 /// color||Color|0
 $--avatar-font-color: #fff !default;
 /// color||Color|0
-$--avatar-background-color: var(--el-text-color-placeholder) !default;
+$--avatar-background-color: var(--hzq-text-color-placeholder) !default;
 /// fontSize||Font Size|1
 $--avatar-text-font-size: 14px !default;
 /// fontSize||Font Size|1
@@ -1038,7 +1088,7 @@ $--avatar-small-size: 28px !default;
 /* Empty
 -------------------------- */
 // 内置插画的 9 档灰不在这里定义：它们必须整组随明暗模式翻转，
-// 所以放在 palette.scss 的 $--empty-fills-light / $--empty-fills-dark（输出为 --el-empty-fill-color-1..9）。
+// 所以放在 palette.scss 的 $--empty-fills-light / $--empty-fills-dark（输出为 --hzq-empty-fill-color-1..9）。
 $--empty-padding: 32px 0 !default;
 $--empty-image-width: 160px !default;
 $--empty-description-margin-top: 20px !default;
@@ -1049,16 +1099,16 @@ $--empty-bottom-margin-top: 20px !default;
 $--descriptions-header-margin-bottom: 14px !default;
 $--descriptions-title-font-size: $--font-size-medium !default;
 $--descriptions-table-border: 1px solid $--border-color-lighter !default;
-$--descriptions-item-bordered-label-background: var(--el-fill-color-lighter) !default;
+$--descriptions-item-bordered-label-background: var(--hzq-fill-color-lighter) !default;
 
 /* Skeleton 
 --------------------------*/
-$--skeleton-color: var(--el-fill-color-light) !default;
-$--skeleton-to-color: var(--el-fill-color-darker) !default;
+$--skeleton-color: var(--hzq-fill-color-light) !default;
+$--skeleton-to-color: var(--hzq-fill-color-darker) !default;
 
 /* Svg
 --------------- */
-$--svg-monochrome-grey: var(--el-fill-color-darker) !default;
+$--svg-monochrome-grey: var(--hzq-fill-color-darker) !default;
 
 /* Result
 -------------------------- */

@@ -1,8 +1,8 @@
 .demo-block.demo-menu {
-  .el-menu-demo {
+  .hzq-menu-demo {
     padding-left: 55px;
   }
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
+  .hzq-menu-vertical-demo:not(.hzq-menu--collapse) {
     width: 240px;
     min-height: 400px;
   }
@@ -19,7 +19,7 @@
   .tac {
     text-align: center;
 
-    .el-menu-vertical-demo {
+    .hzq-menu-vertical-demo {
       display: inline-block;
       text-align: left;
     }

@@ -29,6 +29,7 @@ import { ElDropdownMenu } from './dropdown-menu'
 import { ElFooter } from './footer'
 import { ElForm } from './form'
 import { ElFormItem } from './form-item'
+import { ElFormBuilder } from './form-builder'
 import { ElHeader } from './header'
 import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
@@ -213,6 +214,9 @@ export class Form extends ElForm {}
 
 /** Form Item Component */
 export class FormItem extends ElFormItem {}
+
+/** Config driven Form Component */
+export class FormBuilder extends ElFormBuilder {}
 
 /** Header Component */
 export class Header extends ElHeader {}

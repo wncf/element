@@ -91,7 +91,7 @@
 }
 
 @mixin animation-in($direction) {
-  .el-drawer__open &.#{$direction} {
+  .hzq-drawer__open &.#{$direction} {
     animation: #{$direction}-drawer-in .3s 1ms;
   }
 }
@@ -139,7 +139,7 @@ $directions: rtl, ltr, ttb, btt;
   &__header {
     align-items: center;
     // 标题区文字跟随主题；写死 rgb(114,118,123) 在深色底上几乎读不出来
-    color: var(--el-text-color-regular);
+    color: var(--hzq-text-color-regular);
     display: flex;
     margin-bottom: 32px;
     padding: $--dialog-padding-primary;
@@ -201,7 +201,7 @@ $directions: rtl, ltr, ttb, btt;
   }
 }
 
-.el-drawer__container {
+.hzq-drawer__container {
   position: relative;
   left: 0;
   right: 0;
@@ -211,10 +211,10 @@ $directions: rtl, ltr, ttb, btt;
   width: 100%;
 }
 
-.el-drawer-fade-enter-active {
+.hzq-drawer-fade-enter-active {
   animation: el-drawer-fade-in .3s;
 }
 
-.el-drawer-fade-leave-active {
+.hzq-drawer-fade-leave-active {
   animation: el-drawer-fade-in .3s reverse;
 }

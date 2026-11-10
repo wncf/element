@@ -1,12 +1,12 @@
 <template>
   <div
-    class="el-progress"
+    class="hzq-progress"
     :class="[
-      'el-progress--' + type,
+      'hzq-progress--' + type,
       status ? 'is-' + status : '',
       {
-        'el-progress--without-text': !showText,
-        'el-progress--text-inside': textInside,
+        'hzq-progress--without-text': !showText,
+        'hzq-progress--text-inside': textInside,
       }
     ]"
     role="progressbar"
@@ -14,24 +14,24 @@
     aria-valuemin="0"
     aria-valuemax="100"
   >
-    <div class="el-progress-bar" v-if="type === 'line'">
-      <div class="el-progress-bar__outer" :style="{height: strokeWidth + 'px', backgroundColor:defineBackColor}">
-        <div class="el-progress-bar__inner" :style="barStyle">
-          <div class="el-progress-bar__innerText" :style="{color:textColor}" v-if="showText && textInside">{{content}}</div>
+    <div class="hzq-progress-bar" v-if="type === 'line'">
+      <div class="hzq-progress-bar__outer" :style="{height: strokeWidth + 'px', backgroundColor:defineBackColor}">
+        <div class="hzq-progress-bar__inner" :style="barStyle">
+          <div class="hzq-progress-bar__innerText" :style="{color:textColor}" v-if="showText && textInside">{{content}}</div>
         </div>
       </div>
     </div>
-    <div class="el-progress-circle" :style="{height: width + 'px', width: width + 'px'}" v-else>
+    <div class="hzq-progress-circle" :style="{height: width + 'px', width: width + 'px'}" v-else>
       <svg viewBox="0 0 100 100">
         <path
-          class="el-progress-circle__track"
+          class="hzq-progress-circle__track"
           :d="trackPath"
           :stroke="defineBackColor"
           :stroke-width="relativeStrokeWidth"
           fill="none"
           :style="trailPathStyle"></path>
         <path
-          class="el-progress-circle__path"
+          class="hzq-progress-circle__path"
           :d="trackPath"
           :stroke="stroke"
           fill="none"
@@ -41,7 +41,7 @@
       </svg>
     </div>
     <div
-      class="el-progress__text"
+      class="hzq-progress__text"
       v-if="showText && !textInside"
       :style="{fontSize: progressTextSize + 'px', color:textColor}"
     >
@@ -52,7 +52,7 @@
 </template>
 <script>
   export default {
-    name: 'ElProgress',
+    name: 'HzqProgress',
     props: {
       type: {
         type: String,
@@ -96,11 +96,11 @@
       // 轨道底色与文字色默认值走 token：它们是内联样式，写死浅色在深色模式下会露出一条浅轨
       defineBackColor: {
         type: [String, Array, Function],
-        default: 'var(--el-border-color-lighter)'
+        default: 'var(--hzq-border-color-lighter)'
       },
       textColor: {
         type: [String, Array, Function],
-        default: 'var(--el-text-color-regular)'
+        default: 'var(--hzq-text-color-regular)'
       },
       format: Function
     },
@@ -163,28 +163,28 @@
           // 所以这里必须用 token，否则换了主色或切深色，圆环还是写死的老颜色
           switch (this.status) {
             case 'success':
-              ret = 'var(--el-color-success)';
+              ret = 'var(--hzq-color-success)';
               break;
             case 'exception':
-              ret = 'var(--el-color-danger)';
+              ret = 'var(--hzq-color-danger)';
               break;
             case 'warning':
-              ret = 'var(--el-color-warning)';
+              ret = 'var(--hzq-color-warning)';
               break;
             default:
-              ret = 'var(--el-color-primary)';
+              ret = 'var(--hzq-color-primary)';
           }
         }
         return ret;
       },
       iconClass() {
         if (this.status === 'warning') {
-          return 'el-icon-warning';
+          return 'hzq-icon-warning';
         }
         if (this.type === 'line') {
-          return this.status === 'success' ? 'el-icon-circle-check' : 'el-icon-circle-close';
+          return this.status === 'success' ? 'hzq-icon-circle-check' : 'hzq-icon-circle-close';
         } else {
-          return this.status === 'success' ? 'el-icon-check' : 'el-icon-close';
+          return this.status === 'success' ? 'hzq-icon-check' : 'hzq-icon-close';
         }
       },
       progressTextSize() {

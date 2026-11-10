@@ -8,17 +8,17 @@
 ```html
 <div class="block">
   <span class="demonstration">页数较少时的效果</span>
-  <el-pagination
+  <hzq-pagination
     layout="prev, pager, next"
     :total="50">
-  </el-pagination>
+  </hzq-pagination>
 </div>
 <div class="block">
   <span class="demonstration">大于 7 页时的效果</span>
-  <el-pagination
+  <hzq-pagination
     layout="prev, pager, next"
     :total="1000">
-  </el-pagination>
+  </hzq-pagination>
 </div>
 ```
 :::
@@ -27,12 +27,12 @@
 
 :::demo 默认情况下，当总页数超过 7 页时，Pagination 会折叠多余的页码按钮。通过`pager-count`属性可以设置最大页码按钮数。
 ```html
-<el-pagination
+<hzq-pagination
   :page-size="20"
   :pager-count="11"
   layout="prev, pager, next"
   :total="1000">
-</el-pagination>
+</hzq-pagination>
 ```
 :::
 
@@ -40,11 +40,11 @@
 
 :::demo 设置`background`属性可以为分页按钮添加背景色。
 ```html
-<el-pagination
+<hzq-pagination
   background
   layout="prev, pager, next"
   :total="1000">
-</el-pagination>
+</hzq-pagination>
 ```
 :::
 
@@ -52,13 +52,47 @@
 
 在空间有限的情况下，可以使用简单的小型分页。
 
-:::demo 只需要一个`small`属性，它接受一个`Boolean`，默认为`false`，设为`true`即可启用。
+:::demo 只需要一个`small`属性，它接受一个`Boolean`，默认为`false`，设为`true`即可启用。`small` 是 `size="small"` 的简写，需要其它档位时用 `size`。
+
 ```html
-<el-pagination
+<hzq-pagination
   small
   layout="prev, pager, next"
   :total="50">
-</el-pagination>
+</hzq-pagination>
+```
+:::
+
+### 尺寸
+
+:::demo 通过 `size` 切换四档尺寸：`large`、`medium`、`small`、`mini`。不传时等同 `medium`，页码、上下页按钮与跳页输入框的高度都随档位变化（依次为 36px、32px、28px、24px），整行基线保持对齐。
+
+```html
+<template>
+  <div>
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">大型</hzq-radio-button>
+      <hzq-radio-button label="medium">中等</hzq-radio-button>
+      <hzq-radio-button label="small">小型</hzq-radio-button>
+      <hzq-radio-button label="mini">超小</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-pagination
+      :size="size"
+      layout="prev, pager, next, jumper"
+      :total="400">
+    </hzq-pagination>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium'
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -72,18 +106,18 @@
 <template>
   <div class="block">
     <span class="demonstration">显示总数</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">调整每页显示条数</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage2"
@@ -91,22 +125,22 @@
       :page-size="100"
       layout="sizes, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">直接前往</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
-    </el-pagination>
+    </hzq-pagination>
   </div>
   <div class="block">
     <span class="demonstration">完整功能</span>
-    <el-pagination
+    <hzq-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="currentPage4"
@@ -114,7 +148,7 @@
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
       :total="400">
-    </el-pagination>
+    </hzq-pagination>
   </div>
 </template>
 <script>
@@ -147,13 +181,13 @@
 :::demo
 ```html
 <div>
- <el-switch v-model="value">
- </el-switch>
- <el-pagination
+ <hzq-switch v-model="value">
+ </hzq-switch>
+ <hzq-pagination
   :hide-on-single-page="value"
   :total="5"
   layout="prev, pager, next">
-</el-pagination>
+</hzq-pagination>
 </div>
 
 <script>
@@ -172,6 +206,7 @@
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small | 是否使用小型分页样式 | boolean | — | false |
+| size | 分页尺寸，页码与上下页按钮随档位缩放 | string | large / medium / small / mini | — |
 | background | 是否为分页按钮添加背景色 | boolean | — | false |
 | page-size | 每页显示条目个数，支持 .sync 修饰符 | number | — | 10 |
 | total | 总条目数 | number | — | — |

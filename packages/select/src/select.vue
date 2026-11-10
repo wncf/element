@@ -1,35 +1,35 @@
 <template>
   <div
-    class="el-select"
-    :class="[selectSize ? 'el-select--' + selectSize : '']"
+    class="hzq-select"
+    :class="[selectSize ? 'hzq-select--' + selectSize : '']"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose">
     <div
-      class="el-select__tags"
+      class="hzq-select__tags"
       v-if="multiple"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
       <span v-if="collapseTags && selected.length">
-        <el-tag
+        <hzq-tag
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
           type="info"
           @close="deleteTag($event, selected[0])"
           disable-transitions>
-          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
-        </el-tag>
-        <el-tag
+          <span class="hzq-select__tags-text">{{ selected[0].currentLabel }}</span>
+        </hzq-tag>
+        <hzq-tag
           v-if="selected.length > 1"
           :closable="false"
           :size="collapseTagSize"
           type="info"
           disable-transitions>
-          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
-        </el-tag>
+          <span class="hzq-select__tags-text">+ {{ selected.length - 1 }}</span>
+        </hzq-tag>
       </span>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
-        <el-tag
+        <hzq-tag
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!selectDisabled"
@@ -38,13 +38,13 @@
           type="info"
           @close="deleteTag($event, item)"
           disable-transitions>
-          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
-        </el-tag>
+          <span class="hzq-select__tags-text">{{ item.currentLabel }}</span>
+        </hzq-tag>
       </transition-group>
 
       <input
         type="text"
-        class="el-select__input"
+        class="hzq-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="selectDisabled"
         :autocomplete="autoComplete || autocomplete"
@@ -67,7 +67,7 @@
         :style="{ 'flex-grow': '1', width: inputLength / (inputWidth - 32) + '%', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
-    <el-input
+    <hzq-input
       ref="reference"
       v-model="selectedLabel"
       type="text"
@@ -98,66 +98,66 @@
         <slot name="prefix"></slot>
       </template>
       <template slot="suffix">
-        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
-        <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
+        <i v-show="!showClose" :class="['hzq-select__caret', 'hzq-input__icon', 'hzq-icon-' + iconClass]"></i>
+        <i v-if="showClose" class="hzq-select__caret hzq-input__icon hzq-icon-circle-close" @click="handleClearClick"></i>
       </template>
-    </el-input>
+    </hzq-input>
     <transition
       name="el-zoom-in-top"
       @before-enter="handleMenuEnter"
       @after-leave="doDestroy">
-      <el-select-menu
+      <hzq-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
-        <el-scrollbar
+        <hzq-scrollbar
           tag="ul"
-          wrap-class="el-select-dropdown__wrap"
-          view-class="el-select-dropdown__list"
+          wrap-class="hzq-select-dropdown__wrap"
+          view-class="hzq-select-dropdown__list"
           ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
-          <el-option
+          <hzq-option
             :value="query"
             created
             v-if="showNewOption">
-          </el-option>
+          </hzq-option>
           <slot></slot>
-        </el-scrollbar>
+        </hzq-scrollbar>
         <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
           <slot name="empty" v-if="$slots.empty"></slot>
-          <p class="el-select-dropdown__empty" v-else>
+          <p class="hzq-select-dropdown__empty" v-else>
             {{ emptyText }}
           </p>
         </template>
-      </el-select-menu>
+      </hzq-select-menu>
     </transition>
   </div>
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Focus from 'element-ui/src/mixins/focus';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElSelectMenu from './select-dropdown.vue';
-  import ElOption from './option.vue';
-  import ElTag from 'element-ui/packages/tag';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
+  import Focus from 'hzq-ui/src/mixins/focus';
+  import Locale from 'hzq-ui/src/mixins/locale';
+  import HzqInput from 'hzq-ui/packages/input';
+  import HzqSelectMenu from './select-dropdown.vue';
+  import HzqOption from './option.vue';
+  import HzqTag from 'hzq-ui/packages/tag';
+  import HzqScrollbar from 'hzq-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
+  import Clickoutside from 'hzq-ui/src/utils/clickoutside';
+  import { addResizeListener, removeResizeListener } from 'hzq-ui/src/utils/resize-event';
+  import scrollIntoView from 'hzq-ui/src/utils/scroll-into-view';
+  import { getValueByPath, valueEquals, isIE, isEdge } from 'hzq-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
-  import { isKorean } from 'element-ui/src/utils/shared';
+  import { isKorean } from 'hzq-ui/src/utils/shared';
 
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
 
-    name: 'ElSelect',
+    name: 'HzqSelect',
 
-    componentName: 'ElSelect',
+    componentName: 'HzqSelect',
 
     inject: {
       elForm: {
@@ -225,7 +225,7 @@
       },
 
       selectSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size || this._elFormItemSize || (this.$HZQ || {}).size;
       },
 
       selectDisabled() {
@@ -237,17 +237,18 @@
           ? 'mini'
           : 'small';
       },
+
       propPlaceholder() {
         return typeof this.placeholder !== 'undefined' ? this.placeholder : this.t('el.select.placeholder');
       }
     },
 
     components: {
-      ElInput,
-      ElSelectMenu,
-      ElOption,
-      ElTag,
-      ElScrollbar
+      HzqInput,
+      HzqSelectMenu,
+      HzqOption,
+      HzqTag,
+      HzqScrollbar
     },
 
     directives: { Clickoutside },
@@ -363,13 +364,13 @@
           this.inputLength = 20;
         }
         if (!valueEquals(val, oldVal)) {
-          this.dispatch('ElFormItem', 'el.form.change', val);
+          this.dispatch('HzqFormItem', 'el.form.change', val);
         }
       },
 
       visible(val) {
         if (!val) {
-          this.broadcast('ElSelectDropdown', 'destroyPopper');
+          this.broadcast('HzqSelectDropdown', 'destroyPopper');
           if (this.$refs.input) {
             this.$refs.input.blur();
           }
@@ -402,7 +403,7 @@
             }
           }
         } else {
-          this.broadcast('ElSelectDropdown', 'updatePopper');
+          this.broadcast('HzqSelectDropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.remote ? '' : this.selectedLabel;
             this.handleQueryChange(this.query);
@@ -410,8 +411,8 @@
               this.$refs.input.focus();
             } else {
               if (!this.remote) {
-                this.broadcast('ElOption', 'queryChange', '');
-                this.broadcast('ElOptionGroup', 'queryChange');
+                this.broadcast('HzqOption', 'queryChange', '');
+                this.broadcast('HzqOptionGroup', 'queryChange');
               }
 
               if (this.selectedLabel) {
@@ -426,7 +427,7 @@
       options() {
         if (this.$isServer) return;
         this.$nextTick(() => {
-          this.broadcast('ElSelectDropdown', 'updatePopper');
+          this.broadcast('HzqSelectDropdown', 'updatePopper');
         });
         if (this.multiple) {
           this.resetInputHeight();
@@ -468,7 +469,7 @@
         }
         this.previousQuery = val;
         this.$nextTick(() => {
-          if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
+          if (this.visible) this.broadcast('HzqSelectDropdown', 'updatePopper');
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
@@ -484,11 +485,11 @@
           this.remoteMethod(val);
         } else if (typeof this.filterMethod === 'function') {
           this.filterMethod(val);
-          this.broadcast('ElOptionGroup', 'queryChange');
+          this.broadcast('HzqOptionGroup', 'queryChange');
         } else {
           this.filteredOptionsCount = this.optionsCount;
-          this.broadcast('ElOption', 'queryChange', val);
-          this.broadcast('ElOptionGroup', 'queryChange');
+          this.broadcast('HzqOption', 'queryChange', val);
+          this.broadcast('HzqOptionGroup', 'queryChange');
         }
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
@@ -498,7 +499,7 @@
       scrollToOption(option) {
         const target = Array.isArray(option) && option[0] ? option[0].$el : option.$el;
         if (this.$refs.popper && target) {
-          const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
+          const menu = this.$refs.popper.$el.querySelector('.hzq-select-dropdown__wrap');
           scrollIntoView(menu, target);
         }
         this.$refs.scrollbar && this.$refs.scrollbar.handleScroll();
@@ -662,7 +663,7 @@
               sizeInMap
             ) + 'px';
           if (this.visible && this.emptyText !== false) {
-            this.broadcast('ElSelectDropdown', 'updatePopper');
+            this.broadcast('HzqSelectDropdown', 'updatePopper');
           }
         });
       },
@@ -875,9 +876,10 @@
       if (reference && reference.$el) {
         // 与 var.scss 的尺寸梯级保持一致；正常情况下用实测高度，这里只在测量失败时兜底
         const sizeMap = {
+          large: 36,
           medium: 32,
           small: 28,
-          mini: 26
+          mini: 24
         };
         const input = reference.$el.querySelector('input');
         this.initialInputHeight = input.getBoundingClientRect().height || sizeMap[this.selectSize] || 32;

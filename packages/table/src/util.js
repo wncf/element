@@ -1,4 +1,4 @@
-import { getValueByPath } from 'element-ui/src/utils/util';
+import { getValueByPath } from 'hzq-ui/src/utils/util';
 
 export const getCell = function(event) {
   let cell = event.target;
@@ -97,7 +97,7 @@ export const getColumnByKey = function(table, columnKey) {
 };
 
 export const getColumnByCell = function(table, cell) {
-  const matches = (cell.className || '').match(/el-table_[^\s]+/gm);
+  const matches = (cell.className || '').match(/hzq-table_[^\s]+/gm);
   if (matches) {
     return getColumnById(table, matches[0]);
   }

@@ -7,41 +7,41 @@ Bouton communément utilisé.
 :::demo Utilisez `type`, `plain`, `round` et `circle` pour définir le style du bouton.
 
 ```html
-<el-row>
-  <el-button>Défaut</el-button>
-  <el-button type="primary">Primary</el-button>
-  <el-button type="success">Success</el-button>
-  <el-button type="info">Info</el-button>
-  <el-button type="warning">Warning</el-button>
-  <el-button type="danger">Danger</el-button>
-</el-row>
+<hzq-row>
+  <hzq-button>Défaut</hzq-button>
+  <hzq-button type="primary">Primary</hzq-button>
+  <hzq-button type="success">Success</hzq-button>
+  <hzq-button type="info">Info</hzq-button>
+  <hzq-button type="warning">Warning</hzq-button>
+  <hzq-button type="danger">Danger</hzq-button>
+</hzq-row>
 
-<el-row>
-  <el-button plain>Plein</el-button>
-  <el-button type="primary" plain>Primary</el-button>
-  <el-button type="success" plain>Success</el-button>
-  <el-button type="info" plain>Info</el-button>
-  <el-button type="warning" plain>Warning</el-button>
-  <el-button type="danger" plain>Danger</el-button>
-</el-row>
+<hzq-row>
+  <hzq-button plain>Plein</hzq-button>
+  <hzq-button type="primary" plain>Primary</hzq-button>
+  <hzq-button type="success" plain>Success</hzq-button>
+  <hzq-button type="info" plain>Info</hzq-button>
+  <hzq-button type="warning" plain>Warning</hzq-button>
+  <hzq-button type="danger" plain>Danger</hzq-button>
+</hzq-row>
 
-<el-row>
-  <el-button round>Arrondi</el-button>
-  <el-button type="primary" round>Primary</el-button>
-  <el-button type="success" round>Success</el-button>
-  <el-button type="info" round>Info</el-button>
-  <el-button type="warning" round>Warning</el-button>
-  <el-button type="danger" round>Danger</el-button>
-</el-row>
+<hzq-row>
+  <hzq-button round>Arrondi</hzq-button>
+  <hzq-button type="primary" round>Primary</hzq-button>
+  <hzq-button type="success" round>Success</hzq-button>
+  <hzq-button type="info" round>Info</hzq-button>
+  <hzq-button type="warning" round>Warning</hzq-button>
+  <hzq-button type="danger" round>Danger</hzq-button>
+</hzq-row>
 
-<el-row>
-  <el-button icon="el-icon-search" circle></el-button>
-  <el-button type="primary" icon="el-icon-edit" circle></el-button>
-  <el-button type="success" icon="el-icon-check" circle></el-button>
-  <el-button type="info" icon="el-icon-message" circle></el-button>
-  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-  <el-button type="danger" icon="el-icon-delete" circle></el-button>
-</el-row>
+<hzq-row>
+  <hzq-button icon="hzq-icon-search" circle></hzq-button>
+  <hzq-button type="primary" icon="hzq-icon-edit" circle></hzq-button>
+  <hzq-button type="success" icon="hzq-icon-check" circle></hzq-button>
+  <hzq-button type="info" icon="hzq-icon-message" circle></hzq-button>
+  <hzq-button type="warning" icon="hzq-icon-star-off" circle></hzq-button>
+  <hzq-button type="danger" icon="hzq-icon-delete" circle></hzq-button>
+</hzq-row>
 ```
 :::
 
@@ -52,23 +52,23 @@ L'attribut `disabled` détermine si le bouton est désactivé.
 :::demo Utilisez l'attribut `disabled` pour déterminer si un bouton est désactivé ou non. Il accepte un `Boolean`.
 
 ```html
-<el-row>
-  <el-button disabled>Défaut</el-button>
-  <el-button type="primary" disabled>Principal</el-button>
-  <el-button type="success" disabled>Succès</el-button>
-  <el-button type="info" disabled>Info</el-button>
-  <el-button type="warning" disabled>Attention</el-button>
-  <el-button type="danger" disabled>Danger</el-button>
-</el-row>
+<hzq-row>
+  <hzq-button disabled>Défaut</hzq-button>
+  <hzq-button type="primary" disabled>Principal</hzq-button>
+  <hzq-button type="success" disabled>Succès</hzq-button>
+  <hzq-button type="info" disabled>Info</hzq-button>
+  <hzq-button type="warning" disabled>Attention</hzq-button>
+  <hzq-button type="danger" disabled>Danger</hzq-button>
+</hzq-row>
 
-<el-row>
-  <el-button plain disabled>Plein</el-button>
-  <el-button type="primary" plain disabled>Principal</el-button>
-  <el-button type="success" plain disabled>Succès</el-button>
-  <el-button type="info" plain disabled>Info</el-button>
-  <el-button type="warning" plain disabled>Attention</el-button>
-  <el-button type="danger" plain disabled>Danger</el-button>
-</el-row>
+<hzq-row>
+  <hzq-button plain disabled>Plein</hzq-button>
+  <hzq-button type="primary" plain disabled>Principal</hzq-button>
+  <hzq-button type="success" plain disabled>Succès</hzq-button>
+  <hzq-button type="info" plain disabled>Info</hzq-button>
+  <hzq-button type="warning" plain disabled>Attention</hzq-button>
+  <hzq-button type="danger" plain disabled>Danger</hzq-button>
+</hzq-row>
 ```
 :::
 
@@ -78,8 +78,8 @@ Bouton sans bordure ni fond.
 
 :::demo
 ```html
-<el-button type="text">Bouton texte</el-button>
-<el-button type="text" disabled>Bouton texte</el-button>
+<hzq-button type="text">Bouton texte</hzq-button>
+<hzq-button type="text" disabled>Bouton texte</hzq-button>
 ```
 :::
 
@@ -90,11 +90,11 @@ Utilisez des icônes pour ajouter plus de sens aux boutons. Vous pouvez utiliser
 :::demo Utilisez l'attribut `icon` pour ajouter une icône. Vous pourrez trouver la liste des icônes dans le composant Icon d'Element. Ajouter des icônes sur le coté droit du texte est possible grâce à la balise `<i>`. Des icônes personnalisées peuvent également être utilisées.
 
 ```html
-<el-button type="primary" icon="el-icon-edit"></el-button>
-<el-button type="primary" icon="el-icon-share"></el-button>
-<el-button type="primary" icon="el-icon-delete"></el-button>
-<el-button type="primary" icon="el-icon-search">Recherche</el-button>
-<el-button type="primary">Upload<i class="el-icon-upload el-icon-right"></i></el-button>
+<hzq-button type="primary" icon="hzq-icon-edit"></hzq-button>
+<hzq-button type="primary" icon="hzq-icon-share"></hzq-button>
+<hzq-button type="primary" icon="hzq-icon-delete"></hzq-button>
+<hzq-button type="primary" icon="hzq-icon-search">Recherche</hzq-button>
+<hzq-button type="primary">Upload<i class="hzq-icon-upload hzq-icon-right"></i></hzq-button>
 ```
 :::
 
@@ -102,18 +102,18 @@ Utilisez des icônes pour ajouter plus de sens aux boutons. Vous pouvez utiliser
 
 Affiche un groupe de bouton. Peut être utilisé pour grouper un ensemble d'opérations similaires.
 
-:::demo Utilisez la balise `<el-button-group>` pour grouper vos boutons.
+:::demo Utilisez la balise `<hzq-button-group>` pour grouper vos boutons.
 
 ```html
-<el-button-group>
-  <el-button type="primary" icon="el-icon-arrow-left">Page précédente</el-button>
-  <el-button type="primary">Page suivante<i class="el-icon-arrow-right el-icon-right"></i></el-button>
-</el-button-group>
-<el-button-group>
-  <el-button type="primary" icon="el-icon-edit"></el-button>
-  <el-button type="primary" icon="el-icon-share"></el-button>
-  <el-button type="primary" icon="el-icon-delete"></el-button>
-</el-button-group>
+<hzq-button-group>
+  <hzq-button type="primary" icon="hzq-icon-arrow-left">Page précédente</hzq-button>
+  <hzq-button type="primary">Page suivante<i class="hzq-icon-arrow-right hzq-icon-right"></i></hzq-button>
+</hzq-button-group>
+<hzq-button-group>
+  <hzq-button type="primary" icon="hzq-icon-edit"></hzq-button>
+  <hzq-button type="primary" icon="hzq-icon-share"></hzq-button>
+  <hzq-button type="primary" icon="hzq-icon-delete"></hzq-button>
+</hzq-button-group>
 ```
 :::
 
@@ -124,36 +124,38 @@ Cliquez sur le bouton pour charger des données et il affichera un état de char
 :::demo Configurez l'attribut `loading` à `true` pour afficher un état de chargement.
 
 ```html
-<el-button type="primary" :loading="true">Chargement</el-button>
+<hzq-button type="primary" :loading="true">Chargement</hzq-button>
 ```
 :::
 
 ### Tailles
 
-En plus de la taille par défaut, le composant Button fournit trois tailles supplémentaires pour différents scénarios.
+En plus de la taille par défaut, le composant Button fournit quatre tailles pour différents scénarios.
 
-:::demo Utilisez l'attribut `size` pour choisir d'autres tailles parmi `medium`, `small` ou `mini`.
+:::demo Utilisez l'attribut `size` pour choisir d'autres tailles parmi `large`, `medium`, `small` ou `mini`. Sans `size` le bouton est `medium` ; les quatre hauteurs sont 36px, 32px, 28px et 24px.
 
 ```html
-<el-row>
-  <el-button>Défaut</el-button>
-  <el-button size="medium">Medium</el-button>
-  <el-button size="small">Small</el-button>
-  <el-button size="mini">Mini</el-button>
-</el-row>
-<el-row>
-  <el-button round>Défaut</el-button>
-  <el-button size="medium" round>Medium</el-button>
-  <el-button size="small" round>Small</el-button>
-  <el-button size="mini" round>Mini</el-button>
-</el-row>
+<hzq-row>
+  <hzq-button>Défaut</hzq-button>
+  <hzq-button size="large">Large</hzq-button>
+  <hzq-button size="medium">Medium</hzq-button>
+  <hzq-button size="small">Small</hzq-button>
+  <hzq-button size="mini">Mini</hzq-button>
+</hzq-row>
+<hzq-row>
+  <hzq-button round>Défaut</hzq-button>
+  <hzq-button size="large" round>Large</hzq-button>
+  <hzq-button size="medium" round>Medium</hzq-button>
+  <hzq-button size="small" round>Small</hzq-button>
+  <hzq-button size="mini" round>Mini</hzq-button>
+</hzq-row>
 ```
 :::
 
 ### Attributs
 | Attribut      | Description    | Type      | Valeurs acceptées       | Défaut   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | Taille du bouton.   | string  |   medium / small / mini            |    —     |
+| size     | Taille du bouton.   | string  | large / medium / small / mini |    —     |
 | type     | Type du bouton.   | string    |   primary / success / warning / danger / info / text |     —    |
 | plain     | Détermine si le bouton est plein.   | boolean    | — | false   |
 | round     | Détermine si le bouton est arrondi.   | boolean    | — | false   |

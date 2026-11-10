@@ -1,5 +1,5 @@
 <template>
-  <el-dialog
+  <hzq-dialog
     :visible.sync="visible"
     :title="title"
     :width="dialogWidth"
@@ -12,31 +12,31 @@
     @closed="handleClosed"
   >
     <dialog-render-fn v-if="renderFn" :render="renderFn" />
-    <div v-else-if="typeof content === 'string'" class="el-dialog-service__content">{{ content }}</div>
+    <div v-else-if="typeof content === 'string'" class="hzq-dialog-service__content">{{ content }}</div>
     <dialog-render-fn v-else-if="contentRender" :render="contentRender" />
 
     <template v-if="isConfirm" slot="footer">
-      <el-button :size="buttonSize" @click="handleCancel">
+      <hzq-button :size="buttonSize" @click="handleCancel">
         {{ resolvedCancelText }}
-      </el-button>
-      <el-button
+      </hzq-button>
+      <hzq-button
         :size="buttonSize"
         type="primary"
         :loading="loading"
         @click="handleConfirm"
       >
         {{ resolvedConfirmText }}
-      </el-button>
+      </hzq-button>
     </template>
-  </el-dialog>
+  </hzq-dialog>
 </template>
 
 <script>
-import Locale from 'element-ui/src/mixins/locale';
+import Locale from 'hzq-ui/src/mixins/locale';
 import DialogRenderFn from './dialog-render-fn.vue';
 
 export default {
-  name: 'ElDialogServiceInstance',
+  name: 'HzqDialogServiceInstance',
 
   components: {
     DialogRenderFn
@@ -113,7 +113,7 @@ export default {
     },
 
     dialogClass() {
-      return this.border ? 'el-dialog--bordered' : '';
+      return this.border ? 'hzq-dialog--bordered' : '';
     },
 
     dialogWidth() {
@@ -121,7 +121,7 @@ export default {
     },
 
     buttonSize() {
-      return (this.$ELEMENT || {}).size;
+      return (this.$HZQ || {}).size;
     },
 
     contentRender() {

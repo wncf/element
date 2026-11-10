@@ -9,11 +9,11 @@ Popconfirm es parecido a Popover. Para algunos atributos duplicados, por favor c
 :::demo Solo el atributo  `title`  esta disponible en Popconfirm, `content` sera ignorado.
 ```html
 <template>
-<el-popconfirm
+<hzq-popconfirm
   title="Are you sure to delete this?"
 >
-  <el-button slot="reference">Delete</el-button>
-</el-popconfirm>
+  <hzq-button slot="reference">Delete</hzq-button>
+</hzq-popconfirm>
 </template>
 ````
 :::
@@ -24,15 +24,15 @@ Se puede personalizar Popconfirm así:
 
 ```html
 <template>
-<el-popconfirm
+<hzq-popconfirm
   confirm-button-text='OK'
   cancel-button-text='No, Thanks'
-  icon="el-icon-info"
+  icon="hzq-icon-info"
   icon-color="red"
   title="Are you sure to delete this?"
 >
-  <el-button slot="reference">Delete</el-button>
-</el-popconfirm>
+  <hzq-button slot="reference">Delete</hzq-button>
+</hzq-popconfirm>
 </template>
 ```
 :::
@@ -45,7 +45,7 @@ Se puede personalizar Popconfirm así:
 |  cancel-button-text              | Texto del botón de cancelación | String | — | — |
 |  confirm-button-type              | Tipo del botón de confirmación | String | — | Primary |
 |  cancel-button-type              | Tipo del botón de cancelación | String | — | Text |
-|  icon              | Icono | String | — | el-icon-question |
+|  icon              | Icono | String | — | hzq-icon-question |
 |  icon-color              | Color icono | String | — | #f90 |
 |  hide-icon              | ¿Es un icono oculto? | Boolean | — | false |
 

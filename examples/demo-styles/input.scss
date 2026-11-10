@@ -1,23 +1,23 @@
 .demo-input {
-  .el-select .el-input {
+  .hzq-select .hzq-input {
     width: 130px;
   }
-  .el-input {
+  .hzq-input {
     width: 180px;
   }
-  .el-textarea {
+  .hzq-textarea {
     width: 414px;
   }
-  .el-input-group {
+  .hzq-input-group {
     width: 100%;
   }
   .demo-input-size {
-    .el-input {
+    .hzq-input {
       vertical-align: top;
       margin: 0 10px 10px 0;
     }
   }
-  .input-with-select .el-input-group__prepend {
+  .input-with-select .hzq-input-group__prepend {
     background-color: #fff;
   }
   .demo-autocomplete {
@@ -29,16 +29,16 @@
       color: #8492a6;
     }
 
-    .el-col:not(:last-child) {
+    .hzq-col:not(:last-child) {
       border-right: 1px solid rgba(224, 230, 237, 0.5);
     }
 
-    .el-autocomplete {
+    .hzq-autocomplete {
       text-align: left;
     }
   }
 }
-.el-autocomplete-suggestion.my-autocomplete {
+.hzq-autocomplete-suggestion.my-autocomplete {
   li {
     line-height: normal;
     padding-top: 7px;
@@ -59,7 +59,7 @@
 }
 .demo-input-suffix {
   margin-bottom: 15px;
-  .el-input {
+  .hzq-input {
     margin-right: 15px;
   }
 }

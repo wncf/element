@@ -8,11 +8,11 @@ ColorPicker is a color selector supporting multiple color formats.
 ```html
 <div class="block">
   <span class="demonstration">With default value</span>
-  <el-color-picker v-model="color1"></el-color-picker>
+  <hzq-color-picker v-model="color1"></hzq-color-picker>
 </div>
 <div class="block">
   <span class="demonstration">With no default value</span>
-  <el-color-picker v-model="color2"></el-color-picker>
+  <hzq-color-picker v-model="color2"></hzq-color-picker>
 </div>
 
 <script>
@@ -32,7 +32,7 @@ ColorPicker is a color selector supporting multiple color formats.
 
 :::demo ColorPicker supports alpha channel selecting. To activate alpha selecting, just add the `show-alpha` attribute.
 ```html
-<el-color-picker v-model="color" show-alpha></el-color-picker>
+<hzq-color-picker v-model="color" show-alpha></hzq-color-picker>
 
 <script>
   export default {
@@ -50,11 +50,11 @@ ColorPicker is a color selector supporting multiple color formats.
 
 :::demo ColorPicker supports predefined color options
 ```html
-<el-color-picker
+<hzq-color-picker
   v-model="color"
   show-alpha
   :predefine="predefineColors">
-</el-color-picker>
+</hzq-color-picker>
 
 <script>
   export default {
@@ -89,10 +89,11 @@ ColorPicker is a color selector supporting multiple color formats.
 
 :::demo
 ```html
-<el-color-picker v-model="color"></el-color-picker>
-<el-color-picker v-model="color" size="medium"></el-color-picker>
-<el-color-picker v-model="color" size="small"></el-color-picker>
-<el-color-picker v-model="color" size="mini"></el-color-picker>
+<hzq-color-picker v-model="color"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="large"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="medium"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="small"></hzq-color-picker>
+<hzq-color-picker v-model="color" size="mini"></hzq-color-picker>
 
 <script>
   export default {
@@ -111,7 +112,7 @@ ColorPicker is a color selector supporting multiple color formats.
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | binding value | string | — | — |
 | disabled | whether to disable the ColorPicker | boolean | — | false |
-| size | size of ColorPicker | string | — | medium / small / mini |
+| size | size of ColorPicker | string | large / medium / small / mini | — |
 | show-alpha | whether to display the alpha slider | boolean | — | false |
 | color-format | color format of v-model | string | hsl / hsv / hex / rgb | hex (when show-alpha is false)/ rgb (when show-alpha is true) |
 | popper-class | custom class name for ColorPicker's dropdown | string | — | — |

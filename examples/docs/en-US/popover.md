@@ -8,43 +8,43 @@ Similar to Tooltip, Popover is also built with `Vue-popper`. So for some duplica
 
 ```html
 <template>
-  <el-popover
+  <hzq-popover
     placement="top-start"
     title="Title"
     width="200"
     trigger="hover"
     content="this is content, this is content, this is content">
-    <el-button slot="reference">Hover to activate</el-button>
-  </el-popover>
+    <hzq-button slot="reference">Hover to activate</hzq-button>
+  </hzq-popover>
 
-  <el-popover
+  <hzq-popover
     placement="bottom"
     title="Title"
     width="200"
     trigger="click"
     content="this is content, this is content, this is content">
-    <el-button slot="reference">Click to activate</el-button>
-  </el-popover>
+    <hzq-button slot="reference">Click to activate</hzq-button>
+  </hzq-popover>
 
-  <el-popover
+  <hzq-popover
     ref="popover"
     placement="right"
     title="Title"
     width="200"
     trigger="focus"
     content="this is content, this is content, this is content">
-  </el-popover>
-  <el-button v-popover:popover>Focus to activate</el-button>
+  </hzq-popover>
+  <hzq-button v-popover:popover>Focus to activate</hzq-button>
 
-  <el-popover
+  <hzq-popover
     placement="bottom"
     title="Title"
     width="200"
     trigger="manual"
     content="this is content, this is content, this is content"
     v-model="visible">
-    <el-button slot="reference" @click="visible = !visible">Manual to activate</el-button>
-  </el-popover>
+    <hzq-button slot="reference" @click="visible = !visible">Manual to activate</hzq-button>
+  </hzq-popover>
 </template>
 
 <script>
@@ -66,17 +66,17 @@ Other components can be nested in popover. Following is an example of nested tab
 :::demo replace the `content` attribute with a default `slot`.
 
 ```html
-<el-popover
+<hzq-popover
   placement="right"
   width="400"
   trigger="click">
-  <el-table :data="gridData">
-    <el-table-column width="150" property="date" label="date"></el-table-column>
-    <el-table-column width="100" property="name" label="name"></el-table-column>
-    <el-table-column width="300" property="address" label="address"></el-table-column>
-  </el-table>
-  <el-button slot="reference">Click to activate</el-button>
-</el-popover>
+  <hzq-table :data="gridData">
+    <hzq-table-column width="150" property="date" label="date"></hzq-table-column>
+    <hzq-table-column width="100" property="name" label="name"></hzq-table-column>
+    <hzq-table-column width="300" property="address" label="address"></hzq-table-column>
+  </hzq-table>
+  <hzq-button slot="reference">Click to activate</hzq-button>
+</hzq-popover>
 
 <script>
   export default {
@@ -112,17 +112,17 @@ Of course, you can nest other operations. It's more light-weight than using a di
 
 :::demo
 ```html
-<el-popover
+<hzq-popover
   placement="top"
   width="160"
   v-model="visible">
   <p>Are you sure to delete this?</p>
   <div style="text-align: right; margin: 0">
-    <el-button size="mini" type="text" @click="visible = false">cancel</el-button>
-    <el-button type="primary" size="mini" @click="visible = false">confirm</el-button>
+    <hzq-button size="mini" type="text" @click="visible = false">cancel</hzq-button>
+    <hzq-button type="primary" size="mini" @click="visible = false">confirm</hzq-button>
   </div>
-  <el-button slot="reference">Delete</el-button>
-</el-popover>
+  <hzq-button slot="reference">Delete</hzq-button>
+</hzq-popover>
 
 <script>
   export default {

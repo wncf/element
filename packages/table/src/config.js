@@ -1,4 +1,4 @@
-import { getPropByPath } from 'element-ui/src/utils/util';
+import { getPropByPath } from 'hzq-ui/src/utils/util';
 
 export const cellStarts = {
   default: {
@@ -9,7 +9,7 @@ export const cellStarts = {
     minWidth: 48,
     realWidth: 48,
     order: '',
-    className: 'el-table-column--selection'
+    className: 'hzq-table-column--selection'
   },
   expand: {
     width: 48,
@@ -29,14 +29,14 @@ export const cellStarts = {
 export const cellForced = {
   selection: {
     renderHeader: function(h, { store }) {
-      return <el-checkbox
+      return <hzq-checkbox
         disabled={ store.states.data && store.states.data.length === 0 }
         indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
         on-input={ this.toggleAllSelection }
         value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, isSelected, store, $index }) {
-      return <el-checkbox
+      return <hzq-checkbox
         nativeOn-click={ (event) => event.stopPropagation() }
         value={ isSelected }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
@@ -69,9 +69,9 @@ export const cellForced = {
       return column.label || '';
     },
     renderCell: function(h, { row, store, isExpanded }) {
-      const classes = ['el-table__expand-icon'];
+      const classes = ['hzq-table__expand-icon'];
       if (isExpanded) {
-        classes.push('el-table__expand-icon--expanded');
+        classes.push('hzq-table__expand-icon--expanded');
       }
       const callback = function(e) {
         e.stopPropagation();
@@ -79,12 +79,12 @@ export const cellForced = {
       };
       return (<div class={ classes }
         on-click={callback}>
-        <i class='el-icon el-icon-arrow-right'></i>
+        <i class='hzq-icon hzq-icon-arrow-right'></i>
       </div>);
     },
     sortable: false,
     resizable: false,
-    className: 'el-table__expand-column'
+    className: 'hzq-table__expand-column'
   }
 };
 
@@ -105,20 +105,20 @@ export function treeCellPrefix(h, { row, treeNode, store }) {
     store.loadOrToggle(row);
   };
   if (treeNode.indent) {
-    ele.push(<span class="el-table__indent" style={{'padding-left': treeNode.indent + 'px'}}></span>);
+    ele.push(<span class="hzq-table__indent" style={{'padding-left': treeNode.indent + 'px'}}></span>);
   }
   if (typeof treeNode.expanded === 'boolean' && !treeNode.noLazyChildren) {
-    const expandClasses = ['el-table__expand-icon', treeNode.expanded ? 'el-table__expand-icon--expanded' : ''];
-    let iconClasses = ['el-icon-arrow-right'];
+    const expandClasses = ['hzq-table__expand-icon', treeNode.expanded ? 'hzq-table__expand-icon--expanded' : ''];
+    let iconClasses = ['hzq-icon-arrow-right'];
     if (treeNode.loading) {
-      iconClasses = ['el-icon-loading'];
+      iconClasses = ['hzq-icon-loading'];
     }
     ele.push(<div class={ expandClasses }
       on-click={ callback }>
       <i class={ iconClasses }></i>
     </div>);
   } else {
-    ele.push(<span class="el-table__placeholder"></span>);
+    ele.push(<span class="hzq-table__placeholder"></span>);
   }
   return ele;
 }

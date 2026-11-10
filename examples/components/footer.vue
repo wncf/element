@@ -22,7 +22,7 @@
       </div>
       <div class="footer-social">
         <p class="footer-social-title">Element {{ version && version.slice(0, 3) }} Fullerene</p>
-        <el-popover
+        <hzq-popover
           ref="weixin"
           placement="top"
           width="120"
@@ -30,8 +30,8 @@
           trigger="hover">
           <div class="footer-popover-title">{{ langConfig.elemeTech }}</div>
           <img src="https://gw.alicdn.com/imgextra/i4/O1CN01dBDgJP1t4R3qikGBP_!!6000000005848-0-tps-344-344.jpg" alt="">
-        </el-popover>
-        <el-popover
+        </hzq-popover>
+        <hzq-popover
           ref="weixin"
           placement="top"
           width="120"
@@ -39,7 +39,7 @@
           trigger="hover">
           <div class="footer-popover-title">{{ langConfig.elemeDesign }}</div>
           <img src="https://gw.alicdn.com/imgextra/i4/O1CN015ha1O71yg3g1QaKEi_!!6000000006607-0-tps-1280-1280.jpg" alt="">
-        </el-popover>
+        </hzq-popover>
         <i class="doc-icon-weixin elementdoc" v-popover:weixin></i>
         <a href="https://github.com/elemefe" target="_blank">
           <i class="doc-icon-github elementdoc"></i>
@@ -128,7 +128,7 @@
     }
   }
 
-  .el-popover.footer-popover {
+  .hzq-popover.footer-popover {
     padding: 0;
     min-width: 120px;
     line-height: normal;

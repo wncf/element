@@ -1,0 +1,53 @@
+@import "mixins/mixins";
+@import "common/var";
+
+// 布局只用 flex + 百分比，不依赖 el-row/el-col：它们把 float 写在全局选择器上，
+// 嵌套在表单里时行高和换行不好控制，这里自己管更简单。
+@include b(form-builder) {
+  @include e(row) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  @include e(col) {
+    box-sizing: border-box;
+  }
+
+  @include e(field) {
+    // 分栏时字段之间要留横向间距，
+    // 而 el-form-item 自带的 margin-bottom 在每行末尾会多出一截空白
+    margin-bottom: 18px;
+  }
+
+  @include e(title) {
+    width: 100%;
+    margin: 4px 0 18px;
+    padding-left: 8px;
+    border-left: 3px solid $--color-primary;
+    font-size: $--font-size-medium;
+    font-weight: 600;
+    line-height: 1.2;
+    color: $--color-text-primary;
+  }
+
+  @include e(divider) {
+    margin: 8px 0 22px;
+  }
+
+  @include e(tip) {
+    margin-top: 4px;
+    font-size: $--font-size-small;
+    line-height: 1.4;
+    color: $--color-text-secondary;
+  }
+
+  @include e(plain) {
+    display: inline-block;
+    line-height: $--form-item-line-height;
+    color: $--color-text-regular;
+  }
+
+  @include e(actions) {
+    padding-left: 8px;
+  }
+}

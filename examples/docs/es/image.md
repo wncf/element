@@ -9,10 +9,10 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 <div class="demo-image">
   <div class="block" v-for="fit in fits" :key="fit">
     <span class="demonstration">{{ fit }}</span>
-    <el-image
+    <hzq-image
       style="width: 100px; height: 100px"
       :src="url"
-      :fit="fit"></el-image>
+      :fit="fit"></hzq-image>
   </div>
 </div>
 
@@ -36,15 +36,15 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 <div class="demo-image__placeholder">
   <div class="block">
     <span class="demonstration">Default</span>
-    <el-image :src="src"></el-image>
+    <hzq-image :src="src"></hzq-image>
   </div>
   <div class="block">
     <span class="demonstration">Custom</span>
-    <el-image :src="src">
+    <hzq-image :src="src">
       <div slot="placeholder" class="image-slot">
         Loading<span class="dot">...</span>
       </div>
-    </el-image>
+    </hzq-image>
   </div>
 </div>
 
@@ -67,15 +67,15 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 <div class="demo-image__error">
   <div class="block">
     <span class="demonstration">Default</span>
-    <el-image></el-image>
+    <hzq-image></hzq-image>
   </div>
   <div class="block">
     <span class="demonstration">Custom</span>
-    <el-image>
+    <hzq-image>
       <div slot="error" class="image-slot">
-        <i class="el-icon-picture-outline"></i>
+        <i class="hzq-icon-picture-outline"></i>
       </div>
-    </el-image>
+    </hzq-image>
   </div>
 </div>
 ```
@@ -87,7 +87,7 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 
 ```html
 <div class="demo-image__lazy">
-  <el-image v-for="url in urls" :key="url" :src="url" lazy></el-image>
+  <hzq-image v-for="url in urls" :key="url" :src="url" lazy></hzq-image>
 </div>
 
 <script>
@@ -115,11 +115,11 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 :::demo permitir una vista previa grande de la imagen configurando la prop `previewSrcList`.
 ```html
 <div class="demo-image__preview">
-  <el-image 
+  <hzq-image 
     style="width: 100px; height: 100px"
     :src="url" 
     :preview-src-list="srcList">
-  </el-image>
+  </hzq-image>
 </div>
 
 <script>

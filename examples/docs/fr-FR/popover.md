@@ -8,43 +8,43 @@ Similaire à Tooltip, Popover est aussi construit avec `Vue-popper`. Certains at
 
 ```html
 <template>
-  <el-popover
+  <hzq-popover
     placement="top-start"
     title="Title"
     width="200"
     trigger="hover"
     content="this is content, this is content, this is content">
-    <el-button slot="reference">S'active au passage du curseur</el-button>
-  </el-popover>
+    <hzq-button slot="reference">S'active au passage du curseur</hzq-button>
+  </hzq-popover>
 
-  <el-popover
+  <hzq-popover
     placement="bottom"
     title="Title"
     width="200"
     trigger="click"
     content="this is content, this is content, this is content">
-    <el-button slot="reference">S'active en cliquant</el-button>
-  </el-popover>
+    <hzq-button slot="reference">S'active en cliquant</hzq-button>
+  </hzq-popover>
 
-  <el-popover
+  <hzq-popover
     ref="popover"
     placement="right"
     title="Title"
     width="200"
     trigger="focus"
     content="this is content, this is content, this is content">
-  </el-popover>
-  <el-button v-popover:popover>S'active au focus</el-button>
+  </hzq-popover>
+  <hzq-button v-popover:popover>S'active au focus</hzq-button>
 
-  <el-popover
+  <hzq-popover
     placement="bottom"
     title="Title"
     width="200"
     trigger="manual"
     content="this is content, this is content, this is content"
     v-model="visible">
-    <el-button slot="reference" @click="visible = !visible">S'active manuellement</el-button>
-  </el-popover>
+    <hzq-button slot="reference" @click="visible = !visible">S'active manuellement</hzq-button>
+  </hzq-popover>
 </template>
 
 <script>
@@ -66,17 +66,17 @@ D'autres composants peuvent s'imbriquer dans un popover.
 :::demo Remplacez `content` par un `slot`.
 
 ```html
-<el-popover
+<hzq-popover
   placement="right"
   width="400"
   trigger="click">
-  <el-table :data="gridData">
-    <el-table-column width="150" property="date" label="date"></el-table-column>
-    <el-table-column width="100" property="name" label="name"></el-table-column>
-    <el-table-column width="300" property="address" label="address"></el-table-column>
-  </el-table>
-  <el-button slot="reference">Cliquez pour activer</el-button>
-</el-popover>
+  <hzq-table :data="gridData">
+    <hzq-table-column width="150" property="date" label="date"></hzq-table-column>
+    <hzq-table-column width="100" property="name" label="name"></hzq-table-column>
+    <hzq-table-column width="300" property="address" label="address"></hzq-table-column>
+  </hzq-table>
+  <hzq-button slot="reference">Cliquez pour activer</hzq-button>
+</hzq-popover>
 
 <script>
   export default {
@@ -112,17 +112,17 @@ Vous pouvez aussi imbriquer des opérations. Procéder ainsi est plus léger que
 
 :::demo
 ```html
-<el-popover
+<hzq-popover
   placement="top"
   width="160"
   v-model="visible">
   <p>Voulez-vous vraiment supprimer ceci?</p>
   <div style="text-align: right; margin: 0">
-    <el-button size="mini" type="text" @click="visible = false">Annuler</el-button>
-    <el-button type="primary" size="mini" @click="visible = false">Confirmer</el-button>
+    <hzq-button size="mini" type="text" @click="visible = false">Annuler</hzq-button>
+    <hzq-button type="primary" size="mini" @click="visible = false">Confirmer</hzq-button>
   </div>
-  <el-button slot="reference">Supprimer</el-button>
-</el-popover>
+  <hzq-button slot="reference">Supprimer</hzq-button>
+</hzq-popover>
 
 <script>
   export default {

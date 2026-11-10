@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-radio-button"
+    class="hzq-radio-button"
     :class="[
-      size ? 'el-radio-button--' + size : '',
+      size ? 'hzq-radio-button--' + size : '',
       { 'is-active': value === label },
       { 'is-disabled': isDisabled },
       { 'is-focus': focus }
@@ -14,7 +14,7 @@
     @keydown.space.stop.prevent="value = isDisabled ? value : label"
   >
     <input
-      class="el-radio-button__orig-radio"
+      class="hzq-radio-button__orig-radio"
       :value="label"
       type="radio"
       v-model="value"
@@ -27,7 +27,7 @@
       autocomplete="off"
     >
     <span
-      class="el-radio-button__inner"
+      class="hzq-radio-button__inner"
       :style="value === label ? activeStyle : null"
       @keydown.stop>
       <slot></slot>
@@ -36,10 +36,10 @@
   </label>
 </template>
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElRadioButton',
+    name: 'HzqRadioButton',
 
     mixins: [Emitter],
 
@@ -74,7 +74,7 @@
       _radioGroup() {
         let parent = this.$parent;
         while (parent) {
-          if (parent.$options.componentName !== 'ElRadioGroup') {
+          if (parent.$options.componentName !== 'HzqRadioGroup') {
             parent = parent.$parent;
           } else {
             return parent;
@@ -94,7 +94,7 @@
         return (this.elFormItem || {}).elFormItemSize;
       },
       size() {
-        return this._radioGroup.radioGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this._radioGroup.radioGroupSize || this._elFormItemSize || (this.$HZQ || {}).size;
       },
       isDisabled() {
         return this.disabled || this._radioGroup.disabled || (this.elForm || {}).disabled;
@@ -107,7 +107,7 @@
     methods: {
       handleChange() {
         this.$nextTick(() => {
-          this.dispatch('ElRadioGroup', 'handleChange', this.value);
+          this.dispatch('HzqRadioGroup', 'handleChange', this.value);
         });
       }
     }

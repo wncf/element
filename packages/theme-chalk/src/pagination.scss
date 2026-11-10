@@ -3,7 +3,7 @@
 @import "common/var";
 @import "select";
 
-// 分页内按钮 / 输入框的尺寸梯级：与控件一致（default/medium 32 → small 28 → mini 26）
+// 分页内按钮 / 输入框的尺寸梯级：与控件一致（large 36 → default/medium 32 → small 28 → mini 24）
 // 页码与上下页按钮为正方形，跳页输入框同高，保证整行基线对齐
 @mixin pagination-size($width, $height) {
   // 上下页按钮里箭头图标之外的额外内边距（默认 32px 时是 12px）必须随宽度收敛，
@@ -12,7 +12,7 @@
 
   span:not([class*=suffix]),
   button,
-  .el-pager li {
+  .hzq-pager li {
     min-width: $width;
     height: $height;
     line-height: $height;
@@ -27,20 +27,20 @@
   }
 
   // 省略号是落在基线附近的字形，行高略大于盒子才会视觉居中
-  .el-pager li.btn-quicknext,
-  .el-pager li.btn-quickprev {
+  .hzq-pager li.btn-quicknext,
+  .hzq-pager li.btn-quickprev {
     line-height: $height + 4px;
   }
 
-  .el-pager .more::before,
-  .el-pager li.more::before {
+  .hzq-pager .more::before,
+  .hzq-pager li.more::before {
     line-height: $height + 6px;
   }
 
   @include e(editor) {
     height: $height;
 
-    &.el-input .el-input__inner {
+    &.hzq-input .hzq-input__inner {
       height: $height;
     }
   }
@@ -64,23 +64,23 @@
     box-sizing: border-box;
   }
 
-  .el-input__inner {
+  .hzq-input__inner {
     text-align: center;
     -moz-appearance: textfield;
     line-height: normal;
   }
 
   // pagesize 的下拉 icon
-  .el-input__suffix {
+  .hzq-input__suffix {
     right: 0;
     transform: scale(.8);
   }
 
-  .el-select .el-input {
+  .hzq-select .hzq-input {
     width: 100px;
     margin: 0 5px;
 
-    .el-input__inner {
+    .hzq-input__inner {
       padding-right: 25px;
       border-radius: $--pagination-border-radius;
     }
@@ -115,7 +115,7 @@
     margin: 0;
     color: $--pagination-button-color;
 
-    .el-icon {
+    .hzq-icon {
       display: block;
       font-size: 12px;
       font-weight: bold;
@@ -130,9 +130,13 @@
     padding-left: 12px;    
   }
 
-  .el-pager li.disabled {
+  .hzq-pager li.disabled {
     color: $--color-text-placeholder;
     cursor: not-allowed;
+  }
+
+  @include m(large) {
+    @include pagination-size($--pagination-large-button-width, $--pagination-large-button-height);
   }
 
   @include m(small) {
@@ -149,7 +153,7 @@
     color: $--color-text-regular;
 
     // 下拉与页码按钮同尺寸，字号由 input 自身的尺寸档决定
-    .el-input .el-input__inner {
+    .hzq-input .hzq-input__inner {
       padding-left: 8px;
 
       &:hover {
@@ -169,7 +173,7 @@
     font-weight: normal;
     color: $--color-text-regular;
 
-    .el-input__inner {
+    .hzq-input__inner {
       padding: 0 3px;
     }
   }
@@ -188,16 +192,16 @@
     box-sizing: border-box;
     border-radius: $--pagination-border-radius;
 
-    &.el-input {
+    &.hzq-input {
       width: 50px;
     }
 
-    &.el-input .el-input__inner {
+    &.hzq-input .hzq-input__inner {
       height: $--pagination-button-height;
     }
 
-    .el-input__inner::-webkit-inner-spin-button,
-    .el-input__inner::-webkit-outer-spin-button {
+    .hzq-input__inner::-webkit-inner-spin-button,
+    .hzq-input__inner::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
@@ -206,7 +210,7 @@
   @include when(background) {
     .btn-prev,
     .btn-next,
-    .el-pager li {
+    .hzq-pager li {
       margin: 0 5px;
       background-color: $--color-info-lighter;
       color: $--color-text-regular;
@@ -225,7 +229,7 @@
       }
     }
 
-    .el-pager li:not(.disabled) {
+    .hzq-pager li:not(.disabled) {
       &:hover {
         color: $--pagination-hover-color;
       }
@@ -237,11 +241,11 @@
     }
 
     // 小尺寸按钮之间的间距同步收紧，保持整行节奏
-    &.el-pagination--small,
-    &.el-pagination--mini {
+    &.hzq-pagination--small,
+    &.hzq-pagination--mini {
       .btn-prev,
       .btn-next,
-      .el-pager li {
+      .hzq-pager li {
         margin: 0 3px;
       }
     }

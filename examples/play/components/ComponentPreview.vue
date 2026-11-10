@@ -7,23 +7,23 @@
       </div>
 
       <div class="component-preview__search">
-        <el-input
+        <hzq-input
           v-model="keyword"
           size="small"
-          prefix-icon="el-icon-search"
+          prefix-icon="hzq-icon-search"
           placeholder="搜索组件"
           clearable
         />
       </div>
 
-      <el-radio-group v-model="globalSize" size="mini" class="component-preview__size">
-        <el-radio-button label="default">Default</el-radio-button>
-        <el-radio-button label="medium">Medium</el-radio-button>
-        <el-radio-button label="small">Small</el-radio-button>
-        <el-radio-button label="mini">Mini</el-radio-button>
-      </el-radio-group>
+      <hzq-radio-group v-model="globalSize" size="mini" class="component-preview__size">
+        <hzq-radio-button label="large">Large</hzq-radio-button>
+        <hzq-radio-button label="medium">Medium</hzq-radio-button>
+        <hzq-radio-button label="small">Small</hzq-radio-button>
+        <hzq-radio-button label="mini">Mini</hzq-radio-button>
+      </hzq-radio-group>
 
-      <el-scrollbar class="component-preview__nav-scroll">
+      <hzq-scrollbar class="component-preview__nav-scroll">
         <nav class="component-preview__nav">
           <div
             v-for="group in filteredGroups"
@@ -42,9 +42,9 @@
               {{ section.label }}
             </a>
           </div>
-          <el-empty v-if="!filteredGroups.length" description="无匹配组件" :image-size="60" />
+          <hzq-empty v-if="!filteredGroups.length" description="无匹配组件" :image-size="60" />
         </nav>
-      </el-scrollbar>
+      </hzq-scrollbar>
 
       <theme-panel />
     </aside>
@@ -52,7 +52,7 @@
     <main ref="main" class="component-preview__main" @scroll="handleScroll">
       <header class="component-preview__toolbar">
         <span>Element UI 全组件 Playground</span>
-        <el-button :size="globalSize" @click="scrollToTop">回到顶部</el-button>
+        <hzq-button :size="globalSize" @click="scrollToTop">回到顶部</hzq-button>
       </header>
 
       <div class="component-preview__content">
@@ -87,7 +87,7 @@ export default {
       PREVIEW_GROUPS,
       ALL_SECTIONS,
       keyword: '',
-      globalSize: 'default',
+      globalSize: 'medium',
       activeSection: ALL_SECTIONS[0] ? ALL_SECTIONS[0].id : '',
       sectionMap: {
         basic: BasicSection,
@@ -220,7 +220,7 @@ export default {
   display: flex;
   height: 100%;
   overflow: hidden;
-  background: var(--el-bg-color-page);
+  background: var(--hzq-bg-color-page);
 }
 
 .component-preview__sidebar {
@@ -229,8 +229,8 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: var(--el-bg-color);
-  border-right: 1px solid var(--el-border-color-lighter);
+  background: var(--hzq-bg-color);
+  border-right: 1px solid var(--hzq-border-color-lighter);
 }
 
 .component-preview__sidebar-header {
@@ -240,13 +240,13 @@ export default {
 .component-preview__title {
   margin: 0;
   font-size: 18px;
-  color: var(--el-text-color-primary);
+  color: var(--hzq-text-color-primary);
 }
 
 .component-preview__subtitle {
   margin: 6px 0 0;
   font-size: 12px;
-  color: var(--el-text-color-secondary);
+  color: var(--hzq-text-color-secondary);
 }
 
 .component-preview__search {
@@ -256,7 +256,7 @@ export default {
   margin-bottom: 12px;
 }
 
-.component-preview__search >>> .el-input {
+.component-preview__search >>> .hzq-input {
   display: block;
 }
 
@@ -267,11 +267,11 @@ export default {
   padding: 0 16px 12px;
 }
 
-.component-preview__size >>> .el-radio-button {
+.component-preview__size >>> .hzq-radio-button {
   flex: 1;
 }
 
-.component-preview__size >>> .el-radio-button__inner {
+.component-preview__size >>> .hzq-radio-button__inner {
   width: 100%;
   padding-left: 0;
   padding-right: 0;
@@ -294,7 +294,7 @@ export default {
   padding: 8px;
   font-size: 12px;
   font-weight: 600;
-  color: var(--el-text-color-secondary);
+  color: var(--hzq-text-color-secondary);
 }
 
 .component-preview__nav-link {
@@ -302,20 +302,20 @@ export default {
   padding: 8px 12px;
   margin-bottom: 2px;
   font-size: 13px;
-  color: var(--el-text-color-regular);
+  color: var(--hzq-text-color-regular);
   text-decoration: none;
   border-radius: 6px;
   transition: background 0.15s, color 0.15s;
 }
 
 .component-preview__nav-link:hover {
-  background: var(--el-bg-color-page);
-  color: var(--el-color-primary);
+  background: var(--hzq-bg-color-page);
+  color: var(--hzq-color-primary);
 }
 
 .component-preview__nav-link.is-active {
-  background: var(--el-color-primary-light-9);
-  color: var(--el-color-primary);
+  background: var(--hzq-color-primary-light-9);
+  color: var(--hzq-color-primary);
   font-weight: 500;
 }
 
@@ -334,11 +334,11 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 12px 24px;
-  background: var(--el-bg-color);
-  border-bottom: 1px solid var(--el-border-color-lighter);
+  background: var(--hzq-bg-color);
+  border-bottom: 1px solid var(--hzq-border-color-lighter);
   backdrop-filter: blur(4px);
   font-size: 14px;
-  color: var(--el-text-color-regular);
+  color: var(--hzq-text-color-regular);
 }
 
 .component-preview__content {
@@ -354,16 +354,16 @@ export default {
   margin: 0 0 16px;
   padding-bottom: 8px;
   font-size: 20px;
-  color: var(--el-text-color-primary);
-  border-bottom: 2px solid var(--el-color-primary);
+  color: var(--hzq-text-color-primary);
+  border-bottom: 2px solid var(--hzq-color-primary);
 }
 </style>
 
 <style>
 .component-preview .preview-block {
   margin-bottom: 20px;
-  background: var(--el-bg-color);
-  border: 1px solid var(--el-border-color-lighter);
+  background: var(--hzq-bg-color);
+  border: 1px solid var(--hzq-border-color-lighter);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -373,15 +373,15 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  background: var(--el-fill-color-lighter);
-  border-bottom: 1px solid var(--el-border-color-lighter);
+  background: var(--hzq-fill-color-lighter);
+  border-bottom: 1px solid var(--hzq-border-color-lighter);
 }
 
 .component-preview .preview-block__title {
   margin: 0;
   font-size: 15px;
   font-weight: 500;
-  color: var(--el-text-color-primary);
+  color: var(--hzq-text-color-primary);
 }
 
 .component-preview .preview-block__body {
@@ -412,54 +412,54 @@ export default {
   flex-shrink: 0;
   margin-right: 8px;
   font-size: 12px;
-  color: var(--el-text-color-secondary);
+  color: var(--hzq-text-color-secondary);
 }
 
 .component-preview .preview-demo-box {
   height: 48px;
   line-height: 48px;
   text-align: center;
-  background: var(--el-color-primary-light-9);
-  color: var(--el-color-primary);
+  background: var(--hzq-color-primary-light-9);
+  color: var(--hzq-color-primary);
   border-radius: 6px;
 }
 
 .component-preview .preview-container {
-  border: 1px solid var(--el-border-color-lighter);
+  border: 1px solid var(--hzq-border-color-lighter);
   border-radius: 6px;
   overflow: hidden;
 }
 
-.component-preview .preview-container .el-header,
-.component-preview .preview-container .el-footer {
+.component-preview .preview-container .hzq-header,
+.component-preview .preview-container .hzq-footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--el-color-primary-light-9);
-  color: var(--el-color-primary);
+  background: var(--hzq-color-primary-light-9);
+  color: var(--hzq-color-primary);
 }
 
-.component-preview .preview-container .el-aside {
+.component-preview .preview-container .hzq-aside {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--el-color-success-light-9);
-  color: var(--el-color-success);
+  background: var(--hzq-color-success-light-9);
+  color: var(--hzq-color-success);
 }
 
-.component-preview .preview-container .el-main {
+.component-preview .preview-container .hzq-main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--el-color-warning-light-9);
-  color: var(--el-color-warning);
+  background: var(--hzq-color-warning-light-9);
+  color: var(--hzq-color-warning);
 }
 
 .component-preview .preview-badge-item {
   margin-right: 24px;
 }
 
-.component-preview .el-avatar + .el-avatar {
+.component-preview .hzq-avatar + .hzq-avatar {
   margin-left: 12px;
 }
 
@@ -469,16 +469,16 @@ export default {
   justify-content: center;
   width: 120px;
   height: 60px;
-  border: 1px dashed var(--el-border-color-base);
+  border: 1px dashed var(--hzq-border-color-base);
   border-radius: 6px;
-  color: var(--el-text-color-secondary);
+  color: var(--hzq-text-color-secondary);
   vertical-align: middle;
 }
 
 .component-preview .preview-inline-tip {
   margin-left: 12px;
   font-size: 13px;
-  color: var(--el-text-color-secondary);
+  color: var(--hzq-text-color-secondary);
 }
 
 .component-preview .preview-card {
@@ -505,15 +505,15 @@ export default {
   height: 32px;
   margin-right: 10px;
   border-radius: 8px;
-  background: var(--el-color-primary-light-9);
-  color: var(--el-color-primary);
+  background: var(--hzq-color-primary-light-9);
+  color: var(--hzq-color-primary);
   flex-shrink: 0;
 }
 
 .component-preview .preview-card__title {
   font-size: 15px;
   font-weight: 600;
-  color: var(--el-text-color-primary);
+  color: var(--hzq-text-color-primary);
 }
 
 .component-preview .preview-card__legend {
@@ -537,7 +537,7 @@ export default {
 .component-preview .preview-card__legend-name {
   display: inline-flex;
   align-items: center;
-  color: var(--el-text-color-regular);
+  color: var(--hzq-text-color-regular);
 }
 
 .component-preview .preview-card__legend-name i {
@@ -549,7 +549,7 @@ export default {
 }
 
 .component-preview .preview-card__legend-value {
-  color: var(--el-text-color-primary);
+  color: var(--hzq-text-color-primary);
   font-weight: 500;
 }
 
@@ -557,8 +557,8 @@ export default {
   height: 120px;
   line-height: 120px;
   text-align: center;
-  background: var(--el-color-primary-light-9);
-  color: var(--el-color-primary);
+  background: var(--hzq-color-primary-light-9);
+  color: var(--hzq-color-primary);
   font-size: 24px;
 }
 
@@ -568,22 +568,22 @@ export default {
   padding: 0;
   list-style: none;
   overflow-y: auto;
-  border: 1px solid var(--el-border-color-lighter);
+  border: 1px solid var(--hzq-border-color-lighter);
   border-radius: 6px;
 }
 
 .component-preview .preview-infinite-list__item {
   padding: 10px 16px;
-  border-bottom: 1px solid var(--el-border-color-lighter);
+  border-bottom: 1px solid var(--hzq-border-color-lighter);
   font-size: 13px;
-  color: var(--el-text-color-regular);
+  color: var(--hzq-text-color-regular);
 }
 
-.component-preview .el-link + .el-link {
+.component-preview .hzq-link + .hzq-link {
   margin-left: 12px;
 }
 
-.component-preview .el-tag + .el-tag {
+.component-preview .hzq-tag + .hzq-tag {
   margin-left: 8px;
 }
 </style>

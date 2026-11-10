@@ -8,41 +8,41 @@ Crea un layout básico usando columnas.
 
 :::demo Con `row` y `col`, puede fácilmente manipular el layout usando el atributo `span`.
 ```html
-<el-row>
-  <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="12"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="12"><div class="grid-content bg-purple-light"></div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="8"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-</el-row>
+<hzq-row>
+  <hzq-col :span="24"><div class="grid-content bg-purple-dark"></div></hzq-col>
+</hzq-row>
+<hzq-row>
+  <hzq-col :span="12"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="12"><div class="grid-content bg-purple-light"></div></hzq-col>
+</hzq-row>
+<hzq-row>
+  <hzq-col :span="8"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="8"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :span="8"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
+<hzq-row>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple-light"></div></hzq-col>
+</hzq-row>
+<hzq-row>
+  <hzq-col :span="4"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="4"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :span="4"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="4"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :span="4"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="4"><div class="grid-content bg-purple-light"></div></hzq-col>
+</hzq-row>
 
 <style>
-  .el-row {
+  .hzq-row {
     margin-bottom: 20px;
     &:last-child {
       margin-bottom: 0;
     }
   }
-  .el-col {
+  .hzq-col {
     border-radius: 4px;
   }
   .bg-purple-dark {
@@ -72,21 +72,21 @@ El espaciado de columnas está soportado.
 
 :::demo Row provee el atributo `gutter` para especificar el espacio entre columnas y su valor por defecto es 0.
 ```html
-<el-row :gutter="20">
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
+<hzq-row :gutter="20">
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
 
 <style>
-  .el-row {
+  .hzq-row {
     margin-bottom: 20px;
     &:last-child {
       margin-bottom: 0;
     }
   }
-  .el-col {
+  .hzq-col {
     border-radius: 4px;
   }
   .bg-purple-dark {
@@ -116,30 +116,30 @@ Crea un complejo layout híbrido combinando el básico de 1/24 columnas.
 
 :::demo
 ```html
-<el-row :gutter="20">
-  <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row :gutter="20">
-  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row :gutter="20">
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
+<hzq-row :gutter="20">
+  <hzq-col :span="16"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="8"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
+<hzq-row :gutter="20">
+  <hzq-col :span="8"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="8"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="4"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="4"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
+<hzq-row :gutter="20">
+  <hzq-col :span="4"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="16"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="4"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
 
 <style>
-  .el-row {
+  .hzq-row {
     margin-bottom: 20px;
     &:last-child {
       margin-bottom: 0;
     }
   }
-  .el-col {
+  .hzq-col {
     border-radius: 4px;
   }
   .bg-purple-dark {
@@ -170,26 +170,26 @@ Puedes especificar offsets para las columnas.
 :::demo Puedes especificar el offset para una columna mediante el atributo `offset` de Col.
 
 ```html
-<el-row :gutter="20">
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row :gutter="20">
-  <el-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row :gutter="20">
-  <el-col :span="12" :offset="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
+<hzq-row :gutter="20">
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
+<hzq-row :gutter="20">
+  <hzq-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
+<hzq-row :gutter="20">
+  <hzq-col :span="12" :offset="6"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
 
 <style>
-  .el-row {
+  .hzq-row {
     margin-bottom: 20px;
     &:last-child {
       margin-bottom: 0;
     }
   }
-  .el-col {
+  .hzq-col {
     border-radius: 4px;
   }
   .bg-purple-dark {
@@ -219,40 +219,40 @@ Usa flex layout para un alineamiento flexible de columnas.
 
 :::demo Puede habilitar flex layout asignando el atributo `type` a 'flex', y definir el layout de elementos hijos asignando el atributo `justify` con los valores start, center, end, space-between o space-around.
 ```html
-<el-row type="flex" class="row-bg">
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row type="flex" class="row-bg" justify="center">
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row type="flex" class="row-bg" justify="end">
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row type="flex" class="row-bg" justify="space-between">
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row type="flex" class="row-bg" justify="space-around">
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
+<hzq-row type="flex" class="row-bg">
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
+<hzq-row type="flex" class="row-bg" justify="center">
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
+<hzq-row type="flex" class="row-bg" justify="end">
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
+<hzq-row type="flex" class="row-bg" justify="space-between">
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
+<hzq-row type="flex" class="row-bg" justify="space-around">
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :span="6"><div class="grid-content bg-purple"></div></hzq-col>
+</hzq-row>
 
 <style>
-  .el-row {
+  .hzq-row {
     margin-bottom: 20px;
     &:last-child {
       margin-bottom: 0;
     }
   }
-  .el-col {
+  .hzq-col {
     border-radius: 4px;
   }
   .bg-purple-dark {
@@ -282,15 +282,15 @@ Tomando el ejemplo de Bootstrap responsive design, existen 5 breakpoints: xs, sm
 
 :::demo
 ```html
-<el-row :gutter="10">
-  <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple-light"></div></el-col>
-</el-row>
+<hzq-row :gutter="10">
+  <hzq-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple-light"></div></hzq-col>
+  <hzq-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple"></div></hzq-col>
+  <hzq-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple-light"></div></hzq-col>
+</hzq-row>
 
 <style>
-  .el-col {
+  .hzq-col {
     border-radius: 4px;
   }
   .bg-purple-dark {

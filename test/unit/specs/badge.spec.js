@@ -14,33 +14,33 @@ describe('Badge', () => {
 
   it('is fixed', () => {
     vm = createVue(`
-      <el-badge>
+      <hzq-badge>
         <button>click</button>
-      </el-badge>
+      </hzq-badge>
     `);
 
-    expect(vm.$el.querySelector('.el-badge__content.is-fixed')).to.exist;
+    expect(vm.$el.querySelector('.hzq-badge__content.is-fixed')).to.exist;
   });
 
   it('is dot', () => {
     vm = createVue(`
-      <el-badge is-dot>
+      <hzq-badge is-dot>
         <button>click</button>
-      </el-badge>
+      </hzq-badge>
     `);
 
-    expect(vm.$el.querySelector('.el-badge__content.is-dot')).to.exist;
+    expect(vm.$el.querySelector('.hzq-badge__content.is-dot')).to.exist;
   });
 
   it('is dot with type', () => {
     vm = createVue(`
-      <el-badge is-dot type="success">
+      <hzq-badge is-dot type="success">
         <button>click</button>
-      </el-badge>
+      </hzq-badge>
     `);
 
-    expect(vm.$el.querySelector('.el-badge__content.is-dot')).to.exist;
-    expect(vm.$el.querySelector('.el-badge__content.el-badge__content--success.is-dot')).to.exist;
+    expect(vm.$el.querySelector('.hzq-badge__content.is-dot')).to.exist;
+    expect(vm.$el.querySelector('.hzq-badge__content.hzq-badge__content--success.is-dot')).to.exist;
   });
 
   it('max', () => {

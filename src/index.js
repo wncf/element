@@ -35,6 +35,7 @@ import Tooltip from '../packages/tooltip/index.js';
 import Breadcrumb from '../packages/breadcrumb/index.js';
 import BreadcrumbItem from '../packages/breadcrumb-item/index.js';
 import Form from '../packages/form/index.js';
+import FormBuilder from '../packages/form-builder/index.js';
 import FormItem from '../packages/form-item/index.js';
 import Tabs from '../packages/tabs/index.js';
 import TabPane from '../packages/tab-pane/index.js';
@@ -89,8 +90,8 @@ import Empty from '../packages/empty/index.js';
 import Descriptions from '../packages/descriptions/index.js';
 import DescriptionsItem from '../packages/descriptions-item/index.js';
 import Result from '../packages/result/index.js';
-import locale from 'element-ui/src/locale';
-import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+import locale from 'hzq-ui/src/locale';
+import CollapseTransition from 'hzq-ui/src/transitions/collapse-transition';
 
 const components = [
   Pagination,
@@ -128,6 +129,7 @@ const components = [
   Breadcrumb,
   BreadcrumbItem,
   Form,
+  FormBuilder,
   FormItem,
   Tabs,
   TabPane,
@@ -210,7 +212,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.15.14',
+  version: '1.0.0',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -251,6 +253,7 @@ export default {
   Breadcrumb,
   BreadcrumbItem,
   Form,
+  FormBuilder,
   FormItem,
   Tabs,
   TabPane,

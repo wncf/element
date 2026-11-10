@@ -1,18 +1,18 @@
 <template>
-  <form class="el-form" :class="[
-    labelPosition ? 'el-form--label-' + labelPosition : '',
-    { 'el-form--inline': inline }
+  <form class="hzq-form" :class="[
+    labelPosition ? 'hzq-form--label-' + labelPosition : '',
+    { 'hzq-form--inline': inline }
   ]">
     <slot></slot>
   </form>
 </template>
 <script>
-  import objectAssign from 'element-ui/src/utils/merge';
+  import objectAssign from 'hzq-ui/src/utils/merge';
 
   export default {
-    name: 'ElForm',
+    name: 'HzqForm',
 
-    componentName: 'ElForm',
+    componentName: 'HzqForm',
 
     provide() {
       return {

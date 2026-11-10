@@ -38,6 +38,64 @@ Vue.use(Element)
 需要注意的是，覆盖字体路径变量是必需的，将其赋值为 Element 中 icon 图标所在的相对路径即可。
 :::
 
+#### 统一调整控件尺寸梯级
+
+Button、Input、Select、Tag、Table、Pagination 等控件的四档尺寸（`large` / `medium` / `small` / `mini`）都由 `common/var.scss` 里的「Size ladder」一组变量决定，改这一处即可让所有组件同步缩放，不必一个个组件覆盖：
+
+```scss
+/* 总高，含上下各 1px 边框（见 input 的 box-sizing: border-box） */
+$--component-height-large: 36px;
+$--component-height-medium: 32px;
+$--component-height-small: 28px;
+$--component-height-mini: 24px;
+
+/* 内容区高度 = 总高 - 2px，必须与上面成对修改 */
+$--component-inner-height-large: 34px;
+$--component-inner-height-medium: 30px;
+$--component-inner-height-small: 26px;
+$--component-inner-height-mini: 22px;
+
+/* 字号 */
+$--component-font-size-large: 14px;
+$--component-font-size-medium: 13px;
+$--component-font-size-small: 12px;
+$--component-font-size-mini: 12px;
+```
+
+不传 `size` 时等同 `medium`。少数组件有自己的一套派生值，也跟着这几个基准变量走，例如 `$--input-*-height`、`$--tag-*-height`、`$--pagination-*-button-*`、`$--form-item-line-height-*`，通常只在需要让某个组件单独偏离梯级时才覆盖它们。Dropdown 的菜单项字号是独立的一套（15 / 14 / 13 / 12），不跟随上面的字号变量。
+
+#### 深色模式
+
+在根元素加上 `theme-dark` 类即可切换到深色，与品牌预设可以叠加：
+
+```html
+<html class="theme-dark">                 <!-- 深色默认 -->
+<html class="theme-dark theme-green">     <!-- 深色 + 绿色主色 -->
+```
+
+深色不是纯黑，而是一套带蓝调的 slate 色系，面板之间靠明度差分层：
+
+| Token | 色值 | 用途 |
+| --- | --- | --- |
+| `--hzq-bg-color-page` | `#0f172a` | 页面底色（最暗） |
+| `--hzq-bg-color` | `#1e293b` | 卡片、表格、弹窗 |
+| `--hzq-bg-color-overlay` | `#243347` | 下拉层、表头、悬停态 |
+| `--hzq-fill-color-light` | `#1a2740` | 斑马纹、次级填充 |
+| `--hzq-border-color-base` | `#2d3f52` | 分割线 |
+| `--hzq-text-color-primary` | `#e2e8f0` | 主文字 |
+| `--hzq-text-color-secondary` | `#94a3b8` | 次要文字 |
+
+中性色板定义在 `common/palette.scss` 的 `$--neutrals-dark`，改这一处即可整体换色。注意 `blend-base` 需要一起改 —— 它决定品牌色 `light-1..9` 往哪个底色混合，若与新底色不匹配，深色下的浅色档会发灰。
+
+也可以运行期切换，不必重新编译：
+
+```js
+import { setThemeMode } from 'element-ui/src/utils/theme';
+
+setThemeMode('dark');   // 挂上 theme-dark
+setThemeMode('light');  // 摘掉
+```
+
 ### 命令行主题工具
 如果你的项目没有使用 SCSS，那么可以使用命令行主题工具进行深层次的主题定制：
 

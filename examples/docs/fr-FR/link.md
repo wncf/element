@@ -10,12 +10,12 @@ Lien texte basique.
 
 ```html
 <div>
-  <el-link href="https://element.eleme.io" target="_blank">défaut</el-link>
-  <el-link type="primary">primaire</el-link>
-  <el-link type="success">succès</el-link>
-  <el-link type="warning">avertissement</el-link>
-  <el-link type="danger">danger</el-link>
-  <el-link type="info">info</el-link>
+  <hzq-link href="https://element.eleme.io" target="_blank">défaut</hzq-link>
+  <hzq-link type="primary">primaire</hzq-link>
+  <hzq-link type="success">succès</hzq-link>
+  <hzq-link type="warning">avertissement</hzq-link>
+  <hzq-link type="danger">danger</hzq-link>
+  <hzq-link type="info">info</hzq-link>
 </div>
 ```
 
@@ -29,12 +29,12 @@ Lien désactivé.
 
 ```html
 <div>
-  <el-link disabled>défaut</el-link>
-  <el-link type="primary" disabled>primaire</el-link>
-  <el-link type="success" disabled>succès</el-link>
-  <el-link type="warning" disabled>avertissement</el-link>
-  <el-link type="danger" disabled>danger</el-link>
-  <el-link type="info" disabled>info</el-link>
+  <hzq-link disabled>défaut</hzq-link>
+  <hzq-link type="primary" disabled>primaire</hzq-link>
+  <hzq-link type="success" disabled>succès</hzq-link>
+  <hzq-link type="warning" disabled>avertissement</hzq-link>
+  <hzq-link type="danger" disabled>danger</hzq-link>
+  <hzq-link type="info" disabled>info</hzq-link>
 </div>
 ```
 
@@ -48,8 +48,8 @@ Lien souligné.
 
 ```html
 <div>
-  <el-link :underline="false">non souligné</el-link>
-  <el-link>Souligné</el-link>
+  <hzq-link :underline="false">non souligné</hzq-link>
+  <hzq-link>Souligné</hzq-link>
 </div>
 ```
 
@@ -63,8 +63,8 @@ Lien avec icône.
 
 ```html
 <div>
-  <el-link icon="el-icon-edit">Éditer</el-link>
-  <el-link>Vérifier<i class="el-icon-view el-icon--right"></i> </el-link>
+  <hzq-link icon="hzq-icon-edit">Éditer</hzq-link>
+  <hzq-link>Vérifier<i class="hzq-icon-view hzq-icon--right"></i> </hzq-link>
 </div>
 ```
 

@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'el-cascader-panel',
+      'hzq-cascader-panel',
       border && 'is-bordered'
     ]"
     @keydown="handleKeyDown">
@@ -17,16 +17,16 @@
 <script>
 import CascaderMenu from './cascader-menu';
 import Store from './store';
-import merge from 'element-ui/src/utils/merge';
-import AriaUtils from 'element-ui/src/utils/aria-utils';
-import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+import merge from 'hzq-ui/src/utils/merge';
+import AriaUtils from 'hzq-ui/src/utils/aria-utils';
+import scrollIntoView from 'hzq-ui/src/utils/scroll-into-view';
 import {
   noop,
   coerceTruthyValueToArray,
   isEqual,
   isEmpty,
   valueEquals
-} from 'element-ui/src/utils/util';
+} from 'hzq-ui/src/utils/util';
 
 const { keys: KeyCode } = AriaUtils;
 const DefaultProps = {
@@ -49,7 +49,7 @@ const isLeaf = el => !el.getAttribute('aria-owns');
 const getSibling = (el, distance) => {
   const { parentNode } = el;
   if (parentNode) {
-    const siblings = parentNode.querySelectorAll('.el-cascader-node[tabindex="-1"]');
+    const siblings = parentNode.querySelectorAll('.hzq-cascader-node[tabindex="-1"]');
     const index = Array.prototype.indexOf.call(siblings, el);
     return siblings[index + distance] || null;
   }
@@ -80,7 +80,7 @@ const checkNode = el => {
 };
 
 export default {
-  name: 'ElCascaderPanel',
+  name: 'HzqCascaderPanel',
 
   components: {
     CascaderMenu
@@ -247,14 +247,14 @@ export default {
         case KeyCode.left:
           const preMenu = this.$refs.menu[getMenuIndex(target) - 1];
           if (preMenu) {
-            const expandedNode = preMenu.$el.querySelector('.el-cascader-node[aria-expanded="true"]');
+            const expandedNode = preMenu.$el.querySelector('.hzq-cascader-node[aria-expanded="true"]');
             focusNode(expandedNode);
           }
           break;
         case KeyCode.right:
           const nextMenu = this.$refs.menu[getMenuIndex(target) + 1];
           if (nextMenu) {
-            const firstNode = nextMenu.$el.querySelector('.el-cascader-node[tabindex="-1"]');
+            const firstNode = nextMenu.$el.querySelector('.hzq-cascader-node[tabindex="-1"]');
             focusNode(firstNode);
           }
           break;
@@ -349,9 +349,9 @@ export default {
       menus.forEach(menu => {
         const menuElement = menu.$el;
         if (menuElement) {
-          const container = menuElement.querySelector('.el-scrollbar__wrap');
-          const activeNode = menuElement.querySelector('.el-cascader-node.is-active') ||
-            menuElement.querySelector('.el-cascader-node.in-active-path');
+          const container = menuElement.querySelector('.hzq-scrollbar__wrap');
+          const activeNode = menuElement.querySelector('.hzq-cascader-node.is-active') ||
+            menuElement.querySelector('.hzq-cascader-node.in-active-path');
           scrollIntoView(container, activeNode);
         }
       });

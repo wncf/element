@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { addClass, removeClass } from 'element-ui/src/utils/dom';
+import { addClass, removeClass } from 'hzq-ui/src/utils/dom';
 
 let hasModal = false;
 let hasInitZIndex = false;
@@ -155,7 +155,7 @@ Object.defineProperty(PopupManager, 'zIndex', {
   configurable: true,
   get() {
     if (!hasInitZIndex) {
-      zIndex = zIndex || (Vue.prototype.$ELEMENT || {}).zIndex || 2000;
+      zIndex = zIndex || (Vue.prototype.$HZQ || {}).zIndex || 2000;
       hasInitZIndex = true;
     }
     return zIndex;

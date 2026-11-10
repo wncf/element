@@ -10,12 +10,12 @@ Tabulación básica y concisa
 
 ```html
 <template>
-  <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="User" name="first">User</el-tab-pane>
-    <el-tab-pane label="Config" name="second">Config</el-tab-pane>
-    <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-    <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
-  </el-tabs>
+  <hzq-tabs v-model="activeName" @tab-click="handleClick">
+    <hzq-tab-pane label="User" name="first">User</hzq-tab-pane>
+    <hzq-tab-pane label="Config" name="second">Config</hzq-tab-pane>
+    <hzq-tab-pane label="Role" name="third">Role</hzq-tab-pane>
+    <hzq-tab-pane label="Task" name="fourth">Task</hzq-tab-pane>
+  </hzq-tabs>
 </template>
 <script>
   export default {
@@ -42,12 +42,12 @@ Pestañas diseñadas como tarjetas.
 
 ```html
 <template>
-  <el-tabs type="card" @tab-click="handleClick">
-    <el-tab-pane label="User">User</el-tab-pane>
-    <el-tab-pane label="Config">Config</el-tab-pane>
-    <el-tab-pane label="Role">Role</el-tab-pane>
-    <el-tab-pane label="Task">Task</el-tab-pane>
-  </el-tabs>
+  <hzq-tabs type="card" @tab-click="handleClick">
+    <hzq-tab-pane label="User">User</hzq-tab-pane>
+    <hzq-tab-pane label="Config">Config</hzq-tab-pane>
+    <hzq-tab-pane label="Role">Role</hzq-tab-pane>
+    <hzq-tab-pane label="Task">Task</hzq-tab-pane>
+  </hzq-tabs>
 </template>
 <script>
   export default {
@@ -73,12 +73,12 @@ Pestañas de tarjeta con bordes.
 :::demo Establecer `type` a `border-card`.
 
 ```html
-<el-tabs type="border-card">
-  <el-tab-pane label="User">User</el-tab-pane>
-  <el-tab-pane label="Config">Config</el-tab-pane>
-  <el-tab-pane label="Role">Role</el-tab-pane>
-  <el-tab-pane label="Task">Task</el-tab-pane>
-</el-tabs>
+<hzq-tabs type="border-card">
+  <hzq-tab-pane label="User">User</hzq-tab-pane>
+  <hzq-tab-pane label="Config">Config</hzq-tab-pane>
+  <hzq-tab-pane label="Role">Role</hzq-tab-pane>
+  <hzq-tab-pane label="Task">Task</hzq-tab-pane>
+</hzq-tabs>
 ```
 
 :::
@@ -91,19 +91,19 @@ Es posible usar el atributo `tab-position` para establecer la posición de la ta
 
 ```html
 <template>
-  <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
-    <el-radio-button label="top">top</el-radio-button>
-    <el-radio-button label="right">right</el-radio-button>
-    <el-radio-button label="bottom">bottom</el-radio-button>
-    <el-radio-button label="left">left</el-radio-button>
-  </el-radio-group>
+  <hzq-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
+    <hzq-radio-button label="top">top</hzq-radio-button>
+    <hzq-radio-button label="right">right</hzq-radio-button>
+    <hzq-radio-button label="bottom">bottom</hzq-radio-button>
+    <hzq-radio-button label="left">left</hzq-radio-button>
+  </hzq-radio-group>
 
-  <el-tabs :tab-position="tabPosition" style="height: 200px;">
-    <el-tab-pane label="User">User</el-tab-pane>
-    <el-tab-pane label="Config">Config</el-tab-pane>
-    <el-tab-pane label="Role">Role</el-tab-pane>
-    <el-tab-pane label="Task">Task</el-tab-pane>
-  </el-tabs>
+  <hzq-tabs :tab-position="tabPosition" style="height: 200px;">
+    <hzq-tab-pane label="User">User</hzq-tab-pane>
+    <hzq-tab-pane label="Config">Config</hzq-tab-pane>
+    <hzq-tab-pane label="Role">Role</hzq-tab-pane>
+    <hzq-tab-pane label="Task">Task</hzq-tab-pane>
+  </hzq-tabs>
 </template>
 <script>
   export default {
@@ -123,15 +123,15 @@ Es posible usar slots con nombre para personalizar el contenido de la etiqueta d
 
 :::demo
 ```html
-<el-tabs type="border-card">
-  <el-tab-pane>
-    <span slot="label"><i class="el-icon-date"></i> Route</span>
+<hzq-tabs type="border-card">
+  <hzq-tab-pane>
+    <span slot="label"><i class="hzq-icon-date"></i> Route</span>
     Route
-  </el-tab-pane>
-  <el-tab-pane label="Config">Config</el-tab-pane>
-  <el-tab-pane label="Role">Role</el-tab-pane>
-  <el-tab-pane label="Task">Task</el-tab-pane>
-</el-tabs>
+  </hzq-tab-pane>
+  <hzq-tab-pane label="Config">Config</hzq-tab-pane>
+  <hzq-tab-pane label="Role">Role</hzq-tab-pane>
+  <hzq-tab-pane label="Task">Task</hzq-tab-pane>
+</hzq-tabs>
 ```
 :::
 
@@ -141,16 +141,16 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 
 :::demo
 ```html
-<el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
-  <el-tab-pane
+<hzq-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
+  <hzq-tab-pane
     v-for="(item, index) in editableTabs"
     :key="item.name"
     :label="item.title"
     :name="item.name"
   >
     {{item.content}}
-  </el-tab-pane>
-</el-tabs>
+  </hzq-tab-pane>
+</hzq-tabs>
 <script>
   export default {
     data() {
@@ -208,23 +208,23 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 :::demo
 ```html
 <div style="margin-bottom: 20px;">
-  <el-button
+  <hzq-button
     size="small"
     @click="addTab(editableTabsValue)"
   >
     add tab
-  </el-button>
+  </hzq-button>
 </div>
-<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
-  <el-tab-pane
+<hzq-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
+  <hzq-tab-pane
     v-for="(item, index) in editableTabs"
     :key="item.name"
     :label="item.title"
     :name="item.name"
   >
     {{item.content}}
-  </el-tab-pane>
-</el-tabs>
+  </hzq-tab-pane>
+</hzq-tabs>
 <script>
   export default {
     data() {

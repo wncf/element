@@ -47,10 +47,10 @@ const options = [{
   }]
 }];
 
-const getMenus = el => el.querySelectorAll('.el-cascader-menu');
-const getOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.el-cascader-node');
+const getMenus = el => el.querySelectorAll('.hzq-cascader-menu');
+const getOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.hzq-cascader-node');
 const selectedValue = ['zhejiang', 'hangzhou', 'xihu'];
-const getCloseButton = el => el.querySelectorAll('i.el-tag__close');
+const getCloseButton = el => el.querySelectorAll('i.hzq-tag__close');
 
 describe('Cascader', () => {
   let vm;
@@ -77,10 +77,10 @@ describe('Cascader', () => {
   it('expand and check', async() => {
     vm = createTest({
       template: `
-        <el-cascader
+        <hzq-cascader
           ref="cascader"
           v-model="value"
-          :options="options"></el-cascader>
+          :options="options"></hzq-cascader>
       `,
       data() {
         return {
@@ -107,7 +107,7 @@ describe('Cascader', () => {
     await waitImmediate();
     expect(changeHandler.calledOnceWith(selectedValue)).to.be.true;
     expect(vm.value).to.deep.equal(selectedValue);
-    expect(checkedOption.querySelector('i.el-icon-check')).to.exist;
+    expect(checkedOption.querySelector('i.hzq-icon-check')).to.exist;
     expect(vm.$el.querySelector('input').value).to.equal('Zhejiang / Hangzhou / West Lake');
   });
 
@@ -124,9 +124,9 @@ describe('Cascader', () => {
   it('with default value', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
-          :options="options"></el-cascader>
+          :options="options"></hzq-cascader>
       `,
       data() {
         return {
@@ -139,16 +139,16 @@ describe('Cascader', () => {
     const el = vm.$el;
     await waitImmediate();
     expect(getMenus(el).length).to.equal(3);
-    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('el-icon-check');
+    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('hzq-icon-check');
     expect(vm.$el.querySelector('input').value).to.equal('Zhejiang / Hangzhou / West Lake');
   });
 
   it('async set selected value', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
-          :options="options"></el-cascader>
+          :options="options"></hzq-cascader>
       `,
       data() {
         return {
@@ -162,16 +162,16 @@ describe('Cascader', () => {
     vm.value = selectedValue;
     await waitImmediate();
     expect(getMenus(el).length).to.equal(3);
-    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('el-icon-check');
+    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('hzq-icon-check');
     expect(vm.$el.querySelector('input').value).to.equal('Zhejiang / Hangzhou / West Lake');
   });
 
   it('default value with async options', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
-          :options="options"></el-cascader>
+          :options="options"></hzq-cascader>
       `,
       data() {
         return {
@@ -185,17 +185,17 @@ describe('Cascader', () => {
     vm.options = options;
     await waitImmediate();
     expect(getMenus(el).length).to.equal(3);
-    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('el-icon-check');
+    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('hzq-icon-check');
     expect(vm.$el.querySelector('input').value).to.equal('Zhejiang / Hangzhou / West Lake');
   });
 
   it('clearable', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
           :options="options"
-          clearable></el-cascader>
+          clearable></hzq-cascader>
       `,
       data() {
         return {
@@ -207,7 +207,7 @@ describe('Cascader', () => {
 
     triggerEvent(vm.$el, 'mouseenter');
     await waitImmediate();
-    const closeBtn = vm.$el.querySelector('i.el-input__icon');
+    const closeBtn = vm.$el.querySelector('i.hzq-input__icon');
     expect(closeBtn).to.exist;
     closeBtn.click();
     await waitImmediate();
@@ -217,10 +217,10 @@ describe('Cascader', () => {
   it('show last level label', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
           :options="options"
-          :show-all-levels="false"></el-cascader>
+          :show-all-levels="false"></hzq-cascader>
       `,
       data() {
         return {
@@ -233,18 +233,18 @@ describe('Cascader', () => {
     const el = vm.$el;
     await waitImmediate();
     expect(getMenus(el).length).to.equal(3);
-    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('el-icon-check');
+    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('hzq-icon-check');
     expect(vm.$el.querySelector('input').value).to.equal('West Lake');
   });
 
   it('multiple mode', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
           :options="options"
           :disabled="disabled"
-          :props="props"></el-cascader>
+          :props="props"></hzq-cascader>
       `,
       data() {
         return {
@@ -258,19 +258,19 @@ describe('Cascader', () => {
       }
     }, true);
 
-    getOptions(document.body, 0)[0].querySelector('.el-checkbox input').click();
+    getOptions(document.body, 0)[0].querySelector('.hzq-checkbox input').click();
     await waitImmediate();
     expect(vm.value.length).to.equal(3);
     expect(getCloseButton(vm.$el).length).to.equal(3);
 
-    const tags = vm.$el.querySelectorAll('.el-tag');
-    const closeBtn = tags[0].querySelector('.el-tag__close');
+    const tags = vm.$el.querySelectorAll('.hzq-tag');
+    const closeBtn = tags[0].querySelector('.hzq-tag__close');
     expect(tags.length).to.equal(3);
     expect(closeBtn).to.exist;
     closeBtn.click();
     await waitImmediate();
     expect(vm.value.length).to.equal(2);
-    expect(vm.$el.querySelectorAll('.el-tag').length).to.equal(2);
+    expect(vm.$el.querySelectorAll('.hzq-tag').length).to.equal(2);
 
     vm.disabled = true;
     await waitImmediate();
@@ -280,10 +280,10 @@ describe('Cascader', () => {
   it('click leaf node should check in multiple mode', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
           :options="options"
-          :props="props"></el-cascader>
+          :props="props"></hzq-cascader>
       `,
       data() {
         return {
@@ -311,11 +311,11 @@ describe('Cascader', () => {
   it('clearable in multiple mode', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
           :options="options"
           :props="props"
-          clearable></el-cascader>
+          clearable></hzq-cascader>
       `,
       data() {
         return {
@@ -330,10 +330,10 @@ describe('Cascader', () => {
     }, true);
     vm.value = ['xihu', 'binjiang', 'jiangbei', 'jiangdong'];
     await waitImmediate();
-    expect(getOptions(document.body, 0)[0].querySelector('.el-checkbox.is-checked')).to.exist;
+    expect(getOptions(document.body, 0)[0].querySelector('.hzq-checkbox.is-checked')).to.exist;
     triggerEvent(vm.$el, 'mouseenter');
     await waitImmediate();
-    const closeBtn = vm.$el.querySelector('i.el-input__icon');
+    const closeBtn = vm.$el.querySelector('i.hzq-input__icon');
     expect(closeBtn).to.exist;
     closeBtn.click();
     await waitImmediate();
@@ -343,11 +343,11 @@ describe('Cascader', () => {
   it('collapse tags', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
           :options="options"
           :props="props"
-          collapse-tags></el-cascader>
+          collapse-tags></hzq-cascader>
       `,
       data() {
         return {
@@ -361,31 +361,31 @@ describe('Cascader', () => {
       }
     }, true);
     await waitImmediate();
-    const tags = vm.$el.querySelectorAll('.el-tag');
+    const tags = vm.$el.querySelectorAll('.hzq-tag');
     expect(tags.length).to.equal(2);
-    expect(tags[0].querySelector('.el-tag__close')).to.exist;
-    expect(tags[1].querySelector('.el-tag__close')).to.be.null;
-    tags[0].querySelector('.el-tag__close').click();
+    expect(tags[0].querySelector('.hzq-tag__close')).to.exist;
+    expect(tags[1].querySelector('.hzq-tag__close')).to.be.null;
+    tags[0].querySelector('.hzq-tag__close').click();
     expect(tags[1].textContent).to.equal('+ 3');
     await waitImmediate();
     expect(vm.value.length).to.equal(3);
-    vm.$el.querySelector('.el-tag .el-tag__close').click();
+    vm.$el.querySelector('.hzq-tag .hzq-tag__close').click();
     await waitImmediate();
-    vm.$el.querySelector('.el-tag .el-tag__close').click();
+    vm.$el.querySelector('.hzq-tag .hzq-tag__close').click();
     await waitImmediate();
-    expect(vm.$el.querySelector('.el-tag')).to.exist;
+    expect(vm.$el.querySelector('.hzq-tag')).to.exist;
     // disabled tag can not be closed
-    expect(vm.$el.querySelector('.el-tag .el-tag__close')).to.be.null;
+    expect(vm.$el.querySelector('.hzq-tag .hzq-tag__close')).to.be.null;
   });
 
   it('multiple tags stay in one line and mark overflow', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
           :options="options"
           :props="props"
-          style="width: 180px;"></el-cascader>
+          style="width: 180px;"></hzq-cascader>
       `,
       data() {
         return {
@@ -399,24 +399,24 @@ describe('Cascader', () => {
       }
     }, true);
     await waitImmediate();
-    const tags = vm.$el.querySelector('.el-cascader__tags');
-    const tagsWrap = vm.$el.querySelector('.el-cascader__tags-wrap');
-    const inputInner = vm.$el.querySelector('.el-input__inner');
+    const tags = vm.$el.querySelector('.hzq-cascader__tags');
+    const tagsWrap = vm.$el.querySelector('.hzq-cascader__tags-wrap');
+    const inputInner = vm.$el.querySelector('.hzq-input__inner');
     expect(tagsWrap).to.exist;
-    expect(vm.$el.querySelectorAll('.el-tag').length).to.equal(4);
+    expect(vm.$el.querySelectorAll('.hzq-tag').length).to.equal(4);
     expect(window.getComputedStyle(tags).flexWrap).to.equal('nowrap');
     expect(tagsWrap.classList.contains('is-overflow')).to.be.true;
-    expect(tagsWrap.querySelector('.el-tag.is-overflow-tail')).to.exist;
+    expect(tagsWrap.querySelector('.hzq-tag.is-overflow-tail')).to.exist;
     expect(parseFloat(inputInner.style.height)).to.equal(32);
   });
 
   it('filterable', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
           :options="options"
-          filterable></el-cascader>
+          filterable></hzq-cascader>
       `,
       data() {
         return {
@@ -433,9 +433,9 @@ describe('Cascader', () => {
     input.value = 'Zhejiang';
     triggerEvent(input, 'input');
     await wait(300);
-    expect(body.querySelector('.el-cascader__suggestion-list')).to.exist;
-    expect(body.querySelectorAll('.el-cascader__suggestion-item').length).to.equal(3);
-    body.querySelectorAll('.el-cascader__suggestion-item')[0].click();
+    expect(body.querySelector('.hzq-cascader__suggestion-list')).to.exist;
+    expect(body.querySelectorAll('.hzq-cascader__suggestion-item').length).to.equal(3);
+    body.querySelectorAll('.hzq-cascader__suggestion-item')[0].click();
     await waitImmediate();
     expect(vm.value).to.deep.equal(selectedValue);
   });
@@ -443,11 +443,11 @@ describe('Cascader', () => {
   it('filter method', async() => {
     vm = createVue({
       template: `
-        <el-cascader
+        <hzq-cascader
           v-model="value"
           :options="options"
           :filter-method="filterMethod"
-          filterable></el-cascader>
+          filterable></hzq-cascader>
       `,
       data() {
         return {
@@ -470,10 +470,10 @@ describe('Cascader', () => {
     input.value = 'Zhejiang';
     triggerEvent(input, 'input');
     await wait(300);
-    expect(body.querySelectorAll('.el-cascader__suggestion-item').length).to.equal(3);
+    expect(body.querySelectorAll('.hzq-cascader__suggestion-item').length).to.equal(3);
     input.value = 'xihu';
     triggerEvent(input, 'input');
     await wait(300);
-    expect(body.querySelector('.el-cascader__suggestion-item').textContent).to.equal('Zhejiang / Hangzhou / West Lake');
+    expect(body.querySelector('.hzq-cascader__suggestion-item').textContent).to.equal('Zhejiang / Hangzhou / West Lake');
   });
 });

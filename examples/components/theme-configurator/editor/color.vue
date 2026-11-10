@@ -1,19 +1,19 @@
 <template>
   <section class="config" :key="displayName">
     <div class="config-label">
-      <el-tooltip :content="displayName" placement="top">
+      <hzq-tooltip :content="displayName" placement="top">
         <span>{{displayKeyName}}</span>
-      </el-tooltip>
+      </hzq-tooltip>
     </div>
     <div class="config-content">
       <div class="content-80">
-        <el-input
+        <hzq-input
           size="medium"
           :value=displayValue
           readonly
           slot="reference"
           @click.native="onInputClick"
-        ></el-input>
+        ></hzq-input>
       </div>
       <div class="content-20">
         <color-picker 

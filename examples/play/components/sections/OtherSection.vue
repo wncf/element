@@ -1,63 +1,63 @@
 <template>
   <div class="preview-section">
     <preview-block section-id="dialog" title="Dialog 对话框">
-      <el-button :size="size" type="primary" @click="dialogVisible = true">默认</el-button>
-      <el-button :size="size" @click="dialogCenterVisible = true">居中</el-button>
-      <el-dialog title="提示" :visible.sync="dialogVisible" width="400px">
+      <hzq-button :size="size" type="primary" @click="dialogVisible = true">默认</hzq-button>
+      <hzq-button :size="size" @click="dialogCenterVisible = true">居中</hzq-button>
+      <hzq-dialog title="提示" :visible.sync="dialogVisible" width="400px">
         <span>这是一段 Dialog 内容</span>
         <span slot="footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          <hzq-button @click="dialogVisible = false">取 消</hzq-button>
+          <hzq-button type="primary" @click="dialogVisible = false">确 定</hzq-button>
         </span>
-      </el-dialog>
-      <el-dialog title="居中对话框" :visible.sync="dialogCenterVisible" width="400px" center>
+      </hzq-dialog>
+      <hzq-dialog title="居中对话框" :visible.sync="dialogCenterVisible" width="400px" center>
         <span>center 布局</span>
         <span slot="footer">
-          <el-button type="primary" @click="dialogCenterVisible = false">知道了</el-button>
+          <hzq-button type="primary" @click="dialogCenterVisible = false">知道了</hzq-button>
         </span>
-      </el-dialog>
+      </hzq-dialog>
     </preview-block>
 
     <preview-block section-id="drawer" title="Drawer 抽屉">
-      <el-button :size="size" type="primary" @click="drawerVisible = true">右侧</el-button>
-      <el-button :size="size" @click="drawerLeftVisible = true">左侧</el-button>
-      <el-drawer title="抽屉标题" :visible.sync="drawerVisible" direction="rtl" size="320px">
+      <hzq-button :size="size" type="primary" @click="drawerVisible = true">右侧</hzq-button>
+      <hzq-button :size="size" @click="drawerLeftVisible = true">左侧</hzq-button>
+      <hzq-drawer title="抽屉标题" :visible.sync="drawerVisible" direction="rtl" size="320px">
         <div style="padding: 0 20px;">右侧抽屉</div>
-      </el-drawer>
-      <el-drawer title="左侧抽屉" :visible.sync="drawerLeftVisible" direction="ltr" size="320px">
+      </hzq-drawer>
+      <hzq-drawer title="左侧抽屉" :visible.sync="drawerLeftVisible" direction="ltr" size="320px">
         <div style="padding: 0 20px;">左侧抽屉</div>
-      </el-drawer>
+      </hzq-drawer>
     </preview-block>
 
     <preview-block section-id="popover" title="Popover 弹出框">
-      <el-popover placement="top" width="200" trigger="hover" content="Hover 激活">
-        <el-button slot="reference" :size="size">Hover</el-button>
-      </el-popover>
-      <el-popover placement="right" width="200" trigger="click" content="Click 激活">
-        <el-button slot="reference" :size="size" style="margin-left: 12px;">Click</el-button>
-      </el-popover>
+      <hzq-popover placement="top" width="200" trigger="hover" content="Hover 激活">
+        <hzq-button slot="reference" :size="size">Hover</hzq-button>
+      </hzq-popover>
+      <hzq-popover placement="right" width="200" trigger="click" content="Click 激活">
+        <hzq-button slot="reference" :size="size" style="margin-left: 12px;">Click</hzq-button>
+      </hzq-popover>
     </preview-block>
 
     <preview-block section-id="popconfirm" title="Popconfirm 气泡确认">
-      <el-popconfirm title="确定删除吗？" @confirm="$message.success('已确认')">
-        <el-button slot="reference" :size="size" type="danger">删除</el-button>
-      </el-popconfirm>
+      <hzq-popconfirm title="确定删除吗？" @confirm="$message.success('已确认')">
+        <hzq-button slot="reference" :size="size" type="danger">删除</hzq-button>
+      </hzq-popconfirm>
     </preview-block>
 
     <preview-block section-id="card" title="Card 卡片">
-      <el-card class="preview-card" shadow="never" style="margin-bottom: 16px;">
+      <hzq-card class="preview-card" shadow="never" style="margin-bottom: 16px;">
         <div slot="header">无阴影卡片</div>
         shadow="never"
-      </el-card>
-      <el-card class="preview-card">
+      </hzq-card>
+      <hzq-card class="preview-card">
         <div slot="header" class="preview-card__header">
           <div class="preview-card__header-left">
             <span class="preview-card__icon">
-              <i class="el-icon-pie-chart" />
+              <i class="hzq-icon-pie-chart" />
             </span>
             <span class="preview-card__title">企业类型占比</span>
           </div>
-          <el-tag size="small" effect="plain">5 种类型</el-tag>
+          <hzq-tag size="small" effect="plain">5 种类型</hzq-tag>
         </div>
         <ul class="preview-card__legend">
           <li v-for="item in cardLegend" :key="item.name">
@@ -68,58 +68,58 @@
             <span class="preview-card__legend-value">{{ item.value }}%</span>
           </li>
         </ul>
-      </el-card>
+      </hzq-card>
     </preview-block>
 
     <preview-block section-id="carousel" title="Carousel 走马灯">
-      <el-carousel height="120px" style="width: 360px;">
-        <el-carousel-item v-for="item in 4" :key="item">
+      <hzq-carousel height="120px" style="width: 360px;">
+        <hzq-carousel-item v-for="item in 4" :key="item">
           <div class="preview-carousel-item">{{ item }}</div>
-        </el-carousel-item>
-      </el-carousel>
-      <el-carousel height="120px" type="card" style="width: 100%; margin-top: 16px;" indicator-position="outside">
-        <el-carousel-item v-for="item in 3" :key="'card-' + item">
+        </hzq-carousel-item>
+      </hzq-carousel>
+      <hzq-carousel height="120px" type="card" style="width: 100%; margin-top: 16px;" indicator-position="outside">
+        <hzq-carousel-item v-for="item in 3" :key="'card-' + item">
           <div class="preview-carousel-item">卡片 {{ item }}</div>
-        </el-carousel-item>
-      </el-carousel>
+        </hzq-carousel-item>
+      </hzq-carousel>
     </preview-block>
 
     <preview-block section-id="collapse" title="Collapse 折叠面板">
-      <el-collapse v-model="collapseActive">
-        <el-collapse-item title="一致性 Consistency" name="1">
+      <hzq-collapse v-model="collapseActive">
+        <hzq-collapse-item title="一致性 Consistency" name="1">
           <div>与现实生活一致</div>
-        </el-collapse-item>
-        <el-collapse-item title="反馈 Feedback" name="2">
+        </hzq-collapse-item>
+        <hzq-collapse-item title="反馈 Feedback" name="2">
           <div>控制反馈</div>
-        </el-collapse-item>
-        <el-collapse-item title="禁用" name="3" disabled>
+        </hzq-collapse-item>
+        <hzq-collapse-item title="禁用" name="3" disabled>
           <div>不可展开</div>
-        </el-collapse-item>
-      </el-collapse>
-      <el-collapse accordion v-model="collapseAccordion" style="margin-top: 16px;">
-        <el-collapse-item title="手风琴 1" name="1">只展开一项</el-collapse-item>
-        <el-collapse-item title="手风琴 2" name="2">另一项</el-collapse-item>
-      </el-collapse>
+        </hzq-collapse-item>
+      </hzq-collapse>
+      <hzq-collapse accordion v-model="collapseAccordion" style="margin-top: 16px;">
+        <hzq-collapse-item title="手风琴 1" name="1">只展开一项</hzq-collapse-item>
+        <hzq-collapse-item title="手风琴 2" name="2">另一项</hzq-collapse-item>
+      </hzq-collapse>
     </preview-block>
 
     <preview-block section-id="timeline" title="Timeline 时间线">
-      <el-timeline>
-        <el-timeline-item timestamp="2026/9/1" placement="top" type="primary">创建服务</el-timeline-item>
-        <el-timeline-item timestamp="2026/9/2" placement="top" type="success">初步完成</el-timeline-item>
-        <el-timeline-item timestamp="2026/9/3" placement="top" type="warning">持续迭代</el-timeline-item>
-        <el-timeline-item timestamp="2026/9/4" placement="top" type="danger">异常记录</el-timeline-item>
-      </el-timeline>
+      <hzq-timeline>
+        <hzq-timeline-item timestamp="2026/9/1" placement="top" type="primary">创建服务</hzq-timeline-item>
+        <hzq-timeline-item timestamp="2026/9/2" placement="top" type="success">初步完成</hzq-timeline-item>
+        <hzq-timeline-item timestamp="2026/9/3" placement="top" type="warning">持续迭代</hzq-timeline-item>
+        <hzq-timeline-item timestamp="2026/9/4" placement="top" type="danger">异常记录</hzq-timeline-item>
+      </hzq-timeline>
     </preview-block>
 
     <preview-block section-id="divider" title="Divider 分割线">
       <span>文本前</span>
-      <el-divider direction="vertical" />
+      <hzq-divider direction="vertical" />
       <span>文本后</span>
-      <el-divider content-position="left">分割线</el-divider>
+      <hzq-divider content-position="left">分割线</hzq-divider>
     </preview-block>
 
     <preview-block section-id="image" title="Image 图片">
-      <el-image
+      <hzq-image
         style="width: 120px; height: 80px;"
         src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
         fit="cover"
@@ -128,7 +128,7 @@
 
     <preview-block section-id="backtop" title="Backtop 回到顶部">
       <p class="preview-inline-tip">页面右下角可见回到顶部按钮（需页面滚动）</p>
-      <el-backtop :visibility-height="100" />
+      <hzq-backtop :visibility-height="100" />
     </preview-block>
 
     <preview-block section-id="infinite-scroll" title="InfiniteScroll 无限滚动">

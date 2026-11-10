@@ -1,21 +1,21 @@
-import { arrayFindIndex } from 'element-ui/src/utils/util';
+import { arrayFindIndex } from 'hzq-ui/src/utils/util';
 import { getCell, getColumnByCell, getRowIdentity, objectEquals } from './util';
-import { getStyle, hasClass, removeClass, addClass } from 'element-ui/src/utils/dom';
-import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTooltip from 'element-ui/packages/tooltip';
+import { getStyle, hasClass, removeClass, addClass } from 'hzq-ui/src/utils/dom';
+import HzqCheckbox from 'hzq-ui/packages/checkbox';
+import HzqTooltip from 'hzq-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
 import LayoutObserver from './layout-observer';
 import { mapStates } from './store/helper';
 import TableRow from './table-row.js';
 
 export default {
-  name: 'ElTableBody',
+  name: 'HzqTableBody',
 
   mixins: [LayoutObserver],
 
   components: {
-    ElCheckbox,
-    ElTooltip,
+    HzqCheckbox,
+    HzqTooltip,
     TableRow
   },
 
@@ -35,7 +35,7 @@ export default {
     const data = this.data || [];
     return (
       <table
-        class="el-table__body"
+        class="hzq-table__body"
         cellspacing="0"
         cellpadding="0"
         border="0">
@@ -50,7 +50,7 @@ export default {
               return acc.concat(this.wrappedRowRender(row, acc.length));
             }, [])
           }
-          <el-tooltip effect={this.table.tooltipEffect} placement="top" ref="tooltip" content={this.tooltipContent}></el-tooltip>
+          <hzq-tooltip effect={this.table.tooltipEffect} placement="top" ref="tooltip" content={this.tooltipContent}></hzq-tooltip>
         </tbody>
       </table>
     );
@@ -92,7 +92,7 @@ export default {
         raf = (fn) => setTimeout(fn, 16);
       }
       raf(() => {
-        const rows = this.$el.querySelectorAll('.el-table__row');
+        const rows = this.$el.querySelectorAll('.hzq-table__row');
         const oldRow = rows[oldVal];
         const newRow = rows[newVal];
         if (oldRow) {
@@ -169,7 +169,7 @@ export default {
 
     getRowClass(row, rowIndex) {
       let selection = this.store.states.selection;
-      const classes = ['el-table__row'];
+      const classes = ['hzq-table__row'];
       if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
         classes.push('current-row');
       }
@@ -183,7 +183,7 @@ export default {
       }
 
       if (this.stripe && rowIndex % 2 === 1) {
-        classes.push('el-table__row--striped');
+        classes.push('hzq-table__row--striped');
       }
       const rowClassName = this.table.rowClassName;
       if (typeof rowClassName === 'string') {
@@ -234,7 +234,7 @@ export default {
         }));
       }
 
-      classes.push('el-table__cell');
+      classes.push('hzq-table__cell');
 
       return classes.join(' ');
     },
@@ -259,7 +259,7 @@ export default {
 
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = event.target.querySelector('.cell');
-      if (!(hasClass(cellChild, 'el-tooltip') && cellChild.childNodes.length)) {
+      if (!(hasClass(cellChild, 'hzq-tooltip') && cellChild.childNodes.length)) {
         return;
       }
       // use range width instead of scrollWidth to determine whether the text is overflowing
@@ -334,7 +334,7 @@ export default {
       const rowClasses = this.getRowClass(row, $index);
       let display = true;
       if (treeRowData) {
-        rowClasses.push('el-table__row--level-' + treeRowData.level);
+        rowClasses.push('hzq-table__row--level-' + treeRowData.level);
         display = treeRowData.display;
       }
       // 指令 v-show 会覆盖 row-style 中 display
@@ -390,7 +390,7 @@ export default {
         return [[
           tr,
           <tr key={'expanded-row__' + tr.key}>
-            <td colspan={ this.columnsCount } class="el-table__cell el-table__expanded-cell">
+            <td colspan={ this.columnsCount } class="hzq-table__cell hzq-table__expanded-cell">
               { renderExpanded(this.$createElement, { row, $index, store: this.store }) }
             </td>
           </tr>]];

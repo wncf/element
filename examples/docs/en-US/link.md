@@ -9,12 +9,12 @@ Basic text link
 
 ```html
 <div>
-  <el-link href="https://element.eleme.io" target="_blank">default</el-link>
-  <el-link type="primary">primary</el-link>
-  <el-link type="success">success</el-link>
-  <el-link type="warning">warning</el-link>
-  <el-link type="danger">danger</el-link>
-  <el-link type="info">info</el-link>
+  <hzq-link href="https://element.eleme.io" target="_blank">default</hzq-link>
+  <hzq-link type="primary">primary</hzq-link>
+  <hzq-link type="success">success</hzq-link>
+  <hzq-link type="warning">warning</hzq-link>
+  <hzq-link type="danger">danger</hzq-link>
+  <hzq-link type="info">info</hzq-link>
 </div>
 ```
 
@@ -27,12 +27,12 @@ Disabled state of link
 
 ```html
 <div>
-  <el-link disabled>default</el-link>
-  <el-link type="primary" disabled>primary</el-link>
-  <el-link type="success" disabled>success</el-link>
-  <el-link type="warning" disabled>warning</el-link>
-  <el-link type="danger" disabled>danger</el-link>
-  <el-link type="info" disabled>info</el-link>
+  <hzq-link disabled>default</hzq-link>
+  <hzq-link type="primary" disabled>primary</hzq-link>
+  <hzq-link type="success" disabled>success</hzq-link>
+  <hzq-link type="warning" disabled>warning</hzq-link>
+  <hzq-link type="danger" disabled>danger</hzq-link>
+  <hzq-link type="info" disabled>info</hzq-link>
 </div>
 ```
 
@@ -45,8 +45,8 @@ Underline of link
 
 ```html
 <div>
-  <el-link :underline="false">Without Underline</el-link>
-  <el-link>With Underline</el-link>
+  <hzq-link :underline="false">Without Underline</hzq-link>
+  <hzq-link>With Underline</hzq-link>
 </div>
 ```
 
@@ -59,8 +59,8 @@ Link with icon
 
 ```html
 <div>
-  <el-link icon="el-icon-edit">Edit</el-link>
-  <el-link>Check<i class="el-icon-view el-icon--right"></i> </el-link>
+  <hzq-link icon="hzq-icon-edit">Edit</hzq-link>
+  <hzq-link>Check<i class="hzq-icon-view hzq-icon--right"></i> </hzq-link>
 </div>
 ```
 

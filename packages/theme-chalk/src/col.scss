@@ -1,54 +1,54 @@
 @import "./common/var.scss";
 @import "./mixins/mixins.scss";
 
-[class*="el-col-"] {
+[class*="hzq-col-"] {
   float: left;
   box-sizing: border-box;
 }
 
-.el-col-0 {
+.hzq-col-0 {
   display: none;
 }
 
 @for $i from 0 through 24 {
-  .el-col-#{$i} {
+  .hzq-col-#{$i} {
     width: (1 / 24 * $i * 100) * 1%;
   }
 
-  .el-col-offset-#{$i} {
+  .hzq-col-offset-#{$i} {
     margin-left: (1 / 24 * $i * 100) * 1%;
   }
 
-  .el-col-pull-#{$i} {
+  .hzq-col-pull-#{$i} {
     position: relative;
     right: (1 / 24 * $i * 100) * 1%;
   }
 
-  .el-col-push-#{$i} {
+  .hzq-col-push-#{$i} {
     position: relative;
     left: (1 / 24 * $i * 100) * 1%;
   }
 }
 
 @include res(xs) {
-  .el-col-xs-0 {
+  .hzq-col-xs-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-xs-#{$i} {
+    .hzq-col-xs-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xs-offset-#{$i} {
+    .hzq-col-xs-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xs-pull-#{$i} {
+    .hzq-col-xs-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xs-push-#{$i} {
+    .hzq-col-xs-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
@@ -56,24 +56,24 @@
 }
 
 @include res(sm) {
-  .el-col-sm-0 {
+  .hzq-col-sm-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-sm-#{$i} {
+    .hzq-col-sm-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-sm-offset-#{$i} {
+    .hzq-col-sm-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-sm-pull-#{$i} {
+    .hzq-col-sm-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-sm-push-#{$i} {
+    .hzq-col-sm-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
@@ -81,24 +81,24 @@
 }
 
 @include res(md) {
-  .el-col-md-0 {
+  .hzq-col-md-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-md-#{$i} {
+    .hzq-col-md-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-md-offset-#{$i} {
+    .hzq-col-md-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-md-pull-#{$i} {
+    .hzq-col-md-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-md-push-#{$i} {
+    .hzq-col-md-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
@@ -106,24 +106,24 @@
 }
 
 @include res(lg) {
-  .el-col-lg-0 {
+  .hzq-col-lg-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-lg-#{$i} {
+    .hzq-col-lg-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-lg-offset-#{$i} {
+    .hzq-col-lg-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-lg-pull-#{$i} {
+    .hzq-col-lg-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-lg-push-#{$i} {
+    .hzq-col-lg-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
@@ -131,24 +131,24 @@
 }
 
 @include res(xl) {
-  .el-col-xl-0 {
+  .hzq-col-xl-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-xl-#{$i} {
+    .hzq-col-xl-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xl-offset-#{$i} {
+    .hzq-col-xl-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xl-pull-#{$i} {
+    .hzq-col-xl-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xl-push-#{$i} {
+    .hzq-col-xl-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }

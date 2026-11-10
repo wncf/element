@@ -1,8 +1,8 @@
-import ElInput from './src/input';
+import HzqInput from './src/input';
 
 /* istanbul ignore next */
-ElInput.install = function(Vue) {
-  Vue.component(ElInput.name, ElInput);
+HzqInput.install = function(Vue) {
+  Vue.component(HzqInput.name, HzqInput);
 };
 
-export default ElInput;
+export default HzqInput;

@@ -4,18 +4,18 @@ Cuando haya muchas opciones, utilice un menú desplegable para mostrar y selecci
 
 ### Uso básico
 
-:::demo `v-model` es el valor de  `el-option` que está seleccionado actualmente.
+:::demo `v-model` es el valor de  `hzq-option` que está seleccionado actualmente.
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -46,21 +46,21 @@ Cuando haya muchas opciones, utilice un menú desplegable para mostrar y selecci
 ```
 :::
 
-### Disabled en el-option
+### Disabled en hzq-option
 
-:::demo Establezca el valor de `disabled` en `el-option`  como `true` para deshabilitar esta opción.
+:::demo Establezca el valor de `disabled` en `hzq-option`  como `true` para deshabilitar esta opción.
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value"
       :disabled="item.disabled">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -92,22 +92,22 @@ Cuando haya muchas opciones, utilice un menú desplegable para mostrar y selecci
 ```
 :::
 
-### Disabled en el-select
+### Disabled en hzq-select
 
 Desactivar todo el componente.
 
-:::demo Configure `disabled` de `el-select` para deshabilitarla.
+:::demo Configure `disabled` de `hzq-select` para deshabilitarla.
 
 ```html
 <template>
-  <el-select v-model="value" disabled placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" disabled placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -142,18 +142,18 @@ Desactivar todo el componente.
 
 Puede limpiar un Select con un icono.
 
-:::demo Establezca el atributo `clearable` para `el-select`  y aparecerá un icono. Tenga en cuenta que la opción `clearable` es sólo para una selección individual.
+:::demo Establezca el atributo `clearable` para `hzq-select`  y aparecerá un icono. Tenga en cuenta que la opción `clearable` es sólo para una selección individual.
 
 ```html
 <template>
-  <el-select v-model="value" clearable placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" clearable placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -188,32 +188,32 @@ Puede limpiar un Select con un icono.
 
 Selección múltiple utiliza tags para mostrar las opciones seleccionadas.
 
-:::demo Configure el atributo `multiple` para `el-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas. De forma predeterminada, las opciones seleccionadas se mostrarán como tags. Se pueden contraer a un texto utilizando el atributo  `collapse-tags`.
+:::demo Configure el atributo `multiple` para `hzq-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas. De forma predeterminada, las opciones seleccionadas se mostrarán como tags. Se pueden contraer a un texto utilizando el atributo  `collapse-tags`.
 
 ```html
 <template>
-  <el-select v-model="value1" multiple placeholder="Select">
-    <el-option
+  <hzq-select v-model="value1" multiple placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 
-  <el-select
+  <hzq-select
     v-model="value2"
     multiple
     collapse-tags
     style="margin-left: 20px;"
     placeholder="Select">
-    <el-option
+    <hzq-option
         v-for="item in options"
         :key="item.value"
         :label="item.label"
         :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -249,20 +249,20 @@ Selección múltiple utiliza tags para mostrar las opciones seleccionadas.
 
 Puede personalizar templates HTML para las opciones.
 
-:::demo Inserte templates HTML personalizados en el slot de `el-option`.
+:::demo Inserte templates HTML personalizados en el slot de `hzq-option`.
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" placeholder="Select">
+    <hzq-option
       v-for="item in cities"
       :key="item.value"
       :label="item.label"
       :value="item.value">
       <span style="float: left">{{ item.label }}</span>
       <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -300,23 +300,23 @@ Puede personalizar templates HTML para las opciones.
 
 Mostrar opciones en grupos.
 
-:::demo Utilice `el-option-group` para agrupar las opciones, y su atributo `label` representa el nombre del grupo.
+:::demo Utilice `hzq-option-group` para agrupar las opciones, y su atributo `label` representa el nombre del grupo.
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option-group
+  <hzq-select v-model="value" placeholder="Select">
+    <hzq-option-group
       v-for="group in options"
       :key="group.label"
       :label="group.label">
-      <el-option
+      <hzq-option
         v-for="item in group.options"
         :key="item.value"
         :label="item.label"
         :value="item.value">
-      </el-option>
-    </el-option-group>
-  </el-select>
+      </hzq-option>
+    </hzq-option-group>
+  </hzq-select>
 </template>
 
 <script>
@@ -360,18 +360,18 @@ Mostrar opciones en grupos.
 
 Puede filtrar opciones como lo desee.
 
-:::demo Añadir `filterable` a `el-select` permite filtrar. Por defecto, Select buscará todas las opciones cuyo atributo`label` contenga el valor del input. Si prefiere otras estrategias de filtrado, puede pasar el `filter-method`. `filter-method` es una función que se llama cuando el valor del input cambia, y su parámetro es el valor del input actual.
+:::demo Añadir `filterable` a `hzq-select` permite filtrar. Por defecto, Select buscará todas las opciones cuyo atributo`label` contenga el valor del input. Si prefiere otras estrategias de filtrado, puede pasar el `filter-method`. `filter-method` es una función que se llama cuando el valor del input cambia, y su parámetro es el valor del input actual.
 
 ```html
 <template>
-  <el-select v-model="value" filterable placeholder="Select">
-    <el-option
+  <hzq-select v-model="value" filterable placeholder="Select">
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -406,11 +406,11 @@ Puede filtrar opciones como lo desee.
 
 Introduzca palabras y datos para buscar desde el servidor.
 
-:::demo Configure el valor de `filterable` y `remote` con `true` para habilitar la búsqueda remota, y debería pasar el método `remote-method`. `remote-method` es una función que se llama cuando el valor del input cambia, y su parámetro es el valor del input actual. Tenga en cuenta que si `el-option` se presenta con la directiva `v-for`, debe agregar el atributo `key` para `el-option`. Su valor tiene que ser unívoco, como el valor de `item.value` en el ejemplo siguiente.
+:::demo Configure el valor de `filterable` y `remote` con `true` para habilitar la búsqueda remota, y debería pasar el método `remote-method`. `remote-method` es una función que se llama cuando el valor del input cambia, y su parámetro es el valor del input actual. Tenga en cuenta que si `hzq-option` se presenta con la directiva `v-for`, debe agregar el atributo `key` para `hzq-option`. Su valor tiene que ser unívoco, como el valor de `item.value` en el ejemplo siguiente.
 
 ```html
 <template>
-  <el-select
+  <hzq-select
     v-model="value"
     multiple
     filterable
@@ -419,13 +419,13 @@ Introduzca palabras y datos para buscar desde el servidor.
     placeholder="Please enter a keyword"
     :remote-method="remoteMethod"
     :loading="loading">
-    <el-option
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -488,19 +488,19 @@ Crear y seleccionar nuevos items que no están incluidas en las opciones de sele
 
 ```html
 <template>
-  <el-select
+  <hzq-select
     v-model="value"
     multiple
     filterable
     allow-create
     placeholder="Choose tags for your article">
-    <el-option
+    <hzq-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </hzq-option>
+  </hzq-select>
 </template>
 
 <script>
@@ -531,6 +531,62 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 
 :::
 
+### Tamaños
+
+:::demo Cambie entre las cuatro tallas con `size`: `large`, `medium`, `small` y `mini`. Sin él la talla es `medium`; las alturas son 36px, 32px, 28px y 24px. En modo múltiple las etiquetas también se ajustan.
+
+```html
+<template>
+  <div style="margin-bottom: 16px">
+    <hzq-radio-group v-model="size" size="mini">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+  </div>
+  <hzq-select v-model="value" :size="size" placeholder="Seleccione">
+    <hzq-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </hzq-option>
+  </hzq-select>
+  <hzq-select v-model="values" :size="size" multiple placeholder="Seleccione">
+    <hzq-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </hzq-option>
+  </hzq-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: '',
+        values: ['Opción1', 'Opción2'],
+        options: [{
+          value: 'Opción1',
+          label: 'Opción 1'
+        }, {
+          value: 'Opción2',
+          label: 'Opción 2'
+        }, {
+          value: 'Opción3',
+          label: 'Opción 3'
+        }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Select atributos
 | Atributo             | Descripción                              | Tipo     | Valores aceptados | Por defecto      |
 | -------------------- | ---------------------------------------- | -------- | ----------------- | ---------------- |
@@ -539,7 +595,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | disabled             | si Select esta deshabilitado             | boolean  | —                 | false            |
 | collapse-tags        | si se colapsan los tags a un texto cuando `multiple` es `true`. | boolean  | —                 | false            |
 | value-key            | nombre de clave de identidad única para el valor, necesario cuando el valor es un objeto. | string   | —                 | value            |
-| size                 | tamaño del Input                         | string   | large/small/mini  | —                |
+| size                 | tamaño del Input                         | string   | large / medium / small / mini | —                |
 | clearable            | si el select puede ser limpiado | boolean  | —                 | false            |
 | multiple-limit       | máximo numero de opciones que el usuario puede seleccionar cuando `multiple` es `true`.  Sin límite cuando se fija a 0 | number   | —                 | 0                |
 | name                 | el atributo `name` del input seleccionado | string   | —                 | —                |

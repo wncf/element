@@ -1,21 +1,21 @@
 <template>
   <transition name="el-zoom-in-top">
     <div
-      class="el-table-filter"
+      class="hzq-table-filter"
       v-if="multiple"
       v-clickoutside="handleOutsideClick"
       v-show="showPopper">
-      <div class="el-table-filter__content">
-        <el-scrollbar wrap-class="el-table-filter__wrap">
-          <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
-            <el-checkbox
+      <div class="hzq-table-filter__content">
+        <hzq-scrollbar wrap-class="hzq-table-filter__wrap">
+          <hzq-checkbox-group class="hzq-table-filter__checkbox-group" v-model="filteredValue">
+            <hzq-checkbox
               v-for="filter in filters"
               :key="filter.value"
-              :label="filter.value">{{ filter.text }}</el-checkbox>
-          </el-checkbox-group>
-        </el-scrollbar>
+              :label="filter.value">{{ filter.text }}</hzq-checkbox>
+          </hzq-checkbox-group>
+        </hzq-scrollbar>
       </div>
-      <div class="el-table-filter__bottom">
+      <div class="hzq-table-filter__bottom">
         <button @click="handleConfirm"
           :class="{ 'is-disabled': filteredValue.length === 0 }"
           :disabled="filteredValue.length === 0">{{ t('el.table.confirmFilter') }}</button>
@@ -23,15 +23,15 @@
       </div>
     </div>
     <div
-      class="el-table-filter"
+      class="hzq-table-filter"
       v-else
       v-clickoutside="handleOutsideClick"
       v-show="showPopper">
-      <ul class="el-table-filter__list">
-        <li class="el-table-filter__list-item"
+      <ul class="hzq-table-filter__list">
+        <li class="hzq-table-filter__list-item"
             :class="{ 'is-active': filterValue === undefined || filterValue === null }"
             @click="handleSelect(null)">{{ t('el.table.clearFilter') }}</li>
-        <li class="el-table-filter__list-item"
+        <li class="hzq-table-filter__list-item"
             v-for="filter in filters"
             :label="filter.value"
             :key="filter.value"
@@ -43,17 +43,17 @@
 </template>
 
 <script type="text/babel">
-  import Popper from 'element-ui/src/utils/vue-popper';
-  import { PopupManager } from 'element-ui/src/utils/popup';
-  import Locale from 'element-ui/src/mixins/locale';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import Popper from 'hzq-ui/src/utils/vue-popper';
+  import { PopupManager } from 'hzq-ui/src/utils/popup';
+  import Locale from 'hzq-ui/src/mixins/locale';
+  import Clickoutside from 'hzq-ui/src/utils/clickoutside';
   import Dropdown from './dropdown';
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import HzqCheckbox from 'hzq-ui/packages/checkbox';
+  import HzqCheckboxGroup from 'hzq-ui/packages/checkbox-group';
+  import HzqScrollbar from 'hzq-ui/packages/scrollbar';
 
   export default {
-    name: 'ElTableFilterPanel',
+    name: 'HzqTableFilterPanel',
 
     mixins: [Popper, Locale],
 
@@ -62,9 +62,9 @@
     },
 
     components: {
-      ElCheckbox,
-      ElCheckboxGroup,
-      ElScrollbar
+      HzqCheckbox,
+      HzqCheckboxGroup,
+      HzqScrollbar
     },
 
     props: {

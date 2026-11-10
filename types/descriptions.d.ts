@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 import { VNode } from 'vue'
 
 interface ElDescriptionsSlots {
@@ -24,7 +24,7 @@ export declare class ElDescriptions extends ElementUIComponent {
   direction: 'vertical' | 'horizontal'
 
   /* size of list */
-  size: 'medium' | 'small' | 'mini'
+  size: ElementUIComponentSize
 
   /* title text, display on the top left */
   title: string

@@ -9,50 +9,50 @@ describe('Col', () => {
   it('create', () => {
     vm = createVue({
       template: `
-        <el-col :span="12">
-        </el-col>
+        <hzq-col :span="12">
+        </hzq-col>
       `
     }, true);
     let colElm = vm.$el;
-    expect(colElm.classList.contains('el-col')).to.be.true;
+    expect(colElm.classList.contains('hzq-col')).to.be.true;
   });
   it('span', () => {
     vm = createVue({
       template: `
-        <el-col :span="12">
-        </el-col>
+        <hzq-col :span="12">
+        </hzq-col>
       `
     }, true);
     let colElm = vm.$el;
-    expect(colElm.classList.contains('el-col-12')).to.be.true;
+    expect(colElm.classList.contains('hzq-col-12')).to.be.true;
   });
   it('pull', () => {
     vm = createVue({
       template: `
-        <el-col :span="12" :pull="3">
-        </el-col>
+        <hzq-col :span="12" :pull="3">
+        </hzq-col>
       `
     }, true);
     let colElm = vm.$el;
-    expect(colElm.classList.contains('el-col-pull-3')).to.be.true;
+    expect(colElm.classList.contains('hzq-col-pull-3')).to.be.true;
   });
   it('push', () => {
     vm = createVue({
       template: `
-        <el-col :span="12" :push="3">
-        </el-col>
+        <hzq-col :span="12" :push="3">
+        </hzq-col>
       `
     }, true);
     let colElm = vm.$el;
-    expect(colElm.classList.contains('el-col-push-3')).to.be.true;
+    expect(colElm.classList.contains('hzq-col-push-3')).to.be.true;
   });
   it('gutter', () => {
     vm = createVue({
       template: `
-        <el-row :gutter="20">
-          <el-col :span="12" ref="col">
-          </el-col>
-        </el-row>
+        <hzq-row :gutter="20">
+          <hzq-col :span="12" ref="col">
+          </hzq-col>
+        </hzq-row>
       `
     }, true);
     let colElm = vm.$refs.col.$el;
@@ -62,17 +62,17 @@ describe('Col', () => {
   it('responsive', () => {
     vm = createVue({
       template: `
-        <el-row :gutter="20">
-          <el-col ref="col" :sm="{ span: 4, offset: 2 }" :md="8" :lg="{ span: 6, offset: 3 }">
-          </el-col>
-        </el-row>
+        <hzq-row :gutter="20">
+          <hzq-col ref="col" :sm="{ span: 4, offset: 2 }" :md="8" :lg="{ span: 6, offset: 3 }">
+          </hzq-col>
+        </hzq-row>
       `
     }, true);
     let colElm = vm.$refs.col.$el;
-    expect(colElm.classList.contains('el-col-sm-4')).to.be.true;
-    expect(colElm.classList.contains('el-col-sm-offset-2')).to.be.true;
-    expect(colElm.classList.contains('el-col-lg-6')).to.be.true;
-    expect(colElm.classList.contains('el-col-lg-offset-3')).to.be.true;
-    expect(colElm.classList.contains('el-col-md-8')).to.be.true;
+    expect(colElm.classList.contains('hzq-col-sm-4')).to.be.true;
+    expect(colElm.classList.contains('hzq-col-sm-offset-2')).to.be.true;
+    expect(colElm.classList.contains('hzq-col-lg-6')).to.be.true;
+    expect(colElm.classList.contains('hzq-col-lg-offset-3')).to.be.true;
+    expect(colElm.classList.contains('hzq-col-md-8')).to.be.true;
   });
 });

@@ -10,49 +10,49 @@ Tooltip has 9 placements.
 ```html
 <div class="box">
   <div class="top">
-    <el-tooltip class="item" effect="dark" content="Top Left prompts info" placement="top-start">
-      <el-button>top-start</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Top Center prompts info" placement="top">
-      <el-button>top</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Top Right prompts info" placement="top-end">
-      <el-button>top-end</el-button>
-    </el-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Top Left prompts info" placement="top-start">
+      <hzq-button>top-start</hzq-button>
+    </hzq-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Top Center prompts info" placement="top">
+      <hzq-button>top</hzq-button>
+    </hzq-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Top Right prompts info" placement="top-end">
+      <hzq-button>top-end</hzq-button>
+    </hzq-tooltip>
   </div>
   <div class="left">
-    <el-tooltip class="item" effect="dark" content="Left Top prompts info" placement="left-start">
-      <el-button>left-start</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Left Center prompts info" placement="left">
-      <el-button>left</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Left Bottom prompts info" placement="left-end">
-      <el-button>left-end</el-button>
-    </el-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Left Top prompts info" placement="left-start">
+      <hzq-button>left-start</hzq-button>
+    </hzq-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Left Center prompts info" placement="left">
+      <hzq-button>left</hzq-button>
+    </hzq-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Left Bottom prompts info" placement="left-end">
+      <hzq-button>left-end</hzq-button>
+    </hzq-tooltip>
   </div>
 
   <div class="right">
-    <el-tooltip class="item" effect="dark" content="Right Top prompts info" placement="right-start">
-      <el-button>right-start</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="right">
-      <el-button>right</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Right Bottom prompts info" placement="right-end">
-      <el-button>right-end</el-button>
-    </el-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Right Top prompts info" placement="right-start">
+      <hzq-button>right-start</hzq-button>
+    </hzq-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Right Center prompts info" placement="right">
+      <hzq-button>right</hzq-button>
+    </hzq-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Right Bottom prompts info" placement="right-end">
+      <hzq-button>right-end</hzq-button>
+    </hzq-tooltip>
   </div>
   <div class="bottom">
-    <el-tooltip class="item" effect="dark" content="Bottom Left prompts info" placement="bottom-start">
-      <el-button>bottom-start</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Bottom Center prompts info" placement="bottom">
-      <el-button>bottom</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Bottom Right prompts info" placement="bottom-end">
-      <el-button>bottom-end</el-button>
-    </el-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Bottom Left prompts info" placement="bottom-start">
+      <hzq-button>bottom-start</hzq-button>
+    </hzq-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Bottom Center prompts info" placement="bottom">
+      <hzq-button>bottom</hzq-button>
+    </hzq-tooltip>
+    <hzq-tooltip class="item" effect="dark" content="Bottom Right prompts info" placement="bottom-end">
+      <hzq-button>bottom-end</hzq-button>
+    </hzq-tooltip>
   </div>
 </div>
 
@@ -83,12 +83,12 @@ Tooltip has 9 placements.
       margin: 4px;
     }
 
-    .left .el-tooltip__popper,
-    .right .el-tooltip__popper {
+    .left .hzq-tooltip__popper,
+    .right .hzq-tooltip__popper {
       padding: 8px 10px;
     }
 
-    .el-button {
+    .hzq-button {
       width: 110px;
     }
   }
@@ -103,12 +103,12 @@ Tooltip has two themes: `dark` and `light`。
 
 :::demo Set `effect` to modify theme, and the default value is `dark`.
 ```html
-<el-tooltip content="Top center" placement="top">
-  <el-button>Dark</el-button>
-</el-tooltip>
-<el-tooltip content="Bottom center" placement="bottom" effect="light">
-  <el-button>Light</el-button>
-</el-tooltip>
+<hzq-tooltip content="Top center" placement="top">
+  <hzq-button>Dark</hzq-button>
+</hzq-tooltip>
+<hzq-tooltip content="Bottom center" placement="bottom" effect="light">
+  <hzq-button>Light</hzq-button>
+</hzq-tooltip>
 ```
 :::
 
@@ -116,12 +116,12 @@ Tooltip has two themes: `dark` and `light`。
 
 Display multiple lines of text and set their format.
 
-:::demo Override attribute `content` of `el-tooltip` by adding a slot named `content`.
+:::demo Override attribute `content` of `hzq-tooltip` by adding a slot named `content`.
 ```html
-<el-tooltip placement="top">
+<hzq-tooltip placement="top">
   <div slot="content">multiple lines<br/>second line</div>
-  <el-button>Top center</el-button>
-</el-tooltip>
+  <hzq-button>Top center</hzq-button>
+</hzq-tooltip>
 ```
 :::
 
@@ -138,9 +138,9 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 :::demo
 ```html
 <template>
-  <el-tooltip :disabled="disabled" content="click to close tooltip function" placement="bottom" effect="light">
-    <el-button @click="disabled = !disabled">click to {{disabled ? 'active' : 'close'}} tooltip function</el-button>
-  </el-tooltip>
+  <hzq-tooltip :disabled="disabled" content="click to close tooltip function" placement="bottom" effect="light">
+    <hzq-button @click="disabled = !disabled">click to {{disabled ? 'active' : 'close'}} tooltip function</hzq-button>
+  </hzq-tooltip>
 </template>
 
 <script>

@@ -2,7 +2,7 @@ import LayoutObserver from './layout-observer';
 import { mapStates } from './store/helper';
 
 export default {
-  name: 'ElTableFooter',
+  name: 'HzqTableFooter',
 
   mixins: [LayoutObserver],
 
@@ -44,7 +44,7 @@ export default {
 
     return (
       <table
-        class="el-table__footer"
+        class="hzq-table__footer"
         cellspacing="0"
         cellpadding="0"
         border="0">
@@ -63,7 +63,7 @@ export default {
                 key={cellIndex}
                 colspan={ column.colSpan }
                 rowspan={ column.rowSpan }
-                class={ [...this.getRowClasses(column, cellIndex), 'el-table__cell'] }>
+                class={ [...this.getRowClasses(column, cellIndex), 'hzq-table__cell'] }>
                 <div class={ ['cell', column.labelClassName] }>
                   {
                     sums[cellIndex]
@@ -72,7 +72,7 @@ export default {
               </td>)
             }
             {
-              this.hasGutter ? <th class="el-table__cell gutter"></th> : ''
+              this.hasGutter ? <th class="hzq-table__cell gutter"></th> : ''
             }
           </tr>
         </tbody>

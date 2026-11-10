@@ -1,8 +1,8 @@
-import ElSubmenu from '../menu/src/submenu';
+import HzqSubmenu from '../menu/src/submenu';
 
 /* istanbul ignore next */
-ElSubmenu.install = function(Vue) {
-  Vue.component(ElSubmenu.name, ElSubmenu);
+HzqSubmenu.install = function(Vue) {
+  Vue.component(HzqSubmenu.name, HzqSubmenu);
 };
 
-export default ElSubmenu;
+export default HzqSubmenu;

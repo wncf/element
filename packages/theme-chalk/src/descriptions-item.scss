@@ -7,12 +7,12 @@
   @include e(container) {
     display: flex;
 
-    .el-descriptions-item__label,
-    .el-descriptions-item__content {
+    .hzq-descriptions-item__label,
+    .hzq-descriptions-item__content {
       display: inline-flex;
       align-items: baseline;
     }
-    .el-descriptions-item__content {
+    .hzq-descriptions-item__content {
       flex: 1;
     }
   }

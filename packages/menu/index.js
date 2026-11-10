@@ -1,8 +1,8 @@
-import ElMenu from './src/menu';
+import HzqMenu from './src/menu';
 
 /* istanbul ignore next */
-ElMenu.install = function(Vue) {
-  Vue.component(ElMenu.name, ElMenu);
+HzqMenu.install = function(Vue) {
+  Vue.component(HzqMenu.name, HzqMenu);
 };
 
-export default ElMenu;
+export default HzqMenu;

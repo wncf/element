@@ -1,17 +1,17 @@
 <template>
-  <div class="el-collapse-item"
+  <div class="hzq-collapse-item"
     :class="{'is-active': isActive, 'is-disabled': disabled }">
     <div
       role="tab"
       :aria-expanded="isActive"
-      :aria-controls="`el-collapse-content-${id}`"
-      :aria-describedby ="`el-collapse-content-${id}`"
+      :aria-controls="`hzq-collapse-content-${id}`"
+      :aria-describedby ="`hzq-collapse-content-${id}`"
     >
       <div
-        class="el-collapse-item__header"
+        class="hzq-collapse-item__header"
         @click="handleHeaderClick"
         role="button"
-        :id="`el-collapse-head-${id}`"
+        :id="`hzq-collapse-head-${id}`"
         :tabindex="disabled ? undefined : 0"
         @keyup.space.enter.stop="handleEnterClick"
         :class="{
@@ -23,40 +23,40 @@
       >
         <slot name="title">{{title}}</slot>
         <i
-          class="el-collapse-item__arrow el-icon-arrow-right"
+          class="hzq-collapse-item__arrow hzq-icon-arrow-right"
           :class="{'is-active': isActive}">
         </i>
       </div>
     </div>
-    <el-collapse-transition>
+    <hzq-collapse-transition>
       <div
-        class="el-collapse-item__wrap"
+        class="hzq-collapse-item__wrap"
         v-show="isActive"
         role="tabpanel"
         :aria-hidden="!isActive"
-        :aria-labelledby="`el-collapse-head-${id}`"
-        :id="`el-collapse-content-${id}`"
+        :aria-labelledby="`hzq-collapse-head-${id}`"
+        :id="`hzq-collapse-content-${id}`"
       >
-        <div class="el-collapse-item__content">
+        <div class="hzq-collapse-item__content">
           <slot></slot>
         </div>
       </div>
-    </el-collapse-transition>
+    </hzq-collapse-transition>
   </div>
 </template>
 <script>
-  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import { generateId } from 'element-ui/src/utils/util';
+  import HzqCollapseTransition from 'hzq-ui/src/transitions/collapse-transition';
+  import Emitter from 'hzq-ui/src/mixins/emitter';
+  import { generateId } from 'hzq-ui/src/utils/util';
 
   export default {
-    name: 'ElCollapseItem',
+    name: 'HzqCollapseItem',
 
-    componentName: 'ElCollapseItem',
+    componentName: 'HzqCollapseItem',
 
     mixins: [Emitter],
 
-    components: { ElCollapseTransition },
+    components: { HzqCollapseTransition },
 
     data() {
       return {
@@ -102,12 +102,12 @@
       },
       handleHeaderClick() {
         if (this.disabled) return;
-        this.dispatch('ElCollapse', 'item-click', this);
+        this.dispatch('HzqCollapse', 'item-click', this);
         this.focusing = false;
         this.isClick = true;
       },
       handleEnterClick() {
-        this.dispatch('ElCollapse', 'item-click', this);
+        this.dispatch('HzqCollapse', 'item-click', this);
       }
     }
   };

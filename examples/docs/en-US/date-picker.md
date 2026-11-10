@@ -13,20 +13,20 @@ Basic date picker measured by 'day'.
 <template>
   <div class="block">
     <span class="demonstration">Default</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="date"
       placeholder="Pick a day">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Picker with quick options</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="date"
       placeholder="Pick a day"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -78,56 +78,56 @@ You can choose week, month, year or multiple dates by extending the standard dat
 <div class="container">
   <div class="block">
     <span class="demonstration">Week</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="week"
       format="Week WW"
       placeholder="Pick a week">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Month</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="month"
       placeholder="Pick a month">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </div>
 <div class="container">
   <div class="block">
     <span class="demonstration">Year</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value3"
       type="year"
       placeholder="Pick a year">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Dates</span>
-    <el-date-picker
+    <hzq-date-picker
       type="dates"
       v-model="value4"
       placeholder="Pick one or more dates">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </div>
 <div class="container">
   <div class="block">
     <span class="demonstration">months</span>
-    <el-date-picker
+    <hzq-date-picker
       type="months"
       v-model="value5"
       placeholder="Pick one or more months">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">years</span>
-    <el-date-picker
+    <hzq-date-picker
       type="years"
       v-model="value6"
       placeholder="Pick one or more years">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </div>
 
@@ -159,17 +159,17 @@ Picking a date range is supported.
 <template>
   <div class="block">
     <span class="demonstration">Default</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="daterange"
       range-separator="To"
       start-placeholder="Start date"
       end-placeholder="End date">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">With quick options</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="daterange"
       align="right"
@@ -178,7 +178,7 @@ Picking a date range is supported.
       start-placeholder="Start date"
       end-placeholder="End date"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -232,17 +232,17 @@ Picking a month range is supported.
 <template>
   <div class="block">
     <span class="demonstration">Default</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="monthrange"
       range-separator="To"
       start-placeholder="Start month"
       end-placeholder="End month">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">With quick options</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="monthrange"
       align="right"
@@ -251,7 +251,7 @@ Picking a month range is supported.
       start-placeholder="Start month"
       end-placeholder="End month"
       :picker-options="pickerOptions">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -302,23 +302,23 @@ If type is `daterange`, `default-value` sets the left side calendar.
 <template>
   <div class="block">
     <span class="demonstration">date</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="date"
       placeholder="Pick a date"
       default-value="2010-10-01">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">daterange</span>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="daterange"
       align="right"
       start-placeholder="Start Date"
       end-placeholder="End Date"
       default-value="2010-10-01">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -374,34 +374,34 @@ Pay attention to capitalization
   <div class="block">
     <span class="demonstration">Emits Date object</span>
     <div class="demonstration">Value: {{ value1 }}</div>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value1"
       type="date"
       placeholder="Pick a Date"
       format="yyyy/MM/dd">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Use value-format</span>
     <div class="demonstration">Value: {{ value2 }}</div>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value2"
       type="date"
       placeholder="Pick a Date"
       format="yyyy/MM/dd"
       value-format="yyyy-MM-dd">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Timestamp</span>
     <div class="demonstration">Value：{{ value3 }}</div>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value3"
       type="date"
       placeholder="Pick a Date"
       format="yyyy/MM/dd"
       value-format="timestamp">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -428,13 +428,13 @@ When picking a date range, you can assign the time part for start date and end d
 <template>
   <div class="block">
     <p>Component value：{{ value }}</p>
-    <el-date-picker
+    <hzq-date-picker
       v-model="value"
       type="daterange"
       start-placeholder="Start date"
       end-placeholder="End date"
       :default-time="['00:00:00', '23:59:59']">
-    </el-date-picker>
+    </hzq-date-picker>
   </div>
 </template>
 
@@ -450,13 +450,58 @@ When picking a date range, you can assign the time part for start date and end d
 ```
 :::
 
+### Sizes
+
+:::demo Switch between the four sizes with `size`: `large`, `medium`, `small` and `mini`. Without it the size is `medium`; the heights are 36px, 32px, 28px and 24px.
+
+```html
+<template>
+  <div class="block">
+    <hzq-radio-group v-model="size" size="mini" style="margin-bottom: 16px;">
+      <hzq-radio-button label="large">Large</hzq-radio-button>
+      <hzq-radio-button label="medium">Medium</hzq-radio-button>
+      <hzq-radio-button label="small">Small</hzq-radio-button>
+      <hzq-radio-button label="mini">Mini</hzq-radio-button>
+    </hzq-radio-group>
+    <hzq-date-picker
+      v-model="value"
+      type="date"
+      :size="size"
+      placeholder="Pick a day">
+    </hzq-date-picker>
+  </div>
+  <div class="block">
+    <hzq-date-picker
+      v-model="range"
+      type="daterange"
+      :size="size"
+      start-placeholder="Start date"
+      end-placeholder="End date">
+    </hzq-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: '',
+        range: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | value / v-model | binding value | date(DatePicker) / array(DateRangePicker) | — | — |
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | — | false |
-| size | size of Input | string | large/small/mini | — |
+| size | size of Input | string | large / medium / small / mini | — |
 | editable | whether the input is editable | boolean | — | true |
 | clearable | whether to show clear button | boolean | — | true |
 | placeholder | placeholder in non-range mode | string | — | — |
@@ -473,8 +518,8 @@ When picking a date range, you can assign the time part for start date and end d
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
-| prefix-icon | Custom prefix icon class | string | — | el-icon-date |
-| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
+| prefix-icon | Custom prefix icon class | string | — | hzq-icon-date |
+| clear-icon | Custom clear icon class | string | — | hzq-icon-circle-close |
 | validate-event | whether to trigger form validation | boolean | - | true |
 | append-to-body | whether to append DatePicker itself to body | boolean   | — | true |
 

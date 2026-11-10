@@ -4,7 +4,7 @@ body {
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   font-weight: 400;
   font-size: $--font-size-base;
-  color: var(--el-text-color-primary);
+  color: var(--hzq-text-color-primary);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -14,11 +14,11 @@ a {
 
   &:hover,
   &:focus {
-    color: var(--el-color-primary-hover);
+    color: var(--hzq-color-primary-hover);
   }
 
   &:active {
-    color: var(--el-color-primary-shade);
+    color: var(--hzq-color-primary-shade);
   }
 }
 
@@ -75,5 +75,5 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid var(--el-border-color-lighter);
+  border-top: 1px solid var(--hzq-border-color-lighter);
 }

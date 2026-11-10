@@ -13,7 +13,7 @@ describe('Drawer', () => {
     vm = createVue(
       {
         template: `
-        <el-drawer :title='title' :visible='visible'></el-drawer>
+        <hzq-drawer :title='title' :visible='visible'></hzq-drawer>
       `,
         data() {
           return {
@@ -27,7 +27,7 @@ describe('Drawer', () => {
     const drawer = vm.$children[0];
     await waitImmediate();
     expect(document.querySelector('.v-modal')).to.exist;
-    expect(vm.$el.querySelector('.el-drawer__header').textContent).to.equal(
+    expect(vm.$el.querySelector('.hzq-drawer__header').textContent).to.equal(
       title
     );
     expect(drawer.$el.style.display).to.not.equal('none');
@@ -37,11 +37,11 @@ describe('Drawer', () => {
     vm = createVue(
       {
         template: `
-          <el-drawer :title='title' :visible='visible'>
+          <hzq-drawer :title='title' :visible='visible'>
             <span>这是一段信息</span>
-            <el-button @click.native='dialogVisible = false'>取消</el-button>
-            <el-button type='primary' @click.native='dialogVisible = false'>确定</el-button>
-          </el-drawer>
+            <hzq-button @click.native='dialogVisible = false'>取消</hzq-button>
+            <hzq-button type='primary' @click.native='dialogVisible = false'>确定</hzq-button>
+          </hzq-drawer>
       `,
 
         data() {
@@ -54,10 +54,10 @@ describe('Drawer', () => {
       true
     );
     await waitImmediate();
-    expect(vm.$el.querySelector('.el-drawer__body span').textContent).to.equal(
+    expect(vm.$el.querySelector('.hzq-drawer__body span').textContent).to.equal(
       '这是一段信息'
     );
-    const footerBtns = vm.$el.querySelectorAll('.el-button');
+    const footerBtns = vm.$el.querySelectorAll('.hzq-button');
     expect(footerBtns.length).to.equal(2);
     expect(footerBtns[0].querySelector('span').textContent).to.equal('取消');
     expect(footerBtns[1].querySelector('span').textContent).to.equal('确定');
@@ -67,9 +67,9 @@ describe('Drawer', () => {
     vm = createVue(
       {
         template: `
-        <el-drawer :title='title' :visible='visible' :append-to-body='true'>
+        <hzq-drawer :title='title' :visible='visible' :append-to-body='true'>
            <span> content </span>
-        </el-drawer>
+        </hzq-drawer>
       `,
         data() {
           return {
@@ -87,9 +87,9 @@ describe('Drawer', () => {
   it('should open and close drawer properly', async() => {
     vm = createVue({
       template: `
-        <el-drawer :title='title' :visible='visible' ref='drawer'>
+        <hzq-drawer :title='title' :visible='visible' ref='drawer'>
            <span>${content}</span>
-        </el-drawer>
+        </hzq-drawer>
       `,
       data() {
         return {
@@ -111,9 +111,9 @@ describe('Drawer', () => {
   it('should destroy every child after drawer was closed when destroy-on-close flag is true', async() => {
     vm = createVue({
       template: `
-        <el-drawer :title='title' :visible='visible' :append-to-body='true' :destroy-on-close='true' ref='drawer'>
+        <hzq-drawer :title='title' :visible='visible' :append-to-body='true' :destroy-on-close='true' ref='drawer'>
            <span>${content}</span>
-        </el-drawer>
+        </hzq-drawer>
       `,
       data() {
         return {
@@ -124,20 +124,20 @@ describe('Drawer', () => {
     });
 
     await waitImmediate();
-    expect(vm.$el.querySelector('.el-drawer__body span').textContent).to.equal(
+    expect(vm.$el.querySelector('.hzq-drawer__body span').textContent).to.equal(
       content
     );
     vm.$refs.drawer.closeDrawer();
     await wait(400);
-    expect(vm.$el.querySelector('.el-drawer__body')).not.to.exist;
+    expect(vm.$el.querySelector('.hzq-drawer__body')).not.to.exist;
   });
 
   it('should destroy every child by visible change when destroy-on-close flag is true', async() => {
     vm = createVue({
       template: `
-        <el-drawer :title='title' :visible='visible' :append-to-body='true' :destroy-on-close='true' ref='drawer'>
+        <hzq-drawer :title='title' :visible='visible' :append-to-body='true' :destroy-on-close='true' ref='drawer'>
            <span>${content}</span>
-        </el-drawer>
+        </hzq-drawer>
       `,
       data() {
         return {
@@ -148,20 +148,20 @@ describe('Drawer', () => {
     });
 
     await waitImmediate();
-    expect(vm.$el.querySelector('.el-drawer__body span').textContent).to.equal(
+    expect(vm.$el.querySelector('.hzq-drawer__body span').textContent).to.equal(
       content
     );
     vm.visible = false;
     await wait(400);
-    expect(vm.$el.querySelector('.el-drawer__body')).not.to.exist;
+    expect(vm.$el.querySelector('.hzq-drawer__body')).not.to.exist;
   });
 
   it('should close dialog by clicking the close button', async() => {
     vm = createVue({
       template: `
-        <el-drawer :title='title' :visible.sync='visible' :append-to-body='true' :destroy-on-close='true' ref='drawer'>
+        <hzq-drawer :title='title' :visible.sync='visible' :append-to-body='true' :destroy-on-close='true' ref='drawer'>
            <span>${content}</span>
-        </el-drawer>
+        </hzq-drawer>
       `,
       data() {
         return {
@@ -172,7 +172,7 @@ describe('Drawer', () => {
     });
 
     await waitImmediate();
-    vm.$children[0].$el.querySelector('.el-drawer__close-btn').click();
+    vm.$children[0].$el.querySelector('.hzq-drawer__close-btn').click();
     expect(vm.visible).to.equal(false);
   });
 
@@ -180,7 +180,7 @@ describe('Drawer', () => {
     const beforeClose = sinon.spy();
     vm = createVue({
       template: `
-        <el-drawer
+        <hzq-drawer
                 :before-close='beforeClose'
                 :title='title'
                 :visible.sync='visible'
@@ -189,7 +189,7 @@ describe('Drawer', () => {
                 ref='drawer'
                >
            <span>${content}</span>
-        </el-drawer>
+        </hzq-drawer>
       `,
       data() {
         return {
@@ -209,9 +209,9 @@ describe('Drawer', () => {
   it('should not show close button when show-close flag is false', async() => {
     vm = createVue({
       template: `
-        <el-drawer :title='title' :visible='visible' ref='drawer' :show-close='false'>
+        <hzq-drawer :title='title' :visible='visible' ref='drawer' :show-close='false'>
            <span>${content}</span>
-        </el-drawer>
+        </hzq-drawer>
       `,
       data() {
         return {
@@ -220,16 +220,16 @@ describe('Drawer', () => {
         };
       }
     });
-    expect(vm.$el.querySelector('.el-drawer__close-btn')).not.to.exist;
+    expect(vm.$el.querySelector('.hzq-drawer__close-btn')).not.to.exist;
   });
 
   it('should have custom classes when custom classes were given', async() => {
     const classes = 'some-custom-class';
     vm = createVue({
       template: `
-        <el-drawer :title='title' :visible='visible' ref='drawer' custom-class='${classes}'>
+        <hzq-drawer :title='title' :visible='visible' ref='drawer' custom-class='${classes}'>
            <span>${content}</span>
-        </el-drawer>
+        </hzq-drawer>
       `,
       data() {
         return {
@@ -245,9 +245,9 @@ describe('Drawer', () => {
   it('should not render header when withHeader attribute is false', () => {
     vm = createVue({
       template: `
-        <el-drawer :title='title' :visible='visible' ref='drawer' :with-header='false'>
+        <hzq-drawer :title='title' :visible='visible' ref='drawer' :with-header='false'>
            <span>${content}</span>
-        </el-drawer>
+        </hzq-drawer>
       `,
       data() {
         return {
@@ -257,16 +257,16 @@ describe('Drawer', () => {
       }
     });
 
-    expect(vm.$el.querySelector('.el-drawer__header')).to.not.exist;
+    expect(vm.$el.querySelector('.hzq-drawer__header')).to.not.exist;
   });
 
   describe('directions', () => {
     const renderer = direction => {
       return createVue({
         template: `
-         <el-drawer :title='title' :visible='visible' direction='${direction}'>
+         <hzq-drawer :title='title' :visible='visible' direction='${direction}'>
             <span>${content}</span>
-         </el-drawer>
+         </hzq-drawer>
         `,
         data: {
           visible: true,
@@ -307,7 +307,7 @@ describe('Drawer', () => {
 
     vm = createVue({
       template: `
-        <el-drawer 
+        <hzq-drawer 
             :title='title'
             :visible='visible'
             ref="drawer"
@@ -316,7 +316,7 @@ describe('Drawer', () => {
             @close="close"
             @closed="closed">
           <span>${content}</span>
-         </el-drawer>
+         </hzq-drawer>
       `,
       data() {
         return {
@@ -348,9 +348,9 @@ describe('Drawer', () => {
     const renderer = (size, isVertical) =>
       createVue({
         template: `
-         <el-drawer :title='title' :visible='visible' direction='${isVertical ? 'ltr' : 'ttb'}' size='${size}'>
+         <hzq-drawer :title='title' :visible='visible' direction='${isVertical ? 'ltr' : 'ttb'}' size='${size}'>
             <span>${content}</span>
-         </el-drawer>
+         </hzq-drawer>
       `,
         data: {
           visible: true,
@@ -362,13 +362,13 @@ describe('Drawer', () => {
       const size = '50%';
       vm = renderer(size, true);
 
-      expect(vm.$el.querySelector('.el-drawer').style.width).to.equal('50%');
+      expect(vm.$el.querySelector('.hzq-drawer').style.width).to.equal('50%');
     });
 
     it('should effect width when drawer is horizontal', async() => {
       const size = '50%';
       vm = renderer(size, false);
-      expect(vm.$el.querySelector('.el-drawer').style.height).to.equal('50%');
+      expect(vm.$el.querySelector('.hzq-drawer').style.height).to.equal('50%');
     });
   });
 });

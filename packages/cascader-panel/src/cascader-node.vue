@@ -1,7 +1,7 @@
 <script>
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import ElRadio from 'element-ui/packages/radio';
-  import { isEqual } from 'element-ui/src/utils/util';
+  import HzqCheckbox from 'hzq-ui/packages/checkbox';
+  import HzqRadio from 'hzq-ui/packages/radio';
+  import { isEqual } from 'hzq-ui/src/utils/util';
 
   const stopPropagation = e => e.stopPropagation();
 
@@ -9,8 +9,8 @@
     inject: ['panel'],
 
     components: {
-      ElCheckbox,
-      ElRadio
+      HzqCheckbox,
+      HzqRadio
     },
 
     props: {
@@ -136,12 +136,12 @@
         }
 
         return (
-          <el-checkbox
+          <hzq-checkbox
             value={ node.checked }
             indeterminate={ node.indeterminate }
             disabled={ isDisabled }
             { ...events }
-          ></el-checkbox>
+          ></hzq-checkbox>
         );
       },
 
@@ -154,7 +154,7 @@
         }
 
         return (
-          <el-radio
+          <hzq-radio
             value={ checkedValue }
             label={ value }
             disabled={ isDisabled }
@@ -162,25 +162,25 @@
             nativeOnClick={ stopPropagation }>
             {/* add an empty element to avoid render label */}
             <span></span>
-          </el-radio>
+          </hzq-radio>
         );
       },
 
       renderCheckIcon(h) {
         return (
-          <i class="el-icon-check el-cascader-node__prefix"></i>
+          <i class="hzq-icon-check hzq-cascader-node__prefix"></i>
         );
       },
 
       renderLoadingIcon(h) {
         return (
-          <i class="el-icon-loading el-cascader-node__postfix"></i>
+          <i class="hzq-icon-loading hzq-cascader-node__postfix"></i>
         );
       },
 
       renderExpandIcon(h) {
         return (
-          <i class="el-icon-arrow-right el-cascader-node__postfix"></i>
+          <i class="hzq-icon-arrow-right hzq-cascader-node__postfix"></i>
         );
       },
 
@@ -192,7 +192,7 @@
           : null;
 
         return (
-          <span class="el-cascader-node__label">{ vnode || node.label }</span>
+          <span class="hzq-cascader-node__label">{ vnode || node.label }</span>
         );
       }
     },
@@ -236,7 +236,7 @@
           aria-expanded={ inActivePath }
           tabindex={ disabled ? null : -1 }
           class={{
-            'el-cascader-node': true,
+            'hzq-cascader-node': true,
             'is-selectable': checkStrictly,
             'in-active-path': inActivePath,
             'in-checked-path': inCheckedPath,

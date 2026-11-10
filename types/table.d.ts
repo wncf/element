@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 import { TooltipEffect } from './tooltip'
 
 export type SortOrder = 'ascending' | 'descending'
@@ -53,6 +53,9 @@ export declare class ElTable extends ElementUIComponent {
 
   /** Whether table has vertical border */
   border: boolean
+
+  /** Table's size, controls the row height; without it the table is `medium` */
+  size: ElementUIComponentSize
 
   /** Whether width of column automatically fits its container */
   fit: boolean

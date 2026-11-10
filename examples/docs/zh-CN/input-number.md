@@ -4,10 +4,10 @@
 
 ### 基础用法
 
-:::demo 要使用它，只需要在`el-input-number`元素中使用`v-model`绑定变量即可，变量的初始值即为默认值。
+:::demo 要使用它，只需要在`hzq-input-number`元素中使用`v-model`绑定变量即可，变量的初始值即为默认值。
 ```html
 <template>
-  <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+  <hzq-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -32,7 +32,7 @@
 
 ```html
 <template>
-  <el-input-number v-model="num" :disabled="true"></el-input-number>
+  <hzq-input-number v-model="num" :disabled="true"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -54,7 +54,7 @@
 
 ```html
 <template>
-  <el-input-number v-model="num" :step="2"></el-input-number>
+  <hzq-input-number v-model="num" :step="2"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -74,7 +74,7 @@
 
 ```html
 <template>
-  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+  <hzq-input-number v-model="num" :step="2" step-strictly></hzq-input-number>
 </template>
 <script>
   export default {
@@ -94,7 +94,7 @@
 
 ```html
 <template>
-  <el-input-number v-model="num" :precision="2" :step="0.1" :max="10"></el-input-number>
+  <hzq-input-number v-model="num" :precision="2" :step="0.1" :max="10"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -115,16 +115,17 @@
 
 ### 尺寸
 
-额外提供了 `medium`、`small`、`mini` 三种尺寸的数字输入框
+额外提供了 `large`、`medium`、`small`、`mini` 四种尺寸的数字输入框，不传 `size` 时等同 `medium`
 
 :::demo
 
 ```html
 <template>
-  <el-input-number v-model="num1"></el-input-number>
-  <el-input-number size="medium" v-model="num2"></el-input-number>
-  <el-input-number size="small" v-model="num3"></el-input-number>
-  <el-input-number size="mini" v-model="num4"></el-input-number>
+  <hzq-input-number v-model="num1"></hzq-input-number>
+  <hzq-input-number size="large" v-model="num2"></hzq-input-number>
+  <hzq-input-number size="medium" v-model="num3"></hzq-input-number>
+  <hzq-input-number size="small" v-model="num4"></hzq-input-number>
+  <hzq-input-number size="mini" v-model="num5"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -133,7 +134,8 @@
         num1: 1,
         num2: 1,
         num3: 1,
-        num4: 1
+        num4: 1,
+        num5: 1
       }
     }
   };
@@ -146,7 +148,7 @@
 :::demo 设置 `controls-position` 属性可以控制按钮位置。
 ```html
 <template>
-  <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <hzq-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -174,7 +176,7 @@
 | step     | 计数器步长           | number   | — | 1 |
 | step-strictly | 是否只能输入 step 的倍数 | boolean   | — | false |
 | precision| 数值精度             | number   | — | — |
-| size     | 计数器尺寸           | string   | large, small | — |
+| size     | 计数器尺寸           | string   | large / medium / small / mini | — |
 | disabled | 是否禁用计数器        | boolean | — | false |
 | controls | 是否使用控制按钮        | boolean | — | true |
 | controls-position | 控制按钮位置 | string | right | - |

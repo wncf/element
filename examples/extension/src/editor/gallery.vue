@@ -15,17 +15,17 @@
         <theme-card type="upload" :config="{name: 'upload'}" @action="onAction"></theme-card>
       </li>
     </ul>
-    <el-dialog :visible.sync="copyDialogVisible" :modal-append-to-body="false">
-      <el-form :model="copyForm" ref="copyForm" :rules="copyFormRule">
-        <el-form-item label="主题名称" prop="name">
-          <el-input v-model="copyForm.name"></el-input>
-        </el-form-item>
-      </el-form>
+    <hzq-dialog :visible.sync="copyDialogVisible" :modal-append-to-body="false">
+      <hzq-form :model="copyForm" ref="copyForm" :rules="copyFormRule">
+        <hzq-form-item label="主题名称" prop="name">
+          <hzq-input v-model="copyForm.name"></hzq-input>
+        </hzq-form-item>
+      </hzq-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="closeCopyForm">取消</el-button>
-        <el-button type="primary" @click="copyToUser">确认</el-button>
+        <hzq-button @click="closeCopyForm">取消</hzq-button>
+        <hzq-button type="primary" @click="copyToUser">确认</hzq-button>
       </div>
-    </el-dialog>
+    </hzq-dialog>
   </div>
 </template>
 

@@ -37,6 +37,32 @@ Vue.use(Element)
 Nota es necesario sobrescribir la ruta de la fuente por una ruta relativa de las fuentes de Element.
 :::
 
+#### Ajustar la escala de tamaños en un solo lugar
+
+Las cuatro tallas (`large` / `medium` / `small` / `mini`) de Button, Input, Select, Tag, Table, Pagination y el resto de controles derivan del bloque «Size ladder» de `common/var.scss`. Cambiando ese bloque todos los componentes escalan juntos, sin sobrescribir uno por uno:
+
+```scss
+/* altura total, incluyendo 1px de borde arriba y abajo */
+$--component-height-large: 36px;
+$--component-height-medium: 32px;
+$--component-height-small: 28px;
+$--component-height-mini: 24px;
+
+/* altura interior = altura total - 2px, debe cambiarse junto con los valores anteriores */
+$--component-inner-height-large: 34px;
+$--component-inner-height-medium: 30px;
+$--component-inner-height-small: 26px;
+$--component-inner-height-mini: 22px;
+
+/* tamaños de fuente */
+$--component-font-size-large: 14px;
+$--component-font-size-medium: 13px;
+$--component-font-size-small: 12px;
+$--component-font-size-mini: 12px;
+```
+
+Sin `size` el control es `medium`. Algunos componentes tienen valores derivados que siguen los mismos anclajes, como `$--input-*-height`, `$--tag-*-height`, `$--pagination-*-button-*` y `$--form-item-line-height-*`; sobrescríbalos sólo cuando un componente deba separarse de la escala. Los ítems del menú de Dropdown usan su propia escala (15 / 14 / 13 / 12) y no siguen las variables de fuente anteriores.
+
 ### CLI para generar temas
 Si su proyecto no utiliza SCSS, puede personalizar el tema a través de esta herramienta:
 

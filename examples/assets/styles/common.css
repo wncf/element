@@ -12,6 +12,12 @@ html, body {
   }
 }
 
+/* 页面底色与文字色跟随主题，否则切到深色后文档站还是一片白 */
+body {
+  background-color: var(--hzq-bg-color-page);
+  color: var(--hzq-text-color-primary);
+}
+
 #app {
   height: 100%;
   
@@ -40,14 +46,14 @@ html, body {
 }
 
 a {
-  color: #409EFF;
+  color: var(--hzq-color-primary);
   text-decoration: none;
 }
 
 code {
-  background-color: #f9fafc;
+  background-color: var(--hzq-fill-color-light);
   padding: 0 4px;
-  border: 1px solid #eaeefb;
+  border: 1px solid var(--hzq-border-color-light);
   border-radius: 4px;
 }
 
@@ -63,8 +69,8 @@ button, input, select, textarea {
   font-family: Menlo, Monaco, Consolas, Courier, monospace;
   font-size: 12px;
   padding: 18px 24px;
-  background-color: #fafafa;
-  border: solid 1px #eaeefb;
+  background-color: var(--hzq-fill-color-light);
+  border: solid 1px var(--hzq-border-color-light);
   margin-bottom: 25px;
   border-radius: 4px;
   -webkit-font-smoothing: auto;
@@ -89,7 +95,7 @@ button, input, select, textarea {
 
   h2 {
     font-size: 28px;
-    color: #1f2d3d;
+    color: var(--hzq-text-color-primary);
     margin: 0;
   }
   h3 {
@@ -97,7 +103,7 @@ button, input, select, textarea {
   }
   h2, h3, h4, h5 {
     font-weight: normal;
-    color: #1f2f3d;
+    color: var(--hzq-text-color-primary);
 
     &:hover a {
       opacity: .4;
@@ -117,33 +123,33 @@ button, input, select, textarea {
 
   p {
     font-size: 14px;
-    color: #5e6d82;
+    color: var(--hzq-text-color-regular);
     line-height: 1.5em;
   }
 
   .tip {
     padding: 8px 16px;
-    background-color: #ECF8FF;
+    background-color: var(--hzq-color-primary-light-9);
     border-radius: 4px;
     border-left: #50bfff 5px solid;
     margin: 20px 0;
 
     code {
-      background-color: rgba(255, 255, 255, .7);
-      color: #445368;
+      background-color: var(--hzq-fill-color-light);
+      color: var(--hzq-text-color-regular);
     }
   }
 
   .warning {
     padding: 8px 16px;
-    background-color: #fff6f7;
+    background-color: var(--hzq-color-danger-light-9);
     border-radius: 4px;
     border-left: #FE6C6F 5px solid;
     margin: 20px 0;
 
     code {
-      background-color: rgba(255, 255, 255, .7);
-      color: #445368;
+      background-color: var(--hzq-fill-color-light);
+      color: var(--hzq-text-color-regular);
     }
   }
 }

@@ -16,8 +16,8 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value" :min="50">
-          </el-slider>
+          <hzq-slider v-model="value" :min="50">
+          </hzq-slider>
         </div>
       `,
 
@@ -44,8 +44,8 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value">
-          </el-slider>
+          <hzq-slider v-model="value">
+          </hzq-slider>
         </div>
       `,
 
@@ -66,8 +66,8 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value" :show-tooltip="false">
-          </el-slider>
+          <hzq-slider v-model="value" :show-tooltip="false">
+          </hzq-slider>
         </div>
       `,
 
@@ -85,8 +85,8 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider ref="slider" v-model="value" :format-tooltip="formatTooltip">
-          </el-slider>
+          <hzq-slider ref="slider" v-model="value" :format-tooltip="formatTooltip">
+          </hzq-slider>
         </div>
       `,
 
@@ -110,7 +110,7 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value" :vertical="vertical"></el-slider>
+          <hzq-slider v-model="value" :vertical="vertical"></hzq-slider>
         </div>
       `,
 
@@ -146,7 +146,7 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value"></el-slider>
+          <hzq-slider v-model="value"></hzq-slider>
         </div>
       `,
 
@@ -172,7 +172,7 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div style="width: 200px;">
-          <el-slider v-model="value" :min="0" :max="1" :step="0.1"></el-slider>
+          <hzq-slider v-model="value" :min="0" :max="1" :step="0.1"></hzq-slider>
         </div>
       `,
 
@@ -196,7 +196,7 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value"></el-slider>
+          <hzq-slider v-model="value"></hzq-slider>
         </div>
       `,
 
@@ -220,8 +220,8 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value" @change="onChange">
-          </el-slider>
+          <hzq-slider v-model="value" @change="onChange">
+          </hzq-slider>
         </div>
       `,
 
@@ -253,7 +253,7 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value" disabled></el-slider>
+          <hzq-slider v-model="value" disabled></hzq-slider>
         </div>
       `,
 
@@ -277,7 +277,7 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value" show-input></el-slider>
+          <hzq-slider v-model="value" show-input></hzq-slider>
         </div>
       `,
 
@@ -288,8 +288,8 @@ describe('Slider', () => {
       }
     }, true);
     setTimeout(() => {
-      triggerEvent(vm.$el.querySelector('.el-input-number'), 'keyup');
-      const inputNumber = vm.$el.querySelector('.el-input-number').__vue__;
+      triggerEvent(vm.$el.querySelector('.hzq-input-number'), 'keyup');
+      const inputNumber = vm.$el.querySelector('.hzq-input-number').__vue__;
       inputNumber.setCurrentValue(40);
       setTimeout(() => {
         expect(vm.value).to.equal(40);
@@ -303,7 +303,7 @@ describe('Slider', () => {
       showStops: true,
       step: 10
     }, true);
-    const stops = vm.$el.querySelectorAll('.el-slider__stop');
+    const stops = vm.$el.querySelectorAll('.hzq-slider__stop');
     expect(stops.length).to.equal(9);
   });
 
@@ -311,7 +311,7 @@ describe('Slider', () => {
     vm = createVue({
       template: `
         <div>
-          <el-slider vertical v-model="value" height="200px"></el-slider>
+          <hzq-slider vertical v-model="value" height="200px"></hzq-slider>
         </div>
       `,
 
@@ -336,7 +336,7 @@ describe('Slider', () => {
       vm = createVue({
         template: `
         <div>
-          <el-slider v-model="value" range></el-slider>
+          <hzq-slider v-model="value" range></hzq-slider>
         </div>
       `,
 
@@ -354,8 +354,8 @@ describe('Slider', () => {
       vm = createVue({
         template: `
         <div>
-          <el-slider v-model="value" range :min="50">
-          </el-slider>
+          <hzq-slider v-model="value" range :min="50">
+          </hzq-slider>
         </div>
       `,
 
@@ -382,7 +382,7 @@ describe('Slider', () => {
       vm = createVue({
         template: `
         <div style="width: 200px;">
-          <el-slider range v-model="value"></el-slider>
+          <hzq-slider range v-model="value"></hzq-slider>
         </div>
       `,
 
@@ -407,8 +407,8 @@ describe('Slider', () => {
       vm = createVue({
         template: `
         <div>
-          <el-slider v-model="value" range :min="min" :max="max">
-          </el-slider>
+          <hzq-slider v-model="value" range :min="min" :max="max">
+          </hzq-slider>
         </div>
       `,
 
@@ -438,11 +438,11 @@ describe('Slider', () => {
       vm = createVue({
         template: `
         <div>
-          <el-slider
+          <hzq-slider
             v-model="value"
             range
             :step="10"
-            show-stops></el-slider>
+            show-stops></hzq-slider>
         </div>
       `,
 
@@ -453,7 +453,7 @@ describe('Slider', () => {
         }
       }, true);
       setTimeout(() => {
-        const stops = vm.$el.querySelectorAll('.el-slider__stop');
+        const stops = vm.$el.querySelectorAll('.hzq-slider__stop');
         expect(stops.length).to.equal(5);
         done();
       }, 10);
@@ -463,13 +463,13 @@ describe('Slider', () => {
       vm = createVue({
         template: `
         <div>
-          <el-slider
+          <hzq-slider
             v-model="value"
             range
             :step="10"
             :marks="marks"
             :min="20"
-            show-stops></el-slider>
+            show-stops></hzq-slider>
         </div>
       `,
 
@@ -492,8 +492,8 @@ describe('Slider', () => {
       }, true);
 
       waitImmediate();
-      const stops = vm.$el.querySelectorAll('.el-slider__marks-stop.el-slider__stop');
-      const marks = vm.$el.querySelectorAll('.el-slider__marks .el-slider__marks-text');
+      const stops = vm.$el.querySelectorAll('.hzq-slider__marks-stop.hzq-slider__stop');
+      const marks = vm.$el.querySelectorAll('.hzq-slider__marks .hzq-slider__marks-text');
       expect(marks.length).to.equal(2);
       expect(stops.length).to.equal(2);
     });

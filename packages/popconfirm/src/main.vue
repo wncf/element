@@ -1,47 +1,47 @@
 <template>
-  <el-popover
+  <hzq-popover
     v-bind="$attrs"
     v-model="visible"
     trigger="click"
   >
-  <div class="el-popconfirm">
-    <p class="el-popconfirm__main">
+  <div class="hzq-popconfirm">
+    <p class="hzq-popconfirm__main">
     <i
       v-if="!hideIcon"
       :class="icon"
-      class="el-popconfirm__icon"
+      class="hzq-popconfirm__icon"
       :style="{color: iconColor}"
     ></i>
       {{title}}
     </p>
-    <div class="el-popconfirm__action">
-      <el-button 
+    <div class="hzq-popconfirm__action">
+      <hzq-button 
         size="mini" 
         :type="cancelButtonType" 
         @click="cancel"
       >
         {{ displayCancelButtonText }}
-      </el-button>
-      <el-button 
+      </hzq-button>
+      <hzq-button 
         size="mini" 
         :type="confirmButtonType" 
         @click="confirm"
       >
         {{ displayConfirmButtonText }}
-      </el-button>
+      </hzq-button>
     </div>
   </div>
   <slot name="reference" slot="reference"></slot>
-</el-popover>
+</hzq-popover>
 </template>
 
 <script>
-import ElPopover from 'element-ui/packages/popover';
-import ElButton from 'element-ui/packages/button';
-import {t} from 'element-ui/src/locale';
+import HzqPopover from 'hzq-ui/packages/popover';
+import HzqButton from 'hzq-ui/packages/button';
+import {t} from 'hzq-ui/src/locale';
 
 export default {
-  name: 'ElPopconfirm',
+  name: 'HzqPopconfirm',
   props: {
     title: {
       type: String
@@ -62,11 +62,11 @@ export default {
     },
     icon: {
       type: String,
-      default: 'el-icon-question'
+      default: 'hzq-icon-question'
     },
     iconColor: {
       type: String,
-      default: 'var(--el-color-warning)'
+      default: 'var(--hzq-color-warning)'
     },
     hideIcon: {
       type: Boolean,
@@ -74,8 +74,8 @@ export default {
     }
   },
   components: {
-    ElPopover,
-    ElButton
+    HzqPopover,
+    HzqButton
   },
   data() {
     return {

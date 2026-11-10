@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 
 export type SuggestionPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
 
@@ -46,6 +46,9 @@ export declare class ElAutocomplete extends ElementUIComponent {
 
   /** Key name of the input suggestion object for display */
   valueKey: string
+
+  /** Size of the inner Input, one of large / medium / small / mini */
+  size: ElementUIComponentSize
 
   /** Whether to emit select event on enter when there is no autocomplete match */
   selectWhenUnmatched: boolean

@@ -4,11 +4,11 @@ Input numerical values with a customizable range.
 
 ### Basic usage
 
-:::demo Bind a variable to `v-model` in `<el-input-number>` element and you are set.
+:::demo Bind a variable to `v-model` in `<hzq-input-number>` element and you are set.
 
 ```html
 <template>
-  <el-input-number v-model="num" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <hzq-input-number v-model="num" @change="handleChange" :min="1" :max="10"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -33,7 +33,7 @@ Input numerical values with a customizable range.
 
 ```html
 <template>
-  <el-input-number v-model="num" :disabled="true"></el-input-number>
+  <hzq-input-number v-model="num" :disabled="true"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -55,7 +55,7 @@ Allows you to define incremental steps.
 
 ```html
 <template>
-  <el-input-number v-model="num" :step="2"></el-input-number>
+  <hzq-input-number v-model="num" :step="2"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -75,7 +75,7 @@ Allows you to define incremental steps.
 
 ```html
 <template>
-  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+  <hzq-input-number v-model="num" :step="2" step-strictly></hzq-input-number>
 </template>
 <script>
   export default {
@@ -95,7 +95,7 @@ Allows you to define incremental steps.
 
 ```html
 <template>
-  <el-input-number v-model="num" :precision="2" :step="0.1" :max="10"></el-input-number>
+  <hzq-input-number v-model="num" :precision="2" :step="0.1" :max="10"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -116,16 +116,17 @@ The value of `precision` must be a non negative integer and should not be less t
 
 ### Size
 
-Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+Use attribute `size` to set additional sizes with `large`, `medium`, `small` or `mini`. Without `size` the component is `medium`.
 
 :::demo
 
 ```html
 <template>
-  <el-input-number v-model="num1"></el-input-number>
-    <el-input-number size="medium" v-model="num2"></el-input-number>
-    <el-input-number size="small" v-model="num3"></el-input-number>
-    <el-input-number size="mini" v-model="num4"></el-input-number>
+  <hzq-input-number v-model="num1"></hzq-input-number>
+  <hzq-input-number size="large" v-model="num2"></hzq-input-number>
+  <hzq-input-number size="medium" v-model="num3"></hzq-input-number>
+  <hzq-input-number size="small" v-model="num4"></hzq-input-number>
+  <hzq-input-number size="mini" v-model="num5"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -134,7 +135,8 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
         num1: 1,
         num2: 1,
         num3: 1,
-        num4: 1
+        num4: 1,
+        num5: 1
       }
     }
   };
@@ -147,7 +149,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 :::demo Set `controls-position` to decide the position of control buttons.
 ```html
 <template>
-  <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <hzq-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></hzq-input-number>
 </template>
 <script>
   export default {
@@ -176,7 +178,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |step | incremental step | number | — | 1 |
 |step-strictly | whether input value can only be multiple of step | boolean | — | false |
 |precision | precision of input value | number | — | — |
-|size | size of the component | string | large/small| — |
+|size | size of the component | string | large / medium / small / mini | — |
 |disabled| whether the component is disabled | boolean | — | false |
 |controls| whether to enable the control buttons | boolean | — | true |
 |controls-position | position of the control buttons | string | right | - |

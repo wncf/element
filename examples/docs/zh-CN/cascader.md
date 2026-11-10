@@ -10,18 +10,18 @@
 ```html
 <div class="block">
   <span class="demonstration">默认 click 触发子菜单</span>
-  <el-cascader
+  <hzq-cascader
     v-model="value"
     :options="options"
-    @change="handleChange"></el-cascader>
+    @change="handleChange"></hzq-cascader>
 </div>
 <div class="block">
   <span class="demonstration">hover 触发子菜单</span>
-  <el-cascader
+  <hzq-cascader
     v-model="value"
     :options="options"
     :props="{ expandTrigger: 'hover' }"
-    @change="handleChange"></el-cascader>
+    @change="handleChange"></hzq-cascader>
 </div>
 
 <script>
@@ -242,7 +242,7 @@
 
 :::demo 本例中，`options`指定的数组中的第一个元素含有`disabled: true`键值对，因此是禁用的。在默认情况下，Cascader 会检查数据中每一项的`disabled`字段是否为`true`，如果你的数据中表示禁用含义的字段名不为`disabled`，可以通过`props.disabled`属性来指定（详见下方 API 表格）。当然，`value`、`label`和`children`这三个字段名也可以通过同样的方式指定。
 ```html
-<el-cascader :options="options"></el-cascader>
+<hzq-cascader :options="options"></hzq-cascader>
 
 <script>
   export default {
@@ -457,7 +457,7 @@
 
 :::demo
 ```html
-<el-cascader :options="options" clearable></el-cascader>
+<hzq-cascader :options="options" clearable></hzq-cascader>
 
 <script>
   export default {
@@ -671,7 +671,7 @@
 
 :::demo 属性`show-all-levels`定义了是否显示完整的路径，将其赋值为`false`则仅显示最后一级
 ```html
-<el-cascader :options="options" :show-all-levels="false"></el-cascader>
+<hzq-cascader :options="options" :show-all-levels="false"></hzq-cascader>
 
 <script>
   export default {
@@ -887,18 +887,18 @@
 ```html
 <div class="block">
   <span class="demonstration">默认显示所有Tag</span>
-  <el-cascader
+  <hzq-cascader
     :options="options"
     :props="props"
-    clearable></el-cascader>
+    clearable></hzq-cascader>
 </div>
 <div class="block">
   <span class="demonstration">折叠展示Tag</span>
-  <el-cascader
+  <hzq-cascader
     :options="options"
     :props="props"
     collapse-tags
-    clearable></el-cascader>
+    clearable></hzq-cascader>
 </div>
 
 <script>
@@ -969,17 +969,17 @@
 ```html
 <div class="block">
   <span class="demonstration">单选选择任意一级选项</span>
-  <el-cascader
+  <hzq-cascader
     :options="options"
     :props="{ checkStrictly: true }"
-    clearable></el-cascader>
+    clearable></hzq-cascader>
 </div>
 <div class="block">
   <span class="demonstration">多选选择任意一级选项</span>
-  <el-cascader
+  <hzq-cascader
     :options="options"
     :props="{ multiple: true, checkStrictly: true }"
-    clearable></el-cascader>
+    clearable></hzq-cascader>
 </div>
 
 <script>
@@ -1194,7 +1194,7 @@
 
 :::demo 通过`lazy`开启动态加载，并通过`lazyload`来设置加载数据源的方法。`lazyload`方法有两个参数，第一个参数`node`为当前点击的节点，第二个`resolve`为数据加载完成的回调(必须调用)。为了更准确的显示节点的状态，还可以对节点数据添加是否为叶子节点的标志位 (默认字段为`leaf`，可通过`props.leaf`修改)，否则会简单的以有无子节点来判断是否为叶子节点。
 ```html
-<el-cascader :props="props"></el-cascader>
+<hzq-cascader :props="props"></hzq-cascader>
 
 <script>
   let id = 0;
@@ -1233,18 +1233,18 @@
 ```html
 <div class="block">
   <span class="demonstration">单选可搜索</span>
-  <el-cascader
+  <hzq-cascader
     placeholder="试试搜索：指南"
     :options="options"
-    filterable></el-cascader>
+    filterable></hzq-cascader>
 </div>
 <div class="block">
   <span class="demonstration">多选可搜索</span>
-  <el-cascader
+  <hzq-cascader
     placeholder="试试搜索：指南"
     :options="options"
     :props="{ multiple: true }"
-    filterable></el-cascader>
+    filterable></hzq-cascader>
 </div>
 
 <script>
@@ -1459,12 +1459,12 @@
 
 :::demo 可以通过`scoped slot`对级联选择器的备选项的节点内容进行自定义，scoped slot会传入两个字段 `node` 和 `data`，分别表示当前节点的 Node 对象和数据。
 ```html
-<el-cascader :options="options">
+<hzq-cascader :options="options">
   <template slot-scope="{ node, data }">
     <span>{{ data.label }}</span>
     <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
   </template>
-</el-cascader>
+</hzq-cascader>
 
 <script>
   export default {
@@ -1672,13 +1672,67 @@
 ```
 :::
 
+### 尺寸
+
+:::demo 通过 `size` 切换四档尺寸：`large`、`medium`、`small`、`mini`。不传时等同 `medium`，四档高度依次为 36px、32px、28px、24px。
+
+```html
+<template>
+  <div class="block">
+    <hzq-radio-group v-model="size" size="mini">
+      <hzq-radio-button label="large">大型</hzq-radio-button>
+      <hzq-radio-button label="medium">中等</hzq-radio-button>
+      <hzq-radio-button label="small">小型</hzq-radio-button>
+      <hzq-radio-button label="mini">超小</hzq-radio-button>
+    </hzq-radio-group>
+  </div>
+  <hzq-cascader
+    v-model="value"
+    :options="options"
+    :size="size"></hzq-cascader>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        size: 'medium',
+        value: [],
+        options: [{
+          value: 'zhinan',
+          label: '指南',
+          children: [{
+            value: 'yizhi',
+            label: '一致'
+          }, {
+            value: 'fankui',
+            label: '反馈'
+          }]
+        }, {
+          value: 'ziyuan',
+          label: '资源',
+          children: [{
+            value: 'axure',
+            label: 'Axure Components'
+          }, {
+            value: 'sketch',
+            label: 'Sketch Templates'
+          }]
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### 级联面板
 
 级联面板是级联选择器的核心组件，与级联选择器一样，有单选、多选、动态加载等多种功能。
 
 :::demo 和级联选择器一样，通过`options`来指定选项，也可通过`props`来设置多选、动态加载等功能，具体详情见下方API表格。
 ```html
-<el-cascader-panel :options="options"></el-cascader-panel>
+<hzq-cascader-panel :options="options"></hzq-cascader-panel>
 
 <script>
   export default {
@@ -1892,7 +1946,7 @@
 | value / v-model | 选中项绑定值 | - | — | — |
 | options | 可选项数据源，键名可通过 `Props` 属性配置 | array | — | — |
 | props | 配置选项，具体见下表 | object | — | — |
-| size | 尺寸 | string | medium / small / mini | — |
+| size | 尺寸 | string | large / medium / small / mini | — |
 | placeholder | 输入框占位文本 | string | — | 请选择 |
 | disabled | 是否禁用 | boolean | — | false |
 | clearable | 是否支持清空选项 | boolean | — | false |

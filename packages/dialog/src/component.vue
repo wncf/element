@@ -6,8 +6,8 @@
   >
     <div
       v-show="visible"
-      class="el-dialog__wrapper"
-      :class="{ 'el-dialog__wrapper--centered': isCentered }"
+      class="hzq-dialog__wrapper"
+      :class="{ 'hzq-dialog__wrapper--centered': isCentered }"
       @click.self="handleWrapperClick"
     >
       <div
@@ -16,30 +16,30 @@
         aria-modal="true"
         :aria-label="title || 'dialog'"
         :class="[
-          'el-dialog',
-          { 'is-fullscreen': fullscreen, 'el-dialog--center': center },
+          'hzq-dialog',
+          { 'is-fullscreen': fullscreen, 'hzq-dialog--center': center },
           customClass,
         ]"
         ref="dialog"
         :style="style"
       >
         <div
-          class="el-dialog__header"
+          class="hzq-dialog__header"
           :class="{ 'is-draggable': draggable && !fullscreen }"
           @mousedown="handleDragMouseDown"
         >
           <slot name="title">
-            <span class="el-dialog__title">{{ title }}</span>
+            <span class="hzq-dialog__title">{{ title }}</span>
           </slot>
           <button
             type="button"
-            class="el-dialog__headerbtn"
+            class="hzq-dialog__headerbtn"
             aria-label="Close"
             v-if="showClose"
             @click="handleClose"
           >
             <svg
-              class="el-dialog__close"
+              class="hzq-dialog__close"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
@@ -54,8 +54,8 @@
             </svg>
           </button>
         </div>
-        <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
-        <div class="el-dialog__footer" v-if="$slots.footer">
+        <div class="hzq-dialog__body" v-if="rendered"><slot></slot></div>
+        <div class="hzq-dialog__footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
       </div>
@@ -64,12 +64,12 @@
 </template>
 
 <script>
-import Popup from 'element-ui/src/utils/popup';
-import Migrating from 'element-ui/src/mixins/migrating';
-import emitter from 'element-ui/src/mixins/emitter';
+import Popup from 'hzq-ui/src/utils/popup';
+import Migrating from 'hzq-ui/src/mixins/migrating';
+import emitter from 'hzq-ui/src/mixins/emitter';
 
 export default {
-  name: 'ElDialog',
+  name: 'HzqDialog',
 
   mixins: [Popup, emitter, Migrating],
 
@@ -220,8 +220,8 @@ export default {
       }
     },
     updatePopper() {
-      this.broadcast('ElSelectDropdown', 'updatePopper');
-      this.broadcast('ElDropdownMenu', 'updatePopper');
+      this.broadcast('HzqSelectDropdown', 'updatePopper');
+      this.broadcast('HzqDropdownMenu', 'updatePopper');
     },
     afterEnter() {
       this.$emit('opened');
@@ -232,7 +232,7 @@ export default {
     },
     handleDragMouseDown(e) {
       if (!this.draggable || this.fullscreen) return;
-      if (e.target.closest('.el-dialog__headerbtn')) return;
+      if (e.target.closest('.hzq-dialog__headerbtn')) return;
 
       const dragDom = this.$refs.dialog;
       const rect = dragDom.getBoundingClientRect();

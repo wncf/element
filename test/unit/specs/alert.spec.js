@@ -12,8 +12,8 @@ describe('Alert', () => {
       title: 'test',
       showIcon: true
     }, true);
-    expect(vm.$el.querySelector('.el-alert__title').textContent).to.equal('test');
-    expect(vm.$el.classList.contains('el-alert--info')).to.true;
+    expect(vm.$el.querySelector('.hzq-alert__title').textContent).to.equal('test');
+    expect(vm.$el.classList.contains('hzq-alert--info')).to.true;
   });
 
   it('type', () => {
@@ -22,7 +22,7 @@ describe('Alert', () => {
       type: 'success',
       showIcon: true
     }, true);
-    expect(vm.$el.classList.contains('el-alert--success')).to.true;
+    expect(vm.$el.classList.contains('hzq-alert--success')).to.true;
   });
 
   it('description', () => {
@@ -31,7 +31,7 @@ describe('Alert', () => {
       description: 'Unbowed, Unbent, Unbroken',
       showIcon: true
     }, true);
-    expect(vm.$el.querySelector('.el-alert__description').textContent)
+    expect(vm.$el.querySelector('.hzq-alert__description').textContent)
       .to.equal('Unbowed, Unbent, Unbroken');
   });
 
@@ -45,25 +45,25 @@ describe('Alert', () => {
 
   it('title slot', () => {
     vm = createVue(`
-      <el-alert>
+      <hzq-alert>
         <span slot="title">foo</span>
-      </el-alert>
+      </hzq-alert>
     `);
 
-    expect(vm.$el.querySelector('.el-alert__title').textContent).to.equal('foo');
+    expect(vm.$el.querySelector('.hzq-alert__title').textContent).to.equal('foo');
   });
 
   it('close', () => {
     vm = createVue({
       template: `
         <div>
-          <el-alert
+          <hzq-alert
             title="test"
-            close-text="close"></el-alert>
+            close-text="close"></hzq-alert>
         </div>
       `
     }, true);
-    vm.$el.querySelector('.el-alert__closebtn').click();
+    vm.$el.querySelector('.hzq-alert__closebtn').click();
     expect(vm.$children[0].visible).to.false;
   });
 });

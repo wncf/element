@@ -40,12 +40,12 @@ describe('TimePicker', () => {
     input.focus();
 
     setTimeout(_ => {
-      const list = vm.picker.$el.querySelectorAll('.el-time-spinner__list');
+      const list = vm.picker.$el.querySelectorAll('.hzq-time-spinner__list');
       const hoursEl = list[0];
-      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[0].textContent).to.equal('12 AM');
-      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[1].textContent).to.equal('01 AM');
-      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[12].textContent).to.equal('12 PM');
-      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[15].textContent).to.equal('03 PM');
+      expect(hoursEl.querySelectorAll('.hzq-time-spinner__item')[0].textContent).to.equal('12 AM');
+      expect(hoursEl.querySelectorAll('.hzq-time-spinner__item')[1].textContent).to.equal('01 AM');
+      expect(hoursEl.querySelectorAll('.hzq-time-spinner__item')[12].textContent).to.equal('12 PM');
+      expect(hoursEl.querySelectorAll('.hzq-time-spinner__item')[15].textContent).to.equal('03 PM');
       done();
     }, DELAY);
   });
@@ -73,7 +73,7 @@ describe('TimePicker', () => {
 
   it('select time', done => {
     vm = createVue({
-      template: '<el-time-picker ref="compo" v-model="value"></el-time-picker>',
+      template: '<hzq-time-picker ref="compo" v-model="value"></hzq-time-picker>',
       data() {
         return {
           value: ''
@@ -87,14 +87,14 @@ describe('TimePicker', () => {
     input.focus();
 
     setTimeout(_ => {
-      const list = timePicker.picker.$el.querySelectorAll('.el-time-spinner__list');
+      const list = timePicker.picker.$el.querySelectorAll('.hzq-time-spinner__list');
 
       const hoursEl = list[0];
       const minutesEl = list[1];
       const secondsEl = list[2];
-      const hourEl = hoursEl.querySelectorAll('.el-time-spinner__item')[4];
-      const minuteEl = minutesEl.querySelectorAll('.el-time-spinner__item')[36];
-      const secondEl = secondsEl.querySelectorAll('.el-time-spinner__item')[20];
+      const hourEl = hoursEl.querySelectorAll('.hzq-time-spinner__item')[4];
+      const minuteEl = minutesEl.querySelectorAll('.hzq-time-spinner__item')[36];
+      const secondEl = secondsEl.querySelectorAll('.hzq-time-spinner__item')[20];
 
       // click hour, minute, second one at a time.
       hourEl.click();
@@ -119,7 +119,7 @@ describe('TimePicker', () => {
 
   it('click cancel button', done => {
     vm = createVue({
-      template: '<el-time-picker ref="compo" v-model="value"></el-time-picker>',
+      template: '<hzq-time-picker ref="compo" v-model="value"></hzq-time-picker>',
       data() {
         return {
           value: ''
@@ -133,7 +133,7 @@ describe('TimePicker', () => {
     input.focus();
 
     setTimeout(_ => {
-      timePicker.picker.$el.querySelector('.el-time-panel__btn.cancel').click();
+      timePicker.picker.$el.querySelector('.hzq-time-panel__btn.cancel').click();
 
       setTimeout(_ => {
         expect(vm.value).to.equal('');
@@ -144,7 +144,7 @@ describe('TimePicker', () => {
 
   it('click confirm button', done => {
     vm = createVue({
-      template: '<el-time-picker ref="compo" v-model="value"></el-time-picker>',
+      template: '<hzq-time-picker ref="compo" v-model="value"></hzq-time-picker>',
       data() {
         return {
           value: ''
@@ -158,7 +158,7 @@ describe('TimePicker', () => {
     input.focus();
 
     setTimeout(_ => {
-      timePicker.picker.$el.querySelector('.el-time-panel__btn.confirm').click();
+      timePicker.picker.$el.querySelector('.hzq-time-panel__btn.confirm').click();
 
       setTimeout(_ => {
         expect(vm.value.toISOString()).to.exist;
@@ -178,7 +178,7 @@ describe('TimePicker', () => {
     input.focus();
 
     setTimeout(_ => {
-      expect(vm.picker.$el.querySelectorAll('.el-time-spinner__wrapper')[2].style.display).to.equal('none');
+      expect(vm.picker.$el.querySelectorAll('.hzq-time-spinner__wrapper')[2].style.display).to.equal('none');
       done();
     }, 20);
   });
@@ -194,7 +194,7 @@ describe('TimePicker', () => {
     input.focus();
 
     setTimeout(_ => {
-      expect(vm.picker.$el.querySelectorAll('.el-time-spinner__wrapper')[2].style.display).to.equal('none');
+      expect(vm.picker.$el.querySelectorAll('.hzq-time-spinner__wrapper')[2].style.display).to.equal('none');
       done();
     }, DELAY);
   });
@@ -211,7 +211,7 @@ describe('TimePicker', () => {
     input.focus();
 
     setTimeout(_ => {
-      const list = vm.picker.$el.querySelectorAll('.el-time-spinner__list');
+      const list = vm.picker.$el.querySelectorAll('.hzq-time-spinner__list');
       const hoursEl = list[0];
       const disabledHours = [].slice
         .call(hoursEl.querySelectorAll('.disabled'))
@@ -221,7 +221,7 @@ describe('TimePicker', () => {
       expect(disabledHours).to.not.include.members([17, 18, 19, 20, 21, 22]);
 
       const minutesEl = list[1];
-      hoursEl.querySelectorAll('.el-time-spinner__item')[18].click();
+      hoursEl.querySelectorAll('.hzq-time-spinner__item')[18].click();
       setTimeout(_ => {
         const disabledMinutes = [].slice
           .call(minutesEl.querySelectorAll('.disabled'))
@@ -236,11 +236,11 @@ describe('TimePicker', () => {
   it('event focus and blur', done => {
     vm = createVue({
       template: `
-        <el-date-picker
+        <hzq-date-picker
           type="date"
           placeholder="选择日期"
           ref="picker">
-        </el-date-picker>
+        </hzq-date-picker>
       `
     }, true);
 
@@ -264,11 +264,11 @@ describe('TimePicker', () => {
   it('focus', done => {
     vm = createVue({
       template: `
-        <el-date-picker
+        <hzq-date-picker
           type="date"
           placeholder="选择日期"
           ref="picker">
-        </el-date-picker>
+        </hzq-date-picker>
       `
     }, true);
 
@@ -299,7 +299,7 @@ describe('TimePicker(range)', () => {
     vm.$el.querySelector('input').click();
 
     setTimeout(_ => {
-      expect(vm.picker.$el.querySelectorAll('.el-time-range-picker__cell')).to.length(2);
+      expect(vm.picker.$el.querySelectorAll('.hzq-time-range-picker__cell')).to.length(2);
       expect(vm.picker.minDate.getTime()).to.equal(new Date(2016, 9, 10, 18, 40).getTime());
       expect(vm.picker.maxDate.getTime()).to.equal(new Date(2016, 9, 10, 19, 40).getTime());
       done();
@@ -309,7 +309,7 @@ describe('TimePicker(range)', () => {
   it('default value', done => {
     const defaultValue = [new Date(2000, 9, 1, 10, 0, 0), new Date(2000, 9, 1, 11, 0, 0)];
     vm = createVue({
-      template: '<el-time-picker ref="compo" is-range v-model="value" :default-value="defaultValue"></el-time-picker>',
+      template: '<hzq-time-picker ref="compo" is-range v-model="value" :default-value="defaultValue"></hzq-time-picker>',
       data() {
         return {
           value: '',
@@ -330,7 +330,7 @@ describe('TimePicker(range)', () => {
 
   it('cancel button', done => {
     vm = createVue({
-      template: '<el-time-picker ref="compo" is-range v-model="value"></el-time-picker>',
+      template: '<hzq-time-picker ref="compo" is-range v-model="value"></hzq-time-picker>',
       data() {
         return {
           value: ''

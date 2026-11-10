@@ -1,8 +1,8 @@
-import ElInputNumber from './src/input-number';
+import HzqInputNumber from './src/input-number';
 
 /* istanbul ignore next */
-ElInputNumber.install = function(Vue) {
-  Vue.component(ElInputNumber.name, ElInputNumber);
+HzqInputNumber.install = function(Vue) {
+  Vue.component(HzqInputNumber.name, HzqInputNumber);
 };
 
-export default ElInputNumber;
+export default HzqInputNumber;

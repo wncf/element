@@ -1,8 +1,8 @@
-import ElDropdownItem from '../dropdown/src/dropdown-item';
+import HzqDropdownItem from '../dropdown/src/dropdown-item';
 
 /* istanbul ignore next */
-ElDropdownItem.install = function(Vue) {
-  Vue.component(ElDropdownItem.name, ElDropdownItem);
+HzqDropdownItem.install = function(Vue) {
+  Vue.component(HzqDropdownItem.name, HzqDropdownItem);
 };
 
-export default ElDropdownItem;
+export default HzqDropdownItem;

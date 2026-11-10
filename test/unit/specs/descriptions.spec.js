@@ -11,26 +11,26 @@ describe('Descriptions', () => {
     vm = createVue(
       {
         template: `
-          <el-descriptions title="title" extra="extra">
-            <el-descriptions-item v-for="item in 4" :key="item"></el-descriptions-item>
-          </el-descriptions>
+          <hzq-descriptions title="title" extra="extra">
+            <hzq-descriptions-item v-for="item in 4" :key="item"></hzq-descriptions-item>
+          </hzq-descriptions>
         `
       },
       true
     );
     const el = vm.$el;
-    expect(el.querySelector('.el-descriptions__title').textContent).to.equal('title');
-    expect(el.querySelector('.el-descriptions__extra').textContent).to.equal('extra');
-    expect(el.querySelectorAll('.el-descriptions-item__label').length).to.equal(4);
+    expect(el.querySelector('.hzq-descriptions__title').textContent).to.equal('title');
+    expect(el.querySelector('.hzq-descriptions__extra').textContent).to.equal('extra');
+    expect(el.querySelectorAll('.hzq-descriptions-item__label').length).to.equal(4);
   });
 
   it('should render border props', () => {
     vm = createVue(
       {
         template: `
-          <el-descriptions border>
-            <el-descriptions-item v-for="item in 3" :label="item" :key="item">{{ item }}</el-descriptions-item>
-          </el-descriptions>
+          <hzq-descriptions border>
+            <hzq-descriptions-item v-for="item in 3" :label="item" :key="item">{{ item }}</hzq-descriptions-item>
+          </hzq-descriptions>
         `
       },
       true
@@ -43,23 +43,23 @@ describe('Descriptions', () => {
     vm = createVue(
       {
         template: `
-          <el-descriptions border label-class-name="label-class-name" content-class-name="content-class-name">
-            <el-descriptions-item v-for="item in 3" :label="item" :key="item">{{ item }}</el-descriptions-item>
-          </el-descriptions>
+          <hzq-descriptions border label-class-name="label-class-name" content-class-name="content-class-name">
+            <hzq-descriptions-item v-for="item in 3" :label="item" :key="item">{{ item }}</hzq-descriptions-item>
+          </hzq-descriptions>
         `
       },
       true);
 
-    expect(Array.from(vm.$el.querySelector('.el-descriptions-item__label').classList)).to.contain('label-class-name');
-    expect(Array.from(vm.$el.querySelector('.el-descriptions-item__content').classList)).to.contain('content-class-name');
+    expect(Array.from(vm.$el.querySelector('.hzq-descriptions-item__label').classList)).to.contain('label-class-name');
+    expect(Array.from(vm.$el.querySelector('.hzq-descriptions-item__content').classList)).to.contain('content-class-name');
   });
 
   it('should render column props', async() => {
     vm = createVue({
       template: `
-      <el-descriptions :column="5" :border="border">
-        <el-descriptions-item v-for="item in 10" :label="item" :key="item">{{ item }}</el-descriptions-item>
-      </el-descriptions>
+      <hzq-descriptions :column="5" :border="border">
+        <hzq-descriptions-item v-for="item in 10" :label="item" :key="item">{{ item }}</hzq-descriptions-item>
+      </hzq-descriptions>
     `,
       data() {
         return {
@@ -78,9 +78,9 @@ describe('Descriptions', () => {
     vm = createVue({
 
       template: `
-      <el-descriptions :column="5" :direction="direction" border>
-        <el-descriptions-item v-for="item in 10" :label="item" :key="item">{{ item }}</el-descriptions-item>
-      </el-descriptions>
+      <hzq-descriptions :column="5" :direction="direction" border>
+        <hzq-descriptions-item v-for="item in 10" :label="item" :key="item">{{ item }}</hzq-descriptions-item>
+      </hzq-descriptions>
     `,
       data() {
         return {
@@ -100,24 +100,24 @@ describe('Descriptions', () => {
   it('should render title slots', async() => {
     vm = createVue({
       template: `
-      <el-descriptions>
+      <hzq-descriptions>
         <template slot="title">title</template>
-        <el-descriptions-item v-for="item in 10" :label="item" :key="item">{{ item }}</el-descriptions-item>
-      </el-descriptions>
+        <hzq-descriptions-item v-for="item in 10" :label="item" :key="item">{{ item }}</hzq-descriptions-item>
+      </hzq-descriptions>
     `
     }, true);
 
-    expect(vm.$el.querySelector('.el-descriptions__title').innerText).to.equal('title');
+    expect(vm.$el.querySelector('.hzq-descriptions__title').innerText).to.equal('title');
   });
 
   it('should render span props', async() => {
     vm = createVue({
       template: `
-        <el-descriptions :column="3">
-          <el-descriptions-item label="1">1</el-descriptions-item>
-          <el-descriptions-item label="2" :span="2">2</el-descriptions-item>
-          <el-descriptions-item label="3">3</el-descriptions-item>
-        </el-descriptions>
+        <hzq-descriptions :column="3">
+          <hzq-descriptions-item label="1">1</hzq-descriptions-item>
+          <hzq-descriptions-item label="2" :span="2">2</hzq-descriptions-item>
+          <hzq-descriptions-item label="3">3</hzq-descriptions-item>
+        </hzq-descriptions>
       `
     }, true);
 
@@ -129,11 +129,11 @@ describe('Descriptions', () => {
     vm = createVue({
       template: `
         <div>
-          <el-descriptions v-for="(remark,index) in remarks" :key="index" :title="remark">
-            <el-descriptions-item label="remark">
-              <el-tag size="small">{{remark}}</el-tag>
-            </el-descriptions-item>
-          </el-descriptions>
+          <hzq-descriptions v-for="(remark,index) in remarks" :key="index" :title="remark">
+            <hzq-descriptions-item label="remark">
+              <hzq-tag size="small">{{remark}}</hzq-tag>
+            </hzq-descriptions-item>
+          </hzq-descriptions>
           <button @click="onClick">click</button>
         </div>
       `,
@@ -150,6 +150,6 @@ describe('Descriptions', () => {
     }, true);
     vm.$el.querySelector('button').click();
     await waitImmediate();
-    expect(vm.$el.querySelector('.el-tag').innerText).to.equal(CHANGE_VALUE);
+    expect(vm.$el.querySelector('.hzq-tag').innerText).to.equal(CHANGE_VALUE);
   });
 });

@@ -23,15 +23,15 @@ $--tag-effects: (
 /* 把"类型 + 档位"解析成 token 引用，避免在组件层写死色值 */
 @function tag-token-color($type, $spec) {
   @if $spec == 'type' {
-    @return var(--el-color-#{$type});
+    @return var(--hzq-color-#{$type});
   }
   @if $spec == 'white' {
-    @return var(--el-color-white);
+    @return var(--hzq-color-white);
   }
   @if $spec == 'blank' {
-    @return var(--el-fill-color-blank);
+    @return var(--hzq-fill-color-blank);
   }
-  @return var(--el-color-#{$type}-#{$spec});
+  @return var(--hzq-color-#{$type}-#{$spec});
 }
 
 /* 单个类型在某个 effect 下的完整配色 */
@@ -43,36 +43,36 @@ $--tag-effects: (
   color: tag-token-color($type, nth($spec, 3));
 
   @include when(hit) {
-    border-color: var(--el-color-#{$type});
+    border-color: var(--hzq-color-#{$type});
   }
 
-  .el-tag__close {
+  .hzq-tag__close {
     color: tag-token-color($type, nth($spec, 3));
 
     &:hover {
-      color: var(--el-color-white);
+      color: var(--hzq-color-white);
       background-color: tag-token-color($type, nth($spec, 4));
     }
   }
 }
 
-/* default 类型（不写 type 时的样子）落在 .el-tag 上，其余类型作为覆盖 */
+/* default 类型（不写 type 时的样子）落在 .hzq-tag 上，其余类型作为覆盖 */
 @mixin tag-effect-skin($effect) {
   @include tag-type-skin(primary, $effect);
 
-  &.el-tag--info {
+  &.hzq-tag--info {
     @include tag-type-skin(info, $effect);
   }
 
-  &.el-tag--success {
+  &.hzq-tag--success {
     @include tag-type-skin(success, $effect);
   }
 
-  &.el-tag--warning {
+  &.hzq-tag--warning {
     @include tag-type-skin(warning, $effect);
   }
 
-  &.el-tag--danger {
+  &.hzq-tag--danger {
     @include tag-type-skin(danger, $effect);
   }
 }
@@ -84,14 +84,14 @@ $--tag-effects: (
   padding: $--tag-padding;
   line-height: #{$--tag-height - 2px};
   font-size: $--tag-font-size;
-  color: var(--el-color-primary);
+  color: var(--hzq-color-primary);
   border-width: 1px;
   border-style: solid;
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
   white-space: nowrap;
 
-  .el-icon-close {
+  .hzq-icon-close {
     border-radius: 50%;
     text-align: center;
     position: relative;
@@ -117,6 +117,13 @@ $--tag-effects: (
     @include tag-effect-skin('plain');
   }
 
+  @include m(large) {
+    height: $--tag-large-height;
+    padding: 0 10px;
+    line-height: #{$--tag-large-height - 2px};
+    font-size: $--component-font-size-large;
+  }
+
   @include m(medium) {
     // medium 与 default 同高，保留修饰符便于单独覆盖
     height: $--tag-medium-height;
@@ -128,7 +135,7 @@ $--tag-effects: (
     padding: 0 8px;
     line-height: #{$--tag-small-height - 2px};
 
-    .el-icon-close {
+    .hzq-icon-close {
       transform: scale(.8);
     }
   }
@@ -138,7 +145,7 @@ $--tag-effects: (
     padding: 0 6px;
     line-height: #{$--tag-mini-height - 2px};
 
-    .el-icon-close {
+    .hzq-icon-close {
       margin-left: -3px;
       transform: scale(.7);
     }

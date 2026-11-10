@@ -4,7 +4,7 @@
 @import "button-group";
 
 @include b(calendar) {
-  background-color: var(--el-bg-color);
+  background-color: var(--hzq-bg-color);
 
   @include e(header) {
     display: flex;
@@ -14,7 +14,7 @@
   }
 
   @include e(title) {
-    color: var(--el-text-color-primary);
+    color: var(--hzq-text-color-primary);
     align-self: center;
   }
 
@@ -63,7 +63,7 @@
     border-left: $--calendar-border;
   }
 
-  tr.el-calendar-table__row--hide-border td {
+  tr.hzq-calendar-table__row--hide-border td {
     border-top: none;
   }
 

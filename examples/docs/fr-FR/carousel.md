@@ -4,29 +4,29 @@ Affiche en boucle une série d'images ou de textes dans un espace limité.
 
 ### Usage
 
-:::demo Utilisez `el-carousel` avec `el-carousel-item`, et vous obtiendrez un carrousel. Le contenu de chaque slide est complètement personnalisable, il vous suffit juste de le placer à l'intérieur de la balise `el-carousel-item`. Par défaut le carrousel défile quand la souris passe sur un indicateur. Réglez `trigger` sur `click` et le carrousel défilera uniquement quand vous cliquerez sur l'indicateur.
+:::demo Utilisez `hzq-carousel` avec `hzq-carousel-item`, et vous obtiendrez un carrousel. Le contenu de chaque slide est complètement personnalisable, il vous suffit juste de le placer à l'intérieur de la balise `hzq-carousel-item`. Par défaut le carrousel défile quand la souris passe sur un indicateur. Réglez `trigger` sur `click` et le carrousel défilera uniquement quand vous cliquerez sur l'indicateur.
 ```html
 <template>
   <div class="block">
     <span class="demonstration">Défile quand la souris passe sur l'indicateur (défaut)</span>
-    <el-carousel height="150px">
-      <el-carousel-item v-for="item in 4" :key="item">
+    <hzq-carousel height="150px">
+      <hzq-carousel-item v-for="item in 4" :key="item">
         <h3 class="small">{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
+      </hzq-carousel-item>
+    </hzq-carousel>
   </div>
   <div class="block">
     <span class="demonstration">Défile quand on clique sur l'indicateur</span>
-    <el-carousel trigger="click" height="150px">
-      <el-carousel-item v-for="item in 4" :key="item">
+    <hzq-carousel trigger="click" height="150px">
+      <hzq-carousel-item v-for="item in 4" :key="item">
         <h3 class="small">{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
+      </hzq-carousel-item>
+    </hzq-carousel>
   </div>
 </template>
 
 <style>
-  .el-carousel__item h3 {
+  .hzq-carousel__item h3 {
     color: #475669;
     font-size: 14px;
     opacity: 0.75;
@@ -34,11 +34,11 @@ Affiche en boucle une série d'images ou de textes dans un espace limité.
     margin: 0;
   }
 
-  .el-carousel__item:nth-child(2n) {
+  .hzq-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
 
-  .el-carousel__item:nth-child(2n+1) {
+  .hzq-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
 </style>
@@ -52,15 +52,15 @@ Les indicateurs peuvent être affichés en dehors du carrousel.
 :::demo L'attribut `indicator-position` détermine où les indicateurs sont localisés. Par défaut ils se trouvent à l'intérieur du carrousel, régler `indicator-position` sur `outside` les affichera à l'extérieur; régler `indicator-position` sur `none` les cachera totalement.
 ```html
 <template>
-  <el-carousel indicator-position="outside">
-    <el-carousel-item v-for="item in 4" :key="item">
+  <hzq-carousel indicator-position="outside">
+    <hzq-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </hzq-carousel-item>
+  </hzq-carousel>
 </template>
 
 <style>
-  .el-carousel__item h3 {
+  .hzq-carousel__item h3 {
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
@@ -68,11 +68,11 @@ Les indicateurs peuvent être affichés en dehors du carrousel.
     margin: 0;
   }
 
-  .el-carousel__item:nth-child(2n) {
+  .hzq-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
 
-  .el-carousel__item:nth-child(2n+1) {
+  .hzq-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
 </style>
@@ -86,15 +86,15 @@ Vous pouvez définir quand les flèches doivent apparaître.
 :::demo L'attribut `arrow` détermine quand les flèches sont affichées. Par défaut elles apparaissent quand la souris passe sur le carrousel. Réglez `arrow` sur `always` ou `never` affiche ou cache les flèches de manière permanente.
 ```html
 <template>
-  <el-carousel :interval="5000" arrow="always">
-    <el-carousel-item v-for="item in 4" :key="item">
+  <hzq-carousel :interval="5000" arrow="always">
+    <hzq-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </hzq-carousel-item>
+  </hzq-carousel>
 </template>
 
 <style>
-  .el-carousel__item h3 {
+  .hzq-carousel__item h3 {
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
@@ -102,11 +102,11 @@ Vous pouvez définir quand les flèches doivent apparaître.
     margin: 0;
   }
 
-  .el-carousel__item:nth-child(2n) {
+  .hzq-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
 
-  .el-carousel__item:nth-child(2n+1) {
+  .hzq-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
 </style>
@@ -120,15 +120,15 @@ Quand la page est suffisamment large mais avec une hauteur limitée, vous pouvez
 :::demo Réglez `type` sur `card` pour activer le mode carte. Hormis l'apparence, la principale différence par rapport au mode commun est que cliquer sur une des slides se trouvant de chaque coté fait directement défiler le carrousel.
 ```html
 <template>
-  <el-carousel :interval="4000" type="card" height="200px">
-    <el-carousel-item v-for="item in 6" :key="item">
+  <hzq-carousel :interval="4000" type="card" height="200px">
+    <hzq-carousel-item v-for="item in 6" :key="item">
       <h3 class="medium">{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </hzq-carousel-item>
+  </hzq-carousel>
 </template>
 
 <style>
-  .el-carousel__item h3 {
+  .hzq-carousel__item h3 {
     color: #475669;
     font-size: 14px;
     opacity: 0.75;
@@ -136,11 +136,11 @@ Quand la page est suffisamment large mais avec une hauteur limitée, vous pouvez
     margin: 0;
   }
 
-  .el-carousel__item:nth-child(2n) {
+  .hzq-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
 
-  .el-carousel__item:nth-child(2n+1) {
+  .hzq-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
 </style>
@@ -152,15 +152,15 @@ Par défaut, `direction` est `horizontal`. Vous pouvez faire en sorte que le dé
 :::demo
 ```html
 <template>
-  <el-carousel height="200px" direction="vertical" :autoplay="false">
-    <el-carousel-item v-for="item in 4" :key="item">
+  <hzq-carousel height="200px" direction="vertical" :autoplay="false">
+    <hzq-carousel-item v-for="item in 4" :key="item">
       <h3 class="medium">{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </hzq-carousel-item>
+  </hzq-carousel>
 </template>
 
 <style>
-  .el-carousel__item h3 {
+  .hzq-carousel__item h3 {
     color: #475669;
     font-size: 14px;
     opacity: 0.75;
@@ -168,11 +168,11 @@ Par défaut, `direction` est `horizontal`. Vous pouvez faire en sorte que le dé
     margin: 0;
   }
 
-  .el-carousel__item:nth-child(2n) {
+  .hzq-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
 
-  .el-carousel__item:nth-child(2n+1) {
+  .hzq-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
 </style>
@@ -201,7 +201,7 @@ Par défaut, `direction` est `horizontal`. Vous pouvez faire en sorte que le dé
 ### Méthodes du Carrousel
 | Mathode | Description | Paramètres |
 |---------- |-------------- | -- |
-| setActiveItem | Défile manuellement vers une slide. | index de la slide d'arrivée, à partir de 0; ou bien le `name` du `el-carousel-item` correspondant|
+| setActiveItem | Défile manuellement vers une slide. | index de la slide d'arrivée, à partir de 0; ou bien le `name` du `hzq-carousel-item` correspondant|
 | prev | Défile vers la slide précédente. | — |
 | next | Défile vers la slide suivante. | — |
 

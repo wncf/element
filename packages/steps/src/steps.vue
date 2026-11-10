@@ -1,19 +1,19 @@
 <template>
   <div
-    class="el-steps"
+    class="hzq-steps"
     :class="[
-       !simple && 'el-steps--' + direction,
-       simple && 'el-steps--simple'
+       !simple && 'hzq-steps--' + direction,
+       simple && 'hzq-steps--simple'
      ]">
       <slot></slot>
   </div>
 </template>
 
 <script>
-import Migrating from 'element-ui/src/mixins/migrating';
+import Migrating from 'hzq-ui/src/mixins/migrating';
 
 export default {
-  name: 'ElSteps',
+  name: 'HzqSteps',
 
   mixins: [Migrating],
 

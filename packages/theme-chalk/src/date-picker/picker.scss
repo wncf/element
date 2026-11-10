@@ -7,44 +7,44 @@
   display: inline-block;
   text-align: left;
 
-  &.el-input,
-  &.el-input__inner {
+  &.hzq-input,
+  &.hzq-input__inner {
     width: 220px;
   }
 
   @include m((monthrange)) {
-    &.el-input,
-    &.el-input__inner {
+    &.hzq-input,
+    &.hzq-input__inner {
       width: 300px;
     }
   }
 
   @include m((daterange, timerange)) {
-    &.el-input,
-    &.el-input__inner {
+    &.hzq-input,
+    &.hzq-input__inner {
       width: 350px;
     }
   }
 
   @include m(datetimerange) {
-    &.el-input,
-    &.el-input__inner {
+    &.hzq-input,
+    &.hzq-input__inner {
       width: 400px;
     }
   }
 
   @include m(dates) {
-    .el-input__inner {
+    .hzq-input__inner {
       text-overflow: ellipsis;
       white-space: nowrap;
     }
   }
 
-  .el-icon-circle-close {
+  .hzq-icon-circle-close {
     cursor: pointer;
   }
 
-  .el-range__icon {
+  .hzq-range__icon {
     font-size: 14px;
     // 与普通输入框的前缀图标对齐：内边距 10px 上再外拉 5px
     margin-left: -5px;
@@ -53,7 +53,7 @@
     line-height: 32px;
   }
 
-  .el-range-input {
+  .hzq-range-input {
     appearance: none;
     border: none;
     outline: none;
@@ -72,7 +72,7 @@
     }
   }
 
-  .el-range-separator {
+  .hzq-range-separator {
     // 用 flex 让分隔符的行盒居中：盒子高度只有 100%（含上下 padding 后比 line-height 小），
     // 靠 line-height 居中会让文字整体下沉
     display: flex;
@@ -91,7 +91,7 @@
     color: $--color-text-primary;
   }
 
-  .el-range__close-icon {
+  .hzq-range__close-icon {
     font-size: 14px;
     color: $--color-text-placeholder;
     width: 25px;
@@ -104,13 +104,13 @@
 }
 
 @include b(range-editor) {
-  &.el-input__inner {
+  &.hzq-input__inner {
     display: inline-flex;
     align-items: center;
     padding: 3px 10px;
   }
 
-  .el-range-input {
+  .hzq-range-input {
     line-height: 1;
     // 两个输入框等分剩余空间（不再按百分比定宽）：百分比定宽在控件被拉宽、
     // 或右侧没有清除图标时，会在右边留下空白，分隔符也跟着偏左
@@ -126,59 +126,78 @@
     }
   }
 
+  @include m(large) {
+    &.hzq-input__inner {
+      height: $--input-large-height;
+    }
+
+    .hzq-range-separator {
+      font-size: $--input-large-font-size;
+    }
+
+    .hzq-range-input {
+      font-size: $--input-large-font-size;
+    }
+
+    .hzq-range__icon,
+    .hzq-range__close-icon {
+      line-height: $--input-large-height;
+    }
+  }
+
   @include m(medium) {
-    &.el-input__inner {
+    &.hzq-input__inner {
       height: $--input-medium-height;
     }
 
-    .el-range-separator {
+    .hzq-range-separator {
       font-size: $--input-medium-font-size;
     }
 
-    .el-range-input {
+    .hzq-range-input {
       font-size: $--input-medium-font-size;
     }
 
-    .el-range__icon,
-    .el-range__close-icon {
+    .hzq-range__icon,
+    .hzq-range__close-icon {
       line-height: $--input-medium-height;
     }
   }
 
   @include m(small) {
-    &.el-input__inner {
+    &.hzq-input__inner {
       height: $--input-small-height;
     }
 
-    .el-range-separator {
+    .hzq-range-separator {
       font-size: $--input-small-font-size;
     }
 
-    .el-range-input {
+    .hzq-range-input {
       font-size: $--input-small-font-size;
     }
 
-    .el-range__icon,
-    .el-range__close-icon {
+    .hzq-range__icon,
+    .hzq-range__close-icon {
       line-height: 24px;
     }
   }
 
   @include m(mini) {
-    &.el-input__inner {
+    &.hzq-input__inner {
       height: $--input-mini-height;
     }
 
-    .el-range-separator {
+    .hzq-range-separator {
       font-size: $--input-mini-font-size;
     }
 
-    .el-range-input {
+    .hzq-range-input {
       font-size: $--input-mini-font-size;
     }
 
-    .el-range__icon,
-    .el-range__close-icon {
+    .hzq-range__icon,
+    .hzq-range__close-icon {
       line-height: 20px;
     }
   }
@@ -202,7 +221,7 @@
       }
     }
 
-    .el-range-separator {
+    .hzq-range-separator {
       color: $--input-disabled-color;
     }
   }

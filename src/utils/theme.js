@@ -7,25 +7,25 @@
  * 所以运行期只要拿到一个主色，就能用本模块按同样的公式算齐其余变量。
  *
  * 这里存在的必要性：light-1..9 在 CSS 里是编译期算好的字面量，
- * 单独覆盖 --el-color-primary 会让这些衍生档留在旧色相上（hover、plain 底色、tag、树选中底色都会串色）。
+ * 单独覆盖 --hzq-color-primary 会让这些衍生档留在旧色相上（hover、plain 底色、tag、树选中底色都会串色）。
  *
  * 用法：
- *   import { applyTheme, setThemeMode, resetTheme } from 'element-ui/src/utils/theme';
+ *   import { applyTheme, setThemeMode, resetTheme } from 'hzq-ui/src/utils/theme';
  *   applyTheme({ primary: '#16a34a' });   // 只给主色，其余自动推导
  *   setThemeMode('dark');                 // 切深色，并把已接管的主色按深色重新推导
  *   resetTheme();                         // 交还给编译期主题（CSS 里的预设）
  *
  * 约定：只接管调用方显式设置过的品牌色，没设置过的仍由 CSS 决定，
- * 因此本模块和 .theme-green / .theme-dark 这类预设类可以共存。
+ * 因此本模块和 .hzq-theme-green / .hzq-theme-dark 这类预设类可以共存。
  */
 
 // 与 palette.scss 的 $--brand-default 对齐：新增品牌色时两边都要加
 export const BRAND_COLOR_NAMES = ['primary', 'success', 'warning', 'danger', 'info'];
 
-export const DARK_MODE_CLASS = 'theme-dark';
+export const DARK_MODE_CLASS = 'hzq-theme-dark';
 
-const TOKEN_PREFIX = '--el-color-';
-const BLEND_BASE_TOKEN = '--el-color-blend-base';
+const TOKEN_PREFIX = '--hzq-color-';
+const BLEND_BASE_TOKEN = '--hzq-color-blend-base';
 const LIGHT_LEVELS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // 与 tokens.scss 的 mix 权重一一对应，改动必须同步
@@ -39,7 +39,8 @@ const BLACK = { r: 0, g: 0, b: 0 };
 // 与 palette.scss 的 $--brightness-modes 对齐，读不到 CSS 变量时兜底
 const FALLBACK_BLEND_BASE = {
   light: WHITE,
-  dark: { r: 20, g: 20, b: 20 }
+  // #1e293b：与 palette.scss 深色模式的 bg-color 一致
+  dark: { r: 30, g: 41, b: 59 }
 };
 
 function getRootElement() {
