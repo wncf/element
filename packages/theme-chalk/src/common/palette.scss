@@ -145,13 +145,26 @@ $--empty-fills-dark: (
 // 以及不适用"语义中性色"但仍要随明暗翻转的成组色板（如插画灰阶）。
 // blend-base 决定 light-1..9 的混合方向——浅色模式往白混、深色模式往组件底色混，
 // 这样"深浅两套底色 + 同一个品牌色"都能得到正确的浅色档。
+// token 的作用域选择器。
+//
+// 默认挂在 :root —— 组件库独占一个页面时行为不变。
+// 微前端场景下，子应用与宿主共用同一个 document.documentElement，
+// 若仍挂 :root，子应用切主题会把宿主一起改掉。此时把本变量改成
+// 子应用自己的容器选择器即可（构建时覆盖，见 docs/custom-theme 的「作用域隔离」）：
+//
+//   $--token-scope: '[data-hzq-scope]';
+//
+// 变量本身是"根选择器"，不带模式类；明暗模式与品牌预设由下面的
+// $--brightness-modes / $--brand-modes 拼接，所以只需要在这里写一次根。
+$--token-scope: ':root' !default;
+
 $--brightness-modes: (
-  ':root': (
+  '#{$--token-scope}': (
     'neutrals': $--neutrals-light,
     'blend-base': #ffffff,
     'empty-fills': $--empty-fills-light
   ),
-  ':root.hzq-theme-dark': (
+  '#{$--token-scope}.hzq-theme-dark': (
     'neutrals': $--neutrals-dark,
     'blend-base': #1e293b,
     'empty-fills': $--empty-fills-dark

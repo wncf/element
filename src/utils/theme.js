@@ -43,8 +43,34 @@ const FALLBACK_BLEND_BASE = {
   dark: { r: 30, g: 41, b: 59 }
 };
 
+// 主题作用域选择器。默认挂在 documentElement 上；
+// 微前端场景下子应用需要把 token 限定在自己的容器里，
+// 通过 configureThemeScope() 设置，之后所有不显式传 root 的 API 都用它。
+let themeScopeSelector = null;
+
+/**
+ * 设置主题作用域容器。
+ *
+ * 需要与构建期的 $--token-scope 保持一致：
+ *   $--token-scope: '[data-hzq-scope]';   // SCSS
+ *   configureThemeScope('[data-hzq-scope]');  // JS
+ *
+ * 传 null 恢复为 documentElement。
+ */
+export function configureThemeScope(selector) {
+  themeScopeSelector = selector || null;
+}
+
+export function getThemeScopeElement() {
+  if (typeof document === 'undefined') return null;
+  if (!themeScopeSelector) return document.documentElement;
+
+  // 作用域容器可能还没挂载，退回 documentElement 以免直接崩掉
+  return document.querySelector(themeScopeSelector) || document.documentElement;
+}
+
 function getRootElement() {
-  return typeof document === 'undefined' ? null : document.documentElement;
+  return getThemeScopeElement();
 }
 
 function readToken(name, root) {

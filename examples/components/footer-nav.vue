@@ -89,11 +89,23 @@
 
     methods: {
       setNav() {
+        // 按内容查找，不写死下标 —— 导航项增删后下标会变
         let nav = navConfig[this.lang];
-        this.nav = [nav[0]].concat(nav[3].children);
-        nav[4].groups.map(group => group.list).forEach(list => {
-          this.nav = this.nav.concat(list);
+        let result = [];
+
+        nav.forEach(item => {
+          if (item.path) {
+            result.push(item);
+          } else if (item.children) {
+            result = result.concat(item.children);
+          } else if (item.groups) {
+            item.groups.forEach(group => {
+              result = result.concat(group.list);
+            });
+          }
         });
+
+        this.nav = result;
       },
 
       updateNav() {

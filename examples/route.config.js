@@ -61,7 +61,8 @@ const registerRoute = (navConfig) => {
     let navs = navConfig[lang];
     route.push({
       path: `/${ lang }/component`,
-      redirect: `/${ lang }/component/installation`,
+      // 安装/快速上手等指南页已移除，组件页默认进入第一个组件文档
+      redirect: `/${ lang }/component/layout`,
       component: load(lang, 'component'),
       children: []
     });

@@ -42,7 +42,7 @@
 import { applyTheme, setThemeMode, getThemeMode, resetTheme } from 'hzq-ui/src/utils/theme';
 
 // 绿色预设由编译期 CSS 提供（palette.scss 的 $--brand-modes），运行期只切类即可
-const GREEN_PRESET_CLASS = 'theme-green';
+const GREEN_PRESET_CLASS = 'hzq-theme-green';
 
 // 快捷色，真正的衍生档由 applyTheme 推导，这里不需要维护第二套色板
 const PREDEFINE_COLORS = ['#2563eb', '#16a34a', '#7c3aed', '#dc2626', '#0ea5e9'];

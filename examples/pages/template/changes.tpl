@@ -419,16 +419,35 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
       <strong>主色由 <code>#409EFF</code> 改为 <code>#2563eb</code>，danger 由 <code>#F56C6C</code> 改为 <code>#dc2626</code></strong>。
     </p>
     <p>
-      深色模式使用带蓝调的 slate 色系（`#0f172a` 页面底 / `#1e293b` 卡片底 / `#243347` 浮层底），
-      而不是纯中性灰，面板之间靠明度差分层，详见
-      <a href="#/zh-CN/component/custom-theme">自定义主题</a>。
+      深色模式使用带蓝调的 slate 色系（<code>#0f172a</code> 页面底 / <code>#1e293b</code> 卡片底 / <code>#243347</code> 浮层底），
+      而不是纯中性灰，面板之间靠明度差分层。中性色板定义在
+      <code>common/palette.scss</code> 的 <code>$--neutrals-dark</code>，改这一处即可整体换色。
     </p>
     <p>新增运行期工具 <code>src/utils/theme.js</code>，可在浏览器里直接换主题色：</p>
-    <pre><code>import { applyTheme, setThemeMode, resetTheme } from 'element-ui/src/utils/theme';
+    <pre><code>import { applyTheme, setThemeMode, resetTheme } from 'hzq-ui/src/utils/theme';
 
 applyTheme({ primary: '#16a34a' });  // 自动推导 light-1..9 / hover / shade
-setThemeMode('dark');                // 切换根元素 theme-dark 类
+setThemeMode('dark');                // 切换 hzq-theme-dark 类
 resetTheme();                        // 撤销行内 token，交还编译期主题</code></pre>
+
+    <h3>作用域隔离<span class="tag-new">新增能力</span></h3>
+    <p>
+      微前端场景下子应用与宿主共用同一个 <code>document.documentElement</code>，
+      token 默认挂在 <code>:root</code> 会导致子应用切主题时把宿主一起改掉。
+      为此 token 的根选择器抽成了 SCSS 变量 <code>$--token-scope</code>（默认 <code>:root</code>），
+      运行期对应 <code>configureThemeScope(selector)</code>：
+    </p>
+    <pre><code>// 构建期（SCSS）
+$--token-scope: '[data-hzq-scope]';
+
+// 运行期（JS）
+import { configureThemeScope } from 'hzq-ui/src/utils/theme';
+configureThemeScope('[data-hzq-scope]');</code></pre>
+    <p>
+      产物中所有 token 会变成 <code>[data-hzq-scope]{ --hzq-color-primary: ... }</code>，
+      明暗与品牌预设自动拼在其后（<code>[data-hzq-scope].hzq-theme-dark</code> 等），
+      不再出现裸 <code>:root</code>。两处选择器必须一致，否则 JS 读不到 CSS 里的 token。
+    </p>
 
     <h3>尺寸梯级<span class="tag-change">结构性变更</span></h3>
     <p>

@@ -5,7 +5,9 @@ import {
   applyTheme,
   setThemeMode,
   getThemeMode,
-  resetTheme
+  resetTheme,
+  configureThemeScope,
+  getThemeScopeElement
 } from 'hzq-ui/src/utils/theme';
 
 // 期望值全部取自编译产物（packages/theme-chalk/lib/index.css），
@@ -102,6 +104,59 @@ describe('Utils:theme', () => {
 
       expect(root.style.getPropertyValue('--hzq-color-primary')).to.equal('');
       expect(readToken('--hzq-color-primary')).to.equal('#2563eb');
+    });
+  });
+
+  describe('theme scope', () => {
+    let scopeEl;
+
+    beforeEach(() => {
+      scopeEl = document.createElement('div');
+      scopeEl.id = 'hzq-scope-test';
+      document.body.appendChild(scopeEl);
+    });
+
+    afterEach(() => {
+      configureThemeScope(null);
+      if (scopeEl && scopeEl.parentNode) scopeEl.parentNode.removeChild(scopeEl);
+    });
+
+    it('默认作用域是 documentElement', () => {
+      expect(getThemeScopeElement()).to.equal(document.documentElement);
+    });
+
+    it('配置后返回作用域容器', () => {
+      configureThemeScope('#hzq-scope-test');
+
+      expect(getThemeScopeElement()).to.equal(scopeEl);
+    });
+
+    it('容器不存在时回退到 documentElement，不抛错', () => {
+      configureThemeScope('#not-exist-element');
+
+      expect(getThemeScopeElement()).to.equal(document.documentElement);
+    });
+
+    it('不传 root 的 API 使用配置的作用域', () => {
+      configureThemeScope('#hzq-scope-test');
+
+      applyTheme({ primary: '#16a34a' });
+      setThemeMode('dark');
+
+      expect(scopeEl.style.getPropertyValue('--hzq-color-primary')).to.equal('#16a34a');
+      expect(scopeEl.classList.contains('hzq-theme-dark')).to.be.true;
+      // 不能污染 documentElement
+      expect(document.documentElement.classList.contains('hzq-theme-dark')).to.be.false;
+
+      resetTheme();
+      setThemeMode('light');
+    });
+
+    it('恢复 null 后回到 documentElement', () => {
+      configureThemeScope('#hzq-scope-test');
+      configureThemeScope(null);
+
+      expect(getThemeScopeElement()).to.equal(document.documentElement);
     });
   });
 });
