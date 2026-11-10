@@ -32,11 +32,15 @@ Le Dialog ouvre un modal personnalisable.
     },
     methods: {
       handleClose(done) {
-        this.$confirm('Voulez-vous vraiment quitter ?')
-          .then(_ => {
+        this.$dialog({
+          title: 'Prompt',
+          type: 'confirm',
+          content: 'Voulez-vous vraiment quitter ?',
+          confirm: instance => {
+            instance.close();
             done();
-          })
-          .catch(_ => {});
+          }
+        });
       }
     }
   };

@@ -1,0 +1,18 @@
+@import 'common/var';
+
+// 全局字体族。
+//
+// 只声明字体栈，不在库内加载字体文件——字体由使用方的宿主环境通过 @font-face
+// 引入（main-app 与 crmx-web 都在入口样式里加载 Noto Sans SC 变量字体）。
+// 这样一份字体只下载一次，组件库与业务页面共用同一套字形。
+//
+// 作用域限定在组件库自己的容器和常见表单控件上，避免影响宿主页面的
+// 全局标签样式（reset.scss 里那套 h1/h2/a/p 规则属于整页 reset，
+// 组件库不应把它带给宿主）。
+body,
+button,
+input,
+select,
+textarea {
+  font-family: $--font-family;
+}

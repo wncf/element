@@ -163,13 +163,16 @@ export default {
           this.openRenameForm(item.name);
           break;
         case 'delete':
-          this.$confirm(this.getActionDisplayName('confirm-delete-theme'), this.getActionDisplayName('notice'), {
+          this.$dialog({
+            title: this.getActionDisplayName('notice'),
+            type: 'confirm',
+            content: this.getActionDisplayName('confirm-delete-theme'),
             confirmButtonText: this.getActionDisplayName('confirm'),
             cancelButtonText: this.getActionDisplayName('cancel'),
-            type: 'warning'
-          }).then(() => {
-            this.deleteUserThemeByName(item.name);
-          }).catch(() => {});
+            confirm: () => {
+              this.deleteUserThemeByName(item.name);
+            }
+          });
           break;
         default:
           return;

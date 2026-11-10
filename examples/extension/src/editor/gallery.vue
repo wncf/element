@@ -106,13 +106,16 @@ export default {
           this.openCopyForm(value);
           break;
         case 'delete':
-          this.$confirm('确定要删除这个主题?', '提示', {
+          this.$dialog({
+            title: '提示',
+            type: 'confirm',
+            content: '确定要删除这个主题?',
             confirmButtonText: '确认',
             cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            this.deleteUserThemeByName(value.name);
-          }).catch(() => {});
+            confirm: () => {
+              this.deleteUserThemeByName(value.name);
+            }
+          });
           break;
         case 'rename':
           this.openRenameForm(value.name);

@@ -94,7 +94,18 @@
         top: calc(50% - 8px);
         width: 1px;
         height: 16px;
-        background: #ebebeb;
+        background: var(--hzq-border-color-light);
+      }
+    }
+
+    // 版本号：纯展示，不再提供历史版本切换
+    .nav-versions {
+      cursor: default;
+      margin-left: 20px;
+
+      .nav-version-text {
+        font-size: 14px;
+        color: var(--hzq-text-color-regular);
       }
     }
 
@@ -332,12 +343,6 @@
           <li class="nav-item">
             <router-link
               active-class="active"
-              :to="`/${ lang }/guide`">{{ langConfig.guide }}
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link
-              active-class="active"
               :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
@@ -347,13 +352,6 @@
             <router-link
               active-class="active"
               :to="`/${ lang }/theme`">{{ langConfig.theme }}
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link
-              active-class="active"
-              :to="`/${ lang }/resource`"
-              exact>{{ langConfig.resource }}
             </router-link>
           </li>
           <li class="nav-item" v-if="lang === 'zh-CN'">
@@ -368,28 +366,9 @@
             <div class="nav-gap"></div>
           </li>
 
-          <!-- 版本选择器 -->
+          <!-- 版本号：仅展示，不再提供历史版本切换 -->
           <li class="nav-item nav-versions" v-show="isComponentPage">
-            <hzq-dropdown
-              trigger="click"
-              class="nav-dropdown"
-              :class="{ 'is-active': verDropdownVisible }">
-              <span>
-                {{ version }}
-                <i class="hzq-icon-arrow-down hzq-icon--right"></i>
-              </span>
-              <hzq-dropdown-menu
-                slot="dropdown"
-                class="nav-dropdown-list"
-                @input="handleVerDropdownToggle">
-                <hzq-dropdown-item
-                  v-for="item in Object.keys(versions)"
-                  :key="item"
-                  @click.native="switchVersion(item)">
-                  {{ item }}
-                </hzq-dropdown-item>
-              </hzq-dropdown-menu>
-            </hzq-dropdown>
+            <span class="nav-version-text">{{ version }}</span>
           </li>
 
           <!-- 语言选择器 -->
@@ -441,9 +420,7 @@
     data() {
       return {
         active: '',
-        versions: [],
         version,
-        verDropdownVisible: true,
         langDropdownVisible: true,
         langs: {
           'zh-CN': '中文',
@@ -480,31 +457,14 @@
       }
     },
     mounted() {
-      const testInnerImg = new Image();
-      testInnerImg.onload = () => {
-        this.$isEle = true;
-        ga('send', 'event', 'DocView', 'Ali', 'Inner');
-      };
-      testInnerImg.onerror = (err) => {
-        ga('send', 'event', 'DocView', 'Ali', 'Outer');
-        console.error(err);
-      };
-      testInnerImg.src = `https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/rmsportal/VmvVUItLdPNqKlNGuRHi.png?t=${Date.now()}`;
+      // 原 Element 官方站点在这里加载一张内网图片做「内网/外网」探测并上报 GA，
+      // 内部部署时该域名永远解析不通，会阻塞首屏且控制台持续报错，故移除。
     },
     methods: {
-      switchVersion(version) {
-        if (version === this.version) return;
-        location.href = `${ location.origin }/${ this.versions[version] }/${ location.hash } `;
-      },
-
       switchLang(targetLang) {
         if (this.lang === targetLang) return;
         localStorage.setItem('ELEMENT_LANGUAGE', targetLang);
         this.$router.push(this.$route.path.replace(this.lang, targetLang));
-      },
-
-      handleVerDropdownToggle(visible) {
-        this.verDropdownVisible = visible;
       },
 
       handleLangDropdownToggle(visible) {
@@ -513,18 +473,6 @@
     },
 
     created() {
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = _ => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          const versions = JSON.parse(xhr.responseText);
-          this.versions = Object.keys(versions).reduce((prev, next) => {
-            prev[next] = versions[next];
-            return prev;
-          }, {});
-        }
-      };
-      xhr.open('GET', '/versions.json');
-      xhr.send();
       let primaryLast = '#409EFF';
       bus.$on(ACTION_USER_CONFIG_UPDATE, (val) => {
         let primaryColor = val.global['$--color-primary'];

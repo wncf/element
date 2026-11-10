@@ -176,9 +176,12 @@ export default {
     const previewConfig = loadPreviewFromLocal();
     const pageRefer = this.$route.params.refer;
     if (!previewConfig || !pageRefer) {
-      this.$alert(getActionDisplayName('no-preview-config'), getActionDisplayName('notice'), {
+      this.$dialog({
+        title: getActionDisplayName('notice'),
+        type: 'alert',
+        content: getActionDisplayName('no-preview-config'),
         confirmButtonText: getActionDisplayName('confirm'),
-        callback: action => {
+        cancel: () => {
           const newPath = this.$route.path.replace('/preview', '');
           this.$router.replace(newPath);
         }

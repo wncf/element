@@ -126,6 +126,12 @@ $--font-size-base: 13px !default;
 $--font-size-small: 12px !default;
 /// fontSize|1|Font Size|0
 $--font-size-extra-small: 11px !default;
+/// fontFamily|1|Font Family|0
+// 统一字体族。宿主环境（main-app / crmx-web）已经通过 @font-face 引入
+// Noto Sans SC，这里只声明字体栈，不重复加载字体文件。
+$--font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
+  Helvetica, Arial, sans-serif !default;
 /// fontWeight|1|Font Weight|1
 $--font-weight-primary: 500 !default;
 /// fontWeight|1|Font Weight|1

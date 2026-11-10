@@ -33,11 +33,15 @@ Dialog abre una caja de diálogo, y es bastante personalizable.
     },
     methods: {
       handleClose(done) {
-        this.$confirm('Are you sure to close this dialog?')
-          .then(_ => {
+        this.$dialog({
+          title: 'Prompt',
+          type: 'confirm',
+          content: 'Are you sure to close this dialog?',
+          confirm: instance => {
+            instance.close();
             done();
-          })
-          .catch(_ => {});
+          }
+        });
       }
     }
   };

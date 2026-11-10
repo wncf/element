@@ -5,39 +5,6 @@
       "path": "/changelog"
     },
     {
-      "name": "Element React",
-      "href": "https://elemefe.github.io/element-react/"
-    },
-    {
-      "name": "Element Angular",
-      "href": "https://element-angular.faas.ele.me/"
-    },
-    {
-      "name": "开发指南",
-      "children": [
-        {
-          "path": "/installation",
-          "name": "安装"
-        },
-        {
-          "path": "/quickstart",
-          "name": "快速上手"
-        },
-        {
-          "path": "/i18n",
-          "name": "国际化"
-        },
-        {
-          "path": "/custom-theme",
-          "name": "自定义主题"
-        },
-        {
-          "path": "/transition",
-          "name": "内置过渡动画"
-        }
-      ]
-    },
-    {
       "name": "组件",
       "groups": [
         {
@@ -66,6 +33,10 @@
             {
               "path": "/icon",
               "title": "Icon 图标"
+            },
+            {
+              "path": "/svg-icon",
+              "title": "SvgIcon 业务图标"
             },
             {
               "path": "/button",
@@ -325,39 +296,6 @@
     {
       "name": "Changelog",
       "path": "/changelog"
-    },
-    {
-      "name": "Element React",
-      "href": "https://elemefe.github.io/element-react/"
-    },
-    {
-      "name": "Element Angular",
-      "href": "https://element-angular.faas.ele.me/"
-    },
-    {
-      "name": "Development",
-      "children": [
-        {
-          "path": "/installation",
-          "name": "Installation"
-        },
-        {
-          "path": "/quickstart",
-          "name": "Quick Start"
-        },
-        {
-          "path": "/i18n",
-          "name": "Internationalization"
-        },
-        {
-          "path": "/custom-theme",
-          "name": "Custom Theme"
-        },
-        {
-          "path": "/transition",
-          "name": "Built-in transition"
-        }
-      ]
     },
     {
       "name": "Components",
@@ -645,39 +583,6 @@
       "path": "/changelog"
     },
     {
-      "name": "Element React",
-      "href": "https://elemefe.github.io/element-react/"
-    },
-    {
-      "name": "Element Angular",
-      "href": "https://element-angular.faas.ele.me/"
-    },
-    {
-      "name": "Development",
-      "children": [
-        {
-          "path": "/installation",
-          "name": "Installation"
-        },
-        {
-          "path": "/quickstart",
-          "name": "Quick Start"
-        },
-        {
-          "path": "/i18n",
-          "name": "Internationalization"
-        },
-        {
-          "path": "/custom-theme",
-          "name": "Custom Theme"
-        },
-        {
-          "path": "/transition",
-          "name": "Built-in transition"
-        }
-      ]
-    },
-    {
       "name": "Components",
       "groups": [
         {
@@ -961,39 +866,6 @@
     {
       "name": "Changelog",
       "path": "/changelog"
-    },
-    {
-      "name": "Element pour React",
-      "href": "https://elemefe.github.io/element-react/"
-    },
-    {
-      "name": "Element pour Angular",
-      "href": "https://element-angular.faas.ele.me/"
-    },
-    {
-      "name": "Développement",
-      "children": [
-        {
-          "path": "/installation",
-          "name": "Installation"
-        },
-        {
-          "path": "/quickstart",
-          "name": "Démarrer"
-        },
-        {
-          "path": "/i18n",
-          "name": "Internationalisation"
-        },
-        {
-          "path": "/custom-theme",
-          "name": "Thème"
-        },
-        {
-          "path": "/transition",
-          "name": "Transitions"
-        }
-      ]
     },
     {
       "name": "Composants",

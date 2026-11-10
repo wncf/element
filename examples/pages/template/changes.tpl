@@ -214,14 +214,15 @@
     <h1>改造记录</h1>
     <p class="lead">
       本仓库基于 <a href="https://github.com/ElemeFE/element" target="_blank">Element UI</a> 2.15.14 二次开发，
-      在保持 Vue 2 与原有组件 API 的前提下，补齐了深色模式、主题 token、尺寸梯级、金额输入与配置化表单等能力。
+      在保持 Vue 2 与原有组件 API 的前提下，补齐了深色模式、主题 token、尺寸梯级、全局字体、金额输入与配置化表单等能力。
       本页按模块记录<strong>相对原版的实际差异</strong>，标注哪些是新增、哪些是行为变更、哪些需要调用方改代码。
     </p>
 
     <div class="changes-meta">
       对照基线：上游提交 <code>290e68ea</code>（release 2.15.14）→ 本仓库当前工作区，
-      共 <code>214</code> 个文件、<code>+21043 / -1342</code> 行。<br>
-      统计口径：<code>git diff 290e68ea</code>。组件改动 <code>71</code> 个文件、文档改动 <code>81</code> 个文件。
+      共 <code>730</code> 个文件、<code>+41282 / -18972</code> 行。<br>
+      统计口径：<code>git diff 290e68ea</code>。组件改动 <code>188</code> 个文件、文档改动 <code>253</code> 个文件。<br>
+      包名 <code>hzq-ui</code>，版本 <code>1.0.0</code>，命名空间由 <code>el-</code> 改为 <code>hzq-</code>。
     </div>
 
     <div class="changes-summary">
@@ -243,7 +244,39 @@
       </div>
     </div>
 
-    <h2>一、新增能力</h2>
+    <h2>一、命名空间改名</h2>
+
+    <p>
+      最根本的一处改造：整库命名空间由 <code>el</code> 改为 <code>hzq</code>，
+      使本库能与宿主环境里的官方 <code>element-ui</code> 并存而不互相覆盖。
+    </p>
+    <table>
+      <tr><th>层面</th><th>原版</th><th>本库</th></tr>
+      <tr><td>包名</td><td><code>element-ui</code></td><td><code>hzq-ui</code></td></tr>
+      <tr><td>CSS 类名</td><td><code>.el-button</code></td><td><code>.hzq-button</code></td></tr>
+      <tr><td>CSS 变量</td><td><code>--el-color-primary</code></td><td><code>--hzq-color-primary</code></td></tr>
+      <tr><td>组件注册名</td><td><code>ElButton</code></td><td><code>HzqButton</code></td></tr>
+      <tr><td>模板标签</td><td><code>&lt;el-button&gt;</code></td><td><code>&lt;hzq-button&gt;</code></td></tr>
+      <tr><td>主题类</td><td><code>.theme-dark</code></td><td><code>.hzq-theme-dark</code></td></tr>
+      <tr><td>全局配置</td><td><code>$ELEMENT</code></td><td><code>$HZQ</code></td></tr>
+      <tr><td>图标字体</td><td><code>element-icons</code></td><td><code>hzq-icons</code></td></tr>
+    </table>
+    <div class="breaking">
+      <strong>破坏性变更：</strong>所有模板标签、类名选择器、CSS 变量引用都要跟着改。
+      尤其注意几类<strong>不会报错但会静默失效</strong>的地方：
+      <ul>
+        <li>JS 里按组件名做的父子通信（<code>componentName: 'HzqCheckbox'</code>、<code>dispatch/broadcast</code> 的目标名）</li>
+        <li>局部注册的变量名（<code>components: { HzqInput }</code> 会注册成 <code>hzq-input</code>）</li>
+        <li>属性选择器（<code>[class*=hzq-col-]</code>）与 SCSS 插值（<code>--hzq-#{$key}</code>）</li>
+        <li>硬编码在 JS 字符串里的类名（如 <code>querySelector('.hzq-autocomplete-suggestion__list')</code>）</li>
+      </ul>
+    </div>
+    <p>
+      <code>packages.json</code> 版本号同步改为 <code>1.0.0</code> —— API 已有破坏性变更，
+      沿用 <code>2.15.x</code> 会让人误以为可以无缝替换原版。
+    </p>
+
+    <h2>二、新增能力</h2>
 
     <h3>AmountInput 金额输入<span class="tag-new">新增组件</span></h3>
     <p>
@@ -269,6 +302,24 @@
       适合「表单很多、结构大同小异」的增删改查页面。详见 <a href="#/zh-CN/component/form-builder">FormBuilder 文档</a>。
     </p>
 
+    <h3>SvgIcon 业务图标<span class="tag-new">新增组件</span></h3>
+    <p>
+      用于接入业务方自己的 SVG 图标，与系统内置的 iconfont 图标命名空间互相隔离。
+      采用 <strong>svg-sprite</strong> 方案：使用方的 <code>svg-sprite-loader</code> 把 SVG 打成
+      <code>&lt;symbol id="icon-[name]"&gt;</code>，组件用 <code>&lt;use&gt;</code> 引用，
+      现有构建配置无需改造，也不会让每个图标内联一份 <code>&lt;path&gt;</code> 撑大 DOM。
+    </p>
+    <pre><code>import { registerSvgIcons } from 'hzq-ui/packages/svg-icon';
+
+// 前缀必填，且不能是 el / hzq
+registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
+// 结果：crm-base-arrow、crm-base-book</code></pre>
+    <p>
+      也可以直接在初始化时传入：<code>Vue.use(HZQUI, { svgIcons: { prefix: 'crm', icons } })</code>。
+      注册时校验前缀合法性，同名图标重复注册会抛错（传 <code>{ silent: true }</code> 则只告警并跳过）。
+    </p>
+    <p>使用：<code>&lt;hzq-svg-icon name="crm-base-arrow" size="24px" /&gt;</code>，<code>size</code> 默认 <code>1em</code> 跟随字号。</p>
+
     <h3>$dialog 命令式弹窗<span class="tag-new">新增 API</span></h3>
     <p>
       新增 <code>Vue.prototype.$dialog(options, renderFn?)</code>，用于替代原先的 <code>$msgbox</code> / <code>$alert</code> / <code>$confirm</code>。
@@ -288,7 +339,7 @@
       返回的实例代理提供 <code>visible</code>、<code>loading</code>、<code>close()</code>。
     </p>
 
-    <h2>二、组件行为变更</h2>
+    <h2>三、组件行为变更</h2>
 
     <h3>Dialog 对话框<span class="tag-change">默认行为变更</span></h3>
     <div class="breaking">
@@ -351,7 +402,7 @@
       <li><strong>注意：</strong>若代码读取这些 prop 的默认值（如 <code>define-back-color</code>、<code>void-color</code>），现在拿到的是 <code>var(...)</code> 字符串而非色值。</li>
     </ul>
 
-    <h2>三、主题与尺寸体系</h2>
+    <h2>四、主题与尺寸体系</h2>
 
     <h3>主题 token 化<span class="tag-change">结构性变更</span></h3>
     <p>
@@ -396,7 +447,31 @@ resetTheme();                        // 撤销行内 token，交还编译期主�
       依赖精确像素的旧页面需要复核。
     </div>
 
-    <h2>四、工具函数</h2>
+    <h3>全局字体<span class="tag-change">结构性变更</span></h3>
+    <p>
+      字体族统一改为 <strong>Noto Sans SC</strong>，定义在 <code>common/var.scss</code> 的
+      <code>$--font-family</code>，改这一处即可整体换字体：
+    </p>
+    <pre><code>$--font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
+  Helvetica, Arial, sans-serif !default;</code></pre>
+    <p>
+      生效范围是 <code>body</code> 与 <code>button</code> / <code>input</code> /
+      <code>select</code> / <code>textarea</code> 四个原生表单控件 —— 这几类元素不继承
+      <code>body</code> 的字体，必须显式声明。
+    </p>
+    <div class="breaking">
+      <strong>字体文件不在库内加载。</strong><code>@font-face</code> 由使用方的宿主环境提供
+      （main-app 与 crmx-web 都已在入口样式里引入 Noto Sans SC 变量字体），
+      组件库只声明字体栈，避免重复下载。若在未引入该字体的页面单独使用，会回退到
+      <code>PingFang SC</code> / <code>Microsoft YaHei</code> 等系统字体。
+    </div>
+    <p>
+      另外修正了 <code>statistic</code> 的货币/数字容器：原来写死
+      <code>font-family: Sans-serif</code> 会绕开全局字体，现改为 <code>inherit</code>。
+    </p>
+
+    <h2>五、工具函数</h2>
 
     <h3>amount.js 金额处理<span class="tag-new">新增</span></h3>
     <p>与 Vue 无关的纯函数模块，可脱离组件单独使用（如表格展示、导出）。</p>
@@ -409,7 +484,7 @@ resetTheme();                        // 撤销行内 token，交还编译期主�
       <tr><td><code>normalizeAmount</code></td><td>失焦用：补齐小数位并硬收敛</td></tr>
     </table>
 
-    <h2>五、导入方式变化</h2>
+    <h2>六、导入方式变化</h2>
     <ul>
       <li><strong>新增</strong>：<code>AmountInput</code>（<code>ElAmountInput</code>）、<code>FormBuilder</code>（<code>ElFormBuilder</code>）、<code>Vue.prototype.$dialog</code>。</li>
       <li><strong>移除</strong>：<code>MessageBox</code> 及其四个原型方法。</li>

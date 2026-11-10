@@ -31,11 +31,15 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
     },
     methods: {
       handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
+        this.$dialog({
+          title: '提示',
+          type: 'confirm',
+          content: '确认关闭？',
+          confirm: instance => {
+            instance.close();
             done();
-          })
-          .catch(_ => {});
+          }
+        });
       }
     }
   };

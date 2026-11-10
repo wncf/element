@@ -26,7 +26,6 @@
       "guide": "指南",
       "components": "组件",
       "theme": "主题",
-      "resource": "资源",
       "changes": "改造记录"
     },
     "nav": {
@@ -60,7 +59,6 @@
       "guide": "Guide",
       "components": "Component",
       "theme": "Theme",
-      "resource": "Resource",
       "changes": "Changes"
     },
     "nav": {
@@ -94,7 +92,6 @@
       "guide": "Guía",
       "components": "Componentes",
       "theme": "Theme",
-      "resource": "Recursos",
       "changes": "Changes"
     },
     "nav": {
@@ -128,7 +125,6 @@
       "guide": "Guide",
       "components": "Composants",
       "theme": "Theme",
-      "resource": "Ressources",
       "changes": "Changes"
     },
     "nav": {

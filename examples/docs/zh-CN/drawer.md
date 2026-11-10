@@ -38,11 +38,15 @@
     },
     methods: {
       handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
+        this.$dialog({
+          title: '提示',
+          type: 'confirm',
+          content: '确认关闭？',
+          confirm: instance => {
+            instance.close();
             done();
-          })
-          .catch(_ => {});
+          }
+        });
       }
     }
   };
@@ -172,8 +176,11 @@ export default {
       if (this.loading) {
         return;
       }
-      this.$confirm('确定要提交表单吗？')
-        .then(_ => {
+      this.$dialog({
+        title: '提示',
+        type: 'confirm',
+        content: '确定要提交表单吗？',
+        confirm: () => {
           this.loading = true;
           this.timer = setTimeout(() => {
             done();
@@ -182,8 +189,8 @@ export default {
               this.loading = false;
             }, 400);
           }, 2000);
-        })
-        .catch(_ => {});
+        }
+      });
     },
     cancelForm() {
       this.loading = false;
@@ -234,11 +241,15 @@ export default {
     },
     methods: {
       handleClose(done) {
-        this.$confirm('还有未保存的工作哦确定关闭吗？')
-          .then(_ => {
+        this.$dialog({
+          title: '提示',
+          type: 'confirm',
+          content: '还有未保存的工作哦确定关闭吗？',
+          confirm: instance => {
+            instance.close();
             done();
-          })
-          .catch(_ => {});
+          }
+        });
       }
     }
   };

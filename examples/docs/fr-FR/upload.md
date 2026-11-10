@@ -37,7 +37,15 @@ Permet d'uploader des fichiers en cliquant ou en les déplaçant sur le composan
         this.$message.warning(`La limite est 3, vous avez choisi ${files.length} fichiers, soit ${files.length + fileList.length} au total.`);
       },
       beforeRemove(file, fileList) {
-        return this.$confirm(`Supprimer le transfert de ${ file.name } ?`);
+        return new Promise((resolve, reject) => {
+          this.$dialog({
+            title: 'Prompt',
+            type: 'confirm',
+            content: `Supprimer le transfert de ${ file.name } ?`,
+            confirm: resolve,
+            cancel: reject
+          });
+        });
       }
     }
   }

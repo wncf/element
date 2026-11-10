@@ -38,11 +38,15 @@ Callout a temporary drawer, from multiple direction
     },
     methods: {
       handleClose(done) {
-        this.$confirm('Are you sure you want to close this?')
-          .then(_ => {
+        this.$dialog({
+          title: 'Prompt',
+          type: 'confirm',
+          content: 'Are you sure you want to close this?',
+          confirm: instance => {
+            instance.close();
             done();
-          })
-          .catch(_ => {});
+          }
+        });
       }
     }
   };
@@ -171,8 +175,11 @@ export default {
       if (this.loading) {
         return;
       }
-      this.$confirm('Do you want to submit?')
-        .then(_ => {
+      this.$dialog({
+        title: 'Prompt',
+        type: 'confirm',
+        content: 'Do you want to submit?',
+        confirm: () => {
           this.loading = true;
           this.timer = setTimeout(() => {
             done();
@@ -181,8 +188,8 @@ export default {
               this.loading = false;
             }, 400);
           }, 2000);
-        })
-        .catch(_ => {});
+        }
+      });
     },
     cancelForm() {
       this.loading = false;
@@ -232,11 +239,15 @@ You can also have multiple layer of `Drawer` just like `Dialog`.
     },
     methods: {
       handleClose(done) {
-        this.$confirm('You still have unsaved data, proceed?')
-          .then(_ => {
+        this.$dialog({
+          title: 'Prompt',
+          type: 'confirm',
+          content: 'You still have unsaved data, proceed?',
+          confirm: instance => {
+            instance.close();
             done();
-          })
-          .catch(_ => {});
+          }
+        });
       }
     }
   };

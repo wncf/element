@@ -103,7 +103,9 @@ export default {
     return {
       visible: false,
       loading: false,
-      instanceProxy: null
+      instanceProxy: null,
+      // 程序化关闭时置真，用来跳过 before-close 里的 cancel 回调
+      skipBeforeClose: false
     };
   },
 
@@ -178,7 +180,13 @@ export default {
     },
 
     closeDialog() {
+      // 程序化关闭（instance.close() / 点确定）不应再走 before-close，
+      // 否则会反过来触发一次 cancel 回调，把"确定"当成"取消"
+      this.skipBeforeClose = true;
       this.visible = false;
+      this.$nextTick(() => {
+        this.skipBeforeClose = false;
+      });
     },
 
     invokeCancel() {
@@ -193,6 +201,11 @@ export default {
     },
 
     handleBeforeClose(done) {
+      // 程序化关闭时直接放行，不触发 cancel
+      if (this.skipBeforeClose) {
+        done();
+        return;
+      }
       this.invokeCancel();
       done();
     },

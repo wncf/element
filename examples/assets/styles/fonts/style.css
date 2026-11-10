@@ -37,3 +37,10 @@
   content: "\e903";
 }
 
+
+/* 与宿主环境使用同一份字体资源，保证组件库与业务页面字形一致 */
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-display: swap;
+  src: url('https://storage.lyfz.net/static/font/NotoSansSC-VariableFont_wght.ttf') format('truetype');
+}

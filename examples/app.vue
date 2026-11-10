@@ -64,13 +64,17 @@
         if (cnHref || preferGithub) return;
         setTimeout(() => {
           if (this.lang !== 'zh-CN') return;
-          this.$confirm('建议大陆用户访问部署在国内的站点，是否跳转？', '提示')
-            .then(() => {
+          this.$dialog({
+            title: '提示',
+            type: 'confirm',
+            content: '建议大陆用户访问部署在国内的站点，是否跳转？',
+            confirm: () => {
               location.replace('https://element.eleme.cn');
-            })
-            .catch(() => {
+            },
+            cancel: () => {
               localStorage.setItem('PREFER_GITHUB', 'true');
-            });
+            }
+          });
         }, 1000);
       }
     },

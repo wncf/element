@@ -139,6 +139,36 @@ describe('$dialog', () => {
     }, 100);
   });
 
+  it('closing programmatically does not fire cancel', done => {
+    let cancelled = false;
+    let instanceRef = null;
+
+    dialog({
+      title: 'confirm',
+      type: 'confirm',
+      content: 'programmatic close',
+      cancel: () => {
+        cancelled = true;
+      },
+      confirm: instance => {
+        instanceRef = instance;
+        instance.close();
+      }
+    });
+
+    setTimeout(() => {
+      document.querySelector('.hzq-dialog__footer .hzq-button--primary').click();
+
+      setTimeout(() => {
+        // 点确定后：回调拿到了代理实例、弹窗消失、且不误触发 cancel
+        expect(instanceRef).to.exist;
+        expect(cancelled).to.be.false;
+        expect(document.querySelector('.hzq-dialog__wrapper')).to.not.exist;
+        done();
+      }, 400);
+    }, 100);
+  });
+
   it('cancel callback on header close', done => {
     let cancelled = false;
 

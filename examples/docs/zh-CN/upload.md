@@ -37,7 +37,15 @@
         this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
       },
       beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
+        return new Promise((resolve, reject) => {
+          this.$dialog({
+            title: '提示',
+            type: 'confirm',
+            content: `确定移除 ${ file.name }？`,
+            confirm: resolve,
+            cancel: reject
+          });
+        });
       }
     }
   }

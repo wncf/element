@@ -22,11 +22,11 @@ Dans main.js:
 
 ```javascript
 import Vue from 'vue';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import HzqUI from 'hzq-ui';
+import 'hzq-ui/lib/theme-chalk/index.css';
 import App from './App.vue';
 
-Vue.use(ElementUI);
+Vue.use(HzqUI);
 
 new Vue({
   el: '#app',
@@ -55,7 +55,7 @@ Puis éditez .babelrc:
     [
       "component",
       {
-        "libraryName": "element-ui",
+        "libraryName": "hzq-ui",
         "styleLibraryName": "theme-chalk"
       }
     ]
@@ -67,7 +67,7 @@ Ensuite, si vous n'avez besoin que de Button et Select, éditez main.js comme su
 
 ```javascript
 import Vue from 'vue';
-import { Button, Select } from 'element-ui';
+import { Button, Select } from 'hzq-ui';
 import App from './App.vue';
 
 Vue.component(Button.name, Button);
@@ -162,10 +162,9 @@ import {
   PageHeader,
   CascaderPanel,
   Loading,
-  MessageBox,
   Message,
   Notification
-} from 'element-ui';
+} from 'hzq-ui';
 
 Vue.use(Pagination);
 Vue.use(Dialog);
@@ -244,10 +243,6 @@ Vue.use(CascaderPanel);
 Vue.use(Loading.directive);
 
 Vue.prototype.$loading = Loading.service;
-Vue.prototype.$msgbox = MessageBox;
-Vue.prototype.$alert = MessageBox.alert;
-Vue.prototype.$confirm = MessageBox.confirm;
-Vue.prototype.$prompt = MessageBox.prompt;
 Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
 ```
@@ -260,15 +255,15 @@ Import total d'Element：
 
 ```js
 import Vue from 'vue';
-import Element from 'element-ui';
-Vue.use(Element, { size: 'small', zIndex: 3000 });
+import HzqUI from 'hzq-ui';
+Vue.use(HzqUI, { size: 'small', zIndex: 3000 });
 ```
 
 Import partiel d'Element：
 
 ```js
 import Vue from 'vue';
-import { Button } from 'element-ui';
+import { Button } from 'hzq-ui';
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 Vue.use(Button);

@@ -32,11 +32,15 @@ Dialog pops up a dialog box, and it's quite customizable.
     },
     methods: {
       handleClose(done) {
-        this.$confirm('Are you sure to close this dialog?')
-          .then(_ => {
+        this.$dialog({
+          title: 'Prompt',
+          type: 'confirm',
+          content: 'Are you sure to close this dialog?',
+          confirm: instance => {
+            instance.close();
             done();
-          })
-          .catch(_ => {});
+          }
+        });
       }
     }
   };
