@@ -78,7 +78,11 @@ const webpackConfig = {
         use: [
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            // 显式指定 dart-sass，不依赖 sass-loader 对 node-sass 的默认回退
+            options: { implementation: require('sass') }
+          }
         ]
       },
       {

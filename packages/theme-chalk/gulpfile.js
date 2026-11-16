@@ -1,7 +1,9 @@
 'use strict';
 
 const { series, src, dest } = require('gulp');
-const sass = require('gulp-sass');
+// 用 dart-sass 而非 node-sass：纯 JS 实现，不依赖 Node ABI，
+// 换 Node 版本或换机器都不用重新编译原生模块
+const sass = require('gulp-sass')(require('sass'));
 const autoprefixer = require('gulp-autoprefixer');
 const cssmin = require('gulp-cssmin');
 
