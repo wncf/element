@@ -288,6 +288,15 @@
               "title": "Drawer 抽屉"
             }
           ]
+        },
+        {
+          "groupName": "开发指南",
+          "list": [
+            {
+              "path": "/popup-guide",
+              "title": "浮层层级管理"
+            }
+          ]
         }
       ]
     }
