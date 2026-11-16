@@ -1,28 +1,43 @@
 @import "../common/var";
+@import "../mixins/mixins";
 
+// 与日期表一致：圆角方块 + 浅色悬停底，面板尺寸不变
 @include b(month-table) {
-  font-size: 12px;
+  // 与日期表保持一致的 14px
+  font-size: 14px;
   margin: -1px;
   border-collapse: collapse;
 
   td {
     text-align: center;
-    padding: 8px 0px;
+    padding: 6px 0;
     cursor: pointer;
+
     & div {
-      height: 48px;
-      padding: 6px 0;
+      height: 34px;
+      padding: 2px 0;
       box-sizing: border-box;
     }
-    &.today {
-      .cell {
-        color: $--color-primary;
-        font-weight: bold;
+
+    // 月份表是 4 列，面板内容区 224px，每列需在 56px 以内
+    .cell {
+      width: 52px;
+      height: 30px;
+      display: block;
+      line-height: 30px;
+      color: $--datepicker-font-color;
+      margin: 0 auto;
+      border-radius: 3px;
+      transition: background-color .2s ease-in-out, color .2s ease-in-out;
+
+      &:hover {
+        background-color: $--color-primary-light-9;
       }
-      &.start-date .cell,
-      &.end-date .cell {
-        color: $--color-white;
-      }
+    }
+
+    &.today .cell {
+      color: $--color-primary;
+      font-weight: bold;
     }
 
     &.disabled .cell {
@@ -31,20 +46,8 @@
       color: $--color-text-placeholder;
 
       &:hover {
+        background-color: $--background-color-base;
         color: $--color-text-placeholder;
-      }
-    }
-
-    .cell {
-      width: 60px;
-      height: 36px;
-      display: block;
-      line-height: 36px;
-      color: $--datepicker-font-color;
-      margin: 0 auto;
-      border-radius: 18px;
-      &:hover {
-        color: $--datepicker-hover-font-color;
       }
     }
 
@@ -54,6 +57,7 @@
         background-color: $--datepicker-inrange-hover-background-color;
       }
     }
+
     &.start-date div,
     &.end-date div {
       color: $--color-white;
@@ -63,19 +67,24 @@
     &.end-date .cell {
       color: $--color-white;
       background-color: $--datepicker-active-color;
+
+      &:hover {
+        background-color: $--datepicker-active-color;
+      }
     }
 
+    // 起止端只保留外侧圆角，中间的平铺条才能连成一片
     &.start-date div {
-      border-top-left-radius: 24px;
-      border-bottom-left-radius: 24px;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
     }
 
     &.end-date div {
-      border-top-right-radius: 24px;
-      border-bottom-right-radius: 24px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
     }
 
-    &.current:not(.disabled) .cell {
+    &.current:not(.disabled):not(.start-date):not(.end-date) .cell {
       color: $--datepicker-active-color;
     }
   }

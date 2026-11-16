@@ -2,15 +2,16 @@
 @import "../mixins/mixins";
 @import "./picker-panel.scss";
 
+// 日期网格 7 × 32 = 224，加左右各 15 的 content 外边距
 @include b(date-picker) {
-  width: 322px;
+  width: 256px;
 
   &.has-sidebar.has-time {
-    width: 434px;
+    width: 368px;
   }
 
   &.has-sidebar {
-    width: 438px;
+    width: 372px;
   }
 
   &.has-time .hzq-picker-panel__body-wrapper {
@@ -18,7 +19,9 @@
   }
 
   .hzq-picker-panel__content {
-    width: 292px;
+    width: 224px;
+    // 标题与日历之间不留空隙：面板高度主要由这块空白撑起来
+    margin: 8px 15px 15px;
   }
 
   table {
@@ -36,19 +39,22 @@
     position: relative;
     border-bottom: 1px solid $--datepicker-inner-border-color;
     font-size: 12px;
-    padding: 8px 5px 5px 5px;
+    // 时间输入区上下留白收紧，避免面板顶部过高
+    padding: 4px 5px 4px;
     display: table;
     width: 100%;
     box-sizing: border-box;
   }
 
+  // 参考 view-design：标题行上下留白收紧，不加分隔线
   @include e(header) {
-    margin: 12px;
+    margin: 8px 12px 0;
+    padding-bottom: 0;
     text-align: center;
 
     @include m(bordered) {
       margin-bottom: 0;
-      padding-bottom: 12px;
+      padding-bottom: 8px;
       border-bottom: solid 1px $--border-color-lighter;
 
       & + .hzq-picker-panel__content {
@@ -58,13 +64,14 @@
   }
 
   @include e(header-label) {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     padding: 0 5px;
-    line-height: 22px;
+    line-height: 24px;
     text-align: center;
     cursor: pointer;
-    color: $--color-text-regular;
+    color: $--datepicker-header-font-color;
+    transition: color .2s ease-in-out;
 
     &:hover {
       color: $--datepicker-hover-font-color;

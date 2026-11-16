@@ -7,21 +7,21 @@
   @include e(content) {
     position: relative;
     text-align: center;
-    padding: 10px;
+    padding: 6px;
   }
 
   @include e(cell) {
     box-sizing: border-box;
     margin: 0;
-    padding: 4px 7px 7px;
+    padding: 2px 6px 6px;
     width: 50%;
     display: inline-block;
   }
 
   @include e(header) {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   @include e(body) {

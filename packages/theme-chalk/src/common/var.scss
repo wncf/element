@@ -549,7 +549,6 @@ $--cascader-tag-background: var(--hzq-fill-color);
 
 /* Group
 -------------------------- */
-$--group-option-flex: 0 0 (1/5) * 100% !default;
 $--group-option-offset-bottom: 8px !default;
 $--group-option-fill-hover: var(--hzq-fill-color-light) !default;
 $--group-title-color: $--color-black !default;
@@ -922,6 +921,8 @@ $--datepicker-font-color: $--color-text-regular !default;
 $--datepicker-off-font-color: $--color-text-placeholder !default;
 /// color||Color|0
 $--datepicker-header-font-color: $--color-text-regular !default;
+/// color||Color|0
+$--datepicker-week-font-color: $--color-text-placeholder !default;
 $--datepicker-icon-color: $--color-text-primary !default;
 $--datepicker-border-color: $--disabled-border-base !default;
 $--datepicker-inner-border-color: var(--hzq-border-color-light) !default;
@@ -969,13 +970,13 @@ $--collapse-border-color: $--border-color-lighter !default;
 /// height||Other|4
 $--collapse-header-height: 40px !default;
 /// color||Color|0
-$--collapse-header-background-color: var(--hzq-bg-color) !default;
+$--collapse-header-background-color: transparent !default;
 /// color||Color|0
 $--collapse-header-font-color: $--color-text-primary !default;
 /// fontSize||Font|1
 $--collapse-header-font-size: 13px !default;
 /// color||Color|0
-$--collapse-content-background-color: var(--hzq-bg-color) !default;
+$--collapse-content-background-color: transparent !default;
 /// fontSize||Font|1
 $--collapse-content-font-size: 13px !default;
 /// color||Color|0

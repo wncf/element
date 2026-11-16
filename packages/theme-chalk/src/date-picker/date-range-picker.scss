@@ -1,10 +1,11 @@
 @import "../common/var";
 
+// 每月 224 网格 + 左右各 15 的内边距 = 254，两月共计 508
 @include b(date-range-picker) {
-  width: 520px;
+  width: 508px;
 
   &.has-sidebar {
-    width: 630px;
+    width: 618px;
   }
 
   table {
@@ -13,17 +14,18 @@
   }
 
   .hzq-picker-panel__body {
-    min-width: 480px;
+    min-width: 488px;
   }
 
   .hzq-picker-panel__content {
     margin: 0;
   }
 
+  // 与单日期面板保持一致：不加分隔线
   @include e(header) {
     position: relative;
     text-align: center;
-    height: 24px;
+    height: 28px;
 
     [class*=arrow-left] {
       float: left;
@@ -36,6 +38,7 @@
     div {
       font-size: 14px;
       font-weight: 500;
+      line-height: 24px;
       margin-right: 50px;
     }
   }
@@ -45,7 +48,8 @@
     width: 50%;
     box-sizing: border-box;
     margin: 0;
-    padding: 10px;
+    // 内边距与单日期面板一致（左右 15、上 8、下 15），两边的日历才不会显得贴边
+    padding: 8px 15px 15px;
 
     @include when(left) {
       border-right: 1px solid $--datepicker-inner-border-color;

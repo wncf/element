@@ -1,8 +1,11 @@
 @import "../common/var";
 @import "../mixins/mixins";
 
+// 视觉参考 view-design：方形圆角单元格、悬停浅色底、范围条平铺无缝、
+// 今天用右上角小圆点标识。面板宽度与单元格数量保持不变。
 @include b(date-table) {
-  font-size: 12px;
+  // 日期数字与星期都按 14px 展示，与面板标题保持一致
+  font-size: 14px;
   user-select: none;
 
   @include when(week-mode) {
@@ -10,19 +13,6 @@
       &:hover {
         div {
           background-color: $--datepicker-inrange-background-color;
-        }
-        td.available:hover {
-          color: $--datepicker-font-color;
-        }
-        td:first-child div {
-          margin-left: 4px;
-          border-top-left-radius: 13px;
-          border-bottom-left-radius: 13px;
-        }
-        td:last-child div {
-          margin-right: 4px;
-          border-top-right-radius: 13px;
-          border-bottom-right-radius: 13px;
         }
       }
 
@@ -33,51 +23,68 @@
   }
 
   td {
-    width: 28px;
-    height: 26px;
-    padding: 2px 0;
+    width: 32px;
+    height: 32px;
+    padding: 0;
     box-sizing: border-box;
     text-align: center;
     cursor: pointer;
     position: relative;
 
+    // 范围条与本格同高，靠 background-clip 让底色上下各内缩 2px，
+    // 相邻单元格的底色连起来才是一条连续的色带
     & div {
-      height: 26px;
+      height: 32px;
       padding: 2px 0;
       box-sizing: border-box;
+      background-clip: content-box;
+      transition: background-color .2s ease-in-out;
     }
 
     & span {
-      width: 22px;
-      height: 22px;
+      width: 28px;
+      height: 28px;
       display: block;
-      margin: 0 auto;
-      line-height: 22px;
+      line-height: 28px;
       position: absolute;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
-      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 3px;
+      transition: background-color .2s ease-in-out;
     }
 
     &.next-month,
     &.prev-month {
       color: $--datepicker-off-font-color;
-    }
 
-    &.today {
-      position: relative;
-      span {
-        color: $--color-primary;
-        font-weight: bold;
-      }
-      &.start-date span,
-      &.end-date span {
-        color: $--color-white;
+      // 非本月日期只变色，不响应悬停底色
+      &:hover span {
+        background-color: transparent;
       }
     }
 
-    &.available:hover {
-      color: $--datepicker-hover-font-color;
+    &.available:hover span {
+      background-color: $--color-primary-light-9;
+    }
+
+    // 今天：右上角小圆点，不再加粗变色
+    &.today span::after {
+      content: "";
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: $--datepicker-active-color;
+    }
+
+    // 选中态下圆点改成白色，避免和蓝色底撞色
+    &.today.current span::after,
+    &.today.start-date span::after,
+    &.today.end-date span::after {
+      background-color: $--color-white;
     }
 
     &.in-range div {
@@ -91,6 +98,7 @@
       color: $--color-white;
       background-color: $--datepicker-active-color;
     }
+
     &.start-date div,
     &.end-date div {
       color: $--color-white;
@@ -101,18 +109,6 @@
       background-color: $--datepicker-active-color;
     }
 
-    &.start-date div {
-      margin-left: 4px;
-      border-top-left-radius: 13px;
-      border-bottom-left-radius: 13px;
-    }
-
-    &.end-date div {
-      margin-right: 4px;
-      border-top-right-radius: 13px;
-      border-bottom-right-radius: 13px;
-    }
-
     &.disabled div {
       background-color: $--background-color-base;
       opacity: 1;
@@ -121,10 +117,7 @@
     }
 
     &.selected div {
-      margin-left: 4px;
-      margin-right: 4px;
       background-color: $--datepicker-inrange-background-color;
-      border-radius: 13px;
       &:hover {
         background-color: $--datepicker-inrange-hover-background-color;
       }
@@ -133,7 +126,6 @@
     &.selected span {
       background-color: $--datepicker-active-color;
       color: $--color-white;
-      border-radius: 13px;
     }
 
     &.week {
@@ -143,8 +135,9 @@
   }
 
   th {
-    padding: 3px;
-    color: $--datepicker-header-font-color;
+    height: 24px;
+    padding: 0;
+    color: $--datepicker-week-font-color;
     font-weight: 400;
     border-bottom: solid 1px $--border-color-lighter;
   }

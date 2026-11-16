@@ -1,7 +1,10 @@
 @import "../common/var";
+@import "../mixins/mixins";
 
+// 与日期表、月份表保持一致：圆角方块 + 浅色悬停底
 @include b(year-table) {
-  font-size: 12px;
+  // 与日期表、月份表保持一致的 14px
+  font-size: 14px;
   margin: -1px;
   border-collapse: collapse;
 
@@ -11,14 +14,28 @@
 
   td {
     text-align: center;
-    padding: 20px 3px;
+    padding: 16px 3px;
     cursor: pointer;
 
-    &.today {
-      .cell {
-        color: $--color-primary;
-        font-weight: bold;
+    // 年表是 4 列，面板内容区 224px，每列留 56px 以内才不会溢出
+    .cell {
+      width: 52px;
+      height: 30px;
+      display: block;
+      line-height: 30px;
+      color: $--datepicker-font-color;
+      margin: 0 auto;
+      border-radius: 3px;
+      transition: background-color .2s ease-in-out, color .2s ease-in-out;
+
+      &:hover {
+        background-color: $--color-primary-light-9;
       }
+    }
+
+    &.today .cell {
+      color: $--color-primary;
+      font-weight: bold;
     }
 
     &.disabled .cell {
@@ -27,20 +44,8 @@
       color: $--color-text-placeholder;
 
       &:hover {
+        background-color: $--background-color-base;
         color: $--color-text-placeholder;
-      }
-    }
-
-    .cell {
-      width: 48px;
-      height: 32px;
-      display: block;
-      line-height: 32px;
-      color: $--datepicker-font-color;
-      margin: 0 auto;
-
-      &:hover {
-        color: $--datepicker-hover-font-color;
       }
     }
 
