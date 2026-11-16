@@ -126,6 +126,7 @@
 
 ```html
 <hzq-button type="primary" :loading="true">加载中</hzq-button>
+<hzq-button type="text" :loading="true">加载中</hzq-button>
 ```
 :::
 
