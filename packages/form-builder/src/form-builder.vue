@@ -44,6 +44,7 @@
           :field="field"
           :model="formModel"
           :form-rules="rules"
+          :field-resolver="fieldResolver"
           @field-change="handleFieldChange"
         >
           <!--
@@ -159,6 +160,18 @@ export default {
     rules: {
       type: Object,
       default: () => ({})
+    },
+    /**
+     * 字段解析器：把 fieldType 这类语义类型翻译成组件。
+     *
+     *   (field) => ({ component, props, optionComponent }) | null
+     *
+     * 不传时只看 field.component；返回 null 表示不认识，该字段渲染成纯文本。
+     * 做成注入而不是全局注册：类型目录属于业务，且不同表单可以各用各的。
+     */
+    fieldResolver: {
+      type: Function,
+      default: null
     },
     // 一行几列。填了就按等分栅格排版，忽略字段上的 span
     columns: {

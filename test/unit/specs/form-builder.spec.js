@@ -8,7 +8,10 @@ import {
   normalizeFields,
   normalizeOptions,
   resolveOptionComponent,
-  resolveForwardedSlots
+  resolveForwardedSlots,
+  resolveFieldComponent,
+  mergeComponentProps,
+  createFormModel
 } from 'hzq-ui/src/utils/form-builder';
 
 const SELECT_OPTIONS = [
@@ -135,6 +138,119 @@ describe('FormBuilder', () => {
         { target: 'prefix', source: 'myPrefix' }
       ]);
       expect(resolveForwardedSlots()).to.deep.equal([]);
+    });
+
+    it('显式 component 优先于解析器', () => {
+      const resolver = () => ({ component: 'hzq-select' });
+      const result = resolveFieldComponent(
+        { component: 'hzq-input', fieldType: 'select' },
+        resolver
+      );
+
+      expect(result.component).to.equal('hzq-input');
+    });
+
+    it('没有 component 时交给解析器翻译 fieldType', () => {
+      const resolver = field => (
+        field.fieldType === 'textarea'
+          ? { component: 'hzq-input', props: { type: 'textarea' }, optionComponent: 'hzq-option' }
+          : null
+      );
+
+      const result = resolveFieldComponent({ fieldType: 'textarea' }, resolver);
+      expect(result).to.deep.equal({
+        component: 'hzq-input',
+        props: { type: 'textarea' },
+        optionComponent: 'hzq-option'
+      });
+
+      // 解析器不认识的类型返回 null，交由上层降级
+      expect(resolveFieldComponent({ fieldType: 'unknown' }, resolver)).to.equal(null);
+    });
+
+    it('解析器抛错时不向上冒泡', () => {
+      const resolver = () => { throw new Error('配置写错了'); };
+
+      expect(resolveFieldComponent({ fieldType: 'x' }, resolver)).to.equal(null);
+    });
+
+    it('没有解析器也不报错', () => {
+      expect(resolveFieldComponent({ fieldType: 'x' }, null)).to.equal(null);
+      expect(resolveFieldComponent({ fieldType: 'x' })).to.equal(null);
+    });
+
+    it('预设 props 被字段自己的 props 覆盖', () => {
+      expect(mergeComponentProps({ rows: 3, type: 'textarea' }, { rows: 5 }))
+        .to.deep.equal({ rows: 5, type: 'textarea' });
+      expect(mergeComponentProps(null, { a: 1 })).to.deep.equal({ a: 1 });
+      expect(mergeComponentProps({ a: 1 })).to.deep.equal({ a: 1 });
+    });
+
+    it('createFormModel 按字段生成初始值', () => {
+      const model = createFormModel([
+        { prop: 'name', component: 'hzq-input' },
+        { prop: 'remark', component: 'hzq-input' },
+        { prop: 'tags', component: 'hzq-checkbox-group' },
+        { prop: 'locked', component: 'hzq-switch' },
+        { prop: 'score', component: 'hzq-rate' }
+      ]);
+
+      expect(model).to.deep.equal({
+        name: '',
+        remark: '',
+        tags: [],
+        locked: false,
+        score: 0
+      });
+    });
+
+    it('createFormModel 支持 defaultValue 与函数形式', () => {
+      const model = createFormModel([
+        { prop: 'name', defaultValue: '张三' },
+        { prop: 'items', defaultValue: () => [] },
+        { prop: 'createdAt', defaultValue: () => new Date('2026-01-01') }
+      ]);
+
+      expect(model.name).to.equal('张三');
+      expect(model.items).to.deep.equal([]);
+      expect(model.createdAt.getTime()).to.equal(new Date('2026-01-01').getTime());
+    });
+
+    it('createFormModel 用解析器推断默认值', () => {
+      const resolver = field => (
+        field.fieldType === 'switch' ? { component: 'hzq-switch' } : null
+      );
+
+      const model = createFormModel(
+        [{ prop: 'online', fieldType: 'switch' }],
+        resolver
+      );
+
+      expect(model.online).to.be.false;
+    });
+
+    it('createFormModel 支持嵌套与数组路径，且跳过标题与分隔线', () => {
+      const model = createFormModel([
+        { type: 'title', label: '基本信息' },
+        { prop: 'user.name' },
+        { prop: 'list[0].id' },
+        { type: 'divider', label: '更多' }
+      ]);
+
+      expect(model).to.deep.equal({
+        user: { name: '' },
+        list: [{ id: '' }]
+      });
+      expect(Array.isArray(model.list)).to.be.true;
+    });
+
+    it('createFormModel 每次返回独立实例，数组不共享引用', () => {
+      const fields = [{ prop: 'tags', component: 'hzq-checkbox-group' }];
+      const a = createFormModel(fields);
+      const b = createFormModel(fields);
+
+      a.tags.push('x');
+      expect(b.tags).to.deep.equal([]);
     });
   });
 
@@ -319,6 +435,94 @@ describe('FormBuilder', () => {
       await waitImmediate();
 
       expect(vm.form.name).to.equal('王五');
+    });
+
+    it('fieldResolver 把 fieldType 翻译成组件', async() => {
+      vm = createBuilder(
+        '<hzq-form-builder v-model="form" :fields="fields" :field-resolver="resolveField" />',
+        () => ({
+          form: { remark: '' },
+          fields: [{ prop: 'remark', label: '备注', fieldType: 'textarea' }]
+        }),
+        {
+          resolveField: field => (
+            field.fieldType === 'textarea'
+              ? { component: 'hzq-input', props: { type: 'textarea', rows: 3 } }
+              : null
+          )
+        }
+      );
+      await waitImmediate();
+
+      const textarea = vm.$el.querySelector('textarea');
+      expect(textarea).to.exist;
+      expect(textarea.getAttribute('rows')).to.equal('3');
+    });
+
+    it('字段自己的 props 覆盖解析器的预设', async() => {
+      vm = createBuilder(
+        '<hzq-form-builder v-model="form" :fields="fields" :field-resolver="resolveField" />',
+        () => ({
+          form: { remark: '' },
+          fields: [{
+            prop: 'remark',
+            label: '备注',
+            fieldType: 'textarea',
+            props: { rows: 5 }
+          }]
+        }),
+        {
+          resolveField: () => ({ component: 'hzq-input', props: { type: 'textarea', rows: 3 } })
+        }
+      );
+      await waitImmediate();
+
+      expect(vm.$el.querySelector('textarea').getAttribute('rows')).to.equal('5');
+    });
+
+    it('解析器返回 null 时降级成纯文本，不影响其他字段', () => {
+      vm = createBuilder(
+        '<hzq-form-builder v-model="form" :fields="fields" :field-resolver="resolveField" />',
+        () => ({
+          form: { a: '值 A', b: '值 B' },
+          fields: [
+            { prop: 'a', label: 'A', fieldType: 'unknown' },
+            { prop: 'b', label: 'B', component: 'hzq-input' }
+          ]
+        }),
+        {
+          resolveField: () => null
+        }
+      );
+
+      const plain = vm.$el.querySelector('.hzq-form-builder__plain');
+      expect(plain).to.exist;
+      expect(plain.textContent.trim()).to.equal('值 A');
+      // 认识的字段照常渲染成输入框
+      expect(vm.$el.querySelector('input')).to.exist;
+    });
+
+    it('解析器可以指定选项子组件', async() => {
+      vm = createBuilder(
+        '<hzq-form-builder v-model="form" :fields="fields" :field-resolver="resolveField" />',
+        () => ({
+          form: { region: '' },
+          fields: [{
+            prop: 'region',
+            label: '区域',
+            fieldType: 'enum',
+            options: SELECT_OPTIONS
+          }]
+        }),
+        {
+          resolveField: () => ({ component: 'hzq-select', optionComponent: 'hzq-option' })
+        }
+      );
+      await waitImmediate();
+
+      const items = vm.$el.querySelectorAll('.hzq-select-dropdown__item');
+      expect(items).to.have.length(2);
+      expect(items[0].textContent.trim()).to.equal('区域一');
     });
 
     it('slot 整块接管字段', async() => {

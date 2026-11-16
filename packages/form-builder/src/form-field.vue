@@ -60,6 +60,8 @@ import {
   getValueByPath,
   resolveCondition,
   mergeFieldRules,
+  resolveFieldComponent,
+  mergeComponentProps,
   resolveOptionComponent,
   normalizeOptions,
   resolveForwardedSlots
@@ -85,6 +87,11 @@ export default {
     formRules: {
       type: Object,
       default: () => ({})
+    },
+    // 字段解析器：把 fieldType 这类语义类型翻译成 { component, props, optionComponent }
+    fieldResolver: {
+      type: Function,
+      default: null
     }
   },
 
@@ -99,12 +106,19 @@ export default {
       }
     },
 
+    // 显式 component 优先，其次交给 fieldResolver 解析，都没有返回空串（渲染成纯文本）
+    resolution() {
+      return resolveFieldComponent(this.field, this.fieldResolver);
+    },
+
     resolvedComponent() {
-      return this.field.component || '';
+      return this.resolution ? this.resolution.component : '';
     },
 
     optionComponent() {
-      return resolveOptionComponent(this.field);
+      // 解析器显式给了选项子组件就用它，否则按组件名查表
+      return (this.resolution && this.resolution.optionComponent) ||
+        resolveOptionComponent(this.field, this.resolvedComponent);
     },
 
     normalizedOptions() {
@@ -136,8 +150,10 @@ export default {
     },
 
     // disabled 支持函数：随 model 变化实时求值，比在配置里手写 :disabled 更省事
+    // props 以解析器返回的预设为底，字段自己的 props 覆盖它
     componentProps() {
-      const props = Object.assign({}, this.field.props);
+      const presetProps = this.resolution ? this.resolution.props : null;
+      const props = Object.assign({}, mergeComponentProps(presetProps, this.field.props));
       const disabled = resolveCondition(this.field.disabled, this.model);
 
       if (disabled || props.disabled) props.disabled = true;
