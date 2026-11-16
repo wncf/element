@@ -116,15 +116,26 @@
           view-class="hzq-select-dropdown__list"
           ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
-          v-show="options.length > 0 && !loading">
+          v-show="optionInstances.length > 0 && !loading">
           <hzq-option
             :value="query"
             created
             v-if="showNewOption">
           </hzq-option>
-          <slot></slot>
+          <!-- 传了非空 options 就由数据渲染，忽略默认插槽 -->
+          <template v-if="hasOptions">
+            <hzq-option
+              v-for="(option, index) in options"
+              :key="getOptionKey(option, index)"
+              :value="option.value"
+              :label="option.label"
+              :disabled="!!option.disabled">
+              <render-option v-if="option.render" :render="option.render" :option="option" />
+            </hzq-option>
+          </template>
+          <slot v-else></slot>
         </hzq-scrollbar>
-        <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
+        <template v-if="emptyText && (!allowCreate || loading || (allowCreate && optionInstances.length === 0 ))">
           <slot name="empty" v-if="$slots.empty"></slot>
           <p class="hzq-select-dropdown__empty" v-else>
             {{ emptyText }}
@@ -142,6 +153,7 @@
   import HzqInput from 'hzq-ui/packages/input';
   import HzqSelectMenu from './select-dropdown.vue';
   import HzqOption from './option.vue';
+  import RenderOption from './render-option.vue';
   import HzqTag from 'hzq-ui/packages/tag';
   import HzqScrollbar from 'hzq-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
@@ -207,11 +219,11 @@
         if (this.loading) {
           return this.loadingText || this.t('el.select.loading');
         } else {
-          if (this.remote && this.query === '' && this.options.length === 0) return false;
-          if (this.filterable && this.query && this.options.length > 0 && this.filteredOptionsCount === 0) {
+          if (this.remote && this.query === '' && this.optionInstances.length === 0) return false;
+          if (this.filterable && this.query && this.optionInstances.length > 0 && this.filteredOptionsCount === 0) {
             return this.noMatchText || this.t('el.select.noMatch');
           }
-          if (this.options.length === 0) {
+          if (this.optionInstances.length === 0) {
             return this.noDataText || this.t('el.select.noData');
           }
         }
@@ -219,7 +231,7 @@
       },
 
       showNewOption() {
-        let hasExistingOption = this.options.filter(option => !option.created)
+        let hasExistingOption = this.optionInstances.filter(option => !option.created)
           .some(option => option.currentLabel === this.query);
         return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
       },
@@ -240,6 +252,11 @@
 
       propPlaceholder() {
         return typeof this.placeholder !== 'undefined' ? this.placeholder : this.t('el.select.placeholder');
+      },
+
+      // 传了非空 options 就由数据渲染选项，忽略默认插槽
+      hasOptions() {
+        return Array.isArray(this.options) && this.options.length > 0;
       }
     },
 
@@ -248,7 +265,8 @@
       HzqSelectMenu,
       HzqOption,
       HzqTag,
-      HzqScrollbar
+      HzqScrollbar,
+      RenderOption
     },
 
     directives: { Clickoutside },
@@ -305,12 +323,22 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      /**
+       * 选项数据。传入非空数组时由本组件渲染选项，忽略默认插槽：
+       *   [{ label, value, disabled, key?, render?: (h, option) => VNode }]
+       * render 只影响下拉列表中的显示，筛选与已选值展示仍使用 label。
+       */
+      options: {
+        type: Array,
+        default: () => []
       }
     },
 
     data() {
       return {
-        options: [],
+        // 内部收集的 HzqOption 实例（插槽与 options 两种来源都会注册到这里）
+        optionInstances: [],
         cachedOptions: [],
         createdLabel: null,
         createdSelected: false,
@@ -424,7 +452,7 @@
         this.$emit('visible-change', val);
       },
 
-      options() {
+      optionInstances() {
         if (this.$isServer) return;
         this.$nextTick(() => {
           this.broadcast('HzqSelectDropdown', 'updatePopper');
@@ -443,6 +471,14 @@
     },
 
     methods: {
+      // v-for 的 key：优先 option.key，其次 value，都没有时退回索引
+      getOptionKey(option, index) {
+        if (!option) return index;
+        if (option.key !== undefined && option.key !== null) return option.key;
+        if (option.value !== undefined && option.value !== null) return option.value;
+        return index;
+      },
+
       handleNavigate(direction) {
         if (this.isOnComposition) return;
 
@@ -671,10 +707,10 @@
       resetHoverIndex() {
         setTimeout(() => {
           if (!this.multiple) {
-            this.hoverIndex = this.options.indexOf(this.selected);
+            this.hoverIndex = this.optionInstances.indexOf(this.selected);
           } else {
             if (this.selected.length > 0) {
-              this.hoverIndex = Math.min.apply(null, this.selected.map(item => this.options.indexOf(item)));
+              this.hoverIndex = Math.min.apply(null, this.selected.map(item => this.optionInstances.indexOf(item)));
             } else {
               this.hoverIndex = -1;
             }
@@ -755,8 +791,8 @@
         if (!this.visible) {
           this.toggleMenu();
         } else {
-          if (this.options[this.hoverIndex]) {
-            this.handleOptionSelect(this.options[this.hoverIndex]);
+          if (this.optionInstances[this.hoverIndex]) {
+            this.handleOptionSelect(this.optionInstances[this.hoverIndex]);
           }
         }
       },
@@ -793,7 +829,7 @@
         if (index > -1) {
           this.optionsCount--;
           this.filteredOptionsCount--;
-          this.options.splice(index, 1);
+          this.optionInstances.splice(index, 1);
         }
       },
 
@@ -810,16 +846,16 @@
         this.hoverIndex = -1;
         // highlight the created option
         let hasCreated = false;
-        for (let i = this.options.length - 1; i >= 0; i--) {
-          if (this.options[i].created) {
+        for (let i = this.optionInstances.length - 1; i >= 0; i--) {
+          if (this.optionInstances[i].created) {
             hasCreated = true;
             this.hoverIndex = i;
             break;
           }
         }
         if (hasCreated) return;
-        for (let i = 0; i !== this.options.length; ++i) {
-          const option = this.options[i];
+        for (let i = 0; i !== this.optionInstances.length; ++i) {
+          const option = this.optionInstances[i];
           if (this.query) {
             // highlight first options that passes the filter
             if (!option.disabled && !option.groupDisabled && option.visible) {

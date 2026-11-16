@@ -1,4 +1,4 @@
-import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM, waitImmediate, wait } from '../util';
 import Select from 'packages/select';
 
 describe('Select', () => {
@@ -659,7 +659,7 @@ describe('Select', () => {
       select.handleQueryChange('面');
       setTimeout(() => {
         expect(select.filteredOptionsCount).to.equal(1);
-        select.options[0].$el.click();
+        select.optionInstances[0].$el.click();
         vm.$nextTick(() => {
           expect(vm.value[0]).to.equal('选项4');
           select.deletePrevTag({ target: select.$refs.input });
@@ -880,6 +880,158 @@ describe('Select', () => {
     vm.value = '选项1';
     await waitImmediate();
     expect(vm.$el.querySelector('.hzq-input__inner').value).to.equal('黄金糕');
+  });
+
+  describe('options prop', () => {
+    const clearDropdowns = () => {
+      document.querySelectorAll('.hzq-select-dropdown').forEach(el => {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      });
+    };
+
+    // 下拉是 append 到 body 的，用例之间会互相污染：进入和离开各清一次
+    beforeEach(clearDropdowns);
+    afterEach(clearDropdowns);
+
+    const renderOptions = (config = {}, options) => createVue({
+      template: `
+        <div>
+          <hzq-select
+            ref="select"
+            v-model="value"
+            :options="theOptions"
+            :filterable="filterable">
+            <hzq-option value="slot-option" label="来自插槽" />
+          </hzq-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: '',
+          filterable: !!config.filterable,
+          theOptions: options || [
+            { label: '黄金糕', value: '选项1' },
+            { label: '双皮奶', value: '选项2', disabled: true },
+            { label: '蚵仔煎', value: '选项3' }
+          ]
+        };
+      }
+    }, true);
+
+    it('renders options from data', async() => {
+      vm = renderOptions();
+      await waitImmediate();
+
+      vm.$el.click();
+      await waitImmediate();
+
+      const items = document.querySelectorAll('.hzq-select-dropdown__item');
+      expect(items.length).to.equal(3);
+      expect(items[0].textContent.trim()).to.equal('黄金糕');
+      expect(items[1].classList.contains('is-disabled')).to.be.true;
+    });
+
+    it('ignores the default slot when options is not empty', async() => {
+      vm = renderOptions();
+      await waitImmediate();
+
+      vm.$el.click();
+      await waitImmediate();
+
+      // 只取当前实例对应的下拉，避免命中其他用例残留的节点
+      const select = vm.$children[0];
+      const popperEl = select.$refs.popper && select.$refs.popper.$el;
+      expect(popperEl, 'dropdown should be rendered').to.exist;
+
+      const items = popperEl.querySelectorAll('.hzq-select-dropdown__item');
+      const texts = Array.prototype.slice.call(items).map(el => el.textContent.trim()).filter(Boolean);
+      expect(texts).to.deep.equal(['黄金糕', '双皮奶', '蚵仔煎']);
+      expect(texts).to.not.include('来自插槽');
+    });
+
+    it('falls back to the slot when options is empty', async() => {
+      vm = renderOptions({}, []);
+      await waitImmediate();
+
+      vm.$el.click();
+      await waitImmediate();
+
+      const select = vm.$children[0];
+      const items = select.$refs.popper.$el.querySelectorAll('.hzq-select-dropdown__item');
+      const texts = Array.prototype.slice.call(items).map(el => el.textContent.trim());
+      expect(texts).to.deep.equal(['来自插槽']);
+    });
+
+    it('selects an option rendered from data', async() => {
+      vm = renderOptions();
+      await waitImmediate();
+
+      vm.$el.click();
+      await waitImmediate();
+
+      document.querySelectorAll('.hzq-select-dropdown__item')[2].click();
+      await waitImmediate();
+
+      expect(vm.value).to.equal('选项3');
+    });
+
+    it('supports render function for the option content', async() => {
+      vm = renderOptions({}, [
+        {
+          label: '自定义',
+          value: 'custom',
+          render: h => h('span', { class: 'custom-option' }, '自定义内容')
+        }
+      ]);
+      await waitImmediate();
+
+      vm.$el.click();
+      await waitImmediate();
+
+      const custom = document.querySelector('.hzq-select-dropdown__item .custom-option');
+      expect(custom).to.exist;
+      expect(custom.textContent).to.equal('自定义内容');
+    });
+
+    it('uses label for filtering even when a render function is given', async() => {
+      vm = renderOptions({ filterable: true }, [
+        {
+          label: '黄金糕',
+          value: 'a',
+          render: h => h('span', { class: 'custom-option' }, '渲染内容')
+        },
+        { label: '双皮奶', value: 'b' }
+      ]);
+      await waitImmediate();
+
+      const select = vm.$children[0];
+      const input = vm.$el.querySelector('input');
+      vm.$el.click();
+      await waitImmediate();
+
+      input.value = '黄金';
+      triggerEvent(input, 'input');
+      await wait(300);
+
+      const items = select.$refs.popper.$el.querySelectorAll('.hzq-select-dropdown__item');
+      const visible = Array.prototype.slice.call(items).filter(el => el.style.display !== 'none');
+      expect(visible.length).to.equal(1);
+      expect(visible[0].textContent.trim()).to.include('渲染内容');
+    });
+
+    it('falls back to value or index for the v-for key', async() => {
+      vm = renderOptions({}, [
+        { label: 'A', value: 'a', key: 'custom-key' },
+        { label: 'B', value: 'b' },
+        { label: 'C' }
+      ]);
+      await waitImmediate();
+
+      vm.$el.click();
+      await waitImmediate();
+
+      expect(document.querySelectorAll('.hzq-select-dropdown__item').length).to.equal(3);
+    });
   });
 
   describe('resetInputHeight', () => {

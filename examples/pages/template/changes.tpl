@@ -232,6 +232,10 @@
       </div>
       <div class="changes-card">
         <strong>2</strong>
+        <span>下线组件（MessageBox、Popconfirm）</span>
+      </div>
+      <div class="changes-card">
+        <strong>2</strong>
         <span>新增命令式 API（$dialog、$drawer）</span>
       </div>
       <div class="changes-card">
@@ -384,6 +388,34 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
     </div>
     <p>迁移建议：改用 <code>this.$dialog({...})</code> 或 <code>hzq-dialog</code> 组件。</p>
 
+    <h3>Popconfirm 气泡确认框<span class="tag-remove">已下线</span></h3>
+    <div class="breaking">
+      <strong>破坏性变更：</strong><code>Popconfirm</code> 已整体移除 —— <code>src/index.js</code> 不再 import / 注册，
+      <code>components.json</code>、主题 <code>index.scss</code>、<code>web-types.json</code> 与 <code>types/element-ui.d.ts</code>
+      的对应条目一并删除，<code>types/popconfirm.d.ts</code> 已删除，四个语种的文档页与侧边栏入口也已摘除。
+      <code>packages/popconfirm</code> 源码与 <code>theme-chalk/src/popconfirm.scss</code> 已删除，无法再按路径引入。
+    </div>
+    <p>
+      下线原因：它只是「<code>trigger="click"</code> 的 Popover + 一行文字 + 两个按钮」的语法糖，
+      自身没有定位、弹层或样式能力（源码仅 104 行，样式 12 行布局），<code>content</code> 属性还被明确忽略，
+      用 <code>hzq-popover</code> 加插槽即可等价实现，独立的组件、类型、四语文档与测试的维护成本高于其便利性。
+    </p>
+    <p>迁移建议：改用 <code>hzq-popover</code>，内容区自行放文案与按钮：</p>
+    <pre><code>&lt;hzq-popover trigger="click" width="220"&gt;
+  &lt;div&gt;
+    &lt;p&gt;确定删除该项吗？&lt;/p&gt;
+    &lt;div style="text-align: right"&gt;
+      &lt;hzq-button size="mini" type="text"&gt;取消&lt;/hzq-button&gt;
+      &lt;hzq-button size="mini" type="primary"&gt;确定&lt;/hzq-button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;hzq-button slot="reference" type="danger"&gt;删除&lt;/hzq-button&gt;
+&lt;/hzq-popover&gt;</code></pre>
+    <p>
+      语言包中的 <code>el.popconfirm.confirmButtonText</code> / <code>cancelButtonText</code> 已从全部 60 个语言包移除，
+      迁移后需要自行提供按钮文案。
+    </p>
+
     <h3>Link 文字链接<span class="tag-change">新增属性</span></h3>
     <ul>
       <li>新增 <code>loading</code>（boolean，默认 <code>false</code>）：显示 <code>hzq-icon-loading</code> 替代 <code>icon</code>，<code>href</code> 置空，点击不触发 <code>click</code>，并去掉 hover 下划线。</li>
@@ -429,7 +461,15 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
     <ul>
       <li>修复可搜索单选在关闭下拉后选中标签丢失的问题（不再清空 <code>selectedLabel</code>）。</li>
       <li>尺寸兜底表新增 <code>large</code>，默认高度由 40px 调整为 32px。</li>
+      <li><strong>新增 <code>options</code> 属性</strong>：传入选项数组即可渲染，无需手写 <code>hzq-option</code>；支持 <code>label</code> / <code>value</code> / <code>disabled</code> / <code>key</code> 以及 <code>render(h, option)</code> 自定义下拉内容。</li>
+      <li>传入非空 <code>options</code> 时忽略默认插槽；传空数组或不传时仍走插槽渲染。</li>
+      <li><code>render</code> 只影响下拉列表的展示，筛选与已选值仍使用 <code>label</code>。</li>
     </ul>
+    <div class="breaking">
+      <strong>内部结构调整：</strong>组件内部用于收集 <code>HzqOption</code> 实例的数组由 <code>options</code> 改名为 <code>optionInstances</code>，
+      <code>options</code> 这个名字让给新增的 prop。仅影响直接读取组件内部状态（如 <code>this.$refs.select.options</code>）的代码；
+      常规用法中插槽选项的写法完全不变。
+    </div>
 
     <h3>DatePicker / DateTimePicker<span class="tag-change">样式变更</span></h3>
     <ul>
@@ -445,9 +485,10 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
       日期区间 <code>520px → 508px</code>。若有页面依赖原面板宽度做定位或并排布局，需要复核。
     </div>
 
-    <h3>Progress / Rate / Popconfirm / Empty<span class="tag-change">深色模式适配</span></h3>
+    <h3>Progress / Rate / Empty<span class="tag-change">深色模式适配</span></h3>
     <ul>
       <li>内联样式的默认色由写死色值改为 <code>var(--el-*)</code> token，切换主题或深色模式时不再残留浅色。</li>
+      <li><strong>Popconfirm</strong> 原有的深色适配随组件下线一并移除，见上文「Popconfirm 气泡确认框」。</li>
       <li>Empty 内置插画的 9 档灰改为 <code>--hzq-empty-fill-color-1..9</code>，随明暗模式整组翻转。</li>
       <li><strong>注意：</strong>若代码读取这些 prop 的默认值（如 <code>define-back-color</code>、<code>void-color</code>），现在拿到的是 <code>var(...)</code> 字符串而非色值。</li>
     </ul>
@@ -556,7 +597,7 @@ configureThemeScope('[data-hzq-scope]');</code></pre>
     <h2>六、导入方式变化</h2>
     <ul>
       <li><strong>新增</strong>：<code>AmountInput</code>（<code>ElAmountInput</code>）、<code>FormBuilder</code>（<code>ElFormBuilder</code>）、<code>Vue.prototype.$dialog</code>、<code>Vue.prototype.$drawer</code>。</li>
-      <li><strong>移除</strong>：<code>MessageBox</code> 及其四个原型方法。</li>
+      <li><strong>移除</strong>：<code>MessageBox</code> 及其四个原型方法；<code>Popconfirm</code>（改用 <code>Popover</code> 自行组装）。</li>
       <li>按需引入清单 <code>components.json</code> 同步增删，<code>web-types.json</code> 与 <code>types/*.d.ts</code> 已更新。</li>
     </ul>
 

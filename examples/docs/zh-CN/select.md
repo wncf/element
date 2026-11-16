@@ -575,6 +575,64 @@
 ```
 :::
 
+### 数据驱动选项
+
+通过 `options` 传入选项数组即可，无需再手写 `hzq-option`。**传入非空数组时会忽略默认插槽**；传空数组或不传时仍回退到插槽渲染。
+
+每一项的结构：`{ label, value, disabled?, key?, render? }`。
+
+:::demo 传入 `options` 直接渲染，支持 `disabled`；也可以给某一项配 `render(h, option)` 自定义下拉里的显示内容。`render` 只影响下拉列表，筛选与已选值展示仍然使用 `label`。
+```html
+<template>
+  <hzq-select v-model="value" :options="options" placeholder="请选择" style="width: 280px" />
+
+  <hzq-select
+    v-model="customValue"
+    :options="customOptions"
+    placeholder="自定义渲染"
+    style="width: 280px; margin-left: 12px" />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: '',
+        customValue: '',
+        options: [
+          { label: '黄金糕', value: 'golden' },
+          { label: '双皮奶', value: 'double', disabled: true },
+          { label: '蚵仔煎', value: 'oyster' }
+        ],
+        customOptions: [
+          {
+            label: '带图标的选项',
+            value: 'icon',
+            render: h => h('span', { style: 'display: flex; align-items: center; gap: 6px' }, [
+              h('i', { class: 'hzq-icon-star-on', style: 'color: #e6a23c' }),
+              h('span', '带图标的选项')
+            ])
+          },
+          {
+            label: '普通选项',
+            value: 'plain'
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+:::
+
+:::tip
+`render` 只负责下拉列表中的展示，**不会影响筛选与已选值的文本**。`filterable` 时按 `label` 匹配，多选标签与单选输入框显示的也都是 `label`。
+:::
+
+:::tip
+`key` 用于 `v-for` 的复用判断，缺省依次回退到 `value` 与数组索引。若 `value` 可能重复，建议显式提供 `key`。
+:::
+
 ### Select Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -604,6 +662,7 @@
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 | popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 | automatic-dropdown | 对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单 | boolean | - | false |
+| options | 选项数据。非空时由组件渲染选项并忽略默认插槽 | array | — | [] |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |
