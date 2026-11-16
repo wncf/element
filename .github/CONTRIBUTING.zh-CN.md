@@ -33,21 +33,70 @@ Element UI 的成长离不开大家的支持，如果你愿意为 Element UI 贡
 - 合并代码需要两名维护人员参与：一人进行 review 后 approve，另一人再次 review，通过后即可合并。
 
 ## 开发环境搭建
-首先你需要 Node.js 4+，yarn 和 npm 3+。注意：我们使用 yarn 进行依赖版本的锁定，所以请不要使用 `npm install` 安装依赖。
+
+### 环境要求
+
+| 依赖 | 版本 | 说明 |
+| --- | --- | --- |
+| Node.js | 12.x（推荐 12.22.12） | 仓库根目录有 `.nvmrc`，执行 `nvm use` 即可切换 |
+| yarn | 1.x | **必须**。项目用 `yarn.lock` 锁定依赖版本，请勿使用 `npm install` |
+| npm | 6+ | 仅用于执行 `npm run xxx` 脚本 |
+
+Node 14 也可以正常工作，但以 `.nvmrc` 中的版本为准。项目使用 dart-sass 编译样式，**不需要安装 Python、node-gyp 或 Visual Studio Build Tools**。
+
+### 首次启动
+
 ```shell
-git clone git@github.com:ElemeFE/element.git
+git clone https://github.com/wncf/element.git
+cd element
+
+# 使用 .nvmrc 指定的 Node 版本（已装 nvm 时）
+nvm use
+
+# 1. 安装依赖
+yarn install
+
+# 2. 启动开发服务
 npm run dev
 
-# open http://localhost:8085
+# 浏览器打开 http://localhost:8085
 ```
 
-> **提示**：可以运行 `npm run dev:play`，修改 `examples/play/index.vue` 文件，调用你修改后的组件，仍然访问 [http://localhost:8085](http://localhost:8085)，查看修改效果，更快更方便。
+`npm run dev` 会依次执行 `yarn install`、`build:file` 和 `webpack-dev-server`。
 
-打包代码：
+> **注意**：`examples/pages/` 目录由 `build:file` 从 `examples/pages/template/` 生成，不纳入版本控制。如果跳过 `build:file` 直接启动 webpack，会报 `Can't resolve './pages/zh-CN'`。
+
+### 两种开发模式
+
+两个命令都监听 `8085` 端口，**不能同时运行**。
+
+```shell
+# 文档站：带路由，可查看完整文档与 demo（含全部语言）
+npm run dev
+
+# 组件预览：单页 playground，改代码刷新更快
+npm run dev:play
+```
+
+访问地址相同，均为 [http://localhost:8085](http://localhost:8085)。`dev:play` 没有路由，进去是组件预览页；`dev` 才是文档站，具体页面地址形如 `http://localhost:8085/#/zh-CN/component/button`。
+
+修改 `examples/play/index.vue` 可以调整预览页展示的组件。
+
+### 打包
 
 ```shell
 npm run dist
 ```
+
+### 运行测试
+
+```shell
+npm run test
+```
+
+会先执行 lint 并构建主题，然后用 Karma + Headless Chrome 跑单元测试。本机需已安装 Chrome，或设置 `CHROME_BIN` 指向浏览器可执行文件。
+
+已知 `button.spec.js` 中 `loading implies disabled` 用例在部分环境下失败，与业务代码无关。
 
 ## 组件开发规范
 - 通过 `make new` 创建组件目录结构，包含测试代码、入口文件、文档

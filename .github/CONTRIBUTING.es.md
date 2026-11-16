@@ -38,23 +38,70 @@ Estamos orgullosos de que usted esta interesado en contribuir al proyecto `Eleme
 
 
 ## Requerimientos Técnicos
-`Node.js 4+`, `yarn` y `npm 3+` son requisitos. Nota: Usamos yarn para bloquear versiones de dependencias, por lo que debería instalar dependencias usando `yarn` en lugar de `npm install`.
-.
+
+### Requisitos
+
+| Dependencia | Versión | Notas |
+| --- | --- | --- |
+| Node.js | 12.x (se recomienda 12.22.12) | El repositorio incluye `.nvmrc`; ejecute `nvm use` para cambiar |
+| yarn | 1.x | **Obligatorio.** Las versiones están bloqueadas por `yarn.lock`; no use `npm install` |
+| npm | 6+ | Solo se usa para ejecutar scripts `npm run xxx` |
+
+Node 14 también funciona, pero `.nvmrc` es la referencia. Los estilos se compilan con dart-sass, por lo que **no hace falta instalar Python, node-gyp ni Visual Studio Build Tools**.
+
+### Primera ejecución
+
 ```shell
-git clone git@github.com:ElemeFE/element.git
+git clone https://github.com/wncf/element.git
+cd element
+
+# cambie a la versión de Node indicada en .nvmrc (si usa nvm)
+nvm use
+
+# 1. instale las dependencias
+yarn install
+
+# 2. inicie el servidor de desarrollo
 npm run dev
 
 # abra http://localhost:8085
 ```
 
-> **Notice**: modify `examples/play/index.vue` file, use the component you contribute, then run `npm run dev:play`, go ahead [http://localhost:8085](http://localhost:8085), get result, more quickly and friendly.
+`npm run dev` ejecuta `yarn install`, `build:file` y `webpack-dev-server` en secuencia.
 
-Para armar:
+> **Nota**: `examples/pages/` se genera con `build:file` a partir de `examples/pages/template/` y no está versionado. Si inicia webpack sin ejecutar `build:file`, fallará con `Can't resolve './pages/zh-CN'`.
 
+### Dos modos de desarrollo
+
+Ambos escuchan el puerto `8085` y **no pueden ejecutarse a la vez**.
+
+```shell
+# Sitio de documentación: con rutas, documentación y demos completos
+npm run dev
+
+# Playground de componentes: una sola página, recarga más rápida
+npm run dev:play
 ```
-shell
+
+Ambos se sirven en [http://localhost:8085](http://localhost:8085). `dev:play` no tiene router y abre el playground; `dev` es el sitio de documentación, por ejemplo `http://localhost:8085/#/es/component/button`.
+
+Modifique `examples/play/index.vue` para elegir qué componentes muestra el playground.
+
+### Empaquetado
+
+```shell
 npm run dist
 ```
+
+### Pruebas
+
+```shell
+npm run test
+```
+
+Primero ejecuta lint y compila el tema, luego corre las pruebas unitarias con Karma + Headless Chrome. Chrome debe estar instalado, o bien apunte `CHROME_BIN` a un ejecutable de navegador.
+
+Se sabe que el caso `loading implies disabled` en `button.spec.js` falla en algunos entornos; no está relacionado con el código de negocio.
 
 ## Guía Para Desarrollo de Componentes
 - Corra el comando `make new <component-name>` para crear el directorio de su proyecto para un componente nuevo. Verifique su código fuente test, archivo de entrada y documentación están incluidos.

@@ -35,21 +35,70 @@ Nous sommes ravis que vous souhaitiez contribuer à Element. Avant de soumettre 
 - La fusion d'un PR nécessite deux responsables: l'un approuve les modifications après révision, puis l'autre les révise et les fusionne.
 
 ## Pré-requis
-`Node.js 4+`, `yarn` et `npm 3+` sont requis. Note: nous utilisons yarn pour verrouiller les versions des dépendances, donc vous devriez installer les dépendances en utilisant `yarn` au lieu de `npm install`.
+
+### Environnement
+
+| Dépendance | Version | Remarque |
+| --- | --- | --- |
+| Node.js | 12.x (12.22.12 recommandé) | Un fichier `.nvmrc` est fourni ; lancez `nvm use` pour basculer |
+| yarn | 1.x | **Obligatoire.** Les versions sont verrouillées par `yarn.lock` ; n'utilisez pas `npm install` |
+| npm | 6+ | Sert uniquement à exécuter les scripts `npm run xxx` |
+
+Node 14 fonctionne également, mais `.nvmrc` fait référence. Les styles sont compilés avec dart-sass : **Python, node-gyp et Visual Studio Build Tools ne sont pas nécessaires**.
+
+### Premier démarrage
+
 ```shell
-git clone git@github.com:ElemeFE/element.git
+git clone https://github.com/wncf/element.git
+cd element
+
+# basculez sur la version de Node indiquée dans .nvmrc (si vous utilisez nvm)
+nvm use
+
+# 1. installez les dépendances
+yarn install
+
+# 2. démarrez le serveur de développement
 npm run dev
 
-# open http://localhost:8085
+# ouvrez http://localhost:8085
 ```
 
-> **Remarque** : modifiez le fichier `examples/play/index.vue`, utilisez le composant auquel vous contribuez, puis lancez `npm run dev:play`, allez sur [http://localhost:8085](http://localhost:8085), regardez le résultat rapidement et facilement.
+`npm run dev` exécute successivement `yarn install`, `build:file` et `webpack-dev-server`.
 
-Pour le build:
+> **Note** : `examples/pages/` est généré par `build:file` à partir de `examples/pages/template/` et n'est pas versionné. Démarrer webpack sans lancer `build:file` échoue avec `Can't resolve './pages/zh-CN'`.
+
+### Deux modes de développement
+
+Les deux écoutent le port `8085` et **ne peuvent pas tourner en même temps**.
+
+```shell
+# Site de documentation : avec routeur, documentation et démos complètes
+npm run dev
+
+# Playground de composants : page unique, rechargement plus rapide
+npm run dev:play
+```
+
+Les deux sont servis sur [http://localhost:8085](http://localhost:8085). `dev:play` n'a pas de routeur et affiche le playground ; `dev` est le site de documentation, par exemple `http://localhost:8085/#/fr-FR/component/button`.
+
+Modifiez `examples/play/index.vue` pour choisir les composants affichés dans le playground.
+
+### Build
 
 ```shell
 npm run dist
 ```
+
+### Tests
+
+```shell
+npm run test
+```
+
+Lance d'abord le lint et compile le thème, puis exécute les tests unitaires avec Karma + Headless Chrome. Chrome doit être installé, ou pointez `CHROME_BIN` vers un exécutable de navigateur.
+
+Le cas `loading implies disabled` dans `button.spec.js` échoue dans certains environnements ; cela n'a aucun rapport avec le code métier.
 
 ## Concernant le développement de composants
 - Exécutez `make new <nom-du-composant>` pour créer un répertoire pour le nouveau composant. Les tests, le fichier d'entrée et la documentation sont inclus.
