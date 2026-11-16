@@ -1,10 +1,10 @@
 @import "../common/var";
 
 @include b(date-range-picker) {
-  width: 646px;
+  width: 520px;
 
   &.has-sidebar {
-    width: 756px;
+    width: 630px;
   }
 
   table {
@@ -13,7 +13,7 @@
   }
 
   .hzq-picker-panel__body {
-    min-width: 513px;
+    min-width: 480px;
   }
 
   .hzq-picker-panel__content {
@@ -23,7 +23,7 @@
   @include e(header) {
     position: relative;
     text-align: center;
-    height: 28px;
+    height: 24px;
 
     [class*=arrow-left] {
       float: left;
@@ -34,7 +34,7 @@
     }
 
     div {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
       margin-right: 50px;
     }
@@ -45,7 +45,7 @@
     width: 50%;
     box-sizing: border-box;
     margin: 0;
-    padding: 16px;
+    padding: 10px;
 
     @include when(left) {
       border-right: 1px solid $--datepicker-inner-border-color;

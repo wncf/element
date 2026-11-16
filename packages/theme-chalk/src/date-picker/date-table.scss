@@ -15,14 +15,14 @@
           color: $--datepicker-font-color;
         }
         td:first-child div {
-          margin-left: 5px;
-          border-top-left-radius: 15px;
-          border-bottom-left-radius: 15px;
+          margin-left: 4px;
+          border-top-left-radius: 13px;
+          border-bottom-left-radius: 13px;
         }
         td:last-child div {
-          margin-right: 5px;
-          border-top-right-radius: 15px;
-          border-bottom-right-radius: 15px;
+          margin-right: 4px;
+          border-top-right-radius: 13px;
+          border-bottom-right-radius: 13px;
         }
       }
 
@@ -33,26 +33,26 @@
   }
 
   td {
-    width: 32px;
-    height: 30px;
-    padding: 4px 0;
+    width: 28px;
+    height: 26px;
+    padding: 2px 0;
     box-sizing: border-box;
     text-align: center;
     cursor: pointer;
     position: relative;
 
     & div {
-      height: 30px;
-      padding: 3px 0;
+      height: 26px;
+      padding: 2px 0;
       box-sizing: border-box;
     }
 
     & span {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       display: block;
       margin: 0 auto;
-      line-height: 24px;
+      line-height: 22px;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
@@ -102,15 +102,15 @@
     }
 
     &.start-date div {
-      margin-left: 5px;
-      border-top-left-radius: 15px;
-      border-bottom-left-radius: 15px;
+      margin-left: 4px;
+      border-top-left-radius: 13px;
+      border-bottom-left-radius: 13px;
     }
 
     &.end-date div {
-      margin-right: 5px;
-      border-top-right-radius: 15px;
-      border-bottom-right-radius: 15px;
+      margin-right: 4px;
+      border-top-right-radius: 13px;
+      border-bottom-right-radius: 13px;
     }
 
     &.disabled div {
@@ -121,10 +121,10 @@
     }
 
     &.selected div {
-      margin-left: 5px;
-      margin-right: 5px;
+      margin-left: 4px;
+      margin-right: 4px;
       background-color: $--datepicker-inrange-background-color;
-      border-radius: 15px;
+      border-radius: 13px;
       &:hover {
         background-color: $--datepicker-inrange-hover-background-color;
       }
@@ -133,7 +133,7 @@
     &.selected span {
       background-color: $--datepicker-active-color;
       color: $--color-white;
-      border-radius: 15px;
+      border-radius: 13px;
     }
 
     &.week {
@@ -143,7 +143,7 @@
   }
 
   th {
-    padding: 5px;
+    padding: 3px;
     color: $--datepicker-header-font-color;
     font-weight: 400;
     border-bottom: solid 1px $--border-color-lighter;
