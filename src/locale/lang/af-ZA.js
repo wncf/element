@@ -68,7 +68,9 @@ export default {
       noMatch: 'Geen toepaslike data',
       loading: 'Laai',
       placeholder: 'Kies',
-      noData: 'Geen data'
+      noData: 'Geen data',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Gaan na',

@@ -68,7 +68,9 @@ export default {
       noMatch: 'Aucune correspondance',
       loading: 'Chargement',
       placeholder: 'Choisir',
-      noData: 'Aucune donnée'
+      noData: 'Aucune donnée',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Aller à',

@@ -68,7 +68,9 @@ export default {
       noMatch: 'Dữ liệu không phù hợp',
       loading: 'Đang tải',
       placeholder: 'Chọn',
-      noData: 'Không tìm thấy dữ liệu'
+      noData: 'Không tìm thấy dữ liệu',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Nhảy tới',

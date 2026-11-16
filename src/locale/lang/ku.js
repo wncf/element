@@ -68,7 +68,9 @@ export default {
       noMatch: 'Li hembere ve agahî tune',
       loading: 'Bardibe',
       placeholder: 'Bibijêre',
-      noData: 'Agahî tune'
+      noData: 'Agahî tune',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Biçe',

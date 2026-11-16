@@ -68,7 +68,9 @@ export default {
       noMatch: 'Nav atbilstošu datu',
       loading: 'Ielādē',
       placeholder: 'Izvēlēties',
-      noData: 'Nav datu'
+      noData: 'Nav datu',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Iet uz',

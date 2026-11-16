@@ -68,7 +68,9 @@ export default {
       noMatch: 'No matching data',
       loading: 'Loading',
       placeholder: 'Select',
-      noData: 'No data'
+      noData: 'No data',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Go to',

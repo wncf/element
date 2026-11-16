@@ -1674,22 +1674,36 @@
 
 ### 尺寸
 
-:::demo 通过 `size` 切换四档尺寸：`large`、`medium`、`small`、`mini`。不传时等同 `medium`，四档高度依次为 36px、32px、28px、24px。
+通过 `size` 切换四档尺寸：`large`、`medium`、`small`、`mini`。不传时等同 `medium`，四档高度依次为 36px、32px、28px、24px。多选时标签高度按对应档位自动收缩（比输入框矮 6px），依次为 30px、26px、22px、18px，避免标签顶到输入框的上下边框。
 
+:::demo 下面同时给出单选与多选两种形态，切换尺寸即可对比标签高度。
 ```html
 <template>
-  <div class="block">
+  <div>
     <hzq-radio-group v-model="size" size="mini">
       <hzq-radio-button label="large">大型</hzq-radio-button>
       <hzq-radio-button label="medium">中等</hzq-radio-button>
       <hzq-radio-button label="small">小型</hzq-radio-button>
       <hzq-radio-button label="mini">超小</hzq-radio-button>
     </hzq-radio-group>
+
+    <div class="cascader-size-row">
+      <span class="cascader-size-row__label">单选</span>
+      <hzq-cascader
+        v-model="value"
+        :options="options"
+        :size="size"></hzq-cascader>
+    </div>
+
+    <div class="cascader-size-row">
+      <span class="cascader-size-row__label">多选（显示 Tag）</span>
+      <hzq-cascader
+        v-model="multiValue"
+        :options="options"
+        :props="{ multiple: true }"
+        :size="size"></hzq-cascader>
+    </div>
   </div>
-  <hzq-cascader
-    v-model="value"
-    :options="options"
-    :size="size"></hzq-cascader>
 </template>
 
 <script>
@@ -1698,6 +1712,7 @@
       return {
         size: 'medium',
         value: [],
+        multiValue: [],
         options: [{
           value: 'zhinan',
           label: '指南',
@@ -1707,6 +1722,9 @@
           }, {
             value: 'fankui',
             label: '反馈'
+          }, {
+            value: 'xiaolv',
+            label: '效率'
           }]
         }, {
           value: 'ziyuan',
@@ -1723,6 +1741,21 @@
     }
   };
 </script>
+
+<style>
+  .cascader-size-row {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .cascader-size-row__label {
+    flex: none;
+    width: 120px;
+    font-size: 13px;
+    color: #606266;
+  }
+</style>
 ```
 :::
 

@@ -68,7 +68,9 @@ export default {
       noMatch: 'ගැළපෙන දත්ත නැත',
       loading: 'පූරණය වෙමින්',
       placeholder: 'තෝරන්න',
-      noData: 'දත්ත නැත'
+      noData: 'දත්ත නැත',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'වෙත යන්න',

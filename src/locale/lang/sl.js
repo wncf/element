@@ -68,7 +68,9 @@ export default {
       noMatch: 'Ni ustreznih podatkov',
       loading: 'Nalaganje',
       placeholder: 'Izberi',
-      noData: 'Ni podatkov'
+      noData: 'Ni podatkov',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Pojdi na',

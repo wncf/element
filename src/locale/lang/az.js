@@ -71,7 +71,9 @@ exports.default = {
       noMatch: 'Nəticə tapılmadı',
       loading: 'Yüklənir',
       placeholder: 'Seç',
-      noData: 'Məlumat yoxdur'
+      noData: 'Məlumat yoxdur',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Get',

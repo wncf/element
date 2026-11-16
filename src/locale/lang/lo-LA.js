@@ -71,7 +71,9 @@ exports.default = {
       noMatch: 'ບໍ່ມີຂໍ້ມູນທີ່ກົງກັນ',
       loading: 'ກຳລັງອອກ...',
       placeholder: 'ກະລຸນາເລືອກ',
-      noData: 'ບໍ່​ມີ​ຂໍ້​ມູນ'
+      noData: 'ບໍ່​ມີ​ຂໍ້​ມູນ',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'ໄປທີ່',

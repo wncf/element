@@ -68,7 +68,9 @@ export default {
       noMatch: 'គ្មានទិន្ន័យដូច',
       loading: 'កំពុងផ្ទុក',
       placeholder: 'ជ្រើសរើស',
-      noData: 'គ្មានទិន្ន័យ'
+      noData: 'គ្មានទិន្ន័យ',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'ទៅកាន់',

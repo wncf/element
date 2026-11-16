@@ -68,7 +68,9 @@ export default {
       noMatch: 'Няма намерени',
       loading: 'Зареждане',
       placeholder: 'Избери',
-      noData: 'Няма данни'
+      noData: 'Няма данни',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Иди на',

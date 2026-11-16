@@ -68,7 +68,9 @@ export default {
       noMatch: 'Nessuna corrispondenza',
       loading: 'Caricamento',
       placeholder: 'Seleziona',
-      noData: 'Nessun dato'
+      noData: 'Nessun dato',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Vai a',

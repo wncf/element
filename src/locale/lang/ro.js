@@ -68,7 +68,9 @@ export default {
       noMatch: 'Nu există date potrivite',
       loading: 'Se încarcă',
       placeholder: 'Selectează',
-      noData: 'Nu există date'
+      noData: 'Nu există date',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Go to',

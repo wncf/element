@@ -68,7 +68,9 @@ export default {
       noMatch: 'Eşleşen veri bulunamadı',
       loading: 'Yükleniyor',
       placeholder: 'Seç',
-      noData: 'Veri yok'
+      noData: 'Veri yok',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Git',

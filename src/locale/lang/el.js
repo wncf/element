@@ -68,7 +68,9 @@ export default {
       noMatch: 'Δεν βρέθηκαν αποτελέσματα',
       loading: 'Φόρτωση',
       placeholder: 'Επιλογή',
-      noData: 'Χωρίς δεδομένα'
+      noData: 'Χωρίς δεδομένα',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Μετάβαση σε',

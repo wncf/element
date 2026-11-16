@@ -68,7 +68,9 @@ export default {
       noMatch: 'Сәйкес деректер жоқ',
       loading: 'Жүктелуде',
       placeholder: 'Таңдаңыз',
-      noData: 'Деректер жоқ'
+      noData: 'Деректер жоқ',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Бару',

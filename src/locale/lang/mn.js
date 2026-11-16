@@ -68,7 +68,9 @@ export default {
       noMatch: 'Тохирох өгөгдөл байхгүй',
       loading: 'Ачаалж байна',
       placeholder: 'Сонгох',
-      noData: 'Өгөгдөл байхгүй'
+      noData: 'Өгөгдөл байхгүй',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Очих',

@@ -70,7 +70,9 @@ export default {
       noMatch: 'Nichts gefunden.',
       loading: 'Lädt.',
       placeholder: 'Daten wählen',
-      noData: 'Keine Daten'
+      noData: 'Keine Daten',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Gehe zu',

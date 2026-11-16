@@ -68,7 +68,9 @@ export default {
       noMatch: 'Ingen matchende data',
       loading: 'Henter',
       placeholder: 'Vælg',
-      noData: 'Ingen data'
+      noData: 'Ingen data',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Gå til',

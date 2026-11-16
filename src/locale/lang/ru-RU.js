@@ -68,7 +68,9 @@ export default {
       noMatch: 'Совпадений не найдено',
       loading: 'Загрузка',
       placeholder: 'Выбрать',
-      noData: 'Нет данных'
+      noData: 'Нет данных',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Перейти',

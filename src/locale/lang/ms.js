@@ -67,7 +67,9 @@ export default {
       noMatch: 'Tiada maklumat yang sepadan',
       loading: 'Sedang dimuat turun',
       placeholder: 'Sila pilih',
-      noData: 'Tiada maklumat'
+      noData: 'Tiada maklumat',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Seterusnya',

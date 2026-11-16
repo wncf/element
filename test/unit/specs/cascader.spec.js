@@ -277,6 +277,50 @@ describe('Cascader', () => {
     expect(getCloseButton(vm.$el).length).to.equal(0);
   });
 
+  it('tag size follows the component size and is 6px shorter than the input', async() => {
+    const cases = [
+      // 输入框高度含上下各 1px 边框，标签再矮 6px 才不会顶到边框
+      { size: 'large', expected: 'large', tagHeight: 30 },
+      { size: 'medium', expected: 'medium', tagHeight: 26 },
+      { size: 'small', expected: 'small', tagHeight: 22 },
+      { size: 'mini', expected: 'mini', tagHeight: 18 },
+      // 未指定 size 时按默认档（medium）处理
+      { size: undefined, expected: 'medium', tagHeight: 26 }
+    ];
+
+    for (const item of cases) {
+      vm = createVue({
+        template: `
+          <hzq-cascader
+            v-model="value"
+            :options="options"
+            :size="size"
+            :props="props"></hzq-cascader>
+        `,
+        data() {
+          return {
+            value: [],
+            options,
+            size: item.size,
+            props: { multiple: true }
+          };
+        }
+      }, true);
+
+      getOptions(document.body, 0)[0].querySelector('.hzq-checkbox input').click();
+      await waitImmediate();
+
+      const tag = vm.$el.querySelector('.hzq-tag');
+      expect(tag, `size=${item.size}`).to.exist;
+      // 档位修饰符仍跟随 size，用于内边距、字号与关闭图标缩放
+      expect(tag.classList.contains(`hzq-tag--${item.expected}`), `size=${item.size}`).to.be.true;
+      // 高度由 cascader 样式按档位收缩
+      expect(tag.getBoundingClientRect().height, `size=${item.size}`).to.equal(item.tagHeight);
+
+      destroyVM(vm);
+    }
+  });
+
   it('click leaf node should check in multiple mode', async() => {
     vm = createVue({
       template: `
@@ -427,17 +471,87 @@ describe('Cascader', () => {
     }, true);
     const el = vm.$el;
     const { body } = document;
-    const input = el.querySelector('input');
+    // 主输入框只读，筛选走面板顶部的搜索框
+    expect(el.querySelector('input').readOnly).to.be.true;
+
     el.click();
-    await waitImmediate();
-    input.value = 'Zhejiang';
-    triggerEvent(input, 'input');
+    await wait(100);
+
+    const searchInput = vm.$children[0].$refs.searchInput;
+    expect(searchInput).to.exist;
+
+    searchInput.value = 'Zhejiang';
+    triggerEvent(searchInput, 'input');
     await wait(300);
     expect(body.querySelector('.hzq-cascader__suggestion-list')).to.exist;
     expect(body.querySelectorAll('.hzq-cascader__suggestion-item').length).to.equal(3);
     body.querySelectorAll('.hzq-cascader__suggestion-item')[0].click();
     await waitImmediate();
     expect(vm.value).to.deep.equal(selectedValue);
+  });
+
+  it('filterable shows empty text when nothing matches', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader
+          v-model="value"
+          :options="options"
+          filterable></hzq-cascader>
+      `,
+      data() {
+        return { value: [], options };
+      }
+    }, true);
+
+    const el = vm.$el;
+    const { body } = document;
+    el.click();
+    await wait(100);
+
+    // cascader 是模板里的子组件，ref 取不到外层 wrapper 上
+    const cascader = vm.$children[0];
+    const searchInput = cascader.$refs.searchInput;
+    expect(searchInput, 'panel search input should exist').to.exist;
+    searchInput.value = 'zzzzzz';
+    triggerEvent(searchInput, 'input');
+    await wait(300);
+
+    const empty = body.querySelector('.hzq-cascader__empty-text');
+    expect(empty).to.exist;
+    expect(empty.textContent.trim()).to.equal('暂无内容');
+    expect(body.querySelectorAll('.hzq-cascader__suggestion-item').length).to.equal(0);
+  });
+
+  it('clearing the search input restores the cascader panel', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader
+          v-model="value"
+          :options="options"
+          filterable></hzq-cascader>
+      `,
+      data() {
+        return { value: [], options };
+      }
+    }, true);
+
+    const el = vm.$el;
+    const { body } = document;
+    el.click();
+    await wait(100);
+
+    const cascader = vm.$children[0];
+    const searchInput = cascader.$refs.searchInput;
+
+    searchInput.value = 'Zhejiang';
+    triggerEvent(searchInput, 'input');
+    await wait(300);
+    expect(cascader.panel.$el.style.display).to.equal('none');
+
+    searchInput.value = '';
+    triggerEvent(searchInput, 'input');
+    await wait(300);
+    expect(body.querySelector('.hzq-cascader__suggestion-list').closest('.hzq-cascader__dropdown').querySelector('.hzq-cascader-menu')).to.exist;
   });
 
   it('filter method', async() => {
@@ -464,15 +578,17 @@ describe('Cascader', () => {
     }, true);
     const el = vm.$el;
     const { body } = document;
-    const input = el.querySelector('input');
     el.click();
-    await waitImmediate();
-    input.value = 'Zhejiang';
-    triggerEvent(input, 'input');
+    await wait(100);
+
+    const searchInput = vm.$children[0].$refs.searchInput;
+    searchInput.value = 'Zhejiang';
+    triggerEvent(searchInput, 'input');
     await wait(300);
     expect(body.querySelectorAll('.hzq-cascader__suggestion-item').length).to.equal(3);
-    input.value = 'xihu';
-    triggerEvent(input, 'input');
+
+    searchInput.value = 'xihu';
+    triggerEvent(searchInput, 'input');
     await wait(300);
     expect(body.querySelector('.hzq-cascader__suggestion-item').textContent).to.equal('Zhejiang / Hangzhou / West Lake');
   });

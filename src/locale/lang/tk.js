@@ -68,7 +68,9 @@ export default {
       noMatch: 'Hiçzat tapylmady',
       loading: 'Indirilýär',
       placeholder: 'Saýlaň',
-      noData: 'Hiçzat ýok'
+      noData: 'Hiçzat ýok',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Git',

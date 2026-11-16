@@ -399,9 +399,30 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
     <h3>Cascader 级联选择器<span class="tag-change">交互变更</span></h3>
     <ul>
       <li><strong>多选模式下点击行即可勾选/取消叶子节点</strong>（原来多选时点击行只展开）。</li>
+      <li><strong>启用 <code>checkStrictly</code> 时，非叶子节点也支持点击整行选中</strong>，单选与多选行为一致；不再需要精确点中左侧的单选/复选框图标。</li>
       <li>多选标签区改为<strong>单行不换行、溢出省略</strong>，输入框高度锁定在当前尺寸档，不再被标签撑高。</li>
-      <li>多选 + <code>filterable</code> 时内层 input 的 placeholder 置空，避免与搜索框重影。</li>
       <li>尺寸映射表新增 <code>large</code> 档，整体下调一档（36 / 32 / 28 / 24）。</li>
+    </ul>
+
+    <h3>Cascader 可搜索改版<span class="tag-change">破坏性变更</span></h3>
+    <div class="breaking">
+      <strong>需要留意：</strong>启用 <code>filterable</code> 后，<strong>主输入框不再接受手动输入</strong>（固定只读），
+      只在框内展示已选值。筛选统一改到下拉面板顶部的常驻搜索框。
+      依赖「在输入框里直接打字筛选」的业务代码需要调整使用方式。
+    </div>
+    <ul>
+      <li>面板顶部新增常驻搜索框，占位文案由 <code>el.cascader.searchPlaceholder</code> 提供（默认「请输入搜索词」）。</li>
+      <li>输入关键词后，整个面板替换为<strong>扁平结果列表</strong>，每项显示完整路径（如「续期 / 鞋子」），当前选中项右侧打勾。</li>
+      <li>无匹配结果时展示<strong>「暂无内容」</strong>（新增 <code>el.cascader.noContent</code>，原「无匹配数据」保留给 <code>noMatch</code>）。</li>
+      <li>清空搜索词后自动恢复到级联面板。</li>
+      <li>多选模式下不再向标签区插入内嵌搜索输入框，标签与搜索框完全分离。</li>
+      <li>全部 60 个语言包同步补充 <code>searchPlaceholder</code> 与 <code>noContent</code> 两个键。</li>
+    </ul>
+
+    <h3>Cascader 多选标签尺寸<span class="tag-change">样式变更</span></h3>
+    <ul>
+      <li>标签高度改为按输入框档位<strong>减 6px</strong>，避免顶到输入框的上下边框：large 30px、medium 26px、small 22px、mini 18px。</li>
+      <li>标签的尺寸修饰符仍跟随 <code>size</code>（内边距、字号、关闭图标缩放），仅高度由 cascader 样式覆盖。</li>
     </ul>
 
     <h3>Select 选择器<span class="tag-change">缺陷修复</span></h3>

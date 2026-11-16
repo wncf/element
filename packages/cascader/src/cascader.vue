@@ -9,21 +9,21 @@
     v-clickoutside="() => toggleDropDownVisible(false)"
     @mouseenter="inputHover = true"
     @mouseleave="inputHover = false"
-    @click="() => toggleDropDownVisible(readonly ? undefined : true)"
+    @click="() => toggleDropDownVisible()"
     @keydown="handleKeyDown">
 
+    <!-- 输入框只负责展示已选值，筛选统一放到面板顶部的搜索框 -->
     <hzq-input
       ref="input"
       v-model="multiple ? presentText : inputValue"
       :size="realSize"
-      :placeholder="inputPlaceholder"
-      :readonly="readonly"
+      :placeholder="placeholder"
+      :readonly="true"
       :disabled="isDisabled"
       :validate-event="false"
       :class="{ 'is-focus': dropDownVisible }"
       @focus="handleFocus"
-      @blur="handleBlur"
-      @input="handleInput">
+      @blur="handleBlur">
       <template slot="suffix">
         <i
           v-if="clearBtnVisible"
@@ -56,15 +56,6 @@
           <span>{{ tag.text }}</span>
         </hzq-tag>
       </div>
-      <input
-        v-if="filterable && !isDisabled"
-        v-model.trim="inputValue"
-        type="text"
-        class="hzq-cascader__search-input"
-        :placeholder="presentTags.length ? '' : placeholder"
-        @input="e => handleInput(inputValue, e)"
-        @click.stop="toggleDropDownVisible(true)"
-        @keydown.delete="handleDelete">
     </div>
 
     <transition name="el-zoom-in-top" @after-leave="handleDropdownLeave">
@@ -72,6 +63,18 @@
         v-show="dropDownVisible"
         ref="popper"
         :class="['hzq-popper', 'hzq-cascader__dropdown', popperClass]">
+        <!-- 可搜索：面板顶部常驻搜索框，输入后整个面板替换为扁平结果列表 -->
+        <div v-if="filterable" class="hzq-cascader__search">
+          <i class="hzq-icon-search hzq-cascader__search-icon"></i>
+          <input
+            ref="searchInput"
+            v-model.trim="inputValue"
+            type="text"
+            class="hzq-cascader__search-input"
+            :placeholder="searchPlaceholder"
+            :disabled="isDisabled"
+            @input="handleInput">
+        </div>
         <hzq-cascader-panel
           ref="panel"
           v-show="!filtering"
@@ -105,7 +108,7 @@
             </li>
           </template>
           <slot v-else name="empty">
-            <li class="hzq-cascader__empty-text">{{ t('el.cascader.noMatch') }}</li>
+            <li class="hzq-cascader__empty-text">{{ t('el.cascader.noContent') }}</li>
           </slot>
         </hzq-scrollbar>
       </div>
@@ -255,10 +258,11 @@ export default {
       const _elFormItemSize = (this.elFormItem || {}).elFormItemSize;
       return this.size || _elFormItemSize || (this.$HZQ || {}).size;
     },
+    // 标签沿用输入框的档位（内边距、字号、关闭图标缩放随档位变化）；
+    // 高度不取 tag 的档位值，而是在 cascader.scss 里按「输入框高度 - 6px」单独设置
     tagSize() {
-      return ['small', 'mini'].indexOf(this.realSize) > -1
-        ? 'mini'
-        : 'small';
+      const size = this.realSize;
+      return ['large', 'medium', 'small', 'mini'].indexOf(size) > -1 ? size : 'medium';
     },
     isDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
@@ -288,14 +292,9 @@ export default {
     leafOnly() {
       return !this.config.checkStrictly;
     },
-    readonly() {
-      return !this.filterable || this.multiple;
-    },
-    // 多选 + 可搜索时输入区由 hzq-cascader__search-input 承担（内层 input 是 readonly），
-    // 内层 input 若同时渲染 placeholder 会与搜索框的叠在一起变成重影
-    inputPlaceholder() {
-      const hasSearchInput = this.multiple && this.filterable && !this.isDisabled;
-      return hasSearchInput ? '' : this.placeholder;
+    // 面板搜索框的提示语
+    searchPlaceholder() {
+      return t('el.cascader.searchPlaceholder');
     },
     clearBtnVisible() {
       if (!this.clearable || this.isDisabled || this.filtering || !this.inputHover) {
@@ -452,11 +451,12 @@ export default {
     handleBlur(e) {
       this.$emit('blur', e);
     },
-    handleInput(val, event) {
-      !this.dropDownVisible && this.toggleDropDownVisible(true);
-
+    // 面板搜索框输入：有值走筛选，清空则回到级联面板
+    handleInput(event) {
+      // 输入法组字期间不触发筛选，否则拼音会被当成关键词
       if (event && event.isComposing) return;
-      if (val) {
+
+      if (this.inputValue) {
         this.filterHandler();
       } else {
         this.filtering = false;

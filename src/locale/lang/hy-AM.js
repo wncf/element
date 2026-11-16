@@ -68,7 +68,9 @@ export default {
       noMatch: 'Համապատասխան տուեալներ չկան',
       loading: 'Բեռնում',
       placeholder: 'Ընտրել',
-      noData: 'Տվյալներ չկան'
+      noData: 'Տվյալներ չկան',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Անցնել',

@@ -67,7 +67,9 @@ export default {
       noMatch: 'Nincs találat',
       loading: 'Betöltés',
       placeholder: 'Válassz',
-      noData: 'Nincs adat'
+      noData: 'Nincs adat',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Ugrás',

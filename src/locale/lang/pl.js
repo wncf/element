@@ -68,7 +68,9 @@ export default {
       noMatch: 'Brak dopasowań',
       loading: 'Ładowanie',
       placeholder: 'Wybierz',
-      noData: 'Brak danych'
+      noData: 'Brak danych',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Idź do',

@@ -68,7 +68,9 @@ export default {
       noMatch: 'Sobivad andmed puuduvad',
       loading: 'Laadimine',
       placeholder: 'Vali',
-      noData: 'Andmed puuduvad'
+      noData: 'Andmed puuduvad',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Mine lehele',

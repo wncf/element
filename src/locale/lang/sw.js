@@ -68,7 +68,9 @@ export default {
       noMatch: 'Hakuna Matokeo yaliyofanana',
       loading: 'Inapakia',
       placeholder: 'Chagua',
-      noData: 'Hakuna Matokeo'
+      noData: 'Hakuna Matokeo',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Nenda',

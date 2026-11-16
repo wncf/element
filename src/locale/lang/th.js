@@ -68,7 +68,9 @@ export default {
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       loading: 'กำลังโหลด',
       placeholder: 'เลือก',
-      noData: 'ไม่พบข้อมูล'
+      noData: 'ไม่พบข้อมูล',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'ไปที่',

@@ -223,7 +223,8 @@
           this.$emit('expand', e);
         };
       }
-      if (isLeaf && !isDisabled && !checkStrictly) {
+      // checkStrictly（任意一级可选）下，非叶子节点也能被选中，所以不再要求 isLeaf
+      if (!isDisabled && (checkStrictly || isLeaf)) {
         events.on.click = multiple
           ? this.handleLeafMultiClick
           : this.handleCheckChange;

@@ -68,7 +68,9 @@ export default {
       noMatch: 'Нема резултата',
       loading: 'Учитавање',
       placeholder: 'Изабери',
-      noData: 'Нема података'
+      noData: 'Нема података',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Иди на',

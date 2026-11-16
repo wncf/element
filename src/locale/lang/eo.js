@@ -68,7 +68,9 @@ export default {
       noMatch: 'Neniuj kongruaj datumoj',
       loading: 'Ŝarĝante',
       placeholder: 'Bonvolu elekti',
-      noData: 'Neniuj datumoj'
+      noData: 'Neniuj datumoj',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Iru al',

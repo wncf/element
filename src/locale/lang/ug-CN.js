@@ -68,7 +68,9 @@ export default {
       noMatch: 'ئۇچۇر تېپىلمىدى',
       loading: 'يۈكلىنىۋاتىدۇ',
       placeholder: 'تاللاڭ',
-      noData: 'ئۇچۇر يوق'
+      noData: 'ئۇچۇر يوق',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'كىيىنكى بەت',

@@ -68,7 +68,9 @@ export default {
       noMatch: 'Ekkert fannst',
       loading: 'Hleð',
       placeholder: 'Velja',
-      noData: 'Engin gögn'
+      noData: 'Engin gögn',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Fara á',

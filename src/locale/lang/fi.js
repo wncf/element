@@ -68,7 +68,9 @@ export default {
       noMatch: 'Ei vastaavia tietoja',
       loading: 'Lataa',
       placeholder: 'Valitse',
-      noData: 'Ei tietoja'
+      noData: 'Ei tietoja',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Mene',

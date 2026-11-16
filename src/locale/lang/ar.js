@@ -68,7 +68,9 @@ export default {
       noMatch: 'لايوجد بيانات مطابقة',
       loading: 'جار التحميل',
       placeholder: 'إختر',
-      noData: 'لايوجد بيانات'
+      noData: 'لايوجد بيانات',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'أذهب إلى',

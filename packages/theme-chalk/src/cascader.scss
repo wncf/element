@@ -54,12 +54,18 @@
     }
   }
 
-  // 四档高度直接由这里的 input 尺寸档给出，基础规则不再写死高度
+  // 四档高度直接由这里的 input 尺寸档给出，基础规则不再写死高度。
+  // 多选时标签高度同步按「输入框高度 - 6px」收缩，避免顶到上下边框
   @include m(large) {
     font-size: $--input-large-font-size;
 
     .hzq-input__inner {
       height: $--input-large-height;
+    }
+
+    .hzq-cascader__tags .hzq-tag {
+      height: 30px;
+      line-height: 28px;
     }
   }
 
@@ -69,6 +75,11 @@
     .hzq-input__inner {
       height: $--input-medium-height;
     }
+
+    .hzq-cascader__tags .hzq-tag {
+      height: 26px;
+      line-height: 24px;
+    }
   }
 
   @include m(small) {
@@ -77,6 +88,11 @@
     .hzq-input__inner {
       height: $--input-small-height;
     }
+
+    .hzq-cascader__tags .hzq-tag {
+      height: 22px;
+      line-height: 20px;
+    }
   }
 
   @include m(mini) {
@@ -84,6 +100,11 @@
 
     .hzq-input__inner {
       height: $--input-mini-height;
+    }
+
+    .hzq-cascader__tags .hzq-tag {
+      height: 18px;
+      line-height: 16px;
     }
   }
 
@@ -103,6 +124,43 @@
     box-shadow: $--cascader-menu-shadow;
   }
 
+  // 面板顶部常驻搜索框（filterable）
+  @include e(search) {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border-bottom: 1px solid $--border-color-light;
+  }
+
+  @include e(search-icon) {
+    flex: none;
+    margin-right: 8px;
+    font-size: 14px;
+    color: $--color-text-placeholder;
+  }
+
+  @include e(search-input) {
+    flex: 1;
+    min-width: 0;
+    height: 24px;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: $--cascader-menu-font-size;
+    color: $--color-text-regular;
+
+    &::placeholder {
+      color: $--color-text-placeholder;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: $--color-text-placeholder;
+    }
+  }
+
   @include e(tags) {
     position: absolute;
     left: 0;
@@ -116,6 +174,15 @@
     text-align: left;
     box-sizing: border-box;
     overflow: hidden;
+
+    // 标签高度按输入框档位减 6px：输入框高度含上下各 1px 边框，
+    // 且标签与边框之间需要留一点余量，否则会顶到边框。
+    // 这里给的是默认档（medium）的取值，与下方 m(medium) 保持一致；
+    // 不写 size 时不会带修饰符类，靠它兜底
+    .hzq-tag {
+      height: 26px;
+      line-height: 24px;
+    }
 
     .hzq-tag {
       display: inline-flex;
@@ -208,33 +275,5 @@
   @include e(empty-text) {
     margin: 10px 0;
     color: $--cascader-color-empty;
-  }
-
-  @include e(search-input) {
-    flex: 0 0 auto;
-    height: 24px;
-    width: 40px;
-    min-width: 20px;
-    margin: 0 0 0 8px;
-    padding: 0;
-    color: $--cascader-menu-font-color;
-    border: none;
-    outline: none;
-    box-sizing: border-box;
-    // input 元素不给底色会落到浏览器默认的白色，深色模式下会露出白块
-    background-color: transparent;
-
-    &::placeholder {
-      color: $--color-text-placeholder;
-    }
-  }
-
-  // 无标签时输入框收起，搜索框独占整行，并让文案对齐内层 input 的 15px 内边距，
-  // 与同排其他输入框的 placeholder 保持同一基线
-  .hzq-cascader__tags-wrap:empty + .hzq-cascader__search-input {
-    flex: 1;
-    width: auto;
-    min-width: 60px;
-    margin-left: 15px;
   }
 }

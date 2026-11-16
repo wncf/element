@@ -68,7 +68,9 @@ export default {
       noMatch: 'Дал келген маалыматтар',
       loading: 'Жүктөлүүдө',
       placeholder: 'тандоо',
-      noData: 'маалымат жок'
+      noData: 'маалымат жок',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Мурунку',

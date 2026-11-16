@@ -419,6 +419,40 @@ describe('CascaderPanel', () => {
     expect(getOptions(el, 0)[1].querySelector('.hzq-radio').className).to.includes('is-disabled');
   });
 
+  it('check strictly in single mode: clicking the node row selects it', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader-panel
+          v-model="value"
+          :options="options"
+          :props="props"></hzq-cascader-panel>
+      `,
+      data() {
+        return {
+          value: ['zhejiang'],
+          options: options,
+          props: {
+            checkStrictly: true
+          }
+        };
+      }
+    }, true);
+
+    const el = vm.$el;
+    await waitImmediate();
+
+    // 非叶子节点：点击整行即可选中，不必点中 radio 本体
+    // （options[1] 是 disabled 的 jiangsu，所以这里选 options[0]）
+    getOptions(el, 0)[0].click();
+    await waitImmediate();
+    expect(vm.value).to.deep.equal(['zhejiang']);
+
+    // 叶子节点同样支持点击整行
+    getOptions(el, 1)[1].click();
+    await waitImmediate();
+    expect(vm.value).to.deep.equal(['zhejiang', 'ningbo']);
+  });
+
   it('check strictly in multiple mode', async() => {
     vm = createVue({
       template: `
@@ -447,13 +481,53 @@ describe('CascaderPanel', () => {
     expect(checkbox).to.exist;
     expect(checkbox.className).to.includes('is-checked');
 
+    // checkStrictly 下点击整行是「切换选中」，所以点 zhejiang 会先取消勾选，
+    // 再点一次会重新勾选并展开（handleExpand 与选中同时发生）。
+    // 这里点两次：第一次取消、第二次选中并展开出第二列。
     getOptions(el, 0)[0].click();
     await waitImmediate();
-    expect(getOptions(el, 1)[0].querySelector('.hzq-checkbox').className).to.not.includes('is-checked');
+    getOptions(el, 0)[0].click();
+    await waitImmediate();
+
     getOptions(el, 1)[0].querySelector('input').click();
     await waitImmediate();
     expect(vm.value).to.deep.equal(['zhejiang', 'hangzhou']);
     expect(getOptions(el, 0)[1].querySelector('.hzq-checkbox').className).to.includes('is-disabled');
+  });
+
+  it('check strictly in multiple mode: clicking the node row toggles it', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader-panel
+          v-model="value"
+          :options="options"
+          :props="props"></hzq-cascader-panel>
+      `,
+      data() {
+        return {
+          value: [],
+          options: options,
+          props: {
+            multiple: true,
+            checkStrictly: true,
+            emitPath: false
+          }
+        };
+      }
+    }, true);
+
+    const el = vm.$el;
+    await waitImmediate();
+
+    // 点击非叶子节点整行即可勾选
+    getOptions(el, 0)[0].click();
+    await waitImmediate();
+    expect(vm.value).to.deep.equal(['zhejiang']);
+
+    // 再点一次取消
+    getOptions(el, 0)[0].click();
+    await waitImmediate();
+    expect(vm.value).to.deep.equal([]);
   });
 
   it('custom props', async() => {

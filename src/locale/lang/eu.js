@@ -68,7 +68,9 @@ export default {
       noMatch: 'Bat datorren daturik ez',
       loading: 'Kargatzen',
       placeholder: 'Hautatu',
-      noData: 'Daturik ez'
+      noData: 'Daturik ez',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Joan',

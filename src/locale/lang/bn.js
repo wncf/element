@@ -71,7 +71,9 @@ exports.default = {
       noMatch: 'কোন মিল তথ্য',
       loading: 'লোড হচ্ছে',
       placeholder: 'পছন্দ কর',
-      noData: 'কোন তথ্য নেই'
+      noData: 'কোন তথ্য নেই',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'যাও',

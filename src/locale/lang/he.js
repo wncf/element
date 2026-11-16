@@ -68,7 +68,9 @@ export default {
       noMatch: 'ללא נתונים מתאימים',
       loading: 'טוען',
       placeholder: 'בחר',
-      noData: 'ללא נתונים'
+      noData: 'ללא נתונים',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'עבור ל',

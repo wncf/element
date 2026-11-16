@@ -70,7 +70,9 @@ export default {
       noMatch: 'Žiadna zhoda',
       loading: 'Načítavanie',
       placeholder: 'Vybrať',
-      noData: 'Žiadne dáta'
+      noData: 'Žiadne dáta',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Choď na',

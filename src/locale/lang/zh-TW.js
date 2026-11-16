@@ -68,7 +68,9 @@ export default {
       noMatch: '無匹配資料',
       loading: '加載中',
       placeholder: '請選擇',
-      noData: '無資料'
+      noData: '無資料',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: '前往',

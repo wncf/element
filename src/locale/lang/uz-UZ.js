@@ -68,7 +68,9 @@ export default {
       noMatch: 'Mos maʼlumot topilmadi',
       loading: 'Yuklanmoqda',
       placeholder: 'Tanlash',
-      noData: 'Maʼlumot yoʻq'
+      noData: 'Maʼlumot yoʻq',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Oʻtish',

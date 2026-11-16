@@ -68,7 +68,9 @@ export default {
       noMatch: 'データなし',
       loading: 'ロード中',
       placeholder: '選択してください',
-      noData: 'データなし'
+      noData: 'データなし',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: '',

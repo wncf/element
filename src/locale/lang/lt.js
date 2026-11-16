@@ -68,7 +68,9 @@ export default {
       noMatch: 'Duomenų nerasta',
       loading: 'Kraunasi',
       placeholder: 'Pasirink',
-      noData: 'Nėra duomenų'
+      noData: 'Nėra duomenų',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Eiti į',

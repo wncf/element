@@ -68,7 +68,9 @@ export default {
       noMatch: 'No hi ha dades que coincideixin',
       loading: 'Carregant',
       placeholder: 'Seleccionar',
-      noData: 'Sense Dades'
+      noData: 'Sense Dades',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Anar a',

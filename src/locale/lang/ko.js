@@ -68,7 +68,9 @@ export default {
       noMatch: '맞는 데이터가 없습니다',
       loading: '불러오는 중',
       placeholder: '선택',
-      noData: '데이터 없음'
+      noData: '데이터 없음',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: '이동',

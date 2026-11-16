@@ -68,7 +68,9 @@ export default {
       noMatch: 'Tidak ada data yg cocok',
       loading: 'Memuat',
       placeholder: 'Pilih',
-      noData: 'Tidak ada data'
+      noData: 'Tidak ada data',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'Pergi ke',

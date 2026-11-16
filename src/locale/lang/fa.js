@@ -68,7 +68,9 @@ export default {
       noMatch: 'هیچ داده‌ای پیدا نشد',
       loading: 'بارگیری',
       placeholder: 'انتخاب کنید',
-      noData: 'اطلاعاتی وجود ندارد'
+      noData: 'اطلاعاتی وجود ندارد',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'برو به',

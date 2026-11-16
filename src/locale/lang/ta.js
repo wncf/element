@@ -67,7 +67,9 @@ export default {
       noMatch: 'பொருத்தமான தரவு கிடைக்கவில்லை',
       loading: 'தயாராகிக்கொண்டிருக்கிறது',
       placeholder: 'தேர்வு செய்',
-      noData: 'தரவு இல்லை'
+      noData: 'தரவு இல்லை',
+      searchPlaceholder: 'Search',
+      noContent: 'No content'
     },
     pagination: {
       goto: 'தேவையான் பகுதிக்கு செல்',
