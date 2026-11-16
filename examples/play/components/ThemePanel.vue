@@ -162,16 +162,16 @@ export default {
   color: var(--hzq-text-color-secondary);
 }
 
-.theme-panel__row >>> .hzq-radio-group {
+.theme-panel__row ::v-deep .hzq-radio-group {
   flex: 1;
   display: flex;
 }
 
-.theme-panel__row >>> .hzq-radio-button {
+.theme-panel__row ::v-deep .hzq-radio-button {
   flex: 1;
 }
 
-.theme-panel__row >>> .hzq-radio-button__inner {
+.theme-panel__row ::v-deep .hzq-radio-button__inner {
   width: 100%;
   padding-left: 0;
   padding-right: 0;

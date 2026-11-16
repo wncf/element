@@ -56,7 +56,11 @@
   }
 }
 
-@if not global-variable-exists(--hzq-tokens-emitted) {
+// 单次守卫：Dart Sass 2.0 起不允许用 !global 声明尚不存在的变量，
+// 所以先在这里用默认值声明一次，下面只做赋值而不是首次声明
+$--hzq-tokens-emitted: false !default;
+
+@if not $--hzq-tokens-emitted {
   $--hzq-tokens-emitted: true !global;
 
   // 绝对色（与明暗轴无关）。组件层按 var() 引用它们，例如 tag 的深色变体文字、

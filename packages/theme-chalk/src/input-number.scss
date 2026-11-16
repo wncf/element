@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "mixins/mixins";
 @import "common/var";
 @import "input";
@@ -164,7 +166,7 @@
       top: auto;
       bottom: auto;
       height: 50%;
-      line-height: #{($--input-height - 2) / 2};
+      line-height: #{math.div($--input-height - 2, 2)};
 
       [class*=hzq-icon] {
         transform: scale(.8);
@@ -190,25 +192,25 @@
 
     &[class*=large] {
       [class*=increase], [class*=decrease] {
-        line-height: #{($--input-large-height - 2) / 2};
+        line-height: #{math.div($--input-large-height - 2, 2)};
       }
     }
 
     &[class*=medium] {
       [class*=increase], [class*=decrease] {
-        line-height: #{($--input-medium-height - 2) / 2};
+        line-height: #{math.div($--input-medium-height - 2, 2)};
       }
     }
 
     &[class*=small] {
       [class*=increase], [class*=decrease] {
-        line-height: #{($--input-small-height - 2) / 2};
+        line-height: #{math.div($--input-small-height - 2, 2)};
       }
     }
 
     &[class*=mini] {
       [class*=increase], [class*=decrease] {
-        line-height: #{($--input-mini-height - 2) / 2};
+        line-height: #{math.div($--input-mini-height - 2, 2)};
       }
     }
   }

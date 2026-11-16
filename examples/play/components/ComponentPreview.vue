@@ -256,7 +256,7 @@ export default {
   margin-bottom: 12px;
 }
 
-.component-preview__search >>> .hzq-input {
+.component-preview__search ::v-deep .hzq-input {
   display: block;
 }
 
@@ -267,11 +267,11 @@ export default {
   padding: 0 16px 12px;
 }
 
-.component-preview__size >>> .hzq-radio-button {
+.component-preview__size ::v-deep .hzq-radio-button {
   flex: 1;
 }
 
-.component-preview__size >>> .hzq-radio-button__inner {
+.component-preview__size ::v-deep .hzq-radio-button__inner {
   width: 100%;
   padding-left: 0;
   padding-right: 0;

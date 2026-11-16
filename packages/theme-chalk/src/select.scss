@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "mixins/mixins";
 @import "mixins/utils";
 @import "common/var";
@@ -85,7 +87,7 @@ $select-close-icon-height: 18px;
     }
 
     @include e(close) {
-      top: ($--input-large-height - $select-close-icon-height) / 2;
+      top: math.div($--input-large-height - $select-close-icon-height, 2);
       font-size: $--input-large-font-size;
     }
   }
@@ -96,7 +98,7 @@ $select-close-icon-height: 18px;
     }
 
     @include e(close) {
-      top: ($--input-medium-height - $select-close-icon-height) / 2;
+      top: math.div($--input-medium-height - $select-close-icon-height, 2);
       font-size: $--input-medium-font-size;
     }
   }
@@ -107,7 +109,7 @@ $select-close-icon-height: 18px;
     }
 
     @include e(close) {
-      top: ($--input-small-height - $select-close-icon-height) / 2;
+      top: math.div($--input-small-height - $select-close-icon-height, 2);
       font-size: $--input-small-font-size;
     }
   }
@@ -118,7 +120,7 @@ $select-close-icon-height: 18px;
     }
 
     @include e(close) {
-      top: ($--input-mini-height - $select-close-icon-height) / 2;
+      top: math.div($--input-mini-height - $select-close-icon-height, 2);
       font-size: $--input-mini-font-size;
     }
   }
@@ -151,7 +153,7 @@ $select-close-icon-height: 18px;
   @include e(close) {
     cursor: pointer;
     position: absolute;
-    top: ($--input-height - $select-close-icon-height) / 2;
+    top: math.div($--input-height - $select-close-icon-height, 2);
     z-index: $--index-top;
     right: 25px;
     color: $--select-input-color;
