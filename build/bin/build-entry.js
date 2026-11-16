@@ -43,6 +43,7 @@ const install = function(Vue, opts = {}) {
 
   Vue.prototype.$loading = Loading.service;
   Vue.prototype.$dialog = Dialog.dialog;
+  Vue.prototype.$drawer = Drawer.drawer;
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
 

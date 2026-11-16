@@ -276,6 +276,105 @@ Drawer 提供一个 `destroyOnClose` API, 用来在关闭 Drawer 时销毁子组
 
 :::
 
+### 命令式调用
+
+:::demo 不想在模板里写 Drawer 时，用 `this.$drawer(options, renderFn)` 直接打开。`type` 为 `confirm` 时在内容下方追加取消/确定按钮，为 `alert` 时只有内容。返回的实例代理提供 `visible`、`loading`、`close()`，适合在确认后继续异步提交的场景。
+```html
+<template>
+  <div>
+    <hzq-button @click="openAlert">打开 alert</hzq-button>
+    <hzq-button type="primary" @click="openConfirm">打开 confirm</hzq-button>
+    <hzq-button @click="openLeft">从左弹出</hzq-button>
+    <hzq-button @click="openCustom">自定义渲染</hzq-button>
+  </div>
+</template>
+
+<script>
+  export default {
+    methods: {
+      openAlert() {
+        this.$drawer({
+          title: '提示',
+          content: '这是一条 alert，右上角有关闭按钮。'
+        });
+      },
+      openConfirm() {
+        this.$drawer({
+          title: '确认删除',
+          type: 'confirm',
+          size: '420px',
+          content: '删除后不可恢复，确定继续吗？',
+          confirmButtonText: '删除',
+          cancelButtonText: '再想想',
+          confirm: instance => {
+            instance.loading = true;
+            return new Promise(resolve => {
+              setTimeout(() => {
+                instance.loading = false;
+                instance.close();
+                this.$message.success('已删除');
+                resolve();
+              }, 800);
+            });
+          }
+        });
+      },
+      openLeft() {
+        this.$drawer({
+          title: '左侧抽屉',
+          direction: 'ltr',
+          size: 360,
+          content: 'direction 支持 ltr / rtl / ttb / btt，size 可以是数字或百分比。'
+        });
+      },
+      openCustom() {
+        this.$drawer({ title: '自定义内容', size: '50%' }, h => (
+          <div style="padding: 0 20px;">
+            <p>这里由 render 函数返回，可以放任意 VNode。</p>
+            <hzq-button size="mini" type="primary">示例按钮</hzq-button>
+          </div>
+        ));
+      }
+    }
+  };
+</script>
+```
+:::
+
+:::tip
+默认同一时刻只显示一个抽屉，后续调用会排队，上一个关闭后延迟 500ms 再弹出。需要叠加显示时传 `stack: true`。
+
+这个排队行为与 `$dialog` 一致，两者共用同一套逻辑，但各自维护独立的队列。
+:::
+
+### $drawer Options
+
+`this.$drawer(options, renderFn?)`，第二个参数为 `h => VNode`，优先级高于 `content`。
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---------- | -------------- | ---------- | -------- |
+| title | 标题 | string | '' |
+| type | `alert`（无底部按钮）/ `confirm`（取消 + 确定） | string | alert |
+| size | 尺寸，数字补 `px`，百分比原样使用 | string / number | '' |
+| direction | 弹出方向 | string | rtl |
+| content | 内容，支持字符串或 VNode | string / object | '' |
+| maskClose | 点击遮罩是否关闭 | boolean | false |
+| escClose | 按 ESC 是否关闭 | boolean | true |
+| showClose | 是否显示右上角关闭按钮 | boolean | true |
+| withHeader | 是否渲染头部 | boolean | true |
+| confirmButtonText | 确定按钮文案 | string | '' |
+| cancelButtonText | 取消按钮文案 | string | '' |
+| confirm | 确定回调，可返回 Promise，rejection 会被吞掉 | function(instance) | — |
+| cancel | 取消回调 | function(instance) | — |
+| stack | 叠在上一个抽屉之上，而不是排队 | boolean | false |
+| border | 面板加边框样式 | boolean | false |
+
+返回的实例代理提供 `visible`、`loading`、`close()`。
+
+:::warning
+`hzq-drawer` 组件本身只有 `title` 和默认插槽，没有 `footer` 插槽。所以 `type: 'confirm'` 的按钮是追加在内容之后的，不会固定在面板底部。需要固定在底部时，请在业务侧自行控制布局。
+:::
+
 ### Drawer Attributes
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
