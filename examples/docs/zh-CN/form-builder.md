@@ -380,6 +380,699 @@
 ```
 :::
 
+### 字段类型解析
+
+把「字段类型」和「用什么组件渲染」分开：配置里存 `fieldType`，由 `field-resolver` 翻译成组件。解析器是一个普通函数，返回 `{ component, props, optionComponent }`，返回 `null` 表示不认识这个类型。
+
+库本身不内置任何类型表 —— 类型名属于业务，不同表单也可以用不同的解析器。`field.component` 的优先级永远高于解析器，所以新旧写法可以混用。解析器抛错时该字段降级为纯文本，不会让整个表单渲染失败。
+
+解析器返回的 `props` 是预设值，字段自己的 `props` 会覆盖同名项。类型表之外的兜底写法见下一个例子。
+
+:::demo 用一份 `PRESETS` 表把 `fieldType` 映射到组件，初始化时不需要再写 `component`。
+```html
+<template>
+  <hzq-form-builder
+    v-model="form"
+    :fields="fields"
+    :field-resolver="resolveField"
+    label-width="88px"
+  />
+</template>
+
+<script>
+  // 这份表只有业务自己知道，放在项目里，增删类型不用等组件库发版
+  const PRESETS = {
+    text: { component: 'hzq-input' },
+    textarea: {
+      component: 'hzq-input',
+      props: { type: 'textarea', rows: 3 }
+    },
+    switch: { component: 'hzq-switch' },
+    enum: {
+      component: 'hzq-select',
+      optionComponent: 'hzq-option',
+      props: { clearable: true }
+    }
+  };
+
+  export default {
+    data() {
+      return {
+        form: { name: '', remark: '', online: false, region: '' },
+        fields: [
+          { prop: 'name', label: '名称', fieldType: 'text' },
+          { prop: 'remark', label: '说明', fieldType: 'textarea' },
+          { prop: 'online', label: '启用', fieldType: 'switch' },
+          {
+            prop: 'region',
+            label: '区域',
+            fieldType: 'enum',
+            options: [
+              { label: '区域一', value: 'shanghai' },
+              { label: '区域二', value: 'beijing' }
+            ]
+          }
+        ]
+      };
+    },
+    methods: {
+      resolveField(field) {
+        return PRESETS[field.fieldType] || null;
+      }
+    }
+  };
+</script>
+```
+:::
+
+:::demo 类型表之外的情况用字段自己的配置兜底：`field.component` 直接写组件名或组件对象（优先级最高），`props` 覆盖解析器的预设，解析器返回 `null` 的字段会降级成纯文本。
+```html
+<template>
+  <hzq-form-builder
+    v-model="form"
+    :fields="fields"
+    :field-resolver="resolveField"
+    label-width="88px"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        form: { name: '', remark: '', legacy: '只在配置里出现' },
+        fields: [
+          { prop: 'name', label: '名称', fieldType: 'text' },
+          {
+            prop: 'remark',
+            label: '说明',
+            fieldType: 'textarea',
+            // 覆盖解析器预设的 rows
+            props: { rows: 6 }
+          },
+          {
+            prop: 'legacy',
+            label: '未知类型',
+            // 不给 component，解析器也返回 null → 渲染成纯文本
+            fieldType: 'not-registered'
+          }
+        ]
+      };
+    },
+    methods: {
+      resolveField(field) {
+        if (field.fieldType === 'text') return { component: 'hzq-input' };
+        if (field.fieldType === 'textarea') {
+          return { component: 'hzq-input', props: { type: 'textarea', rows: 3 } };
+        }
+        return null;
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 生成初始数据
+
+`createFormModel(fields, fieldResolver?)` 按字段配置生成初始数据对象，省去手写一份容易和配置对不上的空对象。它与 Vue 无关，可以在组件外调用。
+
+默认值取自 `field.defaultValue`，支持函数形式（每次调用重新求值，适合 `() => new Date()`）。没写时按组件兜底：`hzq-checkbox-group` 为 `[]`、`hzq-switch` 为 `false`、`hzq-rate` 为 `0`，其余为 `''`。数组和对象的默认值每次都会新建，多个表单实例之间不会串值。
+
+`prop` 支持嵌套路径和数组下标，`type` 为 `title` / `divider` 的条目会被跳过。
+
+```js
+import { createFormModel } from 'hzq-ui/src/utils/form-builder';
+
+const fields = [
+  { prop: 'name', component: 'hzq-input' },
+  { prop: 'tags', component: 'hzq-checkbox-group' },
+  { prop: 'online', component: 'hzq-switch' },
+  { prop: 'user.phone', component: 'hzq-input' },
+  { prop: 'items[0].id', component: 'hzq-input' },
+  { prop: 'createdAt', defaultValue: () => new Date() }
+];
+
+const form = createFormModel(fields);
+// {
+//   name: '',
+//   tags: [],
+//   online: false,
+//   user: { phone: '' },
+//   items: [{ id: '' }],
+//   createdAt: <调用时的时间>
+// }
+```
+
+传了 `fieldResolver` 时，默认值还能按 `fieldType` 推断 —— 由解析器指定的组件决定兜底值：
+
+```js
+const form = createFormModel(
+  [{ prop: 'online', fieldType: 'switch' }],
+  field => (field.fieldType === 'switch' ? { component: 'hzq-switch' } : null)
+);
+// { online: false }
+```
+
+配合后端数据时，默认值打底、后端覆盖：
+
+```js
+async loadDetail() {
+  const form = createFormModel(this.fields);
+  this.form = deepMerge(form, await api.getDetail());
+  this.loading = false;   // 数据准备好之后再渲染表单
+}
+```
+
+:::tip
+**先把数据准备好，再渲染表单。** `hzq-form-item` 是在挂载那一刻把当前值记为「初始值」的，`resetFields` 会回到这个快照。所以后端数据异步返回时，要等数据回来再渲染表单（用 `loading` 包住），否则初始值快照的是空值，用户点重置会把数据清空。
+
+默认值和后端数据的合并顺序是「默认值打底、后端覆盖」，嵌套对象需要递归合并（`Object.assign` 只能覆盖第一层），数组建议整体替换。
+:::
+
+### 编辑场景回显
+
+编辑页和新增页的区别只有一处：`v-model` 里的数据不是空对象，而是接口返回的详情。回显本身不需要额外 API，把数据填进 `model` 即可；难的是**时机**和**切换记录**。
+
+推荐做法是等数据回来再渲染表单。`loading` 期间不渲染 `hzq-form-builder`，数据就绪后一次性赋给 `model`，这样 `hzq-form-item` 挂载时快照到的就是详情值，点「重置」回到详情值而不是空值。如果边加载边渲染，表单项会先挂载在空值上，之后虽然能显示数据，但重置会清空全部内容。
+
+:::demo 加载完成后才渲染表单，重置回到详情值。
+```html
+<template>
+  <div>
+    <div v-if="loading" class="edit-tip">正在加载详情…</div>
+    <template v-else-if="form">
+      <hzq-form-builder
+        v-model="form"
+        :fields="fields"
+        label-width="88px"
+        show-actions
+        submit-text="保存"
+        @submit="handleSubmit"
+        @reset="handleReset"
+      />
+      <p class="edit-tip">{{ message }}</p>
+    </template>
+    <div v-else class="edit-tip">加载失败</div>
+  </div>
+</template>
+
+<script>
+  // 模拟接口：真实项目里换成 api.getDetail(id)
+  function fetchDetail() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          title: '十月加班申请',
+          hours: 8,
+          type: 'overtime',
+          remark: '项目上线支持',
+          contacts: '13800000000'
+        });
+      }, 500);
+    });
+  }
+
+  export default {
+    data() {
+      return {
+        loading: true,
+        // 数据没回来之前保持 null，配合 v-else-if 不渲染表单
+        form: null,
+        message: '',
+        fields: [
+          { prop: 'title', label: '标题', component: 'hzq-input', required: true },
+          { prop: 'hours', label: '时长', component: 'hzq-input-number' },
+          {
+            prop: 'type',
+            label: '类型',
+            component: 'hzq-select',
+            options: [
+              { label: '加班', value: 'overtime' },
+              { label: '调休', value: 'leave' }
+            ]
+          },
+          {
+            prop: 'remark',
+            label: '备注',
+            component: 'hzq-input',
+            props: { type: 'textarea', rows: 3 }
+          },
+          { prop: 'contacts', label: '联系电话', component: 'hzq-input' }
+        ]
+      };
+    },
+    created() {
+      this.loadDetail();
+    },
+    methods: {
+      loadDetail() {
+        this.loading = true;
+        fetchDetail().then(detail => {
+          // 一次性赋值：此时表单还没渲染，后续挂载拿到的就是这份数据
+          this.form = {
+            title: detail.title,
+            hours: detail.hours,
+            type: detail.type,
+            remark: detail.remark,
+            contacts: detail.contacts
+          };
+          this.loading = false;
+        });
+      },
+      handleSubmit(model) {
+        this.message = '已保存：' + JSON.stringify(model);
+      },
+      handleReset() {
+        // 重置回到挂载时的详情值，不是空值
+        this.message = '已恢复为原始详情';
+      }
+    }
+  };
+</script>
+
+<style>
+  .edit-tip {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #909399;
+  }
+</style>
+```
+:::
+
+在同一个页面里切换编辑对象时，只替换 `model` 是不够的：表单已经挂载过，`hzq-form-item` 记录的初始值还是上一条数据，点重置会跳回上一个对象的值。给 `hzq-form-builder` 加 `:key`，切换时整块重建，初始值随新数据重新快照；记录 id 作为 key 最直观。
+
+:::demo 切换记录时把记录 id 绑到 `:key` 上，重置回到当前对象的详情。
+```html
+<template>
+  <div>
+    <div class="record-switch">
+      <hzq-radio-group v-model="currentId" @change="switchRecord">
+        <hzq-radio-button
+          v-for="item in records"
+          :key="item.id"
+          :label="item.id"
+        >{{ item.name }}</hzq-radio-button>
+      </hzq-radio-group>
+    </div>
+
+    <hzq-form-builder
+      :key="currentId"
+      v-model="form"
+      :fields="fields"
+      label-width="88px"
+    />
+    <p class="edit-tip">当前表单值：{{ JSON.stringify(form) }}</p>
+  </div>
+</template>
+
+<script>
+  const RECORDS = [
+    { id: 1, name: '张三', department: '研发部', remark: '第一条' },
+    { id: 2, name: '李四', department: '产品部', remark: '第二条' },
+    { id: 3, name: '王五', department: '设计部', remark: '第三条' }
+  ];
+
+  export default {
+    data() {
+      return {
+        records: RECORDS,
+        currentId: 1,
+        form: {},
+        fields: [
+          { prop: 'name', label: '姓名', component: 'hzq-input' },
+          {
+            prop: 'department',
+            label: '部门',
+            component: 'hzq-select',
+            options: [
+              { label: '研发部', value: '研发部' },
+              { label: '产品部', value: '产品部' },
+              { label: '设计部', value: '设计部' }
+            ]
+          },
+          { prop: 'remark', label: '备注', component: 'hzq-input' }
+        ]
+      };
+    },
+    created() {
+      this.form = this.toModel(this.currentId);
+    },
+    methods: {
+      toModel(id) {
+        const record = RECORDS.filter(item => item.id === id)[0] || {};
+        return { name: record.name, department: record.department, remark: record.remark };
+      },
+      switchRecord(id) {
+        this.form = this.toModel(id);
+      }
+    }
+  };
+</script>
+
+<style>
+  .record-switch {
+    margin-bottom: 16px;
+  }
+  .edit-tip {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #909399;
+    word-break: break-all;
+  }
+</style>
+```
+:::
+
+后端返回的格式经常和组件的值形态对不上，回显前要转一次。常见的三类：时间戳转日期字符串（配合 `value-format`）、数字转金额字符串（`hzq-amount-input` 用字符串保存精度）、接口用 `0/1` 表示布尔。编辑态里有些字段只允许看，用 `disabled` 写死或写成函数都行；`props.readonly` 只会阻止输入，值仍会随表单提交。
+
+:::demo 在加载数据时做格式转换，配置本身保持可序列化。
+```html
+<template>
+  <div>
+    <hzq-form-builder
+      v-model="form"
+      :fields="fields"
+      label-width="96px"
+    />
+    <p class="edit-tip">{{ JSON.stringify(form) }}</p>
+  </div>
+</template>
+
+<script>
+  // 模拟接口返回：字段格式与组件期望的形态不一致
+  const DETAIL = {
+    launchAt: 1793808000000,   // 时间戳
+    budget: 1234.5,            // Number
+    urgent: 1,                 // 0 / 1
+    creator: '张三'            // 只读
+  };
+
+  function pad(n) {
+    return n < 10 ? '0' + n : String(n);
+  }
+
+  function formatDate(timestamp) {
+    const d = new Date(timestamp);
+    return [
+      d.getFullYear(),
+      pad(d.getMonth() + 1),
+      pad(d.getDate())
+    ].join('-') + ' ' + [pad(d.getHours()), pad(d.getMinutes()), pad(d.getSeconds())].join(':');
+  }
+
+  export default {
+    data() {
+      return {
+        form: {
+          // 时间戳 → 'yyyy-MM-dd HH:mm:ss'，与 value-format 对应
+          launchAt: formatDate(DETAIL.launchAt),
+          // 数字 → 字符串，避免精度问题
+          budget: DETAIL.budget.toFixed(2),
+          // 0 / 1 → 布尔
+          urgent: !!DETAIL.urgent,
+          creator: DETAIL.creator
+        },
+        fields: [
+          {
+            prop: 'launchAt',
+            label: '上线时间',
+            component: 'hzq-date-picker',
+            props: {
+              type: 'datetime',
+              valueFormat: 'yyyy-MM-dd HH:mm:ss',
+              placeholder: '选择时间'
+            }
+          },
+          {
+            prop: 'budget',
+            label: '预算',
+            component: 'hzq-amount-input',
+            props: { precision: 2 }
+          },
+          { prop: 'urgent', label: '是否加急', component: 'hzq-switch' },
+          {
+            prop: 'creator',
+            label: '创建人',
+            component: 'hzq-input',
+            // 编辑态只读：看得到、提交时仍带着这个值
+            props: { readonly: true }
+          }
+        ]
+      };
+    }
+  };
+</script>
+
+<style>
+  .edit-tip {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #909399;
+    word-break: break-all;
+  }
+</style>
+```
+:::
+
+:::warning
+上面几个 demo 里的转换函数（`formatDate`、`toFixed`、`!!`）都写在业务侧，不要在 `fields` 里塞函数去改值。`fields` 是配置，可能来自后端、要存库、要跨端复用；把转换逻辑留在加载数据那一步，配置才能保持可序列化。
+:::
+
+### 动态构建表单
+
+`fields` 是普通数组，运行中增删元素，表单会立刻重新渲染，不需要重新创建组件实例。`model` 需要自己同步：加字段时补上初始值，删字段时删掉对应键，否则提交的数据里会带着已经不存在的字段。
+
+字段的 `prop` 必须唯一。动态生成的字段建议用递增序号而不是「字段名」，业务名称随时可能重复或改名。
+
+:::demo 从左侧点选字段类型，右侧实时渲染表单并输出配置 JSON。点下方的字段标签可删除。
+```html
+<template>
+  <div class="dynamic-demo">
+    <div class="dynamic-demo__palette">
+      <span class="dynamic-demo__title">点击添加字段</span>
+      <button
+        v-for="item in palette"
+        :key="item.type"
+        type="button"
+        class="dynamic-demo__add"
+        @click="addField(item)"
+      >{{ item.label }}</button>
+    </div>
+
+    <div class="dynamic-demo__main">
+      <div v-if="fields.length" class="dynamic-demo__chips">
+        <span
+          v-for="field in fields"
+          :key="field.prop"
+          class="dynamic-demo__chip"
+          @click="removeField(field)"
+        >{{ field.label }} ×</span>
+      </div>
+
+      <hzq-form-builder
+        v-if="fields.length"
+        v-model="form"
+        :fields="fields"
+        label-width="96px"
+      />
+      <p v-else class="dynamic-demo__empty">还没有字段，从左侧点选添加</p>
+
+      <div v-if="fields.length" class="dynamic-demo__actions">
+        <hzq-button size="small" @click="clearFields">清空</hzq-button>
+        <hzq-button size="small" type="primary" @click="showConfig">输出配置</hzq-button>
+      </div>
+
+      <pre v-if="config" class="dynamic-demo__json">{{ config }}</pre>
+    </div>
+  </div>
+</template>
+
+<script>
+  const PALETTE = [
+    { type: 'text', label: '单行文本' },
+    { type: 'textarea', label: '多行文本' },
+    { type: 'number', label: '数字' },
+    { type: 'select', label: '下拉选择' },
+    { type: 'switch', label: '开关' },
+    { type: 'date', label: '日期' }
+  ];
+
+  // 每种类型展开成一份字段配置，同时给出初始值
+  function buildField(item, seq) {
+    const base = {
+      prop: 'field' + seq,
+      label: item.label + seq,
+      component: 'hzq-input',
+      defaultValue: ''
+    };
+
+    switch (item.type) {
+      case 'textarea':
+        return Object.assign(base, { props: { type: 'textarea', rows: 3 } });
+      case 'number':
+        return Object.assign(base, {
+          component: 'hzq-input-number',
+          defaultValue: 0
+        });
+      case 'select':
+        return Object.assign(base, {
+          component: 'hzq-select',
+          options: [
+            { label: '选项 A', value: 'a' },
+            { label: '选项 B', value: 'b' }
+          ]
+        });
+      case 'switch':
+        return Object.assign(base, {
+          component: 'hzq-switch',
+          defaultValue: false
+        });
+      case 'date':
+        return Object.assign(base, {
+          component: 'hzq-date-picker',
+          props: { type: 'date', valueFormat: 'yyyy-MM-dd' }
+        });
+      default:
+        return base;
+    }
+  }
+
+  export default {
+    data() {
+      return {
+        palette: PALETTE,
+        fields: [],
+        form: {},
+        seq: 0,
+        config: ''
+      };
+    },
+    methods: {
+      addField(item) {
+        this.seq += 1;
+        const field = buildField(item, this.seq);
+
+        this.fields.push(field);
+        // model 与 fields 必须同步：新字段没有键，输入框会拿到 undefined
+        this.$set(this.form, field.prop, field.defaultValue);
+        this.config = '';
+      },
+
+      removeField(field) {
+        this.fields = this.fields.filter(item => item.prop !== field.prop);
+        // 删字段的同时删数据，否则提交时会带上已删除的键
+        this.$delete(this.form, field.prop);
+        this.config = '';
+      },
+
+      clearFields() {
+        this.fields = [];
+        this.form = {};
+        this.config = '';
+      },
+
+      showConfig() {
+        this.config = JSON.stringify(this.fields, null, 2);
+      }
+    }
+  };
+</script>
+
+<style>
+  .dynamic-demo {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .dynamic-demo__palette {
+    flex: 0 0 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .dynamic-demo__title {
+    font-size: 13px;
+    color: #909399;
+  }
+
+  .dynamic-demo__add {
+    padding: 6px 8px;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 13px;
+    color: #606266;
+    cursor: pointer;
+  }
+
+  .dynamic-demo__add:hover {
+    border-color: #409eff;
+    color: #409eff;
+  }
+
+  .dynamic-demo__main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .dynamic-demo__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .dynamic-demo__chip {
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #f4f4f5;
+    font-size: 12px;
+    color: #606266;
+    cursor: pointer;
+  }
+
+  .dynamic-demo__chip:hover {
+    background: #fef0f0;
+    color: #f56c6c;
+  }
+
+  .dynamic-demo__empty {
+    margin: 0;
+    padding: 24px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #909399;
+  }
+
+  .dynamic-demo__actions {
+    margin-top: 8px;
+  }
+
+  .dynamic-demo__json {
+    margin: 12px 0 0;
+    padding: 12px;
+    background: #f5f7fa;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #606266;
+    overflow: auto;
+    max-height: 240px;
+  }
+</style>
+```
+:::
+
+:::tip
+**切换字段类型时加 `:key`。** 如果设计器允许把一个字段从「单行文本」改成「多选」，只改 `fields` 里的 `component`，同一个位置的组件实例可能被复用，内部状态会残留。给字段容器或整块表单加 `:key="field.prop + field.component"`，类型变化时强制重建。
+
+另外配置来自后端时，渲染前建议先做一遍检查：`prop` 是否缺失或重复、`component` 是否存在、`defaultValue` 的形态是否和组件匹配。库本身不做这类校验，配错了只会降级成纯文本或收到控制台告警。
+:::
+
 ### FormBuilder Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
@@ -387,6 +1080,7 @@
 | value / v-model | 表单数据。会被就地更新，不产生副本 | object | — | {} |
 | fields | 字段配置，每一项渲染一个表单项，详见下方 Field 配置项 | array | — | [] |
 | rules | 表单校验规则，按 `prop` 与字段自身规则合并 | object | — | {} |
+| field-resolver | 字段解析器，把 `fieldType` 翻译成 `{ component, props, optionComponent }`。返回 `null` 表示不认识 | function(field) | — | — |
 | label-width | 标签宽度，透传给 `hzq-form` | string | — | — |
 | label-position | 标签位置 | string | right / left / top | right |
 | label-suffix | 标签后缀 | string | — | '' |
@@ -413,8 +1107,10 @@
 | ---------- | -------------- | ---------- | --- | -------- |
 | prop | 对应数据对象的路径，支持 `a.b` 与 `list[0].id` | string | — | — |
 | label | 标签文案 | string | — | — |
-| component | 字段组件：全局注册的组件名字符串（如 `hzq-select`）或组件对象。不填则交给 `slot` 接管 | string / object | — | — |
-| props | 透传给字段组件的 props | object | — | — |
+| component | 字段组件：全局注册的组件名字符串（如 `hzq-select`）或组件对象。不填则交给 `slot` 接管。写了就不走 `field-resolver` | string / object | — | — |
+| fieldType | 语义类型，交给 `field-resolver` 解析成组件。`component` 为空时才生效 | string | — | — |
+| props | 透传给字段组件的 props。同名项会覆盖 `field-resolver` 返回的预设 | object | — | — |
+| defaultValue | 初始值，`createFormModel` 会使用；支持函数形式，每次调用重新求值 | any / function | — | — |
 | events | 事件名 → 处理函数，回调最后会多收到一个 `ctx`（`{ field, model, prop, value }`） | object | — | — |
 | slots | 转发进字段组件内部的插槽。`['prefix']` 表示同名转发，`{ prefix: 'myPrefix' }` 表示映射到你的插槽名 | array / object | — | — |
 | options | 选项数据。按组件自动渲染 `hzq-option` / `hzq-radio` / `hzq-checkbox` | array | — | — |
@@ -457,3 +1153,21 @@
 | validateField | 校验指定字段 | (props, callback) |
 | resetFields | 重置所有字段并清除校验状态 | — |
 | clearValidate | 清除指定字段的校验状态 | (props) |
+
+### 工具函数
+
+```js
+import {
+  createFormModel,
+  resolveFieldComponent,
+  mergeComponentProps
+} from 'hzq-ui/src/utils/form-builder';
+```
+
+| 函数 | 说明 |
+| --- | --- |
+| `createFormModel(fields, fieldResolver?)` | 按字段配置生成初始数据对象。`defaultValue` 优先，没写时按组件兜底；跳过 `title` / `divider`；支持嵌套路径与数组下标。返回新对象，不修改 `fields` |
+| `resolveFieldComponent(field, fieldResolver?)` | 解析字段该用哪个组件。返回 `{ component, props, optionComponent }` 或 `null`。优先级：`field.component` → `fieldResolver` → `null`。解析器抛错时返回 `null` |
+| `mergeComponentProps(presetProps, fieldProps)` | 合并解析器的预设 props 与字段自己的 props，后者覆盖前者 |
+
+这几个函数与 Vue 无关，可以脱离组件单独使用，也便于在业务侧做配置校验、导出等场景复用。
