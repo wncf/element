@@ -117,10 +117,6 @@ exports.default = {
     pageHeader: {
       title: 'প্রত্যাবর্তন'
     },
-    popconfirm: {
-      confirmButtonText: 'নিশ্চিত',
-      cancelButtonText: 'বাতিল করুন'
-    },
     empty: {
       description: 'কোন তথ্য নেই'
     }

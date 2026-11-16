@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'Orqaga'
     },
-    popconfirm: {
-      confirmButtonText: 'Tasdiqlash',
-      cancelButtonText: 'Bekor qilish'
-    },
     empty: {
       description: 'Boʻsh'
     }

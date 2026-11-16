@@ -113,10 +113,6 @@ export default {
     pageHeader: {
       title: 'Indietro'
     },
-    popconfirm: {
-      confirmButtonText: 'Sì',
-      cancelButtonText: 'No'
-    },
     empty: {
       description: 'Nessun dato'
     }

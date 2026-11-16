@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'Nyuma' // to be translated
     },
-    popconfirm: {
-      confirmButtonText: 'Ndio',
-      cancelButtonText: 'Hapana'
-    },
     empty: {
       description: 'Hakuna Data'
     }

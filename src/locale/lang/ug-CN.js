@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'قايتىش'
     },
-    popconfirm: {
-      confirmButtonText: 'ھەئە',
-      cancelButtonText: 'ياق'
-    },
     empty: {
       description: 'ئۇچۇر يوق'
     }

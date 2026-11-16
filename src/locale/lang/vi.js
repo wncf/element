@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'Quay lại'
     },
-    popconfirm: {
-      confirmButtonText: 'Ok',
-      cancelButtonText: 'Huỷ'
-    },
     empty: {
       description: 'Không có dữ liệu'
     }

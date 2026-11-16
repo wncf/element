@@ -116,10 +116,6 @@ export default {
     pageHeader: {
       title: 'Späť'
     },
-    popconfirm: {
-      confirmButtonText: 'Potvrdiť',
-      cancelButtonText: 'Zrušiť'
-    },
     empty: {
       description: 'Žiadne dáta'
     }

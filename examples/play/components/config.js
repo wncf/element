@@ -80,7 +80,6 @@ export const PREVIEW_GROUPS = [
       { id: 'dialog', label: 'Dialog 对话框' },
       { id: 'drawer', label: 'Drawer 抽屉' },
       { id: 'popover', label: 'Popover 弹出框' },
-      { id: 'popconfirm', label: 'Popconfirm 气泡确认' },
       { id: 'card', label: 'Card 卡片' },
       { id: 'carousel', label: 'Carousel 走马灯' },
       { id: 'collapse', label: 'Collapse 折叠面板' },

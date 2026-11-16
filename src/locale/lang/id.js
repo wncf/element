@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'Kembali'
     },
-    popconfirm: {
-      confirmButtonText: 'Ya',
-      cancelButtonText: 'Tidak'
-    },
     empty: {
       description: 'Tidak ada data'
     }

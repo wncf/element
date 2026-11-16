@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'Reen'
     },
-    popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
-    },
     empty: {
       description: 'Neniuj datumoj'
     }

@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: '返回'
     },
-    popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
-    },
     empty: {
       description: '暫無資料'
     }

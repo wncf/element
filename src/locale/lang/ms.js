@@ -113,10 +113,6 @@ export default {
     pageHeader: {
       title: 'Kembali'
     },
-    popconfirm: {
-      confirmButtonText: 'Sah',
-      cancelButtonText: 'Batal'
-    },
     empty: {
       description: 'Tiada maklumat'
     }

@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'Nazad'
     },
-    popconfirm: {
-      confirmButtonText: 'Da',
-      cancelButtonText: 'Ne'
-    },
     empty: {
       description: 'Nema podataka'
     }

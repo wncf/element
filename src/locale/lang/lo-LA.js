@@ -117,10 +117,6 @@ exports.default = {
     pageHeader: {
       title: 'ກັບ ຄືນ'
     },
-    popconfirm: {
-      confirmButtonText: 'ຢືນຢັນ',
-      cancelButtonText: 'ຍົກເລີກ'
-    },
     empty: {
       description: 'ບໍ່​ມີ​ຂໍ້​ມູນ'
     }

@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'ආපසු' // to be translated
     },
-    popconfirm: {
-      confirmButtonText: 'ඔව්',
-      cancelButtonText: 'නැහැ'
-    },
     empty: {
       description: 'දත්ත නැත'
     }

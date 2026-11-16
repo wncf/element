@@ -117,10 +117,6 @@ exports.default = {
     pageHeader: {
       title: 'Geri' // to be translated
     },
-    popconfirm: {
-      confirmButtonText: 'Bəli', // to be translated
-      cancelButtonText: 'Xeyr' // to be translated
-    },
     empty: {
       description: 'Məlumat yoxdur'
     }

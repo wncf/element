@@ -113,10 +113,6 @@ export default {
     pageHeader: {
       title: 'Tornar'
     },
-    popconfirm: {
-      confirmButtonText: 'Si',
-      cancelButtonText: 'No'
-    },
     empty: {
       description: 'Sense Dades'
     }

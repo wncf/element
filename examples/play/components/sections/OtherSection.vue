@@ -38,12 +38,6 @@
       </hzq-popover>
     </preview-block>
 
-    <preview-block section-id="popconfirm" title="Popconfirm 气泡确认">
-      <hzq-popconfirm title="确定删除吗？" @confirm="$message.success('已确认')">
-        <hzq-button slot="reference" :size="size" type="danger">删除</hzq-button>
-      </hzq-popconfirm>
-    </preview-block>
-
     <preview-block section-id="card" title="Card 卡片">
       <hzq-card class="preview-card" shadow="never" style="margin-bottom: 16px;">
         <div slot="header">无阴影卡片</div>

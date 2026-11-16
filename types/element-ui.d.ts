@@ -81,7 +81,6 @@ import { ElInfiniteScroll } from './infinite-scroll'
 import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 import { ElDrawer } from './drawer'
-import { ElPopconfirm } from './popconfirm'
 import { ElSkeleton } from './skeleton'
 import { ElSkeletonItem } from './skeleton-item'
 import { ElCascaderPanel } from './cascader-panel'
@@ -358,9 +357,6 @@ export class Avatar extends ElAvatar {}
 
 /** Drawer Component */
 export class Drawer extends ElDrawer {}
-
-/** Popconfirm Component */
-export class Popconfirm extends ElPopconfirm {}
 
 /** Skeleton Component */
 export class Skeleton extends ElSkeleton {}

@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'Til baka'
     },
-    popconfirm: {
-      confirmButtonText: 'Já',
-      cancelButtonText: 'Nei'
-    },
     empty: {
       description: 'Engin gögn'
     }

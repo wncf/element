@@ -113,10 +113,6 @@ export default {
     pageHeader: {
       title: 'Tilbake'
     },
-    popconfirm: {
-      confirmButtonText: 'Ja',
-      cancelButtonText: 'Nei'
-    },
     empty: {
       description: 'Ingen Data'
     }

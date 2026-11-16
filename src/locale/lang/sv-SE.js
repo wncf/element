@@ -114,10 +114,6 @@ export default {
     pageHeader: {
       title: 'Bakåt' // to be translated
     },
-    popconfirm: {
-      confirmButtonText: 'Ja',
-      cancelButtonText: 'Nej'
-    },
     empty: {
       description: 'Inga Data'
     }
