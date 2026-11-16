@@ -220,19 +220,19 @@
 
     <div class="changes-meta">
       对照基线：上游提交 <code>290e68ea</code>（release 2.15.14）→ 本仓库当前工作区，
-      共 <code>730</code> 个文件、<code>+41282 / -18972</code> 行。<br>
-      统计口径：<code>git diff 290e68ea</code>。组件改动 <code>188</code> 个文件、文档改动 <code>253</code> 个文件。<br>
+      共 <code>759</code> 个文件、<code>+31746 / -23706</code> 行。<br>
+      统计口径：<code>git diff 290e68ea</code>。组件改动 <code>277</code> 个文件、文档改动 <code>263</code> 个文件。<br>
       包名 <code>hzq-ui</code>，版本 <code>1.0.0</code>，命名空间由 <code>el-</code> 改为 <code>hzq-</code>。
     </div>
 
     <div class="changes-summary">
       <div class="changes-card">
-        <strong>2</strong>
-        <span>新增组件（AmountInput、FormBuilder）</span>
+        <strong>3</strong>
+        <span>新增组件（AmountInput、FormBuilder、SvgIcon）</span>
       </div>
       <div class="changes-card">
-        <strong>1</strong>
-        <span>新增命令式 API（$dialog）</span>
+        <strong>2</strong>
+        <span>新增命令式 API（$dialog、$drawer）</span>
       </div>
       <div class="changes-card">
         <strong>4</strong>
@@ -339,6 +339,28 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
       返回的实例代理提供 <code>visible</code>、<code>loading</code>、<code>close()</code>。
     </p>
 
+    <h3>$drawer 函数式抽屉<span class="tag-new">新增 API</span></h3>
+    <p>
+      新增 <code>Vue.prototype.$drawer(options, renderFn?)</code>，与 <code>$dialog</code> 同一套队列与实例代理机制，
+      但对应 <code>hzq-drawer</code>，多了尺寸与方向控制。两者各自维护独立队列，互不阻塞。
+    </p>
+    <table>
+      <tr><th>选项</th><th>说明</th><th>默认值</th></tr>
+      <tr><td><code>type</code></td><td><code>'alert'</code>（无底部按钮）或 <code>'confirm'</code>（取消 + 确定）</td><td><code>'alert'</code></td></tr>
+      <tr><td><code>size</code></td><td>尺寸，数字补 <code>px</code>，百分比原样使用</td><td><code>''</code></td></tr>
+      <tr><td><code>direction</code></td><td><code>ltr</code> / <code>rtl</code> / <code>ttb</code> / <code>btt</code></td><td><code>'rtl'</code></td></tr>
+      <tr><td><code>content</code></td><td>字符串或 VNode</td><td><code>''</code></td></tr>
+      <tr><td><code>maskClose</code> / <code>escClose</code> / <code>showClose</code></td><td>遮罩点击 / ESC / 右上角关闭按钮</td><td>false / true / true</td></tr>
+      <tr><td><code>withHeader</code></td><td>是否渲染头部</td><td>true</td></tr>
+      <tr><td><code>confirm</code> / <code>cancel</code></td><td>回调，可返回 Promise；<code>confirm</code> 的 rejection 会被吞掉</td><td>—</td></tr>
+      <tr><td><code>stack</code></td><td>叠在上一个抽屉之上，而不是排队等待</td><td>false</td></tr>
+      <tr><td><code>border</code></td><td>面板加边框样式</td><td>false</td></tr>
+    </table>
+    <div class="breaking">
+      <strong>使用限制：</strong><code>hzq-drawer</code> 只有 <code>title</code> 与默认插槽，没有 <code>footer</code> 插槽。
+      <code>type: 'confirm'</code> 的按钮追加在内容之后，不会固定在面板底部；需要固定底部时请自行控制布局。
+    </div>
+
     <h2>三、组件行为变更</h2>
 
     <h3>Dialog 对话框<span class="tag-change">默认行为变更</span></h3>
@@ -393,7 +415,14 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
       <li>日期面板底部「此刻 / 清除 / 确定」按钮由 <code>mini</code> 改为 <code>small</code>。</li>
       <li>新增 <code>large</code> 尺寸档完整样式。</li>
       <li>范围选择器改为 flex 布局，两个输入框等分剩余宽度。</li>
+      <li>面板视觉参考 view-design 重构：日期/月份/年份统一 14px 字号与 32×32 圆角方块单元格，悬停改为浅色底，今天改用右上角小圆点。</li>
+      <li>范围选中条由圆角胶囊改为平铺连续色带（<code>background-clip: content-box</code> 实现上下内缩 2px）。</li>
+      <li>去掉标题下方的分隔线，标题与日历间距收紧；区间面板内边距与单日期面板对齐。</li>
     </ul>
+    <div class="breaking">
+      <strong>尺寸变化：</strong>为容纳更大的单元格，面板宽度调整 —— 单日期 <code>322px → 256px</code>（含侧栏 <code>438 → 372</code>），
+      日期区间 <code>520px → 508px</code>。若有页面依赖原面板宽度做定位或并排布局，需要复核。
+    </div>
 
     <h3>Progress / Rate / Popconfirm / Empty<span class="tag-change">深色模式适配</span></h3>
     <ul>
@@ -505,9 +534,42 @@ configureThemeScope('[data-hzq-scope]');</code></pre>
 
     <h2>六、导入方式变化</h2>
     <ul>
-      <li><strong>新增</strong>：<code>AmountInput</code>（<code>ElAmountInput</code>）、<code>FormBuilder</code>（<code>ElFormBuilder</code>）、<code>Vue.prototype.$dialog</code>。</li>
+      <li><strong>新增</strong>：<code>AmountInput</code>（<code>ElAmountInput</code>）、<code>FormBuilder</code>（<code>ElFormBuilder</code>）、<code>Vue.prototype.$dialog</code>、<code>Vue.prototype.$drawer</code>。</li>
       <li><strong>移除</strong>：<code>MessageBox</code> 及其四个原型方法。</li>
       <li>按需引入清单 <code>components.json</code> 同步增删，<code>web-types.json</code> 与 <code>types/*.d.ts</code> 已更新。</li>
     </ul>
+
+    <h2>七、构建配置</h2>
+
+    <h3>dart-sass 替换 node-sass<span class="tag-change">构建变更</span></h3>
+    <p>
+      <code>node-sass</code> 是原生模块，必须匹配 Node ABI 且需要预编译二进制，在 Windows 上还要 Python 2 兜底编译。
+      改为纯 JS 的 <code>sass</code>（dart-sass）后，安装不再依赖编译工具链，换 Node 版本或换机器都无需额外处理。
+    </p>
+    <table>
+      <tr><th>依赖</th><th>变化</th></tr>
+      <tr><td><code>node-sass</code></td><td>移除</td></tr>
+      <tr><td><code>sass</code></td><td>新增，锁定 <code>&gt;=1.32.13 &lt;1.61.0</code>（1.61 起要求 Node 14+）</td></tr>
+      <tr><td><code>gulp-sass</code></td><td><code>^4.0.2 → ^5.1.0</code>，5.x 不再依赖 node-sass</td></tr>
+      <tr><td><code>sass-loader</code></td><td>保持 <code>^7.1.0</code>，通过 <code>implementation</code> 选项指定实现</td></tr>
+    </table>
+    <ul>
+      <li>断点 map 的值统一改为字符串：dart-sass 插值 map 时不会展开成 <code>max-width: 767px</code>，<code>res()</code> mixin 同时去掉 <code>inspect()</code>。</li>
+      <li>全部除法改用 <code>math.div()</code>，<code>!global</code> 守卫变量改为 <code>!default</code> 声明后再赋值，消除全部 dart-sass 弃用警告。</li>
+      <li>play 页面的 <code>&gt;&gt;&gt;</code> 深度选择器改为 <code>::v-deep</code>，原写法会被 sass 判为非法选择器而整条丢弃。</li>
+    </ul>
+    <p>
+      <strong>产物一致性：</strong>替换后与 node-sass 逐条比对，2843 个选择器的声明内容完全一致，
+      差异仅为引号、小数前导零、百分比精度、图标字符转义等格式层面。
+    </p>
+
+    <h2>八、开发指南</h2>
+
+    <h3>浮层层级管理<span class="tag-new">新增文档</span></h3>
+    <p>
+      补充浮层层级的统一说明：静态 Sass 变量（<code>$--index-normal</code> / <code>$--index-top</code> / <code>$--index-popper</code>）、
+      <code>PopupManager</code> 的运行时取号与弹窗栈、以及新浮层组件接入 <code>Popup</code> / <code>vue-popper</code> mixin 的方式。
+    </p>
+    <p>核心约束：不要写死大数字 <code>z-index</code>，浮层必须追加到 <code>body</code>，祖先元素带 <code>transform</code> 会让内部 <code>z-index</code> 失效。</p>
   </div>
 </template>
