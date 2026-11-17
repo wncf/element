@@ -235,8 +235,8 @@
         <span>下线组件（MessageBox、Popconfirm）</span>
       </div>
       <div class="changes-card">
-        <strong>2</strong>
-        <span>新增命令式 API（$dialog、$drawer）</span>
+        <strong>3</strong>
+        <span>新增命令式 API（$dialog、$drawer、$tooltip）</span>
       </div>
       <div class="changes-card">
         <strong>4</strong>
@@ -364,6 +364,65 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
       <strong>使用限制：</strong><code>hzq-drawer</code> 只有 <code>title</code> 与默认插槽，没有 <code>footer</code> 插槽。
       <code>type: 'confirm'</code> 的按钮追加在内容之后，不会固定在面板底部；需要固定底部时请自行控制布局。
     </div>
+
+    <h3>v-tooltip 指令与 $tooltip<span class="tag-new">新增 API</span></h3>
+    <p>
+      新增单行省略 + 溢出提示能力，用于表格单元格、列表标题等<strong>宽度受限、文字可能被截断</strong>的场景。
+      指令给元素注入 <code>overflow: hidden; text-overflow: ellipsis; white-space: nowrap</code>，
+      悬浮时用 <code>scrollWidth &gt; clientWidth</code>（容差 1px，含直接子节点）判断是否真的被截断，
+      <strong>只有被截断才提示</strong>。
+    </p>
+    <pre v-pre><code>&lt;!-- 内容取元素文本，仅在截断时提示 --&gt;
+&lt;span v-tooltip style="width: 220px;"&gt;{{ row.remark }}&lt;/span&gt;
+
+&lt;!-- 用绑定值作为提示内容 --&gt;
+&lt;span v-tooltip="row.remark" style="width: 220px;"&gt;{{ row.remark }}&lt;/span&gt;
+
+&lt;!-- 悬浮即提示，不判断溢出 --&gt;
+&lt;hzq-button v-tooltip.always="'刷新'"&gt;图标按钮&lt;/hzq-button&gt;</code></pre>
+    <table>
+      <tr><th>写法</th><th>说明</th></tr>
+      <tr><td><code>v-tooltip</code></td><td>内容取元素文本，溢出时才提示，注入省略样式</td></tr>
+      <tr><td><code>v-tooltip="text"</code></td><td>用绑定值（String / Number）作为提示内容</td></tr>
+      <tr><td><code>v-tooltip="{ ... }"</code></td><td>对象写法：<code>content</code>、<code>placement</code>、<code>effect</code>、<code>maxWidth</code>、<code>offset</code>、<code>popperClass</code>、<code>delay</code>、<code>disabled</code>、<code>always</code>、<code>ellipsis</code></td></tr>
+      <tr><td><code>v-tooltip:bottom-start</code></td><td>指令参数指定方向</td></tr>
+      <tr><td><code>v-tooltip.always</code></td><td>悬浮即提示，不判断溢出</td></tr>
+      <tr><td><code>v-tooltip.ellipsis</code></td><td>强制注入省略样式（配合 <code>.always</code> 使用）</td></tr>
+      <tr><td><code>v-tooltip.no-ellipsis</code></td><td>不注入省略样式</td></tr>
+      <tr><td><code>v-tooltip.light</code></td><td>浅色主题</td></tr>
+    </table>
+    <p>
+      配置优先级：<strong>对象字段 &gt; 修饰符 / 指令参数 &gt; 默认值</strong>。默认延迟 <code>200ms</code>。
+      指令底层是命令式的 <code>Vue.prototype.$tooltip(options)</code>，返回 <code>{ hide(), update() }</code>，
+      鼠标离开后自动关闭，也可以手动控制：
+    </p>
+    <pre><code>const handle = this.$tooltip({
+  target: this.$refs.el.$el,
+  content: '完整提示文字',
+  placement: 'top',   // 默认 top
+  effect: 'dark',     // dark | light
+  maxWidth: 360
+});
+handle.update();     // 重新定位
+handle.hide();       // 主动关闭</code></pre>
+    <div class="breaking">
+      <strong>使用限制：</strong>
+      <ul>
+        <li><code>$tooltip</code> 是<strong>全局单例</strong>，同一时刻只有一个提示，重复调用会替换上一个。</li>
+        <li>注入的是<strong>行内样式</strong>，<code>unbind</code> 时按原值还原；会覆盖元素原有的 <code>overflow</code> / <code>text-overflow</code> / <code>white-space</code>。</li>
+        <li><strong>不修改 <code>display</code></strong>：<code>&lt;span&gt;</code>、<code>&lt;a&gt;</code> 等 inline 元素上 <code>text-overflow</code> 不生效，需自行设 <code>display: inline-block</code> 并给出宽度。</li>
+        <li>元素没有宽度约束时不会截断，也就不会提示——这是有意为之，避免短文本也弹浮层。</li>
+        <li>浮层<strong>可移入</strong>：离开触发元素后有 <code>150ms</code> 缓冲，期间移入浮层即可停留并<strong>选中复制完整文字</strong>；拖选过程中鼠标划出浮层也不会关闭。</li>
+      </ul>
+    </div>
+    <p>
+      <strong>v-for / 大表格场景</strong>：浮层是全局单例，无论列表渲染多少元素，body 下始终只有一个
+      <code>.hzq-tooltip__popper</code> 节点，隐藏时保留复用，<strong>不随元素数量增长</strong>。
+      每元素只多挂一个状态对象和 2 个事件监听，溢出检测仅在 <code>mouseenter</code> 时计算；
+      元素被移除（删除、分页、虚拟滚动回收）时，指令会解绑监听并释放单例对它的引用。
+      不要在同一个元素上同时使用 <code>v-tooltip</code> 与表格列的 <code>show-overflow-tooltip</code> ——
+      后者是每个单元格一个 <code>hzq-tooltip</code> 组件实例，与单例浮层叠加会重复提示。
+    </p>
 
     <h2>三、组件行为变更</h2>
 
