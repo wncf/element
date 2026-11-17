@@ -28,8 +28,7 @@
         type: Function,
         default: noop
       },
-      type: String,
-      stretch: Boolean
+      type: String
     },
 
     data() {
@@ -198,7 +197,6 @@
         type,
         panes,
         editable,
-        stretch,
         onTabClick,
         onTabRemove,
         navStyle,
@@ -260,7 +258,7 @@
           {scrollBtn}
           <div class={['hzq-tabs__nav-scroll']} ref="navScroll">
             <div
-              class={['hzq-tabs__nav', `is-${ this.rootTabs.tabPosition }`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
+              class={['hzq-tabs__nav', `is-${ this.rootTabs.tabPosition }`]}
               ref="nav"
               style={navStyle}
               role="tablist"

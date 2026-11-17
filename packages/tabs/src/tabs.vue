@@ -19,8 +19,7 @@
         type: String,
         default: 'top'
       },
-      beforeLeave: Function,
-      stretch: Boolean
+      beforeLeave: Function
     },
 
     provide() {
@@ -68,6 +67,16 @@
         } else if (this.panes.length !== 0) {
           this.panes = [];
         }
+      },
+      // 未受控（没有 v-model / value）且面板都显式命名时，currentName 的初始值 '0'
+      // 匹配不上任何面板，会导致一个面板都不渲染。这里回落到第一个面板。
+      setDefaultActivePane() {
+        if (this.value !== undefined || this.activeName) return;
+        if (!this.panes.length) return;
+        const matched = this.panes.some(pane => (pane.name || pane.index) === this.currentName);
+        if (matched) return;
+        const first = this.panes[0];
+        this.setCurrentName(first.name || first.index);
       },
       handleTabClick(tab, tabName, event) {
         if (tab.disabled) return;
@@ -119,8 +128,7 @@
         panes,
         editable,
         addable,
-        tabPosition,
-        stretch
+        tabPosition
       } = this;
 
       const newButton = editable || addable
@@ -143,8 +151,7 @@
           onTabRemove: handleTabRemove,
           editable,
           type,
-          panes,
-          stretch
+          panes
         },
         ref: 'nav'
       };
@@ -182,10 +189,12 @@
 
     mounted() {
       this.calcPaneInstances();
+      this.setDefaultActivePane();
     },
 
     updated() {
       this.calcPaneInstances();
+      this.setDefaultActivePane();
     }
   };
 </script>

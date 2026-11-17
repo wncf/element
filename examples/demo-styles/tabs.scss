@@ -1,0 +1,26 @@
+// 右侧操作区示例：标签栏自适应宽度，右侧留白放按钮；底部横线由使用方自己画
+.demo-block.demo-tabs .tabs-with-extra {
+  position: relative;
+
+  .hzq-tabs__header {
+    position: relative;
+    padding-right: 90px;
+  }
+
+  // 组件不再内置底部横线，这里由使用方补一条
+  .hzq-tabs__header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: var(--hzq-border-color-light);
+  }
+
+  > .hzq-button {
+    position: absolute;
+    right: 0;
+    top: 4px;
+  }
+}

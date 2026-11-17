@@ -564,6 +564,12 @@ $--tab-header-color-hover: $--color-text-regular !default;
 $--tab-header-color: $--color-text-regular !default;
 $--tab-header-fill-active: var(--hzq-fill-color-light) !default;
 $--tab-header-fill-hover: var(--hzq-fill-color-light) !default;
+// card 类型分段控件：外层容器的填充与选中项色块的填充。
+// 两者必须取不同档的中性色，否则深色模式下容器(#1a2740)与色块(#1e293b)几乎同色、色块看不出来；
+// overlay 在浅色下等于白、深色下比容器亮一档，两种模式都能拉开层次。
+$--tab-card-fill: var(--hzq-fill-color-light) !default;
+$--tab-card-active-fill: var(--hzq-bg-color-overlay) !default;
+$--tab-card-active-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08) !default;
 $--tab-vertical-header-width: 90px !default;
 $--tab-vertical-header-count-color: $--color-white !default;
 $--tab-vertical-header-count-fill: $--color-text-secondary !default;

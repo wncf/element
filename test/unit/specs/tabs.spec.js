@@ -32,7 +32,6 @@ describe('Tabs', () => {
       `
     }, true);
 
-    let paneList = vm.$el.querySelector('.hzq-tabs__content').children;
     let spy = sinon.spy();
 
     vm.$refs.tabs.$on('tab-click', spy);
@@ -40,13 +39,13 @@ describe('Tabs', () => {
     setTimeout(_ => {
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       expect(tabList[0].classList.contains('is-active')).to.be.true;
-      expect(paneList[0].style.display).to.not.ok;
+      expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.equal(1);
 
       tabList[2].click();
       vm.$nextTick(_ => {
         expect(spy.withArgs(vm.$refs['pane-click']).calledOnce).to.true;
         expect(tabList[2].classList.contains('is-active')).to.be.true;
-        expect(paneList[2].style.display).to.not.ok;
+        expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.equal(1);
         done();
       });
     }, 100);
@@ -73,16 +72,18 @@ describe('Tabs', () => {
       }
     }, true);
     setTimeout(_ => {
-      const paneList = vm.$el.querySelector('.hzq-tabs__content').children;
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
+      const getRenderedPane = () => vm.$el.querySelector('.hzq-tabs__content').children;
 
       expect(tabList[1].classList.contains('is-active')).to.be.true;
-      expect(paneList[1].style.display).to.not.ok;
+      expect(getRenderedPane().length).to.equal(1);
+      expect(getRenderedPane()[0].id).to.equal('pane-tab-B');
 
       tabList[3].click();
       vm.$nextTick(_ => {
         expect(tabList[3].classList.contains('is-active')).to.be.true;
-        expect(paneList[3].style.display).to.not.ok;
+        expect(getRenderedPane().length).to.equal(1);
+        expect(getRenderedPane()[0].id).to.equal('pane-tab-D');
         expect(vm.activeName === 'tab-D');
         done();
       });
@@ -143,13 +144,15 @@ describe('Tabs', () => {
     }, true);
 
     setTimeout(() => {
-      expect(vm.$el.querySelectorAll('.hzq-tab-pane').length).to.equal(4);
+      // load 默认为 once：只渲染激活的那一个面板
+      expect(vm.$el.querySelectorAll('.hzq-tab-pane').length).to.equal(1);
       vm.tabs.push({
         label: 'tab5',
         name: 'tab5'
       });
       setTimeout(() => {
-        expect(vm.$el.querySelectorAll('.hzq-tab-pane').length).to.equal(5);
+        expect(vm.$el.querySelectorAll('.hzq-tab-pane').length).to.equal(1);
+        expect(vm.$refs.tabs.$refs.nav.$refs.tabs.length).to.equal(5);
         done();
       });
     }, 100);
@@ -225,13 +228,14 @@ describe('Tabs', () => {
       tabList[1].querySelector('.hzq-icon-close').click();
       setTimeout(_ => {
         expect(tabList.length).to.be.equal(2);
-        expect(paneList.length).to.be.equal(2);
+        // load 默认为 once：面板只保留当前激活的那一个
+        expect(paneList.length).to.be.equal(1);
         expect(tabList[1].classList.contains('is-active')).to.be.true;
 
         vm.$refs.tabs.$el.querySelector('.hzq-tabs__new-tab').click();
         setTimeout(_ => {
           expect(tabList.length).to.be.equal(3);
-          expect(paneList.length).to.be.equal(3);
+          expect(paneList.length).to.be.equal(1);
           expect(tabList[2].classList.contains('is-active')).to.be.true;
           done();
         }, 100);
@@ -312,13 +316,13 @@ describe('Tabs', () => {
 
       setTimeout(_ => {
         expect(tabList.length).to.be.equal(3);
-        expect(paneList.length).to.be.equal(3);
+        expect(paneList.length).to.be.equal(1);
         expect(tabList[2].classList.contains('is-active')).to.be.true;
 
         tabList[2].querySelector('.hzq-icon-close').click();
         setTimeout(_ => {
           expect(tabList.length).to.be.equal(2);
-          expect(paneList.length).to.be.equal(2);
+          expect(paneList.length).to.be.equal(1);
           expect(tabList[1].classList.contains('is-active')).to.be.true;
           done();
         }, 100);
@@ -376,7 +380,6 @@ describe('Tabs', () => {
       `
     }, true);
 
-    let paneList = vm.$el.querySelector('.hzq-tabs__content').children;
     let spy = sinon.spy();
 
     vm.$refs.tabs.$on('tab-click', spy);
@@ -384,41 +387,13 @@ describe('Tabs', () => {
     setTimeout(_ => {
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       expect(tabList[0].classList.contains('is-active')).to.be.true;
-      expect(paneList[0].style.display).to.not.ok;
+      expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.equal(1);
 
       tabList[2].click();
       vm.$nextTick(_ => {
         expect(spy.withArgs(vm.$refs['pane-click']).calledOnce).to.true;
         expect(tabList[2].classList.contains('is-active')).to.be.true;
-        expect(paneList[2].style.display).to.not.ok;
-        done();
-      });
-    }, 100);
-  });
-  it('stretch', done => {
-    vm = createVue({
-      template: `
-        <hzq-tabs ref="tabs" stretch :tab-position="tabPosition">
-          <hzq-tab-pane label="用户管理">A</hzq-tab-pane>
-          <hzq-tab-pane label="配置管理">B</hzq-tab-pane>
-          <hzq-tab-pane label="角色管理" ref="pane-click">C</hzq-tab-pane>
-          <hzq-tab-pane label="定时任务补偿">D</hzq-tab-pane>
-        </hzq-tabs>
-      `,
-      data() {
-        return {
-          tabPosition: 'bottom'
-        };
-      }
-    }, true);
-
-    setTimeout(_ => {
-      expect(vm.$el.querySelector('[role=tablist]').classList.contains('is-stretch')).to.be.true;
-
-      vm.tabPosition = 'left';
-
-      vm.$nextTick(_ => {
-        expect(vm.$el.querySelector('[role=tablist]').classList.contains('is-stretch')).not.to.be.true;
+        expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.equal(1);
         done();
       });
     }, 100);
@@ -499,31 +474,90 @@ describe('Tabs', () => {
       });
     }, 100);
   });
-  it('should work with lazy', done => {
+  it('should work with load="lazy"', done => {
     vm = createVue({
       template: `
         <hzq-tabs ref="tabs">
           <hzq-tab-pane label="用户管理" name="A">A</hzq-tab-pane>
           <hzq-tab-pane label="配置管理" name="B">B</hzq-tab-pane>
           <hzq-tab-pane label="角色管理" name="C">C</hzq-tab-pane>
-          <hzq-tab-pane label="定时任务补偿" lazy name="D">D</hzq-tab-pane>
+          <hzq-tab-pane label="定时任务补偿" load="lazy" name="D">D</hzq-tab-pane>
         </hzq-tabs>
       `
     }, true);
 
-    expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.be.equal(3);
-    expect(vm.$el.querySelector('.hzq-tabs__content > #pane-D')).to.be.equal(null);
-
     setTimeout(_ => {
+      // lazy：首屏只挂载激活的那个，D 尚未挂载
+      expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.be.equal(1);
+      expect(vm.$el.querySelector('.hzq-tabs__content > #pane-D')).to.be.equal(null);
+
       vm.$el.querySelector('.hzq-tabs__nav > #tab-D').click();
       vm.$nextTick(() => {
-        expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.be.equal(4);
         expect(vm.$el.querySelector('.hzq-tabs__content > #pane-D')).not.to.be.equal(null);
+
+        // 切走后 A、D 都还保留（lazy 不销毁）
+        vm.$el.querySelector('.hzq-tabs__nav > #tab-A').click();
+        vm.$nextTick(() => {
+          expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.be.equal(2);
+          expect(vm.$el.querySelector('.hzq-tabs__content > #pane-D')).not.to.be.equal(null);
+          done();
+        });
+      });
+    }, 100);
+  });
+  it('should work with load="once" (default)', done => {
+    vm = createVue({
+      template: `
+        <hzq-tabs ref="tabs">
+          <hzq-tab-pane label="用户管理" name="A">A</hzq-tab-pane>
+          <hzq-tab-pane label="配置管理" name="B">B</hzq-tab-pane>
+          <hzq-tab-pane label="定时任务补偿" name="D">D</hzq-tab-pane>
+        </hzq-tabs>
+      `
+    }, true);
+
+    setTimeout(_ => {
+      // 默认 once：只有激活的面板在 DOM 里
+      expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.be.equal(1);
+
+      vm.$el.querySelector('.hzq-tabs__nav > #tab-D').click();
+      vm.$nextTick(() => {
+        expect(vm.$el.querySelector('.hzq-tabs__content > #pane-D')).not.to.be.equal(null);
+        expect(vm.$el.querySelector('.hzq-tabs__content > #pane-A')).to.be.equal(null);
 
         vm.$el.querySelector('.hzq-tabs__nav > #tab-A').click();
         vm.$nextTick(() => {
-          expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.be.equal(4);
+          expect(vm.$el.querySelector('.hzq-tabs__content > #pane-D')).to.be.equal(null);
+          done();
+        });
+      });
+    }, 100);
+  });
+  it('should work with load="all"', done => {
+    vm = createVue({
+      template: `
+        <hzq-tabs ref="tabs">
+          <hzq-tab-pane label="用户管理" name="A">A</hzq-tab-pane>
+          <hzq-tab-pane label="配置管理" name="B">B</hzq-tab-pane>
+          <hzq-tab-pane label="定时任务补偿" load="all" name="D">D</hzq-tab-pane>
+        </hzq-tabs>
+      `
+    }, true);
+
+    setTimeout(_ => {
+      // all：D 与激活的 A 一起常驻，未激活且非 all 的 B 不渲染
+      expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.be.equal(2);
+      expect(vm.$el.querySelector('.hzq-tabs__content > #pane-D')).not.to.be.equal(null);
+      expect(vm.$el.querySelector('.hzq-tabs__content > #pane-B')).to.be.equal(null);
+
+      vm.$el.querySelector('.hzq-tabs__nav > #tab-D').click();
+      vm.$nextTick(() => {
+        vm.$el.querySelector('.hzq-tabs__nav > #tab-A').click();
+        vm.$nextTick(() => {
+          // 切走后 D 仍常驻
+          expect(vm.$el.querySelector('.hzq-tabs__content').children.length).to.be.equal(2);
           expect(vm.$el.querySelector('.hzq-tabs__content > #pane-D')).not.to.be.equal(null);
+          expect(vm.$el.querySelector('.hzq-tabs__content > #pane-A')).not.to.be.equal(null);
           done();
         });
       });
@@ -553,17 +587,17 @@ describe('Tabs', () => {
       }
     }, true);
     setTimeout(_ => {
-      const paneList = vm.$el.querySelector('.hzq-tabs__content').children;
+      const getPane = () => vm.$el.querySelector('.hzq-tabs__content').children[0];
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
 
       expect(tabList[1].classList.contains('is-active')).to.be.true;
-      expect(paneList[1].style.display).to.not.ok;
+      expect(getPane().id).to.equal('pane-tab-B');
 
       tabList[3].click();
       vm.$nextTick(_ => {
         setTimeout(() => {
           expect(tabList[1].classList.contains('is-active')).to.be.true;
-          expect(paneList[1].style.display).to.not.ok;
+          expect(getPane().id).to.equal('pane-tab-B');
           expect(vm.activeName === 'tab-B');
           done();
         }, 200);

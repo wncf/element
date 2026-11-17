@@ -34,11 +34,11 @@
 ```
 :::
 
-### 选项卡样式
+### 分段控件样式
 
-选项卡样式的标签页。
+分段控件风格的标签页。
 
-:::demo 只需要设置 `type` 属性为 `card` 就可以使选项卡改变为标签风格。
+:::demo 只需要设置 `type` 属性为 `card`，标签栏会变成一块独立的分段控件：外层是浅色圆角容器，选中项是内嵌的圆角块。标签栏不再撑满容器，右侧留出的空白可以直接放操作按钮。
 
 ```html
 <template>
@@ -78,6 +78,36 @@
   <hzq-tab-pane label="角色管理">角色管理</hzq-tab-pane>
   <hzq-tab-pane label="定时任务补偿">定时任务补偿</hzq-tab-pane>
 </hzq-tabs>
+```
+:::
+
+### 右侧操作区
+
+标签栏宽度按内容自适应，右侧留白可以直接放置操作按钮。底部的横线也由使用方自己维护，按需通过 CSS 添加。
+
+:::demo 默认类型不再内置底部横线；示例里用 `::after` 在标签栏下方画一条，并在同一行的右侧放一个按钮。
+
+```html
+<template>
+  <div class="tabs-with-extra">
+    <hzq-tabs v-model="activeName">
+      <hzq-tab-pane label="用户管理" name="first">用户管理</hzq-tab-pane>
+      <hzq-tab-pane label="配置管理" name="second">配置管理</hzq-tab-pane>
+      <hzq-tab-pane label="角色管理" name="third">角色管理</hzq-tab-pane>
+    </hzq-tabs>
+    <hzq-button type="primary" size="mini">新建用户</hzq-button>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -282,7 +312,6 @@
 | addable  | 标签是否可增加   | boolean   | — |  false  |
 | editable  | 标签是否同时可增加和关闭   | boolean   | — |  false  |
 | tab-position  | 选项卡所在位置 | string   |  top/right/bottom/left  |  top |
-| stretch  | 标签的宽度是否自撑开 | boolean   |  -  |  false |
 | before-leave | 切换标签之前的钩子，若返回 false 或者返回 Promise 且被 reject，则阻止切换。 | Function(activeName, oldActiveName) | — | — |
 
 ### Tabs Events
@@ -300,4 +329,4 @@
 | disabled | 是否禁用 | boolean | — | false |
 | name      | 与选项卡绑定值 value 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
-| lazy  | 标签是否延迟渲染   | boolean   | — |  false  |
+| load  | 面板内容的加载策略。`once` 只在激活期间挂载，切走即销毁；`lazy` 首次激活时挂载并一直保留；`all` 首屏全部挂载并一直保留 | string | once / lazy / all | once |

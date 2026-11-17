@@ -471,6 +471,26 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
       常规用法中插槽选项的写法完全不变。
     </div>
 
+    <h3>Tabs 标签页<span class="tag-change">破坏性变更</span></h3>
+    <div class="breaking">
+      <strong>需要留意：</strong>面板默认改为「切走即销毁」—— 切走的标签页内容会从 DOM 移除，
+      再次进入时重新挂载，<strong>表单输入、滚动位置、组件内部状态都会丢失</strong>。
+      需要保留状态请给该 <code>hzq-tab-pane</code> 显式加 <code>load="lazy"</code>。
+    </div>
+    <ul>
+      <li>新增 <code>hzq-tab-pane</code> 的 <code>load</code> 属性（string，默认 <code>'once'</code>）：
+        <code>once</code> 只在激活期间挂载；<code>lazy</code> 首次激活时挂载并一直保留；<code>all</code> 首屏全部挂载并一直保留。</li>
+      <li>移除 <code>hzq-tab-pane</code> 的 <code>lazy</code> 属性，改用 <code>load="lazy"</code>。</li>
+      <li>移除 <code>hzq-tabs</code> 的 <code>stretch</code> 属性。</li>
+      <li>标签栏改为 flex 布局，宽度<strong>按内容自适应</strong>，不再撑满容器；右侧留白可用于放置操作按钮。</li>
+      <li>移除 <code>.hzq-tabs__nav-wrap::after</code> 底部横线，需要横线请在使用方自行通过 CSS 添加。</li>
+      <li><code>type="card"</code> 改为分段控件造型：外层浅色圆角容器 + 内嵌圆角选中块，与内容区之间不再有连线。</li>
+    </ul>
+    <p>
+      不受控场景（不传 <code>v-model</code> / <code>value</code>）且面板均显式命名时，
+      现在会自动回落到第一个面板，不会出现一个面板都不渲染的情况。
+    </p>
+
     <h3>DatePicker / DateTimePicker<span class="tag-change">样式变更</span></h3>
     <ul>
       <li>日期面板底部「此刻 / 清除 / 确定」按钮由 <code>mini</code> 改为 <code>small</code>。</li>
