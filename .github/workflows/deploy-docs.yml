@@ -8,8 +8,6 @@ on:
   push:
     branches:
       - dev
-      # 临时：用于首次验证 workflow 是否能跑通，验证后移除
-      - feat/loading-svg-icon-docs
   # 允许在 Actions 页面手动触发
   workflow_dispatch:
 
