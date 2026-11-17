@@ -117,6 +117,25 @@
 ```
 :::
 
+### 全局自定义加载组件
+
+如果需要全局替换加载图标（例如使用自定义的转圈组件），可以在安装时传入 `loading.spinnerComponent` 与 `loading.spinnerProps`，之后所有 `v-loading` 指令和 `$loading` 服务都会默认使用该组件渲染。
+
+```javascript
+import Vue from 'vue';
+import HZQ from 'hzq-ui';
+import MySpinner from './MySpinner.vue';
+
+Vue.use(HZQ, {
+  loading: {
+    spinnerComponent: MySpinner,
+    spinnerProps: { size: 32, color: '#409eff' }
+  }
+});
+```
+
+组件会接收到 `spinnerProps` 中的全部属性。单次使用时可覆盖这些属性：指令方式通过 `element-loading-size`、`element-loading-color` 属性，服务方式通过 `size`、`color` 配置项；同时 `element-loading-spinner` 字符串图标仍然具有更高优先级。
+
 ### 整页加载
 
 页面数据加载时显示。
@@ -204,5 +223,9 @@ console.log(loadingInstance1 === loadingInstance2); // true
 | lock | 同 `v-loading` 指令中的 `lock` 修饰符 | boolean | — | false |
 | text | 显示在加载图标下方的加载文案 | string | — | — |
 | spinner | 自定义加载图标类名 | string | — | — |
+| spinnerComponent | 自定义加载展示组件，覆盖全局配置 | VueComponent/object | — | — |
+| spinnerProps | 传给自定义加载组件的属性，与全局配置合并 | object | — | {} |
+| size | 传给自定义加载组件的尺寸 | string/number | — | — |
+| color | 传给自定义加载组件的颜色 | string | — | — |
 | background | 遮罩背景色 | string | — | — |
 | customClass | Loading 的自定义类名 | string | — | — |

@@ -17,7 +17,17 @@ import './assets/styles/common.css';
 import './assets/styles/fonts/style.css';
 import icon from './icon.json';
 
-Vue.use(Element);
+// 文档示例用的业务 SVG 图标，运行期注入，无需构建配置
+Vue.use(Element, {
+  svgIcons: {
+    prefix: 'crm',
+    icons: {
+      'base-arrow': '<svg viewBox="0 0 24 24"><path d="M12 3l9 18H3z"/></svg>',
+      'base-book': '<svg viewBox="0 0 24 24"><path d="M4 4h7v16H4zM13 4h7v16h-7z"/></svg>',
+      'base-bulb': '<svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M9 18h6v2H9z"/></svg>'
+    }
+  }
+});
 Vue.use(VueRouter);
 Vue.component('demo-block', demoBlock);
 Vue.component('main-footer', MainFooter);

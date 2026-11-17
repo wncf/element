@@ -124,7 +124,7 @@
 
 ### 尺寸
 
-:::demo 与其他表单控件一致，支持 `large` / `medium` / `small` / `mini` 四档，不传时跟随 `hzq-form` 或全局 `$ELEMENT.size`。
+:::demo 与其他表单控件一致，支持 `large` / `medium` / `small` / `mini` 四档，不传时跟随 `hzq-form` 或全局 `$HZQ.size`。
 ```html
 <template>
   <hzq-amount-input v-model="large" size="large" placeholder="large" style="width: 140px; margin-right: 8px;" />

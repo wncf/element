@@ -78,7 +78,7 @@
       },
 
       colorSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size || this._elFormItemSize || (this.$HZQ || {}).size;
       },
 
       colorDisabled() {
