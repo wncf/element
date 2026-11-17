@@ -69,6 +69,83 @@ describe('SvgIcon', () => {
     });
   });
 
+  describe('运行时注入', () => {
+    const svg = '<svg viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>';
+
+    it('传 { 名称: svg内容 } 时注入 symbol', () => {
+      registerSvgIcons({ arrow: svg }, { prefix: 'crm' });
+
+      const symbol = document.getElementById('icon-crm-arrow');
+      expect(symbol).to.exist;
+      expect(symbol.nodeName.toLowerCase()).to.equal('symbol');
+      expect(symbol.getAttribute('viewBox')).to.equal('0 0 24 24');
+      expect(symbol.querySelector('path')).to.exist;
+    });
+
+    it('没有 viewBox 时用 width/height 推导', () => {
+      registerSvgIcons(
+        { dot: '<svg width="16" height="16"><circle r="8"/></svg>' },
+        { prefix: 'crm' }
+      );
+
+      const symbol = document.getElementById('icon-crm-dot');
+      expect(symbol.getAttribute('viewBox')).to.equal('0 0 16 16');
+    });
+
+    it('缺少 xmlns 时自动补齐，节点处于 SVG 命名空间', () => {
+      registerSvgIcons(
+        { plain: '<svg viewBox="0 0 24 24"><path d="M12 3l9 18H3z"/></svg>' },
+        { prefix: 'crm' }
+      );
+
+      const symbol = document.getElementById('icon-crm-plain');
+      expect(symbol).to.exist;
+      const path = symbol.querySelector('path');
+      expect(path).to.exist;
+      // 命名空间缺失会导致浏览器不渲染，这是之前图标空白的根因
+      expect(path.namespaceURI).to.equal('http://www.w3.org/2000/svg');
+      expect(symbol.namespaceURI).to.equal('http://www.w3.org/2000/svg');
+    });
+
+    it('内容为空时告警并跳过', () => {
+      registerSvgIcons({ blank: '<svg viewBox="0 0 24 24"></svg>' }, { prefix: 'crm', silent: true });
+
+      expect(document.getElementById('icon-crm-blank')).to.not.exist;
+    });
+
+    it('重复注册被拒绝，不会重复注入', () => {
+      registerSvgIcons({ arrow: svg }, { prefix: 'crm' });
+      expect(() => registerSvgIcons({ arrow: svg }, { prefix: 'crm' })).to.throw(/重复注册/);
+      expect(document.querySelectorAll('#icon-crm-arrow').length).to.equal(1);
+    });
+
+    it('非法内容只告警不抛错', () => {
+      registerSvgIcons({ bad: 'not an svg' }, { prefix: 'crm', silent: true });
+
+      expect(document.getElementById('icon-crm-bad')).to.not.exist;
+    });
+
+    it('清空注册表时移除已注入的 symbol', () => {
+      registerSvgIcons({ arrow: svg }, { prefix: 'crm' });
+      expect(document.getElementById('icon-crm-arrow')).to.exist;
+
+      clearSvgIcons();
+      expect(document.getElementById('icon-crm-arrow')).to.not.exist;
+    });
+
+    it('组件挂载时能引用到注入的 symbol', () => {
+      registerSvgIcons({ arrow: svg }, { prefix: 'crm' });
+      vm = createVue({
+        template: '<hzq-svg-icon name="crm-arrow" />'
+      }, true);
+
+      const use = vm.$el.querySelector('use');
+      const href = use.getAttribute('xlink:href') || use.getAttribute('href');
+      expect(href).to.equal('#icon-crm-arrow');
+      expect(document.getElementById('icon-crm-arrow')).to.exist;
+    });
+  });
+
   describe('component', () => {
     it('渲染 use 并指向 icon-{name}', () => {
       vm = createVue({
@@ -92,8 +169,29 @@ describe('SvgIcon', () => {
         `
       }, true);
 
-      expect(vm.$refs.a.$el.getAttribute('width')).to.equal('1em');
-      expect(vm.$refs.b.$el.getAttribute('width')).to.equal('24px');
+      // 尺寸写在行内 style 上，否则会被 CSS 的 width/height 覆盖
+      expect(vm.$refs.a.$el.style.width).to.equal('1em');
+      expect(vm.$refs.a.$el.style.height).to.equal('1em');
+      expect(vm.$refs.b.$el.style.width).to.equal('24px');
+      expect(vm.$refs.b.$el.style.height).to.equal('24px');
+    });
+
+    it('size 传数字时补上 px 单位', () => {
+      vm = createVue({
+        template: '<hzq-svg-icon name="a" :size="32" />'
+      }, true);
+
+      expect(vm.$el.style.width).to.equal('32px');
+      expect(vm.$el.style.height).to.equal('32px');
+    });
+
+    it('行内尺寸不会被主题 CSS 覆盖', () => {
+      vm = createVue({
+        template: '<hzq-svg-icon name="a" size="48px" />'
+      }, true);
+
+      // 真实布局尺寸应为 48px，而不是 CSS 里的 1em
+      expect(vm.$el.getBoundingClientRect().width).to.equal(48);
     });
 
     it('color 写入 style，className 写入 class', () => {

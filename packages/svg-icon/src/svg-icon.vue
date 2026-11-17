@@ -3,21 +3,21 @@
     class="hzq-svg-icon"
     :class="svgClass"
     :style="svgStyle"
-    :width="size"
-    :height="size"
     aria-hidden="true"
     v-on="$listeners"
   >
     <!--
-      方案 A：走 svg-sprite。
-      使用方用 svg-sprite-loader 把 svg 打成 symbol（symbolId: 'icon-[name]'），
-      这里用 <use> 引用，构建配置无需改造。
+      两种来源最终都产出 id 为 icon-[name] 的 symbol：
+      - svg-sprite-loader 构建期注入（只传图标名数组）
+      - registerSvgIcons 运行期注入（传 { 名称: svg 内容 }）
     -->
     <use :xlink:href="symbolId" />
   </svg>
 </template>
 
 <script>
+import { ensureSvgIconInjected } from './registry';
+
 export default {
   name: 'HzqSvgIcon',
 
@@ -55,7 +55,28 @@ export default {
     },
 
     svgStyle() {
-      return this.color ? { color: this.color } : {};
+      const style = {};
+      // 尺寸必须走行内样式：CSS 里的 width/height 会覆盖 svg 的 width/height 属性
+      if (this.size !== null && this.size !== undefined && this.size !== '') {
+        const value = typeof this.size === 'number' ? `${this.size}px` : this.size;
+        style.width = value;
+        style.height = value;
+      }
+      if (this.color) {
+        style.color = this.color;
+      }
+      return style;
+    }
+  },
+
+  mounted() {
+    // 兜底：若注册发生在 body 尚未可用时，这里补注入一次
+    ensureSvgIconInjected(this.name);
+  },
+
+  watch: {
+    name(val) {
+      ensureSvgIconInjected(val);
     }
   }
 };

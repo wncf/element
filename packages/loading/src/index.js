@@ -4,6 +4,7 @@ import { addClass, removeClass, getStyle } from 'hzq-ui/src/utils/dom';
 import { PopupManager } from 'hzq-ui/src/utils/popup';
 import afterLeave from 'hzq-ui/src/utils/after-leave';
 import merge from 'hzq-ui/src/utils/merge';
+import { getConfig } from './config';
 
 const LoadingConstructor = Vue.extend(loadingVue);
 
@@ -12,7 +13,11 @@ const defaults = {
   fullscreen: true,
   body: false,
   lock: false,
-  customClass: ''
+  customClass: '',
+  spinnerComponent: null,
+  spinnerProps: {},
+  size: null,
+  color: null
 };
 
 let fullscreenLoading;
@@ -79,6 +84,12 @@ const Loading = (options = {}) => {
   if (options.fullscreen && fullscreenLoading) {
     return fullscreenLoading;
   }
+
+  const config = getConfig();
+  if (!options.spinnerComponent) {
+    options.spinnerComponent = config.spinnerComponent;
+  }
+  options.spinnerProps = merge({}, config.spinnerProps, options.spinnerProps);
 
   let parent = options.body ? document.body : options.target;
   let instance = new LoadingConstructor({

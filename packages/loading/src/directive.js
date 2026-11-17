@@ -93,6 +93,8 @@ loadingDirective.install = Vue => {
       const spinnerExr = el.getAttribute('element-loading-spinner');
       const backgroundExr = el.getAttribute('element-loading-background');
       const customClassExr = el.getAttribute('element-loading-custom-class');
+      const sizeExr = el.getAttribute('element-loading-size');
+      const colorExr = el.getAttribute('element-loading-color');
       const vm = vnode.context;
       const mask = new Mask({
         el: document.createElement('div'),
@@ -101,6 +103,8 @@ loadingDirective.install = Vue => {
           spinner: vm && vm[spinnerExr] || spinnerExr,
           background: vm && vm[backgroundExr] || backgroundExr,
           customClass: vm && vm[customClassExr] || customClassExr,
+          size: vm && vm[sizeExr] || sizeExr,
+          color: vm && vm[colorExr] || colorExr,
           fullscreen: !!binding.modifiers.fullscreen
         }
       });
@@ -111,8 +115,13 @@ loadingDirective.install = Vue => {
       binding.value && toggleLoading(el, binding);
     },
 
-    update: function(el, binding) {
+    update: function(el, binding, vnode) {
+      const vm = vnode.context;
+      const sizeExr = el.getAttribute('element-loading-size');
+      const colorExr = el.getAttribute('element-loading-color');
       el.instance.setText(el.getAttribute('element-loading-text'));
+      el.instance.size = vm && vm[sizeExr] || sizeExr;
+      el.instance.color = vm && vm[colorExr] || colorExr;
       if (binding.oldValue !== binding.value) {
         toggleLoading(el, binding);
       }

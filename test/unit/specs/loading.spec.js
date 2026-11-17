@@ -278,5 +278,82 @@ describe('Loading', () => {
       const customClass = document.querySelector('.hzq-loading-custom-class');
       expect(customClass).to.exist;
     });
+
+    it('spinnerProps with size and color', () => {
+      const Spinner = {
+        props: ['size', 'color', 'foo'],
+        render(h) {
+          return h('div', {
+            class: 'custom-spinner',
+            attrs: { 'data-size': this.size, 'data-color': this.color, 'data-foo': this.foo }
+          });
+        }
+      };
+      loadingInstance = Loading({
+        spinnerComponent: Spinner,
+        spinnerProps: { foo: 'bar', size: 20 },
+        size: 40,
+        color: '#ff0000'
+      });
+      const el = document.querySelector('.custom-spinner');
+      expect(el).to.exist;
+      expect(el.getAttribute('data-size')).to.equal('40');
+      expect(el.getAttribute('data-color')).to.equal('#ff0000');
+      expect(el.getAttribute('data-foo')).to.equal('bar');
+    });
+
+    it('spinner string takes priority over spinnerComponent', () => {
+      const Spinner = {
+        render(h) {
+          return h('div', { class: 'custom-spinner' });
+        }
+      };
+      loadingInstance = Loading({ spinnerComponent: Spinner, spinner: 'hzq-icon-loading' });
+      expect(document.querySelector('.custom-spinner')).to.not.exist;
+      expect(document.querySelector('.hzq-icon-loading')).to.exist;
+    });
+  });
+
+  describe('global config', () => {
+    afterEach(() => {
+      LoadingRaw.setConfig({ spinnerComponent: null, spinnerProps: {} });
+    });
+
+    it('directive uses globally configured component', done => {
+      const Spinner = {
+        props: ['size'],
+        render(h) {
+          return h('div', { class: 'global-spinner', attrs: { 'data-size': this.size } });
+        }
+      };
+      LoadingRaw.setConfig({ spinnerComponent: Spinner, spinnerProps: { size: 32 } });
+      vm = createVue({
+        template: `<div v-loading="loading" element-loading-size="48"></div>`,
+        data() {
+          return { loading: true };
+        }
+      });
+      Vue.nextTick(() => {
+        const el = vm.$el.querySelector('.global-spinner');
+        expect(el).to.exist;
+        expect(el.getAttribute('data-size')).to.equal('48');
+        vm.loading = false;
+        setTimeout(done, 400);
+      });
+    });
+
+    it('service uses globally configured component', () => {
+      const Spinner = {
+        props: ['color'],
+        render(h) {
+          return h('div', { class: 'global-spinner', attrs: { 'data-color': this.color } });
+        }
+      };
+      LoadingRaw.setConfig({ spinnerComponent: Spinner, spinnerProps: { color: '#00ff00' } });
+      loadingInstance = Loading();
+      const el = document.querySelector('.global-spinner');
+      expect(el).to.exist;
+      expect(el.getAttribute('data-color')).to.equal('#00ff00');
+    });
   });
 });
