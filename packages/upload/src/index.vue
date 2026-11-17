@@ -1,7 +1,5 @@
 <script>
-import UploadList from './upload-list';
 import Upload from './upload';
-import HzqProgress from 'hzq-ui/packages/progress';
 import Migrating from 'hzq-ui/src/mixins/migrating';
 
 function noop() {}
@@ -12,8 +10,6 @@ export default {
   mixins: [Migrating],
 
   components: {
-    HzqProgress,
-    UploadList,
     Upload
   },
 
@@ -49,10 +45,6 @@ export default {
     drag: Boolean,
     dragger: Boolean,
     withCredentials: Boolean,
-    showFileList: {
-      type: Boolean,
-      default: true
-    },
     accept: String,
     type: {
       type: String,
@@ -67,9 +59,6 @@ export default {
     onChange: {
       type: Function,
       default: noop
-    },
-    onPreview: {
-      type: Function
     },
     onSuccess: {
       type: Function,
@@ -92,10 +81,6 @@ export default {
     autoUpload: {
       type: Boolean,
       default: true
-    },
-    listType: {
-      type: String,
-      default: 'text' // text,picture,picture-card
     },
     httpRequest: Function,
     disabled: Boolean,
@@ -122,20 +107,6 @@ export default {
   },
 
   watch: {
-    listType(type) {
-      if (type === 'picture-card' || type === 'picture') {
-        this.uploadFiles = this.uploadFiles.map(file => {
-          if (!file.url && file.raw) {
-            try {
-              file.url = URL.createObjectURL(file.raw);
-            } catch (err) {
-              console.error('[Element Error][Upload]', err);
-            }
-          }
-          return file;
-        });
-      }
-    },
     fileList: {
       immediate: true,
       handler(fileList) {
@@ -160,13 +131,10 @@ export default {
         raw: rawFile
       };
 
-      if (this.listType === 'picture-card' || this.listType === 'picture') {
-        try {
-          file.url = URL.createObjectURL(rawFile);
-        } catch (err) {
-          console.error('[Element Error][Upload]', err);
-          return;
-        }
+      try {
+        file.url = URL.createObjectURL(rawFile);
+      } catch (err) {
+        console.error('[Element Error][Upload]', err);
       }
 
       this.uploadFiles.push(file);
@@ -204,6 +172,8 @@ export default {
       if (raw) {
         file = this.getFile(raw);
       }
+      if (!file || this.uploadFiles.indexOf(file) === -1) return;
+
       let doRemove = () => {
         this.abort(file);
         let fileList = this.uploadFiles;
@@ -236,6 +206,9 @@ export default {
     abort(file) {
       this.$refs['upload-inner'].abort(file);
     },
+    remove(file) {
+      this.handleRemove(file);
+    },
     clearFiles() {
       this.uploadFiles = [];
     },
@@ -250,8 +223,10 @@ export default {
       return {
         props: {
           'default-file-list': 'default-file-list is renamed to file-list.',
-          'show-upload-list': 'show-upload-list is renamed to show-file-list.',
-          'thumbnail-mode': 'thumbnail-mode has been deprecated, you can implement the same effect according to this case: http://element.eleme.io/#/zh-CN/component/upload#yong-hu-tou-xiang-shang-chuan'
+          'show-upload-list': 'show-upload-list is removed, use the file-list slot instead.',
+          'show-file-list': 'show-file-list is removed, use the file-list slot instead.',
+          'list-type': 'list-type is removed, render the list yourself with the file-list slot.',
+          'thumbnail-mode': 'thumbnail-mode is removed, render the list yourself with the file-list slot.'
         }
       };
     }
@@ -266,29 +241,6 @@ export default {
   },
 
   render(h) {
-    let uploadList;
-
-    if (this.showFileList) {
-      uploadList = (
-        <UploadList
-          disabled={this.uploadDisabled}
-          listType={this.listType}
-          files={this.uploadFiles}
-          on-remove={this.handleRemove}
-          handlePreview={this.onPreview}>
-          {
-            (props) => {
-              if (this.$scopedSlots.file) {
-                return this.$scopedSlots.file({
-                  file: props.file
-                });
-              }
-            }
-          }
-        </UploadList>
-      );
-    }
-
     const uploadData = {
       props: {
         type: this.type,
@@ -303,7 +255,6 @@ export default {
         accept: this.accept,
         fileList: this.uploadFiles,
         autoUpload: this.autoUpload,
-        listType: this.listType,
         disabled: this.uploadDisabled,
         limit: this.limit,
         'on-exceed': this.onExceed,
@@ -311,7 +262,6 @@ export default {
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
         'on-error': this.handleError,
-        'on-preview': this.onPreview,
         'on-remove': this.handleRemove,
         'http-request': this.httpRequest
       },
@@ -320,17 +270,19 @@ export default {
 
     const trigger = this.$slots.trigger || this.$slots.default;
     const uploadComponent = <upload {...uploadData}>{trigger}</upload>;
+    const fileList = this.$scopedSlots['file-list']
+      ? this.$scopedSlots['file-list']({ list: this.uploadFiles })
+      : null;
 
     return (
       <div>
-        { this.listType === 'picture-card' ? uploadList : ''}
         {
           this.$slots.trigger
             ? [uploadComponent, this.$slots.default]
             : uploadComponent
         }
-        {this.$slots.tip}
-        { this.listType !== 'picture-card' ? uploadList : ''}
+        { this.$slots.tip }
+        { fileList }
       </div>
     );
   }

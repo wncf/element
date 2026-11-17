@@ -91,11 +91,6 @@ describe('Upload', () => {
             handlers.onError(err, file, fileList);
           }
         },
-        onPreview(file) {
-          if (handlers.onPreview) {
-            handlers.onPreview(file);
-          }
-        },
         limit: 2,
         onExceed(files, fileList) {
           if (handlers.onExceed) {
@@ -122,8 +117,13 @@ describe('Upload', () => {
     beforeEach(() => {
       uploader = createVue({
         render(h) {
+          const fileListSlot = ({ list }) => (
+            <ul class="custom-file-list">
+              {list.map(file => <li class="custom-file">{file.name}</li>)}
+            </ul>
+          );
           return (
-            <hzq-upload {...props} ref="upload">
+            <hzq-upload {...props} ref="upload" scopedSlots={{ 'file-list': fileListSlot }}>
               <hzq-button size="small" type="primary">点击上传</hzq-button>
             </hzq-upload>
           );
@@ -176,21 +176,18 @@ describe('Upload', () => {
         requests[0].respond(400, {}, 'error 400');
       }, 100);
     });
-    it('preview file', done => {
+    it('render file list slot', done => {
       const file = new Blob([JSON.stringify({}, null, 2)], {
         type: 'application/json'
       });
       file.name = 'success.png';
       const files = [file];
 
-      handlers.onPreview = (file) => {
-        expect(file.response).to.equal('success.png');
-        done();
-      };
-
       handlers.onSuccess = (res, file, fileList) => {
         uploader.$nextTick(_ => {
-          uploader.$el.querySelector('.hzq-upload-list .is-success a').click();
+          const item = uploader.$el.querySelector('.custom-file-list .custom-file');
+          expect(item.textContent).to.equal('success.png');
+          done();
         });
       };
 
@@ -208,7 +205,7 @@ describe('Upload', () => {
       const files = [file];
 
       handlers.onSuccess = (res, file, fileList) => {
-        uploader.$el.querySelector('.hzq-upload-list .hzq-icon-close').click();
+        uploader.remove(file);
         uploader.$nextTick(_ => {
           expect(uploader.fileList.length).to.equal(0);
           done();
@@ -278,7 +275,7 @@ describe('Upload', () => {
       const files = [file];
 
       handlers.onSuccess = (res, file, fileList) => {
-        uploader.$el.querySelector('.hzq-upload-list .hzq-icon-close').click();
+        uploader.remove(file);
         setTimeout(() => {
           expect(spy.calledOnce).to.equal(true);
           expect(uploader.uploadFiles.length).to.equal(1);

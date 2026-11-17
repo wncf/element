@@ -491,6 +491,41 @@ registerSvgIcons(['base-arrow', 'base-book'], { prefix: 'crm' });
       现在会自动回落到第一个面板，不会出现一个面板都不渲染的情况。
     </p>
 
+    <h3>Upload 上传<span class="tag-change">破坏性变更</span></h3>
+    <div class="breaking">
+      <strong>破坏性变更：</strong>移除 <code>list-type</code>、<code>show-file-list</code>、<code>on-preview</code> 三个属性，
+      内置的文件列表（<code>upload-list.vue</code> 与 <code>hzq-upload-list</code> 样式块）一并删除。
+      文件列表改由新增的 <code>file-list</code> 作用域插槽自行渲染，布局与样式完全交给调用方。
+    </div>
+    <ul>
+      <li>新增 <code>file-list</code> 作用域插槽，参数 <code>{ list }</code>，为文件对象数组；不写该插槽即不显示列表（等价于旧的 <code>:show-file-list="false"</code>）。</li>
+      <li>插槽内容作为触发器与 <code>tip</code> 的<strong>兄弟节点</strong>渲染，组件不包裹容器、不规定上下位置。卡片墙等需要与触发器平行的场景，给根节点加 <code>display: inline-flex; flex-wrap: wrap</code> 即可。</li>
+      <li>新增公开方法 <code>remove(file)</code>：用户在自己的删除按钮里调用，组件负责中断请求、从列表移除并触发 <code>on-remove</code>，同时仍然遵守 <code>before-remove</code> 的拦截。</li>
+      <li><strong>列表区域不再触发文件选择框</strong>：点击事件只绑在触发器的 <code>.hzq-upload</code> 根节点上，列表已是它的兄弟节点。</li>
+      <li>所有文件统一通过 <code>URL.createObjectURL</code> 生成 <code>url</code> 作为预览地址（原先仅 <code>picture</code> / <code>picture-card</code> 生成），组件销毁时统一 revoke；非图片文件忽略该字段即可。</li>
+      <li>移除根节点上的 <code>hzq-upload--{listType}</code> 修饰类与对应样式，照片墙的虚线框改由调用方自行实现。</li>
+      <li>旧属性会通过 Migrating 混入在控制台给出废弃提示。</li>
+    </ul>
+    <p>迁移建议：把原来的 <code>list-type="text"</code> 列表替换为插槽渲染，删除改用 <code>remove(file)</code>：</p>
+    <pre v-pre><code>&lt;hzq-upload ref="upload" action="/api/upload" :file-list="files"&gt;
+  &lt;hzq-button&gt;点击上传&lt;/hzq-button&gt;
+
+  &lt;template slot="file-list" slot-scope="{ list }"&gt;
+    &lt;ul class="my-list"&gt;
+      &lt;li v-for="item in list" :key="item.uid"&gt;
+        {{ item.name }}
+        &lt;span v-if="item.status === 'uploading'"&gt;{{ item.percentage }}%&lt;/span&gt;
+        &lt;i class="hzq-icon-close" @click="$refs.upload.remove(item)"&gt;&lt;/i&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/template&gt;
+&lt;/hzq-upload&gt;</code></pre>
+    <p>
+      文件对象字段保持不变：<code>uid</code> / <code>name</code> / <code>size</code> /
+      <code>status</code>（<code>ready</code> / <code>uploading</code> / <code>success</code> / <code>fail</code>）/
+      <code>percentage</code> / <code>raw</code> / <code>url</code> / <code>response</code>。
+    </p>
+
     <h3>DatePicker / DateTimePicker<span class="tag-change">样式变更</span></h3>
     <ul>
       <li>日期面板底部「此刻 / 清除 / 确定」按钮由 <code>mini</code> 改为 <code>small</code>。</li>

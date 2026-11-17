@@ -5,7 +5,9 @@
 }
 .demo-block {
   margin-bottom: 24px;
+}
 
+.demo-upload.demo-block {
   .upload-demo {
     width: 360px;
   }
@@ -34,6 +36,186 @@
       width: 178px;
       height: 178px;
       display: block;
+    }
+  }
+
+  /* file-list 插槽示例：文件条目列表 */
+  .demo-file-list {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+
+    .demo-file-list__item {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #606266;
+    }
+
+    .demo-file-list__name {
+      flex: 1;
+      margin-left: 6px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .demo-file-list__percent {
+      margin-right: 8px;
+      color: #409eff;
+    }
+
+    .demo-file-list__status {
+      margin-right: 8px;
+      font-size: 12px;
+      color: #67c23a;
+
+      &.is-fail {
+        color: #f56c6c;
+      }
+    }
+
+    .hzq-icon-close {
+      cursor: pointer;
+      color: #909399;
+
+      &:hover {
+        color: #409eff;
+      }
+    }
+  }
+
+  /* file-list 插槽示例：图片列表缩略图 */
+  .demo-picture-list {
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+
+    .demo-picture-list__item {
+      display: flex;
+      align-items: center;
+      height: 92px;
+      padding: 10px;
+      margin-top: 10px;
+      box-sizing: border-box;
+      border: 1px solid #d9d9d9;
+      border-radius: 6px;
+    }
+
+    .demo-picture-list__thumb {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+
+    .demo-picture-list__name {
+      flex: 1;
+      font-size: 14px;
+      color: #606266;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hzq-icon-close {
+      cursor: pointer;
+      color: #909399;
+
+      &:hover {
+        color: #409eff;
+      }
+    }
+  }
+
+  /* file-list 插槽示例：照片墙，卡片与上传按钮平行排列 */
+  .picture-wall {
+    display: inline-flex;
+    flex-wrap: wrap;
+    text-align: left;
+
+    .picture-wall__trigger {
+      width: 148px;
+      height: 148px;
+      line-height: 146px;
+      text-align: center;
+      border: 1px dashed #d9d9d9;
+      border-radius: 6px;
+      box-sizing: border-box;
+      margin: 0 8px 8px 0;
+
+      &:hover {
+        border-color: #409eff;
+        color: #409eff;
+      }
+
+      i {
+        font-size: 28px;
+        color: #8c939d;
+      }
+    }
+
+    .picture-wall__card {
+      position: relative;
+      width: 148px;
+      height: 148px;
+      margin: 0 8px 8px 0;
+      border: 1px solid #d9d9d9;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .picture-wall__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .picture-wall__mask {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      background-color: rgba(0, 0, 0, .5);
+
+      i {
+        cursor: pointer;
+
+        + i {
+          margin-left: 15px;
+        }
+      }
+    }
+
+    .picture-wall__progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      background-color: rgba(0, 0, 0, .5);
+    }
+
+    /* 纯 CSS 悬停显示操作层 */
+    &.picture-wall--hover .picture-wall__mask {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    &.picture-wall--hover .picture-wall__card:hover .picture-wall__mask {
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 }

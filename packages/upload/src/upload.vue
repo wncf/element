@@ -28,17 +28,12 @@ export default {
     onError: Function,
     beforeUpload: Function,
     drag: Boolean,
-    onPreview: {
-      type: Function,
-      default: function() {}
-    },
     onRemove: {
       type: Function,
       default: function() {}
     },
     fileList: Array,
     autoUpload: Boolean,
-    listType: String,
     httpRequest: {
       type: Function,
       default: ajax
@@ -181,7 +176,6 @@ export default {
       handleChange,
       multiple,
       accept,
-      listType,
       uploadFiles,
       disabled,
       handleKeydown
@@ -195,7 +189,6 @@ export default {
         keydown: handleKeydown
       }
     };
-    data.class[`hzq-upload--${listType}`] = true;
     return (
       <div {...data} tabindex="0" >
         {

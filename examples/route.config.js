@@ -3,16 +3,17 @@ import navConfig from './nav.config';
 // 文档站已精简为仅中文，语言维度保留在路由 meta 中供组件读取
 const LANG = 'zh-CN';
 
+// require.ensure 的 chunkName 必须是字符串字面量，传变量会让 webpack 无法识别
 const load = function(name) {
   return r => require.ensure([], () =>
     r(require(`./pages/zh-CN/${name}.vue`)),
-  LANG);
+  'zh-CN');
 };
 
 const loadDocs = function(path) {
   return r => require.ensure([], () =>
     r(require(`./docs/zh-CN${path}.md`)),
-  LANG);
+  'zh-CN');
 };
 
 const registerRoute = (navConfig) => {
