@@ -328,7 +328,7 @@ describe('Loading', () => {
       };
       LoadingRaw.setConfig({ spinnerComponent: Spinner, spinnerProps: { size: 32 } });
       vm = createVue({
-        template: `<div v-loading="loading" element-loading-size="48"></div>`,
+        template: '<div v-loading="loading" element-loading-size="48"></div>',
         data() {
           return { loading: true };
         }
