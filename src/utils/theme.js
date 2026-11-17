@@ -39,7 +39,7 @@ const BLACK = { r: 0, g: 0, b: 0 };
 // 与 palette.scss 的 $--brightness-modes 对齐，读不到 CSS 变量时兜底
 const FALLBACK_BLEND_BASE = {
   light: WHITE,
-  // #1e293b：与 palette.scss 深色模式的 bg-color 一致
+  // #1e293b：与 palette.scss 深色模式的 blend-base（即 bg-color）一致
   dark: { r: 30, g: 41, b: 59 }
 };
 

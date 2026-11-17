@@ -164,7 +164,7 @@
       }
 
       & + span.hzq-checkbox__label {
-        color: $--disabled-color-base;
+        color: var(--hzq-text-color-control-disabled);
         cursor: not-allowed;
       }
     }

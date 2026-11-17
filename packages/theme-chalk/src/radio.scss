@@ -144,7 +144,7 @@
         }
       }
       & + span.hzq-radio__label {
-        color: $--color-text-placeholder;
+        color: var(--hzq-text-color-control-disabled);
         cursor: not-allowed;
       }
     }

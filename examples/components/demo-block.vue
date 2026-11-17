@@ -62,6 +62,9 @@
 
     .source {
       padding: 24px;
+      // 示例区不设底色会透出页面底（#f5f7fa），和输入类控件的底（#f8fafc）
+      // 只差几个色阶，输入框的轮廓就看不出来了。用卡片底托一下，控件才显出来。
+      background-color: var(--hzq-bg-color);
     }
 
     .meta {

@@ -48,7 +48,7 @@
     }
 
     &.is-disabled {
-      color: $--disabled-color-base;
+      color: var(--hzq-text-color-control-disabled);
       cursor: not-allowed;
     }
   }
@@ -69,11 +69,11 @@
 
   @include when(disabled) {
     @include e((increase, decrease)) {
-      border-color: $--disabled-border-base;
-      color: $--disabled-border-base;
+      border-color: var(--hzq-border-color-control-disabled);
+      color: var(--hzq-text-color-control-disabled);
 
       &:hover {
-        color: $--disabled-border-base;
+        color: var(--hzq-text-color-control-disabled);
         cursor: not-allowed;
       }
     }

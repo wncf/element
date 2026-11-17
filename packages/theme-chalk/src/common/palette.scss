@@ -58,6 +58,15 @@ $--neutrals-light: (
   'bg-color-page': #f5f7fa,
   'bg-color': #ffffff,
   'bg-color-overlay': #ffffff,
+  // 输入类控件的底：input/textarea、select 触发器、date-picker、checkbox、radio。
+  // 浅色下比卡片（白）暗一档、比页面底亮一档，控件才有"可填入"的凹陷感；
+  // 深色下反过来比卡片亮一档，控件的边界靠明度差就能拉开。
+  'bg-color-control': #f8fafc,
+  // 禁用态控件：底色比常态再压暗一档，边框反而比常态更深，靠"底色更沉 + 边框更实"
+  // 表达不可操作。只比常态暗一点点（如 #f5f7fa）的话，禁用和可用几乎分辨不出来。
+  'bg-color-control-disabled': #e6ebf3,
+  'border-color-control-disabled': #b7c2d2,
+  'text-color-control-disabled': #8b95a5,
   'fill-color': #f0f2f5,
   'fill-color-dark': #edf2fc,
   'fill-color-darker': #e6e6e6,
@@ -88,6 +97,15 @@ $--neutrals-dark: (
   'bg-color-page': #0f172a,
   'bg-color': #1e293b,
   'bg-color-overlay': #243347,
+  // 控件底比卡片亮一档：卡片仍是 #1e293b，输入框/勾选框用 #243347，
+  // 否则控件和卡片同色，深色模式下几乎看不出输入区的边界。
+  'bg-color-control': #243347,
+  // 禁用态往暗处走：常态控件是"浮起来"的，禁用控件压到卡片底下，
+  // 边框保持比常态更深的一档，于是边框在暗底上更实，禁用态一眼能认出来。
+  'bg-color-control-disabled': #0f1a2e,
+  'border-color-control-disabled': #3d5169,
+  // 禁用文字取 placeholder 那一档：能读清是"已填的内容"，但不抢普通输入框的注意力
+  'text-color-control-disabled': #64748b,
   'fill-color': #243347,
   'fill-color-dark': #2d3f52,
   'fill-color-darker': #374b61,

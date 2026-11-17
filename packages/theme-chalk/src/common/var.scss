@@ -186,6 +186,10 @@ $--index-popper: 2000 !default;
 
 /* Disable base
 -------------------------- */
+// 这里的三个 base 供文本、页签、步骤条等非控件元素使用，保持原样。
+// 输入类控件的禁用态另走 --hzq-*-control-disabled 一档（见下方各组件段），
+// 因为控件常态有"填充 + 边框"两道区分，禁用后必须同时压暗底色、加深边框，
+// 只换 fill-color-light / border-color-light 的话，明度差不到一档，禁用和可用分不开。
 $--disabled-fill-base: $--background-color-base !default;
 $--disabled-color-base: $--color-text-placeholder !default;
 $--disabled-border-base: $--border-color-light !default;
@@ -208,17 +212,19 @@ $--checkbox-input-width: 14px !default;
 /// borderRadius||Border|2
 $--checkbox-border-radius: $--border-radius-small !default;
 /// color||Color|0
-$--checkbox-background-color: var(--hzq-bg-color) !default;
+$--checkbox-background-color: var(--hzq-bg-color-control) !default;
 $--checkbox-input-border: $--border-base !default;
 
 /// color||Color|0
-$--checkbox-disabled-border-color: $--border-color-base !default;
-$--checkbox-disabled-input-fill: var(--hzq-fill-color-dark) !default;
-$--checkbox-disabled-icon-color: $--color-text-placeholder !default;
+$--checkbox-disabled-border-color: var(--hzq-border-color-control-disabled) !default;
+$--checkbox-disabled-input-fill: var(--hzq-bg-color-control-disabled) !default;
+$--checkbox-disabled-icon-color: var(--hzq-text-color-control-disabled) !default;
 
-$--checkbox-disabled-checked-input-fill: $--border-color-extra-light !default;
-$--checkbox-disabled-checked-input-border-color: $--border-color-base !default;
-$--checkbox-disabled-checked-icon-color: $--color-text-placeholder !default;
+// 选中态禁用不必再压暗一层：勾号本身就是"已选"的信息，
+// 底色跟未选中禁用态取同一档，避免同一排 checkbox 出现两种灰。
+$--checkbox-disabled-checked-input-fill: var(--hzq-bg-color-control-disabled) !default;
+$--checkbox-disabled-checked-input-border-color: var(--hzq-border-color-control-disabled) !default;
+$--checkbox-disabled-checked-icon-color: var(--hzq-text-color-control-disabled) !default;
 
 /// color||Color|0
 $--checkbox-checked-font-color: $--color-primary !default;
@@ -281,27 +287,27 @@ $--radio-input-width: 14px !default;
 /// borderRadius||Border|2
 $--radio-input-border-radius: $--border-radius-circle !default;
 /// color||Color|0
-$--radio-input-background-color: var(--hzq-bg-color) !default;
+$--radio-input-background-color: var(--hzq-bg-color-control) !default;
 $--radio-input-border: $--border-base !default;
 /// color||Color|0
 $--radio-input-border-color: $--border-color-base !default;
 /// color||Color|0
 $--radio-icon-color: $--color-white !default;
 
-$--radio-disabled-input-border-color: $--disabled-border-base !default;
-$--radio-disabled-input-fill: $--disabled-fill-base !default;
-$--radio-disabled-icon-color: $--disabled-fill-base !default;
+$--radio-disabled-input-border-color: var(--hzq-border-color-control-disabled) !default;
+$--radio-disabled-input-fill: var(--hzq-bg-color-control-disabled) !default;
+$--radio-disabled-icon-color: var(--hzq-text-color-control-disabled) !default;
 
-$--radio-disabled-checked-input-border-color: $--disabled-border-base !default;
-$--radio-disabled-checked-input-fill: $--disabled-fill-base !default;
-$--radio-disabled-checked-icon-color: $--color-text-placeholder !default;
+$--radio-disabled-checked-input-border-color: var(--hzq-border-color-control-disabled) !default;
+$--radio-disabled-checked-input-fill: var(--hzq-bg-color-control-disabled) !default;
+$--radio-disabled-checked-icon-color: var(--hzq-text-color-control-disabled) !default;
 
 /// color||Color|0
 $--radio-checked-font-color: $--color-primary !default;
 /// color||Color|0
 $--radio-checked-input-border-color: $--color-primary !default;
 /// color||Color|0
-$--radio-checked-input-background-color: var(--hzq-bg-color) !default;
+$--radio-checked-input-background-color: var(--hzq-bg-color-control) !default;
 /// color||Color|0
 $--radio-checked-icon-color: $--color-primary !default;
 
@@ -340,7 +346,7 @@ $--radio-button-disabled-checked-fill: $--border-color-extra-light !default;
 /* Select
 -------------------------- */
 $--select-border-color-hover: $--border-color-hover !default;
-$--select-disabled-border: $--disabled-border-base !default;
+$--select-disabled-border: var(--hzq-border-color-control-disabled) !default;
 /// fontSize||Font|1
 $--select-font-size: $--font-size-base !default;
 $--select-close-hover-color: $--color-text-secondary !default;
@@ -475,9 +481,9 @@ $--input-border-color: $--border-color-base !default;
 $--input-border-radius: $--border-radius-base !default;
 $--input-border-color-hover: $--border-color-hover !default;
 /// color||Color|0
-$--input-background-color: var(--hzq-bg-color) !default;
-$--input-fill-disabled: $--disabled-fill-base !default;
-$--input-color-disabled: $--font-color-disabled-base !default;
+$--input-background-color: var(--hzq-bg-color-control) !default;
+$--input-fill-disabled: var(--hzq-bg-color-control-disabled) !default;
+$--input-color-disabled: var(--hzq-text-color-control-disabled) !default;
 /// color||Color|0
 $--input-icon-color: $--color-text-placeholder !default;
 /// color||Color|0
@@ -488,12 +494,12 @@ $--input-hover-border: $--border-color-hover !default;
 $--input-clear-hover-color: $--color-text-secondary !default;
 
 $--input-focus-border: $--color-primary !default;
-$--input-focus-fill: var(--hzq-bg-color) !default;
+$--input-focus-fill: var(--hzq-bg-color-control) !default;
 
-$--input-disabled-fill: $--disabled-fill-base !default;
-$--input-disabled-border: $--disabled-border-base !default;
-$--input-disabled-color: $--disabled-color-base !default;
-$--input-disabled-placeholder-color: $--color-text-placeholder !default;
+$--input-disabled-fill: var(--hzq-bg-color-control-disabled) !default;
+$--input-disabled-border: var(--hzq-border-color-control-disabled) !default;
+$--input-disabled-color: var(--hzq-text-color-control-disabled) !default;
+$--input-disabled-placeholder-color: var(--hzq-text-color-control-disabled) !default;
 
 /// fontSize||Font|1
 $--input-large-font-size: $--component-font-size-large !default;
