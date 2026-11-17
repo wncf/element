@@ -1,0 +1,88 @@
+name: Deploy Docs
+
+# 推送到 dev 分支时自动构建文档站并发布到 GitHub Pages
+# 发布目标：gh-pages 分支根目录，访问 https://<owner>.github.io/<repo>/
+# 保留 gh-pages 下已有的版本子目录（1.4、2.15 等），只覆盖根目录的构建产物
+
+on:
+  push:
+    branches:
+      - dev
+  # 允许在 Actions 页面手动触发
+  workflow_dispatch:
+
+# 同一时间只允许一个部署；不取消正在跑的任务，避免 gh-pages 推到一半被打断
+concurrency:
+  group: deploy-docs
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          # 与 .nvmrc 保持一致
+          node-version: '12.22.12'
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # 生成 src/index.js、语言包与组件索引；逐条执行，避免 npm script 里的 & 并发导致竞态
+      - name: Generate entries
+        run: |
+          node build/bin/iconInit.js
+          node build/bin/build-entry.js
+          node build/bin/i18n.js
+
+      # 直接调用 webpack，不沿用 deploy:build —— 那个脚本会往产物里写 CNAME=element.eleme.io
+      - name: Build docs
+        env:
+          NODE_ENV: production
+        run: npx webpack --config build/webpack.demo.js
+
+      - name: Deploy to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+
+          BUILD_DIR="$GITHUB_WORKSPACE/examples/element-ui"
+          DEPLOY_DIR="$RUNNER_TEMP/gh-pages-deploy"
+
+          # 在临时目录检出 gh-pages，避免污染工作区
+          mkdir -p "$DEPLOY_DIR"
+          cd "$DEPLOY_DIR"
+          git init -q
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth 1 origin gh-pages
+          git checkout -q gh-pages
+
+          # 清理根目录的旧构建产物，版本子目录（1.4、2.15 等）保持不动
+          find . -maxdepth 1 -type f \
+            \( -name '*.js' -o -name '*.css' -o -name '*.map' -o -name 'index.html' \) -delete
+          rm -rf static
+          # 上游的 CNAME 指向 element.eleme.io，与本仓库无关；保留会让 github.io 被重定向
+          rm -f CNAME
+
+          # 覆盖根目录产物
+          cp -R "$BUILD_DIR"/. .
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "文档站内容无变化，跳过提交"
+            exit 0
+          fi
+          git commit -q -m "docs: 自动部署文档站 (${GITHUB_SHA:0:7})"
+          git push -q origin gh-pages
