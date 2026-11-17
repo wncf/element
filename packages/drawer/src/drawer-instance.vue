@@ -251,15 +251,3 @@ function normalizeSize(size) {
 }
 </script>
 
-<style>
-.hzq-drawer-service__content {
-  padding: 0 20px 20px;
-}
-
-.hzq-drawer-service__footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 12px 20px;
-  border-top: 1px solid var(--hzq-border-color-lighter);
-}
-</style>

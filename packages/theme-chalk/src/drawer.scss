@@ -218,3 +218,15 @@ $directions: rtl, ltr, ttb, btt;
 .hzq-drawer-fade-leave-active {
   animation: el-drawer-fade-in .3s reverse;
 }
+
+// $drawer 函数式抽屉的内容与底部按钮区
+.hzq-drawer-service__content {
+  padding: 0 20px 20px;
+}
+
+.hzq-drawer-service__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 20px;
+  border-top: 1px solid var(--hzq-border-color-lighter);
+}
