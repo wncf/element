@@ -15,7 +15,7 @@ module.exports = {
     filename: 'hzq-ui.common.js',
     chunkFilename: '[id].js',
     libraryExport: 'default',
-    library: 'ELEMENT',
+    library: 'HZQUI',
     libraryTarget: 'commonjs2'
   },
   resolve: {

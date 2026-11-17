@@ -1,0 +1,25 @@
+# svgo-loader 配置：文档站与组件库构建共用
+# 默认把单色图标的颜色转成 currentColor，方便 <hzq-svg-icon color> 统一覆盖
+plugins:
+  - removeDoctype: true
+  - removeXMLProcInst: true
+  - removeComments: true
+  - removeMetadata: true
+  - removeEditorsNSData: true
+  - removeUselessDefs: true
+  - removeEmptyAttrs: true
+  - removeHiddenElems: true
+  - removeEmptyText: true
+  - removeEmptyContainers: true
+  - removeViewBox: false
+  - removeDimensions: true
+  - cleanupIDs: true
+  - removeUnusedNS: true
+  - collapseGroups: true
+  - cleanupEnableBackground: true
+  - convertColors:
+      currentColor: true
+  - convertPathData:
+      floatPrecision: 2
+  - convertShapeToPath: true
+  - mergePaths: true

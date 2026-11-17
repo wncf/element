@@ -194,6 +194,11 @@ const install = function(Vue, opts = {}) {
 
   Vue.use(InfiniteScroll);
   Vue.use(Loading.directive);
+  // opts.loading: { spinnerComponent, spinnerProps } 全局自定义 Loading 展示组件
+  if (opts.loading) {
+    Loading.setConfig(opts.loading);
+  }
+  Vue.directive('tooltip', Tooltip.directive);
 
   // opts.svgIcons: { prefix: 'crm', icons: [...] } 用户自定义 SVG 图标
   if (opts.svgIcons) {
@@ -210,6 +215,7 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$drawer = Drawer.drawer;
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
+  Vue.prototype.$tooltip = Tooltip.tooltip;
 
 };
 
