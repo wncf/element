@@ -2,7 +2,7 @@ name: Deploy Docs
 
 # 推送到 dev 分支时自动构建文档站并发布到 GitHub Pages
 # 发布目标：gh-pages 分支根目录，访问 https://<owner>.github.io/<repo>/
-# 保留 gh-pages 下已有的版本子目录（1.4、2.15 等），只覆盖根目录的构建产物
+# 首次部署会自动创建 gh-pages 分支（孤儿分支），之后每次覆盖根目录产物
 
 on:
   push:
@@ -61,22 +61,27 @@ jobs:
           BUILD_DIR="$GITHUB_WORKSPACE/examples/element-ui"
           DEPLOY_DIR="$RUNNER_TEMP/gh-pages-deploy"
 
-          # 在临时目录检出 gh-pages，避免污染工作区
+          # 在临时目录准备发布分支，避免污染工作区
           mkdir -p "$DEPLOY_DIR"
           cd "$DEPLOY_DIR"
           git init -q
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git fetch -q --depth 1 origin gh-pages
-          git checkout -q gh-pages
 
-          # 清理根目录的旧构建产物，版本子目录（1.4、2.15 等）保持不动
-          find . -maxdepth 1 -type f \
-            \( -name '*.js' -o -name '*.css' -o -name '*.map' -o -name 'index.html' \) -delete
-          rm -rf static
-          # 上游的 CNAME 指向 element.eleme.io，与本仓库无关；保留会让 github.io 被重定向
-          rm -f CNAME
+          # 分支已存在则增量更新；不存在则以孤儿分支起步（首次部署）
+          if git fetch -q --depth 1 origin gh-pages 2>/dev/null; then
+            git checkout -q -b gh-pages FETCH_HEAD
+            # 清理根目录的旧构建产物
+            find . -maxdepth 1 -type f \
+              \( -name '*.js' -o -name '*.css' -o -name '*.map' -o -name 'index.html' \) -delete
+            rm -rf static
+          else
+            echo "gh-pages 分支不存在，创建新分支"
+            git checkout -q --orphan gh-pages
+            git rm -rq --cached . 2>/dev/null || true
+            find . -maxdepth 1 -mindepth 1 ! -name .git -exec rm -rf {} +
+          fi
 
           # 覆盖根目录产物
           cp -R "$BUILD_DIR"/. .
