@@ -121,29 +121,7 @@
       return {
         index: null,
         query: '',
-        isEmpty: false,
-        langs: {
-          'zh-CN': {
-            search: '搜索文档',
-            empty: '无匹配结果',
-            index: 'zh'
-          },
-          'en-US': {
-            search: 'Search',
-            empty: 'No results',
-            index: 'en'
-          },
-          'es': {
-            search: 'Buscar',
-            empty: 'No hay datos que coincidan',
-            index: 'es'
-          },
-          'fr-FR': {
-            search: 'Rechercher',
-            empty: 'Aucun résultat',
-            index: 'fr'
-          }
-        }
+        isEmpty: false
       };
     },
 
@@ -153,24 +131,18 @@
       },
 
       placeholder() {
-        return this.lang ? this.langs[this.lang].search : '';
+        return '搜索文档';
       },
 
       emptyText() {
-        return this.lang ? this.langs[this.lang].empty : '';
-      }
-    },
-
-    watch: {
-      lang() {
-        this.initIndex();
+        return '无匹配结果';
       }
     },
 
     methods: {
       initIndex() {
         const client = algoliasearch('4C63BTGP6S', '0729c3c7f4dc8db7395ad0b19c0748d2');
-        this.index = client.initIndex(`element-${ this.lang ? this.langs[this.lang].index : 'zh' }`);
+        this.index = client.initIndex('element-zh');
       },
 
       querySearch(query, cb) {

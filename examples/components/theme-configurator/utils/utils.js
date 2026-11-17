@@ -38,7 +38,8 @@ export const getStyleDisplayValue = (displayValue, global) => {
 };
 
 const getLang = () => {
-  return location.hash.replace('#', '').split('/')[1] || 'zh-CN';
+  // 文档站仅保留中文
+  return 'zh-CN';
 };
 
 const getNameFromI18N = (name) => {

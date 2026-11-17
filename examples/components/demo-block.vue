@@ -311,7 +311,8 @@
 
     computed: {
       lang() {
-        return this.$route.path.split('/')[1];
+        // 文档站仅保留中文
+        return 'zh-CN';
       },
 
       langConfig() {

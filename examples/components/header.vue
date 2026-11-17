@@ -36,10 +36,6 @@
       border-bottom: 1px solid var(--hzq-border-color-base);
     }
 
-    .nav-lang-spe {
-      color: var(--hzq-text-color-secondary);
-    }
-
     h1 {
       margin: 0;
       float: left;
@@ -129,7 +125,6 @@
         cursor: default;
       }
 
-      &.lang-item,
       &:last-child {
         cursor: default;
         margin-left: 34px;
@@ -137,24 +132,9 @@
         span {
           opacity: .8;
         }
-
-        .nav-lang {
-          cursor: pointer;
-          display: inline-block;
-          height: 100%;
-          color: var(--hzq-text-color-secondary);
-
-          &:hover {
-            color: #409EFF;
-          }
-          &.active {
-             font-weight: bold;
-             color: #409EFF;
-           }
-        }
       }
 
-      // 主题切换：紧跟语言选择器右侧，样式由 theme-switcher 组件自己维护。
+      // 主题切换：样式由 theme-switcher 组件自己维护。
       // 其余 nav-item 靠 line-height: 80px 垂直居中，这里放的是固定尺寸按钮，
       // 不吃行高，必须显式补齐同样是 80px 的行盒并垂直居中
       &.nav-theme-switch {
@@ -192,53 +172,6 @@
     }
   }
 
-  .nav-dropdown {
-    margin-bottom: 6px;
-    padding-left: 18px;
-    width: 100%;
-
-    span {
-      display: block;
-      width: 100%;
-      font-size: 16px;
-      color: var(--hzq-text-color-secondary);
-      line-height: 40px;
-      transition: .2s;
-      padding-bottom: 6px;
-      user-select: none;
-
-      &:hover {
-         cursor: pointer;
-       }
-    }
-
-    i {
-      transition: .2s;
-      font-size: 12px;
-      color: var(--hzq-text-color-secondary);
-      transform: translateY(-2px);
-    }
-
-    .is-active {
-      span, i {
-        color: #409EFF;
-      }
-      i {
-        transform: rotateZ(180deg) translateY(3px);
-      }
-    }
-
-    &:hover {
-      span, i {
-        color: #409EFF;
-      }
-    }
-  }
-
-  .nav-dropdown-list {
-    width: auto;
-  }
-
   @media (max-width: 850px) {
     .header {
       .nav-logo {
@@ -250,7 +183,6 @@
       .nav-item {
         margin-left: 6px;
 
-        &.lang-item,
         &:last-child {
           margin-left: 10px;
         }
@@ -275,25 +207,6 @@
           font-size: 12px;
           vertical-align: top;
         }
-
-        &.lang-item {
-          height: 100%;
-
-          .nav-lang {
-            display: flex;
-            align-items: center;
-
-            span {
-              padding-bottom: 0;
-            }
-          }
-        }
-      }
-      .nav-dropdown {
-        padding: 0;
-        span {
-          font-size: 12px;
-        }
       }
       .nav-gap {
         padding: 0 8px;
@@ -307,16 +220,10 @@
 <template>
   <div class="headerWrapper">
     <div id="v3-banner" v-if="isHome">
-      <template v-if="lang === 'zh-CN'">
-        您正在浏览基于 Vue 2.x 的文档;
-        <a href="https://element-plus.org/#/zh-CN">点击查看 Vue 3.x 版本。</a>
-        饿了么开源了自研多端框架 MorJS，
-        <a href="https://github.com/eleme/morjs">欢迎点击查看或试用 👏🏻</a>
-      </template>
-      <template v-else>
-        You’re browsing the documentation of Element UI for Vue 2.x version.
-        <a href="https://element-plus.org">Click here</a> for Vue 3.x version
-      </template>
+      您正在浏览基于 Vue 2.x 的文档;
+      <a href="https://element-plus.org/#/zh-CN">点击查看 Vue 3.x 版本。</a>
+      饿了么开源了自研多端框架 MorJS，
+      <a href="https://github.com/eleme/morjs">欢迎点击查看或试用 👏🏻</a>
     </div>
     <header class="header" ref="header">
       <div class="container">
@@ -371,30 +278,6 @@
             <span class="nav-version-text">{{ version }}</span>
           </li>
 
-          <!-- 语言选择器 -->
-          <li class="nav-item lang-item">
-            <hzq-dropdown
-              trigger="click"
-              class="nav-dropdown nav-lang"
-              :class="{ 'is-active': langDropdownVisible }">
-              <span>
-                {{ displayedLang }}
-                <i class="hzq-icon-arrow-down hzq-icon--right"></i>
-              </span>
-              <hzq-dropdown-menu
-                slot="dropdown"
-                class="nav-dropdown-list"
-                @input="handleLangDropdownToggle">
-                <hzq-dropdown-item
-                  v-for="(value, key) in langs"
-                  :key="key"
-                  @click.native="switchLang(key)">
-                  {{ value }}
-                </hzq-dropdown-item>
-              </hzq-dropdown-menu>
-            </hzq-dropdown>
-          </li>
-
           <!-- 主题切换：模式 / 预设 / 主色 -->
           <li class="nav-item nav-theme-switch">
             <theme-switcher />
@@ -420,14 +303,7 @@
     data() {
       return {
         active: '',
-        version,
-        langDropdownVisible: true,
-        langs: {
-          'zh-CN': '中文',
-          'en-US': 'English',
-          'es': 'Español',
-          'fr-FR': 'Français'
-        }
+        version
       };
     },
 
@@ -441,10 +317,8 @@
 
     computed: {
       lang() {
-        return this.$route.path.split('/')[1] || 'zh-CN';
-      },
-      displayedLang() {
-        return this.langs[this.lang] || '中文';
+        // 文档站仅保留中文
+        return 'zh-CN';
       },
       langConfig() {
         return compoLang.filter(config => config.lang === this.lang)[0]['header'];
@@ -460,17 +334,7 @@
       // 原 Element 官方站点在这里加载一张内网图片做「内网/外网」探测并上报 GA，
       // 内部部署时该域名永远解析不通，会阻塞首屏且控制台持续报错，故移除。
     },
-    methods: {
-      switchLang(targetLang) {
-        if (this.lang === targetLang) return;
-        localStorage.setItem('ELEMENT_LANGUAGE', targetLang);
-        this.$router.push(this.$route.path.replace(this.lang, targetLang));
-      },
-
-      handleLangDropdownToggle(visible) {
-        this.langDropdownVisible = visible;
-      }
-    },
+    methods: {},
 
     created() {
       let primaryLast = '#409EFF';

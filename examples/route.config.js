@@ -1,104 +1,62 @@
 import navConfig from './nav.config';
-import langs from './i18n/route';
 
-const LOAD_MAP = {
-  'zh-CN': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/zh-CN/${name}.vue`)),
-    'zh-CN');
-  },
-  'en-US': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/en-US/${name}.vue`)),
-    'en-US');
-  },
-  'es': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/es/${name}.vue`)),
-    'es');
-  },
-  'fr-FR': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/fr-FR/${name}.vue`)),
-    'fr-FR');
-  }
+// 文档站已精简为仅中文，语言维度保留在路由 meta 中供组件读取
+const LANG = 'zh-CN';
+
+const load = function(name) {
+  return r => require.ensure([], () =>
+    r(require(`./pages/zh-CN/${name}.vue`)),
+  LANG);
 };
 
-const load = function(lang, path) {
-  return LOAD_MAP[lang](path);
-};
-
-const LOAD_DOCS_MAP = {
-  'zh-CN': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/zh-CN${path}.md`)),
-    'zh-CN');
-  },
-  'en-US': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/en-US${path}.md`)),
-    'en-US');
-  },
-  'es': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/es${path}.md`)),
-    'es');
-  },
-  'fr-FR': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/fr-FR${path}.md`)),
-    'fr-FR');
-  }
-};
-
-const loadDocs = function(lang, path) {
-  return LOAD_DOCS_MAP[lang](path);
+const loadDocs = function(path) {
+  return r => require.ensure([], () =>
+    r(require(`./docs/zh-CN${path}.md`)),
+  LANG);
 };
 
 const registerRoute = (navConfig) => {
   let route = [];
-  Object.keys(navConfig).forEach((lang, index) => {
-    let navs = navConfig[lang];
-    route.push({
-      path: `/${ lang }/component`,
-      // 安装/快速上手等指南页已移除，组件页默认进入第一个组件文档
-      redirect: `/${ lang }/component/layout`,
-      component: load(lang, 'component'),
-      children: []
-    });
-    navs.forEach(nav => {
-      if (nav.href) return;
-      if (nav.groups) {
-        nav.groups.forEach(group => {
-          group.list.forEach(nav => {
-            addRoute(nav, lang, index);
-          });
-        });
-      } else if (nav.children) {
-        nav.children.forEach(nav => {
-          addRoute(nav, lang, index);
-        });
-      } else {
-        addRoute(nav, lang, index);
-      }
-    });
+  let navs = navConfig[LANG];
+  route.push({
+    path: `/${ LANG }/component`,
+    // 安装/快速上手等指南页已移除，组件页默认进入第一个组件文档
+    redirect: `/${ LANG }/component/layout`,
+    component: load('component'),
+    children: []
   });
-  function addRoute(page, lang, index) {
+  navs.forEach(nav => {
+    if (nav.href) return;
+    if (nav.groups) {
+      nav.groups.forEach(group => {
+        group.list.forEach(nav => {
+          addRoute(nav);
+        });
+      });
+    } else if (nav.children) {
+      nav.children.forEach(nav => {
+        addRoute(nav);
+      });
+    } else {
+      addRoute(nav);
+    }
+  });
+  function addRoute(page) {
     const component = page.path === '/changelog'
-      ? load(lang, 'changelog')
-      : loadDocs(lang, page.path);
+      ? load('changelog')
+      : loadDocs(page.path);
     let child = {
       path: page.path.slice(1),
       meta: {
         title: page.title || page.name,
         description: page.description,
-        lang
+        lang: LANG
       },
-      name: 'component-' + lang + (page.title || page.name),
+      name: 'component-' + LANG + (page.title || page.name),
       component: component.default || component
     };
 
-    route[index].children.push(child);
+    route[0].children.push(child);
   }
 
   return route;
@@ -106,50 +64,39 @@ const registerRoute = (navConfig) => {
 
 let route = registerRoute(navConfig);
 
-const generateMiscRoutes = function(lang) {
-  let themeRoute = {
-    path: `/${ lang }/theme`,
-    component: load(lang, 'theme-nav'),
-    children: [
-      {
-        path: '/', // 主题管理
-        name: 'theme' + lang,
-        meta: { lang },
-        component: load(lang, 'theme')
-      },
-      {
-        path: 'preview', // 主题预览编辑
-        name: 'theme-preview-' + lang,
-        meta: { lang },
-        component: load(lang, 'theme-preview')
-      }]
-  };
-
-  let indexRoute = {
-    path: `/${ lang }`, // 首页
-    meta: { lang },
-    name: 'home' + lang,
-    component: load(lang, 'index')
-  };
-
-  // 改造记录只维护中文版：其余语言没有对应文案，不生成路由，
-  // 避免顶部导航出现点了就 404 的入口
-  if (lang === 'zh-CN') {
-    let changesRoute = {
-      path: `/${ lang }/changes`, // 改造记录
-      meta: { lang },
-      name: 'changes' + lang,
-      component: load(lang, 'changes')
-    };
-    return [themeRoute, changesRoute, indexRoute];
-  }
-
-  return [themeRoute, indexRoute];
+const themeRoute = {
+  path: `/${ LANG }/theme`,
+  component: load('theme-nav'),
+  children: [
+    {
+      path: '/', // 主题管理
+      name: 'theme' + LANG,
+      meta: { lang: LANG },
+      component: load('theme')
+    },
+    {
+      path: 'preview', // 主题预览编辑
+      name: 'theme-preview-' + LANG,
+      meta: { lang: LANG },
+      component: load('theme-preview')
+    }]
 };
 
-langs.forEach(lang => {
-  route = route.concat(generateMiscRoutes(lang.lang));
-});
+const indexRoute = {
+  path: `/${ LANG }`, // 首页
+  meta: { lang: LANG },
+  name: 'home' + LANG,
+  component: load('index')
+};
+
+const changesRoute = {
+  path: `/${ LANG }/changes`, // 改造记录
+  meta: { lang: LANG },
+  name: 'changes' + LANG,
+  component: load('changes')
+};
+
+route = route.concat([themeRoute, changesRoute, indexRoute]);
 
 route.push({
   path: '/play',
@@ -157,22 +104,12 @@ route.push({
   component: require('./play/index.vue')
 });
 
-let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || 'en-US';
-let defaultPath = '/en-US';
-if (userLanguage.indexOf('zh-') !== -1) {
-  defaultPath = '/zh-CN';
-} else if (userLanguage.indexOf('es') !== -1) {
-  defaultPath = '/es';
-} else if (userLanguage.indexOf('fr') !== -1) {
-  defaultPath = '/fr-FR';
-}
-
 route = route.concat([{
   path: '/',
-  redirect: defaultPath
+  redirect: `/${ LANG }`
 }, {
   path: '*',
-  redirect: defaultPath
+  redirect: `/${ LANG }`
 }]);
 
 export default route;

@@ -52,7 +52,7 @@ router.afterEach(route => {
     const blocks = document.querySelectorAll('pre code:not(.hljs)');
     Array.prototype.forEach.call(blocks, hljs.highlightBlock);
   });
-  const data = title[route.meta.lang];
+  const data = title[route.meta.lang] || title['zh-CN'];
   for (let val in data) {
     if (new RegExp('^' + val, 'g').test(route.name)) {
       document.title = data[val];

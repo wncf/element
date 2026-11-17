@@ -182,7 +182,8 @@
 
     computed: {
       lang() {
-        return this.$route.path.split('/')[1] || 'zh-CN';
+        // 文档站仅保留中文
+        return 'zh-CN';
       },
 
       langConfig() {
@@ -190,7 +191,7 @@
       },
 
       gitterLink() {
-        return this.lang === 'zh-CN' ? 'https://gitter.im/ElemeFE/element' : 'https://gitter.im/element-en/Lobby';
+        return 'https://gitter.im/ElemeFE/element';
       }
     }
   };

@@ -7,14 +7,12 @@ const slugify = require('transliteration').slugify;
 const key = require('./algolia-key');
 
 const client = algoliasearch('4C63BTGP6S', key);
+// 文档站仅保留中文
 const langs = {
-  'zh-CN': 'element-zh',
-  'en-US': 'element-en',
-  'es': 'element-es',
-  'fr-FR': 'element-fr'
+  'zh-CN': 'element-zh'
 };
 
-['zh-CN', 'en-US', 'es', 'fr-FR'].forEach(lang => {
+['zh-CN'].forEach(lang => {
   const indexName = langs[lang];
   const index = client.initIndex(indexName);
   index.clearIndex(err => {
