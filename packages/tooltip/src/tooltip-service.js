@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import TooltipService from './tooltip-service.vue';
+import { getPopperConfig, resolveContainer } from 'hzq-ui/src/utils/popper-config';
 
 let instance = null;
 
@@ -8,7 +9,9 @@ function ensureInstance() {
   const Ctor = Vue.extend(TooltipService);
   instance = new Ctor();
   instance.$mount();
-  document.body.appendChild(instance.$el);
+  // 单例只在首次创建时挂载，此后再改 appendTo 不会迁移已有实例
+  const container = resolveContainer(getPopperConfig().appendTo);
+  if (container) container.appendChild(instance.$el);
   return instance;
 }
 

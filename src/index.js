@@ -93,6 +93,7 @@ import Result from '../packages/result/index.js';
 import locale from 'hzq-ui/src/locale';
 import CollapseTransition from 'hzq-ui/src/transitions/collapse-transition';
 import { registerSvgIcons } from 'hzq-ui/packages/svg-icon';
+import { setPopperConfig } from 'hzq-ui/src/utils/popper-config';
 
 const components = [
   Pagination,
@@ -205,9 +206,17 @@ const install = function(Vue, opts = {}) {
     registerSvgIcons(opts.svgIcons.icons, { prefix: opts.svgIcons.prefix });
   }
 
+  // opts.popper: { appendTo, boundariesElement, boundariesPadding, zIndex } 全局浮层配置
+  // opts.zIndex 为旧写法，与 opts.popper.zIndex 同时给出时以后者为准
+  if (opts.popper || opts.zIndex) {
+    const popperConfig = Object.assign({}, opts.popper);
+    if (popperConfig.zIndex === undefined && opts.zIndex) popperConfig.zIndex = opts.zIndex;
+    setPopperConfig(popperConfig);
+  }
+
   Vue.prototype.$HZQ = {
     size: opts.size || '',
-    zIndex: opts.zIndex || 2000
+    zIndex: (opts.popper && opts.popper.zIndex) || opts.zIndex || 2000
   };
 
   Vue.prototype.$loading = Loading.service;
@@ -229,6 +238,7 @@ export default {
   locale: locale.use,
   i18n: locale.i18n,
   install,
+  setPopperConfig,
   CollapseTransition,
   Loading,
   Pagination,

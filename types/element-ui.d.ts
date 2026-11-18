@@ -91,11 +91,29 @@ import { ElDescriptionsItem } from './descriptions-item'
 import { ElResult } from './result'
 import { ElStatistic } from './statistic'
 
+export interface PopperConfig {
+  /** 浮层挂载容器：选择器、元素或返回元素的函数，默认 'body'。每次创建浮层时实时解析 */
+  appendTo?: string | HTMLElement | (() => HTMLElement | null),
+  /** 边界元素：'viewport' | 'window' | 'scrollParent' | 选择器 | 元素 | 函数，默认 'viewport' */
+  boundariesElement?: 'viewport' | 'window' | 'scrollParent' | string | HTMLElement | (() => HTMLElement | null),
+  /** 边界留白，不设时沿用组件自身或 popper 默认值 */
+  boundariesPadding?: number,
+  /** 浮层层级计数器起始值，默认 2000 */
+  zIndex?: number
+}
+
 export interface InstallationOptions {
   locale: any,
   i18n: any,
-  size: string
+  size: string,
+  popper?: PopperConfig
 }
+
+/**
+ * 设置全局浮层配置，可替代 Vue.use 的 opts.popper。
+ * 传 null 表示清空该项回落到默认值。
+ */
+export function setPopperConfig (config: PopperConfig): void
 
 /** The version of element-ui */
 export const version: string

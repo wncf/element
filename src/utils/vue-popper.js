@@ -2,6 +2,11 @@ import Vue from 'vue';
 import {
   PopupManager
 } from 'hzq-ui/src/utils/popup';
+import {
+  getPopperConfig,
+  resolveContainer,
+  resolveBoundaries
+} from 'hzq-ui/src/utils/popper-config';
 
 const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
 const stop = e => e.stopPropagation();
@@ -84,7 +89,16 @@ export default {
         return;
       }
 
-      const options = this.popperOptions;
+      const own = this.popperOptions || {};
+      const options = Object.assign({}, own);
+      const cfg = getPopperConfig();
+      // 全局值只在组件没显式提供时兜底，组件自身优先级最高
+      if (options.boundariesElement === undefined && cfg.boundariesElement !== undefined) {
+        options.boundariesElement = resolveBoundaries(cfg.boundariesElement);
+      }
+      if (options.boundariesPadding === undefined && cfg.boundariesPadding !== undefined) {
+        options.boundariesPadding = cfg.boundariesPadding;
+      }
       const popper = this.popperElm = this.popperElm || this.popper || this.$refs.popper;
       let reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference;
 
@@ -96,7 +110,10 @@ export default {
 
       if (!popper || !reference) return;
       if (this.visibleArrow) this.appendArrow(popper);
-      if (this.appendToBody) document.body.appendChild(this.popperElm);
+      if (this.appendToBody) {
+        const container = resolveContainer(cfg.appendTo);
+        if (container) container.appendChild(this.popperElm);
+      }
       if (this.popperJS && this.popperJS.destroy) {
         this.popperJS.destroy();
       }
@@ -185,9 +202,9 @@ export default {
 
   beforeDestroy() {
     this.doDestroy(true);
-    if (this.popperElm && this.popperElm.parentNode === document.body) {
+    if (this.popperElm && this.popperElm.parentNode) {
       this.popperElm.removeEventListener('click', stop);
-      document.body.removeChild(this.popperElm);
+      this.popperElm.parentNode.removeChild(this.popperElm);
     }
   },
 

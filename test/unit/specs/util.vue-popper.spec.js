@@ -1,4 +1,5 @@
 import VuePopper from 'hzq-ui/src/utils/vue-popper';
+import { setPopperConfig } from 'hzq-ui/src/utils/popper-config';
 import { createTest } from '../util';
 
 const Popper = Object.assign({}, VuePopper, {
@@ -175,5 +176,40 @@ describe('Utils:VuePopper', () => {
     expect(document.body.contains(vm.popperElm)).to.true;
     vm.$destroy();
     expect(document.body.contains(vm.popperElm)).to.false;
+  });
+
+  it('component boundariesElement takes precedence over global config', () => {
+    setPopperConfig({ boundariesElement: 'window' });
+    const vm = createTest(Popper, {
+      popperOptions: { boundariesElement: 'viewport' }
+    });
+    vm.createPopper();
+    expect(vm.popperJS._options.boundariesElement).to.equal('viewport');
+    setPopperConfig({ boundariesElement: null });
+  });
+
+  it('falls back to global boundariesElement and padding', () => {
+    setPopperConfig({ boundariesElement: 'window', boundariesPadding: 12 });
+    const vm = createTest(Popper);
+    vm.createPopper();
+    expect(vm.popperJS._options.boundariesElement).to.equal('window');
+    expect(vm.popperJS._options.boundariesPadding).to.equal(12);
+    setPopperConfig({ boundariesElement: null, boundariesPadding: null });
+  });
+
+  it('appendToBody mounts into configured container and cleans up', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    setPopperConfig({ appendTo: container });
+
+    const vm = createTest(Popper);
+    vm.createPopper();
+    expect(container.contains(vm.popperElm)).to.true;
+
+    vm.$destroy();
+    expect(container.contains(vm.popperElm)).to.false;
+
+    document.body.removeChild(container);
+    setPopperConfig({ appendTo: null });
   });
 });

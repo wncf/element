@@ -21,6 +21,7 @@
 import Vue from 'vue';
 import { on, off } from 'hzq-ui/src/utils/dom';
 import { PopupManager } from 'hzq-ui/src/utils/popup';
+import { getPopperConfig, resolveBoundaries } from 'hzq-ui/src/utils/popper-config';
 
 const PopperJS = Vue.prototype.$isServer ? function() {} : require('hzq-ui/src/utils/popper');
 
@@ -181,14 +182,23 @@ export default {
         this.destroyPopper();
       }
 
-      this.popperJS = new PopperJS(this.target, popperElm, {
+      const cfg = getPopperConfig();
+      const options = {
         placement: this.placement,
         offset: this.offset,
         arrowOffset: 0,
         boundariesPadding: 10,
         gpuAcceleration: false,
         removeOnDestroy: false
-      });
+      };
+      if (cfg.boundariesElement !== undefined) {
+        options.boundariesElement = resolveBoundaries(cfg.boundariesElement);
+      }
+      if (cfg.boundariesPadding !== undefined) {
+        options.boundariesPadding = cfg.boundariesPadding;
+      }
+
+      this.popperJS = new PopperJS(this.target, popperElm, options);
       this.lastPlacement = this.placement;
       this.lastOffset = this.offset;
 
