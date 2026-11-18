@@ -18,6 +18,11 @@ Vue.use(HZQUI, {
   loading: {                                       // 全局 Loading 展示组件
     spinnerComponent: MySpinner,
     spinnerProps: { size: 32 }
+  },
+  popper: {                                        // 全局浮层配置
+    appendTo: 'micro-app-body',
+    boundariesElement: 'viewport',
+    zIndex: 5000
   }
 });
 ```
@@ -36,6 +41,7 @@ Vue.use(HZQUI, {
 | `i18n` | function | — | 自定义翻译函数，用于接入 vue-i18n |
 | `svgIcons` | object | — | 注册业务 SVG 图标 |
 | `loading` | object | — | 全局自定义 Loading 展示组件 |
+| `popper` | object | — | 全局浮层配置：挂载容器、边界元素、起始层级 |
 
 ### size
 
@@ -194,6 +200,50 @@ this.$loading({ size: 48, color: '#f56c6c' });
 ```
 
 渲染优先级从高到低为：`element-loading-spinner` 字符串图标 → 自定义组件 → 内置 SVG 圆圈。详见 [Loading 加载](./#/zh-CN/component/loading)。
+
+### popper
+
+统一配置所有定位类浮层（Tooltip、Popover、Select 下拉、DatePicker 面板、Dropdown 等）的挂载容器、边界元素与起始层级。主要解决主应用 / micro-app 场景下浮层被裁切、被遮盖或被推回的问题。
+
+| 字段 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `appendTo` | string / HTMLElement / function | `'body'` | 浮层的挂载容器。字符串按选择器查找，函数需要返回元素 |
+| `boundariesElement` | string / HTMLElement / function | `'viewport'` | 浮层允许摆放的边界。`'viewport'` / `'window'` / `'scrollParent'` 直接透传给 popper，其它字符串按选择器查找 |
+| `boundariesPadding` | number | — | 边界留白，不设时沿用组件自身或 popper 的默认值 |
+| `zIndex` | number | `2000` | 浮层层级计数器的起始值，与顶层 `zIndex` 等价 |
+
+```js
+Vue.use(HZQUI, {
+  popper: {
+    appendTo: 'micro-app-body',
+    boundariesElement: 'viewport',
+    zIndex: 5000
+  }
+});
+```
+
+:::tip
+`appendTo` 支持选择器、元素、函数三种写法，**每次创建浮层时实时解析**，所以微前端容器即使晚于插件安装才注入也能被正确找到。解析失败（或函数返回 `null`）时回落到 `document.body`。
+:::
+
+优先级从高到低：
+
+1. 组件自身的 `popper-options`（例如 `<hzq-tooltip :popper-options="{ boundariesElement: el }">`）
+2. 全局 `popper` 配置
+3. 库内默认值
+
+也就是说，全局配置只做兜底，单个组件显式指定了就以组件为准。`$tooltip` 服务式提示使用全局单例，只在首次调用时挂载，因此之后再改 `appendTo` 不会迁移已有实例。
+
+配置也可以不用 `Vue.use`，单独调用导出的方法：
+
+```js
+import { setPopperConfig } from 'hzq-ui';
+
+setPopperConfig({
+  appendTo: () => document.querySelector('.app-container'),
+  zIndex: 5000
+});
+```
 
 ### 初始化时一并完成的事
 

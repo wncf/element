@@ -57,6 +57,8 @@ Vue.use(HZQUI, { zIndex: 5000 });
 
 这在把组件库嵌入已有 `z-index` 体系的老系统时很有用。
 
+定位类浮层还有一个全局 `popper` 配置，可以同时指定挂载容器与边界元素：`appendTo` 决定浮层挂到哪（默认 `body`），`boundariesElement` 决定浮层能摆到哪（默认 `viewport`）。两者配合，可以解决浮层被 `overflow: hidden` 祖先裁切、或在微前端里被主应用遮挡的问题。配置方式见 [初始化参数 - popper](./#/zh-CN/component/init-options?id=popper)。
+
 ### 一个最小示例
 
 ```js

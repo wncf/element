@@ -32,7 +32,7 @@
 ### 2.1 `src/` 内部
 
 - `src/index.js`：**由 `build/bin/build-entry.js` 自动生成**（文件头有 `/* Automatically generated ... */` 注释），不要手工维护，改动会在下次 `npm run build:file` 时被覆盖。
-- `src/utils/`（18 个文件）：`dom.js`、`popper.js`、`vue-popper.js`、`merge.js`、`date.js`、`clickoutside.js`、`scrollbar-width.js` 等通用能力，是全库的公共依赖层。
+- `src/utils/`（23 个 `.js`）：`dom.js`、`popper.js`、`vue-popper.js`、`popper-config.js`、`merge.js`、`date.js`、`clickoutside.js`、`scrollbar-width.js` 等通用能力，是全库的公共依赖层。
 - `src/utils/lodash.js`：**内联的 lodash 副本，单文件 17029 行**，占 `src/` 总行数（约 2.8 万行）的六成，是覆盖率统计的主要干扰项。
 - `src/mixins/`、`src/directives/`、`src/transitions/`：跨组件复用的混入（如表单元素、Popper）、指令（`v-loading`、`v-infinite-scroll`）与过渡。
 - `src/locale/lang/`：60 个语言包。
@@ -47,13 +47,13 @@
 
 | 文件 | 行数 |
 | --- | --- |
-| `packages/date-picker/src/picker.vue` | 873 |
-| `packages/select/src/select.vue` | 829 |
-| `packages/table/src/table.vue` | 625 |
-| `packages/date-picker/src/panel/date-range.vue` | 620 |
-| `packages/cascader/src/cascader.vue` | 612 |
+| `packages/date-picker/src/picker.vue` | 956 |
+| `packages/select/src/select.vue` | 938 |
+| `packages/cascader/src/cascader.vue` | 822 |
+| `packages/table/src/table.vue` | 712 |
+| `packages/date-picker/src/panel/date-range.vue` | 680 |
 
-`date-picker`、`select`、`table`、`cascader` 这几个是复杂度最高的组件，其中 `picker.vue`（873 行）已经越过单文件 800 行的建议上限。
+`date-picker`、`select`、`table`、`cascader` 这几个是复杂度最高的组件，其中 `picker.vue`（956 行）、`select.vue`（938 行）、`cascader.vue`（822 行）都越过了单文件 800 行的建议上限。
 
 ### 2.3 `packages/theme-chalk/` 主题
 
