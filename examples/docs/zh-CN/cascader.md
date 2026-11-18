@@ -1973,6 +1973,81 @@
 ```
 :::
 
+### 末级值兼容
+
+后端常常只返回末级节点的 id。开启 `value-compat` 后，传入 `[末级值]` 或 `[末级值1, 末级值2]` 会被自动补全为完整路径；查不到节点时按原值透传，不会清空。
+
+:::demo `value-compat` 只在 `props.emitPath` 为 true（默认）时生效。
+```html
+<hzq-cascader
+  v-model="value"
+  :options="options"
+  value-compat
+  @change="handleChange"></hzq-cascader>
+<script>
+  export default {
+    data() {
+      return {
+        value: ['xihu'],
+        options: [{
+          value: 'zhejiang',
+          label: '浙江',
+          children: [{
+            value: 'hangzhou',
+            label: '杭州',
+            children: [{
+              value: 'xihu',
+              label: '西湖'
+            }, {
+              value: 'binjiang',
+              label: '滨江'
+            }]
+          }]
+        }]
+      };
+    },
+    methods: {
+      handleChange(value, nodes) {
+        console.log(value, nodes);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 手动控制下拉层
+
+设置 `popover-trigger="manual"` 后，点击输入框、箭头以及 Enter/方向键都不再切换下拉层，需要外部调用组件的 `toggleDropDownVisible` 方法控制。点击外部、`esc` / `tab`、选中后自动关闭等行为保持不变。
+
+:::demo
+```html
+<div>
+  <hzq-cascader
+    ref="cascader"
+    v-model="value"
+    :options="options"
+    popover-trigger="manual"></hzq-cascader>
+  <hzq-button @click="$refs.cascader.toggleDropDownVisible(true)">展开</hzq-button>
+  <hzq-button @click="$refs.cascader.toggleDropDownVisible(false)">收起</hzq-button>
+</div>
+<script>
+  export default {
+    data() {
+      return {
+        value: [],
+        options: [{
+          value: 'zhejiang',
+          label: '浙江',
+          children: [{ value: 'hangzhou', label: '杭州' }]
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Cascader Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -1991,21 +2066,24 @@
 | debounce | 搜索关键词输入的去抖延迟，毫秒 | number | — | 300 |
 | before-filter | 筛选之前的钩子，参数为输入的值，若返回 false 或者返回 Promise 且被 reject，则停止筛选 | function(value) | — | — |
 | popper-class | 自定义浮层类名   | string | —  | — |
+| value-compat | 是否允许 value 传入末级值（如 `['xihu']`），开启后自动按 options 补全为完整路径；仅在 `props.emitPath` 为 true 时生效，查不到的节点原值透传 | boolean | — | false |
+| popover-trigger | 下拉层的触发方式。`click` 点击输入框切换；`manual` 不响应点击、Enter、方向键，需外部调用 `toggleDropDownVisible` | string | click / manual | click |
 
 ### Cascader Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| change | 当选中节点变化时触发 | 选中节点的值 |
+| change | 当选中节点变化时触发 | (value, nodes) 选中节点的值，以及当前选中节点对应的原始 option 数组（多选为各选中节点的原始 option 数组，无选中或清空时为 `[]`） |
 | expand-change | 当展开节点发生变化时触发 | 各父级选项值组成的数组 |
 | blur | 当失去焦点时触发 | (event: Event) |
 | focus | 当获得焦点时触发 | (event: Event) |
 | visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
-| remove-tag | 在多选模式下，移除Tag时触发 | 移除的Tag对应的节点的值 |
+| remove-tag | 在多选模式下，移除Tag时触发 | (value, index) 移除的Tag对应的节点的值；该 Tag 在已展示标签中的下标 |
 
 ### Cascader Methods
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
 | getCheckedNodes | 获取选中的节点 | (leafOnly) 是否只是叶子节点，默认值为 `false` |
+| toggleDropDownVisible | 控制下拉层显隐，不传参数时按当前状态取反 | (visible) 是否显示 |
 
 ### Cascader Slots
 | 名称     | 说明 |

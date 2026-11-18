@@ -522,6 +522,223 @@ describe('Cascader', () => {
     expect(body.querySelectorAll('.hzq-cascader__suggestion-item').length).to.equal(0);
   });
 
+  it('change event passes the raw option nodes as second argument', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader
+          ref="cascader"
+          v-model="value"
+          :options="options"></hzq-cascader>
+      `,
+      data() {
+        return { value: [], options };
+      }
+    }, true);
+
+    const cascader = vm.$refs.cascader;
+    const changeHandler = sinon.spy();
+    cascader.$on('change', changeHandler);
+
+    getOptions(document.body, 0)[0].click();
+    await waitImmediate();
+    getOptions(document.body, 1)[0].click();
+    await waitImmediate();
+    getOptions(document.body, 2)[0].click();
+    await waitImmediate();
+
+    expect(changeHandler.calledOnce).to.be.true;
+    const [val, nodes] = changeHandler.firstCall.args;
+    expect(val).to.deep.equal(selectedValue);
+    expect(nodes).to.have.lengthOf(1);
+    expect(nodes[0]).to.equal(options[0].children[0].children[0]);
+
+    // 清除时第二参为空数组
+    const clearHandler = sinon.spy();
+    cascader.$on('change', clearHandler);
+    cascader.handleClear();
+    await waitImmediate();
+    expect(clearHandler.calledOnce).to.be.true;
+    expect(clearHandler.firstCall.args[0]).to.deep.equal([]);
+    expect(clearHandler.firstCall.args[1]).to.deep.equal([]);
+  });
+
+  it('change event passes checked nodes in multiple mode', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader
+          ref="cascader"
+          v-model="value"
+          :options="options"
+          :props="props"></hzq-cascader>
+      `,
+      data() {
+        return { value: [], options, props: { multiple: true } };
+      }
+    }, true);
+
+    const cascader = vm.$refs.cascader;
+    const changeHandler = sinon.spy();
+    cascader.$on('change', changeHandler);
+
+    getOptions(document.body, 0)[0].querySelector('.hzq-checkbox input').click();
+    await waitImmediate();
+
+    expect(changeHandler.called).to.be.true;
+    const [val, nodes] = changeHandler.lastCall.args;
+    expect(val).to.deep.equal([
+      ['zhejiang', 'hangzhou', 'xihu'],
+      ['zhejiang', 'hangzhou', 'binjiang'],
+      ['zhejiang', 'ningbo', 'jiangbei']
+    ]);
+    expect(nodes).to.have.lengthOf(3);
+    expect(nodes[0]).to.equal(options[0].children[0].children[0]);
+    expect(nodes[1]).to.equal(options[0].children[0].children[1]);
+    expect(nodes[2]).to.equal(options[0].children[1].children[0]);
+  });
+
+  it('valueCompat expands leaf values to full paths in multiple mode', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader
+          ref="cascader"
+          v-model="value"
+          :options="options"
+          :props="props"
+          value-compat></hzq-cascader>
+      `,
+      data() {
+        return {
+          value: ['xihu', 'jiangbei'],
+          options,
+          props: { multiple: true }
+        };
+      }
+    }, true);
+
+    await waitImmediate();
+    const cascader = vm.$refs.cascader;
+    expect(cascader.checkedValue).to.deep.equal([
+      ['zhejiang', 'hangzhou', 'xihu'],
+      ['zhejiang', 'ningbo', 'jiangbei']
+    ]);
+    expect(vm.$el.querySelectorAll('.hzq-tag').length).to.equal(2);
+
+    // 运行中改值同样归一化
+    vm.value = ['binjiang'];
+    await waitImmediate();
+    expect(cascader.checkedValue).to.deep.equal([
+      ['zhejiang', 'hangzhou', 'binjiang']
+    ]);
+  });
+
+  it('valueCompat expands a single leaf value in single mode', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader
+          ref="cascader"
+          v-model="value"
+          :options="options"
+          value-compat></hzq-cascader>
+      `,
+      data() {
+        return { value: ['xihu'], options };
+      }
+    }, true);
+
+    await waitImmediate();
+    const cascader = vm.$refs.cascader;
+    expect(cascader.checkedValue).to.deep.equal(selectedValue);
+    expect(vm.$el.querySelector('input').value).to.equal('Zhejiang / Hangzhou / West Lake');
+  });
+
+  it('valueCompat keeps unknown values untouched', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader
+          ref="cascader"
+          v-model="value"
+          :options="options"
+          value-compat></hzq-cascader>
+      `,
+      data() {
+        return { value: ['not-exist'], options };
+      }
+    }, true);
+
+    await waitImmediate();
+    const cascader = vm.$refs.cascader;
+    expect(cascader.checkedValue).to.deep.equal(['not-exist']);
+    expect(cascader.presentText).to.equal(null);
+  });
+
+  it('manual popoverTrigger does not toggle on click', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader
+          ref="cascader"
+          v-model="value"
+          :options="options"
+          popover-trigger="manual"></hzq-cascader>
+      `,
+      data() {
+        return { value: [], options };
+      }
+    }, true);
+
+    const cascader = vm.$refs.cascader;
+    vm.$el.click();
+    await waitImmediate();
+    expect(cascader.dropDownVisible).to.be.false;
+
+    // 外部调用公共方法仍可开合
+    cascader.toggleDropDownVisible(true);
+    await waitImmediate();
+    expect(cascader.dropDownVisible).to.be.true;
+    expect(cascader.$refs.popper.style.display).to.not.equal('none');
+
+    cascader.toggleDropDownVisible(false);
+    await waitImmediate();
+    expect(cascader.dropDownVisible).to.be.false;
+  });
+
+  it('remove-tag passes the tag index', async() => {
+    vm = createVue({
+      template: `
+        <hzq-cascader
+          ref="cascader"
+          v-model="value"
+          :options="options"
+          :props="props"></hzq-cascader>
+      `,
+      data() {
+        return {
+          value: ['xihu', 'binjiang', 'jiangbei'],
+          options,
+          props: { multiple: true, emitPath: false }
+        };
+      }
+    }, true);
+
+    await waitImmediate();
+    const cascader = vm.$refs.cascader;
+    const removeHandler = sinon.spy();
+    cascader.$on('remove-tag', removeHandler);
+
+    vm.$el.querySelectorAll('.hzq-tag')[1].querySelector('.hzq-tag__close').click();
+    await waitImmediate();
+    expect(removeHandler.calledOnce).to.be.true;
+    expect(removeHandler.firstCall.args[0]).to.equal('binjiang');
+    expect(removeHandler.firstCall.args[1]).to.equal(1);
+
+    // 只剩最后一项时 index 为 0
+    vm.$el.querySelectorAll('.hzq-tag')[0].querySelector('.hzq-tag__close').click();
+    await waitImmediate();
+    expect(removeHandler.lastCall.args[1]).to.equal(0);
+    vm.$el.querySelector('.hzq-tag__close').click();
+    await waitImmediate();
+    expect(removeHandler.lastCall.args[1]).to.equal(0);
+  });
+
   it('clearing the search input restores the cascader panel', async() => {
     vm = createVue({
       template: `

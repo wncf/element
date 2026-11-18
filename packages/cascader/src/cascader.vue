@@ -9,7 +9,7 @@
     v-clickoutside="() => toggleDropDownVisible(false)"
     @mouseenter="inputHover = true"
     @mouseleave="inputHover = false"
-    @click="() => toggleDropDownVisible()"
+    @click="handleTriggerClick"
     @keydown="handleKeyDown">
 
     <!-- 输入框只负责展示已选值，筛选统一放到面板顶部的搜索框 -->
@@ -38,7 +38,7 @@
             'hzq-icon-arrow-down',
             dropDownVisible && 'is-reverse'
           ]"
-          @click.stop="toggleDropDownVisible()"></i>
+          @click.stop="handleTriggerClick"></i>
       </template>
     </hzq-input>
 
@@ -234,7 +234,18 @@ export default {
       type: Function,
       default: () => (() => {})
     },
-    popperClass: String
+    popperClass: String,
+    // 允许 v-model 传入「只有末级值」的数组，组件会按 options 补全为完整路径
+    valueCompat: {
+      type: Boolean,
+      default: false
+    },
+    // 下拉层的触发方式：click 为点击输入框切换，manual 完全由外部控制
+    popoverTrigger: {
+      type: String,
+      default: 'click',
+      validator: value => ['click', 'manual'].indexOf(value) > -1
+    }
   },
 
   data() {
@@ -292,6 +303,10 @@ export default {
     leafOnly() {
       return !this.config.checkStrictly;
     },
+    // config 只含调用方传入的键，emitPath 的默认值在 panel 里，这里按默认 true 处理
+    emitPath() {
+      return this.config.emitPath !== false;
+    },
     // 面板搜索框的提示语
     searchPlaceholder() {
       return t('el.cascader.searchPlaceholder');
@@ -315,10 +330,7 @@ export default {
       this.computePresentContent();
     },
     value(val) {
-      if (!isEqual(val, this.checkedValue)) {
-        this.checkedValue = val;
-        this.computePresentContent();
-      }
+      this.syncValue(val);
     },
     checkedValue(val) {
       const { value, dropDownVisible } = this;
@@ -332,13 +344,17 @@ export default {
         }
 
         this.$emit('input', val);
-        this.$emit('change', val);
+        this.$emit('change', val, this.getChangeNodes(val));
         this.dispatch('HzqFormItem', 'el.form.change', [val]);
       }
     },
     options: {
       handler: function() {
-        this.$nextTick(this.computePresentContent);
+        this.$nextTick(() => {
+          // options 异步到达后重新归一化，避免末级值回显缺失
+          if (this.valueCompat) this.syncValue(this.value);
+          this.computePresentContent();
+        });
       },
       deep: true
     },
@@ -365,7 +381,7 @@ export default {
     }
 
     if (!this.isEmptyValue(this.value)) {
-      this.computePresentContent();
+      this.syncValue(this.value);
     }
 
     this.filterHandler = debounce(this.debounce, () => {
@@ -406,6 +422,14 @@ export default {
         }
       };
     },
+    handleTriggerClick() {
+      // manual 模式下开合完全交给外部，点击输入框与箭头都不再切换
+      if (this.popoverTrigger === 'manual') return;
+      this.toggleDropDownVisible();
+    },
+    /**
+     * 公开 API：控制下拉层显隐，不传 visible 时按当前状态取反
+     */
     toggleDropDownVisible(visible) {
       if (this.isDisabled) return;
 
@@ -432,9 +456,11 @@ export default {
     handleKeyDown(event) {
       switch (event.keyCode) {
         case KeyCode.enter:
+          if (this.popoverTrigger === 'manual') break;
           this.toggleDropDownVisible();
           break;
         case KeyCode.down:
+          if (this.popoverTrigger === 'manual') break;
           this.toggleDropDownVisible(true);
           this.focusFirstNode();
           event.preventDefault();
@@ -508,6 +534,81 @@ export default {
         return isEmpty(val);
       }
       return false;
+    },
+    // value 变化与初始化统一走这里：valueCompat 开启时先把末级值补全成完整路径
+    syncValue(val) {
+      const next = this.valueCompat ? this.normalizeValue(val) : val;
+      if (!isEqual(next, this.checkedValue)) {
+        this.checkedValue = next;
+      }
+      this.computePresentContent();
+    },
+    // 归一化失败的场景一律原值透传，不清空也不报错
+    normalizeValue(val) {
+      const { panel, multiple } = this;
+
+      if (!this.valueCompat || !this.emitPath || !panel || !panel.getNodeByValue) {
+        return val;
+      }
+      if (!Array.isArray(val) || !val.length) return val;
+
+      return multiple
+        ? this.normalizeMultiLeafValue(val)
+        : this.normalizeSingleLeafValue(val);
+    },
+    // 多选：一维数组视为末级值数组，逐项补全；任一节点查不到则整体透传
+    normalizeMultiLeafValue(val) {
+      if (Array.isArray(val[0])) return val;
+
+      const paths = [];
+      for (let i = 0; i < val.length; i++) {
+        const node = this.panel.getNodeByValue(val[i]);
+        if (!node || !node.isLeaf) return val;
+        paths.push(node.getValueByOption());
+      }
+      return paths.length ? paths : val;
+    },
+    // 单选：仅当是叶子节点且完整路径确实更长时才补全
+    normalizeSingleLeafValue(val) {
+      if (val.length !== 1 || Array.isArray(val[0])) return val;
+
+      const node = this.panel.getNodeByValue(val[0]);
+      if (!node || !node.isLeaf) return val;
+
+      const path = node.getValueByOption();
+      return Array.isArray(path) && path.length > val.length ? path : val;
+    },
+    // change 事件第二参：当前选中节点对应的原始 option 数组
+    getChangeNodes(val) {
+      const { panel, multiple } = this;
+      if (!panel || !panel.getCheckedNodes) return [];
+
+      if (multiple) {
+        // panel 自身 checkedValue 尚未同步到最新值时（外部改 value），按 val 反查，保证与第一参一致
+        if (isEqual(panel.checkedValue, val)) {
+          return (panel.getCheckedNodes(this.leafOnly) || [])
+            .filter(node => node && node.data)
+            .map(node => node.data);
+        }
+        return this.getNodesByValue(val);
+      }
+
+      if (this.isEmptyValue(val)) return [];
+      const node = panel.getNodeByValue(val);
+      return node && node.data ? [node.data] : [];
+    },
+    getNodesByValue(val) {
+      if (!Array.isArray(val)) return [];
+
+      return val
+        .map(item => {
+          const value = Array.isArray(item)
+            ? item[item.length - 1]
+            : item;
+          const node = this.panel.getNodeByValue(value);
+          return node && node.data ? node.data : null;
+        })
+        .filter(Boolean);
     },
     computePresentText() {
       const { checkedValue, config } = this;
@@ -632,11 +733,12 @@ export default {
       }
     },
     deleteTag(tag) {
-      const { checkedValue } = this;
+      const { checkedValue, presentTags } = this;
       const current = tag.node.getValueByOption();
       const val = checkedValue.find(n => isEqual(n, current));
+      const index = presentTags.indexOf(tag);
       this.checkedValue = checkedValue.filter(n => !isEqual(n, current));
-      this.$emit('remove-tag', val);
+      this.$emit('remove-tag', val, index);
     },
     syncTagsOverflow(tagsWrap) {
       const tagEls = tagsWrap.querySelectorAll('.hzq-tag');

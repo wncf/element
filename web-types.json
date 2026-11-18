@@ -652,6 +652,16 @@
               "name": "clearable",
               "description": "Whether selected value can be cleared",
               "type": "boolean"
+            },
+            {
+              "name": "valueCompat",
+              "description": "Whether to accept a value containing only leaf values, which is expanded to full paths using options. Only works when props.emitPath is true. Default false.",
+              "type": "boolean"
+            },
+            {
+              "name": "popoverTrigger",
+              "description": "How the dropdown is triggered. 'click' toggles on click; 'manual' requires calling toggleDropDownVisible. Default 'click'.",
+              "type": "string"
             }
           ],
           "slots": [

@@ -58,8 +58,21 @@ export declare class ElCascader<V = any, D = CascaderOption> extends ElementUICo
   /** Custom class name for Cascader's dropdown */
   popperClass: string
 
+  /**
+   * Whether to accept leaf-only values.
+   * When enabled, a value of `[leafValue]` / `[leaf1, leaf2]` is expanded
+   * to the full path(s) using `options`. Default false.
+   */
+  valueCompat: boolean
+
+  /** How the dropdown is triggered: 'click' or 'manual' */
+  popoverTrigger: 'click' | 'manual'
+
   /** Hook function before filtering with the value to be filtered as its parameter */
   beforeFilter: (value: string) => boolean | Promise<any>
+
+  /** Toggle the dropdown visibility, e.g. with `popoverTrigger="manual"` */
+  toggleDropDownVisible(visible?: boolean): void
 
   $slots: CascaderSlots
 }
