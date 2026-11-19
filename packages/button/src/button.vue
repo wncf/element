@@ -71,6 +71,10 @@
 
     methods: {
       handleClick(evt) {
+        // 原生 disabled 只在事件命中元素自身时才阻断；点击子元素后冒泡上来的
+        // click 仍会走到这里。样式里的 pointer-events: none 只能拦住真实指针，
+        // 程序化 dispatch 的 click 不经过命中测试，所以这里再守一道。
+        if (this.buttonDisabled || this.loading) return;
         this.$emit('click', evt);
       }
     }

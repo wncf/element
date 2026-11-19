@@ -1174,5 +1174,5 @@ $--breakpoints-spec: (
   'xl-only' : "(min-width: #{$--xl})",
 );
 
-/* 语义 token 输出：必须放在最后，此时上面所有变量已解析完成 */
-@import "./tokens";
+/* 语义 token 输出不在这里：见 base.scss。
+   变量块只在 base 产物里输出一次，组件产物只保留 var() 引用。 */

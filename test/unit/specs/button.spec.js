@@ -130,4 +130,46 @@ describe('Button', () => {
       done();
     }, 20);
   });
+
+  it('disabled implies disabled', done => {
+    let result;
+    vm = createVue({
+      template: `
+        <hzq-button disabled @click="handleClick"><span class="inner-slot"></span></hzq-button>
+      `,
+      methods: {
+        handleClick(evt) {
+          result = evt;
+        }
+      }
+    }, true);
+    vm.$el.querySelector('.inner-slot').click();
+
+    setTimeout(_ => {
+      expect(result).to.not.exist;
+      done();
+    }, 20);
+  });
+
+  it('disabled by form does not emit click', done => {
+    let result;
+    vm = createVue({
+      template: `
+        <hzq-form disabled>
+          <hzq-button @click="handleClick"><span class="inner-slot"></span></hzq-button>
+        </hzq-form>
+      `,
+      methods: {
+        handleClick(evt) {
+          result = evt;
+        }
+      }
+    }, true);
+    vm.$el.querySelector('.inner-slot').click();
+
+    setTimeout(_ => {
+      expect(result).to.not.exist;
+      done();
+    }, 20);
+  });
 });

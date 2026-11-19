@@ -1,3 +1,13 @@
 @import "common/transition.scss";
 @import "font-family.scss";
 @import "icon.scss";
+
+// 语义 token（CSS 变量）只在这里输出一次。
+//
+// 以前它在 common/var.scss 末尾输出，于是每个组件产物（lib/button.css 等）
+// 都各自内嵌一份完整的四套主题变量块（约 11.6 KB / 组件，全库近 930 KB）。
+// 现在组件产物只保留 var(--hzq-*) 引用，变量块集中在 base 产物里：
+//   - 全量引入 index.css：base 在首位，行为不变
+//   - 按需引入：babel-plugin-component 会自动引入 theme-chalk/base.css
+//   - 直接引 scss 源码：使用方必须一并引入 base.scss
+@import "common/tokens";

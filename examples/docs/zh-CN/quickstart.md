@@ -28,6 +28,13 @@ new Vue({
 
 借助 [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component)，可以只引入需要的组件，以减小打包体积。
 
+:::tip
+按需引入会同时引入 `theme-chalk/base.css`，主题变量（`--hzq-*`）全部定义在这个文件里。
+**不要省略它**——否则组件样式里的 `var(--hzq-*)` 取不到值，颜色会静默退回继承值。
+插件默认就会带上 base，通常无需手动处理；如果用 Vite 等其他方式做按需引入，
+请自行引入一次 `hzq-ui/lib/theme-chalk/base.css`。
+:::
+
 首先安装：
 
 ```bash
