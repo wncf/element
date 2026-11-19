@@ -3,6 +3,13 @@
 ### 未发布
 
 #### 新特性
+- Dialog（`$dialog`）
+  - 新增 `type`：`error` / `warning` / `info` / `add` / `edit`，在标题区渲染对应图标，底部默认渲染取消 + 确定；`error` 的确定按钮使用危险色。
+  - 新增 `icon`（自定义标题图标类名）、`hideFooter`（不渲染底部按钮）、`fullscreen`（全屏）。
+  - 新增 `open` 回调，弹窗打开后拿到实例，可用于聚焦输入框等。
+  - 新增 `zIndex`，配合 `explicitZIndex` 只设定本层层级、不抬高全局自增基线。
+  - 新增 `parent` 选项：`this.$dialog()` 自动取 `this`，`$store` / `$route` / `provide` 沿正确的父链解析。
+  - 返回值改为实例代理，透传 `$refs` / `$el`；排队中的占位代理在实例挂载后自动转发读写。
 - Cascader
   - `change` 事件新增第二参 `nodes`：当前选中节点对应的原始 option 数组，调用方可直接取业务字段（如 `goodsId`），无需按 value 反查。无选中或清空时为 `[]`。
   - 新增 `value-compat` 属性：允许 value 直接传末级值（如 `['xihu']`），组件按 options 自动补全为完整路径；异步到达的 options 会重新归一化，查不到节点时原值透传。仅在 `props.emitPath` 为 true 时生效。
@@ -14,15 +21,23 @@
   - 挂载容器与边界元素支持选择器、元素、函数三种写法，**每次创建浮层时实时解析**，微前端容器晚于插件安装注入也能命中。
 
 #### 修复
+- Button
+  - `loading` / `disabled` 时不再触发 `click`。原生 `disabled` 只拦截命中按钮自身的点击，点击内部子元素后冒泡上来的 `click` 仍会触发；样式里的 `pointer-events: none` 也只对真实指针生效，程序化触发的点击不受约束。改为在 `handleClick` 中按 `buttonDisabled` / `loading` 再守一道。
 - Popper
   - `boundariesElement` 解析失败或选择器未命中时回落到 `viewport`。此前会把未知字符串透传给 popper，`_getBoundaries` 算出 `NaN` 边界，配置看起来生效、实际完全不约束位置。
   - `beforeDestroy` 清理浮层时改为判断 `parentNode` 是否存在。此前只在父节点是 `document.body` 时才移除，挂到自定义容器后 DOM 会残留。
 
 #### 优化
+- 主题体积
+  - 主题 token（`--hzq-*`）改为只在 `theme-chalk/base.css` 输出一次。此前每个组件产物各自内嵌一份完整的四套主题变量块，`lib/theme-chalk` 因此膨胀到 1.91 MB；现在约 875 KB，`button.css` 由 25,143 B 降到 13,550 B（gzip 3.5 KB → 1.8 KB）。
+  - 完整引入与按需引入（`babel-plugin-component` 会自动引入 `base.css`）行为不变；**直接引入 scss 源码**的用法需要额外引入 `base.scss`。
+  - 构建新增 `check-theme-tokens` 校验：组件引用的 token 必须由 `base.css` 定义，且不得有组件重新内嵌 token 块。
 - Popper
   - `vue-popper` 的 `createPopper` 改为克隆 `popperOptions` 后再合并全局配置，不再原地改写组件实例上的 options 对象。优先级：组件自身 `popper-options` > 全局 `popper` 配置 > 库默认值。
 
 #### 文档
+- Dialog：补充语义类型、`fullscreen`、`icon`、`hideFooter`、`zIndex`、`parent`、`open` 与返回值说明；`stack` 默认值改为 `true`。
+- 快速上手：说明按需引入必须包含 `base.css`。
 - Cascader：补充末级值兼容、手动控制下拉层两个示例，更新属性 / 事件 / 方法表。
 - 初始化参数：新增 `popper` 小节，说明四个字段、优先级与微前端用法。
 - 浮层层级管理：补充挂载容器与边界元素的关系说明。
