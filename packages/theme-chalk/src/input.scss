@@ -77,6 +77,11 @@
   display: inline-block;
   vertical-align: top;
   width: 100%;
+  // 根节点是 inline-block，行盒高度取 max(line-height, 内容高度)。
+  // 不显式声明就会继承父级行高：放进 .hzq-form-item__content（line-height 32px）时，
+  // small/mini 档内框只有 28/24px，外框却被行高撑回 32px，上下各多出 4px。
+  // 写 normal 后行盒跟随内容高度，内框与外框同高，且不依赖任何父级样式。
+  line-height: normal;
   @include scroll-bar;
 
   & .hzq-input__clear {

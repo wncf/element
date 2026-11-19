@@ -42,7 +42,10 @@
       </template>
     </hzq-input>
 
-    <div v-if="multiple" class="hzq-cascader__tags">
+    <div
+      v-if="multiple"
+      class="hzq-cascader__tags"
+      :class="{ 'hzq-cascader__tags--adaptive': tagsWrap }">
       <div
         class="hzq-cascader__tags-wrap"
         :class="{ 'hzq-cascader__tags--wrap': tagsWrap }">

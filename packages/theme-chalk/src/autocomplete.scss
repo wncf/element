@@ -8,6 +8,8 @@
 @include b(autocomplete) {
   position: relative;
   display: inline-block;
+  // 同 .hzq-input / .hzq-select：避免继承 Form 内容区的行高把外框撑高
+  line-height: normal;
 }
 
 @include b(autocomplete-suggestion) {

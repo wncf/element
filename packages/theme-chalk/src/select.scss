@@ -18,6 +18,9 @@ $select-close-icon-height: 18px;
   display: inline-block;
   position: relative;
   vertical-align: top;
+  // 根节点本身就是行盒容器，不写会继承 .hzq-form-item__content 的 32px 行高，
+  // 把 small/mini 档的选择器外框撑回 32px（内框仍是 28/24px）
+  line-height: normal;
 
   .hzq-select__tags
     >span {

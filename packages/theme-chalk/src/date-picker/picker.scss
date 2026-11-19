@@ -50,7 +50,9 @@
     margin-left: -5px;
     color: $--color-text-placeholder;
     float: left;
-    line-height: 32px;
+    // 默认档位行高跟着变量走，不要写死 32px：
+    // 变量可被主题覆盖，写死会让图标在自定义高度下偏离中线
+    line-height: $--input-medium-height;
   }
 
   .hzq-range-input {
@@ -78,15 +80,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // 行盒居中仍是按基线排布，“-”这类标点的墨迹位于基线上方、低于行盒的视觉中心，
-    // 看上去还是偏下；按字号等比上提 0.15em（14px 字号约 2px）把它拉回视觉中线
-    position: relative;
-    top: -0.15em;
+    // 分隔符与两侧输入框同字号、同行盒高度，两边文字的基线才能对齐。
+    // 不要再单独上提（如 top: -0.15em）：那只对“-”这类居中的标点有效，
+    // 换成“至”等汉字就会整体浮到数字上方
     height: 100%;
     padding: 0 5px;
     margin: 0;
     text-align: center;
-    font-size: 14px;
+    font-size: $--font-size-base;
     width: 5%;
     color: $--color-text-primary;
   }
@@ -97,7 +98,7 @@
     width: 25px;
     display: inline-block;
     float: right;
-    line-height: 32px;
+    line-height: $--input-medium-height;
     // 与左侧图标的外距对称，否则两侧占位不等宽，中间的分隔符会偏左
     margin-right: -5px;
   }

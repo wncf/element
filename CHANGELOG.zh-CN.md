@@ -15,6 +15,10 @@
 - 主题
   - 禁用态控件底色与边框调浅：`--hzq-bg-color-control-disabled` 由 `#e6ebf3` 改为 `#eef1f6`，`--hzq-border-color-control-disabled` 由 `#b7c2d2` 改为 `#c5cedb`。此前的取值偏重，禁用控件显得发闷、像报错状态。
 
+#### 修复
+- Cascader
+  - 修复多选开启 `tags-wrap` 后标签仍然只显示单行、多出的标签被裁切的问题：外层标签容器新增 `hzq-cascader__tags--adaptive` 修饰类（仅在 `tagsWrap` 为 true 时添加），把 `top: 50%` / `transform` / `overflow: hidden` 改为铺满输入框并允许溢出，外层高度跟随 JS 撑高的输入框，标签换行与 80px 限高滚动由内层 `hzq-cascader__tags--wrap` 负责。未开启 `tags-wrap` 时样式与行为保持不变。
+
 #### 文档
 - Cascader 补充「自定义搜索建议项」「多选标签换行」两个示例，更新属性表与插槽表。
 - DateTimePicker 补充「点击『此刻』后保持面板打开」示例，属性表补充 `keep-open-on-now`；DatePicker 属性表同步补充。

@@ -235,6 +235,20 @@
     }
   }
 
+  // 换行模式下外层标签容器改为跟随输入框高度自适应。
+  // 基础规则里的 top:50% + translateY(-50%) 只按单行高度居中，
+  // 且 overflow:hidden + flex-wrap:nowrap 会把内层的多行标签直接裁掉，
+  // 所以开启 tags-wrap 时让外层铺满输入框（高度由 JS 撑高），只负责垂直居中。
+  @include e(tags--adaptive) {
+    top: 0;
+    bottom: 0;
+    transform: none;
+    align-items: center;
+    overflow: visible;
+    // 换行交给内层 tags--wrap，外层始终单行排布
+    flex-wrap: nowrap;
+  }
+
   // 多选标签换行模式（tags-wrap）：标签多行排列，超出 80px 后纵向滚动。
   // 输入框高度由 JS 的 syncTagsWrapHeight 跟随标签实际高度撑高
   @include e(tags--wrap) {
@@ -245,6 +259,7 @@
     align-items: center;
     white-space: normal;
     max-height: 80px;
+    // 横向溢出仍由基础规则的 overflow: hidden 裁掉，这里只接管纵向
     overflow-y: auto;
     // 只在行与行之间留间距，单行时不会额外撑高输入框
     row-gap: 3px;
