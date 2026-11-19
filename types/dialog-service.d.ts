@@ -22,6 +22,8 @@ export interface DialogOptions {
   type?: DialogType
   width?: string | number
   fullscreen?: boolean
+  /** 是否渲染遮罩，默认 true；设为 false 可只保留弹窗本身 */
+  modal?: boolean
   maskClose?: boolean
   escClose?: boolean
   showClose?: boolean

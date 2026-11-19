@@ -7,7 +7,10 @@
     <div
       v-show="visible"
       class="hzq-dialog__wrapper"
-      :class="{ 'hzq-dialog__wrapper--centered': isCentered }"
+      :class="{
+        'hzq-dialog__wrapper--centered': isCentered,
+        'hzq-dialog__wrapper--no-modal': !modal
+      }"
       @click.self="handleWrapperClick"
     >
       <div
@@ -202,6 +205,8 @@ export default {
       };
     },
     handleWrapperClick() {
+      // 没有遮罩时不存在「点击遮罩关闭」这个交互，空白区的点击也不该关弹窗
+      if (!this.modal) return;
       if (!this.closeOnClickModal) return;
       this.handleClose();
     },

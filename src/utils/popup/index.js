@@ -58,6 +58,7 @@ export default {
   beforeDestroy() {
     PopupManager.deregister(this._popupId);
     PopupManager.closeModal(this._popupId);
+    PopupManager.popEsc(this._popupId);
 
     this.restoreBodyStyle();
   },
@@ -171,6 +172,10 @@ export default {
         popupZIndex = PopupManager.nextZIndex();
       }
       dom.style.zIndex = popupZIndex;
+
+      // 无论有没有遮罩都要参与 esc 关闭的顺序
+      PopupManager.pushEsc(this._popupId);
+
       this.opened = true;
 
       this.onOpen && this.onOpen();
@@ -219,6 +224,7 @@ export default {
 
     doAfterClose() {
       PopupManager.closeModal(this._popupId);
+      PopupManager.popEsc(this._popupId);
       this._closing = false;
     },
 

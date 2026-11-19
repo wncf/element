@@ -1,10 +1,20 @@
 import Vue from 'vue';
 import dialog, { resetDialogService } from 'packages/dialog/src/dialog-service';
+import { PopupManager } from 'hzq-ui/src/utils/popup';
 
 describe('$dialog', () => {
   afterEach(done => {
     resetDialogService();
-    setTimeout(done, 50);
+    // 遮罩是单例 DOM，closeModal 会延迟 200ms 才移除。
+    // 不等它清掉，残留的 .v-modal 会串到下一条用例。
+    setTimeout(() => {
+      const mask = document.querySelector('.v-modal');
+      if (mask && mask.parentNode) mask.parentNode.removeChild(mask);
+      PopupManager.modalStack.length = 0;
+      if (PopupManager.escStack) PopupManager.escStack.length = 0;
+      PopupManager.modalDom = undefined;
+      done();
+    }, 250);
   });
 
   function lastWrapper() {
@@ -95,6 +105,65 @@ describe('$dialog', () => {
     setTimeout(() => {
       expect(document.querySelector('.hzq-dialog--bordered')).to.not.exist;
       done();
+    }, 100);
+  });
+
+  it('renders a mask by default', done => {
+    dialog({ title: 'mask', content: 'x' });
+
+    setTimeout(() => {
+      expect(document.querySelector('.v-modal'), '默认应渲染遮罩').to.exist;
+      expect(getVisibleWrappers()[0]).to.exist;
+      done();
+    }, 100);
+  });
+
+  it('renders no mask when modal is false', done => {
+    dialog({ title: 'no mask', content: 'x', modal: false });
+
+    setTimeout(() => {
+      expect(document.querySelector('.v-modal'), '不应渲染遮罩').to.not.exist;
+      // 弹窗本体仍要正常显示，并且有层级（无遮罩时走自增）
+      const wrapper = getVisibleWrappers()[0];
+      expect(wrapper, '弹窗本身仍应显示').to.exist;
+      expect(wrapper.style.zIndex, '无遮罩时也要有层级').to.not.equal('');
+      // wrapper 铺满视口，无遮罩时必须让点击穿透，否则页面其余部分点不动
+      expect(wrapper.classList.contains('hzq-dialog__wrapper--no-modal'), '应标记为无遮罩').to.be.true;
+      done();
+    }, 100);
+  });
+
+  it('esc closes a dialog without modal', done => {
+    dialog({ title: 'no mask', content: 'x', modal: false, escClose: true });
+
+    setTimeout(() => {
+      expect(getVisibleWrappers()[0], '弹窗应已打开').to.exist;
+
+      const event = new KeyboardEvent('keydown', {
+        key: 'Escape', code: 'Escape', keyCode: 27, which: 27, bubbles: true
+      });
+      document.dispatchEvent(event);
+      window.dispatchEvent(event);
+
+      setTimeout(() => {
+        expect(getVisibleWrappers()[0], '无遮罩时 esc 也应关闭弹窗').to.not.exist;
+        done();
+      }, 400);
+    }, 100);
+  });
+
+  it('clicking outside does not close a dialog without modal', done => {
+    dialog({ title: 'no mask', content: 'x', modal: false, maskClose: true });
+
+    setTimeout(() => {
+      const wrapper = getVisibleWrappers()[0];
+      expect(wrapper).to.exist;
+      // 没有遮罩就不存在「点遮罩关闭」，空白处点击不应关闭弹窗
+      wrapper.click();
+      setTimeout(() => {
+        expect(getVisibleWrappers()[0], '无遮罩时点空白处不应关闭').to.exist;
+        done();
+      }, 100);
     }, 100);
   });
 
@@ -476,5 +545,52 @@ describe('$dialog', () => {
       parent.$destroy();
       done();
     }, 100);
+  });
+
+  // 回归：closeModal 有一个 200ms 的延迟清理，期间遮罩挂着 v-modal-leave
+  // 在播淡出。关闭后在这个窗口内重新打开时，如果不清掉那次清理，
+  // 淡出会继续播完（实测约 100ms），直到旧定时器摘类才瞬间弹回不透明，
+  // 用户看到的就是遮罩「闪一下」。
+  //
+  // 这里直接驱动 PopupManager 而不经过 dialog 的 $nextTick 打开流程，
+  // 时序才是确定的：open → close → 立刻 open。
+  describe('modal fading state', () => {
+    function cleanup() {
+      const mask = document.querySelector('.v-modal');
+      if (mask && mask.parentNode) mask.parentNode.removeChild(mask);
+      PopupManager.modalStack.length = 0;
+      if (PopupManager.escStack) PopupManager.escStack.length = 0;
+      PopupManager.modalDom = undefined;
+    }
+
+    afterEach(cleanup);
+
+    it('reopening during the close window clears the fading-out state', done => {
+      PopupManager.openModal('probe-a', 3000, undefined, '', true);
+
+      const mask = document.querySelector('.v-modal');
+      expect(mask, '遮罩应存在').to.exist;
+      expect(mask.classList.contains('v-modal-leave')).to.be.false;
+
+      PopupManager.closeModal('probe-a');
+      // 关闭后进入淡出
+      expect(mask.classList.contains('v-modal-leave'), '关闭时应进入淡出').to.be.true;
+
+      // 在 200ms 清理窗口内重新打开
+      PopupManager.openModal('probe-b', 3002, undefined, '', true);
+
+      // 关键断言：重开必须立刻摘掉淡出类。否则 .2s forwards 的动画
+      // 会继续往 opacity:0 走，等旧定时器摘类时再瞬间弹回，就是「闪一下」。
+      expect(mask.classList.contains('v-modal-leave'), '重开后应立刻摘掉淡出类').to.be.false;
+
+      // 越过旧的 200ms 清理窗口，遮罩不能被那次清理删掉
+      setTimeout(() => {
+        const still = document.querySelector('.v-modal');
+        expect(still, '越过旧清理窗口后遮罩不应被删除').to.exist;
+        expect(still.style.display).to.not.equal('none');
+        expect(PopupManager.modalStack.length).to.equal(1);
+        done();
+      }, 260);
+    });
   });
 });

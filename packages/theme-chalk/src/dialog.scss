@@ -34,6 +34,18 @@
       align-items: center;
       justify-content: center;
     }
+
+    // 无遮罩（modal=false）时，wrapper 本身仍铺满视口。
+    // 若继续接收点击，页面其余部分就点不动了，所以让点击穿透，
+    // 再由弹窗本体重新接收。centered 用 flex 居中，不依赖 pointer-events。
+    @include m(no-modal) {
+      pointer-events: none;
+      background: transparent;
+
+      .hzq-dialog {
+        pointer-events: auto;
+      }
+    }
   }
 
   @include e(header) {

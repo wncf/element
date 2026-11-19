@@ -338,12 +338,13 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 
 ### 全屏、层级与 open 回调
 
-:::demo `fullscreen` 让弹窗铺满视口。`zIndex` 用于和业务方既有弹窗并轨：传入时只有本层使用该层级，不会抬高全局自增基线，遮罩取 `zIndex`、弹窗本体取 `zIndex + 1`。`open` 在弹窗打开后触发，适合聚焦输入框或做 DOM 操作。
+:::demo `fullscreen` 让弹窗铺满视口。`zIndex` 用于和业务方既有弹窗并轨：传入时只有本层使用该层级，不会抬高全局自增基线，遮罩取 `zIndex`、弹窗本体取 `zIndex + 1`。`open` 在弹窗打开后触发，适合聚焦输入框或做 DOM 操作。`modal` 默认 `true`，传 `false` 不渲染遮罩。
 ```html
 <template>
   <div>
     <hzq-button @click="openFullscreen">全屏弹窗</hzq-button>
     <hzq-button @click="openWithZIndex">指定 zIndex</hzq-button>
+    <hzq-button @click="openNoMask">无遮罩</hzq-button>
   </div>
 </template>
 
@@ -369,6 +370,15 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
             // 打开后才能拿到真实 DOM
             console.log(instance.$el);
           },
+          confirm: instance => instance.close()
+        });
+      },
+      openNoMask() {
+        this.$dialog({
+          title: '无遮罩弹窗',
+          type: 'confirm',
+          modal: false,
+          content: '不渲染遮罩，页面其余部分仍可交互。',
           confirm: instance => instance.close()
         });
       }
@@ -502,6 +512,7 @@ Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默�
 | type | `alert`（无底部按钮）/ `confirm`（取消 + 确定）/ `error`、`warning`、`info`、`add`、`edit`（在标题区带图标，且默认渲染取消 + 确定） | string | alert |
 | width | 宽度，数字会补上 `px` | string / number | '' |
 | fullscreen | 是否全屏 | boolean | false |
+| modal | 是否渲染遮罩 | boolean | true |
 | content | 内容，支持字符串或 VNode | string / object | '' |
 | icon | 自定义标题图标类名，不传按 `type` 自动取 | string | '' |
 | hideFooter | 不渲染底部按钮 | boolean | false |

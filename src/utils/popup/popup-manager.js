@@ -4,6 +4,17 @@ import { addClass, removeClass } from 'hzq-ui/src/utils/dom';
 let hasModal = false;
 let hasInitZIndex = false;
 let zIndex;
+// closeModal 的延迟清理定时器。没有它时，关闭后 200ms 内重新打开，
+// 旧定时器仍会把遮罩移除并置回 display:none，同时 v-modal-leave
+// 的淡出动画也在继续播，表现为遮罩闪一下。
+let modalCloseTimer = null;
+
+function clearModalCloseTimer() {
+  if (modalCloseTimer) {
+    clearTimeout(modalCloseTimer);
+    modalCloseTimer = null;
+  }
+}
 
 const getModal = function() {
   if (Vue.prototype.$isServer) return;
@@ -56,6 +67,22 @@ const PopupManager = {
 
   modalStack: [],
 
+  // 打开中的浮层顺序，用于 esc 关闭。
+  // 不能复用 modalStack：它只记录「渲染了遮罩」的浮层，modal: false 的
+  // 弹窗从不进入，于是 esc 找不到它、按了没反应。
+  escStack: [],
+
+  pushEsc: function(id) {
+    if (!id) return;
+    if (this.escStack.indexOf(id) > -1) return;
+    this.escStack.push(id);
+  },
+
+  popEsc: function(id) {
+    const index = this.escStack.indexOf(id);
+    if (index > -1) this.escStack.splice(index, 1);
+  },
+
   doOnModalClick: function() {
     const topItem = PopupManager.modalStack[PopupManager.modalStack.length - 1];
     if (!topItem) return;
@@ -81,6 +108,11 @@ const PopupManager = {
     }
 
     const modalDom = getModal();
+
+    // 上一轮关闭的延迟清理还没执行就重新打开了：取消清理，
+    // 并立即摘掉 v-modal-leave，否则它会在新遮罩上继续播淡出
+    clearModalCloseTimer();
+    removeClass(modalDom, 'v-modal-leave');
 
     addClass(modalDom, 'v-modal');
     if (this.modalFade && !hasModal) {
@@ -139,7 +171,10 @@ const PopupManager = {
       if (this.modalFade) {
         addClass(modalDom, 'v-modal-leave');
       }
-      setTimeout(() => {
+      clearModalCloseTimer();
+      modalCloseTimer = setTimeout(() => {
+        modalCloseTimer = null;
+        // 期间可能又打开了：仅在栈仍为空时清理，否则会把新遮罩一起删掉
         if (modalStack.length === 0) {
           if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
           modalDom.style.display = 'none';
@@ -167,12 +202,12 @@ Object.defineProperty(PopupManager, 'zIndex', {
 
 const getTopPopup = function() {
   if (Vue.prototype.$isServer) return;
-  if (PopupManager.modalStack.length > 0) {
-    const topPopup = PopupManager.modalStack[PopupManager.modalStack.length - 1];
-    if (!topPopup) return;
-    const instance = PopupManager.getInstance(topPopup.id);
-
-    return instance;
+  // 用 escStack 而非 modalStack：后者只含渲染了遮罩的浮层，
+  // modal: false 的弹窗不在其中，会导致 esc 对它无效。
+  const stack = PopupManager.escStack;
+  if (stack.length > 0) {
+    const id = stack[stack.length - 1];
+    return PopupManager.getInstance(id);
   }
 };
 

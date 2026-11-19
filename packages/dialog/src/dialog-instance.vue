@@ -4,6 +4,7 @@
     :title="title"
     :width="dialogWidth"
     :fullscreen="fullscreen"
+    :modal="modal"
     :close-on-click-modal="maskClose"
     :close-on-press-escape="escClose"
     :show-close="showClose"
@@ -99,6 +100,11 @@ export default {
     fullscreen: {
       type: Boolean,
       default: false
+    },
+    // 是否渲染遮罩。命令式弹窗默认与 <hzq-dialog> 保持一致（有遮罩）
+    modal: {
+      type: Boolean,
+      default: true
     },
     zIndex: {
       type: Number,
