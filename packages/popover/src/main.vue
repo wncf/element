@@ -9,7 +9,7 @@
         :class="[popperClass, content && 'hzq-popover--plain']"
         ref="popper"
         v-show="!disabled && showPopper"
-        :style="{ width: width + 'px' }"
+        :style="popperStyle"
         role="tooltip"
         :id="tooltipId"
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
@@ -54,6 +54,11 @@ export default {
     reference: {},
     popperClass: String,
     width: {},
+    // 内容区 padding，覆盖 .hzq-popover 的默认值；传 0 可让内容铺满
+    padding: {
+      type: [Number, String],
+      default: 20
+    },
     visibleArrow: {
       default: true
     },
@@ -74,6 +79,15 @@ export default {
   computed: {
     tooltipId() {
       return `hzq-popover-${generateId()}`;
+    },
+    popperStyle() {
+      const style = { width: this.width + 'px' };
+      // 只有显式传了 padding 才写行内样式，避免总是覆盖主题里的默认值。
+      // 0 是有效值（铺满），所以不能用真值判断。
+      if (this.padding !== undefined && this.padding !== null && this.padding !== '') {
+        style.padding = typeof this.padding === 'number' ? `${this.padding}px` : this.padding;
+      }
+      return style;
     }
   },
   watch: {

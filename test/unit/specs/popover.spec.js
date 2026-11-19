@@ -299,6 +299,40 @@ describe('Popover', () => {
     });
   });
 
+  describe('padding', () => {
+    const createPopover = padding => {
+      const props = { content: 'content' };
+      if (padding !== undefined) props.padding = padding;
+      return createTest(Popover, props, true);
+    };
+
+    it('defaults to 20px', () => {
+      vm = createPopover();
+      expect(vm.popperStyle.padding).to.equal('20px');
+    });
+
+    it('accepts 0 so content can fill the popover', () => {
+      vm = createPopover(0);
+      // 0 必须保留，不能被真值判断吞掉
+      expect(vm.popperStyle.padding).to.equal('0px');
+    });
+
+    it('accepts a number', () => {
+      vm = createPopover(8);
+      expect(vm.popperStyle.padding).to.equal('8px');
+    });
+
+    it('passes through a string value', () => {
+      vm = createPopover('4px 12px');
+      expect(vm.popperStyle.padding).to.equal('4px 12px');
+    });
+
+    it('applies inline padding to the popper element', () => {
+      vm = createPopover(0);
+      expect(vm.$refs.popper.style.padding).to.equal('0px');
+    });
+  });
+
   it('destroy event', () => {
     vm = createTest(Popover, {
       reference: document.createElement('div'),

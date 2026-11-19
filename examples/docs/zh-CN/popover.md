@@ -133,6 +133,44 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 ```
 :::
 
+### 自定义内边距
+
+`padding` 用于覆盖内容区默认的内边距，接受数字（按 px 处理）或 CSS 简写字符串。传 `0` 可以让内容铺满，适合在浮层里放列表、表格或图片。
+
+:::demo
+```html
+<div>
+  <hzq-popover placement="top" content="这里用默认内边距" trigger="hover">
+    <hzq-button>默认 padding</hzq-button>
+  </hzq-popover>
+  <hzq-popover placement="top" content="内容贴着浮层边缘" :padding="0" trigger="hover">
+    <hzq-button>padding = 0</hzq-button>
+  </hzq-popover>
+  <hzq-popover
+    placement="top"
+    title="标题"
+    content="上下 4px，左右 16px"
+    padding="4px 16px"
+    trigger="hover">
+    <hzq-button>自定义字符串</hzq-button>
+  </hzq-popover>
+</div>
+```
+:::
+
+:::demo `padding="0"` 时内容会贴着浮层边缘，适合放列表、表格这类自带间距的内容。下面用菜单模拟一个常见的下拉面板。
+```html
+<hzq-popover placement="bottom-start" width="180" :padding="0" trigger="click">
+  <div style="padding: 4px 0">
+    <div style="padding: 8px 16px; font-size: 13px; line-height: 20px; cursor: pointer">查看详情</div>
+    <div style="padding: 8px 16px; font-size: 13px; line-height: 20px; cursor: pointer">复制链接</div>
+    <div style="padding: 8px 16px; font-size: 13px; line-height: 20px; cursor: pointer; color: var(--hzq-color-danger)">删除</div>
+  </div>
+  <hzq-button slot="reference">更多操作</hzq-button>
+</hzq-popover>
+```
+:::
+
 ### Attributes
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
@@ -140,6 +178,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 |  title              | 标题 | String | — | — |
 |  content        |  显示的内容，也可以通过 `slot` 传入 DOM   | String            | — | — |
 |  width        |  宽度  | String, Number            | — | 最小宽度 150px |
+|  padding        |  内容区内边距，覆盖 `.hzq-popover` 的默认值；传 `0` 可让内容铺满 | String, Number | — | 20 |
 |  placement        |  出现位置  | String | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
 |  disabled       |  Popover 是否可用  | Boolean           | — |  false |
 |  value / v-model        |  状态是否可见  | Boolean           | — |  false |

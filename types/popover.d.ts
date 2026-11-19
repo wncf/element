@@ -34,6 +34,9 @@ export declare class ElPopover extends ElementUIComponent {
   /** Popover width */
   width: string | number
 
+  /** Content padding, overrides the default; 0 makes content fill the popover */
+  padding: string | number
+
   /** Popover placement */
   placement: PopoverPlacement
 
