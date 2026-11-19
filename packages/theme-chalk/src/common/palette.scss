@@ -41,7 +41,7 @@ $--brand-default: (
 
 // 绿色预设：只换主色。功能色沿用默认值，浅色档与 hover/shade 由 tokens 按当前明暗模式重算，
 // 所以"一个主色"就够，不需要为绿色再写一套完整色板。
-$--brand-green: map-merge($--brand-default, ('primary': #16a34a)) !default;
+$--brand-green: map-merge($--brand-default, ('primary': #2d8463)) !default;
 
 // 品牌轴配置：key 为根元素上的类名后缀（'' 表示默认预设），value 为该预设的品牌色集合。
 // 新增预设只在这里加一行，例如 '.theme-purple': $--brand-purple。
