@@ -16,11 +16,11 @@
     @closed="handleClosed"
   >
     <template v-if="resolvedIcon" slot="title">
-      <div class="hzq-dialog-service__header">
+      <div class="hzq-dialog__service-header">
         <span
-          class="hzq-dialog-service__icon"
+          class="hzq-dialog__service-icon"
           :class="[
-            `hzq-dialog-service__icon--${iconType}`,
+            `hzq-dialog__service-icon--${iconType}`,
             resolvedIcon
           ]"
         ></span>
@@ -29,15 +29,15 @@
     </template>
 
     <dialog-render-fn v-if="renderFn" :render="renderFn" />
-    <div v-else-if="typeof content === 'string'" class="hzq-dialog-service__content">{{ content }}</div>
+    <div v-else-if="typeof content === 'string'" class="hzq-dialog__service-content">{{ content }}</div>
     <dialog-render-fn v-else-if="contentRender" :render="contentRender" />
 
     <template v-if="showFooter" slot="footer">
-      <hzq-button class="hzq-dialog-service__cancel" :size="buttonSize" @click="handleCancel">
+      <hzq-button class="hzq-dialog__service-cancel" :size="buttonSize" @click="handleCancel">
         {{ resolvedCancelText }}
       </hzq-button>
       <hzq-button
-        class="hzq-dialog-service__confirm"
+        class="hzq-dialog__service-confirm"
         :size="buttonSize"
         :type="confirmButtonType"
         :loading="loading"

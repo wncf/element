@@ -190,7 +190,7 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      expect(document.querySelector('.hzq-dialog-service__confirm').classList.contains('hzq-button--danger')).to.be.true;
+      expect(document.querySelector('.hzq-dialog__service-confirm').classList.contains('hzq-button--danger')).to.be.true;
       done();
     }, 100);
   });
@@ -203,9 +203,9 @@ describe('$dialog', () => {
     });
 
     setTimeout(() => {
-      const icon = document.querySelector('.hzq-dialog-service__icon');
+      const icon = document.querySelector('.hzq-dialog__service-icon');
       expect(icon).to.exist;
-      expect(icon.classList.contains('hzq-dialog-service__icon--warning')).to.be.true;
+      expect(icon.classList.contains('hzq-dialog__service-icon--warning')).to.be.true;
       expect(icon.classList.contains('hzq-icon-warning')).to.be.true;
       done();
     }, 100);

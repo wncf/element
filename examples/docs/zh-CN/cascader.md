@@ -2048,6 +2048,103 @@
 ```
 :::
 
+### change 事件取到原始节点
+
+:::demo `change` 的第二参 `nodes` 是当前选中节点对应的**原始 option 数组**，可直接取业务字段，不必再按 value 反查。单选返回 `[option]`，多选返回各选中节点的 option 数组，无选中或清空时为 `[]`。
+```html
+<template>
+  <div>
+    <hzq-cascader
+      v-model="value"
+      :options="options"
+      :props="{ multiple: true }"
+      @change="handleChange"></hzq-cascader>
+    <span class="demonstration">当前选中的商品 id：{{ goodsIds.join(', ') || '无' }}</span>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [],
+        goodsIds: [],
+        options: [{
+          value: 'drink',
+          label: '饮品',
+          children: [{
+            value: 'coffee',
+            label: '咖啡',
+            goodsId: 1001,
+            children: [
+              { value: 'latte', label: '拿铁', goodsId: 1002 },
+              { value: 'mocha', label: '摩卡', goodsId: 1003 }
+            ]
+          }]
+        }, {
+          value: 'snack',
+          label: '零食',
+          children: [
+            { value: 'cookie', label: '饼干', goodsId: 2001 }
+          ]
+        }]
+      };
+    },
+    methods: {
+      handleChange(value, nodes) {
+        // nodes 里就是原始 option，业务字段直接取
+        this.goodsIds = nodes.map(node => node.goodsId).filter(Boolean);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### remove-tag 取到被移除的值与下标
+
+:::demo 多选移除 Tag 时，`remove-tag` 的第二参是该 Tag 在**已展示标签**中的下标。配合 `collapse-tags` 时，下标对应的是当前可见的 Tag 顺序。
+```html
+<template>
+  <div>
+    <hzq-cascader
+      v-model="value"
+      :options="options"
+      :props="{ multiple: true }"
+      @remove-tag="handleRemoveTag"></hzq-cascader>
+    <span class="demonstration">刚移除：{{ removed.text || '无' }}（下标 {{ removed.index }}）</span>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [['zhejiang', 'hangzhou'], ['zhejiang', 'ningbo']],
+        removed: { text: '', index: -1 },
+        options: [{
+          value: 'zhejiang',
+          label: '浙江',
+          children: [
+            { value: 'hangzhou', label: '杭州' },
+            { value: 'ningbo', label: '宁波' },
+            { value: 'wenzhou', label: '温州' }
+          ]
+        }]
+      };
+    },
+    methods: {
+      handleRemoveTag(value, index) {
+        // value 是被移除节点的值（emitPath 下为完整路径数组）
+        const leaf = Array.isArray(value) ? value[value.length - 1] : value;
+        this.removed = { text: leaf, index };
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Cascader Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |

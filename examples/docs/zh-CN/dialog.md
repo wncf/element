@@ -278,6 +278,172 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ```
 :::
 
+### 语义类型与图标
+
+:::demo `type` 除 `alert` / `confirm` 外，还支持 `error`、`warning`、`info`、`add`、`edit`。这些类型会在标题区渲染对应图标，并默认带取消 / 确定按钮；`error` 的确定按钮使用危险色。传 `icon` 可覆盖默认图标（font class），传 `hideFooter` 可只保留标题与内容。
+```html
+<template>
+  <div>
+    <hzq-button @click="open('error')">error</hzq-button>
+    <hzq-button @click="open('warning')">warning</hzq-button>
+    <hzq-button @click="open('info')">info</hzq-button>
+    <hzq-button @click="open('add')">add</hzq-button>
+    <hzq-button @click="open('edit')">edit</hzq-button>
+    <hzq-button @click="openCustomIcon">自定义图标</hzq-button>
+    <hzq-button @click="openNoFooter">无底部按钮</hzq-button>
+  </div>
+</template>
+
+<script>
+  const TEXT = {
+    error: '删除后数据不可恢复，请确认。',
+    warning: '当前配置可能影响其他模块，请确认。',
+    info: '这是一条普通提示。',
+    add: '填写分组名称后保存。',
+    edit: '修改后立即生效。'
+  };
+
+  export default {
+    methods: {
+      open(type) {
+        this.$dialog({
+          title: '标题',
+          type,
+          content: TEXT[type],
+          confirm: instance => instance.close(),
+          cancel: instance => instance.close()
+        });
+      },
+      openCustomIcon() {
+        this.$dialog({
+          title: '自定义图标',
+          type: 'info',
+          icon: 'hzq-icon-bell',
+          content: '通过 icon 覆盖按 type 取到的默认图标。'
+        });
+      },
+      openNoFooter() {
+        this.$dialog({
+          title: '无底部按钮',
+          type: 'confirm',
+          hideFooter: true,
+          content: '内容区自行控制关闭，可调用返回实例的 close()。'
+        });
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 全屏、层级与 open 回调
+
+:::demo `fullscreen` 让弹窗铺满视口。`zIndex` 用于和业务方既有弹窗并轨：传入时只有本层使用该层级，不会抬高全局自增基线，遮罩取 `zIndex`、弹窗本体取 `zIndex + 1`。`open` 在弹窗打开后触发，适合聚焦输入框或做 DOM 操作。
+```html
+<template>
+  <div>
+    <hzq-button @click="openFullscreen">全屏弹窗</hzq-button>
+    <hzq-button @click="openWithZIndex">指定 zIndex</hzq-button>
+  </div>
+</template>
+
+<script>
+  export default {
+    methods: {
+      openFullscreen() {
+        this.$dialog({
+          title: '全屏弹窗',
+          fullscreen: true,
+          type: 'confirm',
+          content: '全屏状态下标题栏不再拖拽。',
+          confirm: instance => instance.close()
+        });
+      },
+      openWithZIndex() {
+        this.$dialog({
+          title: '层级并轨',
+          zIndex: 5000,
+          type: 'confirm',
+          content: '弹窗本体在 5001。',
+          open: instance => {
+            // 打开后才能拿到真实 DOM
+            console.log(instance.$el);
+          },
+          confirm: instance => instance.close()
+        });
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 叠加与排队
+
+:::demo 默认 `stack: true`，后开的弹窗叠在先开的之上。传 `stack: false` 改为排队：上一个关闭后延迟 500ms 再显示下一个。
+```html
+<template>
+  <div>
+    <hzq-button @click="openStacked">叠加两个</hzq-button>
+    <hzq-button @click="openQueued">排队两个</hzq-button>
+  </div>
+</template>
+
+<script>
+  export default {
+    methods: {
+      openStacked() {
+        this.$dialog({ title: '第一个', content: '后开的会叠在这个之上' });
+        this.$dialog({ title: '第二个', content: '我是叠加上来的' });
+      },
+      openQueued() {
+        this.$dialog({ title: '排队 1', content: '关闭我之后才显示下一个' });
+        this.$dialog({ title: '排队 2', content: '上一个关闭后才出现', stack: false });
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 拿到弹窗内的组件与 DOM
+
+:::demo `$dialog` 返回实例代理，除 `visible`、`loading`、`close()` 外还透传真实实例的 `$refs` 和 `$el`。配合 `open` 回调，可以在弹窗渲染后直接操作内部表单。
+```html
+<template>
+  <hzq-button @click="openForm">打开表单弹窗</hzq-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      openForm() {
+        this.$dialog({
+          title: '填写名称',
+          type: 'confirm',
+          width: '420px',
+          open: instance => {
+            // open 触发时真实实例已挂载，可直接取 refs
+            const input = instance.$refs.nameInput;
+            input && input.focus && input.focus();
+          },
+          confirm: instance => {
+            const input = instance.$refs.nameInput;
+            this.$message.success('名称为：' + (input ? input.value : ''));
+            instance.close();
+          }
+        }, h => (
+          <div>
+            <hzq-input ref="nameInput" placeholder="请输入名称" />
+          </div>
+        ));
+      }
+    }
+  };
+</script>
+```
+:::
+
 :::tip
 默认允许弹窗叠加显示，后开的叠在先开的之上。需要串行展示时传 `stack: false`，后续调用会排队，上一个关闭后延迟 500ms 再弹出。
 :::
