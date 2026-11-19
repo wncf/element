@@ -9,7 +9,13 @@ export interface CascaderSlots {
   default: VNode[],
 
   /** Empty content when no option matches */
-  empty: VNode[]
+  empty: VNode[],
+
+  /**
+   * Custom suggestion item content in search mode,
+   * scope: { item, index, keyword }
+   */
+  suggestion: VNode[]
 
   [key: string]: VNode[]
 }
@@ -42,6 +48,12 @@ export declare class ElCascader<V = any, D = CascaderOption> extends ElementUICo
 
   /** Whether to collapse selected tags in multiple selection mode */
   collapseTags: boolean
+
+  /** Whether selected tags wrap to multiple lines (max-height 80px, scrolls) in multiple selection mode */
+  tagsWrap: boolean
+
+  /** Maximum width of a single tag's text, number is treated as px */
+  tagMaxWidth: string | number
 
   /** Separator of option labels */
   separator: string

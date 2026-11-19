@@ -383,7 +383,8 @@
         //       consider disable "now" button in the future
         if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
           this.date = new Date();
-          this.emit(this.date);
+          // 开启 keepOpenOnNow 且为 datetime 类型时保持面板打开，便于继续选择时间
+          this.emit(this.date, this.keepOpenOnNow && this.showTime);
         }
       },
 
@@ -523,6 +524,7 @@
         defaultValue: null, // use getDefaultValue() for time computation
         defaultTime: null,
         showTime: false,
+        keepOpenOnNow: false,
         selectionMode: 'day',
         shortcuts: '',
         visible: false,

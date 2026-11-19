@@ -76,6 +76,43 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 ```
 :::
 
+### 点击「此刻」后保持面板打开
+
+:::demo 面板底部「此刻」按钮默认会填入当前时间并收起面板。设置 `keep-open-on-now` 后，点击「此刻」只填入当前时间，面板保持打开，可以接着调整时分秒；该属性仅在 `type` 为 `datetime` 时生效，`date` 等类型仍按原逻辑收起面板。
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">默认：点击「此刻」后收起</span>
+    <hzq-date-picker
+      v-model="value1"
+      type="datetime"
+      placeholder="选择日期时间">
+    </hzq-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">keep-open-on-now：点击「此刻」后继续选择时间</span>
+    <hzq-date-picker
+      v-model="value2"
+      type="datetime"
+      keep-open-on-now
+      placeholder="选择日期时间">
+    </hzq-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: '',
+        value2: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### 日期和时间范围
 
 :::demo 设置`type`为`datetimerange`即可选择日期和时间范围
@@ -255,6 +292,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
+| keep-open-on-now | 点击「此刻」按钮后是否保持面板打开，仅在 `type` 为 `datetime` 时生效；`datetimerange` 无「此刻」按钮，`date` 等类型仍按原逻辑收起面板 | boolean | — | false |
 | prefix-icon | 自定义头部图标的类名 | string | — | hzq-icon-date |
 | clear-icon | 自定义清空图标的类名 | string | — | hzq-icon-circle-close |
 

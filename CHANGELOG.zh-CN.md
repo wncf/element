@@ -1,8 +1,24 @@
 ## 更新日志
 
-### 未发布
+### 1.1.2
 
-暂无。
+*2026-11-19*
+
+#### 新特性
+- Cascader
+  - 新增 `suggestion` 作用域插槽：搜索模式下自定义每个建议项的内容，作用域参数为 `{ item, index, keyword }`，便于做关键词高亮。插槽只替换建议项内部内容，点击选中、键盘上下选择与勾选标记仍由组件处理；不传该插槽时渲染与之前完全一致。
+  - 新增 `tags-wrap` 属性（默认 `false`）：多选模式下标签自动换行，区域最高 80px、超出纵向滚动，输入框高度随标签实际高度撑高；不开启时保持原有的单行截断行为。
+  - 新增 `tag-max-width` 属性：限制单个标签文字的最大宽度（数字按 px 处理），超出仍按省略号截断；留空不限制。
+- DatePicker
+  - 新增 `keep-open-on-now` 属性（默认 `false`）：`type` 为 `datetime` 时点击「此刻」按钮后面板保持打开，便于继续选择时间；默认值下仍按原逻辑收起面板，`date` 等非时间类型的行为不受影响。
+#### 优化
+- 主题
+  - 禁用态控件底色与边框调浅：`--hzq-bg-color-control-disabled` 由 `#e6ebf3` 改为 `#eef1f6`，`--hzq-border-color-control-disabled` 由 `#b7c2d2` 改为 `#c5cedb`。此前的取值偏重，禁用控件显得发闷、像报错状态。
+
+#### 文档
+- Cascader 补充「自定义搜索建议项」「多选标签换行」两个示例，更新属性表与插槽表。
+- DateTimePicker 补充「点击『此刻』后保持面板打开」示例，属性表补充 `keep-open-on-now`；DatePicker 属性表同步补充。
+- 类型定义 `types/cascader.d.ts` 同步补充 `suggestion` 插槽、`tagsWrap`、`tagMaxWidth`，`types/date-picker.d.ts` 补充 `keepOpenOnNow`；`web-types.json` 同步补充上述属性与插槽。
 
 ### 1.1.1
 

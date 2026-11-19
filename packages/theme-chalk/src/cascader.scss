@@ -235,6 +235,21 @@
     }
   }
 
+  // 多选标签换行模式（tags-wrap）：标签多行排列，超出 80px 后纵向滚动。
+  // 输入框高度由 JS 的 syncTagsWrapHeight 跟随标签实际高度撑高
+  @include e(tags--wrap) {
+    // tags-wrap 本身不是 flex 容器，换行模式显式改为 flex 才能用 row-gap 控制行距
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: center;
+    white-space: normal;
+    max-height: 80px;
+    overflow-y: auto;
+    // 只在行与行之间留间距，单行时不会额外撑高输入框
+    row-gap: 3px;
+  }
+
   @include e(suggestion-panel) {
     border-radius: $--cascader-menu-radius;
   }

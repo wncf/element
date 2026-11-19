@@ -1182,6 +1182,62 @@ describe('DatePicker', () => {
       }, DELAY);
     });
 
+    it('click now button: keep panel open when keepOpenOnNow is true for datetime', done => {
+      vm = createTest(DatePicker, {
+        type: 'datetime',
+        keepOpenOnNow: true
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        vm.picker.$el.querySelector('.hzq-picker-panel__link-btn').click();
+        setTimeout(_ => {
+          expect(vm.pickerVisible).to.true;
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('click now button: close panel when keepOpenOnNow is true for date', done => {
+      vm = createTest(DatePicker, {
+        type: 'date',
+        keepOpenOnNow: true
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        vm.picker.$el.querySelector('.hzq-picker-panel__link-btn').click();
+        setTimeout(_ => {
+          expect(vm.pickerVisible).to.false;
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('click now button: close panel by default', done => {
+      vm = createTest(DatePicker, {
+        type: 'datetime'
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        vm.picker.$el.querySelector('.hzq-picker-panel__link-btn').click();
+        setTimeout(_ => {
+          expect(vm.pickerVisible).to.false;
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
     it('click timepicker', done => {
       vm = createTest(DatePicker, {
         type: 'datetime'

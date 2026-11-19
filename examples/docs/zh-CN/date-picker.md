@@ -471,6 +471,7 @@
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
+| keep-open-on-now | 点击面板底部「此刻」按钮后是否保持面板打开。仅在 `type` 为 `datetime` 时生效（便于继续选择时间）；`type` 为 `date` 等其它类型时仍按原逻辑收起面板 | boolean | — | false |
 | prefix-icon | 自定义头部图标的类名 | string | — | hzq-icon-date |
 | clear-icon | 自定义清空图标的类名 | string | — | hzq-icon-circle-close |
 | validate-event | 输入时是否触发表单的校验 | boolean | - | true |

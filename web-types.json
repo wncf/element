@@ -662,6 +662,16 @@
               "name": "popoverTrigger",
               "description": "How the dropdown is triggered. 'click' toggles on click; 'manual' requires calling toggleDropDownVisible. Default 'click'.",
               "type": "string"
+            },
+            {
+              "name": "tagsWrap",
+              "description": "Whether selected tags wrap to multiple lines in multiple selection mode (max-height 80px, scrolls). Default false.",
+              "type": "boolean"
+            },
+            {
+              "name": "tagMaxWidth",
+              "description": "Maximum width of a single tag's text, number is treated as px",
+              "type": "string|number"
             }
           ],
           "slots": [
@@ -672,6 +682,10 @@
             {
               "name": "empty",
               "description": "Empty content when no option matches"
+            },
+            {
+              "name": "suggestion",
+              "description": "Custom suggestion item content in search mode, scope: { item, index, keyword }"
             }
           ]
         },
@@ -1081,6 +1095,11 @@
               "name": "valueFormat",
               "description": "Format of binding value. If not specified, the binding value will be a Date object",
               "type": "string"
+            },
+            {
+              "name": "keepOpenOnNow",
+              "description": "Whether to keep the panel open after clicking the \"now\" button when type is datetime. Default false.",
+              "type": "boolean"
             }
           ],
           "slots": [

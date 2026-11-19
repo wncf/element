@@ -62,10 +62,11 @@ $--neutrals-light: (
   // 浅色下比卡片（白）暗一档、比页面底亮一档，控件才有"可填入"的凹陷感；
   // 深色下反过来比卡片亮一档，控件的边界靠明度差就能拉开。
   'bg-color-control': #f8fafc,
-  // 禁用态控件：底色比常态再压暗一档，边框反而比常态更深，靠"底色更沉 + 边框更实"
-  // 表达不可操作。只比常态暗一点点（如 #f5f7fa）的话，禁用和可用几乎分辨不出来。
-  'bg-color-control-disabled': #e6ebf3,
-  'border-color-control-disabled': #b7c2d2,
+  // 禁用态控件：靠"底色略沉 + 边框稍实"表达不可操作。
+  // 早期取值更重（#e6ebf3 / #b7c2d2），禁用控件显得发闷、像报错状态，
+  // 现在压到只比常态暗一点点的程度，禁用感由底色、边框、文字三者共同承担。
+  'bg-color-control-disabled': #eef1f6,
+  'border-color-control-disabled': #c5cedb,
   'text-color-control-disabled': #8b95a5,
   'fill-color': #f0f2f5,
   'fill-color-dark': #edf2fc,

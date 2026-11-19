@@ -43,7 +43,9 @@
     </hzq-input>
 
     <div v-if="multiple" class="hzq-cascader__tags">
-      <div class="hzq-cascader__tags-wrap">
+      <div
+        class="hzq-cascader__tags-wrap"
+        :class="{ 'hzq-cascader__tags--wrap': tagsWrap }">
         <hzq-tag
           v-for="tag in presentTags"
           :key="tag.key"
@@ -53,7 +55,7 @@
           :closable="tag.closable"
           disable-transitions
           @close="deleteTag(tag)">
-          <span>{{ tag.text }}</span>
+          <span :style="tagTextStyle">{{ tag.text }}</span>
         </hzq-tag>
       </div>
     </div>
@@ -103,8 +105,11 @@
               ]"
               :tabindex="-1"
               @click="handleSuggestionClick(index)">
-              <span>{{ item.text }}</span>
-              <i v-if="item.checked" class="hzq-icon-check"></i>
+              <!-- 作用域插槽只替换建议项内容，点击行为仍由外层 li 负责 -->
+              <slot name="suggestion" :item="item" :index="index" :keyword="inputValue">
+                <span>{{ item.text }}</span>
+                <i v-if="item.checked" class="hzq-icon-check"></i>
+              </slot>
             </li>
           </template>
           <slot v-else name="empty">
@@ -245,6 +250,16 @@ export default {
       type: String,
       default: 'click',
       validator: value => ['click', 'manual'].indexOf(value) > -1
+    },
+    // 多选标签换行显示：不换行时（默认）保持 1.1.1 的单行截断行为
+    tagsWrap: {
+      type: Boolean,
+      default: false
+    },
+    // 单个标签的最大宽度，数字按 px 处理；留空表示不限制
+    tagMaxWidth: {
+      type: [String, Number],
+      default: ''
     }
   },
 
@@ -322,6 +337,17 @@ export default {
     },
     panel() {
       return this.$refs.panel;
+    },
+    // 标签文字的最大宽度样式，仅在传入 tagMaxWidth 时生效，
+    // 直接作用于 tag 内部 span，超长文字仍按 existing 的 ellipsis 规则截断
+    tagTextStyle() {
+      const { tagMaxWidth } = this;
+      if (tagMaxWidth === '' || tagMaxWidth === null || tagMaxWidth === undefined) return null;
+      // 纯数字（含数字字符串）按 px 处理，其余按原样透传（如 '10em'、'30%'）
+      const width = typeof tagMaxWidth === 'number' || /^\d+(\.\d+)?$/.test(String(tagMaxWidth))
+        ? `${tagMaxWidth}px`
+        : tagMaxWidth;
+      return { maxWidth: width };
     }
   },
 
@@ -367,6 +393,12 @@ export default {
       }
     },
     realSize() {
+      this.$nextTick(this.updateStyle);
+    },
+    tagsWrap() {
+      this.$nextTick(this.updateStyle);
+    },
+    tagMaxWidth() {
       this.$nextTick(this.updateStyle);
     },
     filtering(val) {
@@ -799,14 +831,36 @@ export default {
 
       if (tags) {
         const lockedHeight = InputSizeMap[this.realSize] || inputInitialHeight || 32;
-        inputInner.style.height = lockedHeight + 'px';
         const tagsWrap = tags.querySelector('.hzq-cascader__tags-wrap');
-        if (tagsWrap && !this.collapseTags) {
-          this.syncTagsOverflow(tagsWrap);
+        if (this.tagsWrap && tagsWrap) {
+          // 换行模式：输入框高度跟随标签高度增长，标签交给 CSS 换行 + 限高滚动
+          this.syncTagsWrapHeight(tagsWrap, lockedHeight, inputInner);
+        } else {
+          inputInner.style.height = lockedHeight + 'px';
+          if (tagsWrap && !this.collapseTags) {
+            this.syncTagsOverflow(tagsWrap);
+          }
         }
         if (this.dropDownVisible) {
           this.updatePopper();
         }
+      }
+    },
+    // 换行模式下按标签实际高度撑高输入框：标签高出单行时额外留 6px 内边距，
+    // 与 select 的 resetInputHeight 保持一致；未超出时仍取档位高度
+    syncTagsWrapHeight(tagsWrap, minHeight, inputInner) {
+      // 换行模式下不做单行溢出折叠，清掉可能残留的内联隐藏样式
+      tagsWrap.querySelectorAll('.hzq-tag').forEach(tag => {
+        tag.style.display = '';
+        tag.classList.remove('is-overflow-tail');
+      });
+      tagsWrap.classList.remove('is-overflow');
+
+      const tagsHeight = Math.round(tagsWrap.getBoundingClientRect().height);
+      const height = tagsHeight > minHeight ? tagsHeight + 6 : minHeight;
+      const next = `${Math.max(height, minHeight)}px`;
+      if (inputInner.style.height !== next) {
+        inputInner.style.height = next;
       }
     },
 

@@ -1453,6 +1453,132 @@
 ```
 :::
 
+### 自定义搜索建议项
+
+:::demo 搜索模式下可以用 `suggestion` 作用域插槽自定义每个建议项的内容，作用域参数为 `{ item, index, keyword }`：`item` 是扁平化后的节点（含 `text`、`path`、`data` 等字段），`keyword` 是当前搜索关键词。插槽只替换建议项内部的内容，点击选中与勾选标记仍由组件处理，下方示例做了关键词高亮。
+```html
+<hzq-cascader
+  placeholder="试试搜索：指南"
+  :options="options"
+  filterable>
+  <span slot="suggestion" slot-scope="{ item, keyword }" class="cascader-demo-suggestion">
+    <template v-for="(part, i) in highlight(item.text, keyword)">
+      <span :key="i" :class="{ 'cascader-demo-suggestion__hit': part.hit }">{{ part.text }}</span>
+    </template>
+    <i v-if="item.checked" class="hzq-icon-check"></i>
+  </span>
+</hzq-cascader>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'zhinan',
+          label: '指南',
+          children: [{
+            value: 'shejiyuanze',
+            label: '设计原则',
+            children: [
+              { value: 'yizhi', label: '一致' },
+              { value: 'fankui', label: '反馈' }
+            ]
+          }, {
+            value: 'daohang',
+            label: '导航',
+            children: [
+              { value: 'cexiangdaohang', label: '侧向导航' },
+              { value: 'dingbudaohang', label: '顶部导航' }
+            ]
+          }]
+        }, {
+          value: 'zujian',
+          label: '组件',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [
+              { value: 'button', label: 'Button 按钮' },
+              { value: 'cascader', label: 'Cascader 级联选择器' }
+            ]
+          }]
+        }]
+      };
+    },
+    methods: {
+      // 把文本按关键词切成普通片段与命中片段
+      highlight(text, keyword) {
+        if (!keyword) return [{ text, hit: false }];
+        const parts = [];
+        const lowerText = text.toLowerCase();
+        const lowerKeyword = keyword.toLowerCase();
+        let start = 0;
+        let index = lowerText.indexOf(lowerKeyword);
+        while (index > -1) {
+          if (index > start) parts.push({ text: text.slice(start, index), hit: false });
+          parts.push({ text: text.slice(index, index + keyword.length), hit: true });
+          start = index + keyword.length;
+          index = lowerText.indexOf(lowerKeyword, start);
+        }
+        if (start < text.length) parts.push({ text: text.slice(start), hit: false });
+        return parts;
+      }
+    }
+  };
+</script>
+
+<style>
+  /* 建议项 li 本身是 flex 容器，插槽内容撑满一行才能让勾选标记靠右 */
+  .cascader-demo-suggestion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+  }
+
+  .cascader-demo-suggestion__hit {
+    color: var(--hzq-color-primary);
+    font-weight: bold;
+  }
+</style>
+```
+:::
+
+### 多选标签换行
+
+:::demo 多选模式下默认标签单行排列，超出部分会截断；设置 `tags-wrap` 后标签自动换行，容器最高 80px，超出纵向滚动。可用 `tag-max-width` 限制单个标签的最大宽度（数字按 px 处理），配合换行避免长文本撑满整行。
+```html
+<hzq-cascader
+  v-model="value"
+  :options="options"
+  :props="{ multiple: true }"
+  tags-wrap
+  tag-max-width="160"
+  placeholder="请选择"
+  clearable></hzq-cascader>
+
+<script>
+  const cities = ['上海', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西'];
+  export default {
+    data() {
+      return {
+        // 预选几项，便于直接看到换行效果
+        value: [0, 1, 2, 3, 4, 5].map(index => ['huadong', index]),
+        options: [{
+          value: 'huadong',
+          label: '华东地区',
+          children: cities.map((label, index) => ({
+            value: index,
+            label: `华东 - ${label} - 某个比较长的选项名称`
+          }))
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### 自定义节点内容
 
 可以自定义备选项的节点内容
@@ -2165,6 +2291,8 @@
 | popper-class | 自定义浮层类名   | string | —  | — |
 | value-compat | 是否允许 value 传入末级值（如 `['xihu']`），开启后自动按 options 补全为完整路径；仅在 `props.emitPath` 为 true 时生效，查不到的节点原值透传 | boolean | — | false |
 | popover-trigger | 下拉层的触发方式。`click` 点击输入框切换；`manual` 不响应点击、Enter、方向键，需外部调用 `toggleDropDownVisible` | string | click / manual | click |
+| tags-wrap | 多选模式下标签是否换行排列。开启后标签自动换行，区域最高 80px，超出纵向滚动；关闭时保持单行截断 | boolean | — | false |
+| tag-max-width | 单个标签文字的最大宽度，超出省略；数字按 px 处理，字符串可带单位。留空不限制 | string / number | — | — |
 
 ### Cascader Events
 | 事件名称      | 说明    | 回调参数      |
@@ -2187,6 +2315,7 @@
 |---------|-------------|
 | - | 自定义备选项的节点内容，参数为 { node, data }，分别为当前节点的 Node 对象和数据 |
 | empty  | 无匹配选项时的内容 |
+| suggestion | 搜索模式下自定义建议项内容，作用域参数为 `{ item, index, keyword }`，`item` 为扁平化后的节点（含 `text`、`path`、`data` 等），`keyword` 为当前搜索关键词。不传时渲染节点文本与选中勾选标记 |
 
 ### CascaderPanel Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
