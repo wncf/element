@@ -17,6 +17,12 @@ export default {
     openDelay: {},
     closeDelay: {},
     zIndex: {},
+    // 为 true 时按 zIndex 精确设置本层浮层的层级，但不改动全局自增基线
+    // （默认行为是 zIndex 同时充当基线，供业务方统一调整整套浮层）
+    explicitZIndex: {
+      type: Boolean,
+      default: false
+    },
     modal: {
       type: Boolean,
       default: false
@@ -121,16 +127,25 @@ export default {
       const modal = props.modal;
 
       const zIndex = props.zIndex;
-      if (zIndex) {
+      // 精确层级：只用 zIndex 定本层位置，不改全局自增基线，
+      // 避免业务方传一个小 zIndex 就把之后所有浮层一起拉低
+      const explicit = Boolean(props.explicitZIndex) && zIndex !== undefined && zIndex !== null && zIndex !== '';
+      if (zIndex && !explicit) {
         PopupManager.zIndex = zIndex;
       }
+
+      // 显式层级时遮罩取 zIndex、弹窗本体高一层，避免内容被自己的遮罩压住；
+      // 非显式层级沿用自增，遮罩先取、本体再取（与改动前一致）
+      let popupZIndex;
 
       if (modal) {
         if (this._closing) {
           PopupManager.closeModal(this._popupId);
           this._closing = false;
         }
-        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
+        const modalZIndex = explicit ? Number(zIndex) : PopupManager.nextZIndex();
+        popupZIndex = explicit ? Number(zIndex) + 1 : undefined;
+        PopupManager.openModal(this._popupId, modalZIndex, this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
           this.withoutHiddenClass = !hasClass(document.body, 'hzq-popup-parent--hidden');
           if (this.withoutHiddenClass) {
@@ -151,7 +166,11 @@ export default {
         dom.style.position = 'absolute';
       }
 
-      dom.style.zIndex = PopupManager.nextZIndex();
+      // 没有遮罩时同样要定层级
+      if (popupZIndex === undefined) {
+        popupZIndex = PopupManager.nextZIndex();
+      }
+      dom.style.zIndex = popupZIndex;
       this.opened = true;
 
       this.onOpen && this.onOpen();

@@ -91,6 +91,47 @@
     }
   }
 
+  // 命令式弹窗（$dialog）的标题区：图标块 + 标题
+  @include e(service-header) {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    gap: 10px;
+  }
+
+  @include e(service-icon) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    background: $--color-primary-light-9;
+    color: $--color-primary;
+
+    @include m(error) {
+      background: $--color-danger-lighter;
+      color: $--color-danger;
+    }
+
+    @include m(warning) {
+      background: $--color-warning-lighter;
+      color: $--color-warning;
+    }
+
+    @include m(info) {
+      background: $--color-primary-light-9;
+      color: $--color-primary;
+    }
+  }
+
+  @include e(service-content) {
+    line-height: $--dialog-font-line-height;
+  }
+
   @include e(body) {
     padding: ($--dialog-padding-primary + 10px) $--dialog-padding-primary;
     color: $--color-text-regular;

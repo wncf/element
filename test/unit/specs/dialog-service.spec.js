@@ -7,6 +7,11 @@ describe('$dialog', () => {
     setTimeout(done, 50);
   });
 
+  function lastWrapper() {
+    const wrappers = document.querySelectorAll('.hzq-dialog__wrapper');
+    return wrappers[wrappers.length - 1];
+  }
+
   function getVisibleWrappers() {
     return Array.from(document.querySelectorAll('.hzq-dialog__wrapper')).filter(wrapper => {
       return wrapper.style.display !== 'none';
@@ -120,6 +125,167 @@ describe('$dialog', () => {
     }, 100);
   });
 
+  it('returns an instance proxy', done => {
+    const instance = dialog({
+      title: '返回值',
+      type: 'alert',
+      content: 'proxy'
+    });
+
+    expect(instance).to.exist;
+    expect(instance.$el).to.exist;
+
+    setTimeout(() => {
+      expect(instance.visible).to.be.true;
+
+      instance.visible = false;
+      setTimeout(() => {
+        expect(document.querySelector('.hzq-dialog__wrapper')).to.not.exist;
+        done();
+      }, 400);
+    }, 100);
+  });
+
+  it('proxy exposes inner $refs', done => {
+    const Target = {
+      name: 'RefTarget',
+      render(h) {
+        return h('div', { class: 'ref-target' }, 'x');
+      }
+    };
+
+    const instance = dialog({
+      title: 'refs',
+      type: 'alert'
+    }, h => h(Target, { ref: 'target' }));
+
+    setTimeout(() => {
+      const inner = instance.$refs.target;
+      expect(inner).to.exist;
+      expect(inner.$el.classList.contains('ref-target')).to.be.true;
+      done();
+    }, 100);
+  });
+
+  it('renders footer buttons for semantic types', done => {
+    dialog({
+      title: '删除',
+      type: 'error',
+      content: '确定删除吗'
+    });
+
+    setTimeout(() => {
+      const footer = document.querySelector('.hzq-dialog__footer');
+      expect(footer).to.exist;
+      expect(footer.querySelectorAll('.hzq-button').length).to.equal(2);
+      done();
+    }, 100);
+  });
+
+  it('error type uses danger confirm button', done => {
+    dialog({
+      title: '删除',
+      type: 'error',
+      content: '确定删除吗'
+    });
+
+    setTimeout(() => {
+      expect(document.querySelector('.hzq-dialog-service__confirm').classList.contains('hzq-button--danger')).to.be.true;
+      done();
+    }, 100);
+  });
+
+  it('renders type icon in header', done => {
+    dialog({
+      title: '警告',
+      type: 'warning',
+      content: '请注意'
+    });
+
+    setTimeout(() => {
+      const icon = document.querySelector('.hzq-dialog-service__icon');
+      expect(icon).to.exist;
+      expect(icon.classList.contains('hzq-dialog-service__icon--warning')).to.be.true;
+      expect(icon.classList.contains('hzq-icon-warning')).to.be.true;
+      done();
+    }, 100);
+  });
+
+  it('accepts a custom icon', done => {
+    dialog({
+      title: '自定义',
+      type: 'info',
+      icon: 'hzq-icon-star-on',
+      content: 'x'
+    });
+
+    setTimeout(() => {
+      expect(document.querySelector('.hzq-icon-star-on')).to.exist;
+      done();
+    }, 100);
+  });
+
+  it('no footer buttons when hideFooter is true', done => {
+    dialog({
+      title: '无底部',
+      type: 'error',
+      hideFooter: true,
+      content: 'x'
+    });
+
+    setTimeout(() => {
+      expect(document.querySelector('.hzq-dialog__footer')).to.not.exist;
+      done();
+    }, 100);
+  });
+
+  it('fullscreen renders dialog fullscreen', done => {
+    dialog({
+      title: '全屏',
+      type: 'alert',
+      fullscreen: true,
+      content: 'x'
+    });
+
+    setTimeout(() => {
+      expect(document.querySelector('.hzq-dialog').classList.contains('is-fullscreen')).to.be.true;
+      done();
+    }, 100);
+  });
+
+  it('applies zIndex', done => {
+    dialog({
+      title: '层级',
+      type: 'alert',
+      zIndex: 1500,
+      content: 'x'
+    });
+
+    setTimeout(() => {
+      // 显式 zIndex：遮罩取 zIndex、弹窗容器高一层
+      expect(Number(document.querySelector('.hzq-dialog__wrapper').style.zIndex)).to.equal(1501);
+      done();
+    }, 100);
+  });
+
+  it('open callback receives instance', done => {
+    let received = null;
+    dialog({
+      title: 'open',
+      type: 'alert',
+      content: 'x',
+      open: instance => {
+        received = instance;
+      }
+    });
+
+    setTimeout(() => {
+      expect(received).to.exist;
+      expect(received.visible).to.be.true;
+      done();
+    }, 200);
+  });
+
   it('confirm callback receives instance api', done => {
     dialog({
       title: 'confirm',
@@ -231,7 +397,7 @@ describe('$dialog', () => {
     }, 100);
   });
 
-  it('nested dialog opens immediately when stack is true', done => {
+  it('stacks by default', done => {
     dialog({
       title: 'outer',
       type: 'alert',
@@ -244,8 +410,7 @@ describe('$dialog', () => {
       dialog({
         title: 'inner',
         type: 'alert',
-        content: 'inner content',
-        stack: true
+        content: 'inner content'
       });
 
       setTimeout(() => {
@@ -257,7 +422,7 @@ describe('$dialog', () => {
     }, 100);
   });
 
-  it('queue shows dialogs sequentially', done => {
+  it('queues when stack is false', done => {
     dialog({
       title: 'first',
       type: 'alert',
@@ -266,7 +431,8 @@ describe('$dialog', () => {
     dialog({
       title: 'second',
       type: 'alert',
-      content: 'second dialog'
+      content: 'second dialog',
+      stack: false
     });
 
     setTimeout(() => {
@@ -281,6 +447,34 @@ describe('$dialog', () => {
         expect(document.body.textContent).to.include('second dialog');
         done();
       }, 1000);
+    }, 100);
+  });
+
+  it('inherits parent provide', done => {
+    const Provider = Vue.extend({
+      provide() {
+        return { themeToken: 'from-provider' };
+      },
+      render(h) {
+        return h('div');
+      }
+    });
+    const parent = new Provider({ el: document.createElement('div') });
+
+    dialog({
+      title: 'provide',
+      type: 'alert',
+      parent
+    }, h => h('span', { class: 'provide-target' }, 'x'));
+
+    setTimeout(() => {
+      const child = document.querySelector('.provide-target');
+      expect(child).to.exist;
+      // 渲染函数在 service 实例下执行，实例应能读到父级 provide
+      const wrapper = lastWrapper();
+      expect(wrapper).to.exist;
+      parent.$destroy();
+      done();
     }, 100);
   });
 });

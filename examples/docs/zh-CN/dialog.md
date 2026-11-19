@@ -279,7 +279,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 :::
 
 :::tip
-默认同一时刻只显示一个弹窗，后续调用会排队，上一个关闭后延迟 500ms 再弹出。需要叠加显示时传 `stack: true`。
+默认允许弹窗叠加显示，后开的叠在先开的之上。需要串行展示时传 `stack: false`，后续调用会排队，上一个关闭后延迟 500ms 再弹出。
 :::
 
 :::tip
@@ -333,9 +333,12 @@ Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默�
 | 参数 | 说明 | 类型 | 默认值 |
 | ---------- | -------------- | ---------- | -------- |
 | title | 标题 | string | '' |
-| type | `alert`（无底部按钮）/ `confirm`（取消 + 确定） | string | alert |
+| type | `alert`（无底部按钮）/ `confirm`（取消 + 确定）/ `error`、`warning`、`info`、`add`、`edit`（在标题区带图标，且默认渲染取消 + 确定） | string | alert |
 | width | 宽度，数字会补上 `px` | string / number | '' |
+| fullscreen | 是否全屏 | boolean | false |
 | content | 内容，支持字符串或 VNode | string / object | '' |
+| icon | 自定义标题图标类名，不传按 `type` 自动取 | string | '' |
+| hideFooter | 不渲染底部按钮 | boolean | false |
 | maskClose | 点击遮罩是否关闭 | boolean | false |
 | escClose | 按 ESC 是否关闭 | boolean | true |
 | showClose | 是否显示右上角关闭按钮 | boolean | true |
@@ -343,7 +346,11 @@ Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默�
 | cancelButtonText | 取消按钮文案 | string | '' |
 | confirm | 确定回调，可返回 Promise，rejection 会被吞掉 | function(instance) | — |
 | cancel | 取消回调 | function(instance) | — |
-| stack | 叠在上一个弹窗之上，而不是排队 | boolean | false |
+| open | 弹窗打开后的回调，可用于聚焦输入框等 | function(instance) | — |
+| stack | 叠在上一个弹窗之上；传 `false` 改为排队 | boolean | **true** |
+| zIndex | 层级，用于和业务方既有弹窗并轨；不传走自增 | number | — |
+| parent | 父实例，决定 `$store` / `$route` / `provide` 的来源；组件内调用自动取 `this` | object | — |
 | border | header / body / footer 之间加分割线 | boolean | false |
 
-返回的实例代理提供 `visible`、`loading`、`close()`。
+`$dialog` 返回实例代理，提供 `visible`、`loading`、`close()`，以及透传到真实实例的 `$refs`、`$el`。
+排队中的弹窗返回的是占位代理，实例挂载后读写会自动转发。

@@ -3,25 +3,43 @@
     :visible.sync="visible"
     :title="title"
     :width="dialogWidth"
+    :fullscreen="fullscreen"
     :close-on-click-modal="maskClose"
     :close-on-press-escape="escClose"
     :show-close="showClose"
     :append-to-body="true"
+    :z-index="zIndex"
+    explicit-z-index
     :custom-class="dialogClass"
     :before-close="handleBeforeClose"
+    @open="handleOpen"
     @closed="handleClosed"
   >
+    <template v-if="resolvedIcon" slot="title">
+      <div class="hzq-dialog-service__header">
+        <span
+          class="hzq-dialog-service__icon"
+          :class="[
+            `hzq-dialog-service__icon--${iconType}`,
+            resolvedIcon
+          ]"
+        ></span>
+        <span class="hzq-dialog__title">{{ title }}</span>
+      </div>
+    </template>
+
     <dialog-render-fn v-if="renderFn" :render="renderFn" />
     <div v-else-if="typeof content === 'string'" class="hzq-dialog-service__content">{{ content }}</div>
     <dialog-render-fn v-else-if="contentRender" :render="contentRender" />
 
-    <template v-if="isConfirm" slot="footer">
-      <hzq-button :size="buttonSize" @click="handleCancel">
+    <template v-if="showFooter" slot="footer">
+      <hzq-button class="hzq-dialog-service__cancel" :size="buttonSize" @click="handleCancel">
         {{ resolvedCancelText }}
       </hzq-button>
       <hzq-button
+        class="hzq-dialog-service__confirm"
         :size="buttonSize"
-        type="primary"
+        :type="confirmButtonType"
         :loading="loading"
         @click="handleConfirm"
       >
@@ -34,6 +52,27 @@
 <script>
 import Locale from 'hzq-ui/src/mixins/locale';
 import DialogRenderFn from './dialog-render-fn.vue';
+
+// 带底部按钮的类型：confirm 为纯确认，其余类型额外渲染标题图标
+const CONFIRM_TYPES = ['confirm', 'error', 'warning', 'info', 'add', 'edit'];
+
+// 类型 -> 标题图标（iconfont 类名）。图标语义沿用业务方的既有约定。
+const TYPE_ICONS = {
+  error: 'hzq-icon-delete',
+  warning: 'hzq-icon-warning',
+  info: 'hzq-icon-info',
+  add: 'hzq-icon-circle-plus-outline',
+  edit: 'hzq-icon-edit'
+};
+
+// 图标的色彩分组，决定图标块的背景/前景色
+const TYPE_ICON_VARIANTS = {
+  error: 'error',
+  warning: 'warning',
+  info: 'info',
+  add: 'primary',
+  edit: 'primary'
+};
 
 export default {
   name: 'HzqDialogServiceInstance',
@@ -56,6 +95,14 @@ export default {
     width: {
       type: [String, Number],
       default: ''
+    },
+    fullscreen: {
+      type: Boolean,
+      default: false
+    },
+    zIndex: {
+      type: Number,
+      default: undefined
     },
     maskClose: {
       type: Boolean,
@@ -85,11 +132,23 @@ export default {
       type: Function,
       default: null
     },
+    icon: {
+      type: String,
+      default: ''
+    },
+    hideFooter: {
+      type: Boolean,
+      default: false
+    },
     onConfirm: {
       type: Function,
       default: null
     },
     onCancel: {
+      type: Function,
+      default: null
+    },
+    onOpen: {
       type: Function,
       default: null
     },
@@ -110,15 +169,38 @@ export default {
   },
 
   computed: {
-    isConfirm() {
-      return this.type === 'confirm';
+    hasConfirmButton() {
+      return CONFIRM_TYPES.indexOf(this.type) > -1;
+    },
+
+    // hideFooter 只在「不传类型」的自定义内容弹窗上有意义；
+    // 显式传了 error/warning 等类型时，底部按钮是类型语义的一部分。
+    showFooter() {
+      return this.hasConfirmButton && !this.hideFooter;
+    },
+
+    iconType() {
+      return TYPE_ICON_VARIANTS[this.type] || 'info';
+    },
+
+    resolvedIcon() {
+      if (this.icon) return this.icon;
+      return TYPE_ICONS[this.type] || '';
+    },
+
+    confirmButtonType() {
+      return this.type === 'error' ? 'danger' : 'primary';
     },
 
     dialogClass() {
-      return this.border ? 'hzq-dialog--bordered' : '';
+      const classes = [];
+      if (this.border) classes.push('hzq-dialog--bordered');
+      if (this.resolvedIcon) classes.push('hzq-dialog--with-icon');
+      return classes.join(' ');
     },
 
     dialogWidth() {
+      if (this.fullscreen) return undefined;
       return normalizeWidth(this.width);
     },
 
@@ -154,6 +236,8 @@ export default {
   },
 
   methods: {
+    // 实例代理：业务方拿到的就是这个对象，语义与组件实例保持一致。
+    // $refs / $el 直接转发到真实实例，供「弹窗内组件校验」这类用法。
     createInstanceProxy() {
       const vm = this;
       return {
@@ -168,6 +252,15 @@ export default {
         },
         set loading(val) {
           vm.loading = val;
+        },
+        get $refs() {
+          return vm.$refs;
+        },
+        get $el() {
+          return vm.$el;
+        },
+        get instance() {
+          return vm;
         },
         close() {
           vm.closeDialog();
@@ -211,13 +304,19 @@ export default {
     },
 
     handleConfirm() {
-      if (!this.isConfirm || typeof this.onConfirm !== 'function') {
+      if (!this.showFooter || typeof this.onConfirm !== 'function') {
         this.closeDialog();
         return;
       }
       const result = this.onConfirm(this.getInstance());
       if (result && typeof result.then === 'function') {
         result.catch(function() {});
+      }
+    },
+
+    handleOpen() {
+      if (typeof this.onOpen === 'function') {
+        this.onOpen(this.getInstance());
       }
     },
 

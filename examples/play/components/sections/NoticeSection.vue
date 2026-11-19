@@ -102,7 +102,7 @@ export default {
 
     openDialogQueue() {
       this.$dialog({ title: '队列 1', type: 'alert', content: '第一个弹窗' })
-      this.$dialog({ title: '队列 2', type: 'alert', content: '关闭上一个后显示' })
+      this.$dialog({ title: '队列 2', type: 'alert', content: '关闭上一个后显示', stack: false })
     },
 
     openDialogNested() {
@@ -129,7 +129,6 @@ export default {
           title: '内层弹窗',
           type: 'confirm',
           width: 360,
-          stack: true,
           confirm: (instance) => {
             instance.visible = false
             this.$message.success('内层已确认')
