@@ -582,8 +582,15 @@ $--tab-vertical-header-count-fill: $--color-text-secondary !default;
 
 /* Button
 -------------------------- */
-// 按钮高度由 padding 撑开：高度 = 上下 padding × 2 + font-size + 上下 border(1px × 2)
-// 目标高度：large 36、default/medium 32、small 28、mini 24，padding 按目标高度反推
+// 目标高度：large 36、default/medium 32、small 28、mini 24，与同档输入框一致。
+//
+// 这些高度通过 button-size 的 $height 直接钉死，不再靠 padding 反推。
+// 原因：靠 padding 撑高时，高度 = 上下 padding + 内容行盒 + 上下 border，
+// 而内容行盒只有在纯文字时才恰好等于 font-size。内容里放图标（inline-block +
+// baseline 对齐）时，行盒下面还要留字体降部，比 font-size 多约 1px，按钮就
+// 比输入框高 1px，float 栅格里会挤错位、圆形按钮会变椭圆。
+//
+// padding 仍按目标高度反推，保证钉死高度后内容仍有合适留白：
 // large: 10 × 2 + 14 + 2 = 36 / medium: 8.5 × 2 + 13 + 2 = 32
 // small: 7 × 2 + 12 + 2 = 28 / mini: 5 × 2 + 12 + 2 = 24
 /// fontSize||Font|1
@@ -596,6 +603,8 @@ $--button-border-radius: 6px !default;
 $--button-padding-vertical: 8.5px !default;
 /// padding||Spacing|3
 $--button-padding-horizontal: 14px !default;
+/// height||Other|4
+$--button-height: $--component-height-medium !default;
 
 /// fontSize||Font|1
 $--button-large-font-size: $--component-font-size-large !default;
@@ -605,6 +614,8 @@ $--button-large-border-radius: 6px !default;
 $--button-large-padding-vertical: 10px !default;
 /// padding||Spacing|3
 $--button-large-padding-horizontal: 16px !default;
+/// height||Other|4
+$--button-large-height: $--component-height-large !default;
 
 /// fontSize||Font|1
 $--button-medium-font-size: $--component-font-size-medium !default;
@@ -615,6 +626,8 @@ $--button-medium-border-radius: 6px !default;
 $--button-medium-padding-vertical: 8.5px !default;
 /// padding||Spacing|3
 $--button-medium-padding-horizontal: 14px !default;
+/// height||Other|4
+$--button-medium-height: $--component-height-medium !default;
 
 /// fontSize||Font|1
 $--button-small-font-size: $--component-font-size-small !default;
@@ -623,6 +636,8 @@ $--button-small-border-radius: 6px !default;
 $--button-small-padding-vertical: 7px !default;
 /// padding||Spacing|3
 $--button-small-padding-horizontal: 12px !default;
+/// height||Other|4
+$--button-small-height: $--component-height-small !default;
 /// fontSize||Font|1
 $--button-mini-font-size: $--component-font-size-mini !default;
 $--button-mini-border-radius: 6px !default;
@@ -630,6 +645,8 @@ $--button-mini-border-radius: 6px !default;
 $--button-mini-padding-vertical: 5px !default;
 /// padding||Spacing|3
 $--button-mini-padding-horizontal: 10px !default;
+/// height||Other|4
+$--button-mini-height: $--component-height-mini !default;
 
 /// color||Color|0
 $--button-default-font-color: $--color-text-regular !default;

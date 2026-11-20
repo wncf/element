@@ -5,7 +5,12 @@
 @import "mixins/utils";
 
 @include b(button) {
-  display: inline-block;
+  // inline-flex 而非 inline-block：按钮高度由 button-size 钉死，
+  // 内容靠 flex 居中，图标（inline-block + baseline）就不会再把高度撑出 1px。
+  // 详见 mixins/_button.scss 里 button-size 的说明。
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
@@ -25,7 +30,7 @@
     margin-left: 10px;
   }
 
-  @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-border-radius);
+  @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-border-radius, $--button-height);
 
   &:hover,
   &:focus {
@@ -121,7 +126,10 @@
   }
   @include when(circle) {
     border-radius: 50%;
-    padding: $--button-padding-vertical;
+    // 高度已由 button-size 钉死，宽度同样取该高度才保证是正圆。
+    // 原来靠单边 padding 撑宽，图标撑高行盒时会连带变椭圆。
+    width: $--button-height;
+    padding: 0;
   }
   @each $type in (primary, success, warning, danger, info) {
     @include m($type) {
@@ -129,27 +137,31 @@
     }
   }
   @include m(large) {
-    @include button-size($--button-large-padding-vertical, $--button-large-padding-horizontal, $--button-large-font-size, $--button-large-border-radius);
+    @include button-size($--button-large-padding-vertical, $--button-large-padding-horizontal, $--button-large-font-size, $--button-large-border-radius, $--button-large-height);
     @include when(circle) {
-      padding: $--button-large-padding-vertical;
+      width: $--button-large-height;
+      padding: 0;
     }
   }
   @include m(medium) {
-    @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);
+    @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius, $--button-medium-height);
     @include when(circle) {
-      padding: $--button-medium-padding-vertical;
+      width: $--button-medium-height;
+      padding: 0;
     }
   }
   @include m(small) {
-    @include button-size($--button-small-padding-vertical, $--button-small-padding-horizontal, $--button-small-font-size, $--button-small-border-radius);
+    @include button-size($--button-small-padding-vertical, $--button-small-padding-horizontal, $--button-small-font-size, $--button-small-border-radius, $--button-small-height);
     @include when(circle) {
-      padding: $--button-small-padding-vertical;
+      width: $--button-small-height;
+      padding: 0;
     }
   }
   @include m(mini) {
-    @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, $--button-mini-border-radius);
+    @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, $--button-mini-border-radius, $--button-mini-height);
     @include when(circle) {
-      padding: $--button-mini-padding-vertical;
+      width: $--button-mini-height;
+      padding: 0;
     }
   }
   @include m(text) {

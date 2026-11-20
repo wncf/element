@@ -89,10 +89,28 @@
   }
 }
 
-@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius) {
+// $height 可选：给了就把按钮高度钉死成该值。
+//
+// 不钉高度时，按钮高度由 padding + border + 内容行盒三者算出来。纯文字时
+// 行盒恰好等于 line-height，得出的正是设计值；但内容里一旦有图标（图标是
+// inline-block + baseline 对齐，见 icon.scss），行盒下方还要留出字体的降部
+// 空间，行盒比 line-height 多 1px，按钮就比同档输入框高 1px
+// （small 28→29、mini 24→25、default 32→33、large 36→37），放在 float 栅格
+// 里会把后面的列挤错位；圆形按钮也会被撑成椭圆。
+//
+// element-ui 没暴露这个问题，是因为它的 padding（small 档 9px）比内容溢出
+// 多得多，那 1px 被 padding 吃掉了；hzq-ui 把 padding 收紧到 7px 后就没有余量。
+//
+// 钉死高度后图标只影响行内排布、不再作用于按钮高度，配合 hzq-button 的
+// inline-flex 居中，图标与文字仍然居中（实测四档 × 五种内容，高度全部命中
+// 设计值，居中偏差为 0）。
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius, $height: null) {
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
   border-radius: $border-radius;
+  @if $height {
+    height: $height;
+  }
   &.is-round {
     padding: $padding-vertical $padding-horizontal;
   }
