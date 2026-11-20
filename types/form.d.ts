@@ -60,6 +60,13 @@ export declare class ElForm extends ElementUIComponent {
   size: ElementUIComponentSize
 
   /**
+   * Background of input-like controls in this form:
+   * `card` — same colour as the card (white), controls are delimited by border only;
+   * `tint` — light background following the theme colour.
+   */
+  controlBg: 'card' | 'tint'
+
+  /**
    * Validate the whole form
    *
    * @param callback A callback to tell the validation result

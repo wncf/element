@@ -38,7 +38,9 @@
     height: auto;
     padding: 1px 0;
     text-align: center;
-    background: $--background-color-base;
+    // 与输入框同底：按钮和输入框是同一个控件的两半，底色分开会在 card 档
+    // 露出一块灰按钮贴白输入框（默认档两色本就接近，观感不变）。
+    background: var(--hzq-bg-color-control);
     background-clip: content-box;
     box-sizing: border-box;
     color: $--color-text-regular;

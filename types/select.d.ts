@@ -79,6 +79,13 @@ export declare class ElSelect extends ElementUIComponent {
   popperAppendToBody: boolean
 
   /**
+   * Background of the control: `card` (same colour as the card) or `tint`
+   * (light background following the theme colour).
+   * Inherited from the surrounding form when not set.
+   */
+  controlBg: 'card' | 'tint'
+
+  /**
    * Focus the Input component
    */
   focus (): void

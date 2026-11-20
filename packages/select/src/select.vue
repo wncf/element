@@ -1,7 +1,7 @@
 <template>
   <div
     class="hzq-select"
-    :class="[selectSize ? 'hzq-select--' + selectSize : '']"
+    :class="[selectSize ? 'hzq-select--' + selectSize : '', 'hzq-bg-' + resolvedControlBg]"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose">
     <div
@@ -188,6 +188,13 @@
     },
 
     computed: {
+      // 优先级：控件自身 > 所在 hzq-form > 全局（Vue.use 传入）> 默认白底。
+      resolvedControlBg() {
+        return this.controlBg ||
+          (this.elForm && this.elForm.resolvedControlBg) ||
+          (this.$HZQ && this.$HZQ.controlBg) ||
+          'card';
+      },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
@@ -346,6 +353,13 @@
       options: {
         type: Array,
         default: () => []
+      },
+      // 底色档位，见 theme-chalk/src/common/control-bg.scss。
+      // 不设则沿用所在 hzq-form 的 control-bg。
+      controlBg: {
+        type: String,
+        default: '',
+        validator: (value) => ['', 'card', 'tint'].includes(value)
       }
     },
 

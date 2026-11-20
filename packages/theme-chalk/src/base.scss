@@ -11,3 +11,6 @@
 //   - 按需引入：babel-plugin-component 会自动引入 theme-chalk/base.css
 //   - 直接引 scss 源码：使用方必须一并引入 base.scss
 @import "common/tokens";
+// 控件底色档位（hzq-bg-card / hzq-bg-tint）是全库共用的工具类，
+// 和 token 一样只需输出一次，所以并入 base 产物。
+@import "common/control-bg";

@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { createVue, destroyVM, waitImmediate } from '../util';
 
 const DELAY = 50;
@@ -352,6 +353,80 @@ describe('Form', () => {
       done();
     });
   });
+  describe('control-bg', () => {
+    const createForm = (attrs = '') => createVue({
+      template: `
+        <hzq-form ref="form" :model="form" ${attrs}>
+          <hzq-form-item label="活动名称">
+            <hzq-input ref="input" v-model="form.name"></hzq-input>
+          </hzq-form-item>
+        </hzq-form>
+      `,
+      data() {
+        return { form: { name: '' } };
+      }
+    }, true);
+
+    it('card by default', () => {
+      vm = createForm();
+      // 表单本身不设，不干预；控件回落到默认白底
+      expect(vm.$el.classList.contains('hzq-bg-card')).to.false;
+      expect(vm.$el.classList.contains('hzq-bg-tint')).to.false;
+      expect(vm.$el.querySelector('.hzq-input').classList.contains('hzq-bg-card')).to.true;
+    });
+
+    it('tint', () => {
+      vm = createForm('control-bg="tint"');
+      expect(vm.$el.classList.contains('hzq-bg-tint')).to.true;
+      expect(vm.$el.classList.contains('hzq-bg-card')).to.false;
+      // 控件未显式设置时跟随表单
+      expect(vm.$el.querySelector('.hzq-input').classList.contains('hzq-bg-tint')).to.true;
+    });
+
+    it('control wins over the form', () => {
+      vm = createVue({
+        template: `
+          <hzq-form :model="form" control-bg="tint">
+            <hzq-form-item label="活动名称">
+              <hzq-input v-model="form.name" control-bg="card"></hzq-input>
+            </hzq-form-item>
+          </hzq-form>
+        `,
+        data() {
+          return { form: { name: '' } };
+        }
+      }, true);
+      // 优先级：控件自身 > 表单 > 全局
+      expect(vm.$el.querySelector('.hzq-input').classList.contains('hzq-bg-card')).to.true;
+      expect(vm.$el.querySelector('.hzq-input').classList.contains('hzq-bg-tint')).to.false;
+    });
+
+    it('form wins over the global', () => {
+      const backup = Vue.prototype.$HZQ;
+      try {
+        Vue.prototype.$HZQ = { size: '', zIndex: 2000, controlBg: 'tint' };
+        vm = createForm('control-bg="card"');
+        expect(vm.$el.classList.contains('hzq-bg-card')).to.true;
+        expect(vm.$el.classList.contains('hzq-bg-tint')).to.false;
+        expect(vm.$el.querySelector('.hzq-input').classList.contains('hzq-bg-card')).to.true;
+      } finally {
+        Vue.prototype.$HZQ = backup;
+      }
+    });
+
+    it('global is the fallback when neither is set', () => {
+      const backup = Vue.prototype.$HZQ;
+      try {
+        Vue.prototype.$HZQ = { size: '', zIndex: 2000, controlBg: 'tint' };
+        vm = createForm();
+        expect(vm.$el.classList.contains('hzq-bg-tint')).to.true;
+        expect(vm.$el.querySelector('.hzq-input').classList.contains('hzq-bg-tint')).to.true;
+      } finally {
+        Vue.prototype.$HZQ = backup;
+      }
+    });
+  });
+
   describe('validate', () => {
     it('input', done => {
       vm = createVue({

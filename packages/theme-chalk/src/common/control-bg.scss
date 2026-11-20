@@ -1,0 +1,25 @@
+// 输入类控件的底色档位
+//
+// 控件样式统一读 --hzq-bg-color-control（见 input.scss / select.scss / date-picker），
+// 所以这里不做任何控件级样式，只在作用域根节点把这个变量换掉：
+//   - 写在 hzq-form 上：整个表单内的控件一起换
+//   - 写在某个控件上：只换这一个（元素自身的声明优先于从祖先继承的值）
+//
+// 这也是"控件 > 表单 > 全局"这条优先级在 CSS 层能成立的原因：
+// 控件节点自己声明了 --hzq-bg-color-control，就不再继承表单那一档的值。
+// JS 侧只需保证每一层"未设置时不出类"，不要让上层用默认值把下层提前定死。
+//
+// 由 form / input / select / input-number / date-picker 的 control-bg 属性输出这两个类。
+
+// card：与卡片同色，控件只靠边框界定。
+// 白底指的是"卡片那种无色底"，不随品牌色走；深色模式下取深色卡片色，
+// 否则深色页面里会露出刺眼的白块。
+.hzq-bg-card {
+  --hzq-bg-color-control: var(--hzq-fill-color-blank);
+}
+
+// tint：跟随主题色的浅底。默认预设即控件原本的浅灰蓝底，
+// 绿色主题下由 $--brand-tint-modes 覆盖成极浅的绿。
+.hzq-bg-tint {
+  --hzq-bg-color-control: var(--hzq-bg-color-control-tint);
+}

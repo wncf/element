@@ -52,7 +52,12 @@ const install = function(Vue, opts = {}) {
 
   Vue.prototype.$HZQ = {
     size: opts.size || '',
-    zIndex: (opts.popper && opts.popper.zIndex) || opts.zIndex || 2000
+    zIndex: (opts.popper && opts.popper.zIndex) || opts.zIndex || 2000,
+    // opts.controlBg: 'card' | 'tint' 全局控件底色（兜底）。
+    // 优先级：控件自身属性 > 所在 hzq-form > 全局 > 默认 card。
+    // 即全局只在两层都没显式设置时生效。
+    // 注意：$HZQ 非响应式，安装后再改这里不会触发已渲染控件更新。
+    controlBg: opts.controlBg || ''
   };
 
   Vue.prototype.$loading = Loading.service;

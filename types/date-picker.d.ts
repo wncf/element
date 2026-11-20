@@ -93,6 +93,13 @@ export declare class ElDatePicker extends ElementUIComponent {
   /** Type of the picker */
   type: DatePickerType
 
+  /**
+   * Background of the control: `card` (same colour as the card) or `tint`
+   * (light background following the theme colour).
+   * Inherited from the surrounding form when not set.
+   */
+  controlBg: 'card' | 'tint'
+
   /** Format of the picker */
   format: string
 

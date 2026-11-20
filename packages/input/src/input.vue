@@ -10,7 +10,8 @@
       'hzq-input-group--prepend': $slots.prepend,
       'hzq-input--prefix': $slots.prefix || prefixIcon,
       'hzq-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
-    }
+    },
+    'hzq-bg-' + resolvedControlBg
     ]"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
@@ -189,10 +190,27 @@
         type: Boolean,
         default: false
       },
-      tabindex: String
+      tabindex: String,
+      // 底色档位，见 theme-chalk/src/common/control-bg.scss。
+      // 不传时跟随所在 hzq-form 的 control-bg；单独使用（无表单）时默认白底。
+      controlBg: {
+        type: String,
+        default: '',
+        validator: (value) => ['', 'card', 'tint'].includes(value)
+      }
     },
 
     computed: {
+      // 优先级：控件自身 > 所在 hzq-form > 全局（Vue.use 传入）> 默认白底。
+      // 越局部越优先：控件最清楚自己要什么，表单次之，全局只做兜底。
+      // 表单那层由 elForm.resolvedControlBg 提供（它内部已处理 表单 > 全局），
+      // 这里再读 elForm.controlBg 会绕开全局兜底。
+      resolvedControlBg() {
+        return this.controlBg ||
+          (this.elForm && this.elForm.resolvedControlBg) ||
+          (this.$HZQ && this.$HZQ.controlBg) ||
+          'card';
+      },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },

@@ -292,6 +292,73 @@
       </hzq-form>
     </preview-block>
 
+    <preview-block section-id="form-control-bg" title="控件底色 control-bg" tag="controlBg">
+      <div class="preview-row">
+        <span class="preview-label">表单</span>
+        <hzq-radio-group v-model="controlBgForm" size="mini">
+          <hzq-radio-button label="">不设置</hzq-radio-button>
+          <hzq-radio-button label="card">card 白底</hzq-radio-button>
+          <hzq-radio-button label="tint">tint 主题浅底</hzq-radio-button>
+        </hzq-radio-group>
+      </div>
+      <div class="preview-row">
+        <span class="preview-label">控件</span>
+        <hzq-radio-group v-model="controlBgInput" size="mini">
+          <hzq-radio-button label="">跟随表单</hzq-radio-button>
+          <hzq-radio-button label="card">card</hzq-radio-button>
+          <hzq-radio-button label="tint">tint</hzq-radio-button>
+        </hzq-radio-group>
+        <span class="preview-label" style="width: auto; margin-left: 12px;">
+          实际生效：{{ resolvedControlBgDemo }}
+        </span>
+      </div>
+
+      <div class="control-bg-demo">
+        <hzq-form
+          :model="form"
+          :size="size"
+          label-width="80px"
+          :control-bg="controlBgForm"
+          class="control-bg-demo__form"
+        >
+          <hzq-form-item label="输入框">
+            <hzq-input v-model="form.input" :control-bg="controlBgInput" placeholder="请输入内容" />
+          </hzq-form-item>
+          <hzq-form-item label="选择器">
+            <hzq-select v-model="form.select" placeholder="请选择" style="width: 100%;">
+              <hzq-option
+                v-for="item in cityOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </hzq-select>
+          </hzq-form-item>
+          <hzq-form-item label="计数器">
+            <hzq-input-number v-model="form.number" :min="1" :max="10" />
+          </hzq-form-item>
+          <hzq-form-item label="日期">
+            <hzq-date-picker v-model="form.date" type="date" placeholder="选择日期" style="width: 100%;" />
+          </hzq-form-item>
+          <hzq-form-item label="金额">
+            <hzq-amount-input v-model="form.amount" placeholder="请输入金额" />
+          </hzq-form-item>
+          <hzq-form-item label="文本域">
+            <hzq-input v-model="form.textarea" type="textarea" :rows="2" placeholder="请输入" />
+          </hzq-form-item>
+          <hzq-form-item label="禁用">
+            <hzq-input v-model="form.input" disabled placeholder="禁用态" />
+          </hzq-form-item>
+        </hzq-form>
+      </div>
+
+      <p class="control-bg-demo__hint">
+        优先级：控件自身 control-bg &gt; 表单 control-bg &gt; 全局（Vue.use 的 controlBg）&gt; 默认 card。
+        card 固定为卡片白底（不随主色），tint 跟随主题：默认浅蓝、绿色主题下是极浅的绿、深色主题下比卡片亮一档。
+        上方「主题」面板切到绿色预设时，tint 的差别最明显。
+      </p>
+    </preview-block>
+
     <preview-block section-id="form-builder" title="FormBuilder 配置化表单">
       <hzq-form-builder
         v-model="builderForm"
@@ -663,6 +730,9 @@ export default {
         rate: 3,
         checkboxSingle: true
       },
+      // control-bg 演示：表单层与控件层分别可切换，空串表示"不设置"，交给下一层决定
+      controlBgForm: '',
+      controlBgInput: '',
       // 场景 C 的尺寸档位；default 由场景 B 覆盖，这里只跑四个显式档位
       alignSizes: ['large', 'medium', 'small', 'mini'],
       builderForm: {
@@ -752,6 +822,14 @@ export default {
     ];
   },
 
+  computed: {
+    // 与组件内的解析顺序保持一致，用来在演示区直接显示"这一格最终用的是哪档"
+    resolvedControlBgDemo() {
+      const global = (this.$HZQ && this.$HZQ.controlBg) || '';
+      return this.controlBgInput || this.controlBgForm || global || 'card';
+    }
+  },
+
   methods: {
     querySearch(queryString, cb) {
       const results = queryString
@@ -768,6 +846,25 @@ export default {
 </script>
 
 <style scoped>
+/* control-bg 演示区：卡片底色 + 内边距，否则白底控件贴在白页面上看不出边界 */
+.control-bg-demo {
+  margin-top: 4px;
+  padding: 16px 16px 0;
+  max-width: 460px;
+  border: 1px solid var(--hzq-border-color-lighter);
+  border-radius: 6px;
+  /* 用卡片色而不是页面色：card 档要和"周围的白"对比才看得出效果 */
+  background: var(--hzq-bg-color);
+}
+
+.control-bg-demo__hint {
+  margin: 10px 0 0;
+  max-width: 460px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--hzq-text-color-secondary);
+}
+
 /* 对齐测试区：刻意用普通表格 + inline 流，
    不引入 flex/grid，才能真实复现「单元格内并排控件基线不一致」的问题 */
 .align-scene {

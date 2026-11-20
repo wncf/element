@@ -18,6 +18,7 @@
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
     :validateEvent="false"
+    :controlBg="resolvedControlBg"
     ref="reference">
     <i slot="prefix"
       class="hzq-input__icon"
@@ -37,7 +38,8 @@
       'hzq-date-editor--' + type,
       pickerSize ? `hzq-range-editor--${ pickerSize }` : '',
       pickerDisabled ? 'is-disabled' : '',
-      pickerVisible ? 'is-active' : ''
+      pickerVisible ? 'is-active' : '',
+      'hzq-bg-' + resolvedControlBg
     ]"
     @click="handleRangeClick"
     @mouseenter="handleMouseEnter"
@@ -412,6 +414,13 @@ export default {
     validateEvent: {
       type: Boolean,
       default: true
+    },
+    // 底色档位，见 theme-chalk/src/common/control-bg.scss。
+    // 不设则沿用所在 hzq-form 的 control-bg。
+    controlBg: {
+      type: String,
+      default: '',
+      validator: (value) => ['', 'card', 'tint'].includes(value)
     }
   },
 
@@ -468,6 +477,13 @@ export default {
   },
 
   computed: {
+    // 优先级：控件自身 > 所在 hzq-form > 全局（Vue.use 传入）> 默认白底。
+    resolvedControlBg() {
+      return this.controlBg ||
+        (this.elForm && this.elForm.resolvedControlBg) ||
+        (this.$HZQ && this.$HZQ.controlBg) ||
+        'card';
+    },
     ranged() {
       return this.type.indexOf('range') > -1;
     },

@@ -48,6 +48,18 @@
   --hzq-color-blend-base: #{$blend-base};
 }
 
+// 控件"主题浅底"跳板。
+//
+// 输入类控件默认读 --hzq-bg-color-control（中性灰底）。设置 control-bg="tint" 时，
+// 组件根节点把 --hzq-bg-color-control 指向本变量，于是同一个控件样式自动换底色。
+// 默认就是控件原本的底色，所以默认预设下 tint 与不设同效；
+// 有品牌色相的预设（见 palette 的 $--brand-tint-modes）再覆盖成淡淡的品牌色。
+// 单独成一组而不是并进 neutrals：它只是"当前主题色的一档浅底"，
+// 语义上不属于中性色，且需要随品牌轴而不是明暗轴变化。
+@mixin el-control-tint-token($neutrals) {
+  --hzq-bg-color-control-tint: #{map-get($neutrals, 'bg-color-control')};
+}
+
 // 成组色板：一组颜色只有一起存在才有意义（如空状态插画的 9 档灰），
 // 单看每一档都不是"中性色语义"，所以不并进 neutrals，只作为独立组随明暗轴输出。
 @mixin el-group-tokens($tokens) {
@@ -77,6 +89,7 @@ $--hzq-tokens-emitted: false !default;
 
     #{$brightness-selector} {
       @include el-neutral-tokens($neutrals, $blend-base);
+      @include el-control-tint-token($neutrals);
       @include el-group-tokens(map-get($brightness, 'empty-fills'));
     }
 
@@ -85,6 +98,13 @@ $--hzq-tokens-emitted: false !default;
     @each $brand-suffix, $brand-colors in $--brand-modes {
       #{$brightness-selector}#{$brand-suffix} {
         @include el-brand-tokens($brand-colors, $blend-base);
+
+        // 有品牌色相的预设把 tint 压成"极浅的品牌色"：以品牌主色在 blend-base 上
+        // 只保留少量色相，既看得出跟随主题，又不至于比常规灰底重。
+        $tint-weight: map-get($--brand-tint-modes, $brand-suffix);
+        @if $tint-weight {
+          --hzq-bg-color-control-tint: #{mix(map-get($brand-colors, 'primary'), $blend-base, 100% - $tint-weight)};
+        }
       }
     }
   }

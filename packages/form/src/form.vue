@@ -1,7 +1,8 @@
 <template>
   <form class="hzq-form" :class="[
     labelPosition ? 'hzq-form--label-' + labelPosition : '',
-    { 'hzq-form--inline': inline }
+    { 'hzq-form--inline': inline },
+    resolvedControlBg ? 'hzq-bg-' + resolvedControlBg : ''
   ]">
     <slot></slot>
   </form>
@@ -45,6 +46,16 @@
       hideRequiredAsterisk: {
         type: Boolean,
         default: false
+      },
+      // 表单内输入类控件（input/textarea/select/date-picker/input-number…）的底色。
+      //   card —— 白底：与卡片同色，控件只靠边框界定，适合放在白底弹窗/卡片里。
+      //   tint —— 主题浅底：默认浅蓝、绿色主题下是极浅的绿、深色主题下比卡片亮一档。
+      // 不传表示不干预：控件用自己的 control-bg，都没设置时是 card。
+      // 优先级：全局（Vue.use）> 本表单 > 控件自身 > card，故这里必须保留"未设置"态。
+      controlBg: {
+        type: String,
+        default: '',
+        validator: (value) => ['', 'card', 'tint'].includes(value)
       }
     },
     watch: {
@@ -61,6 +72,12 @@
       }
     },
     computed: {
+      // 优先级：本表单属性 > 全局（Vue.use 传入）。
+      // 这里只解析到"表单层"为止（不含默认值）：都没设时返回空串，表单就不输出类，
+      // 把决定权留给内部控件——控件的优先级高于表单，不能被表单层的默认值提前定死。
+      resolvedControlBg() {
+        return this.controlBg || (this.$HZQ && this.$HZQ.controlBg) || '';
+      },
       autoLabelWidth() {
         if (!this.potentialLabelWidthArr.length) return 0;
         const max = Math.max(...this.potentialLabelWidthArr);

@@ -6,7 +6,8 @@
       inputNumberSize ? 'hzq-input-number--' + inputNumberSize : '',
       { 'is-disabled': inputNumberDisabled },
       { 'is-without-controls': !controls },
-      { 'is-controls-right': controlsAtRight }
+      { 'is-controls-right': controlsAtRight },
+      'hzq-bg-' + resolvedControlBg
     ]">
     <span
       class="hzq-input-number__decrease"
@@ -103,6 +104,13 @@
         validator(val) {
           return val >= 0 && val === parseInt(val, 10);
         }
+      },
+      // 底色档位，见 theme-chalk/src/common/control-bg.scss。
+      // 不设则沿用所在 hzq-form 的 control-bg。
+      controlBg: {
+        type: String,
+        default: '',
+        validator: (value) => ['', 'card', 'tint'].includes(value)
       }
     },
     data() {
@@ -140,6 +148,13 @@
       }
     },
     computed: {
+      // 优先级：控件自身 > 所在 hzq-form > 全局（Vue.use 传入）> 默认白底。
+      resolvedControlBg() {
+        return this.controlBg ||
+          (this.elForm && this.elForm.resolvedControlBg) ||
+          (this.$HZQ && this.$HZQ.controlBg) ||
+          'card';
+      },
       minDisabled() {
         return this._decrease(this.value, this.step) < this.min;
       },
