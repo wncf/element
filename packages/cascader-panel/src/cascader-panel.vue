@@ -138,7 +138,7 @@ export default {
   watch: {
     value() {
       this.syncCheckedValue();
-      this.checkStrictly && this.calculateCheckedNodePaths();
+      this.calculateCheckedNodePaths();
     },
     options: {
       handler: function() {
@@ -149,7 +149,7 @@ export default {
     },
     checkedValue(val) {
       if (!isEqual(val, this.value)) {
-        this.checkStrictly && this.calculateCheckedNodePaths();
+        this.calculateCheckedNodePaths();
         this.$emit('input', val);
         this.$emit('change', val);
       }
@@ -182,10 +182,10 @@ export default {
       }
     },
     syncMenuState() {
-      const { multiple, checkStrictly } = this;
+      const { multiple } = this;
       this.syncActivePath();
       multiple && this.syncMultiCheckState();
-      checkStrictly && this.calculateCheckedNodePaths();
+      this.calculateCheckedNodePaths();
       this.$nextTick(this.scrollIntoView);
     },
     syncMultiCheckState() {

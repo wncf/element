@@ -40,7 +40,10 @@
         return this.isInPath(this.panel.activePath);
       },
       inCheckedPath() {
-        if (!this.config.checkStrictly) return false;
+        // 不限定 checkStrictly：非严格模式下已选中的叶子也会形成 checkedNodePaths，
+        // 其祖先节点（分类 / 商品）命中路径时同样需要高亮，否则被勾选的父级
+        // 在面板里没有任何选中态（文字保持默认色），看起来像没选中。
+        if (!this.panel.checkedNodePaths || !this.panel.checkedNodePaths.length) return false;
 
         return this.panel.checkedNodePaths
           .some(checkedPath => this.isInPath(checkedPath));

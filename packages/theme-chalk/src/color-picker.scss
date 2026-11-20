@@ -242,6 +242,10 @@
   display: inline-block;
   position: relative;
   line-height: normal;
+  // 内部 trigger 是块级盒子、不含行内文本，根节点没有可用的基线，
+  // 按 baseline 对齐时会退化到底边、与输入框类控件错开约 10px。
+  // middle 让它在行盒中垂直居中，与同为 32px 的输入框视觉齐平。
+  vertical-align: middle;
   // 四档边长与控件高度同档（large 36 / medium 32 / small 28 / mini 24），
   // 无 size 时等同 medium，保证与相邻 input 等高
   height: $--component-height-medium;

@@ -1,5 +1,33 @@
 ## 更新日志
 
+### 1.1.4
+
+*2026-11-20*
+
+#### 修复
+- Cascader / CascaderPanel
+  - 修复多选（`multiple`）未开启 `checkStrictly` 时，被勾选的节点没有任何选中态样式的问题。此前 `checkedNodePaths` 只在严格模式下计算，导致分类、商品这类含子级的节点勾选后文字仍是默认色、看不出已选。现在非严格模式下同样计算选中路径，被勾选节点及其祖先按主题的主色 + 加粗显示。
+- InputNumber
+  - 加减按钮改为 flex 居中：按钮用 `top: 0; bottom: 0` 撑满控件高度，原先靠 `line-height` 与档位高度对齐，在 large / small / mini 档会偏上或偏下。改后各档位图标都垂直居中，且不再依赖按档位写死的行高。
+  - 根节点改用 `inline-flex`，与 `hzq-input` 等 inline-block 控件在同一行内按基线对齐时不再错位（此前在表格单元格内并排会低约 10px）。
+- ColorPicker
+  - 根节点改回 `inline-block` 并设置 `vertical-align: middle`：内部触发器是块级盒子、不含行内文本，按基线对齐会退化到底边，与输入框并排时偏上约 10px。
+- Select
+  - 修复多选内框高度被误判为「多行」而多加 6px 的问题：单行标签的高度天然比档位高度大 2px（标签自身高度 + 上下留白），此前直接比较会把 mini / small 档撑高一档。现在按 4px 容差判断，只有真正换行才按内容高度撑开。
+  - `initialInputHeight` 改为计算属性，按当前 `size` 实时取值；新增 `size` 监听，切换档位时重算内框高度。此前该值只在 `mounted` 时赋值，组件复用时切换档位不生效。
+  - 多选标签高度改为比外框矮 4px（各档位分别为 32 / 28 / 24 / 20），避免标签与输入框等高显得拥挤；`collapseTagSize` 同步降一档，标签字号与内边距一并收小。
+
+#### 优化
+- 主题
+  - 输入类组件（`hzq-input` / `hzq-select` / `hzq-autocomplete` / `hzq-cascader` / `hzq-input-number`）移除根节点上的 `vertical-align: top`，恢复与 Element 原版一致的基线对齐。之前的问题实际由行高差异引起，已通过 `line-height: normal` 解决，`top` 会让控件与同行文字错开。
+  - `hzq-input` / `hzq-select` / `hzq-autocomplete` 根节点显式声明 `line-height: normal`，不再继承 `.hzq-form-item__content` 的 32px，避免 small / mini 档外框被撑高。
+  - 日期区间选择器（daterange）的分隔符去掉 `top: -0.15em` 偏移与写死的 14px 字号，改为跟随 `$--font-size-base`，换成「至」等汉字时不再浮到数字上方。
+  - `.hzq-range__icon` / `.hzq-range__close-icon` 的行高由写死的 32px 改为 `$--input-medium-height`，跟随主题变量。
+
+#### 开发
+- play 页面新增「表单元素对齐测试」区块：覆盖全部表单组件的 FormItem 单行高度、表格单元格内并排对齐、四个尺寸档位的对比，均带 `data-align-item` 标记便于脚本测量。
+- play 页与文档站端口分离：`dev` 用 8085，`dev:play` 用 8086，可用 `DEV_PORT` 覆盖，两者可同时运行。
+
 ### 1.1.2
 
 *2026-11-19*

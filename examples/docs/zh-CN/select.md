@@ -521,7 +521,7 @@
 
 ### 尺寸
 
-:::demo 通过 `size` 切换四档尺寸：`large`、`medium`、`small`、`mini`。不传时等同 `medium`，四档高度依次为 36px、32px、28px、24px。多选时标签也会跟着收敛。
+:::demo 通过 `size` 切换四档尺寸：`large`、`medium`、`small`、`mini`。不传时等同 `medium`，四档高度依次为 36px、32px、28px、24px。多选时标签也会跟着收敛，且标签高度比输入框矮 4px（依次为 32px、28px、24px、20px），避免与输入框等高显得拥挤。
 
 ```html
 <template>

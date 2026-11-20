@@ -315,6 +315,279 @@
         <span class="preview-label" style="width: auto;">{{ builderResult || '尚未提交' }}</span>
       </div>
     </preview-block>
+
+    <!--
+      表单元素对齐测试：
+      所有控件都带 data-align-item 标记，测量脚本按 data-align-group 分组，
+      对比同一行内各控件的 getBoundingClientRect().top / height / bottom。
+    -->
+    <preview-block section-id="form-align" title="表单元素对齐测试" tag="measure">
+      <!-- 场景 A：Form 内单个 FormItem，验证外框高度 == 内框高度 -->
+      <div class="align-scene">
+        <h4 class="align-scene__title">A. Form 内单个 FormItem（外框高度应等于内框高度）</h4>
+        <hzq-form :model="form" :size="size" label-width="110px" class="align-form">
+          <hzq-form-item label="Input">
+            <hzq-input v-model="form.input" data-align-item="input" placeholder="普通" style="width: 220px;" />
+          </hzq-form-item>
+          <hzq-form-item label="Input 图标">
+            <hzq-input
+              v-model="form.input"
+              data-align-item="input-prefix"
+              prefix-icon="hzq-icon-search"
+              placeholder="prefix-icon"
+              style="width: 220px;"
+            />
+            <hzq-input
+              v-model="form.input"
+              data-align-item="input-suffix"
+              suffix-icon="hzq-icon-date"
+              placeholder="suffix-icon"
+              style="width: 220px; margin-left: 12px;"
+            />
+          </hzq-form-item>
+          <hzq-form-item label="Input 状态">
+            <hzq-input v-model="form.input" data-align-item="input-clearable" clearable placeholder="clearable" style="width: 220px;" />
+            <hzq-input
+              v-model="form.password"
+              data-align-item="input-password"
+              show-password
+              placeholder="show-password"
+              style="width: 220px; margin-left: 12px;"
+            />
+            <hzq-input data-align-item="input-disabled" disabled placeholder="disabled" style="width: 220px; margin-left: 12px;" />
+          </hzq-form-item>
+          <hzq-form-item label="InputNumber">
+            <hzq-input-number v-model="form.number" data-align-item="input-number" :min="1" :max="10" style="width: 180px;" />
+            <hzq-input-number
+              v-model="form.number"
+              data-align-item="input-number-no-controls"
+              :controls="false"
+              style="width: 180px; margin-left: 12px;"
+            />
+            <hzq-input-number
+              v-model="form.number"
+              data-align-item="input-number-right"
+              controls-position="right"
+              style="width: 180px; margin-left: 12px;"
+            />
+          </hzq-form-item>
+          <hzq-form-item label="Select">
+            <hzq-select v-model="form.select" data-align-item="select" placeholder="单选" style="width: 220px;">
+              <hzq-option v-for="item in cityOptions" :key="item.value" :label="item.label" :value="item.value" />
+            </hzq-select>
+            <hzq-select
+              v-model="form.selectMultiple"
+              data-align-item="select-multiple"
+              multiple
+              collapse-tags
+              placeholder="多选"
+              style="width: 220px; margin-left: 12px;"
+            >
+              <hzq-option label="Vue" value="vue" />
+              <hzq-option label="React" value="react" />
+            </hzq-select>
+          </hzq-form-item>
+          <hzq-form-item label="DatePicker">
+            <hzq-date-picker v-model="form.date" data-align-item="date-picker" type="date" placeholder="date" />
+            <hzq-date-picker v-model="form.datetime" data-align-item="datetime-picker" type="datetime" placeholder="datetime" style="margin-left: 12px;" />
+            <hzq-date-picker
+              v-model="form.dateRange"
+              data-align-item="daterange-picker"
+              type="daterange"
+              start-placeholder="开始"
+              end-placeholder="结束"
+              style="margin-left: 12px; width: 260px;"
+            />
+          </hzq-form-item>
+          <hzq-form-item label="TimePicker">
+            <hzq-time-picker v-model="form.time" data-align-item="time-picker" placeholder="time-picker" />
+            <hzq-time-select v-model="form.timeSelect" data-align-item="time-select" placeholder="time-select" style="margin-left: 12px;" />
+          </hzq-form-item>
+          <hzq-form-item label="Autocomplete">
+            <hzq-autocomplete
+              v-model="form.autocomplete"
+              data-align-item="autocomplete"
+              :fetch-suggestions="querySearch"
+              placeholder="autocomplete"
+              style="width: 220px;"
+            />
+          </hzq-form-item>
+          <hzq-form-item label="Cascader">
+            <hzq-cascader
+              v-model="form.cascader"
+              data-align-item="cascader"
+              :options="cascaderOptions"
+              clearable
+              placeholder="cascader"
+              style="width: 220px;"
+            />
+          </hzq-form-item>
+          <hzq-form-item label="Textarea">
+            <hzq-input v-model="form.textarea" data-align-item="textarea" type="textarea" :rows="2" placeholder="textarea" style="width: 360px;" />
+          </hzq-form-item>
+          <hzq-form-item label="Switch">
+            <hzq-switch v-model="form.switch" data-align-item="switch" />
+          </hzq-form-item>
+          <hzq-form-item label="Radio">
+            <hzq-radio-group v-model="form.radio" data-align-item="radio">
+              <hzq-radio label="1">选项 A</hzq-radio>
+              <hzq-radio label="2">选项 B</hzq-radio>
+            </hzq-radio-group>
+          </hzq-form-item>
+          <hzq-form-item label="Checkbox">
+            <hzq-checkbox-group v-model="form.checkbox" data-align-item="checkbox">
+              <hzq-checkbox label="美食" />
+              <hzq-checkbox label="电影" />
+            </hzq-checkbox-group>
+          </hzq-form-item>
+          <hzq-form-item label="Slider">
+            <hzq-slider v-model="form.slider" data-align-item="slider" style="width: 280px;" />
+          </hzq-form-item>
+          <hzq-form-item label="Rate">
+            <hzq-rate v-model="form.rate" data-align-item="rate" />
+          </hzq-form-item>
+          <hzq-form-item label="ColorPicker">
+            <hzq-color-picker v-model="form.color" data-align-item="color-picker" />
+          </hzq-form-item>
+          <hzq-form-item label="Upload">
+            <hzq-upload data-align-item="upload" action="#" :auto-upload="false" :file-list="form.fileList">
+              <hzq-button type="primary">点击上传</hzq-button>
+            </hzq-upload>
+          </hzq-form-item>
+        </hzq-form>
+      </div>
+
+      <!-- 场景 B：模拟表格单元格内并排，验证各控件 top 是否一致 -->
+      <div class="align-scene">
+        <h4 class="align-scene__title">B. 表格单元格内并排（top 应完全一致）</h4>
+        <div class="align-table-wrap">
+        <table class="align-table">
+          <tbody>
+            <tr>
+              <td class="align-table__label">{{ size || '默认' }}</td>
+              <td class="align-table__cell" data-align-group="b-default">
+                <hzq-input v-model="form.input" data-align-item="input" :size="size" placeholder="input" style="width: 130px;" />
+                <hzq-input-number v-model="form.number" data-align-item="input-number" :size="size" style="width: 130px;" />
+                <hzq-input-number
+                  v-model="form.number"
+                  data-align-item="input-number-no-controls"
+                  :size="size"
+                  :controls="false"
+                  style="width: 130px;"
+                />
+                <hzq-select v-model="form.select" data-align-item="select" :size="size" placeholder="select" style="width: 130px;">
+                  <hzq-option v-for="item in cityOptions" :key="item.value" :label="item.label" :value="item.value" />
+                </hzq-select>
+                <hzq-select v-model="form.selectMultiple" data-align-item="select-multiple" :size="size" multiple placeholder="多选" style="width: 130px;">
+                  <hzq-option v-for="item in cityOptions" :key="item.value" :label="item.label" :value="item.value" />
+                </hzq-select>
+                <hzq-date-picker v-model="form.date" data-align-item="date-picker" :size="size" type="date" placeholder="date" style="width: 150px;" />
+                <hzq-date-picker
+                  v-model="form.datetime"
+                  data-align-item="datetime-picker"
+                  :size="size"
+                  type="datetime"
+                  placeholder="datetime"
+                  style="width: 180px;"
+                />
+                <hzq-date-picker
+                  v-model="form.dateRange"
+                  data-align-item="daterange-picker"
+                  :size="size"
+                  type="daterange"
+                  start-placeholder="开始"
+                  end-placeholder="结束"
+                  style="width: 240px;"
+                />
+                <hzq-autocomplete
+                  v-model="form.autocomplete"
+                  data-align-item="autocomplete"
+                  :size="size"
+                  :fetch-suggestions="querySearch"
+                  placeholder="autocomplete"
+                  style="width: 150px;"
+                />
+                <hzq-cascader
+                  v-model="form.cascader"
+                  data-align-item="cascader"
+                  :size="size"
+                  :options="cascaderOptions"
+                  placeholder="cascader"
+                  style="width: 150px;"
+                />
+                <hzq-time-picker v-model="form.time" data-align-item="time-picker" :size="size" placeholder="time-picker" style="width: 150px;" />
+                <hzq-time-select v-model="form.timeSelect" data-align-item="time-select" :size="size" placeholder="time-select" style="width: 150px;" />
+                <hzq-amount-input v-model="form.amount" data-align-item="amount-input" :size="size" placeholder="amount" style="width: 130px;" />
+                <hzq-textarea v-model="form.textarea" data-align-item="textarea" :size="size" placeholder="textarea" :rows="1" style="width: 160px;" />
+                <hzq-button data-align-item="button" :size="size" type="primary">按钮</hzq-button>
+                <hzq-radio-group v-model="form.radio" data-align-item="radio-group" :size="size">
+                  <hzq-radio label="1">单选</hzq-radio>
+                </hzq-radio-group>
+                <hzq-radio-group v-model="form.radio" data-align-item="radio-button" :size="size">
+                  <hzq-radio-button label="1">按钮</hzq-radio-button>
+                </hzq-radio-group>
+                <hzq-checkbox-group v-model="form.checkbox" data-align-item="checkbox-group" :size="size">
+                  <hzq-checkbox label="美食">多选</hzq-checkbox>
+                </hzq-checkbox-group>
+                <hzq-checkbox-group v-model="form.checkboxBtn" data-align-item="checkbox-button" :size="size">
+                  <hzq-checkbox-button label="上海">按钮</hzq-checkbox-button>
+                </hzq-checkbox-group>
+                <hzq-switch v-model="form.switch" data-align-item="switch" />
+                <hzq-slider v-model="form.slider" data-align-item="slider" style="width: 120px;" />
+                <hzq-rate v-model="form.rate" data-align-item="rate" />
+                <hzq-color-picker v-model="form.color" data-align-item="color-picker" :size="size" />
+                <span class="align-inline-wrap" data-align-item="upload">
+                  <hzq-upload action="#" :show-file-list="false">
+                    <hzq-button :size="size" type="primary">上传</hzq-button>
+                  </hzq-upload>
+                </span>
+                <hzq-tag data-align-item="tag" :size="size" type="success">标签</hzq-tag>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <!-- 场景 C：四个尺寸档位重复场景 B -->
+      <div v-for="tier in alignSizes" :key="tier" class="align-scene">
+        <h4 class="align-scene__title">C. 尺寸 {{ tier }}</h4>
+        <div class="align-table-wrap">
+        <table class="align-table">
+          <tbody>
+            <tr>
+              <td class="align-table__label">{{ tier }}</td>
+              <td class="align-table__cell" :data-align-group="'c-' + tier">
+                <hzq-input v-model="form.input" data-align-item="input" :size="tier" placeholder="input" style="width: 130px;" />
+                <hzq-input-number v-model="form.number" data-align-item="input-number" :size="tier" style="width: 130px;" />
+                <hzq-select v-model="form.select" data-align-item="select" :size="tier" placeholder="select" style="width: 130px;">
+                  <hzq-option v-for="item in cityOptions" :key="item.value" :label="item.label" :value="item.value" />
+                </hzq-select>
+                <hzq-date-picker v-model="form.date" data-align-item="date-picker" :size="tier" type="date" placeholder="date" style="width: 150px;" />
+                <hzq-autocomplete
+                  v-model="form.autocomplete"
+                  data-align-item="autocomplete"
+                  :size="tier"
+                  :fetch-suggestions="querySearch"
+                  placeholder="autocomplete"
+                  style="width: 150px;"
+                />
+                <hzq-cascader
+                  v-model="form.cascader"
+                  data-align-item="cascader"
+                  :size="tier"
+                  :options="cascaderOptions"
+                  placeholder="cascader"
+                  style="width: 150px;"
+                />
+                <hzq-button data-align-item="button" :size="tier" type="primary">按钮</hzq-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </preview-block>
   </div>
 </template>
 
@@ -386,8 +659,12 @@ export default {
         datetimeRange: '',
         fileList: [{ name: 'demo.pdf', url: '#' }],
         color: '#409EFF',
-        autocomplete: ''
+        autocomplete: '',
+        rate: 3,
+        checkboxSingle: true
       },
+      // 场景 C 的尺寸档位；default 由场景 B 覆盖，这里只跑四个显式档位
+      alignSizes: ['large', 'medium', 'small', 'mini'],
       builderForm: {
         type: 'fixed',
         name: '',
@@ -489,3 +766,95 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+/* 对齐测试区：刻意用普通表格 + inline 流，
+   不引入 flex/grid，才能真实复现「单元格内并排控件基线不一致」的问题 */
+.align-scene {
+  margin-bottom: 20px;
+  /* 一行控件总宽会超过内容区，允许横向滚动，避免末尾控件被裁掉看不到 */
+  overflow-x: auto;
+}
+
+.align-scene:last-child {
+  margin-bottom: 0;
+}
+
+.align-scene__title {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hzq-text-color-regular);
+}
+
+.align-form {
+  // 内容区宽度要容得下最宽的一行：
+  // Input 状态 = 3×220 + 2×12 = 684px，DatePicker = 220+220+260+24 = 724px，
+  // 减去 label-width 110px 后需要 ≥ 724px，取 900px 留余量，避免控件换行
+  // 被误判成「样式掉下来」。
+  max-width: 1010px;
+}
+
+// 横向滚动容器：控件一行排开不换行，超出时滚动查看
+.align-table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.align-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.align-table__label {
+  width: 64px;
+  padding: 8px;
+  font-size: 12px;
+  color: var(--hzq-text-color-secondary);
+  vertical-align: middle;
+  background: var(--hzq-fill-color-lighter);
+  border: 1px solid var(--hzq-border-color-lighter);
+}
+
+.align-table__cell {
+  padding: 8px;
+  border: 1px solid var(--hzq-border-color-lighter);
+  // 所有控件排成一行不换行。单元格本身不设 overflow（table-cell 的 overflow
+  // 计算值恒为 visible，设了也不生效），由外层 .align-table-wrap 负责横向滚动。
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* 只给间距，不改 display/vertical-align，避免掩盖被测的默认行为 */
+.align-table__cell > * {
+  margin-right: 8px;
+}
+
+// slider / rate 默认是 display:block，会强制独占一行导致换行。
+// 这里仅为「单行并排」的测试场景改成 inline-block，不修改组件自身的默认样式。
+.align-table__cell > .hzq-slider,
+.align-table__cell > .hzq-rate {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+// checkbox-group 的根元素是 div（块级），在单元格里会独占一行。
+// 仅为测试场景改成 inline-block，不修改组件自身的默认样式。
+.align-table__cell > .hzq-checkbox-group {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+}
+
+// hzq-upload 渲染的外层 div 没有类名，用包裹元素控制对齐
+.align-inline-wrap {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.align-table__cell > *:last-child {
+  margin-right: 0;
+}
+</style>

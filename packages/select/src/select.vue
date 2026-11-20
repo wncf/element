@@ -244,10 +244,24 @@
         return this.disabled || (this.elForm || {}).disabled;
       },
 
+      // 多选内框的基准高度：优先按档位表取，避免把已被撑高的实测值固化成基准。
+      // 用计算属性而不是 data，是为了在 size 变化（组件被复用、mounted 不重跑）时
+      // 也能实时反映到新档位。
+      initialInputHeight() {
+        const sizeMap = { large: 36, medium: 32, small: 28, mini: 24 };
+        return sizeMap[this.selectSize] || sizeMap.medium || this.measuredInputHeight || 32;
+      },
+
       collapseTagSize() {
-        return ['small', 'mini'].indexOf(this.selectSize) > -1
-          ? 'mini'
-          : 'small';
+        // tag 高度与组件高度同档时会和输入框一样高，视觉上挤在一起，
+        // 这里统一降一档：large→small、medium→small、small→mini、mini→mini（已是最小档）
+        const map = {
+          large: 'small',
+          medium: 'small',
+          small: 'mini',
+          mini: 'mini'
+        };
+        return map[this.selectSize] || 'small';
       },
 
       propPlaceholder() {
@@ -345,7 +359,8 @@
         selected: this.multiple ? [] : {},
         inputLength: 20,
         inputWidth: 0,
-        initialInputHeight: 0,
+        // 实测高度，仅作为档位表取不到时的兜底（见 computed.initialInputHeight）
+        measuredInputHeight: 0,
         cachedPlaceHolder: '',
         optionsCount: 0,
         filteredOptionsCount: 0,
@@ -365,6 +380,14 @@
 
     watch: {
       selectDisabled() {
+        this.$nextTick(() => {
+          this.resetInputHeight();
+        });
+      },
+
+      // 档位变化时重算内框高度：initialInputHeight 是 computed，读取值会变，
+      // 但 input.style.height 是行内样式，不会自动跟随，必须主动重算一次。
+      selectSize() {
         this.$nextTick(() => {
           this.resetInputHeight();
         });
@@ -692,12 +715,16 @@
           const tags = this.$refs.tags;
           const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
           const sizeInMap = this.initialInputHeight || 32;
+          // 单行标签的高度会略大于档位高度（标签自身高度 + 上下留白 2px），
+          // 直接用 tagsHeight 和 sizeInMap 比较会误判成「多行」而多加 6px，
+          // 把 mini/small 档的多选撑高一档。留 4px 容差后，只有真正换行
+          // （高度多出一整行）才按内容高度撑开。
+          const isMultiLine = tagsHeight > sizeInMap + 4;
           input.style.height = this.selected.length === 0
             ? sizeInMap + 'px'
-            : Math.max(
-              tags ? (tagsHeight + (tagsHeight > sizeInMap ? 6 : 0)) : 0,
-              sizeInMap
-            ) + 'px';
+            : isMultiLine
+              ? (tagsHeight + 6) + 'px'
+              : sizeInMap + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('HzqSelectDropdown', 'updatePopper');
           }
@@ -910,15 +937,10 @@
 
       const reference = this.$refs.reference;
       if (reference && reference.$el) {
-        // 与 var.scss 的尺寸梯级保持一致；正常情况下用实测高度，这里只在测量失败时兜底
-        const sizeMap = {
-          large: 36,
-          medium: 32,
-          small: 28,
-          mini: 24
-        };
+        // 只记录实测值作为兜底；基准高度由 computed.initialInputHeight 按档位给出，
+        // 不受这里可能已被撑高的实测值影响。
         const input = reference.$el.querySelector('input');
-        this.initialInputHeight = input.getBoundingClientRect().height || sizeMap[this.selectSize] || 32;
+        this.measuredInputHeight = input.getBoundingClientRect().height || 0;
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();

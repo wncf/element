@@ -75,7 +75,6 @@
   position: relative;
   font-size: $--font-size-base;
   display: inline-block;
-  vertical-align: top;
   width: 100%;
   // 根节点是 inline-block，行盒高度取 max(line-height, 内容高度)。
   // 不显式声明就会继承父级行高：放进 .hzq-form-item__content（line-height 32px）时，

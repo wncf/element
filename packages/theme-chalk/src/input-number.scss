@@ -6,14 +6,20 @@
 
 @include b(input-number) {
   position: relative;
-  display: inline-block;
+  // 用 inline-flex：flex 容器的基线取第一个 flex item 的基线，
+  // 这样与同为 inline-block 的 .hzq-input 按 baseline 对齐时能保持一致。
+  // 若用 inline-block 包一个 block 子元素，基线会退化为底边，导致错位约 10px。
+  display: inline-flex;
   width: 180px;
-  line-height: #{$--input-height - 2};
+  // 内部 .hzq-input 不再依赖根节点行高，写 normal 避免继承 Form 内容区的 32px
+  line-height: normal;
   overflow: hidden;
   border-radius: $--input-border-radius;
 
   .hzq-input {
-    display: block;
+    // flex 子项自动填满宽度，不需要 display / width 覆盖
+    flex: 1;
+    min-width: 0;
 
     &__inner {
       -webkit-appearance: none;
@@ -38,6 +44,12 @@
     color: $--color-text-regular;
     cursor: pointer;
     font-size: 13px;
+    // 按钮用 top:0 + bottom:0 撑满整个控件高度，而各档位高度不同，
+    // 单靠 line-height 居中必须与高度严格相等（原来取 $--input-height - 2，
+    // 在 large/small/mini 档就会偏上/偏下）。用 flex 居中与高度解耦。
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       color: $--color-primary;
@@ -81,7 +93,7 @@
 
   @include m(large) {
     width: 220px;
-    line-height: #{$--input-large-height - 2};
+    line-height: normal;
 
     @include e((increase, decrease)) {
       width: $--input-large-height;
@@ -96,7 +108,7 @@
 
   @include m(medium) {
     width: 200px;
-    line-height: #{$--input-medium-height - 2};
+    line-height: normal;
 
     @include e((increase, decrease)) {
       width: $--input-medium-height;
@@ -111,7 +123,7 @@
 
   @include m(small) {
     width: 130px;
-    line-height: #{$--input-small-height - 2};
+    line-height: normal;
 
     @include e((increase, decrease)) {
       width: $--input-small-height;
@@ -130,7 +142,7 @@
 
   @include m(mini) {
     width: 130px;
-    line-height: #{$--input-mini-height - 2};
+    line-height: normal;
 
     @include e((increase, decrease)) {
       width: $--input-mini-height;
@@ -166,7 +178,8 @@
       top: auto;
       bottom: auto;
       height: 50%;
-      line-height: #{math.div($--input-height - 2, 2)};
+      // 外层已用 flex 居中，这里不再需要按档位写死 line-height
+      line-height: normal;
 
       [class*=hzq-icon] {
         transform: scale(.8);
@@ -190,28 +203,5 @@
       border-radius: 0 0 $--border-radius-base 0;
     }
 
-    &[class*=large] {
-      [class*=increase], [class*=decrease] {
-        line-height: #{math.div($--input-large-height - 2, 2)};
-      }
-    }
-
-    &[class*=medium] {
-      [class*=increase], [class*=decrease] {
-        line-height: #{math.div($--input-medium-height - 2, 2)};
-      }
-    }
-
-    &[class*=small] {
-      [class*=increase], [class*=decrease] {
-        line-height: #{math.div($--input-small-height - 2, 2)};
-      }
-    }
-
-    &[class*=mini] {
-      [class*=increase], [class*=decrease] {
-        line-height: #{math.div($--input-mini-height - 2, 2)};
-      }
-    }
   }
 }

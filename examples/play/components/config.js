@@ -29,7 +29,8 @@ export const PREVIEW_GROUPS = [
       { id: 'color-picker', label: 'ColorPicker 颜色选择器' },
       { id: 'autocomplete', label: 'Autocomplete 自动补全' },
       { id: 'form', label: 'Form 表单' },
-      { id: 'form-builder', label: 'FormBuilder 配置化表单' }
+      { id: 'form-builder', label: 'FormBuilder 配置化表单' },
+      { id: 'form-align', label: '表单元素对齐测试' }
     ]
   },
   {

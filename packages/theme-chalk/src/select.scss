@@ -17,7 +17,6 @@ $select-close-icon-height: 18px;
 @include b(select) {
   display: inline-block;
   position: relative;
-  vertical-align: top;
   // 根节点本身就是行盒容器，不写会继承 .hzq-form-item__content 的 32px 行高，
   // 把 small/mini 档的选择器外框撑回 32px（内框仍是 28/24px）
   line-height: normal;
@@ -89,6 +88,11 @@ $select-close-icon-height: 18px;
       font-size: $--input-large-font-size;
     }
 
+    .hzq-tag {
+      height: $--input-large-height - 4px;
+      line-height: $--input-large-height - 6px;
+    }
+
     @include e(close) {
       top: math.div($--input-large-height - $select-close-icon-height, 2);
       font-size: $--input-large-font-size;
@@ -98,6 +102,11 @@ $select-close-icon-height: 18px;
   @include m(medium) {
     .hzq-input .hzq-select__caret {
       font-size: $--input-medium-font-size;
+    }
+
+    .hzq-tag {
+      height: $--input-medium-height - 4px;
+      line-height: $--input-medium-height - 6px;
     }
 
     @include e(close) {
@@ -111,6 +120,11 @@ $select-close-icon-height: 18px;
       font-size: $--input-small-font-size;
     }
 
+    .hzq-tag {
+      height: $--input-small-height - 4px;
+      line-height: $--input-small-height - 6px;
+    }
+
     @include e(close) {
       top: math.div($--input-small-height - $select-close-icon-height, 2);
       font-size: $--input-small-font-size;
@@ -120,6 +134,11 @@ $select-close-icon-height: 18px;
   @include m(mini) {
     .hzq-input .hzq-select__caret {
       font-size: $--input-mini-font-size;
+    }
+
+    .hzq-tag {
+      height: $--input-mini-height - 4px;
+      line-height: $--input-mini-height - 6px;
     }
 
     @include e(close) {
@@ -191,6 +210,8 @@ $select-close-icon-height: 18px;
     // 多选内联 tag 比 select 自身小一档，纵向留 1px 即可对齐内容区，
     // 留白再大（2px）会让 mini 尺寸的 tag 撑高输入框
     margin: 1px 0 1px 6px;
+    // tag 高度默认与组件同档，和输入框一样高会显得拥挤，
+    // 这里统一比外框矮 4px（各档位在下方 m() 中分别覆盖）。
     background-color: var(--hzq-fill-color);
     display: flex;
     max-width: 100%;

@@ -31,7 +31,9 @@ const webpackConfig = {
   },
   devServer: {
     host: '0.0.0.0',
-    port: 8085,
+    // 端口可用环境变量覆盖：文档站与 play 页同时跑时各占一个。
+    // 文档站默认 8085，play 页默认 8086（见 package.json 的 dev:play）。
+    port: Number(process.env.DEV_PORT) || (isPlay ? 8086 : 8085),
     publicPath: '/',
     hot: true,
     before: (app) => {
