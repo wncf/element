@@ -410,7 +410,13 @@ export default {
     },
     pickerOptions: {},
     unlinkPanels: Boolean,
-    keepOpenOnNow: Boolean,
+    // 点「此刻」后默认不收起面板，方便接着调整时分。
+    // 只有 datetime / datetimerange（showTime 为真）时生效；
+    // 需要旧行为（选中即关闭）时显式传 :keep-open-on-now="false"。
+    keepOpenOnNow: {
+      type: Boolean,
+      default: true
+    },
     validateEvent: {
       type: Boolean,
       default: true
