@@ -1220,9 +1220,28 @@ describe('DatePicker', () => {
       }, DELAY);
     });
 
-    it('click now button: close panel by default', done => {
+    it('click now button: keep panel open by default', done => {
       vm = createTest(DatePicker, {
         type: 'datetime'
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        vm.picker.$el.querySelector('.hzq-picker-panel__link-btn').click();
+        setTimeout(_ => {
+          expect(vm.pickerVisible).to.true;
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('click now button: close panel when keepOpenOnNow is false', done => {
+      vm = createTest(DatePicker, {
+        type: 'datetime',
+        keepOpenOnNow: false
       }, true);
       const input = vm.$el.querySelector('input');
 

@@ -1098,7 +1098,7 @@
             },
             {
               "name": "keepOpenOnNow",
-              "description": "Whether to keep the panel open after clicking the \"now\" button when type is datetime. Default false.",
+              "description": "Whether to keep the panel open after clicking the \"now\" button when type is datetime. Default true; pass false to restore the old behaviour (close on click).",
               "type": "boolean"
             }
           ],

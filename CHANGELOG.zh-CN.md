@@ -1,5 +1,20 @@
 ## 更新日志
 
+### 1.2.3
+
+#### 变更（不兼容）
+- DatePicker
+  - `keep-open-on-now` 默认值由 `false` 改为 `true`：`type` 为 `datetime` 时点击「此刻」只填入当前时间，面板保持打开，可继续调整时分秒。此前该属性默认为关闭，点击「此刻」总是收起面板。需要旧行为可显式传 `:keep-open-on-now="false"`，或直接写 `keep-open-on-now="false"`。`date` 等非时间类型不受影响。
+
+#### 修复
+- 主题
+  - 修复 `.hzq-button--text` 的 `border-color: transparent` 被 `.hzq-button` 基类的 `border` 覆盖，导致文字按钮多出一圈灰边框的问题。根因在构建：clean-css 默认开启 restructuring，会把声明相同、选择器不同的规则合并成一条多选择器规则并前移，`--text` 的边框声明被挪到基类规则之前，层叠顺序反转。主题构建脚本改为 `restructuring: false`，只保留声明级压缩，产物增大约 1.2%。实际影响见日期选择器面板底部的「此刻」按钮。
+
+#### 文档
+- DatePicker / DateTimePicker 属性表把 `keep-open-on-now` 的默认值改为 `true`，并补充「需要旧行为时传 false」的说明。
+- DateTimePicker 的「点击『此刻』后保持面板打开」示例改为演示默认行为，旧行为改用 `:keep-open-on-now="false"` 演示。
+- 类型定义 `types/date-picker.d.ts` 与 `web-types.json` 同步默认值说明。
+
 ### 1.2.2
 
 #### 变更

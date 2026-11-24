@@ -112,7 +112,10 @@ export declare class ElDatePicker extends ElementUIComponent {
   /** Additional options, check the table below */
   pickerOptions: DatePickerOptions
 
-  /** Whether to keep the panel open after clicking the "now" button when type is datetime */
+  /**
+   * Whether to keep the panel open after clicking the "now" button when type is datetime.
+   * Defaults to true; pass false to restore the old behaviour (close on click).
+   */
   keepOpenOnNow: boolean
 
   /** Range separator */
