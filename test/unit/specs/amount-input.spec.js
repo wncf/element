@@ -55,9 +55,16 @@ describe('AmountInput', () => {
       expect(clampAmount('5.5', { min: 100 })).to.equal('100');
     });
 
-    it('失焦时补齐小数位', () => {
-      expect(normalizeAmount('12', OPTIONS)).to.equal('12.00');
-      expect(normalizeAmount('12.5', OPTIONS)).to.equal('12.50');
+    it('失焦不补尾随零，原样保留用户输入', () => {
+      expect(normalizeAmount('12', OPTIONS)).to.equal('12');
+      expect(normalizeAmount('12.5', OPTIONS)).to.equal('12.5');
+      expect(normalizeAmount('12.50', OPTIONS)).to.equal('12.50');
+    });
+
+    it('失焦时收掉没输完的小数点', () => {
+      expect(normalizeAmount('12.', OPTIONS)).to.equal('12');
+      expect(normalizeAmount('.', OPTIONS)).to.equal('0');
+      expect(normalizeAmount('-.', { ...OPTIONS, allowNegative: true })).to.equal('0');
     });
 
     it('空值保持空，不会被补成 0.00', () => {
@@ -65,9 +72,9 @@ describe('AmountInput', () => {
       expect(normalizeAmount('-', { ...OPTIONS, allowNegative: true })).to.equal('');
     });
 
-    it('失焦时硬收敛到范围', () => {
-      expect(normalizeAmount('-5', OPTIONS)).to.equal('0.00');
-      expect(normalizeAmount('2000', { ...OPTIONS, max: 1000 })).to.equal('1000.00');
+    it('失焦时硬收敛到范围，且不带尾随零', () => {
+      expect(normalizeAmount('-5', OPTIONS)).to.equal('0');
+      expect(normalizeAmount('2000', { ...OPTIONS, max: 1000 })).to.equal('1000');
     });
   });
 
@@ -81,15 +88,25 @@ describe('AmountInput', () => {
       return createVue({ template, data, methods }, true);
     }
 
-    it('初值按精度补齐并回写', async() => {
+    it('初值不补尾随零', async() => {
       vm = createAmountInput(
         '<hzq-amount-input v-model="amount" />',
         () => ({ amount: '12' })
       );
       await waitImmediate();
 
-      expect(vm.amount).to.equal('12.00');
-      expect(vm.$el.querySelector('input').value).to.equal('12.00');
+      expect(vm.amount).to.equal('12');
+      expect(vm.$el.querySelector('input').value).to.equal('12');
+    });
+
+    it('初值只保留到 precision 位', async() => {
+      vm = createAmountInput(
+        '<hzq-amount-input v-model="amount" />',
+        () => ({ amount: '12.345' })
+      );
+      await waitImmediate();
+
+      expect(vm.amount).to.equal('12.34');
     });
 
     it('过滤非法字符', async() => {
@@ -179,7 +196,7 @@ describe('AmountInput', () => {
       expect(input.value).to.equal('1000');
     });
 
-    it('失焦补齐小数位并抛 change', async() => {
+    it('失焦不补零并抛 change', async() => {
       const changes = [];
 
       vm = createAmountInput(
@@ -194,8 +211,24 @@ describe('AmountInput', () => {
       triggerEvent(input, 'blur');
       await waitImmediate();
 
-      expect(vm.amount).to.equal('12.50');
-      expect(changes).to.deep.equal(['12.50']);
+      expect(vm.amount).to.equal('12.5');
+      expect(changes).to.deep.equal(['12.5']);
+    });
+
+    it('失焦收掉没输完的小数点', async() => {
+      vm = createAmountInput(
+        '<hzq-amount-input v-model="amount" />',
+        () => ({ amount: '' })
+      );
+      const input = vm.$el.querySelector('input');
+
+      setValue(input, '12.');
+      await waitImmediate();
+      triggerEvent(input, 'blur');
+      await waitImmediate();
+
+      expect(vm.amount).to.equal('12');
+      expect(input.value).to.equal('12');
     });
 
     it('空值失焦后保持空', async() => {
@@ -265,11 +298,11 @@ describe('AmountInput', () => {
       setValue(input, '12');
       await waitImmediate();
 
-      vm.amount = '99';
+      vm.amount = '99.5';
       await waitImmediate();
 
-      expect(vm.amount).to.equal('99.00');
-      expect(input.value).to.equal('99.00');
+      expect(vm.amount).to.equal('99.5');
+      expect(input.value).to.equal('99.5');
     });
 
     it('清空时抛出 input / change / clear', async() => {
@@ -343,7 +376,7 @@ describe('AmountInput', () => {
       }, true);
       await waitImmediate();
 
-      expect(vm.form.amount).to.equal('12.00');
+      expect(vm.form.amount).to.equal('12');
       expect(vm.$refs.item.validateState).to.equal('');
     });
 

@@ -247,7 +247,7 @@ export default {
       immediate: true,
       handler(value) {
         // 自己 emit 出去的值会原样回来，此时不能清掉编辑态，
-        // 否则每敲一个键都会被补齐成 "12.50"，光标和输入都会乱
+        // 否则每敲一个键都会走一遍规范化，光标和输入都会乱
         if (this.toText(value) === this.lastEmitted) return;
 
         this.userInput = null;
@@ -274,8 +274,8 @@ export default {
   },
 
   methods: {
-    // 外部传入的值可能不满足 precision 或范围（如 '12'、'-5'），先规范化再回写。
-    // 只在真的变了才 emit，避免一挂载就无谓地触发一次表单校验。
+    // 外部传入的值可能超出 precision 或范围（如 '12.345'、'-5'），先规范化再回写。
+    // 不合规才 emit，避免一挂载就无谓地触发一次表单校验。'12' 这类合规值不会被补成 '12.00'。
     syncValue(value) {
       const normalized = normalizeAmount(value, this.constraint);
       if (normalized === this.toText(value)) return;
@@ -319,7 +319,7 @@ export default {
       this.focused = false;
       this.userInput = null;
 
-      // 编辑态不补齐小数，失焦才补齐，所以这里要把补齐后的值写回去
+      // 编辑态允许停在 '12.' 这类中间态，失焦时收干净（不补尾随零），所以要把结果写回去
       if (normalized !== current) {
         this.emitInput(normalized);
         this.notifyFormChange(normalized);

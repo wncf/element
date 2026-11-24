@@ -1,13 +1,13 @@
 /**
  * 金额输入的工具函数
  *
- * 为什么单独抽出来：过滤字符、收敛范围、补齐小数这三段都是纯字符串/数字运算，
+ * 为什么单独抽出来：过滤字符、收敛范围、收敛精度这三段都是纯字符串/数字运算，
  * 和 Vue 无关。放在这里可以脱离组件单测，表格、导出等场景也能复用。
  *
  * 约定（与 amount-input 的 v-model 保持一致）：
  * - 值一律用字符串表示，空串表示"没填"。金额用 Number 往返会丢精度，大额还会变成科学计数法。
  * - "编辑态"（用户正在打字）不补齐小数位，也不吞掉正在输入的小数点；
- *   只有失焦才补齐成 precision 位。
+ *   失焦后同样不补尾随零，只把 '12.' 这类中间态收干净。
  *
  * 各函数共用的 options：
  * { precision = 2, min = -Infinity, max = Infinity, allowNegative = false }
@@ -103,22 +103,41 @@ export function clampAmount(text, options = {}) {
 }
 
 /**
- * 失焦时用：补齐 precision 位小数，并硬收敛到 [min, max]。
+ * 失焦时用：硬收敛到 [min, max]，并把"还没输完"的文本收干净。
  * 与 clampAmount 的区别是 min 不再留"还能继续输入"的余地——输入已经结束了。
+ *
+ * 不补齐尾随零：'12' 就是 '12'，不会被改写成 '12.00'；
+ * 用户自己敲的 '12.50' 也原样保留。只处理两种中间态：
+ * - '12.' → '12'（未输完的小数点）
+ * - '.' / '-.' → '0'
+ * 越界时才用数值转文本回写（如 '1005' → '1000'）。
  */
 export function normalizeAmount(text, options = {}) {
   const { precision = DEFAULT_PRECISION, min = -Infinity, max = Infinity } = options;
 
   // 这里一律保留负号再解析：不允许负数时，-5 应该被收敛到下限 0，
   // 而不是因为负号被过滤掉，反而变成正数 5
-  const value = parseAmount(sanitizeAmount(text, { precision, allowNegative: true }));
+  const cleaned = sanitizeAmount(text, { precision, allowNegative: true });
+  const value = parseAmount(cleaned);
   if (value === null) return '';
 
-  let final = value;
-  if (final < min) final = min;
-  if (final > max) final = max;
+  if (value < min || value > max) {
+    return toPlainText(Math.min(Math.max(value, min), max));
+  }
 
-  return final.toFixed(precision);
+  return stripIncomplete(cleaned);
+}
+
+// 去掉末尾那个还没输完的小数点；剩下的 '-0' 归一到 '0'
+function stripIncomplete(text) {
+  const trimmed = text.endsWith('.') ? text.slice(0, -1) : text;
+
+  return trimmed === '-0' ? '0' : trimmed;
+}
+
+// 数值转文本：不用 toFixed，避免带出不想要的尾随零
+function toPlainText(value) {
+  return Object.is(value, -0) ? '0' : String(value);
 }
 
 // 整数部分还能靠继续输入够到 min 吗？
